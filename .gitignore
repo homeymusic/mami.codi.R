@@ -1,0 +1,11 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.DS_Store
+src/*.o
+src/*.so
+src/*.dll
+mami.codi.R.Rcheck/
+mami.codi.R*.tar.gz
+mami.codi.R*.tgz

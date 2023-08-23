@@ -1,0 +1,47 @@
+---
+title: "Harmonic Amplitudes"
+output:
+  github_document: default
+always_allow_html: true
+---
+
+```{r, echo=F, message=F, include=F}
+devtools::load_all(".")
+source('../code/plot.R')
+mami.codi(60)
+```
+
+```{r}
+macro_experiment.rds = '../data/12dB.rds'
+rolloff_12dB         = readRDS(macro_experiment.rds)$profile
+num_harmonics        = 10
+decay_dB_per_octave  = 12
+```
+
+```{r}
+midi = c(0,rolloff_12dB$interval[2]) + 60
+tibble::tibble(
+  i         = seq_len(num_harmonics),
+  dB        = -decay_dB_per_octave * log2(i),
+  amplitude = 1 * 10 ^ (dB / 20)
+)
+```
+
+```{r}
+decay_dB_per_octave = 7
+midi = c(0,rolloff_12dB$interval[2]) + 60
+tibble::tibble(
+  i         = seq_len(num_harmonics),
+  dB        = -decay_dB_per_octave * log2(i),
+  amplitude = 1 * 10 ^ (dB / 20)
+)
+```
+```{r}
+decay_dB_per_octave = 2
+midi = c(0,rolloff_12dB$interval[2]) + 60
+tibble::tibble(
+  i         = seq_len(num_harmonics),
+  dB        = -decay_dB_per_octave * log2(i),
+  amplitude = 1 * 10 ^ (dB / 20)
+)
+```

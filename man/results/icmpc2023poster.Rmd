@@ -1,0 +1,421 @@
+---
+title: "ICMPC 2023 Poster"
+output:
+  github_document: default
+always_allow_html: true
+---
+```{r, echo=F, message=F, include=F}
+devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+library(mami.codi.R)
+devtools::load_all(".")
+source('../code/plot.R')
+source('../code/utils.R')
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "../figures/POSTER2023-"
+)
+knitr::opts_chunk$set(dev = 'svg')
+BEHAVIOURAL_SMOOTH_BROAD  <- 0.2
+BEHAVIOURAL_SMOOTH_NARROW <- 0.035
+```
+
+## Primary MaMiCodi Data
+
+```{r}
+chords <- chords %>% dplyr::filter(type == 'Dyads')
+
+grid = tidyr::expand_grid(
+  index         = seq_along(chords$pitches),
+  num_harmonics = c(5)
+)
+
+plan(multisession, workers=parallelly::availableCores())
+
+results = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics) {
+  
+  chord_spectrum = hrep::sparse_fr_spectrum(chords$pitches[[index]],
+                                            num_harmonics = num_harmonics)
+  
+  mami.codi.R::mami.codi(chord_spectrum,
+            metadata=purrr::flatten(
+              list(chords$metadata[[index]], num_harmonics=num_harmonics)
+            ),
+            verbose=T)
+}, .progress=TRUE, .options = furrr::furrr_options(seed = T))
+
+results <- results %>% dplyr::rowwise() %>% dplyr::mutate(
+  label = metadata$label,
+  type  = metadata$type, 
+  num_harmonics=metadata$num_harmonics,
+  .before=1
+)
+```
+
+## Primary MaMiCoDi Plot
+
+```{r, echo=F, message=F, results='asis'}
+harmonics_5 = results %>% dplyr::filter(num_harmonics==5)
+harmonics_5$type = '5Partials'
+title = 'Harmonics: 5'
+plot_mami.codi(harmonics_5, title)
+```
+
+## Periods
+
+### M3 Spectrum
+
+### Pure Tones
+
+```{r}
+M3 = mami.codi(c(60,64),num_harmonics=1,verbose=T)
+plot(tibble::tibble(
+  frequency = c(M3$reference_freq_low,
+                M3$chord[[1]]$x,
+                M3$reference_freq_high),
+  amplitude = c(1.618,
+                M3$chord[[1]]$y,
+                1.618)
+) %>% as.list %>% hrep::sparse_fr_spectrum(),
+log = 'x'
+)
+```
+
+```{r}
+m3 = mami.codi(c(60,63),num_harmonics=1,verbose=T)
+plot(tibble::tibble(
+  frequency = c(m3$reference_freq_low,
+                m3$chord[[1]]$x,
+                m3$reference_freq_high),
+  amplitude = c(1.618,
+                m3$chord[[1]]$y,
+                1.618)
+) %>% as.list %>% hrep::sparse_fr_spectrum(),
+log = 'x'
+)
+```
+
+## M3 & m3 Period Ratios
+
+## M3
+
+```{r}
+M3$ratios_low[[1]]
+```
+
+```{r}
+M3$ratios_high[[1]]
+```
+
+```{r}
+M3$lcm_low
+```
+
+```{r}
+M3$lcm_high
+```
+
+```{r}
+rl=M3$ratios_low[[1]] %>% dplyr::filter(pitch_freq==hrep::midi_to_freq(60) |
+                                       pitch_freq==hrep::midi_to_freq(64))
+rl
+```
+
+#### Below
+
+```{r}
+ratios=tibble::tibble(
+  name=c('C3',rl$pitch_freq),
+  value=c(1,1/rl$freq_ratio)
+)
+ratios
+```
+
+```{r}
+ggplot2::ggplot(ratios, ggplot2::aes(x=name,y=value)) + 
+  ggplot2::geom_bar(stat="identity")
+```
+
+#### Above
+
+```{r}
+ratios=tibble::tibble(
+  name=c(M3$ratios_high[[1]]$pitch_freq,'C5'),
+  value=c(M3$ratios_high[[1]]$freq_ratio,1)
+)
+ratios
+```
+
+```{r}
+ggplot2::ggplot(ratios, ggplot2::aes(x=name,y=value)) + 
+  ggplot2::geom_bar(stat="identity")
+```
+
+## m3
+
+```{r}
+m3$ratios_low[[1]]
+```
+
+```{r}
+m3$ratios_high[[1]]
+```
+
+```{r}
+m3$lcm_low
+```
+
+```{r}
+m3$lcm_high
+```
+
+```{r}
+rl=m3$ratios_low[[1]] %>% dplyr::filter(pitch_freq==hrep::midi_to_freq(60) |
+                                          pitch_freq==hrep::midi_to_freq(63))
+rl
+```
+
+#### Below
+
+```{r}
+ratios=tibble::tibble(
+  name=c('C3',rl$pitch_freq),
+  value=c(1,1/rl$freq_ratio)
+)
+ratios
+```
+
+```{r}
+ggplot2::ggplot(ratios, ggplot2::aes(x=name,y=value)) + 
+  ggplot2::geom_bar(stat="identity")
+```
+
+#### Above
+
+```{r}
+ratios=tibble::tibble(
+  name=c(m3$ratios_high[[1]]$pitch_freq,'C5'),
+  value=c(m3$ratios_high[[1]]$freq_ratio,1)
+)
+ratios
+```
+
+```{r}
+ggplot2::ggplot(ratios, ggplot2::aes(x=name,y=value)) + 
+  ggplot2::geom_bar(stat="identity")
+```
+
+## Rotate Plot
+
+### Math
+
+Dissonance Definition
+
+$$
+d_{f} = log_2(lcd(\frac{k_1}{l_1},...,\frac{k_N}{l_N}))
+
+\\
+
+d_{T} = log_2(lcd(\frac{g_{1}}{h_{1}},...,\frac{g_{N}}{h_{N}}))
+$$
+
+Consonance Definition
+
+$$
+c_{f} = Z - d_{f} + d_{f}^{P1}
+\\
+c_{T} = Z - d_{T} + d_{T}^{P1}
+\\
+Z = 100/\sqrt{2}
+$$
+
+$$
+\begin{bmatrix}
+c \\
+m
+\end{bmatrix}
+=
+\begin{bmatrix}
+cos(\theta) & sin(\theta) \\
+-sin(\theta) & cos(\theta) \\
+\end{bmatrix}
+\begin{bmatrix}
+c_T \\
+c_f
+\end{bmatrix}
+-
+\begin{bmatrix}
+\delta \\
+0
+\end{bmatrix}
+\\
+\theta = \pi / 4, \ \
+\delta = \sqrt{(d_{T}^{P1})^2+(d_{f}^{P1})^2}
+$$
+
+Definitions
+
+$$
+d_{f} = \ Frequency \ Dissonance
+
+\\
+
+k_i / l_i = Frequency \ Ratios \ to \ Low \ Ref
+
+\\
+
+g_i / h_i = Period \ Ratios \ to \ High \ Ref
+
+\\
+
+d_{T} = \ Period \ Dissonance
+
+\\
+
+c_{f} = \ Frequency \ Consonance
+
+\\
+
+c_{T} = \ Period \ Consonance
+
+\\
+
+d_{f}^{P1} = Unison's \ Frequency \ Dissonance
+
+\\
+
+d_{T}^{P1} = Unison's \ Period \ Dissonance
+
+\\
+
+c = Consonance-Dissonance
+
+\\
+
+m = Major-Minor
+
+\\
+
+\theta = Rotation \ Angle
+
+\\
+
+\delta = Unison \ Dissonance \ vs. Pure
+
+
+$$
+
+### 1 Harmonic
+
+```{r, echo=F, message=F, results='asis'}
+harmonics_1 = results %>%dplyr::filter(num_harmonics==1)
+title = paste(
+  'Ref Reg Lo:', paste(harmonics_1$reference_register_low  %>% unique, collapse=' '),
+  'Ref Reg Hi:', paste(harmonics_1$reference_register_high %>% unique, collapse=' ')
+)
+plot_dilo.dihi(harmonics_1, title, aspect.ratio = 1, minimal=T)
+plot_colo.cohi(harmonics_1, title, aspect.ratio = 1, minimal=T)
+plot_mami.codi(harmonics_1, title, aspect.ratio = 1, minimal=T)
+```
+
+## Results Plots
+
+```{r, include=F}
+behavior_dyads = readRDS('../data/timbre_paper.rds')
+```
+
+```{r, include=F}
+behavior_dyads <- behavior_dyads %>% dplyr::rowwise() %>% dplyr::mutate(
+  type          = metadata$type,
+  num_harmonics = metadata$num_harmonics,
+  octave_ratio  = metadata$octave_ratio,
+  semitone      = metadata$semitone,
+  scale         = metadata$scale,
+  label         = as.character(round(metadata$semitone)),
+  .before=1
+)
+```
+
+```{r}
+add_these = c('m2', 'M2','m3','M3',
+              'tt',
+              'P5', 'm6', 'M6','M7','P8')
+ET_dyads = harmonics_5 %>% dplyr::filter(label %in% add_these)
+ss = (1:12)[-c(5,10)]
+ET_dyads$semitone = ss 
+ET_dyads <- ET_dyads %>% dplyr::mutate(
+  type         = '5Partials',
+  octave_ratio = 2,
+  scale        = 'macro',
+  .before=1
+)
+```
+
+```{r}
+dyads = dplyr::bind_rows(ET_dyads, behavior_dyads)
+```
+
+```{r, include=F}
+params = list(
+  list(h=1, o=2.0,s='macro',t='Pure'),
+  list(h=5,o=2,s='macro',t='5Partials'),
+  list(h=10,o=2.1,s='macro',t='Stretched'),
+  list(h=10,o=2.0,s='macro',t='Harmonic'),
+  list(h=10,o=1.9,s='macro',t='Compressed')
+)
+```
+
+```{r, echo=F, results='asis', message=F}
+source('../code/plot.R')
+
+params %>% purrr::map(\(p) {
+  gray_vlines = c()
+  black_vlines = c()
+  title = paste(
+    p$t,
+    '~',
+    'Partials:', p$h
+  )
+  
+  chords <- dyads %>% dplyr::filter(num_harmonics  == p$h &
+                                      octave_ratio == p$o &
+                                      scale        == p$s)
+  chords$consonance_dissonance_z = z_scores(chords$consonance_dissonance)
+  
+  experiment.rds = paste0('../data/',
+                          p$t,
+                          '.rds')
+  
+  experiment = readRDS(experiment.rds)$profile %>%
+    dplyr::rename(semitone=interval)
+  
+  experiment <- experiment %>% dplyr::mutate(
+    consonance_dissonance = rating,
+    consonance_dissonance_2x = 2*rating,
+    consonance_dissonance_4x = 4*rating
+  )
+  if (p$s == 'macro' | p$s == 'Bonang' | p$s == '5PartialsNo3') {
+    sigma = BEHAVIOURAL_SMOOTH_BROAD
+  } else {
+    sigma = BEHAVIOURAL_SMOOTH_NARROW
+  }
+  cat("  \n###", title, '\n')
+  if (p$h ==5 & p$o == 2.0 & p$s == 'macro') {
+    et_chords = chords %>% dplyr::filter(semitone %in% 0:12)
+    print(plot_mami.codi(et_chords, paste('MaMi ~ CoDi ~',title)))
+    print(plot_smoothed_mami.codi(chords, paste('MaMi ~ Smoothed CoDi ~',title),sigma=sigma))
+  }
+  print(plot_semitone_codi(chords, paste('Cosonance-Dissonance ~',title),
+                           goal=experiment,sigma=sigma,include_points=F,
+                           black_vlines=black_vlines,gray_vlines=gray_vlines))
+  cat("  \n")
+})
+```
+
+
+Timbral effects on consonance illuminate psychoacoustics of music evolution
+Raja Marjieh, Peter M. C. Harrison, Harin Lee, Fotini Deligiannaki, Nori Jacoby
+bioRxiv 2022.06.14.496070; doi: https://doi.org/10.1101/2022.06.14.496070
+
+
+Nemoto, I. & Kawakatsu, M. (2023) A two-dimensional representation of musical chords using the simplicity of frequency and period ratios as coordinates, Journal of Mathematics and Music, 17:1, 65-77. https://10.1080/17459737.2021.1924304

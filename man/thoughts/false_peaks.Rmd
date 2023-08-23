@@ -1,0 +1,75 @@
+---
+title: "False Peaks"
+output:
+  github_document: default
+always_allow_html: true
+---
+```{r, echo=F, message=F, include=F}
+devtools::load_all(".")
+source('../code/plot.R')
+source('../code/utils.R')
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "../figures/FALSE-PEAKS-"
+)
+knitr::opts_chunk$set(dev = 'svg')
+BEHAVIOURAL_SMOOTH_BROAD  <- 0.2
+BEHAVIOURAL_SMOOTH_NARROW <- 0.035
+```
+
+```{r}
+experiment.rds = paste0('../data/',
+                        '5Partials',
+                        '.rds')
+experiment = readRDS(experiment.rds)$profile %>% 
+  dplyr::rename(
+    semitone=interval,
+    consonance_dissonance=rating
+  ) %>% dplyr::mutate(
+    consonance_dissonance_2x = 2*consonance_dissonance,
+    consonance_dissonance_4x = 4*consonance_dissonance
+  )
+```
+
+```{r}
+theory.rds = paste0('../data/',
+                        'timbre_paper',
+                        '.rds')
+theory = readRDS(theory.rds) %>% dplyr::rowwise() %>% dplyr::mutate(
+  type          = metadata$type,
+  num_harmonics = metadata$num_harmonics,
+  octave_ratio  = metadata$octave_ratio,
+  semitone      = metadata$semitone,
+  scale         = metadata$scale,
+  label         = as.character(round(metadata$semitone)),
+  .before=1
+) %>% dplyr::filter(
+  num_harmonics ==5 &
+  scale != '5PartialsNo3'
+)
+theory$consonance_dissonance_z = z_scores(theory$consonance_dissonance)
+```
+
+```{r}
+plot_semitone_codi(theory, paste('Cosonance-Dissonance ~','5 Harmonics'),
+                           goal=experiment,sigma=BEHAVIOURAL_SMOOTH_BROAD)
+```
+
+```{r}
+m7_M7 = theory %>% dplyr::filter(
+  10 < semitone & semitone < 11
+)
+m7_M7
+```
+
+```{r}
+max_m7_M7 <- m7_M7 %>% dplyr::arrange(dplyr::desc(consonance_dissonance))
+```
+
+```{r}
+max_m7_M7$ratios_low[1][[1]]
+```
+```{r}
+max_m7_M7$ratios_high[1][[1]]
+```

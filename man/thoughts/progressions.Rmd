@@ -1,0 +1,47 @@
+---
+title: "2023 May 23 Meeting with Peter"
+output:
+  github_document: default
+always_allow_html: true
+---
+
+```{r, echo=F, message=F, include=F}
+devtools::load_all(".")
+source('../code/plot.R')
+mami.codi(60)
+```
+
+```{r}
+major_triad = c(60,64,67)
+```
+
+## I Tonic is Tonic
+
+```{r}
+I  = hrep::sparse_fr_spectrum(major_triad  , num_harmonics=10) %>% 
+  mami.codi(metadata=list(label='I'))
+IV = hrep::sparse_fr_spectrum(major_triad+5, num_harmonics=10) %>% 
+  mami.codi(metadata=list(label='IV'), tonic = I$tonic[[1]])
+V  = hrep::sparse_fr_spectrum(major_triad+7, num_harmonics=10) %>% 
+  mami.codi(metadata=list(label='V'),  tonic = I$tonic[[1]])
+
+dplyr::bind_rows(I,IV,V) %>% 
+  dplyr::rowwise() %>% 
+  dplyr::mutate(label = metadata$label, .before=1)
+```
+
+## I Chord is Tonic
+
+```{r}
+I  = hrep::sparse_fr_spectrum(major_triad  , num_harmonics=10) %>% 
+  mami.codi(metadata=list(label='I'))
+IV = hrep::sparse_fr_spectrum(major_triad+5, num_harmonics=10) %>% 
+  mami.codi(metadata=list(label='IV'), tonic = I$chord[[1]])
+V  = hrep::sparse_fr_spectrum(major_triad+7, num_harmonics=10) %>% 
+  mami.codi(metadata=list(label='V'),  tonic = I$chord[[1]])
+
+dplyr::bind_rows(I,IV,V) %>% 
+  dplyr::rowwise() %>% 
+  dplyr::mutate(label = metadata$label, .before=1)
+```
+

@@ -1,0 +1,328 @@
+---
+title: "Major-Minor and Consonance-Dissonance Perception"
+output:
+  github_document: default
+---
+
+```{r, echo=F, message=F, include=F}
+devtools::load_all(".")
+source('./man/code/plot.R')
+source('./man/code/utils.R')
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-"
+)
+BEHAVIOURAL_SMOOTH_BROAD  <- 0.2
+BEHAVIOURAL_SMOOTH_NARROW <- 0.035
+```
+
+## Timbre: Consonance-Dissonance and Major-Minor ~ Semitones
+
+## Amplitudes
+
+```{r, include=F}
+timbre_paper = readRDS('./man/data/roll_off_timbre_paper.rds')
+```
+
+```{r, include=F}
+dyads <- timbre_paper %>% dplyr::rowwise() %>% dplyr::mutate(
+  type          = metadata$type,
+  num_harmonics = metadata$num_harmonics,
+  octave_ratio  = metadata$octave_ratio,
+  semitone      = metadata$semitone,
+  roll_off      = metadata$roll_off,
+  label         = round(metadata$semitone),
+  chord_max     = max(chord_freqs),
+  chord_min     = min(chord_freqs),
+  .before=1
+)
+```
+
+
+```{r, include=F}
+params = list(
+  list(h=10,r=2),
+  list(h=10,r=7),
+  list(h=10,r=12)
+)
+```
+
+```{r, fig.height=8, fig.width=12, echo=F, results='asis', message=F}
+params %>% purrr::map(\(p) {
+  gray_vlines = c()
+  black_vlines = c()
+  title = paste(
+    'Harmonic ~',
+    'Roll Off:', p$r
+  )
+  
+  chords <- dyads %>% dplyr::filter(roll_off == p$r)
+  chords$consonance_dissonance_z = z_scores(chords$consonance_dissonance)
+  
+  experiment.csv = paste0('./man/data/',
+                          'roll_off_', p$r,
+                          '.csv')
+  
+  experiment = read.csv(experiment.csv) %>%
+    dplyr::rename(semitone=interval)
+  
+  experiment <- experiment %>% dplyr::mutate(
+    consonance_dissonance = rating,
+    consonance_dissonance_2x = 2*rating,
+    consonance_dissonance_4x = 4*rating
+  )
+  sigma = BEHAVIOURAL_SMOOTH_BROAD
+  core_plots = list(
+    plot_semitone_codi(chords, paste('Consonance-Dissonance'),
+                       goal=experiment,sigma=sigma,
+                       black_vlines=black_vlines,gray_vlines=gray_vlines),
+    plot_semitone_mami(chords, paste('Major-Minor'),goal=experiment,
+                       include_line=T,sigma=sigma,
+                       black_vlines=black_vlines,gray_vlines=gray_vlines)
+  )  
+  meta_plots = list(
+    plot_semitone_colo.cohi(chords, paste('Consonance Low & High'),
+                            sigma=sigma,
+                            black_vlines=black_vlines,gray_vlines=gray_vlines),
+    plot_mami.codi(chords, paste('MaMi.CoDi ~',title),
+                   chords_to_label=chords %>% dplyr::filter(
+                     round(semitone,2) %% 1 == 0
+                   )),
+    plot_semitone_registers(chords, paste('Ref Freqs & Tonic Timbre'))
+  )  
+  cat("  \n###", title, '\n')
+  print(patchwork::wrap_plots(core_plots, ncol=1))
+  print(patchwork::wrap_plots(meta_plots, ncol=1))
+  cat("  \n")
+})
+```
+
+## Frequencies
+
+```{r, include=F}
+timbre_paper = readRDS('./man/data/timbre_paper.rds')
+```
+
+```{r, include=F}
+dyads <- timbre_paper %>% dplyr::rowwise() %>% dplyr::mutate(
+  type          = metadata$type,
+  num_harmonics = metadata$num_harmonics,
+  octave_ratio  = metadata$octave_ratio,
+  semitone      = metadata$semitone,
+  scale         = metadata$scale,
+  label         = round(metadata$semitone),
+  chord_max     = max(chord_freqs),
+  chord_min     = min(chord_freqs),
+  .before=1
+)
+```
+
+
+```{r, include=F}
+params = list(
+  list(h=10,o=2.1,s='macro'),
+  list(h=10,o=2.0,s='macro'),
+  list(h=10,o=1.9,s='macro'),
+  list(h=4,o=2,s='Bonang'),
+  list(h=1, o=2.0,s='macro'),
+  list(h=5, o=2.0,s='macro'),
+  list(h=5,o=2,s='5PartialsNo3'),
+  list(h=10,o=2.0,s='M3'),
+  list(h=10,o=2.0,s='M6'),
+  list(h=10,o=2.0,s='P8')
+)
+```
+
+```{r, fig.height=8, fig.width=12, echo=F, results='asis', message=F}
+params %>% purrr::map(\(p) {
+  gray_vlines = c()
+  black_vlines = c()
+  if (p$o<2 & p$s == 'macro') {
+    timbre = 'Compressed'
+    black_vlines  = c(11.10)
+  } else if (p$o>2 & p$s == 'macro') {
+    timbre = 'Stretched'
+    black_vlines  = c(12.78)
+  } else if (p$o==2 & p$h==1 & p$s == 'macro') {
+    timbre = 'Pure'
+    black_vlines = c()
+  } else if (p$s == 'Bonang') {
+    timbre = 'Bonang'
+    black_vlines = c(2.60, 4.80, 11.98)
+    gray_vlines  = c(7.2, 9.6)
+  } else if (p$o==2 & p$h==5 & p$s == '5PartialsNo3') {
+    timbre = '5PartialsNo3'
+    black_vlines = c()
+  } else if (p$o==2 & p$h==5 & p$s == 'macro') {
+    timbre = '5Partials'
+    black_vlines = c()
+  } else if (p$o==2 & p$h==10 & p$s == 'macro') {
+    timbre = 'Harmonic'
+    black_vlines  = c(12.04)
+  } else if (p$s == 'M3') {
+    timbre = 'M3'
+    gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 5/4)-60,4)
+    black_vlines  = c(3.95)
+  } else if (p$s == 'M6') {
+    timbre = 'M6'
+    gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 5/3)-60,9)
+    black_vlines  = c(8.78,8.93)
+  } else if (p$s == 'P8') {
+    timbre = 'P8'
+    gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 2/1)-60)
+    black_vlines  = c(11.94, 12.08)
+  }
+  title = paste(
+    timbre,
+    '~',
+    'Partials:', p$h
+  )
+  
+  chords <- dyads %>% dplyr::filter(num_harmonics  == p$h &
+                                      octave_ratio == p$o &
+                                      scale        == p$s)
+  chords$consonance_dissonance_z = z_scores(chords$consonance_dissonance)
+  
+  experiment.rds = paste0('./man/data/',
+                          timbre,
+                          '.rds')
+  
+  experiment = readRDS(experiment.rds)$profile %>%
+    dplyr::rename(semitone=interval)
+  
+  experiment <- experiment %>% dplyr::mutate(
+    consonance_dissonance = rating,
+    consonance_dissonance_2x = 2*rating,
+    consonance_dissonance_4x = 4*rating
+  )
+  if (p$s == 'macro' | p$s == 'Bonang' | p$s == '5PartialsNo3') {
+    sigma = BEHAVIOURAL_SMOOTH_BROAD
+  } else {
+    sigma = BEHAVIOURAL_SMOOTH_NARROW
+  }
+  core_plots = list(
+    plot_semitone_codi(chords, paste('Consonance-Dissonance'),
+                       goal=experiment,sigma=sigma,
+                       black_vlines=black_vlines,gray_vlines=gray_vlines),
+    plot_semitone_mami(chords, paste('Major-Minor'),goal=experiment,
+                       include_line=T,sigma=sigma,
+                       black_vlines=black_vlines,gray_vlines=gray_vlines)
+  )  
+  meta_plots = list(
+    plot_semitone_colo.cohi(chords, paste('Consonance Low & High'),
+                            sigma=sigma,
+                            black_vlines=black_vlines,gray_vlines=gray_vlines),
+    plot_mami.codi(chords, paste('MaMi.CoDi ~',title),
+                   chords_to_label=chords %>% dplyr::filter(
+                     round(semitone,2) %% 1 == 0
+                   )),
+    plot_semitone_registers(chords, paste('Ref Freqs & Tonic Timbre'))
+  )  
+  cat("  \n###", title, '\n')
+  print(knitr::kable(tibble::tibble_row(
+    pseudo_octave       = paste(round(chords$pseudo_octave %>% unique, 2),
+                                collapse = ' ')
+  )))
+  print(patchwork::wrap_plots(core_plots, ncol=1))
+  print(patchwork::wrap_plots(meta_plots, ncol=1))
+  cat("  \n")
+})
+```
+
+# MaMi CoDi Plots
+
+```{r, include=F}
+chord_types <- c('Dyads','Triads','Major Triad Progressions',
+                 'Minor Triad Progressions', 'Scales')
+chords <- chords %>% dplyr::filter(type %in% chord_types)
+
+major_I = chords %>% dplyr::filter(type == 'Major Triad Progressions' &
+                                     label == 'I')
+minor_i = chords %>% dplyr::filter(type == 'Minor Triad Progressions' &
+                                     label == 'i')
+
+progression_tonics = list(
+  'Major Triad Progressions 1' = (major_I$pitches[[1]] %>%
+                                    mami.codi.R::mami.codi(num_harmonics=1))$chord[[1]],
+  'Minor Triad Progressions 1' = (minor_i$pitches[[1]] %>% 
+                                    mami.codi.R::mami.codi(num_harmonics=1))$chord[[1]],
+  'Major Triad Progressions 5' = (major_I$pitches[[1]] %>%
+                                    mami.codi.R::mami.codi(num_harmonics=5))$chord[[1]],
+  'Minor Triad Progressions 5' = (minor_i$pitches[[1]] %>% 
+                                    mami.codi.R::mami.codi(num_harmonics=5))$chord[[1]],
+  'Major Triad Progressions 10' = (major_I$pitches[[1]] %>%
+                                     mami.codi.R::mami.codi(num_harmonics=10))$chord[[1]],
+  'Minor Triad Progressions 10' = (minor_i$pitches[[1]] %>% 
+                                     mami.codi.R::mami.codi(num_harmonics=10))$chord[[1]]
+)
+
+```
+
+```{r, include=F}
+grid = tidyr::expand_grid(
+  index         = seq_along(chords$pitches),
+  num_harmonics = c(1,5,10)
+)
+
+results = grid %>% furrr::future_pmap_dfr(\(index,
+                                     num_harmonics) {
+  
+  chord_spectrum = hrep::sparse_fr_spectrum(chords$pitches[[index]],
+                                            num_harmonics = num_harmonics)
+  
+  if (endsWith(chords$type[index], 'Progressions')) {
+    if (chords$label[index] == 'I' | chords$label[index] == 'i' | chords$label[index] == '') {
+      tonic_spectrum = NULL
+    } else {
+      tonic_spectrum = progression_tonics[[paste(chords$type[index],num_harmonics)]]
+    }
+  } else {
+    if (is.na(chords$tonic[[index]])) {
+      tonic_spectrum = NULL
+    } else {
+      tonic_spectrum = hrep::sparse_fr_spectrum(chords$tonic[[index]],
+                                                num_harmonics = num_harmonics)
+    }
+  }  
+  mami.codi.R::mami.codi(chord_spectrum,
+                         tonic=tonic_spectrum,
+                         metadata=purrr::flatten(
+                           list(chords$metadata[[index]],
+                                num_harmonics=num_harmonics)
+                         ),
+                         verbose=T)
+}, .progress=TRUE, .options = furrr::furrr_options(seed = T))
+
+results <- results %>% dplyr::rowwise() %>% dplyr::mutate(
+  label = metadata$label,
+  type  = metadata$type, 
+  num_harmonics=metadata$num_harmonics,
+  .before=1
+)
+```
+
+## Chords: Consonance-Dissonance ~ Major-Minor
+
+```{r, echo=F, message=F, results='asis'}
+for (t in chord_types) {
+  
+  cat("  \n###", t, '\n')
+  
+  for (n in results$num_harmonics %>% unique) {
+    title = paste(
+      t,
+      '~',
+      'Number of Harmonics:', n
+    )
+    r = results %>% dplyr::filter(
+      type==t & 
+        num_harmonics == n
+    )
+    print(plot_mami.codi(r, title, include_path=endsWith(t, 'Progressions')))
+  }
+  
+  cat("  \n")
+  
+}
+```

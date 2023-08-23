@@ -1,0 +1,106 @@
+---
+title: "2023 May 23 Meeting with Peter"
+output:
+  github_document: default
+always_allow_html: true
+---
+
+```{r, echo=F, message=F, include=F}
+devtools::load_all(".")
+source('../code/plot.R')
+mami.codi(60)
+```
+
+### Major Third
+
+```{r}
+M3 = hrep::sparse_fr_spectrum(c(60,64), num_harmonics=10, octave_ratio=2.1) %>%
+  mami.codi(verbose=T)
+```
+
+```{r}
+M3$ratios_low[[1]] %>% 
+  dplyr::arrange(pitch_freq) %>% 
+  dplyr::mutate(midi=round(hrep::freq_to_midi(pitch_freq),1))
+```
+
+```{r, echo=T}
+dens = M3$ratios_low[[1]]$den %>% unique %>% sort
+tibble::tibble_row(
+  unique_denominators = paste(dens, collapse=' '),
+  relative_period_length  = lcm(dens) %>% as.integer,
+  log2=log2(relative_period_length),
+  consonance_below=ZARLINO-log2
+)
+```
+
+```{r}
+M3$ratios_high[[1]] %>%
+  dplyr::arrange(pitch_freq) %>% 
+  dplyr::mutate(midi=round(hrep::freq_to_midi(pitch_freq),1))
+```
+
+```{r, echo=T}
+dens = M3$ratios_high[[1]]$den %>% unique %>% sort
+tibble::tibble_row(
+  unique_denominators = paste(dens, collapse=' '),
+  relative_period_length  = lcm(dens) %>% as.integer,
+  log2=log2(relative_period_length),
+  consonance_above=ZARLINO-log2
+)
+```
+
+### Minor Third 
+
+```{r}
+m3 = hrep::sparse_fr_spectrum(c(60,63), num_harmonics=10, octave_ratio=2.1) %>%
+  mami.codi(verbose=T)
+```
+
+```{r}
+m3$ratios_low[[1]] %>%
+  dplyr::arrange(pitch_freq) %>% 
+  dplyr::mutate(midi=round(hrep::freq_to_midi(pitch_freq),1))
+```
+
+```{r, echo=T}
+dens = m3$ratios_low[[1]]$den %>% unique %>% sort
+tibble::tibble_row(
+  unique_denominators = paste(dens, collapse=' '),
+  relative_period_length  = lcm(dens) %>% as.integer,
+  log2=log2(relative_period_length),
+  consonance_below=ZARLINO-log2
+)
+```
+
+```{r}
+m3$ratios_high[[1]] %>%
+  dplyr::arrange(pitch_freq) %>% 
+  dplyr::mutate(midi=round(hrep::freq_to_midi(pitch_freq),2))
+```
+
+```{r, echo=T}
+dens = m3$ratios_high[[1]]$den %>% unique %>% sort
+tibble::tibble_row(
+  unique_denominators = paste(dens, collapse=' '),
+  relative_period_length  = lcm(dens) %>% as.integer,
+  log2=log2(relative_period_length),
+  consonance_above=ZARLINO-log2
+)
+```
+
+## P1 Stretched, Harmonic and Compressed
+
+```{r}
+P1_stretched = hrep::sparse_fr_spectrum(60, num_harmonics=10, octave_ratio=2.1) %>%
+  mami.codi(verbose=T)
+P1_harmonic = hrep::sparse_fr_spectrum(60, num_harmonics=10, octave_ratio=2.0) %>%
+  mami.codi(verbose=T)
+P1_compressed = hrep::sparse_fr_spectrum(60, num_harmonics=10, octave_ratio=1.9) %>%
+  mami.codi(verbose=T)
+```
+
+```{r, echo=F}
+dplyr::bind_rows(P1_stretched, P1_harmonic, P1_compressed) %>%
+  dplyr::select(pseudo_octave, major_minor, consonance_dissonance)
+```

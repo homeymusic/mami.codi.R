@@ -1,0 +1,125 @@
+---
+title: "Periods"
+output:
+  github_document: default
+always_allow_html: true
+---
+```{r, echo=F, message=F, include=F}
+devtools::load_all(".")
+source('../code/plot.R')
+source('../code/utils.R')
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "../figures/PERIODS-"
+)
+knitr::opts_chunk$set(dev = 'svg')
+BEHAVIOURAL_SMOOTH_BROAD  <- 0.2
+BEHAVIOURAL_SMOOTH_NARROW <- 0.035
+```
+
+## Major Triad
+
+```{r}
+MT = c(60,64,67) %>% mami.codi(num_harmonics=1, verbose=T)
+```
+
+```{r}
+MT$ratios_low[[1]] %>% dplyr::arrange(pitch_freq)
+```
+
+```{r}
+2^MT$dissonance_low
+```
+
+```{r}
+MT$ratios_high[[1]] %>% dplyr::arrange(pitch_freq)
+```
+
+```{r}
+2^MT$dissonance_high
+```
+
+## Major Third
+
+```{r}
+tol_win = c(semitone_ratio(-DEFAULT_SEMITONE_TOLERANCE, 2),
+                semitone_ratio(+DEFAULT_SEMITONE_TOLERANCE, 2))
+estimate_cycle(hrep::sparse_fr_spectrum(60,64,num_harmonics=1), 
+            reference_freq=hrep::midi_to_freq(48), 
+            tolerance_window=tol_win, 2)
+```
+
+
+```{r}
+M3 = c(60,64) %>% mami.codi(num_harmonics=1, verbose=T)
+M3
+```
+
+```{r}
+tibble::tibble_row(
+  lcm_lo = M3$lcm_low[[1]] %>% as.integer(),
+  lcm_hi = M3$lcm_high[[1]] %>% as.integer()
+)
+```
+
+
+```{r}
+M3$ratios_low[[1]]
+```
+
+```{r}
+below=tibble::tibble_row(
+  ref_lo = 1 / M3$reference_freq_low,
+  C4     = 1 / hrep::midi_to_freq(60),
+  E4     = 1 / hrep::midi_to_freq(64)
+)
+below
+```
+
+```{r}
+ggplot2::ggplot(tidyr::pivot_longer(below,cols=tidyr::everything()),
+                ggplot2::aes(x=name,y=value)) + 
+  ggplot2::geom_bar(stat="identity")
+```
+
+```{r}
+tibble::tibble_row(
+  E4_C4     = below$E4 / below$C4,
+  C4_ref_lo = below$C4 / below$ref_lo,
+  E4_ref_lo = below$E4 / below$ref_lo
+)
+```
+
+```{r}
+M3$ratios_high[[1]]
+```
+
+```{r}
+above = tibble::tibble_row(
+  C4     = 1 / hrep::midi_to_freq(60),
+  E4     = 1 / hrep::midi_to_freq(64),
+  ref_hi = 1 / M3$reference_freq_high
+)
+above
+```
+
+```{r}
+ggplot2::ggplot(tidyr::pivot_longer(above,cols=tidyr::everything()),
+                ggplot2::aes(x=name,y=value)) + 
+  ggplot2::geom_bar(stat="identity")
+```
+
+```{r}
+tibble::tibble_row(
+  E4_C4     = above$E4 / above$C4,
+  C4_ref_hi = above$C4 / above$ref_hi,
+  E4_ref_hi = above$E4 / above$ref_hi
+)
+```
+
+```{r}
+8/5
+```
+
+
