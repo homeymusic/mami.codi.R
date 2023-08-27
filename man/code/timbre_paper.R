@@ -1,3 +1,5 @@
+
+
 source('./utils.R')
 devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 
@@ -149,8 +151,8 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
       study_chords = P8_chords
     }
     study_chord = hrep::sparse_fr_spectrum(study_chords$pitches[index][[1]][[1]],
-                                     num_harmonics = num_harmonics,
-                                     octave_ratio  = octave_ratio)
+                                           num_harmonics = num_harmonics,
+                                           octave_ratio  = octave_ratio)
 
     if (scale == '5PartialsNo3') {
       if (length(study_chord$y)==5) {
