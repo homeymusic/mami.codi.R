@@ -62,6 +62,18 @@ grid_M3 = tidyr::expand_grid(
   scale = 'M3'
 )
 
+intervals = tonic + seq(7.85, 7.85 + 0.5 , 1/2000 )
+m6_chords = tibble::tibble(
+  pitches = intervals %>% lapply(\(i) list(c(tonic,i)))
+)
+index = seq_along(m6_chords$pitches)
+grid_m6 = tidyr::expand_grid(
+  index,
+  num_harmonics,
+  octave_ratio,
+  scale = 'm6'
+)
+
 experiment.rds = '../data/M6.rds'
 intervals = 60 + readRDS(experiment.rds)$profile$interval
 M6_chords = tibble::tibble(
@@ -75,6 +87,18 @@ grid_M6 = tidyr::expand_grid(
   scale = 'M6'
 )
 
+intervals = tonic + seq(2.85,2.85+0.5,1/2000)
+m3_chords = tibble::tibble(
+  pitches = intervals %>% lapply(\(i) list(c(tonic,i)))
+)
+index = seq_along(m3_chords$pitches)
+grid_m3 = tidyr::expand_grid(
+  index,
+  num_harmonics,
+  octave_ratio,
+  scale = 'm3'
+)
+
 experiment.rds = '../data/P8.rds'
 intervals = 60 + readRDS(experiment.rds)$profile$interval
 P8_chords = tibble::tibble(
@@ -86,6 +110,31 @@ grid_P8 = tidyr::expand_grid(
   num_harmonics,
   octave_ratio,
   scale = 'P8'
+)
+
+intervals = tonic + seq(0, 15 , 1/2000 )
+hi_res_chords = tibble::tibble(
+  pitches = intervals %>% lapply(\(i) list(c(tonic,i)))
+)
+index = seq_along(hi_res_chords$pitches)
+
+grid_hi_res_5 = tidyr::expand_grid(
+  index,
+  num_harmonics=5,
+  octave_ratio,
+  scale = 'hi_res'
+)
+grid_hi_res_10 = tidyr::expand_grid(
+  index,
+  num_harmonics=10,
+  octave_ratio,
+  scale = 'hi_res'
+)
+grid_hi_res_20 = tidyr::expand_grid(
+  index,
+  num_harmonics=20,
+  octave_ratio,
+  scale = 'hi_res'
 )
 
 experiment.rds = '../data/Bonang.rds'
@@ -114,7 +163,8 @@ grid_5PartialsNo3 = tidyr::expand_grid(
   scale = '5PartialsNo3'
 )
 
-grid = dplyr::bind_rows(grid_1,grid_5,grid_10,grid_M3,grid_M6,grid_P8,
+grid = dplyr::bind_rows(grid_1,grid_5,grid_10,grid_M3,grid_m6,grid_M6,grid_m3,
+                        grid_P8,grid_hi_res_5,grid_hi_res_10,grid_hi_res_20,
                         grid_Bonang,grid_5PartialsNo3)
 
 plan(multisession, workers=parallelly::availableCores())
@@ -147,8 +197,14 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
       study_chords = M3_chords
     } else if (scale == 'M6') {
       study_chords = M6_chords
+    } else if (scale == 'm3') {
+      study_chords = m3_chords
+    } else if (scale == 'm6') {
+      study_chords = m6_chords
     } else if (scale == 'P8') {
       study_chords = P8_chords
+    } else if (scale == 'hi_res') {
+      study_chords = hi_res_chords
     }
     study_chord = hrep::sparse_fr_spectrum(study_chords$pitches[index][[1]][[1]],
                                            num_harmonics = num_harmonics,

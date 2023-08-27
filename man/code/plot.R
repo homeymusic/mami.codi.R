@@ -79,10 +79,11 @@ theme_homey_minimal <- function(aspect.ratio=NULL){
 }
 path_homey <- function() {
 }
-plot_mami.codi <- function(chords, title='', chords_to_label=NULL,
+plot_mami.codi <- function(chords, title='', chords_to_label=NULL,include_labels=F,
                            include_path=FALSE, aspect.ratio=NULL,
                            minimal=F) {
-  if (is.null(chords_to_label)) {
+
+  if (is_null(chords_to_label)) {
     chords_to_label = chords
   }
 
@@ -100,13 +101,14 @@ plot_mami.codi <- function(chords, title='', chords_to_label=NULL,
                             ends = "last", type = "closed")
       )
     }} +
-    ggrepel::geom_text_repel(data=chords_to_label,
-                             ggplot2::aes(label=label,
-                                          color=color_factor_homey(
-                                            chords_to_label,'major_minor')),
-                             segment.color = colors_homey$subtle_foreground,
-                             max.overlaps = Inf,
-                             family='Arial Unicode MS') +
+    {  if (include_labels) {
+      ggrepel::geom_text_repel(data=chords_to_label,
+                               ggplot2::aes(label=label,
+                                            color=color_factor_homey(
+                                              chords_to_label,'major_minor')),
+                               segment.color = colors_homey$subtle_foreground,
+                               max.overlaps = Inf,
+                               family='Arial Unicode MS')}} +
     ggplot2::scale_color_manual(values=color_values_homey(), guide='none') +
     ggplot2::ggtitle(title) +
     ggplot2::scale_x_continuous(

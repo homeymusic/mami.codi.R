@@ -17,49 +17,6 @@ BEHAVIOURAL_SMOOTH_BROAD  <- 0.2
 BEHAVIOURAL_SMOOTH_NARROW <- 0.035
 ```
 
-## High Resolution ~ 30,000 Dyads with 10 Harmonics in 15 semitones
-
-```{r, include=F}
-high_res = readRDS('./man/data/high_res.rds')
-chords <- high_res %>% dplyr::rowwise() %>% dplyr::mutate(
-  semitone      = metadata$semitone,
-  chord_max     = max(chord_freqs),
-  chord_min     = min(chord_freqs),
-  .before=1
-)
-chords$consonance_dissonance_z = z_scores(chords$consonance_dissonance)
-sigma = BEHAVIOURAL_SMOOTH_NARROW
-black_vlines = c()
-gray_vlines = c()
-core_plots = list(
-  plot_semitone_codi(chords, paste('Consonance-Dissonance'),
-                     sigma=sigma,
-                     black_vlines=black_vlines,gray_vlines=gray_vlines),
-  plot_semitone_mami(chords, paste('Major-Minor'),
-                     include_line=T,sigma=sigma,
-                     black_vlines=black_vlines,gray_vlines=gray_vlines)
-)  
-meta_plots = list(
-  plot_semitone_colo.cohi(chords, paste('Consonance Low & High'),
-                          sigma=sigma,
-                          black_vlines=black_vlines,gray_vlines=gray_vlines),
-  plot_mami.codi(chords, paste('MaMi.CoDi ~',title), chords_to_label=c()),
-  plot_semitone_registers(chords, paste('Ref Freqs & Tonic Timbre'))
-)
-```
-
-```{r, fig.height=8, fig.width=12, echo=F, results='asis', message=F}
-cat("  \n###", 'High Res ~ Core Plots', '\n')
-print(patchwork::wrap_plots(core_plots, ncol=1))
-cat("  \n")
-```
-
-```{r, fig.height=12, fig.width=12, echo=F, results='asis', message=F}
-cat("  \n###", 'High Res ~ Meta Plots', '\n')
-print(patchwork::wrap_plots(meta_plots, ncol=1))
-cat("  \n")
-```
-
 ## Timbre: Consonance-Dissonance and Major-Minor ~ Semitones
 
 ## Amplitudes
@@ -81,7 +38,6 @@ dyads <- timbre_paper %>% dplyr::rowwise() %>% dplyr::mutate(
   .before=1
 )
 ```
-
 
 ```{r, include=F}
 params = list(
@@ -124,18 +80,19 @@ params %>% purrr::map(\(p) {
                        include_line=T,sigma=sigma,
                        black_vlines=black_vlines,gray_vlines=gray_vlines)
   )  
+  mami_codi_plot = list(
+    plot_mami.codi(chords, paste('MaMi.CoDi ~',title),
+                   include_labels=F)
+  )  
   meta_plots = list(
     plot_semitone_colo.cohi(chords, paste('Consonance Low & High'),
                             sigma=sigma,
                             black_vlines=black_vlines,gray_vlines=gray_vlines),
-    plot_mami.codi(chords, paste('MaMi.CoDi ~',title),
-                   chords_to_label=chords %>% dplyr::filter(
-                     round(semitone,2) %% 1 == 0
-                   )),
     plot_semitone_registers(chords, paste('Ref Freqs & Tonic Timbre'))
   )  
   cat("  \n###", title, '\n')
   print(patchwork::wrap_plots(core_plots, ncol=1))
+  print(patchwork::wrap_plots(mami_codi_plot, ncol=1))
   print(patchwork::wrap_plots(meta_plots, ncol=1))
   cat("  \n")
 })
@@ -161,8 +118,7 @@ dyads <- timbre_paper %>% dplyr::rowwise() %>% dplyr::mutate(
 )
 ```
 
-
-```{r, include=F}
+```{r, fig.height=8, fig.width=12, echo=F, results='asis', message=F}
 params = list(
   list(h=10,o=2.1,s='macro'),
   list(h=10,o=2.0,s='macro'),
@@ -171,13 +127,15 @@ params = list(
   list(h=1, o=2.0,s='macro'),
   list(h=5, o=2.0,s='macro'),
   list(h=5,o=2,s='5PartialsNo3'),
-  list(h=10,o=2.0,s='M3'),
+  list(h=10,o=2.0,s='P8'),
   list(h=10,o=2.0,s='M6'),
-  list(h=10,o=2.0,s='P8')
+  list(h=10,o=2.0,s='M3'),
+  list(h=10,o=2.0,s='m3'),
+  list(h=10,o=2.0,s='m6'),
+  list(h=5,o=2.0,s='hi_res'),
+  list(h=10,o=2.0,s='hi_res')
 )
-```
 
-```{r, fig.height=8, fig.width=12, echo=F, results='asis', message=F}
 params %>% purrr::map(\(p) {
   gray_vlines = c()
   black_vlines = c()
@@ -215,6 +173,18 @@ params %>% purrr::map(\(p) {
     timbre = 'P8'
     gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 2/1)-60)
     black_vlines  = c(11.94, 12.08)
+  } else if (p$s == 'm3') {
+    timbre = 'm3'
+    gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 6/5)-60,3)
+    black_vlines  = c()
+  } else if (p$s == 'm6') {
+    timbre = 'm6'
+    gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 8/5)-60,8)
+    black_vlines  = c()
+  } else if (p$s == 'hi_res') {
+    timbre = 'hi_res'
+    gray_vlines = c()
+    black_vlines  = c()
   }
   title = paste(
     timbre,
@@ -227,18 +197,22 @@ params %>% purrr::map(\(p) {
                                       scale        == p$s)
   chords$consonance_dissonance_z = z_scores(chords$consonance_dissonance)
   
-  experiment.rds = paste0('./man/data/',
-                          timbre,
-                          '.rds')
-  
-  experiment = readRDS(experiment.rds)$profile %>%
-    dplyr::rename(semitone=interval)
-  
-  experiment <- experiment %>% dplyr::mutate(
-    consonance_dissonance = rating,
-    consonance_dissonance_2x = 2*rating,
-    consonance_dissonance_4x = 4*rating
-  )
+  if (timbre=='m3' | timbre=='m6' | timbre=='hi_res') {
+    experiment = NULL
+  } else {
+    experiment.rds = paste0('./man/data/',
+                            timbre,
+                            '.rds')
+    
+    experiment = readRDS(experiment.rds)$profile %>%
+      dplyr::rename(semitone=interval)
+    
+    experiment <- experiment %>% dplyr::mutate(
+      consonance_dissonance = rating,
+      consonance_dissonance_2x = 2*rating,
+      consonance_dissonance_4x = 4*rating
+    )
+  }
   if (p$s == 'macro' | p$s == 'Bonang' | p$s == '5PartialsNo3') {
     sigma = BEHAVIOURAL_SMOOTH_BROAD
   } else {
@@ -252,14 +226,14 @@ params %>% purrr::map(\(p) {
                        include_line=T,sigma=sigma,
                        black_vlines=black_vlines,gray_vlines=gray_vlines)
   )  
+  mami_codi_plots = list(
+    plot_mami.codi(chords, paste('MaMi.CoDi ~',title), chords_to_label=NULL,
+                   include_labels=F)
+  )  
   meta_plots = list(
     plot_semitone_colo.cohi(chords, paste('Consonance Low & High'),
                             sigma=sigma,
                             black_vlines=black_vlines,gray_vlines=gray_vlines),
-    plot_mami.codi(chords, paste('MaMi.CoDi ~',title),
-                   chords_to_label=chords %>% dplyr::filter(
-                     round(semitone,2) %% 1 == 0
-                   )),
     plot_semitone_registers(chords, paste('Ref Freqs & Tonic Timbre'))
   )  
   cat("  \n###", title, '\n')
@@ -268,6 +242,7 @@ params %>% purrr::map(\(p) {
                                 collapse = ' ')
   )))
   print(patchwork::wrap_plots(core_plots, ncol=1))
+  print(patchwork::wrap_plots(mami_codi_plots, ncol=1))
   print(patchwork::wrap_plots(meta_plots, ncol=1))
   cat("  \n")
 })
@@ -305,7 +280,7 @@ progression_tonics = list(
 ```{r, include=F}
 grid = tidyr::expand_grid(
   index         = seq_along(chords$pitches),
-  num_harmonics = c(1,5,10)
+  num_harmonics = c(1,5,10,20)
 )
 
 results = grid %>% furrr::future_pmap_dfr(\(index,
@@ -362,7 +337,8 @@ for (t in chord_types) {
       type==t & 
         num_harmonics == n
     )
-    print(plot_mami.codi(r, title, include_path=endsWith(t, 'Progressions')))
+    print(plot_mami.codi(r, title, include_path=endsWith(t, 'Progressions'),
+                         include_labels=T))
   }
   
   cat("  \n")
