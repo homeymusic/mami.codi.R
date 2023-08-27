@@ -17,6 +17,49 @@ BEHAVIOURAL_SMOOTH_BROAD  <- 0.2
 BEHAVIOURAL_SMOOTH_NARROW <- 0.035
 ```
 
+## High Resolution ~ 30,000 Dyads with 10 Harmonics in 15 semitones
+
+```{r, include=F}
+high_res = readRDS('./man/data/high_res.rds')
+chords <- high_res %>% dplyr::rowwise() %>% dplyr::mutate(
+  semitone      = metadata$semitone,
+  chord_max     = max(chord_freqs),
+  chord_min     = min(chord_freqs),
+  .before=1
+)
+chords$consonance_dissonance_z = z_scores(chords$consonance_dissonance)
+sigma = BEHAVIOURAL_SMOOTH_NARROW
+black_vlines = c()
+gray_vlines = c()
+core_plots = list(
+  plot_semitone_codi(chords, paste('Consonance-Dissonance'),
+                     sigma=sigma,
+                     black_vlines=black_vlines,gray_vlines=gray_vlines),
+  plot_semitone_mami(chords, paste('Major-Minor'),
+                     include_line=T,sigma=sigma,
+                     black_vlines=black_vlines,gray_vlines=gray_vlines)
+)  
+meta_plots = list(
+  plot_semitone_colo.cohi(chords, paste('Consonance Low & High'),
+                          sigma=sigma,
+                          black_vlines=black_vlines,gray_vlines=gray_vlines),
+  plot_mami.codi(chords, paste('MaMi.CoDi ~',title), chords_to_label=c()),
+  plot_semitone_registers(chords, paste('Ref Freqs & Tonic Timbre'))
+)
+```
+
+```{r, fig.height=8, fig.width=12, echo=F, results='asis', message=F}
+cat("  \n###", 'High Res ~ Core Plots', '\n')
+print(patchwork::wrap_plots(core_plots, ncol=1))
+cat("  \n")
+```
+
+```{r, fig.height=12, fig.width=12, echo=F, results='asis', message=F}
+cat("  \n###", 'High Res ~ Meta Plots', '\n')
+print(patchwork::wrap_plots(meta_plots, ncol=1))
+cat("  \n")
+```
+
 ## Timbre: Consonance-Dissonance and Major-Minor ~ Semitones
 
 ## Amplitudes
