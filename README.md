@@ -126,15 +126,7 @@ Major-Minor and Consonance-Dissonance Perception
 |:--------------|
 | 2             |
 
-![](man/figures/README-unnamed-chunk-8-37.png)<!-- -->![](man/figures/README-unnamed-chunk-8-38.png)<!-- -->![](man/figures/README-unnamed-chunk-8-39.png)<!-- -->
-
-### hi_res ~ Partials: 10
-
-| pseudo_octave |
-|:--------------|
-| 2             |
-
-![](man/figures/README-unnamed-chunk-8-40.png)<!-- -->![](man/figures/README-unnamed-chunk-8-41.png)<!-- -->![](man/figures/README-unnamed-chunk-8-42.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-8-37.png)<!-- -->![](man/figures/README-unnamed-chunk-8-38.png)<!-- -->![](man/figures/README-unnamed-chunk-8-39.png)<!-- -->  
 \[\[1\]\] NULL
 
 \[\[2\]\] NULL
@@ -160,8 +152,6 @@ Major-Minor and Consonance-Dissonance Perception
 \[\[12\]\] NULL
 
 \[\[13\]\] NULL
-
-\[\[14\]\] NULL
 
 # MaMi CoDi Plots
 

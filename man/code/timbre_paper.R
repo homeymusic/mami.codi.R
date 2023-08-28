@@ -112,7 +112,7 @@ grid_P8 = tidyr::expand_grid(
   scale = 'P8'
 )
 
-intervals = tonic + seq(0, 15 , 1/2000 )
+intervals = tonic + seq(0, 15 , 1/4000)
 hi_res_chords = tibble::tibble(
   pitches = intervals %>% lapply(\(i) list(c(tonic,i)))
 )
@@ -121,18 +121,6 @@ index = seq_along(hi_res_chords$pitches)
 grid_hi_res_5 = tidyr::expand_grid(
   index,
   num_harmonics=5,
-  octave_ratio,
-  scale = 'hi_res'
-)
-grid_hi_res_10 = tidyr::expand_grid(
-  index,
-  num_harmonics=10,
-  octave_ratio,
-  scale = 'hi_res'
-)
-grid_hi_res_20 = tidyr::expand_grid(
-  index,
-  num_harmonics=20,
   octave_ratio,
   scale = 'hi_res'
 )
@@ -164,7 +152,7 @@ grid_5PartialsNo3 = tidyr::expand_grid(
 )
 
 grid = dplyr::bind_rows(grid_1,grid_5,grid_10,grid_M3,grid_m6,grid_M6,grid_m3,
-                        grid_P8,grid_hi_res_5,grid_hi_res_10,grid_hi_res_20,
+                        grid_P8,grid_hi_res_5,
                         grid_Bonang,grid_5PartialsNo3)
 
 plan(multisession, workers=parallelly::availableCores())

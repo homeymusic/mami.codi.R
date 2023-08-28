@@ -132,8 +132,7 @@ params = list(
   list(h=10,o=2.0,s='M3'),
   list(h=10,o=2.0,s='m3'),
   list(h=10,o=2.0,s='m6'),
-  list(h=5,o=2.0,s='hi_res'),
-  list(h=10,o=2.0,s='hi_res')
+  list(h=5,o=2.0,s='hi_res')
 )
 
 params %>% purrr::map(\(p) {
@@ -280,7 +279,7 @@ progression_tonics = list(
 ```{r, include=F}
 grid = tidyr::expand_grid(
   index         = seq_along(chords$pitches),
-  num_harmonics = c(1,5,10,20)
+  num_harmonics = c(1,5,10)
 )
 
 results = grid %>% furrr::future_pmap_dfr(\(index,
