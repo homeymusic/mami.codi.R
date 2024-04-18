@@ -4,7 +4,7 @@
 \name{mami.codi.R-package}
 \alias{mami.codi.R}
 \alias{mami.codi.R-package}
-\title{mami.codi.R: An Auditory Theory of Major-Minor and Consonance-Dissonance Perception}
+\title{mami.codi.R: An Auditory Model of Major-Minor and Consonance-Dissonance Perception}
 \description{
 Allows researchers to explore music perception and music theory.
 }

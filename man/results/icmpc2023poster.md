@@ -346,7 +346,8 @@ m = Major-Minor
     #> non-missing arguments to min; returning Inf
     #> Warning in max(c(chords$consonance_low, chords$consonance_high)): no
     #> non-missing arguments to max; returning -Inf
-    #> Warning: Removed 1 rows containing missing values (`geom_abline()`).
+    #> Warning: Removed 1 row containing missing values or values outside the scale range
+    #> (`geom_abline()`).
 
 ![](../figures/POSTER2023-unnamed-chunk-24-2.svg)<!-- -->
 
@@ -354,7 +355,8 @@ m = Major-Minor
     #> returning -Inf
     #> Warning in max(abs(chords$major_minor)): no non-missing arguments to max;
     #> returning -Inf
-    #> Warning: Removed 1 rows containing missing values (`geom_vline()`).
+    #> Warning: Removed 1 row containing missing values or values outside the scale range
+    #> (`geom_vline()`).
 
 ![](../figures/POSTER2023-unnamed-chunk-24-3.svg)<!-- -->
 
@@ -379,23 +381,23 @@ ET_dyads <- ET_dyads %>% dplyr::mutate(
 dyads = dplyr::bind_rows(ET_dyads, behavior_dyads)
 ```
 
-### Pure \~ Partials: 1
+### Pure ~ Partials: 1
 
 ![](../figures/POSTER2023-unnamed-chunk-30-1.svg)<!-- -->
 
-### 5Partials \~ Partials: 5
+### 5Partials ~ Partials: 5
 
 ![](../figures/POSTER2023-unnamed-chunk-30-2.svg)<!-- -->![](../figures/POSTER2023-unnamed-chunk-30-3.svg)<!-- -->![](../figures/POSTER2023-unnamed-chunk-30-4.svg)<!-- -->
 
-### Stretched \~ Partials: 10
+### Stretched ~ Partials: 10
 
 ![](../figures/POSTER2023-unnamed-chunk-30-5.svg)<!-- -->
 
-### Harmonic \~ Partials: 10
+### Harmonic ~ Partials: 10
 
 ![](../figures/POSTER2023-unnamed-chunk-30-6.svg)<!-- -->
 
-### Compressed \~ Partials: 10
+### Compressed ~ Partials: 10
 
 ![](../figures/POSTER2023-unnamed-chunk-30-7.svg)<!-- -->  
 \[\[1\]\] NULL

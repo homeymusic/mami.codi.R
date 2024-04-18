@@ -4,20 +4,13 @@
 \alias{mami.codi}
 \title{Major-Minor Consonance-Dissonance}
 \usage{
-mami.codi(
-  x,
-  tonic = NULL,
-  metadata = NA,
-  verbose = FALSE,
-  tolerance_semitone_ratio = DEFAULT_SEMITONE_TOLERANCE,
-  ...
-)
+mami.codi(x, tonic = NULL, metadata = NA, verbose = FALSE, ...)
 }
 \arguments{
 \item{x}{Chord to analyse specified in MIDI, coerced to
 hrep::sparse_fr_spectrum}
 
-\item{tonic}{Tonic to analyse specified in MIDI, coerced to
+\item{tonic}{Tonic pitch specified in MIDI, coerced to
 hrep::sparse_fr_spectrum}
 
 \item{metadata}{User-provided list of metadata that roundtrips with each call.
@@ -25,9 +18,6 @@ helpful for analysis and plots}
 
 \item{verbose}{Determines the amount of data to return from chord evaluation
 TRUE is all and FALSE is just major-minor and consonance-dissonance}
-
-\item{tolerance_semitone_ratio}{The tolerance to pass to the Stern Brocot
-tree to convert frequency ratios into rational fractions}
 
 \item{...}{parameters for hrep::sparse_fr_spectrum}
 }

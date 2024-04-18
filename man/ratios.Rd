@@ -4,7 +4,7 @@
 \alias{ratios}
 \title{ratios}
 \usage{
-ratios(x, reference_freq, tolerance, pseudo_octave)
+ratios(x, reference_freq, tolerance, pseudo_octave, invert = FALSE)
 }
 \arguments{
 \item{x}{Chord frequency ratios}
