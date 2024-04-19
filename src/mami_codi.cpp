@@ -131,12 +131,12 @@ DataFrame ratios(NumericVector x,
    double amp_ceiling = amp0;
    for (int i=1; i<=num_harmonics; i++) {
      for (int j=1; j<x.size(); j++){
-       if (amp[j] < amp_ceiling && (harmonics_min[i] < x[j]) && (x[j] < harmonics_max[i])) {
+       if (amp[j] <= amp_ceiling && (harmonics_min[i] < x[j]) && (x[j] < harmonics_max[i])) {
          freq[num_matches] = x[j];
          pseudo_octave[num_matches] = std::round(1000000 * pow(x[j]/f0,1/(log(i+1)/log(2)))) / 1000000;
          num_matches++;
        }
-       amp_ceiling = amp[j];
+       if (amp[j] > amp0) {amp_ceiling = amp0 - 0.01;} else {amp_ceiling = amp[j];}
      }
    }
 
