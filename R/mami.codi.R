@@ -5,8 +5,6 @@
 #'
 #' @param x Chord to analyse specified in MIDI, coerced to
 #' hrep::sparse_fr_spectrum
-#' @param tonic Tonic pitch specified in MIDI, coerced to
-#' hrep::sparse_fr_spectrum
 #' @param metadata User-provided list of metadata that roundtrips with each call.
 #' helpful for analysis and plots
 #' @param verbose Determines the amount of data to return from chord evaluation
@@ -60,6 +58,8 @@ detect_highest_lowest_pitches <- function(x) {
 
   c_freqs   = x$chord[[1]] %>% dplyr::filter(.data$y>MIN_AMPLITUDE) %>%
     hrep::freq()
+
+  c_pitches = listen_for_harmonics(c_freqs)
 
   l_freqs = x$lowest[[1]] %>% dplyr::filter(.data$y>MIN_AMPLITUDE) %>%
     hrep::freq()
@@ -205,6 +205,7 @@ estimate_cycle <- function(x, reference_freq, tolerance_window, pseudo_octave,
 lcm <- function(x) Reduce(numbers::LCM, x)
 
 listen_for_harmonics = function(x) {
+  browser()
   potential_harmonics = x %>% analyze_harmonics
 
   estimated_pseudo_octave = (potential_harmonics %>%
