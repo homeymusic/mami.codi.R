@@ -4,6 +4,9 @@
 #' analyze_harmonics
 NULL
 
+#' find_highest_fundamental
+NULL
+
 #' ratios
 #'
 #' Creates a list of ratios as rational fractions
@@ -21,7 +24,11 @@ ratios <- function(x, reference, tolerance, pseudo_octave, ref_harmonic_number) 
     .Call(`_mami_codi_R_ratios`, x, reference, tolerance, pseudo_octave, ref_harmonic_number)
 }
 
-analyze_harmonics <- function(x, amp) {
-    .Call(`_mami_codi_R_analyze_harmonics`, x, amp)
+analyze_harmonics <- function(x, y) {
+    .Call(`_mami_codi_R_analyze_harmonics`, x, y)
+}
+
+find_highest_fundamental <- function(x) {
+    .Call(`_mami_codi_R_find_highest_fundamental`, x)
 }
 

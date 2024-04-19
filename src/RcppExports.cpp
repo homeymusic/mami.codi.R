@@ -26,14 +26,25 @@ BEGIN_RCPP
 END_RCPP
 }
 // analyze_harmonics
-DataFrame analyze_harmonics(const NumericVector x, const NumericVector amp);
-RcppExport SEXP _mami_codi_R_analyze_harmonics(SEXP xSEXP, SEXP ampSEXP) {
+DataFrame analyze_harmonics(const NumericVector x, const NumericVector y);
+RcppExport SEXP _mami_codi_R_analyze_harmonics(SEXP xSEXP, SEXP ySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< const NumericVector >::type amp(ampSEXP);
-    rcpp_result_gen = Rcpp::wrap(analyze_harmonics(x, amp));
+    Rcpp::traits::input_parameter< const NumericVector >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(analyze_harmonics(x, y));
+    return rcpp_result_gen;
+END_RCPP
+}
+// find_highest_fundamental
+DataFrame find_highest_fundamental(const NumericVector x);
+RcppExport SEXP _mami_codi_R_find_highest_fundamental(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const NumericVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(find_highest_fundamental(x));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -41,6 +52,7 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_mami_codi_R_ratios", (DL_FUNC) &_mami_codi_R_ratios, 5},
     {"_mami_codi_R_analyze_harmonics", (DL_FUNC) &_mami_codi_R_analyze_harmonics, 2},
+    {"_mami_codi_R_find_highest_fundamental", (DL_FUNC) &_mami_codi_R_find_highest_fundamental, 1},
     {NULL, NULL, 0}
 };
 

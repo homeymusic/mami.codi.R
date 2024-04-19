@@ -50,8 +50,14 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 }
 
 listen_for_harmonics = function(x) {
+
   chords = x$chord[[1]] %>% dplyr::filter(.data$y>MIN_AMPLITUDE)
-  potential_harmonics =  chords %>% hrep::freq() %>% analyze_harmonics(chords %>% hrep::amp())
+
+  potential_harmonics = chords %>% hrep::freq() %>% find_highest_fundamental()
+
+
+  highet_fundamental_freq = potential_harmonics %>% dplyr::filter(pseudo_octave == 2.0) %>% select(reference_freq) %>% max()
+
 
   estimated_pseudo_octave = (potential_harmonics %>%
                                dplyr::count(.data$pseudo_octave, name='num_harmonics',sort=TRUE) %>%
@@ -68,9 +74,11 @@ listen_for_harmonics = function(x) {
     root_harmonics %>% dplyr::distinct()
   }
 
+  browser()
+
   x %>% dplyr::mutate(
     pseudo_octave       = max(root_harmonics$pseudo_octave),
-    num_harmonics       = nrow(root_harmonics)
+    num_harmonics       = max(root_harmonics$harmonic_number)
   )
 }
 
