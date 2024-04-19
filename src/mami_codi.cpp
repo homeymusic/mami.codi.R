@@ -45,109 +45,103 @@ NumericVector rational_fraction(const double x, const NumericVector tolerance) {
 
 //' ratios
 //'
-//' Creates a list of frequency ratios as rational fractions
+//' Creates a list of ratios as rational fractions
 //'
-//' @param x Chord frequency ratios
-//' @param reference_freq Reference frequency ratios
+//' @param x Chord values
+//' @param reference Reference value
 //' @param tolerance A vector with two values for the upper and lower tolerance.
 //' @param pseudo_octave Factor for calculating stretched and compressed ratios.
+//' @param ref_harmonic_number The harmonic number of the reference
 //'
 //' @return A data frame of numerators and denominators
 //'
 //' @export
 // [[Rcpp::export]]
 DataFrame ratios(NumericVector x,
-                 const double reference_freq,
+                 const double reference,
                  const NumericVector tolerance,
                  const double pseudo_octave,
-                 const bool invert = false) {
+                 const double ref_harmonic_number) {
 
   x = unique(x);
 
   int m = x.size();
   NumericVector nums(m);
   NumericVector dens(m);
-  NumericVector pitch_freqs(m);
-  NumericVector freq_ratios(m);
+  NumericVector pitch(m);
+  NumericVector ratios(m);
   NumericVector pseudo_ratios(m);
   NumericVector fraction(2);
 
   for (int i = 0; i < m; ++i) {
-    double freq_ratio = x[i] / reference_freq;
-    if (invert) {freq_ratio = 1 / freq_ratio;}
-    const double pseudo_ratio = pow(2.0, log(freq_ratio) / log(pseudo_octave));
+    double ratio = x[i] / reference;
+    if (ratio != 1) {
+      ratio = ratio / (ref_harmonic_number + 1);
+    }
+    const double pseudo_ratio = pow(2.0, log(ratio) / log(pseudo_octave));
     fraction = rational_fraction(pseudo_ratio,tolerance);
-    nums[i]                = fraction[0];
-    dens[i]                = fraction[1];
-    freq_ratios[i]         = freq_ratio;
-    pseudo_ratios[i]       = pseudo_ratio;
-    pitch_freqs[i]         = x[i];
+    nums[i]          = fraction[0];
+    dens[i]          = fraction[1];
+    ratios[i]        = ratio;
+    pseudo_ratios[i] = pseudo_ratio;
+    pitch[i]         = x[i];
   }
 
   return DataFrame::create(
-    _("num")              = nums,
-    _("den")              = dens,
-    _("freq_ratio")       = freq_ratios,
-    _("pseudo_ratio")     = pseudo_ratios,
-    _("pitch_freq")       = pitch_freqs,
-    _("reference_freq")   = reference_freq
+    _("num")          = nums,
+    _("den")          = dens,
+    _("ratio")        = ratios,
+    _("pseudo_ratio") = pseudo_ratios,
+    _("pitch")        = pitch,
+    _("reference")    = reference
   );
 }
 
 //' analyze_harmonics
-//'
-//' Determine pseudo octave of all frequencies relative to lowest frequency
-//'
-//' @param x Chord frequencies
-//'
-//' @return A data frame of frequencies and pseudo_octaves
-//'
-//' @export
-// [[Rcpp::export]]
-DataFrame analyze_harmonics(const NumericVector x) {
-  const int x_size = x.size();
+ //'
+ //' Determine pseudo octave of all frequencies relative to lowest frequency
+ //'
+ //' @param x Chord frequencies
+ //' @param amp Chord frequencies
+ //'
+ //'
+ //' @return A data frame of frequencies and pseudo_octaves
+ //'
+ //' @export
+ // [[Rcpp::export]]
+ DataFrame analyze_harmonics(const NumericVector x,
+                             const NumericVector amp) {
 
-  const double f0 = min(x);
-  const int num_harmonics = ceil(pow(2,log(max(x)/f0)/log(2))) + 1;
+   const double f0   = min(x);
+   const double amp0 = max(amp);
+   const int num_harmonics = ceil(pow(2,log(max(x)/f0)/log(2)));
 
-  NumericVector harmonic(x_size*num_harmonics*num_harmonics);
-  NumericVector ref_freq(x_size*num_harmonics*num_harmonics);
-  NumericVector freq(x_size*num_harmonics*num_harmonics);
-  NumericVector pseudo_octave(x_size*num_harmonics*num_harmonics);
+   NumericVector harmonics(num_harmonics);
+   NumericVector harmonics_min(num_harmonics);
+   NumericVector harmonics_max(num_harmonics);
+   for (int i=0; i<num_harmonics;i++) {
+     harmonics[i] = (i+1) * f0;
+     harmonics_min[i] = harmonics[i] * 0.8408964;
+     harmonics_max[i] = harmonics[i] * 1.189207;
+   }
 
-  int num_matches=0;
+   NumericVector freq(num_harmonics*num_harmonics);
+   NumericVector pseudo_octave(num_harmonics*num_harmonics);
+   int num_matches=0;
+   double amp_ceiling = amp0;
+   for (int i=1; i<=num_harmonics; i++) {
+     for (int j=1; j<x.size(); j++){
+       if (amp[j] < amp_ceiling && (harmonics_min[i] < x[j]) && (x[j] < harmonics_max[i])) {
+         freq[num_matches] = x[j];
+         pseudo_octave[num_matches] = std::round(1000000 * pow(x[j]/f0,1/(log(i+1)/log(2)))) / 1000000;
+         num_matches++;
+       }
+       amp_ceiling = amp[j];
+     }
+   }
 
-  for (int k = 0; k < x_size; ++k) {
-    double ref = x[k];
-
-    NumericVector harmonics(num_harmonics);
-    NumericVector harmonics_min(num_harmonics);
-    NumericVector harmonics_max(num_harmonics);
-
-    for (int i=0; i<num_harmonics-k;i++) {
-      harmonics[i] = (i+1) * ref;
-      harmonics_min[i] = harmonics[i] * 0.8408964;
-      harmonics_max[i] = harmonics[i] * 1.189207;
-    }
-
-    for (int i=1; i<num_harmonics-k; i++) {
-      for (int j=k; j<x_size; j++){
-        if ((harmonics_min[i] < x[j]) && (x[j] < harmonics_max[i])) {
-          harmonic[num_matches] = i;
-          ref_freq[num_matches] = ref;
-          freq[num_matches] = x[j];
-          pseudo_octave[num_matches] = std::round(1000000 * pow(x[j]/ref,1/(log(i+1)/log(2)))) / 1000000;
-          num_matches++;
-        }
-      }
-    }
-  }
-
-  return DataFrame::create(
-    _("harmonic")      = harmonic[Rcpp::Range(0, num_matches-1)],
-    _("ref_freq")      = ref_freq[Rcpp::Range(0, num_matches-1)],
-    _("freq")          = freq[Rcpp::Range(0, num_matches-1)],
-    _("pseudo_octave") = pseudo_octave[Rcpp::Range(0, num_matches-1)]
-  );
-
+   return DataFrame::create(
+     _("freq") = freq[Rcpp::Range(0, num_matches-1)],
+                     _("pseudo_octave") = pseudo_octave[Rcpp::Range(0, num_matches-1)]
+   );
  }

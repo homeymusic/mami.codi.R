@@ -16,11 +16,11 @@
 #'
 #' @rdname mami.codi
 #' @export
-mami.codi <- function(x, lowest_fundamental, highest_fundamental, metadata=NA, verbose=FALSE,...) {
+mami.codi <- function(x, metadata=NA, verbose=FALSE,...) {
 
-  parse_input(x, lowest_fundamental, highest_fundamental, ...)      %>%
-    detect_highest_lowest_pitches %>%
-    select_ref_pitches            %>%
+  parse_input(x, ...)             %>%
+    listen_for_harmonics           %>%
+    select_ref_freqs              %>%
     duplex                        %>%
     flip                          %>%
     rotate                        %>%
@@ -28,81 +28,61 @@ mami.codi <- function(x, lowest_fundamental, highest_fundamental, metadata=NA, v
 
 }
 
-parse_input <- function(x, lowest_fundamental, highest_fundamental,...) {
-
+parse_input <- function(x,...) {
 
   UseMethod('parse_input', x)
 
 }
 
-parse_input.default <- function(x, lowest_fundamental, highest_fundamental, ...) {
+parse_input.default <- function(x, ...) {
 
   parse_input(hrep::sparse_fr_spectrum(x, ...),
-              lowest = hrep::sparse_fr_spectrum(lowest_fundamental,...),
-              highest = hrep::sparse_fr_spectrum(highest_fundamental,...),
               ...)
 
 }
 
-parse_input.sparse_fr_spectrum <- function(x, lowest, highest, ...) {
+parse_input.sparse_fr_spectrum <- function(x, ...) {
 
   tibble::tibble_row(
-    chord = list(x),
-    lowest = list(lowest),
-    highest = list(highest)
+    chord = list(x)
   )
 
 }
 
-detect_highest_lowest_pitches <- function(x) {
+listen_for_harmonics = function(x) {
+  chords = x$chord[[1]] %>% dplyr::filter(.data$y>MIN_AMPLITUDE)
+  potential_harmonics =  chords %>% hrep::freq() %>% analyze_harmonics(chords %>% hrep::amp())
+
+  estimated_pseudo_octave = (potential_harmonics %>%
+                               dplyr::count(.data$pseudo_octave, name='num_harmonics',sort=TRUE) %>%
+                               dplyr::slice(1))$pseudo_octave
+
+  root_harmonics = potential_harmonics %>%
+    dplyr::filter(.data$pseudo_octave==1 |
+                    dplyr::near(.data$pseudo_octave,estimated_pseudo_octave))
+
+  if (nrow(root_harmonics)==1) {
+    root_harmonics$pseudo_octave = 2.0
+    root_harmonics
+  } else {
+    root_harmonics %>% dplyr::distinct()
+  }
+
+  x %>% dplyr::mutate(
+    pseudo_octave       = max(root_harmonics$pseudo_octave),
+    num_harmonics       = nrow(root_harmonics)
+  )
+}
+
+select_ref_freqs <- function(x) {
 
   c_freqs   = x$chord[[1]] %>% dplyr::filter(.data$y>MIN_AMPLITUDE) %>%
     hrep::freq()
 
-  c_pitches = listen_for_harmonics(c_freqs)
-
-  l_freqs = x$lowest[[1]] %>% dplyr::filter(.data$y>MIN_AMPLITUDE) %>%
-    hrep::freq()
-  l_pitch = listen_for_harmonics(l_freqs)
-
-  h_freqs = x$highest[[1]] %>% dplyr::filter(.data$y>MIN_AMPLITUDE) %>%
-    hrep::freq()
-  h_pitch = listen_for_harmonics(h_freqs)
-
-  a_freqs   = c(l_freqs,c_freqs,h_freqs)
-
   x %>% dplyr::mutate(
-    chord_freqs   = list(c_freqs),
-    lowest_freqs  = list(l_freqs),
-    highest_freqs = list(h_freqs),
-    all_freqs     = list(a_freqs),
-    pseudo_octave = l_pitch$pseudo_octave %>% max
-  )
-
-}
-
-select_ref_pitches <- function(x) {
-  x %>% dplyr::mutate(
-    distance_below     = distance(min(x$all_freqs[[1]]),
-                                       min(x$lowest_freqs[[1]]),
-                                       x$pseudo_octave),
-    distance_above     = distance(max(x$all_freqs[[1]]),
-                                       max(x$highest_freqs[[1]]),
-                                       x$pseudo_octave),
-    distance_harmonics = distance(max(x$highest_freqs[[1]]),
-                                        min(x$highest_freqs[[1]]),
-                                        x$pseudo_octave),
-    reference_register_low   = floor(min(.data$distance_below, -BUFFER)),
-    reference_register_high  = ceiling(max(.data$distance_above,
-                                           +BUFFER + .data$distance_harmonics)),
-    calibration_register_low = floor(-BUFFER),
-    calibration_register_high = ceiling(.data$distance_harmonics + BUFFER),
-    reference_freq_low        = transpose_freqs(min(x$lowest_freqs[[1]]),
-                                              .data$reference_register_low,
-                                              x$pseudo_octave),
-    reference_freq_high       = transpose_freqs(min(x$highest_freqs[[1]]),
-                                              .data$reference_register_high,
-                                              x$pseudo_octave)
+    chord_freqs         = list(c_freqs),
+    reference_freq_low  = min(x$chord[[1]]$x),
+    reference_freq_high = max(x$chord[[1]]$x)
   )
 
 }
@@ -113,15 +93,15 @@ duplex <- function(x) {
                 semitone_ratio(+DEFAULT_SEMITONE_TOLERANCE, x$pseudo_octave))
 
   x %>% dplyr::mutate(
+
+    # estimate the frequency cycle
     estimate_cycle(x$chord_freqs[[1]], x$reference_freq_low,  tol_win,
-                x$pseudo_octave, FREQUENCY, 2^(abs(x$reference_register_low -
-                                                     x$calibration_register_low))) %>%
+                x$pseudo_octave, ref_harmonic_number = 0) %>%
       dplyr::rename_with(~ paste0(.,'_low')),
 
-
-    estimate_cycle(x$chord_freqs[[1]], x$reference_freq_high, tol_win,
-                x$pseudo_octave, PERIOD, 2^(x$reference_register_high -
-                                              x$calibration_register_high)) %>%
+    # estimate the wavelength cycle
+    estimate_cycle(SPEED_OF_SOUND / x$chord_freqs[[1]], SPEED_OF_SOUND / x$reference_freq_high, tol_win,
+                x$pseudo_octave, ref_harmonic_number = x$num_harmonics) %>%
       dplyr::rename_with(~ paste0(.,'_high')),
 
     tolerance_window = list(tol_win)
@@ -131,10 +111,8 @@ duplex <- function(x) {
 
 flip <- function(x) {
 
-  duplexed_lowest <- x %>% dplyr::mutate(chord_freqs = x$lowest_freqs) %>% duplex
-
-  consonance_low  = ZARLINO - x$dissonance_low  + duplexed_lowest$dissonance_low
-  consonance_high = ZARLINO - x$dissonance_high + duplexed_lowest$dissonance_high
+  consonance_low  = ZARLINO - x$dissonance_low
+  consonance_high = ZARLINO - x$dissonance_high
 
   if (consonance_low <= 0 | consonance_high <= 0) {
     stop(paste(
@@ -142,17 +120,13 @@ flip <- function(x) {
       'if so the ZARLINO constant is too low',
       'dissonance_low',x$dissonance_low,
       'dissonance_high',x$dissonance_high,
-      'chord', x$chord_freqs,
-      'lowest', x$lowest_freqs,
-      'highest', x$highest_freqs,
+      'chord', x$chord_freqs
     ))
   }
 
   x %>% dplyr::mutate(
     consonance_low,
     consonance_high,
-    lowest_dissonance = sqrt(duplexed_lowest$dissonance_low^2 +
-                               duplexed_lowest$dissonance_high^2),
     .before=1
   )
 
@@ -163,7 +137,7 @@ rotate <- function(x) {
   rotated = (R_PI_4 %*% matrix(c(
     x$consonance_high,
     x$consonance_low
-  )) - matrix(c(x$lowest_dissonance,0))) %>% as.vector %>% zapsmall
+  ))) %>% as.vector %>% zapsmall
 
   x %>% dplyr::mutate(
     consonance_dissonance = rotated[1],
@@ -182,47 +156,23 @@ format_output <- function(x, metadata, verbose) {
     x
   } else {
     x %>% dplyr::select('major_minor', 'consonance_dissonance',
-                        'chord', 'lowest', 'highest', 'metadata')
+                        'chord', 'metadata')
   }
 }
 
-estimate_cycle <- function(x, reference_freq, tolerance_window, pseudo_octave,
-                           ratio_type=FREQUENCY, lcm_factor) {
+estimate_cycle <- function(x, reference, tolerance_window, pseudo_octave, ref_harmonic_number) {
 
-  r = ratios(x, reference_freq, tolerance_window, pseudo_octave, ratio_type)
+    r = ratios(x, reference, tolerance_window, pseudo_octave, ref_harmonic_number)
 
-  tibble::tibble_row(
-    lcm        = lcm(r$den) * lcm_factor,
-    dissonance = log2(.data$lcm),
-    # TODO: remove period and freq and their tests for now.
-    period     = as.integer(.data$lcm) / min(x),
-    freq       = 1 / .data$period,
-    ratios     = list(r)
-  )
+    tibble::tibble_row(
+      lcm        = lcm(if (ref_harmonic_number == 0) r$den else r$num),
+      dissonance = log2(.data$lcm),
+      ratios     = list(r)
+    )
 
 }
 
 lcm <- function(x) Reduce(numbers::LCM, x)
-
-listen_for_harmonics = function(x) {
-  browser()
-  potential_harmonics = x %>% analyze_harmonics
-
-  estimated_pseudo_octave = (potential_harmonics %>%
-                               dplyr::count(.data$pseudo_octave, name='num_harmonics',sort=TRUE) %>%
-                               dplyr::slice(1))$pseudo_octave
-
-  root_harmonics = potential_harmonics %>%
-    dplyr::filter(.data$pseudo_octave==1 |
-                    dplyr::near(.data$pseudo_octave,estimated_pseudo_octave))
-
-  if (nrow(root_harmonics)==1) {
-    root_harmonics$pseudo_octave = 2.0
-    root_harmonics
-  } else {
-    root_harmonics %>% dplyr::distinct()
-  }
-}
 
 semitone_ratio <- function(x, pseudo_octave, steps=TRICIA) {
   pseudo_octave^(x*steps)
@@ -246,7 +196,7 @@ TRICIA                     = 12 ^ -3           # pure base 12
 DEFAULT_OCTAVE_TOLERANCE   = 12^3/4        # tricia
 
 # default tolerance_semitone_ratio is based on fit to experimental results
-DEFAULT_SEMITONE_TOLERANCE = (12^2)/6                # tricia
+DEFAULT_SEMITONE_TOLERANCE = (12^2)/6           # tricia
 
 # define perfect consonance as the pure-tone unison post-pi/4 rotation
 # pure tones show pure octave-complementarity so tip of the hat to Zarlino
@@ -277,3 +227,5 @@ R_PI_4 = matrix(c(
 
 FREQUENCY=F
 PERIOD=T
+
+SPEED_OF_SOUND = 343

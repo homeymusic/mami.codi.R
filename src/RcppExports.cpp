@@ -11,35 +11,36 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // ratios
-DataFrame ratios(NumericVector x, const double reference_freq, const NumericVector tolerance, const double pseudo_octave, const bool invert);
-RcppExport SEXP _mami_codi_R_ratios(SEXP xSEXP, SEXP reference_freqSEXP, SEXP toleranceSEXP, SEXP pseudo_octaveSEXP, SEXP invertSEXP) {
+DataFrame ratios(NumericVector x, const double reference, const NumericVector tolerance, const double pseudo_octave, const double ref_harmonic_number);
+RcppExport SEXP _mami_codi_R_ratios(SEXP xSEXP, SEXP referenceSEXP, SEXP toleranceSEXP, SEXP pseudo_octaveSEXP, SEXP ref_harmonic_numberSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< const double >::type reference_freq(reference_freqSEXP);
+    Rcpp::traits::input_parameter< const double >::type reference(referenceSEXP);
     Rcpp::traits::input_parameter< const NumericVector >::type tolerance(toleranceSEXP);
     Rcpp::traits::input_parameter< const double >::type pseudo_octave(pseudo_octaveSEXP);
-    Rcpp::traits::input_parameter< const bool >::type invert(invertSEXP);
-    rcpp_result_gen = Rcpp::wrap(ratios(x, reference_freq, tolerance, pseudo_octave, invert));
+    Rcpp::traits::input_parameter< const double >::type ref_harmonic_number(ref_harmonic_numberSEXP);
+    rcpp_result_gen = Rcpp::wrap(ratios(x, reference, tolerance, pseudo_octave, ref_harmonic_number));
     return rcpp_result_gen;
 END_RCPP
 }
 // analyze_harmonics
-DataFrame analyze_harmonics(const NumericVector x);
-RcppExport SEXP _mami_codi_R_analyze_harmonics(SEXP xSEXP) {
+DataFrame analyze_harmonics(const NumericVector x, const NumericVector amp);
+RcppExport SEXP _mami_codi_R_analyze_harmonics(SEXP xSEXP, SEXP ampSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const NumericVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(analyze_harmonics(x));
+    Rcpp::traits::input_parameter< const NumericVector >::type amp(ampSEXP);
+    rcpp_result_gen = Rcpp::wrap(analyze_harmonics(x, amp));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
     {"_mami_codi_R_ratios", (DL_FUNC) &_mami_codi_R_ratios, 5},
-    {"_mami_codi_R_analyze_harmonics", (DL_FUNC) &_mami_codi_R_analyze_harmonics, 1},
+    {"_mami_codi_R_analyze_harmonics", (DL_FUNC) &_mami_codi_R_analyze_harmonics, 2},
     {NULL, NULL, 0}
 };
 
