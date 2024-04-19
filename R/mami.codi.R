@@ -18,92 +18,89 @@
 #'
 #' @rdname mami.codi
 #' @export
-mami.codi <- function(x, tonic=NULL, metadata=NA, verbose=FALSE,...) {
+mami.codi <- function(x, lowest_fundamental, highest_fundamental, metadata=NA, verbose=FALSE,...) {
 
-  parse_input(x, tonic, ...) %>%
-    detect_tonic_pitch %>%
-    select_ref_pitches  %>%
-    duplex             %>%
-    flip               %>%
-    rotate             %>%
+  parse_input(x, lowest_fundamental, highest_fundamental, ...)      %>%
+    detect_highest_lowest_pitches %>%
+    select_ref_pitches            %>%
+    duplex                        %>%
+    flip                          %>%
+    rotate                        %>%
     format_output(metadata, verbose)
 
 }
 
-parse_input <- function(x, tonic=NULL,...) {
+parse_input <- function(x, lowest_fundamental, highest_fundamental,...) {
+
 
   UseMethod('parse_input', x)
 
 }
 
-parse_input.default <- function(x, tonic=NULL, ...) {
+parse_input.default <- function(x, lowest_fundamental, highest_fundamental, ...) {
 
   parse_input(hrep::sparse_fr_spectrum(x, ...),
-              tonic = if (!is.null(tonic)) hrep::sparse_fr_spectrum(tonic,...) else NULL,
+              lowest = hrep::sparse_fr_spectrum(lowest_fundamental,...),
+              highest = hrep::sparse_fr_spectrum(highest_fundamental,...),
               ...)
 
 }
 
-parse_input.sparse_fr_spectrum <- function(x, tonic=NULL, ...) {
+parse_input.sparse_fr_spectrum <- function(x, lowest, highest, ...) {
 
   tibble::tibble_row(
     chord = list(x),
-    tonic = list(tonic)
+    lowest = list(lowest),
+    highest = list(highest)
   )
 
 }
 
-# TODO: clearly separate concept of tonic from root concept
-# tonic is the tonal center of a broader context and must be passed in explicitly
-# set root to the tonic if it is passed otherwise it must be found in the chord
-detect_tonic_pitch <- function(x) {
+detect_highest_lowest_pitches <- function(x) {
 
   c_freqs   = x$chord[[1]] %>% dplyr::filter(.data$y>MIN_AMPLITUDE) %>%
     hrep::freq()
 
-  if (!is.null(x$tonic[[1]])) {
-    t_freqs = x$tonic[[1]] %>% dplyr::filter(.data$y>MIN_AMPLITUDE) %>%
-      hrep::freq()
-    tonic_pitch = listen_for_harmonics(t_freqs)
-  } else {
-    tonic_pitch = listen_for_harmonics(c_freqs)
-    t_freqs = tonic_pitch$freq
-    tonic   = tibble::tibble(frequency = t_freqs, amplitude = 1) %>%
-      as.list %>% hrep::sparse_fr_spectrum()
-    x$tonic = list(tonic)
-  }
+  l_freqs = x$lowest[[1]] %>% dplyr::filter(.data$y>MIN_AMPLITUDE) %>%
+    hrep::freq()
+  l_pitch = listen_for_harmonics(l_freqs)
 
-  a_freqs   = c(t_freqs,c_freqs)
+  h_freqs = x$highest[[1]] %>% dplyr::filter(.data$y>MIN_AMPLITUDE) %>%
+    hrep::freq()
+  h_pitch = listen_for_harmonics(h_freqs)
+
+  a_freqs   = c(l_freqs,c_freqs,h_freqs)
 
   x %>% dplyr::mutate(
     chord_freqs   = list(c_freqs),
-    tonic_freqs   = list(t_freqs),
+    lowest_freqs  = list(l_freqs),
+    highest_freqs = list(h_freqs),
     all_freqs     = list(a_freqs),
-    pseudo_octave = tonic_pitch$pseudo_octave %>% max
+    pseudo_octave = l_pitch$pseudo_octave %>% max
   )
 
 }
 
 select_ref_pitches <- function(x) {
   x %>% dplyr::mutate(
-    distance_below_tonic     = distance(min(x$all_freqs[[1]]),
-                                       min(x$tonic_freqs[[1]]),
+    distance_below     = distance(min(x$all_freqs[[1]]),
+                                       min(x$lowest_freqs[[1]]),
                                        x$pseudo_octave),
-    distance_above_tonic     = distance(max(x$all_freqs[[1]]),
-                                       min(x$tonic_freqs[[1]]),
+    distance_above     = distance(max(x$all_freqs[[1]]),
+                                       max(x$highest_freqs[[1]]),
                                        x$pseudo_octave),
-    distance_tonic_harmonics = distance(max(x$tonic_freqs[[1]]),
-                                        min(x$tonic_freqs[[1]]),
+    distance_harmonics = distance(max(x$highest_freqs[[1]]),
+                                        min(x$highest_freqs[[1]]),
                                         x$pseudo_octave),
-    reference_register_low   = floor(min(.data$distance_below_tonic, -BUFFER)),
-    reference_register_high  = ceiling(max(.data$distance_above_tonic,
-                                           +BUFFER + .data$distance_tonic_harmonics)),
+    reference_register_low   = floor(min(.data$distance_below, -BUFFER)),
+    reference_register_high  = ceiling(max(.data$distance_above,
+                                           +BUFFER + .data$distance_harmonics)),
     calibration_register_low = floor(-BUFFER),
-    calibration_register_high = ceiling(.data$distance_tonic_harmonics + BUFFER),
-    reference_freq_low        = transpose_freqs(min(x$tonic_freqs[[1]]),
+    calibration_register_high = ceiling(.data$distance_harmonics + BUFFER),
+    reference_freq_low        = transpose_freqs(min(x$lowest_freqs[[1]]),
                                               .data$reference_register_low,
                                               x$pseudo_octave),
-    reference_freq_high       = transpose_freqs(min(x$tonic_freqs[[1]]),
+    reference_freq_high       = transpose_freqs(min(x$highest_freqs[[1]]),
                                               .data$reference_register_high,
                                               x$pseudo_octave)
   )
@@ -120,10 +117,13 @@ duplex <- function(x) {
                 x$pseudo_octave, FREQUENCY, 2^(abs(x$reference_register_low -
                                                      x$calibration_register_low))) %>%
       dplyr::rename_with(~ paste0(.,'_low')),
+
+
     estimate_cycle(x$chord_freqs[[1]], x$reference_freq_high, tol_win,
                 x$pseudo_octave, PERIOD, 2^(x$reference_register_high -
                                               x$calibration_register_high)) %>%
       dplyr::rename_with(~ paste0(.,'_high')),
+
     tolerance_window = list(tol_win)
   )
 
@@ -131,10 +131,10 @@ duplex <- function(x) {
 
 flip <- function(x) {
 
-  duplexed_tonic <- x %>% dplyr::mutate(chord_freqs = x$tonic_freqs) %>% duplex
+  duplexed_lowest <- x %>% dplyr::mutate(chord_freqs = x$lowest_freqs) %>% duplex
 
-  consonance_low  = ZARLINO - x$dissonance_low  + duplexed_tonic$dissonance_low
-  consonance_high = ZARLINO - x$dissonance_high + duplexed_tonic$dissonance_high
+  consonance_low  = ZARLINO - x$dissonance_low  + duplexed_lowest$dissonance_low
+  consonance_high = ZARLINO - x$dissonance_high + duplexed_lowest$dissonance_high
 
   if (consonance_low <= 0 | consonance_high <= 0) {
     stop(paste(
@@ -143,15 +143,16 @@ flip <- function(x) {
       'dissonance_low',x$dissonance_low,
       'dissonance_high',x$dissonance_high,
       'chord', x$chord_freqs,
-      'tonic', x$tonic_freqs,
+      'lowest', x$lowest_freqs,
+      'highest', x$highest_freqs,
     ))
   }
 
   x %>% dplyr::mutate(
     consonance_low,
     consonance_high,
-    tonic_dissonance = sqrt(duplexed_tonic$dissonance_low^2 +
-                              duplexed_tonic$dissonance_high^2),
+    lowest_dissonance = sqrt(duplexed_lowest$dissonance_low^2 +
+                               duplexed_lowest$dissonance_high^2),
     .before=1
   )
 
@@ -162,7 +163,7 @@ rotate <- function(x) {
   rotated = (R_PI_4 %*% matrix(c(
     x$consonance_high,
     x$consonance_low
-  )) - matrix(c(x$tonic_dissonance,0))) %>% as.vector %>% zapsmall
+  )) - matrix(c(x$lowest_dissonance,0))) %>% as.vector %>% zapsmall
 
   x %>% dplyr::mutate(
     consonance_dissonance = rotated[1],
@@ -181,7 +182,7 @@ format_output <- function(x, metadata, verbose) {
     x
   } else {
     x %>% dplyr::select('major_minor', 'consonance_dissonance',
-                        'tonic', 'chord', 'metadata')
+                        'chord', 'lowest', 'highest', 'metadata')
   }
 }
 
