@@ -90,9 +90,10 @@ listen_for_highest_fundamental = function(x) {
       highest_f0    = f0$reference_freq
     )
   } else {
+
     x %>% dplyr::mutate(
-      pseudo_octave = 2.0,
-      num_harmonics = 1,
+      pseudo_octave = compute_pseudo_octave(max(freqs), min(freqs), length(freqs)),
+      num_harmonics = length(freqs),
       highest_f0    = max(freqs)
     )
   }
@@ -186,6 +187,7 @@ format_output <- function(x, metadata, verbose) {
 
 estimate_cycle <- function(x, reference, tolerance_window, pseudo_octave, ref_harmonic_number) {
 
+  if (length(x) > 1) {
     r = ratios(x, reference, tolerance_window, pseudo_octave, ref_harmonic_number)
 
     tibble::tibble_row(
@@ -193,6 +195,20 @@ estimate_cycle <- function(x, reference, tolerance_window, pseudo_octave, ref_ha
       dissonance = log2(.data$lcm),
       ratios     = list(r)
     )
+  } else {
+    tibble::tibble_row(
+      lcm        = 1,
+      dissonance = 0,
+      ratios     = list(tibble::tibble_row(
+        num = 1,
+        den = 1,
+        ratio = 1,
+        pseudo_ratio = 1,
+        pitch = min(x),
+        reference = max(x)
+      ))
+    )
+  }
 
 }
 

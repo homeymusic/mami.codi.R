@@ -56,7 +56,11 @@ NumericVector rational_fraction(const double x, const NumericVector tolerance) {
  //' @export
  // [[Rcpp::export]]
  const double compute_pseudo_octave(const double fn, const double f0, const int n) {
-   return std::round(1000000 * pow(2, log(fn / f0) / log(n))) / 1000000;
+   if (n==1) {
+     return 1.0;
+   } else {
+     return std::round(1000000 * pow(2, log(fn / f0) / log(n))) / 1000000;
+   }
  }
 
 //' ratios
