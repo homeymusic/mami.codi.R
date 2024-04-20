@@ -144,7 +144,7 @@ DataFrame ratios(NumericVector x,
            ref_freq[num_matches] = ref;
            freq[num_matches] = x[j];
            amp[num_matches] = y[j];
-           pseudo_octave[num_matches] = std::round(1000000 * pow(x[j]/ref,1/(log(i+1)/log(2)))) / 1000000;
+           pseudo_octave[num_matches] = std::round(1000000 * pow(x[j]/ref,log(2)/log(i+1))) / 1000000;
            num_matches++;
          }
        }
@@ -173,28 +173,31 @@ DataFrame ratios(NumericVector x,
  // [[Rcpp::export]]
  DataFrame find_highest_fundamental(const NumericVector x) {
 
-   const double f_max = max(x);
    const int x_size   = x.size();
-
+   const double f0    = min(x);
+   const double f_max = max(x);
    NumericVector harmonic_number(x_size * x_size);
    NumericVector reference_freq(x_size * x_size);
    NumericVector pseudo_octave(x_size * x_size);
    NumericVector highest_freq(x_size * x_size);
 
+   if (x_size < 2) {
+     return DataFrame::create(
+       _("harmonic_number") = x_size,
+       _("reference_freq")  = f0,
+       _("pseudo_octave")   = 2.0,
+       _("highest_freq")    = f_max
+     );
+   }
+
    int num_matches=0;
 
-   //  2D loop
-   //  for fixed highest freq
-   //  loop through every possible harmonic number from 1 to i_max
-   //  loop through every frequency other than highest freq
-   //  look for the ones that five pseudo octave ~= 2.0
-
    for (int freq_index = 0; freq_index < x_size; ++freq_index) {
-     for (int harmonic_num = 0; harmonic_num < x_size; ++harmonic_num) {
+     for (int harmonic_num = 2; harmonic_num <= x_size; ++harmonic_num) {
        harmonic_number[num_matches] = harmonic_num;
        reference_freq[num_matches]  = x[freq_index];
        highest_freq[num_matches]    = f_max;
-       pseudo_octave[num_matches]   = std::round(1000000 * pow(f_max/reference_freq[num_matches],1/(log(harmonic_num+1)/log(2)))) / 1000000;;
+       pseudo_octave[num_matches]   = pow(2, log(f_max / x[freq_index]) / log(harmonic_num));
        num_matches++;
      }
    }
@@ -206,3 +209,6 @@ DataFrame ratios(NumericVector x,
      _("highest_freq")    = highest_freq[Rcpp::Range(0, num_matches-1)]
    );
  }
+
+// how to print to console from Rcpp
+// Rcout << "harmonic_num: " << harmonic_num << "\n";

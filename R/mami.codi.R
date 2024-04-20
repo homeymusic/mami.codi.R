@@ -55,6 +55,7 @@ listen_for_harmonics = function(x) {
 
   potential_harmonics = chords %>% hrep::freq() %>% find_highest_fundamental()
 
+  browser()
 
   highet_fundamental_freq = potential_harmonics %>% dplyr::filter(pseudo_octave == 2.0) %>% select(reference_freq) %>% max()
 
