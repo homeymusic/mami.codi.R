@@ -18,7 +18,7 @@ ratios <- function(x, reference, tolerance, pseudo_octave, ref_harmonic_number) 
     .Call(`_mami_codi_R_ratios`, x, reference, tolerance, pseudo_octave, ref_harmonic_number)
 }
 
-find_highest_fundamental <- function(x, y) {
-    .Call(`_mami_codi_R_find_highest_fundamental`, x, y)
+find_highest_fundamental <- function(x) {
+    .Call(`_mami_codi_R_find_highest_fundamental`, x)
 }
 

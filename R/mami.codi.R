@@ -51,44 +51,51 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 
 listen_for_highest_fundamental = function(x) {
 
-  chords = x$chord[[1]] %>% dplyr::filter(.data$y>MIN_AMPLITUDE)
+  freqs = x$chord[[1]] %>% dplyr::filter(.data$y>MIN_AMPLITUDE) %>% hrep::freq()
 
-  potential_highest_fundamentals = chords %>% hrep::freq() %>%
-    find_highest_fundamental(chords %>% hrep::amp())
+  if (length(freq) > 2) {
+    potential_highest_fundamentals = freqs %>% find_highest_fundamental()
 
-  estimated_pseudo_octave = (potential_highest_fundamentals %>%
-                               dplyr::count(.data$pseudo_octave, name='harmonic_number',sort=TRUE) %>%
-                               dplyr::slice(1))$pseudo_octave
+    estimated_pseudo_octave = (potential_highest_fundamentals %>%
+                                 dplyr::count(.data$pseudo_octave, name='harmonic_number',sort=TRUE) %>%
+                                 dplyr::slice(1))$pseudo_octave
 
-  f0 =  potential_highest_fundamentals %>%
-    dplyr::filter(dplyr::near(pseudo_octave, estimated_pseudo_octave), evaluation_freq == highest_freq) %>%
-    dplyr::arrange(dplyr::desc(harmonic_number))
+    f0 =  potential_highest_fundamentals %>%
+      dplyr::filter(dplyr::near(pseudo_octave, estimated_pseudo_octave), evaluation_freq == highest_freq) %>%
+      dplyr::arrange(dplyr::desc(harmonic_number))
 
-  # start: remove candidates that are an octave below other candidates
-  # TODO: find a tidyr way to do this
-  i <- 1
-  candidate_to_remove = c()
-  while (i<=nrow(f0)){
-    j <- 1
-    while (j<=nrow(f0)){
-      if (f0[i,]$harmonic_number == 2 * f0[j,]$harmonic_number) {
-        candidate_to_remove = append(candidate_to_remove, i)
+    # start: remove candidates that are an octave below other candidates
+    # TODO: find a tidyr way to do this
+    i <- 1
+    candidate_to_remove = c()
+    while (i<=nrow(f0)){
+      j <- 1
+      while (j<=nrow(f0)){
+        if (f0[i,]$harmonic_number == 2 * f0[j,]$harmonic_number) {
+          candidate_to_remove = append(candidate_to_remove, i)
+        }
+        j <- j+1
       }
-      j <- j+1
+      i <- i+1
     }
-    i <- i+1
-  }
-  if (length(candidate_to_remove) > 0) {
-    f0 <- f0[-candidate_to_remove,]
-  }
+    if (length(candidate_to_remove) > 0) {
+      f0 <- f0[-candidate_to_remove,]
+    }
 
-  f0 = f0[1,]
+    f0 = f0[1,]
 
-  x %>% dplyr::mutate(
-    pseudo_octave = f0$pseudo_octave,
-    num_harmonics = f0$harmonic_number-1,
-    highest_f0    = f0$reference_freq
-  )
+    x %>% dplyr::mutate(
+      pseudo_octave = f0$pseudo_octave,
+      num_harmonics = f0$harmonic_number-1,
+      highest_f0    = f0$reference_freq
+    )
+  } else {
+    x %>% dplyr::mutate(
+      pseudo_octave = 2.0,
+      num_harmonics = 1,
+      highest_f0    = max(freqs)
+    )
+  }
 }
 
 select_refs <- function(x) {
