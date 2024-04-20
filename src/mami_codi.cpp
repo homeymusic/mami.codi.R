@@ -165,46 +165,61 @@ DataFrame ratios(NumericVector x,
  //'
  //' Determine pseudo octave of all frequencies relative to lowest frequency
  //'
- //' @param x Chord frequencies
+ //' @param x Chord frequencies or wavelengths
+ //' @param x Chord amplitudes
  //'
  //' @return A data frame of frequencies and pseudo_octaves
  //'
  //' @export
  // [[Rcpp::export]]
- DataFrame find_highest_fundamental(const NumericVector x) {
+ DataFrame find_highest_fundamental(const NumericVector x, const NumericVector y) {
 
    const int x_size   = x.size();
    const double f0    = min(x);
    const double f_max = max(x);
-   NumericVector harmonic_number(x_size * x_size);
-   NumericVector reference_freq(x_size * x_size);
-   NumericVector pseudo_octave(x_size * x_size);
-   NumericVector highest_freq(x_size * x_size);
+   const double amp0    = min(y);
+   NumericVector harmonic_number(x_size * x_size * x_size);
+   NumericVector evaluation_freq(x_size * x_size * x_size);
+   NumericVector reference_freq(x_size * x_size * x_size);
+   NumericVector reference_amp(x_size * x_size * x_size);
+   NumericVector pseudo_octave(x_size * x_size * x_size);
+   NumericVector highest_freq(x_size * x_size * x_size);
 
    if (x_size < 2) {
      return DataFrame::create(
        _("harmonic_number") = x_size,
+       _("evaluation_freq") = f_max,
        _("reference_freq")  = f0,
-       _("pseudo_octave")   = 2.0,
+       _("reference_amp")   = amp0,
+       _("pseudo_octave")   = 1,
        _("highest_freq")    = f_max
      );
    }
 
    int num_matches=0;
 
-   for (int freq_index = 0; freq_index < x_size; ++freq_index) {
-     for (int harmonic_num = 2; harmonic_num <= x_size; ++harmonic_num) {
-       harmonic_number[num_matches] = harmonic_num;
-       reference_freq[num_matches]  = x[freq_index];
-       highest_freq[num_matches]    = f_max;
-       pseudo_octave[num_matches]   = pow(2, log(f_max / x[freq_index]) / log(harmonic_num));
-       num_matches++;
+   for (int eval_freq_index = 0; eval_freq_index < x_size; ++eval_freq_index) {
+     for (int ref_freq_index = 0; ref_freq_index < x_size; ++ref_freq_index) {
+       for (int harmonic_num = 2; harmonic_num <= x_size; ++harmonic_num) {
+         const double p_octave = pow(2, log(x[eval_freq_index] / x[ref_freq_index]) / log(harmonic_num));
+         if (1.89 < p_octave && p_octave < 2.11) { // TODO: check with Sethares on limits of stretching and compressing
+           harmonic_number[num_matches] = harmonic_num;
+           evaluation_freq[num_matches] = x[eval_freq_index];
+           reference_freq[num_matches]  = x[ref_freq_index];
+           reference_amp[num_matches]   = y[ref_freq_index];
+           highest_freq[num_matches]    = f_max;
+           pseudo_octave[num_matches]   = p_octave;
+           num_matches++;
+         }
+       }
      }
    }
 
    return DataFrame::create(
      _("harmonic_number") = harmonic_number[Rcpp::Range(0, num_matches-1)],
+     _("evaluation_freq") = evaluation_freq[Rcpp::Range(0, num_matches-1)],
      _("reference_freq")  = reference_freq[Rcpp::Range(0, num_matches-1)],
+     _("reference_amp")   = reference_amp[Rcpp::Range(0, num_matches-1)],
      _("pseudo_octave")   = pseudo_octave[Rcpp::Range(0, num_matches-1)],
      _("highest_freq")    = highest_freq[Rcpp::Range(0, num_matches-1)]
    );

@@ -53,33 +53,38 @@ listen_for_harmonics = function(x) {
 
   chords = x$chord[[1]] %>% dplyr::filter(.data$y>MIN_AMPLITUDE)
 
-  potential_harmonics = chords %>% hrep::freq() %>% find_highest_fundamental()
+  potential_harmonics = chords %>% hrep::freq() %>% find_highest_fundamental(chords %>% hrep::amp())
+
+  estimated_pseudo_octave = (potential_harmonics %>%
+                               dplyr::count(.data$pseudo_octave, name='harmonic_number',sort=TRUE) %>%
+                               dplyr::slice(1))$pseudo_octave
+
+  f0 =  potential_harmonics %>% dplyr::filter(dplyr::near(pseudo_octave, estimated_pseudo_octave), evaluation_freq == highest_freq) %>% dplyr::arrange(dplyr::desc(harmonic_number))
 
   browser()
 
-  highet_fundamental_freq = potential_harmonics %>% dplyr::filter(pseudo_octave == 2.0) %>% select(reference_freq) %>% max()
-
-
-  estimated_pseudo_octave = (potential_harmonics %>%
-                               dplyr::count(.data$pseudo_octave, name='num_harmonics',sort=TRUE) %>%
-                               dplyr::slice(1))$pseudo_octave
-
-  root_harmonics = potential_harmonics %>%
-    dplyr::filter(.data$pseudo_octave==1 |
-                    dplyr::near(.data$pseudo_octave,estimated_pseudo_octave))
-
-  if (nrow(root_harmonics)==1) {
-    root_harmonics$pseudo_octave = 2.0
-    root_harmonics
-  } else {
-    root_harmonics %>% dplyr::distinct()
+  # start: remove candidates that are an octave below other candidates
+  i <- 1
+  rows_to_remove = c()
+  while (i<=nrow(f0)){
+    j <- 1
+    while (j<=nrow(f0)){
+      if (f0[i,]$harmonic_number == 2 * f0[j,]$harmonic_number) {
+        rows_to_remove = append(rows_to_remove, i)
+      }
+      j <- j+1
+    }
+    i <- i+1
   }
+  f0 <- f0[-rows_to_remove,]
+  f0 = f0[1,]
 
   browser()
 
   x %>% dplyr::mutate(
-    pseudo_octave       = max(root_harmonics$pseudo_octave),
-    num_harmonics       = max(root_harmonics$harmonic_number)
+    pseudo_octave = f0$pseudo_octave,
+    num_harmonics = f0$harmonic_number,
+    highest_f0    = f0$reference_freq
   )
 }
 

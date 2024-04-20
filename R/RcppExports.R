@@ -28,7 +28,7 @@ analyze_harmonics <- function(x, y) {
     .Call(`_mami_codi_R_analyze_harmonics`, x, y)
 }
 
-find_highest_fundamental <- function(x) {
-    .Call(`_mami_codi_R_find_highest_fundamental`, x)
+find_highest_fundamental <- function(x, y) {
+    .Call(`_mami_codi_R_find_highest_fundamental`, x, y)
 }
 
