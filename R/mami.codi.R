@@ -20,7 +20,7 @@ mami.codi <- function(x, metadata=NA, verbose=FALSE,...) {
 
   parse_input(x, ...)              %>%
     listen_for_highest_fundamental %>%
-    select_ref_freqs               %>%
+    select_refs               %>%
     duplex                         %>%
     flip                           %>%
     rotate                         %>%
@@ -53,30 +53,33 @@ listen_for_highest_fundamental = function(x) {
 
   chords = x$chord[[1]] %>% dplyr::filter(.data$y>MIN_AMPLITUDE)
 
-  potential_harmonics = chords %>% hrep::freq() %>% find_highest_fundamental(chords %>% hrep::amp())
+  potential_highest_fundamentals = chords %>% hrep::freq() %>%
+    find_highest_fundamental(chords %>% hrep::amp())
 
-  estimated_pseudo_octave = (potential_harmonics %>%
+  estimated_pseudo_octave = (potential_highest_fundamentals %>%
                                dplyr::count(.data$pseudo_octave, name='harmonic_number',sort=TRUE) %>%
                                dplyr::slice(1))$pseudo_octave
 
-  f0 =  potential_harmonics %>% dplyr::filter(dplyr::near(pseudo_octave, estimated_pseudo_octave), evaluation_freq == highest_freq) %>% dplyr::arrange(dplyr::desc(harmonic_number))
+  f0 =  potential_highest_fundamentals %>%
+    dplyr::filter(dplyr::near(pseudo_octave, estimated_pseudo_octave), evaluation_freq == highest_freq) %>%
+    dplyr::arrange(dplyr::desc(harmonic_number))
 
   # start: remove candidates that are an octave below other candidates
   # TODO: find a tidyr way to do this
   i <- 1
-  rows_to_remove = c()
+  candidate_to_remove = c()
   while (i<=nrow(f0)){
     j <- 1
     while (j<=nrow(f0)){
       if (f0[i,]$harmonic_number == 2 * f0[j,]$harmonic_number) {
-        rows_to_remove = append(rows_to_remove, i)
+        candidate_to_remove = append(candidate_to_remove, i)
       }
       j <- j+1
     }
     i <- i+1
   }
-  if (length(rows_to_remove) > 0) {
-    f0 <- f0[-rows_to_remove,]
+  if (length(candidate_to_remove) > 0) {
+    f0 <- f0[-candidate_to_remove,]
   }
 
   f0 = f0[1,]
@@ -88,7 +91,7 @@ listen_for_highest_fundamental = function(x) {
   )
 }
 
-select_ref_freqs <- function(x) {
+select_refs <- function(x) {
 
   c_freqs   = x$chord[[1]] %>% dplyr::filter(.data$y>MIN_AMPLITUDE) %>%
     hrep::freq()
@@ -111,12 +114,12 @@ duplex <- function(x) {
     # estimate the frequency cycle
     estimate_cycle(x$chord_freqs[[1]], x$reference_freq_low,  tol_win,
                 x$pseudo_octave, ref_harmonic_number = 0) %>%
-      dplyr::rename_with(~ paste0(.,'_low')),
+      dplyr::rename_with(~ paste0(.,'_freq')),
 
     # estimate the wavelength cycle
     estimate_cycle(SPEED_OF_SOUND / x$chord_freqs[[1]], SPEED_OF_SOUND / x$reference_freq_high, tol_win,
                 x$pseudo_octave, ref_harmonic_number = x$num_harmonics) %>%
-      dplyr::rename_with(~ paste0(.,'_high')),
+      dplyr::rename_with(~ paste0(.,'_wavelength')),
 
     tolerance_window = list(tol_win)
   )
@@ -125,22 +128,22 @@ duplex <- function(x) {
 
 flip <- function(x) {
 
-  consonance_low  = ZARLINO - x$dissonance_low
-  consonance_high = ZARLINO - x$dissonance_high
+  consonance_freq       = ZARLINO - x$dissonance_freq
+  consonance_wavelength = ZARLINO - x$dissonance_wavelength
 
-  if (consonance_low <= 0 | consonance_high <= 0) {
+  if (consonance_freq <= 0 | consonance_wavelength <= 0) {
     stop(paste(
       'consonance should never be less than zero',
       'if so the ZARLINO constant is too low',
-      'dissonance_low',x$dissonance_low,
-      'dissonance_high',x$dissonance_high,
+      'dissonance_freq',x$dissonance_freq,
+      'dissonance_wavelength',x$dissonance_wavelength,
       'chord', x$chord_freqs
     ))
   }
 
   x %>% dplyr::mutate(
-    consonance_low,
-    consonance_high,
+    consonance_freq,
+    consonance_wavelength,
     .before=1
   )
 
@@ -149,8 +152,8 @@ flip <- function(x) {
 rotate <- function(x) {
 
   rotated = (R_PI_4 %*% matrix(c(
-    x$consonance_high,
-    x$consonance_low
+    x$consonance_wavelength,
+    x$consonance_freq
   ))) %>% as.vector %>% zapsmall
 
   x %>% dplyr::mutate(
@@ -192,22 +195,11 @@ semitone_ratio <- function(x, pseudo_octave, steps=TRICIA) {
   pseudo_octave^(x*steps)
 }
 
-distance <- function(x, y, pseudo_octave) {
-  log((x/y)%>%zapsmall(24),pseudo_octave)
-}
-
-transpose_freqs <- function(x, register, pseudo_octave) {
-  x * pseudo_octave ^ register
-}
-
 # it's convenient for us to think in base 10 so we have cents ...
 CENTS                      = 12 ^ -1 * 10 ^ -2 # friendly mix of base 12 and base 10
 
 # ... but search results of param space have been compelling with pure base 12
 TRICIA                     = 12 ^ -3           # pure base 12
-
-# default tolerance_octave_ratio
-DEFAULT_OCTAVE_TOLERANCE   = 12^3/4        # tricia
 
 # default tolerance_semitone_ratio is based on fit to experimental results
 DEFAULT_SEMITONE_TOLERANCE = (12^2)/6           # tricia
@@ -221,16 +213,7 @@ ZARLINO                    = 100 / sqrt(2)     # Z
 # heavy, stable, high-gravity chords have higher values than
 # light, passing, low-gravity chords. consonance is like mass.
 
-DEFAULT_OCTAVE_RATIO = 2.0
-
-PURE_TONE = tibble::tibble_row(
-  pseudo_octave  = DEFAULT_OCTAVE_RATIO,
-  num_harmonics  = 1,
-  harmonics      = list(1)
-)
-
 MIN_AMPLITUDE = 1/12
-BUFFER        = 1
 
 PI_4 = pi / 4
 
@@ -239,7 +222,4 @@ R_PI_4 = matrix(c(
   -sin(PI_4), cos(PI_4)
 ), nrow = 2, ncol = 2, byrow = TRUE)
 
-FREQUENCY=F
-PERIOD=T
-
-SPEED_OF_SOUND = 343
+SPEED_OF_SOUND = 343 # m/S
