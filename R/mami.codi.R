@@ -111,13 +111,13 @@ duplex <- function(x) {
 
   x %>% dplyr::mutate(
 
-    # estimate the frequency cycle
+    # estimate the frequency cycle from below
     estimate_cycle(x$chord_freqs[[1]], x$reference_freq_low,  tol_win,
                 x$pseudo_octave, ref_harmonic_number = 0) %>%
       dplyr::rename_with(~ paste0(.,'_freq')),
 
-    # estimate the wavelength cycle
-    estimate_cycle(SPEED_OF_SOUND / x$chord_freqs[[1]], SPEED_OF_SOUND / x$reference_freq_high, tol_win,
+    # estimate the frequency cycle from above
+    estimate_cycle(x$chord_freqs[[1]], x$reference_freq_high, tol_win,
                 x$pseudo_octave, ref_harmonic_number = x$num_harmonics) %>%
       dplyr::rename_with(~ paste0(.,'_wavelength')),
 
