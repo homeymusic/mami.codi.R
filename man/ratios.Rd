@@ -4,20 +4,22 @@
 \alias{ratios}
 \title{ratios}
 \usage{
-ratios(x, reference_freq, tolerance, pseudo_octave, invert = FALSE)
+ratios(x, reference, tolerance, pseudo_octave, ref_harmonic_number)
 }
 \arguments{
-\item{x}{Chord frequency ratios}
+\item{x}{Chord values}
 
-\item{reference_freq}{Reference frequency ratios}
+\item{reference}{Reference value}
 
 \item{tolerance}{A vector with two values for the upper and lower tolerance.}
 
 \item{pseudo_octave}{Factor for calculating stretched and compressed ratios.}
+
+\item{ref_harmonic_number}{The harmonic number of the reference}
 }
 \value{
 A data frame of numerators and denominators
 }
 \description{
-Creates a list of frequency ratios as rational fractions
+Creates a list of ratios as rational fractions
 }

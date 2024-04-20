@@ -18,12 +18,12 @@
 #' @export
 mami.codi <- function(x, metadata=NA, verbose=FALSE,...) {
 
-  parse_input(x, ...)             %>%
-    listen_for_harmonics           %>%
-    select_ref_freqs              %>%
-    duplex                        %>%
-    flip                          %>%
-    rotate                        %>%
+  parse_input(x, ...)              %>%
+    listen_for_highest_fundamental %>%
+    select_ref_freqs               %>%
+    duplex                         %>%
+    flip                           %>%
+    rotate                         %>%
     format_output(metadata, verbose)
 
 }
@@ -49,7 +49,7 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 
 }
 
-listen_for_harmonics = function(x) {
+listen_for_highest_fundamental = function(x) {
 
   chords = x$chord[[1]] %>% dplyr::filter(.data$y>MIN_AMPLITUDE)
 
@@ -62,6 +62,7 @@ listen_for_harmonics = function(x) {
   f0 =  potential_harmonics %>% dplyr::filter(dplyr::near(pseudo_octave, estimated_pseudo_octave), evaluation_freq == highest_freq) %>% dplyr::arrange(dplyr::desc(harmonic_number))
 
   # start: remove candidates that are an octave below other candidates
+  # TODO: find a tidyr way to do this
   i <- 1
   rows_to_remove = c()
   while (i<=nrow(f0)){

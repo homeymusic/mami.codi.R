@@ -4,13 +4,10 @@
 \alias{mami.codi}
 \title{Major-Minor Consonance-Dissonance}
 \usage{
-mami.codi(x, tonic = NULL, metadata = NA, verbose = FALSE, ...)
+mami.codi(x, metadata = NA, verbose = FALSE, ...)
 }
 \arguments{
 \item{x}{Chord to analyse specified in MIDI, coerced to
-hrep::sparse_fr_spectrum}
-
-\item{tonic}{Tonic pitch specified in MIDI, coerced to
 hrep::sparse_fr_spectrum}
 
 \item{metadata}{User-provided list of metadata that roundtrips with each call.

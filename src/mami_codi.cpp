@@ -97,78 +97,14 @@ DataFrame ratios(NumericVector x,
   );
 }
 
-//' analyze_harmonics
+ //' find_highest_fundamental
  //'
- //' Determine pseudo octave of all frequencies relative to lowest frequency
- //'
- //' @param x Chord frequencies
- //' @param amp Chord frequencies
- //'
- //'
- //' @return A data frame of frequencies and pseudo_octaves
- //'
- //' @export
- // [[Rcpp::export]]
- DataFrame analyze_harmonics(const NumericVector x,
-                             const NumericVector y) {
-   const int x_size = x.size();
-
-   const double f0 = min(x);
-   const int num_harmonics = ceil(pow(2,log(max(x)/f0)/log(2))) + 1;
-
-   NumericVector freq(x_size*num_harmonics*num_harmonics);
-   NumericVector amp(x_size*num_harmonics*num_harmonics);
-   NumericVector harmonic_number(x_size*num_harmonics*num_harmonics);
-   NumericVector ref_freq(x_size*num_harmonics*num_harmonics);
-   NumericVector pseudo_octave(x_size*num_harmonics*num_harmonics);
-
-   int num_matches=0;
-
-   for (int k = 0; k < x_size; ++k) {
-     double ref = x[k];
-
-     NumericVector harmonics(num_harmonics);
-     NumericVector harmonics_min(num_harmonics);
-     NumericVector harmonics_max(num_harmonics);
-
-     for (int i=0; i<num_harmonics-k;i++) {
-       harmonics[i] = (i+1) * ref;
-       harmonics_min[i] = harmonics[i] * 0.8408964;
-       harmonics_max[i] = harmonics[i] * 1.189207;
-     }
-
-     for (int i=0; i<num_harmonics-k; i++) {
-       for (int j=k; j<x_size; j++){
-         if ((harmonics_min[i] < x[j]) && (x[j] < harmonics_max[i])) {
-           harmonic_number[num_matches] = i;
-           ref_freq[num_matches] = ref;
-           freq[num_matches] = x[j];
-           amp[num_matches] = y[j];
-           pseudo_octave[num_matches] = std::round(1000000 * pow(x[j]/ref,log(2)/log(i+1))) / 1000000;
-           num_matches++;
-         }
-       }
-     }
-   }
-
-   return DataFrame::create(
-     _("freq")            = freq[Rcpp::Range(0, num_matches-1)],
-     _("amp")             = amp[Rcpp::Range(0, num_matches-1)],
-     _("harmonic_number") = harmonic_number[Rcpp::Range(0, num_matches-1)],
-     _("ref_freq")        = ref_freq[Rcpp::Range(0, num_matches-1)],
-     _("pseudo_octave")   = pseudo_octave[Rcpp::Range(0, num_matches-1)]
-   );
-
- }
-
-//' find_highest_fundamental
- //'
- //' Determine pseudo octave of all frequencies relative to lowest frequency
+ //' Find the highest fundamental freq
  //'
  //' @param x Chord frequencies or wavelengths
  //' @param x Chord amplitudes
  //'
- //' @return A data frame of frequencies and pseudo_octaves
+ //' @return A data frame of frequencies, harmonics and pseudo_octaves
  //'
  //' @export
  // [[Rcpp::export]]
