@@ -201,7 +201,7 @@ DataFrame ratios(NumericVector x,
    for (int eval_freq_index = 0; eval_freq_index < x_size; ++eval_freq_index) {
      for (int ref_freq_index = 0; ref_freq_index < x_size; ++ref_freq_index) {
        for (int harmonic_num = 2; harmonic_num <= x_size; ++harmonic_num) {
-         const double p_octave = pow(2, log(x[eval_freq_index] / x[ref_freq_index]) / log(harmonic_num));
+         const double p_octave = std::round(1000000 * pow(2, log(x[eval_freq_index] / x[ref_freq_index]) / log(harmonic_num))) / 1000000;
          if (1.89 < p_octave && p_octave < 2.11) { // TODO: check with Sethares on limits of stretching and compressing
            harmonic_number[num_matches] = harmonic_num;
            evaluation_freq[num_matches] = x[eval_freq_index];

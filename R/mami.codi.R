@@ -61,8 +61,6 @@ listen_for_harmonics = function(x) {
 
   f0 =  potential_harmonics %>% dplyr::filter(dplyr::near(pseudo_octave, estimated_pseudo_octave), evaluation_freq == highest_freq) %>% dplyr::arrange(dplyr::desc(harmonic_number))
 
-  browser()
-
   # start: remove candidates that are an octave below other candidates
   i <- 1
   rows_to_remove = c()
@@ -76,14 +74,14 @@ listen_for_harmonics = function(x) {
     }
     i <- i+1
   }
-  f0 <- f0[-rows_to_remove,]
+  if (length(rows_to_remove) > 0) {
+    f0 <- f0[-rows_to_remove,]
+  }
   f0 = f0[1,]
-
-  browser()
 
   x %>% dplyr::mutate(
     pseudo_octave = f0$pseudo_octave,
-    num_harmonics = f0$harmonic_number,
+    num_harmonics = f0$harmonic_number-1,
     highest_f0    = f0$reference_freq
   )
 }
