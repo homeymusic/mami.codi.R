@@ -77,6 +77,7 @@ listen_for_harmonics = function(x) {
   if (length(rows_to_remove) > 0) {
     f0 <- f0[-rows_to_remove,]
   }
+
   f0 = f0[1,]
 
   x %>% dplyr::mutate(
