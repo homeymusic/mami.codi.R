@@ -43,6 +43,22 @@ NumericVector rational_fraction(const double x, const NumericVector tolerance) {
   return NumericVector::create(mediant_num, mediant_den);
 }
 
+//' compute_pseudo_octave
+ //'
+ //' Find the highest fundamental freq
+ //'
+ //' @param fn freq to eval
+ //' @param f0 fundamental freq
+ //' @param n  harmonic number
+ //'
+ //' @return Calculated pseudo octave
+ //'
+ //' @export
+ // [[Rcpp::export]]
+ const double compute_pseudo_octave(const double fn, const double f0, const int n) {
+   return std::round(1000000 * pow(2, log(fn / f0) / log(n))) / 1000000;
+ }
+
 //' ratios
 //'
 //' Creates a list of ratios as rational fractions
@@ -128,10 +144,7 @@ DataFrame ratios(NumericVector x,
    for (int eval_freq_index = 0; eval_freq_index < x_size; ++eval_freq_index) {
      for (int ref_freq_index = 0; ref_freq_index < x_size; ++ref_freq_index) {
        for (int harmonic_num = 2; harmonic_num <= x_size; ++harmonic_num) {
-         Rcout << "eval_freq_index: " << eval_freq_index << "\n";
-         Rcout << "ref_freq_index: " << harmonic_num << "\n";
-         Rcout << "harmonic_num: " << harmonic_num << "\n";
-         const double p_octave = std::round(1000000 * pow(2, log(x[eval_freq_index] / x[ref_freq_index]) / log(harmonic_num))) / 1000000;
+         const double p_octave = compute_pseudo_octave(x[eval_freq_index], x[ref_freq_index], harmonic_num);
          if (1.89 < p_octave && p_octave < 2.11) { // TODO: check with Sethares on limits of stretching and compressing
            harmonic_number[num_matches] = harmonic_num;
            evaluation_freq[num_matches] = x[eval_freq_index];
@@ -143,7 +156,6 @@ DataFrame ratios(NumericVector x,
        }
      }
    }
-   Rcout << "after\n";
 
    return DataFrame::create(
      _("harmonic_number") = harmonic_number[Rcpp::Range(0, num_matches-1)],

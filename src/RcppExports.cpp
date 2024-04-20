@@ -10,6 +10,19 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// compute_pseudo_octave
+const double compute_pseudo_octave(const double fn, const double f0, const int n);
+RcppExport SEXP _mami_codi_R_compute_pseudo_octave(SEXP fnSEXP, SEXP f0SEXP, SEXP nSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const double >::type fn(fnSEXP);
+    Rcpp::traits::input_parameter< const double >::type f0(f0SEXP);
+    Rcpp::traits::input_parameter< const int >::type n(nSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_pseudo_octave(fn, f0, n));
+    return rcpp_result_gen;
+END_RCPP
+}
 // ratios
 DataFrame ratios(NumericVector x, const double reference, const NumericVector tolerance, const double pseudo_octave, const double ref_harmonic_number);
 RcppExport SEXP _mami_codi_R_ratios(SEXP xSEXP, SEXP referenceSEXP, SEXP toleranceSEXP, SEXP pseudo_octaveSEXP, SEXP ref_harmonic_numberSEXP) {
@@ -38,6 +51,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_mami_codi_R_compute_pseudo_octave", (DL_FUNC) &_mami_codi_R_compute_pseudo_octave, 3},
     {"_mami_codi_R_ratios", (DL_FUNC) &_mami_codi_R_ratios, 5},
     {"_mami_codi_R_find_highest_fundamental", (DL_FUNC) &_mami_codi_R_find_highest_fundamental, 1},
     {NULL, NULL, 0}

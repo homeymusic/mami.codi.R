@@ -20,7 +20,7 @@ mami.codi <- function(x, metadata=NA, verbose=FALSE,...) {
 
   parse_input(x, ...)              %>%
     listen_for_highest_fundamental %>%
-    select_refs               %>%
+    select_refs                    %>%
     duplex                         %>%
     flip                           %>%
     rotate                         %>%
@@ -53,7 +53,7 @@ listen_for_highest_fundamental = function(x) {
 
   freqs = x$chord[[1]] %>% dplyr::filter(.data$y>MIN_AMPLITUDE) %>% hrep::freq()
 
-  if (length(freq) > 2) {
+  if (length(freqs) > 2) {
     potential_highest_fundamentals = freqs %>% find_highest_fundamental()
 
     estimated_pseudo_octave = (potential_highest_fundamentals %>%
