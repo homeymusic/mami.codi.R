@@ -84,17 +84,20 @@ listen_for_highest_fundamental = function(x) {
 
     f0 = f0[1,]
 
+    highest_fundamental = f0$reference_freq
     x %>% dplyr::mutate(
       pseudo_octave = f0$pseudo_octave,
       num_harmonics = f0$harmonic_number-1,
-      highest_f0    = f0$reference_freq
+      highest_f0    = highest_fundamental,
+      octave_span   = estimate_span(highest_fundamental, min(freqs), f0$pseudo_octave)
     )
   } else {
 
     x %>% dplyr::mutate(
       pseudo_octave = compute_pseudo_octave(max(freqs), min(freqs), length(freqs)),
       num_harmonics = length(freqs),
-      highest_f0    = max(freqs)
+      highest_f0    = max(freqs),
+      octave_span   = estimate_span(min(freqs), max(freqs), f0$pseudo_octave)
     )
   }
 }
@@ -121,12 +124,12 @@ duplex <- function(x) {
 
     # estimate the frequency cycle
     estimate_cycle(x$chord_freqs[[1]], x$reference_freq_low,  tol_win,
-                x$pseudo_octave, ref_harmonic_number = 0) %>%
+                x$pseudo_octave, ref_harmonic_number = 1, pitch_type=FREQ) %>%
       dplyr::rename_with(~ paste0(.,'_freq')),
 
     # estimate the wavelength cycle
     estimate_cycle(SPEED_OF_SOUND / x$chord_freqs[[1]], SPEED_OF_SOUND / x$reference_freq_high, tol_win,
-                x$pseudo_octave, ref_harmonic_number = x$num_harmonics) %>%
+                x$pseudo_octave, ref_harmonic_number = (x$num_harmonics*x$octave_span + x$octave_span), pitch_type=WAVELENGTH) %>%
       dplyr::rename_with(~ paste0(.,'_wavelength')),
 
     tolerance_window = list(tol_win)
@@ -185,13 +188,13 @@ format_output <- function(x, metadata, verbose) {
   }
 }
 
-estimate_cycle <- function(x, reference, tolerance_window, pseudo_octave, ref_harmonic_number) {
+estimate_cycle <- function(x, reference, tolerance_window, pseudo_octave, ref_harmonic_number, pitch_type) {
 
   if (length(x) > 1) {
     r = ratios(x, reference, tolerance_window, pseudo_octave, ref_harmonic_number)
 
     tibble::tibble_row(
-      lcm        = lcm(if (ref_harmonic_number == 0) r$den else r$num),
+      lcm        = lcm(if (pitch_type) r$den else r$num),
       dissonance = log2(.data$lcm),
       ratios     = list(r)
     )
@@ -216,6 +219,10 @@ lcm <- function(x) Reduce(numbers::LCM, x)
 
 semitone_ratio <- function(x, pseudo_octave, steps=TRICIA) {
   pseudo_octave^(x*steps)
+}
+
+estimate_span <- function(x, y, pseudo_octave) {
+  ceiling(log((x/y)%>%zapsmall(24),pseudo_octave)) + 1
 }
 
 # it's convenient for us to think in base 10 so we have cents ...
@@ -246,3 +253,6 @@ R_PI_4 = matrix(c(
 ), nrow = 2, ncol = 2, byrow = TRUE)
 
 SPEED_OF_SOUND = 343 # m/S
+
+FREQ = T
+WAVELENGTH = F

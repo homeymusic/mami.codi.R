@@ -88,6 +88,7 @@ DataFrame ratios(NumericVector x,
   int m = x.size();
   NumericVector nums(m);
   NumericVector dens(m);
+  NumericVector harmonic_number(m);
   NumericVector pitch(m);
   NumericVector ratios(m);
   NumericVector pseudo_ratios(m);
@@ -95,25 +96,25 @@ DataFrame ratios(NumericVector x,
 
   for (int i = 0; i < m; ++i) {
     double ratio = x[i] / reference;
-    if (ratio != 1) {
-      ratio = ratio / (ref_harmonic_number + 1);
-    }
+    ratio = ratio / ref_harmonic_number;
     const double pseudo_ratio = pow(2.0, log(ratio) / log(pseudo_octave));
     fraction = rational_fraction(pseudo_ratio,tolerance);
-    nums[i]          = fraction[0];
-    dens[i]          = fraction[1];
-    ratios[i]        = ratio;
-    pseudo_ratios[i] = pseudo_ratio;
-    pitch[i]         = x[i];
+    nums[i]            = fraction[0];
+    dens[i]            = fraction[1];
+    harmonic_number[i] = ref_harmonic_number;
+    ratios[i]          = ratio;
+    pseudo_ratios[i]   = pseudo_ratio;
+    pitch[i]           = x[i];
   }
 
   return DataFrame::create(
-    _("num")          = nums,
-    _("den")          = dens,
-    _("ratio")        = ratios,
-    _("pseudo_ratio") = pseudo_ratios,
-    _("pitch")        = pitch,
-    _("reference")    = reference
+    _("num")                 = nums,
+    _("den")                 = dens,
+    _("ratio")               = ratios,
+    _("pseudo_ratio")        = pseudo_ratios,
+    _("pitch")               = pitch,
+    _("reference")           = reference,
+    _("harmonic_number")     = harmonic_number
   );
 }
 
