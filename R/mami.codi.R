@@ -89,7 +89,7 @@ listen_for_highest_fundamental = function(x) {
       pseudo_octave = f0$pseudo_octave,
       num_harmonics = f0$harmonic_number-1,
       highest_f0    = highest_fundamental,
-      octave_span   = estimate_span(highest_fundamental, min(freqs), f0$pseudo_octave)
+      fundamental_span   = estimate_span(highest_fundamental, min(freqs), f0$pseudo_octave)
     )
   } else {
 
@@ -97,7 +97,7 @@ listen_for_highest_fundamental = function(x) {
       pseudo_octave = compute_pseudo_octave(max(freqs), min(freqs), length(freqs)),
       num_harmonics = length(freqs),
       highest_f0    = max(freqs),
-      octave_span   = estimate_span(min(freqs), max(freqs), f0$pseudo_octave)
+      fundamental_span = estimate_span(min(freqs), max(freqs), f0$pseudo_octave)
     )
   }
 }
@@ -107,12 +107,26 @@ select_refs <- function(x) {
   c_freqs   = x$chord[[1]] %>% dplyr::filter(.data$y>MIN_AMPLITUDE) %>%
     hrep::freq()
 
-  ref_high = transpose_freqs(x$highest_f0, x$octave_span, x$pseudo_octave)
+  min_freq = min(c_freqs)
+  max_freq = max(c_freqs)
+  chord_span = estimate_span(max_freq, min_freq, x$pseudo_octave)
+  high_ref_shift = ceiling(chord_span - x$fundamental_span)
+  ref_high = transpose_freqs(x$highest_f0, high_ref_shift, x$pseudo_octave)
+
+  if (ref_high < max_freq) {
+    stop(paste("reference frequency", ref_high, "must be greater than or equal to the maximum frequency", max_freq,
+               "chord_span:", chord_span, "highest f0:", x$highest_f0))
+  }
 
   x %>% dplyr::mutate(
     chord_freqs         = list(c_freqs),
-    reference_freq_low  = min(x$chord[[1]]$x),
-    reference_freq_high = ref_high
+    reference_freq_low  = min_freq,
+    reference_freq_high = ref_high,
+    # reference_freq_high = max_freq,
+    min_freq            = min_freq,
+    max_freq            = max_freq,
+    chord_span          = chord_span,
+    high_ref_shift      = high_ref_shift
   )
 
 }
@@ -131,7 +145,7 @@ duplex <- function(x) {
 
     # estimate the wavelength cycle
     estimate_cycle(SPEED_OF_SOUND / x$chord_freqs[[1]], SPEED_OF_SOUND / x$reference_freq_high, tol_win,
-                x$pseudo_octave, ref_harmonic_number = (x$num_harmonics*x$octave_span + x$octave_span), pitch_type=WAVELENGTH) %>%
+                x$pseudo_octave, ref_harmonic_number = (x$num_harmonics*ceiling(x$fundamental_span + 1) + ceiling(x$fundamental_span + 1)), pitch_type=WAVELENGTH) %>%
       dplyr::rename_with(~ paste0(.,'_wavelength')),
 
     tolerance_window = list(tol_win)
@@ -224,11 +238,11 @@ semitone_ratio <- function(x, pseudo_octave, steps=TRICIA) {
 }
 
 estimate_span <- function(x, y, pseudo_octave) {
-  ceiling(log((x/y)%>%zapsmall(24),pseudo_octave)) + 1
+  log((x/y)%>%zapsmall(24),pseudo_octave)
 }
 
 transpose_freqs <- function(x, register, pseudo_octave) {
-  x * pseudo_octave ^ register
+  x * (pseudo_octave ^ register)
 }
 
 # it's convenient for us to think in base 10 so we have cents ...
