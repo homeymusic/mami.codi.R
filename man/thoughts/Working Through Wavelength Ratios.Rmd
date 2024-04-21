@@ -22,7 +22,9 @@ chord %>% dplyr::select(consonance_dissonance, major_minor)
 #### Frequency
 
 ```{r, echo=F}
-chord$ratios_frequency[[1]] %>% dplyr::arrange(ratio)
+chord$ratios_frequency[[1]] %>% dplyr::arrange(ratio) %>% dplyr::rename(freq=pitch) %>% dplyr::mutate(
+  wavelength = SPEED_OF_SOUND / freq
+) %>% dplyr::select(-pseudo_ratio, -harmonic_number, -reference, -wavelength)
 ```
 
 ```{r, echo=F}
@@ -32,8 +34,12 @@ chord$consonance_frequency
 
 #### Wavelength
 
+
 ```{r, echo=F}
-chord$ratios_wavelength[[1]] %>% dplyr::arrange(dplyr::desc(ratio)) 
+chord$ratios_wavelength[[1]] %>% dplyr::arrange(dplyr::desc(ratio)) %>% dplyr::rename(wavelength=pitch) %>% dplyr::mutate(
+  freq = SPEED_OF_SOUND / wavelength,
+  ratio = 1/ratio
+) %>% dplyr::select(den, num, ratio, freq, -wavelength, -pseudo_ratio, -harmonic_number, -reference)
 ```
 
 ```{r, echo=F}
