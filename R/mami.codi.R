@@ -20,7 +20,6 @@ mami.codi <- function(x, metadata=NA, verbose=FALSE,...) {
 
   parse_input(x, ...)              %>%
     listen_for_highest_fundamental %>%
-    select_refs                    %>%
     duplex                         %>%
     flip                           %>%
     rotate                         %>%
@@ -43,18 +42,22 @@ parse_input.default <- function(x, ...) {
 
 parse_input.sparse_fr_spectrum <- function(x, ...) {
 
+  f = x %>% dplyr::filter(.data$y>MIN_AMPLITUDE) %>% hrep::freq()
+  λ = SPEED_OF_SOUND / f
+
   tibble::tibble_row(
-    chord = list(x)
+      frequencies = list(f),
+      wavelengths = list(λ)
   )
 
 }
 
 listen_for_highest_fundamental = function(x) {
 
-  freqs = x$chord[[1]] %>% dplyr::filter(.data$y>MIN_AMPLITUDE) %>% hrep::freq()
+  f = x$frequencies[[1]]
 
-  if (length(freqs) > 2) {
-    potential_highest_fundamentals = freqs %>% find_highest_fundamental()
+  if (length(f) > 2) {
+    potential_highest_fundamentals = f %>% find_highest_fundamental()
 
     estimated_pseudo_octave = (potential_highest_fundamentals %>%
                                  dplyr::count(.data$pseudo_octave, name='harmonic_number',sort=TRUE) %>%
@@ -64,11 +67,11 @@ listen_for_highest_fundamental = function(x) {
       dplyr::filter(dplyr::near(pseudo_octave, estimated_pseudo_octave), evaluation_freq == highest_freq) %>%
       dplyr::arrange(dplyr::desc(harmonic_number))
 
-    # start: remove candidates that are an octave below other candidates
-    # TODO: find a tidyr way to do this
+    # remove candidates that are an octave below other candidates
     i <- 1
     candidate_to_remove = c()
     while (i<=nrow(f0)){
+      # TODO: find a tidyr way to do this loop
       j <- 1
       while (j<=nrow(f0)){
         if (f0[i,]$harmonic_number == 2 * f0[j,]$harmonic_number) {
@@ -89,33 +92,18 @@ listen_for_highest_fundamental = function(x) {
       pseudo_octave = f0$pseudo_octave,
       num_harmonics = f0$harmonic_number-1,
       highest_f0    = highest_fundamental,
-      octave_span   = estimate_span(highest_fundamental, min(freqs), f0$pseudo_octave)
+      fundamentals_span = estimate_span(highest_fundamental, min(f), f0$pseudo_octave)
     )
   } else {
-
-    x %>% dplyr::mutate(
-      pseudo_octave = compute_pseudo_octave(max(freqs), min(freqs), length(freqs)),
-      num_harmonics = length(freqs),
-      highest_f0    = max(freqs),
-      octave_span   = estimate_span(min(freqs), max(freqs), f0$pseudo_octave)
-    )
+    stop("not ready for less than 2 frequencies")
   }
 }
 
-select_refs <- function(x) {
-
-  c_freqs   = x$chord[[1]] %>% dplyr::filter(.data$y>MIN_AMPLITUDE) %>%
-    hrep::freq()
-
-  x %>% dplyr::mutate(
-    chord_freqs         = list(c_freqs),
-    reference_freq_low  = min(x$chord[[1]]$x),
-    reference_freq_high = max(x$chord[[1]]$x)
-  )
-
-}
-
 duplex <- function(x) {
+
+  f = x$frequencies[[1]]
+  λ = x$wavelengths[[1]]
+  harmonic_number = x$num_harmonics*x$fundamentals_span + x$fundamentals_span
 
   tol_win = c(semitone_ratio(-DEFAULT_SEMITONE_TOLERANCE, x$pseudo_octave),
                 semitone_ratio(+DEFAULT_SEMITONE_TOLERANCE, x$pseudo_octave))
@@ -123,14 +111,12 @@ duplex <- function(x) {
   x %>% dplyr::mutate(
 
     # estimate the frequency cycle
-    estimate_cycle(x$chord_freqs[[1]], x$reference_freq_low,  tol_win,
-                x$pseudo_octave, ref_harmonic_number = 1, pitch_type=FREQ) %>%
-      dplyr::rename_with(~ paste0(.,'_freq')),
+    estimate_cycle(f, min(f), tol_win, x$pseudo_octave, ref_harmonic_number = 1,
+                   pitch_type=FREQ) %>% dplyr::rename_with(~ paste0(.,'_frequency')),
 
     # estimate the wavelength cycle
-    estimate_cycle(SPEED_OF_SOUND / x$chord_freqs[[1]], SPEED_OF_SOUND / x$reference_freq_high, tol_win,
-                x$pseudo_octave, ref_harmonic_number = (x$num_harmonics*x$octave_span + x$octave_span), pitch_type=WAVELENGTH) %>%
-      dplyr::rename_with(~ paste0(.,'_wavelength')),
+    estimate_cycle(λ, min(λ), tol_win, x$pseudo_octave, ref_harmonic_number = harmonic_number,
+                   pitch_type=WAVELENGTH)  %>% dplyr::rename_with(~ paste0(.,'_wavelength')),
 
     tolerance_window = list(tol_win)
   )
@@ -139,21 +125,21 @@ duplex <- function(x) {
 
 flip <- function(x) {
 
-  consonance_freq       = ZARLINO - x$dissonance_freq
+  consonance_frequency  = ZARLINO - x$dissonance_frequency
   consonance_wavelength = ZARLINO - x$dissonance_wavelength
 
-  if (consonance_freq <= 0 | consonance_wavelength <= 0) {
+  if (consonance_frequency <= 0 | consonance_wavelength <= 0) {
     stop(paste(
       'consonance should never be less than zero',
       'if so the ZARLINO constant is too low',
-      'dissonance_freq',x$dissonance_freq,
+      'dissonance_freq',x$dissonance_frequency,
       'dissonance_wavelength',x$dissonance_wavelength,
-      'chord', x$chord_freqs
+      'chord', x$frequencies
     ))
   }
 
   x %>% dplyr::mutate(
-    consonance_freq,
+    consonance_frequency,
     consonance_wavelength,
     .before=1
   )
@@ -164,7 +150,7 @@ rotate <- function(x) {
 
   rotated = (R_PI_4 %*% matrix(c(
     x$consonance_wavelength,
-    x$consonance_freq
+    x$consonance_frequency
   ))) %>% as.vector %>% zapsmall
 
   x %>% dplyr::mutate(
@@ -184,7 +170,7 @@ format_output <- function(x, metadata, verbose) {
     x
   } else {
     x %>% dplyr::select('major_minor', 'consonance_dissonance',
-                        'chord', 'metadata')
+                        'frequencies', 'wavelengths', 'metadata')
   }
 }
 

@@ -8,40 +8,35 @@ always_allow_html: true
 ```{r, echo=F, message=F, include=F}
 devtools::load_all(".")
 source('../code/plot.R')
-mami.codi(60)
+c(60,63,72) %>% mami.codi()
 ```
 
 ```{r, echo=T}
-chord = hrep::sparse_fr_spectrum(c(60,63,72), num_harmonics=11) %>% mami.codi(verbose=T)
+chord = hrep::sparse_fr_spectrum(c(60,72), num_harmonics=11) %>% mami.codi(verbose=T)
 ```
 
 ```{r, echo=F}
 chord %>% dplyr::select(consonance_dissonance, major_minor)
 ```
 
-#### Freq
+#### Frequency
 
 ```{r, echo=F}
-chord$ratios_freq[[1]] %>% dplyr::arrange(ratio) %>% dplyr::rename(freq=pitch) %>% dplyr::mutate(
-  wavelength = SPEED_OF_SOUND / freq
-) %>% dplyr::select(-pseudo_ratio, -harmonic_number, -reference, -wavelength)
+chord$ratios_frequency[[1]] %>% dplyr::arrange(ratio)
 ```
 
 ```{r, echo=F}
-min(chord$chord_freqs[[1]])
-chord$consonance_freq
+min(chord$frequencies[[1]])
+chord$consonance_frequency
 ```
 
 #### Wavelength
 
 ```{r, echo=F}
-chord$ratios_wavelength[[1]] %>% dplyr::arrange(dplyr::desc(ratio)) %>% dplyr::rename(wavelength=pitch) %>% dplyr::mutate(
-  freq = SPEED_OF_SOUND / wavelength,
-  ratio = 1/ratio
-) %>% dplyr::select(den, num, ratio, freq, -wavelength, -pseudo_ratio, -harmonic_number, -reference)
+chord$ratios_wavelength[[1]] %>% dplyr::arrange(dplyr::desc(ratio)) 
 ```
 
 ```{r, echo=F}
-max(chord$chord_freqs[[1]])
+max(chord$frequencies[[1]])
 chord$consonance_wavelength
 ```
