@@ -107,10 +107,12 @@ select_refs <- function(x) {
   c_freqs   = x$chord[[1]] %>% dplyr::filter(.data$y>MIN_AMPLITUDE) %>%
     hrep::freq()
 
+  ref_high = transpose_freqs(x$highest_f0, x$octave_span, x$pseudo_octave)
+
   x %>% dplyr::mutate(
     chord_freqs         = list(c_freqs),
     reference_freq_low  = min(x$chord[[1]]$x),
-    reference_freq_high = max(x$chord[[1]]$x)
+    reference_freq_high = ref_high
   )
 
 }
@@ -223,6 +225,10 @@ semitone_ratio <- function(x, pseudo_octave, steps=TRICIA) {
 
 estimate_span <- function(x, y, pseudo_octave) {
   ceiling(log((x/y)%>%zapsmall(24),pseudo_octave)) + 1
+}
+
+transpose_freqs <- function(x, register, pseudo_octave) {
+  x * pseudo_octave ^ register
 }
 
 # it's convenient for us to think in base 10 so we have cents ...
