@@ -46,8 +46,8 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
   λ = SPEED_OF_SOUND / f
 
   tibble::tibble_row(
-      frequencies = list(f),
-      wavelengths = list(λ)
+    frequencies = list(f),
+    wavelengths = list(λ)
   )
 
 }
@@ -105,21 +105,37 @@ duplex <- function(x) {
   λ = x$wavelengths[[1]]
   harmonic_number = x$num_harmonics*x$fundamentals_span + x$fundamentals_span
 
-  tol_win = c(semitone_ratio(-DEFAULT_SEMITONE_TOLERANCE, x$pseudo_octave),
-                semitone_ratio(+DEFAULT_SEMITONE_TOLERANCE, x$pseudo_octave))
-
   x %>% dplyr::mutate(
 
     # estimate the frequency cycle
-    estimate_cycle(f, min(f), tol_win, x$pseudo_octave, ref_harmonic_number = 1,
-                   pitch_type=FREQ) %>% dplyr::rename_with(~ paste0(.,'_frequency')),
+    estimate_cycle(f, min(f), 1, FREQ, x$pseudo_octave) %>%
+      dplyr::rename_with(~ paste0(.,'_frequency')),
 
     # estimate the wavelength cycle
-    estimate_cycle(λ, min(λ), tol_win, x$pseudo_octave, ref_harmonic_number = harmonic_number,
-                   pitch_type=WAVELENGTH)  %>% dplyr::rename_with(~ paste0(.,'_wavelength')),
+    estimate_cycle(λ, max(λ), harmonic_number, WAVELENGTH, x$pseudo_octave) %>%
+      dplyr::rename_with(~ paste0(.,'_wavelength')),
 
-    tolerance_window = list(tol_win)
   )
+
+}
+
+estimate_cycle <- function(x, reference, ref_harmonic_number, type, pseudo_octave) {
+
+  tol_win = c(semitone_ratio(-DEFAULT_SEMITONE_TOLERANCE, pseudo_octave),
+                       semitone_ratio(+DEFAULT_SEMITONE_TOLERANCE, pseudo_octave))
+
+  if (length(x) > 2) {
+    r = ratios(x, reference, tol_win, pseudo_octave, ref_harmonic_number)
+
+    tibble::tibble_row(
+      lcm        = lcm(if (type) r$den else r$num),
+      dissonance = log2(.data$lcm),
+      ratios     = list(r),
+      tolerance_window = list(tol_win)
+    )
+  } else {
+    stop("not ready for less than 2 frequencies")
+  }
 
 }
 
@@ -172,33 +188,6 @@ format_output <- function(x, metadata, verbose) {
     x %>% dplyr::select('major_minor', 'consonance_dissonance',
                         'frequencies', 'wavelengths', 'metadata')
   }
-}
-
-estimate_cycle <- function(x, reference, tolerance_window, pseudo_octave, ref_harmonic_number, pitch_type) {
-
-  if (length(x) > 1) {
-    r = ratios(x, reference, tolerance_window, pseudo_octave, ref_harmonic_number)
-
-    tibble::tibble_row(
-      lcm        = lcm(if (pitch_type) r$den else r$num),
-      dissonance = log2(.data$lcm),
-      ratios     = list(r)
-    )
-  } else {
-    tibble::tibble_row(
-      lcm        = 1,
-      dissonance = 0,
-      ratios     = list(tibble::tibble_row(
-        num = 1,
-        den = 1,
-        ratio = 1,
-        pseudo_ratio = 1,
-        pitch = min(x),
-        reference = max(x)
-      ))
-    )
-  }
-
 }
 
 lcm <- function(x) Reduce(numbers::LCM, x)
