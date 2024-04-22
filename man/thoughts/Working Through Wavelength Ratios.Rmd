@@ -8,15 +8,17 @@ always_allow_html: true
 ```{r, echo=F, message=F, include=F}
 devtools::load_all(".")
 source('../code/plot.R')
-c(60,72) %>% mami.codi()
+c(0) %>% mami.codi()
 ```
 
 ```{r, echo=T}
-chord = c(60,96) %>% mami.codi(verbose=T, num_harmonics=11)
+chord = c(60, 64, 72) %>% mami.codi(verbose=T, num_harmonics=11)
 ```
 
 ```{r, echo=F}
 chord %>% dplyr::select(consonance_dissonance, major_minor)
+chord$chord_span
+chord$tolerance_window_frequency
 ```
 
 #### Frequency
@@ -32,6 +34,8 @@ chord$ratios_frequency[[1]] %>% dplyr::arrange(ratio) %>% dplyr::rename(freq=pit
 chord$ratios_frequency[[1]]$reference[1]
 chord$consonance_frequency
 chord$fundamentals_span
+chord$ratios_frequency[[1]]$den
+lcm(chord$ratios_frequency[[1]]$den)
 ```
 
 #### Wavelength
@@ -49,4 +53,6 @@ chord$ratios_wavelength[[1]] %>% dplyr::arrange(dplyr::desc(ratio)) %>% dplyr::r
 SPEED_OF_SOUND / chord$ratios_wavelength[[1]]$reference[1]
 chord$consonance_wavelength
 chord$fundamentals_span
+chord$ratios_wavelength[[1]]$num
+lcm(chord$ratios_wavelength[[1]]$num)
 ```

@@ -91,10 +91,11 @@ listen_for_highest_fundamental = function(x) {
 
     highest_fundamental = f0$reference_freq
     x %>% dplyr::mutate(
-      pseudo_octave = f0$pseudo_octave,
-      num_harmonics = f0$harmonic_number-1,
-      highest_f0    = highest_fundamental,
-      fundamentals_span = estimate_span(highest_fundamental, min(f), f0$pseudo_octave)
+      pseudo_octave     = f0$pseudo_octave,
+      num_harmonics     = f0$harmonic_number-1,
+      highest_f0        = highest_fundamental,
+      fundamentals_span = estimate_span(highest_fundamental, min(f), f0$pseudo_octave),
+      chord_span        = estimate_span(max(f), min(f), f0$pseudo_octave)
     )
   } else {
     stop("not ready for less than 2 frequencies")
@@ -108,14 +109,17 @@ duplex <- function(x) {
 
   harmonic_number = 2^(x$fundamentals_span) * (x$num_harmonics + 1)
 
-  print(paste("harmonic_number", harmonic_number, "x$fundamentals_span", x$fundamentals_span,"x$num_harmonics", x$num_harmonics))
   x %>% dplyr::mutate(
 
     # estimate the frequency cycle
+    # estimate_cycle(f, min(f)/x$pseudo_octave, 1/harmonic_number, FREQ, x$pseudo_octave) %>%
+    #   dplyr::rename_with(~ paste0(.,'_frequency')),
     estimate_cycle(f, min(f), 1/harmonic_number, FREQ, x$pseudo_octave) %>%
       dplyr::rename_with(~ paste0(.,'_frequency')),
 
     # estimate the wavelength cycle
+    # estimate_cycle(λ, max(λ)/(x$pseudo_octave^x$chord_span), harmonic_number, WAVELENGTH, x$pseudo_octave) %>%
+    #   dplyr::rename_with(~ paste0(.,'_wavelength')),
     estimate_cycle(λ, min(λ), harmonic_number, WAVELENGTH, x$pseudo_octave) %>%
       dplyr::rename_with(~ paste0(.,'_wavelength')),
 
@@ -211,7 +215,7 @@ CENTS                      = 12 ^ -1 * 10 ^ -2 # friendly mix of base 12 and bas
 TRICIA                     = 12 ^ -3           # pure base 12
 
 # default tolerance_semitone_ratio is based on fit to experimental results
-DEFAULT_SEMITONE_TOLERANCE = (12^2)/6           # tricia
+DEFAULT_SEMITONE_TOLERANCE = (12^2)/48           # tricia
 
 # define perfect consonance as the pure-tone unison post-pi/4 rotation
 # pure tones show pure octave-complementarity so tip of the hat to Zarlino
