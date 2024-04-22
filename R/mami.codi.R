@@ -52,6 +52,8 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 
 }
 
+# TODO: write a test for c(60,60+4*12) %>% mami.codi(verbose=T, num_harmonics=11)
+# the function is hearing 15 instead of 11 harmonics
 listen_for_highest_fundamental = function(x) {
 
   f = x$frequencies[[1]]
@@ -104,9 +106,9 @@ duplex <- function(x) {
   f = x$frequencies[[1]]
   λ = x$wavelengths[[1]]
 
+  harmonic_number = 2^(x$fundamentals_span-1) * (x$num_harmonics + 1)
 
-  harmonic_number = x$num_harmonics*x$fundamentals_span + x$fundamentals_span
-
+  print(paste("harmonic_number", harmonic_number, "x$fundamentals_span", x$fundamentals_span,"x$num_harmonics", x$num_harmonics))
   x %>% dplyr::mutate(
 
     # estimate the frequency cycle
