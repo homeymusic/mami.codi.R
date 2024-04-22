@@ -106,7 +106,7 @@ duplex <- function(x) {
   f = x$frequencies[[1]]
   λ = x$wavelengths[[1]]
 
-  harmonic_number = 2^(x$fundamentals_span-1) * (x$num_harmonics + 1)
+  harmonic_number = 2^(x$fundamentals_span) * (x$num_harmonics + 1)
 
   print(paste("harmonic_number", harmonic_number, "x$fundamentals_span", x$fundamentals_span,"x$num_harmonics", x$num_harmonics))
   x %>% dplyr::mutate(
@@ -201,7 +201,7 @@ semitone_ratio <- function(x, pseudo_octave, steps=TRICIA) {
 }
 
 estimate_span <- function(x, y, pseudo_octave) {
-  ceiling(log((x/y)%>%zapsmall(24),pseudo_octave)) + 1
+  ceiling(log((x/y)%>%zapsmall(24),pseudo_octave))
 }
 
 # it's convenient for us to think in base 10 so we have cents ...

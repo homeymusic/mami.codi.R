@@ -5,7 +5,7 @@ Working Through Wavelength Ratios
 chord = c(60,96) %>% mami.codi(verbose=T, num_harmonics=11)
 ```
 
-    ## [1] "harmonic_number 88 x$fundamentals_span 4 x$num_harmonics 10"
+    ## [1] "harmonic_number 88 x$fundamentals_span 3 x$num_harmonics 10"
 
     ## # A tibble: 1 × 2
     ##   consonance_dissonance major_minor
@@ -41,7 +41,7 @@ chord = c(60,96) %>% mami.codi(verbose=T, num_harmonics=11)
 
     ## [1] 70.71068
 
-    ## [1] 4
+    ## [1] 3
 
 #### Wavelength
 
@@ -72,4 +72,4 @@ chord = c(60,96) %>% mami.codi(verbose=T, num_harmonics=11)
 
     ## [1] 70.71068
 
-    ## [1] 4
+    ## [1] 3
