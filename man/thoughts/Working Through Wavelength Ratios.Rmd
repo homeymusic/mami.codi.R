@@ -38,7 +38,7 @@ chord$consonance_frequency
 ```{r, echo=F}
 chord$ratios_wavelength[[1]] %>% dplyr::arrange(dplyr::desc(ratio)) %>% dplyr::rename(wavelength=pitch) %>% dplyr::mutate(
   freq = SPEED_OF_SOUND / wavelength,
-  ratio = 1/ratio
+  reference = SPEED_OF_SOUND / reference
 ) %>% dplyr::select(den, num, ratio, freq, reference)
 ```
 

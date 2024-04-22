@@ -103,12 +103,14 @@ duplex <- function(x) {
 
   f = x$frequencies[[1]]
   λ = x$wavelengths[[1]]
+
+
   harmonic_number = x$num_harmonics*x$fundamentals_span + x$fundamentals_span
 
   x %>% dplyr::mutate(
 
     # estimate the frequency cycle
-    estimate_cycle(f, min(f), 1, FREQ, x$pseudo_octave) %>%
+    estimate_cycle(f, min(f), 1/harmonic_number, FREQ, x$pseudo_octave) %>%
       dplyr::rename_with(~ paste0(.,'_frequency')),
 
     # estimate the wavelength cycle
