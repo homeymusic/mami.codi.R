@@ -112,7 +112,7 @@ duplex <- function(x) {
       dplyr::rename_with(~ paste0(.,'_frequency')),
 
     # estimate the wavelength cycle
-    estimate_cycle(λ, max(λ), harmonic_number, WAVELENGTH, x$pseudo_octave) %>%
+    estimate_cycle(λ, min(λ), harmonic_number, WAVELENGTH, x$pseudo_octave) %>%
       dplyr::rename_with(~ paste0(.,'_wavelength')),
 
   )
