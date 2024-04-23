@@ -125,10 +125,6 @@ duplex <- function(x) {
       dplyr::rename_with(~ paste0(.,'_frequency')),
 
     # estimate the wavelength cycle
-    # estimate_cycle(f, max(f), harmonic_number, WAVELENGTH, x$pseudo_octave) %>%
-    #   dplyr::rename_with(~ paste0(.,'_wavelength')),
-    # estimate_cycle(f, transpose_freqs(x$highest_f0, x$chord_span, x$pseudo_octave) , harmonic_number, WAVELENGTH, x$pseudo_octave) %>%
-    #   dplyr::rename_with(~ paste0(.,'_wavelength')),
     estimate_cycle(f, x$highest_f0, harmonic_number, WAVELENGTH, x$pseudo_octave) %>%
       dplyr::rename_with(~ paste0(.,'_wavelength')),
 
@@ -140,8 +136,6 @@ estimate_cycle <- function(x, reference, ref_harmonic_number, type, pseudo_octav
 
   tol_win = c(semitone_ratio(-RATIO_TOLERANCE, pseudo_octave),
     semitone_ratio(+RATIO_TOLERANCE, pseudo_octave))
-
-  ref_harmonic_number = 1 / ref_harmonic_number
 
   if (length(x) > 2) {
     r = ratios(x, reference, tol_win, pseudo_octave, ref_harmonic_number)
