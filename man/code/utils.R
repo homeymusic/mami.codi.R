@@ -52,12 +52,12 @@ triads = tibble::tibble(
     list(label='Major 1st Inv',type='Triads'),
     list(label='Major 2nd Inv',type='Triads'),
     list(label='Major 6:4',type='Triads'),
-    list(label='Dual Major',type='Triads'),
+    list(label='Phrygian',type='Triads'),
     list(label='Minor',type='Triads'),
     list(label='Minor 1st Inv',type='Triads'),
     list(label='Minor 2nd Inv',type='Triads'),
     list(label='Minor 6:4',type='Triads'),
-    list(label='Dual Minor',type='Triads')
+    list(label='Mixolydian',type='Triads')
   )
 )
 progressions = tibble::tibble(

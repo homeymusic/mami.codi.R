@@ -233,7 +233,7 @@ CENTS                      = 12 ^ -1 * 10 ^ -2 # friendly mix of base 12 and bas
 TRICIA                     = 12 ^ -3           # pure base 12
 
 # default tolerance_semitone_ratio is based on fit to experimental results
-RATIO_TOLERANCE  = 6            # tricia
+RATIO_TOLERANCE  = 12            # tricia
 
 # define perfect consonance as the pure-tone unison post-pi/4 rotation
 # pure tones show pure octave-complementarity so tip of the hat to Zarlino
