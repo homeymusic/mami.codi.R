@@ -91,13 +91,17 @@ listen_for_highest_fundamental = function(x) {
 
     tol_win = c(semitone_ratio(-RATIO_TOLERANCE, f0$pseudo_octave),
                 semitone_ratio(+RATIO_TOLERANCE, f0$pseudo_octave))
-    potential_f0_harmonics = f0$reference_freq * f0$pseudo_octave ^ 0:(f0$harmonic_number)
 
-    f0_harmonics = (get_harmonics_in_chord(f, potential_f0_harmonics, tol_win))$harmonics
+    potential_lowest_harmonics = min(f) * f0$pseudo_octave ^ 0:(f0$harmonic_number)
+    lowest_harmonics = (get_harmonics_in_chord(f, potential_lowest_harmonics, tol_win))$harmonics
+    potential_highest_harmonics = f0$reference_freq * f0$pseudo_octave ^ 0:(f0$harmonic_number)
+    highest_harmonics = (get_harmonics_in_chord(f, potential_highest_harmonics, tol_win))$harmonics
 
     x %>% dplyr::mutate(
+      lowest_f0            = min(f),
+      lowest_f0_harmonics  = list(lowest_harmonics),
       highest_f0           = f0$reference_freq,
-      highest_f0_harmonics = list(f0_harmonics),
+      lowest_f0_harmonics  = list(highest_harmonics),
       pseudo_octave        = f0$pseudo_octave,
       num_harmonics        = f0$harmonic_number-1,
       fundamentals_span    = estimate_span(f0$reference_freq, min(f), f0$pseudo_octave),
@@ -111,7 +115,6 @@ listen_for_highest_fundamental = function(x) {
 duplex <- function(x) {
 
   f = x$frequencies[[1]]
-  λ = x$wavelengths[[1]]
 
   harmonic_number = 2^(x$fundamentals_span) * (x$num_harmonics + 1)
 
@@ -122,10 +125,10 @@ duplex <- function(x) {
       dplyr::rename_with(~ paste0(.,'_frequency')),
 
     # estimate the wavelength cycle
-    # estimate_cycle(f, max(f), harmonic_number, WAVELENGTH, x$pseudo_octave) %>%
-    #   dplyr::rename_with(~ paste0(.,'_wavelength')),
-    estimate_cycle(f, transpose_freqs(x$highest_f0, x$chord_span, x$pseudo_octave) , harmonic_number, WAVELENGTH, x$pseudo_octave) %>%
+    estimate_cycle(f, max(f), harmonic_number, WAVELENGTH, x$pseudo_octave) %>%
       dplyr::rename_with(~ paste0(.,'_wavelength')),
+    # estimate_cycle(f, transpose_freqs(x$highest_f0, x$chord_span, x$pseudo_octave) , harmonic_number, WAVELENGTH, x$pseudo_octave) %>%
+    #   dplyr::rename_with(~ paste0(.,'_wavelength')),
 
   )
 
@@ -159,12 +162,15 @@ estimate_cycle <- function(x, reference, ref_harmonic_number, type, pseudo_octav
 
 flip <- function(x) {
 
-  # duplexed_highest_f0 <- x %>% dplyr::mutate(chord_freqs = x$highest_f0_harmonics[[1]]) %>% duplex
-
   consonance_frequency  = ZARLINO - x$dissonance_frequency
   consonance_wavelength = ZARLINO - x$dissonance_wavelength
 
-  if (consonance_frequency <= 0 | consonance_wavelength <= 0) {
+  duplexed_lowest_f0 <- x %>% dplyr::mutate(chord_freqs = x$lowest_f0_harmonics) %>% duplex
+  # consonance_frequency  = ZARLINO - x$dissonance_frequency  + duplexed_lowest_f0$dissonance_frequency
+  # consonance_wavelength = ZARLINO - x$dissonance_wavelength + duplexed_lowest_f0$dissonance_wavelength
+
+
+    if (consonance_frequency <= 0 | consonance_wavelength <= 0) {
     stop(paste(
       'consonance should never be less than zero',
       'if so the ZARLINO constant is too low',
@@ -177,19 +183,22 @@ flip <- function(x) {
   x %>% dplyr::mutate(
     consonance_frequency,
     consonance_wavelength,
+    lowest_f0_dissonance = sqrt(duplexed_lowest_f0$dissonance_frequency^2 +
+                                  duplexed_lowest_f0$dissonance_wavelength^2),
     .before=1
   )
 
 }
 
 rotate <- function(x) {
-
+  browser
   rotated = (R_PI_4 %*% matrix(c(
     x$consonance_wavelength,
     x$consonance_frequency
   ))) %>% as.vector %>% zapsmall
+  # )) - matrix(c(x$lowest_f0_dissonance,0))) %>% as.vector %>% zapsmall
 
-  x %>% dplyr::mutate(
+x %>% dplyr::mutate(
     consonance_dissonance = rotated[1],
     major_minor           = rotated[2],
     .before=1

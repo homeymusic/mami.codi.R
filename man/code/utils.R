@@ -25,7 +25,7 @@ dual_label = paste0('d.',rev(mono_label))
 label = c(dual_label,'P1',mono_label)
 
 dyads = tibble::tibble(
-  pitches = -12:12 %>% purrr::map(\(i) {c(60,60+i,72)}),
+  pitches = -12:12 %>% purrr::map(\(i) {c(60,60+i)}),
   tonic   = NA,
   metadata = purrr::map2(label, type, \(l,t) {list(label=l,type=t)})
 )

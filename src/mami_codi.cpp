@@ -106,7 +106,6 @@ using namespace Rcpp;
 
    for (int i = 0; i < m; ++i) {
      const double ratio = x[i] / reference / ref_harmonic_number;
-     // const double ratio = x[i] / reference;
      double pseudo_ratio = pow(2.0, log(ratio) / log(pseudo_octave));
      fraction = rational_fraction(pseudo_ratio,tolerance);
      ratios[i]          = ratio;
