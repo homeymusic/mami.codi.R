@@ -121,14 +121,16 @@ duplex <- function(x) {
   x %>% dplyr::mutate(
 
     # estimate the frequency cycle
-    estimate_cycle(f, min(f), harmonic_number, FREQ, x$pseudo_octave) %>%
+    estimate_cycle(f, x$lowest_f0, harmonic_number, FREQ, x$pseudo_octave) %>%
       dplyr::rename_with(~ paste0(.,'_frequency')),
 
     # estimate the wavelength cycle
-    estimate_cycle(f, max(f), harmonic_number, WAVELENGTH, x$pseudo_octave) %>%
-      dplyr::rename_with(~ paste0(.,'_wavelength')),
+    # estimate_cycle(f, max(f), harmonic_number, WAVELENGTH, x$pseudo_octave) %>%
+    #   dplyr::rename_with(~ paste0(.,'_wavelength')),
     # estimate_cycle(f, transpose_freqs(x$highest_f0, x$chord_span, x$pseudo_octave) , harmonic_number, WAVELENGTH, x$pseudo_octave) %>%
     #   dplyr::rename_with(~ paste0(.,'_wavelength')),
+    estimate_cycle(f, x$highest_f0, harmonic_number, WAVELENGTH, x$pseudo_octave) %>%
+      dplyr::rename_with(~ paste0(.,'_wavelength')),
 
   )
 
