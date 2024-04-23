@@ -12,7 +12,7 @@ c(0) %>% mami.codi()
 ```
 
 ```{r, echo=T}
-chord = c(60, 64, 72) %>% mami.codi(verbose=T, num_harmonics=11)
+chord = c(60, 63, 72) %>% mami.codi(verbose=T, num_harmonics=11)
 ```
 
 ```{r, echo=F}
@@ -24,10 +24,7 @@ chord$tolerance_window_frequency
 #### Frequency
 
 ```{r, echo=F}
-chord$ratios_frequency[[1]] %>% dplyr::arrange(ratio) %>% dplyr::rename(freq=pitch) %>% dplyr::mutate(
-  wavelength = SPEED_OF_SOUND / freq,
-  harmonic_number = 1 / harmonic_number
-) %>% dplyr::select(-pseudo_ratio, -wavelength)
+chord$ratios_frequency[[1]] %>% dplyr::arrange(ratio) %>% dplyr::rename(freq=pitch) %>% dplyr::select(-pseudo_ratio)
 ```
 
 ```{r, echo=F}
@@ -42,17 +39,13 @@ lcm(chord$ratios_frequency[[1]]$den)
 
 
 ```{r, echo=F}
-chord$ratios_wavelength[[1]] %>% dplyr::arrange(dplyr::desc(ratio)) %>% dplyr::rename(wavelength=pitch) %>% dplyr::mutate(
-  freq = SPEED_OF_SOUND / wavelength,
-  reference = SPEED_OF_SOUND / reference,
-  harmonic_number
-) %>% dplyr::select(den, num, ratio, freq, reference, harmonic_number)
+chord$ratios_wavelength[[1]] %>% dplyr::arrange(ratio) %>% dplyr::rename(freq=pitch) %>% dplyr::select(-pseudo_ratio)
 ```
 
 ```{r, echo=F}
 SPEED_OF_SOUND / chord$ratios_wavelength[[1]]$reference[1]
 chord$consonance_wavelength
 chord$fundamentals_span
-chord$ratios_wavelength[[1]]$num
-lcm(chord$ratios_wavelength[[1]]$num)
+chord$ratios_wavelength[[1]]$den
+lcm(chord$ratios_wavelength[[1]]$den)
 ```

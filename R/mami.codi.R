@@ -89,16 +89,14 @@ listen_for_highest_fundamental = function(x) {
 
     f0 = f0[1,]
 
-    highest_fundamental = f0$reference_freq
     x %>% dplyr::mutate(
       pseudo_octave     = f0$pseudo_octave,
       num_harmonics     = f0$harmonic_number-1,
-      highest_f0        = highest_fundamental,
-      fundamentals_span = estimate_span(highest_fundamental, min(f), f0$pseudo_octave),
+      fundamentals_span = estimate_span(f0$reference_freq, min(f), f0$pseudo_octave),
       chord_span        = estimate_span(max(f), min(f), f0$pseudo_octave)
     )
   } else {
-    stop("not ready for less than 2 frequencies")
+    stop("not ready for 2 or fewer frequencies")
   }
 }
 
@@ -112,16 +110,14 @@ duplex <- function(x) {
   x %>% dplyr::mutate(
 
     # estimate the frequency cycle
-    # estimate_cycle(f, min(f)/x$pseudo_octave, 1/harmonic_number, FREQ, x$pseudo_octave) %>%
-    #   dplyr::rename_with(~ paste0(.,'_frequency')),
-    estimate_cycle(f, min(f), 1/harmonic_number, FREQ, x$pseudo_octave) %>%
+    estimate_cycle(f, min(f), harmonic_number, FREQ, x$pseudo_octave) %>%
       dplyr::rename_with(~ paste0(.,'_frequency')),
 
     # estimate the wavelength cycle
-    # estimate_cycle(λ, max(λ)/(x$pseudo_octave^x$chord_span), harmonic_number, WAVELENGTH, x$pseudo_octave) %>%
-    #   dplyr::rename_with(~ paste0(.,'_wavelength')),
-    estimate_cycle(λ, min(λ), harmonic_number, WAVELENGTH, x$pseudo_octave) %>%
+    estimate_cycle(f, max(f), harmonic_number, WAVELENGTH, x$pseudo_octave) %>%
       dplyr::rename_with(~ paste0(.,'_wavelength')),
+    # estimate_cycle(λ, max(λ)/x$pseudo_octave ^ x$chord_span , harmonic_number, WAVELENGTH, x$pseudo_octave) %>%
+    #   dplyr::rename_with(~ paste0(.,'_wavelength')),
 
   )
 
@@ -129,14 +125,20 @@ duplex <- function(x) {
 
 estimate_cycle <- function(x, reference, ref_harmonic_number, type, pseudo_octave) {
 
-  tol_win = c(semitone_ratio(-DEFAULT_SEMITONE_TOLERANCE, pseudo_octave),
-                       semitone_ratio(+DEFAULT_SEMITONE_TOLERANCE, pseudo_octave))
+  tol_win = c(semitone_ratio(-RATIO_TOLERANCE, pseudo_octave),
+    semitone_ratio(+RATIO_TOLERANCE, pseudo_octave))
+
+  if (type) {
+    ref_harmonic_number = 1 / ref_harmonic_number
+  } else {
+    ref_harmonic_number = 1
+  }
 
   if (length(x) > 2) {
     r = ratios(x, reference, tol_win, pseudo_octave, ref_harmonic_number)
 
     tibble::tibble_row(
-      lcm        = lcm(if (type) r$den else r$num),
+      lcm        = lcm(if (type) {r$den} else {r$den}),
       dissonance = log2(.data$lcm),
       ratios     = list(r),
       tolerance_window = list(tol_win)
@@ -215,11 +217,11 @@ CENTS                      = 12 ^ -1 * 10 ^ -2 # friendly mix of base 12 and bas
 TRICIA                     = 12 ^ -3           # pure base 12
 
 # default tolerance_semitone_ratio is based on fit to experimental results
-DEFAULT_SEMITONE_TOLERANCE = (12^2)/48           # tricia
+RATIO_TOLERANCE  = 12            # tricia
 
 # define perfect consonance as the pure-tone unison post-pi/4 rotation
 # pure tones show pure octave-complementarity so tip of the hat to Zarlino
-ZARLINO                    = 100 / sqrt(2)     # Z
+ZARLINO                    =1000 # 100 / sqrt(2)     # Z
 
 # once log relative cycle length becomes consonance those units will be called:
 # gRameuas (g) or gRams for short :~))
@@ -237,5 +239,5 @@ R_PI_4 = matrix(c(
 
 SPEED_OF_SOUND = 343 # m/S
 
-FREQ = T
-WAVELENGTH = F
+FREQ = F
+WAVELENGTH = T

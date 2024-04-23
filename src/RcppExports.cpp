@@ -10,6 +10,18 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// rational_fraction
+NumericVector rational_fraction(const double x, const NumericVector tolerance);
+RcppExport SEXP _mami_codi_R_rational_fraction(SEXP xSEXP, SEXP toleranceSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const double >::type x(xSEXP);
+    Rcpp::traits::input_parameter< const NumericVector >::type tolerance(toleranceSEXP);
+    rcpp_result_gen = Rcpp::wrap(rational_fraction(x, tolerance));
+    return rcpp_result_gen;
+END_RCPP
+}
 // compute_pseudo_octave
 const double compute_pseudo_octave(const double fn, const double f0, const int n);
 RcppExport SEXP _mami_codi_R_compute_pseudo_octave(SEXP fnSEXP, SEXP f0SEXP, SEXP nSEXP) {
@@ -51,6 +63,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_mami_codi_R_rational_fraction", (DL_FUNC) &_mami_codi_R_rational_fraction, 2},
     {"_mami_codi_R_compute_pseudo_octave", (DL_FUNC) &_mami_codi_R_compute_pseudo_octave, 3},
     {"_mami_codi_R_ratios", (DL_FUNC) &_mami_codi_R_ratios, 5},
     {"_mami_codi_R_find_highest_fundamental", (DL_FUNC) &_mami_codi_R_find_highest_fundamental, 1},
