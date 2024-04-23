@@ -20,3 +20,7 @@ find_highest_fundamental <- function(x) {
     .Call(`_mami_codi_R_find_highest_fundamental`, x)
 }
 
+get_harmonics_in_chord <- function(x, potential_harmonics, tolerance) {
+    .Call(`_mami_codi_R_get_harmonics_in_chord`, x, potential_harmonics, tolerance)
+}
+

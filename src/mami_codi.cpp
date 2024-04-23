@@ -180,5 +180,35 @@ using namespace Rcpp;
    );
  }
 
+ //' get_harmonics_in_chord
+ //'
+ //' Determine pseudo octave of all frequencies relative to lowest frequency
+ //'
+ //' @param x the chord
+ //' @param potential_harmonics potential harmonics
+ //' @param pseudo_octave Pseudo octave
+ //'
+ //' @return A data frame of frequencies and pseudo_octaves
+ //'
+ //' @export
+ // [[Rcpp::export]]
+DataFrame get_harmonics_in_chord(const NumericVector x,
+                                 const NumericVector potential_harmonics,
+                                 const NumericVector tolerance) {
+
+  NumericVector harmonics(x.size());
+  int num_matches=0;
+  for (int i=0; i<x.size(); i++) {
+    for (int j=0; j<potential_harmonics.size(); j++)
+      if ((potential_harmonics[j] * tolerance[0] <  x[i]) && (x[i] < potential_harmonics[j] * tolerance[1]) ) {
+        harmonics[num_matches] = x[i];
+        num_matches++;
+      }
+  }
+   return DataFrame::create(
+     _("harmonics") = harmonics[Rcpp::Range(0, num_matches-1)]
+   );
+ }
+
  // how to print to console from Rcpp
  // Rcout << "harmonic_num: " << harmonic_num << "\n";

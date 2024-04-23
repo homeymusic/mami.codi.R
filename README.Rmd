@@ -261,17 +261,17 @@ minor_i = chords %>% dplyr::filter(type == 'Minor Triad Progressions' &
 
 progression_tonics = list(
   # 'Major Triad Progressions 1' = (major_I$pitches[[1]] %>%
-  #                                   mami.codi.R::mami.codi(num_harmonics=1))$chord[[1]],
+  #                                   mami.codi(num_harmonics=1))$chord[[1]],
   # 'Minor Triad Progressions 1' = (minor_i$pitches[[1]] %>% 
-  #                                   mami.codi.R::mami.codi(num_harmonics=1))$chord[[1]],
+  #                                   mami.codi(num_harmonics=1))$chord[[1]],
   'Major Triad Progressions 5' = (major_I$pitches[[1]] %>%
-                                    mami.codi.R::mami.codi(num_harmonics=5))$chord[[1]],
+                                    mami.codi(num_harmonics=5))$chord[[1]],
   'Minor Triad Progressions 5' = (minor_i$pitches[[1]] %>% 
-                                    mami.codi.R::mami.codi(num_harmonics=5))$chord[[1]],
+                                    mami.codi(num_harmonics=5))$chord[[1]],
   'Major Triad Progressions 10' = (major_I$pitches[[1]] %>%
-                                     mami.codi.R::mami.codi(num_harmonics=10))$chord[[1]],
+                                     mami.codi(num_harmonics=10))$chord[[1]],
   'Minor Triad Progressions 10' = (minor_i$pitches[[1]] %>% 
-                                     mami.codi.R::mami.codi(num_harmonics=10))$chord[[1]]
+                                     mami.codi(num_harmonics=10))$chord[[1]]
 )
 
 ```
@@ -280,37 +280,22 @@ progression_tonics = list(
 grid = tidyr::expand_grid(
   index         = seq_along(chords$pitches),
   # num_harmonics = c(1,5,10)
-  num_harmonics = c(5,10)
+  num_harmonics = c(6, 11)
 )
 
-results = grid %>% furrr::future_pmap_dfr(\(index,
+results = grid %>% purrr::pmap_dfr(\(index,
                                      num_harmonics) {
-  
+
   chord_spectrum = hrep::sparse_fr_spectrum(chords$pitches[[index]],
                                             num_harmonics = num_harmonics)
   
-  if (endsWith(chords$type[index], 'Progressions')) {
-    if (chords$label[index] == 'I' | chords$label[index] == 'i' | chords$label[index] == '') {
-      tonic_spectrum = NULL
-    } else {
-      tonic_spectrum = progression_tonics[[paste(chords$type[index],num_harmonics)]]
-    }
-  } else {
-    if (is.na(chords$tonic[[index]])) {
-      tonic_spectrum = NULL
-    } else {
-      tonic_spectrum = hrep::sparse_fr_spectrum(chords$tonic[[index]],
-                                                num_harmonics = num_harmonics)
-    }
-  }  
-  mami.codi.R::mami.codi(chord_spectrum,
-                         tonic=tonic_spectrum,
-                         metadata=purrr::flatten(
-                           list(chords$metadata[[index]],
-                                num_harmonics=num_harmonics)
-                         ),
-                         verbose=T)
-}, .progress=TRUE, .options = furrr::furrr_options(seed = T))
+  mami.codi(chord_spectrum,
+            metadata=purrr::flatten(
+              list(chords$metadata[[index]],
+                   num_harmonics=num_harmonics)
+            ),
+            verbose=T)
+})
 
 results <- results %>% dplyr::rowwise() %>% dplyr::mutate(
   label = metadata$label,

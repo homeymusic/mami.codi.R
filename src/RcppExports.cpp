@@ -61,12 +61,26 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// get_harmonics_in_chord
+DataFrame get_harmonics_in_chord(const NumericVector x, const NumericVector potential_harmonics, const NumericVector tolerance);
+RcppExport SEXP _mami_codi_R_get_harmonics_in_chord(SEXP xSEXP, SEXP potential_harmonicsSEXP, SEXP toleranceSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< const NumericVector >::type potential_harmonics(potential_harmonicsSEXP);
+    Rcpp::traits::input_parameter< const NumericVector >::type tolerance(toleranceSEXP);
+    rcpp_result_gen = Rcpp::wrap(get_harmonics_in_chord(x, potential_harmonics, tolerance));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_mami_codi_R_rational_fraction", (DL_FUNC) &_mami_codi_R_rational_fraction, 2},
     {"_mami_codi_R_compute_pseudo_octave", (DL_FUNC) &_mami_codi_R_compute_pseudo_octave, 3},
     {"_mami_codi_R_ratios", (DL_FUNC) &_mami_codi_R_ratios, 5},
     {"_mami_codi_R_find_highest_fundamental", (DL_FUNC) &_mami_codi_R_find_highest_fundamental, 1},
+    {"_mami_codi_R_get_harmonics_in_chord", (DL_FUNC) &_mami_codi_R_get_harmonics_in_chord, 3},
     {NULL, NULL, 0}
 };
 
