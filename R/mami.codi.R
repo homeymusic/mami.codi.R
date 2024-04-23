@@ -139,11 +139,7 @@ estimate_cycle <- function(x, reference, ref_harmonic_number, type, pseudo_octav
   tol_win = c(semitone_ratio(-RATIO_TOLERANCE, pseudo_octave),
     semitone_ratio(+RATIO_TOLERANCE, pseudo_octave))
 
-  if (type) {
-    ref_harmonic_number = 1 / ref_harmonic_number
-  } else {
-    ref_harmonic_number = 1
-  }
+  ref_harmonic_number = 1 / ref_harmonic_number
 
   if (length(x) > 2) {
     r = ratios(x, reference, tol_win, pseudo_octave, ref_harmonic_number)
