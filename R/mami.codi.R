@@ -105,6 +105,7 @@ listen_for_highest_fundamental = function(x) {
       pseudo_octave        = f0$pseudo_octave,
       num_harmonics        = f0$harmonic_number-1,
       fundamentals_span    = estimate_span(f0$reference_freq, min(f), f0$pseudo_octave),
+      harmonic_span        = estimate_span(max(f), f0$reference_freq, f0$pseudo_octave),
       chord_span           = estimate_span(max(f), min(f), f0$pseudo_octave)
     )
   } else {
@@ -125,6 +126,8 @@ duplex <- function(x) {
       dplyr::rename_with(~ paste0(.,'_frequency')),
 
     # estimate the wavelength cycle
+    # estimate_cycle(f, transpose_pitch(x$highest_f0, x$harmonic_span, x$pseudo_octave), harmonic_number, WAVELENGTH, x$pseudo_octave) %>%
+    #   dplyr::rename_with(~ paste0(.,'_wavelength'))
     estimate_cycle(f, max(f), harmonic_number, WAVELENGTH, x$pseudo_octave) %>%
       dplyr::rename_with(~ paste0(.,'_wavelength'))
 
@@ -139,12 +142,10 @@ estimate_cycle <- function(x, reference, ref_harmonic_number, type, pseudo_octav
 
   if (length(x) > 2) {
 
-    if (type == WAVELENGTH) {ref_harmonic_number = 1 / ref_harmonic_number}
-
     r = ratios(x, reference, tol_win, pseudo_octave, ref_harmonic_number)
 
     tibble::tibble_row(
-      lcm        = lcm(if (type == WAVELENGTH) {r$num} else {r$den}),
+      lcm        = lcm(r$den),
       dissonance = log2(.data$lcm),
       ratios     = list(r),
       tolerance_window = list(tol_win)
@@ -225,7 +226,7 @@ estimate_span <- function(x, y, pseudo_octave) {
   ceiling(log((x/y)%>%zapsmall(24),pseudo_octave))
 }
 
-transpose_freqs <- function(x, register, pseudo_octave) {
+transpose_pitch <- function(x, register, pseudo_octave) {
   x * pseudo_octave ^ register
 }
 
@@ -236,7 +237,7 @@ CENTS                      = 12 ^ -1 * 10 ^ -2 # friendly mix of base 12 and bas
 TRICIA                     = 12 ^ -3           # pure base 12
 
 # default tolerance_semitone_ratio is based on fit to experimental results
-RATIO_TOLERANCE  = 3            # tricia
+RATIO_TOLERANCE  = 12            # tricia
 
 # define perfect consonance as the pure-tone unison post-pi/4 rotation
 # pure tones show pure octave-complementarity so tip of the hat to Zarlino
