@@ -12,7 +12,7 @@ c(0) %>% mami.codi()
 ```
 
 ```{r, echo=T}
-chord = c(60, 64, 72) %>% mami.codi(verbose=T, num_harmonics=11)
+chord = c(60, 64) %>% mami.codi(verbose=T, num_harmonics=11)
 ```
 
 ```{r, echo=F}

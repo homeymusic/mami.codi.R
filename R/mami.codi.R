@@ -89,13 +89,10 @@ listen_for_highest_fundamental = function(x) {
 
     f0 = f0[1,]
 
-    tol_win = c(semitone_ratio(-RATIO_TOLERANCE, f0$pseudo_octave),
-                semitone_ratio(+RATIO_TOLERANCE, f0$pseudo_octave))
-
     potential_lowest_harmonics = min(f) * f0$pseudo_octave ^ 0:(f0$harmonic_number)
-    lowest_harmonics = (get_harmonics_in_chord(f, potential_lowest_harmonics, tol_win))$harmonics
+    lowest_harmonics = (get_harmonics_in_chord(f, potential_lowest_harmonics, TOLERANCE_WINDOW))$harmonics
     potential_highest_harmonics = f0$reference_freq * f0$pseudo_octave ^ 0:(f0$harmonic_number)
-    highest_harmonics = (get_harmonics_in_chord(f, potential_highest_harmonics, tol_win))$harmonics
+    highest_harmonics = (get_harmonics_in_chord(f, potential_highest_harmonics, TOLERANCE_WINDOW))$harmonics
 
     x %>% dplyr::mutate(
       lowest_f0            = min(f),
@@ -126,8 +123,12 @@ duplex <- function(x) {
       dplyr::rename_with(~ paste0(.,'_frequency')),
 
     # estimate the wavelength cycle
+    # 1. max f
     estimate_cycle(f, max(f), harmonic_number, x$pseudo_octave) %>%
       dplyr::rename_with(~ paste0(.,'_wavelength'))
+    # 2. max f0
+    # estimate_cycle(f, x$highest_f0, harmonic_number, x$pseudo_octave) %>%
+    #   dplyr::rename_with(~ paste0(.,'_wavelength'))
 
   )
 
@@ -135,18 +136,15 @@ duplex <- function(x) {
 
 estimate_cycle <- function(x, reference, ref_harmonic_number, pseudo_octave) {
 
-  tol_win = c(semitone_ratio(-RATIO_TOLERANCE, pseudo_octave),
-    semitone_ratio(+RATIO_TOLERANCE, pseudo_octave))
-
   if (length(x) > 2) {
 
-    r = ratios(x, reference, tol_win, pseudo_octave, ref_harmonic_number)
+    r = ratios(x, reference, TOLERANCE_WINDOW, pseudo_octave, ref_harmonic_number)
 
     tibble::tibble_row(
       lcm        = lcm(r$den),
       dissonance = log2(.data$lcm),
       ratios     = list(r),
-      tolerance_window = list(tol_win)
+      tolerance_window = list(TOLERANCE_WINDOW)
     )
   } else {
     stop("not ready for less than 2 frequencies")
@@ -234,8 +232,8 @@ CENTS                      = 12 ^ -1 * 10 ^ -2 # friendly mix of base 12 and bas
 # ... but search results of param space have been compelling with pure base 12
 TRICIA                     = 12 ^ -3           # pure base 12
 
-# default tolerance_semitone_ratio is based on fit to experimental results
-RATIO_TOLERANCE  = 48            # tricia
+RATIO_TOLERANCE  = 0.1
+TOLERANCE_WINDOW = c(1.0 - RATIO_TOLERANCE, 1.0 + RATIO_TOLERANCE)
 
 # define perfect consonance as the pure-tone unison post-pi/4 rotation
 # pure tones show pure octave-complementarity so tip of the hat to Zarlino
