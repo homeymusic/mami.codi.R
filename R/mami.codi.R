@@ -121,12 +121,12 @@ duplex <- function(x) {
   x %>% dplyr::mutate(
 
     # estimate the frequency cycle
-    estimate_cycle(f, x$lowest_f0, harmonic_number, FREQ, x$pseudo_octave) %>%
+    estimate_cycle(f, min(f), harmonic_number, FREQUENCY, x$pseudo_octave) %>%
       dplyr::rename_with(~ paste0(.,'_frequency')),
 
     # estimate the wavelength cycle
-    estimate_cycle(f, x$highest_f0, harmonic_number, WAVELENGTH, x$pseudo_octave) %>%
-      dplyr::rename_with(~ paste0(.,'_wavelength')),
+    estimate_cycle(f, max(f), harmonic_number, WAVELENGTH, x$pseudo_octave) %>%
+      dplyr::rename_with(~ paste0(.,'_wavelength'))
 
   )
 
@@ -138,10 +138,13 @@ estimate_cycle <- function(x, reference, ref_harmonic_number, type, pseudo_octav
     semitone_ratio(+RATIO_TOLERANCE, pseudo_octave))
 
   if (length(x) > 2) {
+
+    if (type == WAVELENGTH) {ref_harmonic_number = 1 / ref_harmonic_number}
+
     r = ratios(x, reference, tol_win, pseudo_octave, ref_harmonic_number)
 
     tibble::tibble_row(
-      lcm        = lcm(if (type) {r$den} else {r$den}),
+      lcm        = lcm(if (type == WAVELENGTH) {r$num} else {r$den}),
       dissonance = log2(.data$lcm),
       ratios     = list(r),
       tolerance_window = list(tol_win)
@@ -233,7 +236,7 @@ CENTS                      = 12 ^ -1 * 10 ^ -2 # friendly mix of base 12 and bas
 TRICIA                     = 12 ^ -3           # pure base 12
 
 # default tolerance_semitone_ratio is based on fit to experimental results
-RATIO_TOLERANCE  = 12            # tricia
+RATIO_TOLERANCE  = 3            # tricia
 
 # define perfect consonance as the pure-tone unison post-pi/4 rotation
 # pure tones show pure octave-complementarity so tip of the hat to Zarlino
@@ -255,5 +258,5 @@ R_PI_4 = matrix(c(
 
 SPEED_OF_SOUND = 343 # m/S
 
-FREQ = F
+FREQUENCY = F
 WAVELENGTH = T
