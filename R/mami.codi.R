@@ -102,7 +102,7 @@ listen_for_highest_fundamental = function(x) {
       pseudo_octave        = f0$pseudo_octave,
       num_harmonics        = f0$harmonic_number-1,
       fundamentals_span    = estimate_span(f0$reference_freq, min(f), f0$pseudo_octave),
-      harmonic_span        = estimate_span(max(f), f0$reference_freq, f0$pseudo_octave),
+      harmonics_span       = estimate_span(max(f), f0$reference_freq, f0$pseudo_octave),
       chord_span           = estimate_span(max(f), min(f), f0$pseudo_octave)
     )
   } else {
@@ -114,31 +114,33 @@ duplex <- function(x) {
 
   f = x$frequencies[[1]]
 
-  harmonic_number = 2^(x$fundamentals_span) * (x$num_harmonics + 1)
+  # harmonic_number = 2^(x$fundamentals_span) * (x$num_harmonics + 1)
 
   x %>% dplyr::mutate(
 
     # estimate the frequency cycle
-    estimate_cycle(f, min(f), harmonic_number, x$pseudo_octave) %>%
-      dplyr::rename_with(~ paste0(.,'_frequency')),
+    estimate_cycle(f,
+                   min(f),
+                   x$pseudo_octave) %>% dplyr::rename_with(~ paste0(.,'_frequency')),
 
     # estimate the wavelength cycle
     # 1. max f
-    estimate_cycle(f, max(f), harmonic_number, x$pseudo_octave) %>%
+    estimate_cycle(f, max(f), x$pseudo_octave) %>%
       dplyr::rename_with(~ paste0(.,'_wavelength'))
-    # 2. max f0
-    # estimate_cycle(f, x$highest_f0, harmonic_number, x$pseudo_octave) %>%
-    #   dplyr::rename_with(~ paste0(.,'_wavelength'))
+    # 2. max f0 transposed
+    # estimate_cycle(f,
+    #                transpose_pitch(x$highest_f0, x$harmonics_span, x$pseudo_octave),
+    #                x$pseudo_octave) %>% dplyr::rename_with(~ paste0(.,'_wavelength'))
 
   )
 
 }
 
-estimate_cycle <- function(x, reference, ref_harmonic_number, pseudo_octave) {
+estimate_cycle <- function(x, reference, pseudo_octave) {
 
   if (length(x) > 2) {
 
-    r = ratios(x, reference, TOLERANCE_WINDOW, pseudo_octave, ref_harmonic_number)
+    r = ratios(x, reference, TOLERANCE_WINDOW, pseudo_octave)
 
     tibble::tibble_row(
       lcm        = lcm(r$den),
@@ -232,7 +234,7 @@ CENTS                      = 12 ^ -1 * 10 ^ -2 # friendly mix of base 12 and bas
 # ... but search results of param space have been compelling with pure base 12
 TRICIA                     = 12 ^ -3           # pure base 12
 
-RATIO_TOLERANCE  = 0.1
+RATIO_TOLERANCE  = 0.01
 TOLERANCE_WINDOW = c(1.0 - RATIO_TOLERANCE, 1.0 + RATIO_TOLERANCE)
 
 # define perfect consonance as the pure-tone unison post-pi/4 rotation

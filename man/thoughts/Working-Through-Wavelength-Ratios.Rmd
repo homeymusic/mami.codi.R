@@ -12,7 +12,7 @@ c(0) %>% mami.codi()
 ```
 
 ```{r, echo=T}
-chord = c(60, 64) %>% mami.codi(verbose=T, num_harmonics=11)
+chord = c(60, 65, 72) %>% mami.codi(verbose=T, num_harmonics=11)
 ```
 
 ```{r, echo=F}
@@ -24,7 +24,7 @@ chord$tolerance_window_frequency
 #### Frequency
 
 ```{r, echo=F}
-chord$ratios_frequency[[1]] %>% dplyr::arrange(ratio) %>% dplyr::rename(freq=pitch) %>% dplyr::select(-pseudo_ratio)
+chord$ratios_frequency[[1]] %>% dplyr::arrange(ratio) %>% dplyr::rename(freq=pitch)
 ```
 
 ```{r, echo=F}
@@ -39,7 +39,7 @@ lcm(chord$ratios_frequency[[1]]$den)
 
 
 ```{r, echo=F}
-chord$ratios_wavelength[[1]] %>% dplyr::arrange(ratio) %>% dplyr::rename(freq=pitch) %>% dplyr::select(-pseudo_ratio)
+chord$ratios_wavelength[[1]] %>% dplyr::arrange(ratio) %>% dplyr::rename(freq=pitch)
 ```
 
 ```{r, echo=F}

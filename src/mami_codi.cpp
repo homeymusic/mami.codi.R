@@ -82,7 +82,6 @@ using namespace Rcpp;
  //' @param reference Reference value
  //' @param tolerance A vector with two values for the upper and lower tolerance.
  //' @param pseudo_octave Factor for calculating stretched and compressed ratios.
- //' @param ref_harmonic_number The harmonic number of the reference
  //'
  //' @return A data frame of numerators and denominators
  //'
@@ -91,8 +90,7 @@ using namespace Rcpp;
  DataFrame ratios(NumericVector x,
                   const double reference,
                   const NumericVector tolerance,
-                  const double pseudo_octave,
-                  const double ref_harmonic_number) {
+                  const double pseudo_octave) {
 
    x = unique(x);
 
@@ -105,16 +103,20 @@ using namespace Rcpp;
    NumericVector fraction(2);
 
    for (int i = 0; i < m; ++i) {
-     if (x[i] >= reference) {
-       ratios[i] = x[i] / reference * ref_harmonic_number;
+     if (max(x) > reference) {
+       harmonic_number[i] = std::round(max(x) / reference);
+       ratios[i] = x[i] / reference * harmonic_number[i];
+     } else if (min(x) < reference) {
+       harmonic_number[i] = std::round(reference / min(x));
+       ratios[i] = reference / x[i] * harmonic_number[i];
      } else {
-       ratios[i] = reference / x[i] * ref_harmonic_number;
+       throw std::range_error("not ready to hand the case where the reference equals min or max");
+       return R_NilValue;
      }
      pseudo_ratios[i]   = pow(2.0, log(ratios[i]) / log(pseudo_octave));
      fraction           = rational_fraction(pseudo_ratios[i],tolerance);
      nums[i]            = fraction[0];
      dens[i]            = fraction[1];
-     harmonic_number[i] = ref_harmonic_number;
    }
 
    return DataFrame::create(
