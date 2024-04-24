@@ -105,11 +105,13 @@ using namespace Rcpp;
    NumericVector fraction(2);
 
    for (int i = 0; i < m; ++i) {
-     const double ratio = x[i] / reference * ref_harmonic_number;
-     double pseudo_ratio = pow(2.0, log(ratio) / log(pseudo_octave));
-     fraction = rational_fraction(pseudo_ratio,tolerance);
-     ratios[i]          = ratio;
-     pseudo_ratios[i]   = pseudo_ratio;
+     if (x[i] >= reference) {
+       ratios[i] = x[i] / reference * ref_harmonic_number;
+     } else {
+       ratios[i] = reference / x[i] * ref_harmonic_number;
+     }
+     pseudo_ratios[i]   = pow(2.0, log(ratios[i]) / log(pseudo_octave));
+     fraction           = rational_fraction(pseudo_ratios[i],tolerance);
      nums[i]            = fraction[0];
      dens[i]            = fraction[1];
      harmonic_number[i] = ref_harmonic_number;
@@ -191,19 +193,19 @@ using namespace Rcpp;
  //'
  //' @export
  // [[Rcpp::export]]
-DataFrame get_harmonics_in_chord(const NumericVector x,
-                                 const NumericVector potential_harmonics,
-                                 const NumericVector tolerance) {
+ DataFrame get_harmonics_in_chord(const NumericVector x,
+                                  const NumericVector potential_harmonics,
+                                  const NumericVector tolerance) {
 
-  NumericVector harmonics(x.size());
-  int num_matches=0;
-  for (int i=0; i<x.size(); i++) {
-    for (int j=0; j<potential_harmonics.size(); j++)
-      if ((potential_harmonics[j] * tolerance[0] <  x[i]) && (x[i] < potential_harmonics[j] * tolerance[1]) ) {
-        harmonics[num_matches] = x[i];
-        num_matches++;
-      }
-  }
+   NumericVector harmonics(x.size());
+   int num_matches=0;
+   for (int i=0; i<x.size(); i++) {
+     for (int j=0; j<potential_harmonics.size(); j++)
+       if ((potential_harmonics[j] * tolerance[0] <  x[i]) && (x[i] < potential_harmonics[j] * tolerance[1]) ) {
+         harmonics[num_matches] = x[i];
+         num_matches++;
+       }
+   }
    return DataFrame::create(
      _("harmonics") = harmonics[Rcpp::Range(0, num_matches-1)]
    );

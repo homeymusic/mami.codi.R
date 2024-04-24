@@ -122,20 +122,18 @@ duplex <- function(x) {
   x %>% dplyr::mutate(
 
     # estimate the frequency cycle
-    estimate_cycle(f, min(f), harmonic_number, FREQUENCY, x$pseudo_octave) %>%
+    estimate_cycle(f, min(f), harmonic_number, x$pseudo_octave) %>%
       dplyr::rename_with(~ paste0(.,'_frequency')),
 
     # estimate the wavelength cycle
-    # estimate_cycle(f, transpose_pitch(x$highest_f0, x$harmonic_span, x$pseudo_octave), harmonic_number, WAVELENGTH, x$pseudo_octave) %>%
-    #   dplyr::rename_with(~ paste0(.,'_wavelength'))
-    estimate_cycle(f, max(f), harmonic_number, WAVELENGTH, x$pseudo_octave) %>%
+    estimate_cycle(f, max(f), harmonic_number, x$pseudo_octave) %>%
       dplyr::rename_with(~ paste0(.,'_wavelength'))
 
   )
 
 }
 
-estimate_cycle <- function(x, reference, ref_harmonic_number, type, pseudo_octave) {
+estimate_cycle <- function(x, reference, ref_harmonic_number, pseudo_octave) {
 
   tol_win = c(semitone_ratio(-RATIO_TOLERANCE, pseudo_octave),
     semitone_ratio(+RATIO_TOLERANCE, pseudo_octave))
@@ -237,7 +235,7 @@ CENTS                      = 12 ^ -1 * 10 ^ -2 # friendly mix of base 12 and bas
 TRICIA                     = 12 ^ -3           # pure base 12
 
 # default tolerance_semitone_ratio is based on fit to experimental results
-RATIO_TOLERANCE  = 12            # tricia
+RATIO_TOLERANCE  = 48            # tricia
 
 # define perfect consonance as the pure-tone unison post-pi/4 rotation
 # pure tones show pure octave-complementarity so tip of the hat to Zarlino
