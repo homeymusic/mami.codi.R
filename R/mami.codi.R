@@ -158,17 +158,17 @@ duplex <- function(x) {
 
     # estimate the wavelength cycle
     # 1. max f
-    # estimate_cycle(f,
-    #                max(f),
-    #                x$tolerance_window[[1]],
-    #                x$pseudo_octave) %>%
-    #   dplyr::rename_with(~ paste0(.,'_wavelength'))
-    # 2. max f0 transposed
     estimate_cycle(f,
-                   transpose_pitch(x$highest_f0, x$harmonics_span, x$pseudo_octave),
+                   max(f),
                    TOLERANCE,
                    x$pseudo_octave) %>%
       dplyr::rename_with(~ paste0(.,'_wavelength'))
+    # 2. max f0 transposed
+    # estimate_cycle(f,
+    #                transpose_pitch(x$highest_f0, x$harmonics_span, x$pseudo_octave),
+    #                TOLERANCE,
+    #                x$pseudo_octave) %>%
+    #   dplyr::rename_with(~ paste0(.,'_wavelength'))
     # 3. min f0 transposed
     # estimate_cycle(f,
     #                transpose_pitch(min(f), x$chord_span, x$pseudo_octave),
