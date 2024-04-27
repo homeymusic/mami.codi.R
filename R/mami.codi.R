@@ -146,7 +146,7 @@ duplex <- function(x) {
     # 1. low
     estimate_cycle(f,
                    min(f),
-                   x$tolerance_window[[1]],
+                   TOLERANCE,
                    x$pseudo_octave) %>%
       dplyr::rename_with(~ paste0(.,'_frequency')),
     # 2. lowest down one
@@ -158,17 +158,17 @@ duplex <- function(x) {
 
     # estimate the wavelength cycle
     # 1. max f
-    estimate_cycle(f,
-                   max(f),
-                   x$tolerance_window[[1]],
-                   x$pseudo_octave) %>%
-      dplyr::rename_with(~ paste0(.,'_wavelength'))
-    # 2. max f0 transposed
     # estimate_cycle(f,
-    #                transpose_pitch(x$highest_f0, x$harmonics_span, x$pseudo_octave),
-    # x$tolerance_window[[1]],
+    #                max(f),
+    #                x$tolerance_window[[1]],
     #                x$pseudo_octave) %>%
     #   dplyr::rename_with(~ paste0(.,'_wavelength'))
+    # 2. max f0 transposed
+    estimate_cycle(f,
+                   transpose_pitch(x$highest_f0, x$harmonics_span, x$pseudo_octave),
+                   TOLERANCE,
+                   x$pseudo_octave) %>%
+      dplyr::rename_with(~ paste0(.,'_wavelength'))
     # 3. min f0 transposed
     # estimate_cycle(f,
     #                transpose_pitch(min(f), x$chord_span, x$pseudo_octave),
@@ -180,9 +180,9 @@ duplex <- function(x) {
 
 }
 
-estimate_cycle <- function(x, reference, tolerance_window, pseudo_octave) {
+estimate_cycle <- function(x, reference, tolerance, pseudo_octave) {
 
-    r = ratios(x, reference, tolerance_window, pseudo_octave)
+    r = ratios(x, reference, tolerance, pseudo_octave)
 
     tibble::tibble_row(
       lcm        = lcm(r$den),
@@ -281,7 +281,7 @@ CENTS     = 12 ^ -1 * 10 ^ -2 # friendly mix of base 12 and base 10
 
 # ... but search results of param space have been compelling with pure base 12
 TRICIA    = 12 ^ -3           # pure base 12
-TOLERANCE = 48
+TOLERANCE = 0.01
 
 # define perfect consonance as the pure-tone unison post-pi/4 rotation
 # pure tones show pure octave-complementarity so tip of the hat to Zarlino

@@ -7,18 +7,18 @@ using namespace Rcpp;
  //'
  //' Find the highest fundamental freq
  //'
- //' @param x Number to convert to fraction
+ //' @param r Number to convert to fraction
  //' @param tolerance Tolerance for converting
  //'
  //' @return A ratio of num / den
  //'
  //' @export
  // [[Rcpp::export]]
- NumericVector rational_fraction(const double x, const NumericVector tolerance) {
+ NumericVector rational_fraction(const double x, const double tolerance) {
    double approximation;
 
-   const double valid_min = x * tolerance[0];
-   const double valid_max = x * tolerance[1];
+   const double valid_min = x - tolerance;
+   const double valid_max = x + tolerance;
 
    int left_num    = floor(x);
    int left_den    = 1;
@@ -27,7 +27,7 @@ using namespace Rcpp;
    int right_num   = floor(x)+1;
    int right_den   = 1;
 
-   approximation  = mediant_num / mediant_den;
+   approximation  = std::round(mediant_num / mediant_den);
 
    int sanity = 0;
    while (((approximation < valid_min) || (valid_max < approximation)) && sanity < 1000) {
@@ -89,7 +89,7 @@ using namespace Rcpp;
  // [[Rcpp::export]]
  DataFrame ratios(NumericVector x,
                   const double reference,
-                  const NumericVector tolerance,
+                  const double tolerance,
                   const double pseudo_octave) {
 
    x = unique(x);
@@ -111,7 +111,9 @@ using namespace Rcpp;
        harmonic_number[i] = 1;
      }
      ratios[i] = x[i] / reference * harmonic_number[i];
-     pseudo_ratios[i]   = pow(2.0, log(ratios[i]) / log(pseudo_octave));
+     // const double rounded_ratio = std::round(ratios[i]/tolerance)*tolerance;
+     const double rounded_ratio = ratios[i];
+     pseudo_ratios[i]   = pow(2.0, log(rounded_ratio) / log(pseudo_octave));
      fraction           = rational_fraction(pseudo_ratios[i],tolerance);
      if (max(x) > reference || min(x) < reference) {
        nums[i]            = fraction[0];

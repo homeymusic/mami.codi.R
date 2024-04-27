@@ -11,13 +11,13 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // rational_fraction
-NumericVector rational_fraction(const double x, const NumericVector tolerance);
+NumericVector rational_fraction(const double x, const double tolerance);
 RcppExport SEXP _mami_codi_R_rational_fraction(SEXP xSEXP, SEXP toleranceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const double >::type x(xSEXP);
-    Rcpp::traits::input_parameter< const NumericVector >::type tolerance(toleranceSEXP);
+    Rcpp::traits::input_parameter< const double >::type tolerance(toleranceSEXP);
     rcpp_result_gen = Rcpp::wrap(rational_fraction(x, tolerance));
     return rcpp_result_gen;
 END_RCPP
@@ -36,14 +36,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // ratios
-DataFrame ratios(NumericVector x, const double reference, const NumericVector tolerance, const double pseudo_octave);
+DataFrame ratios(NumericVector x, const double reference, const double tolerance, const double pseudo_octave);
 RcppExport SEXP _mami_codi_R_ratios(SEXP xSEXP, SEXP referenceSEXP, SEXP toleranceSEXP, SEXP pseudo_octaveSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
     Rcpp::traits::input_parameter< const double >::type reference(referenceSEXP);
-    Rcpp::traits::input_parameter< const NumericVector >::type tolerance(toleranceSEXP);
+    Rcpp::traits::input_parameter< const double >::type tolerance(toleranceSEXP);
     Rcpp::traits::input_parameter< const double >::type pseudo_octave(pseudo_octaveSEXP);
     rcpp_result_gen = Rcpp::wrap(ratios(x, reference, tolerance, pseudo_octave));
     return rcpp_result_gen;
