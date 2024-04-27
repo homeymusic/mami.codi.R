@@ -50,7 +50,7 @@ progression_tonics = list(
 grid = tidyr::expand_grid(
   index         = seq_along(chords$pitches),
   # num_harmonics = c(1,5,10)
-  num_harmonics = c(11)
+  num_harmonics = c(2, 3, 11)
 )
 
 results = grid %>% purrr::pmap_dfr(\(index,

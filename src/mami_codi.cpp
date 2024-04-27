@@ -105,18 +105,21 @@ using namespace Rcpp;
    for (int i = 0; i < m; ++i) {
      if (max(x) > reference) {
        harmonic_number[i] = std::round(max(x) / reference);
-       ratios[i] = x[i] / reference * harmonic_number[i];
      } else if (min(x) < reference) {
        harmonic_number[i] = std::round(reference / min(x));
-       ratios[i] = reference / x[i] * harmonic_number[i];
      } else {
-       throw std::range_error("not ready to hand the case where the reference equals min or max");
-       return R_NilValue;
+       harmonic_number[i] = 1;
      }
+     ratios[i] = x[i] / reference * harmonic_number[i];
      pseudo_ratios[i]   = pow(2.0, log(ratios[i]) / log(pseudo_octave));
      fraction           = rational_fraction(pseudo_ratios[i],tolerance);
-     nums[i]            = fraction[0];
-     dens[i]            = fraction[1];
+     if (max(x) > reference || min(x) < reference) {
+       nums[i]            = fraction[0];
+       dens[i]            = fraction[1];
+     } else {
+       nums[i]            = 1;
+       dens[i]            = 1;
+     }
    }
 
    return DataFrame::create(
@@ -174,13 +177,24 @@ using namespace Rcpp;
      }
    }
 
-   return DataFrame::create(
-     _("harmonic_number") = harmonic_number[Rcpp::Range(0, num_matches-1)],
-                                           _("evaluation_freq") = evaluation_freq[Rcpp::Range(0, num_matches-1)],
-                                                                                 _("reference_freq")  = reference_freq[Rcpp::Range(0, num_matches-1)],
-                                                                                                                      _("pseudo_octave")   = pseudo_octave[Rcpp::Range(0, num_matches-1)],
-                                                                                                                                                          _("highest_freq")    = highest_freq[Rcpp::Range(0, num_matches-1)]
-   );
+   if (num_matches == 0) {
+     return DataFrame::create(
+       _("harmonic_number") = 1,
+       _("evaluation_freq") = f_max,
+       _("reference_freq")  = f_max,
+       _("pseudo_octave")   = 1.0,
+       _("highest_freq")    = f_max
+     );
+   } else {
+     return DataFrame::create(
+       _("harmonic_number") = harmonic_number[Rcpp::Range(0, num_matches-1)],
+                                             _("evaluation_freq") = evaluation_freq[Rcpp::Range(0, num_matches-1)],
+                                                                                   _("reference_freq")  = reference_freq[Rcpp::Range(0, num_matches-1)],
+                                                                                                                        _("pseudo_octave")   = pseudo_octave[Rcpp::Range(0, num_matches-1)],
+                                                                                                                                                            _("highest_freq")    = highest_freq[Rcpp::Range(0, num_matches-1)]
+     );
+   }
+
  }
 
  //' get_harmonics_in_chord

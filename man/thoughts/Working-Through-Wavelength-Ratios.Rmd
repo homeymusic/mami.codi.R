@@ -12,13 +12,13 @@ c(0) %>% mami.codi()
 ```
 
 ```{r, echo=T}
-chord = c(60, 65, 72) %>% mami.codi(verbose=T, num_harmonics=11)
+chord = c(60,72) %>% mami.codi(verbose=T, num_harmonics=11)
 ```
 
 ```{r, echo=F}
 chord %>% dplyr::select(consonance_dissonance, major_minor)
 chord$chord_span
-chord$tolerance_window_frequency
+chord$tolerance_window[[1]]
 ```
 
 #### Frequency
@@ -36,6 +36,7 @@ lcm(chord$ratios_frequency[[1]]$den)
 ```
 
 #### Wavelength
+ 
 
 
 ```{r, echo=F}
