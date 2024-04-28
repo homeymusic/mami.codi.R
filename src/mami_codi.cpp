@@ -90,6 +90,7 @@ using namespace Rcpp;
  DataFrame ratios(NumericVector x,
                   const double reference,
                   const double tolerance,
+                  const double coefficient,
                   const double pseudo_octave) {
 
    x = unique(x);
@@ -97,31 +98,23 @@ using namespace Rcpp;
    int m = x.size();
    NumericVector nums(m);
    NumericVector dens(m);
-   NumericVector harmonic_number(m);
+   NumericVector coefficients(m);
    NumericVector ratios(m);
    NumericVector pseudo_ratios(m);
    NumericVector fraction(2);
 
    for (int i = 0; i < m; ++i) {
-     if (max(x) > reference) {
-       harmonic_number[i] = std::round(max(x) / reference);
-     } else if (min(x) < reference) {
-       harmonic_number[i] = std::round(reference / min(x));
-     } else {
-       harmonic_number[i] = 1;
-     }
-     ratios[i] = x[i] / reference * harmonic_number[i];
-     // const double rounded_ratio = std::round(ratios[i]/tolerance)*tolerance;
-     const double rounded_ratio = ratios[i];
-     pseudo_ratios[i]   = pow(2.0, log(rounded_ratio) / log(pseudo_octave));
+     ratios[i]          = x[i] / reference * coefficient;
+     pseudo_ratios[i]   = pow(2.0, log(ratios[i]) / log(pseudo_octave));
      fraction           = rational_fraction(pseudo_ratios[i],tolerance);
-     if (max(x) > reference || min(x) < reference) {
-       nums[i]            = fraction[0];
-       dens[i]            = fraction[1];
+     if (coefficient >= 1.0) {
+     nums[i]            = fraction[0];
+     dens[i]            = fraction[1];
      } else {
-       nums[i]            = 1;
-       dens[i]            = 1;
+       nums[i]            = fraction[1];
+       dens[i]            = fraction[0];
      }
+     coefficients[i]    = coefficient;
    }
 
    return DataFrame::create(
@@ -131,7 +124,7 @@ using namespace Rcpp;
      _("pseudo_ratio")        = pseudo_ratios,
      _("pitch")               = x,
      _("reference")           = reference,
-     _("harmonic_number")     = harmonic_number
+     _("coefficient")         = coefficients
    );
  }
 

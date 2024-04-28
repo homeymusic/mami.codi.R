@@ -1,0 +1,29 @@
+---
+title: "Coefficients"
+output:
+  github_document: default
+---
+
+```{r, echo=F, message=F, include=F}
+devtools::load_all(".")
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/coefficients-"
+)
+```
+
+```{r, echo=T}
+f0           = hrep::midi_to_freq(60)
+max_harmonic = 13
+λ_max        = SPEED_OF_SOUND / (f0 * max_harmonic)
+λ_min        = λ_max * max_harmonic
+```
+```{r, echo=T}
+tibble::tibble(
+  harmonic = 1:max_harmonic,
+  f        = .data$harmonic * f0,
+  f_inv    = SPEED_OF_SOUND / f,
+  λ        =  λ_min / harmonic
+)
+```

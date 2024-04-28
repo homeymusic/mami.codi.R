@@ -101,7 +101,7 @@ listen_for_highest_fundamental = function(x) {
       highest_f0           = f0$reference_freq,
       lowest_f0_harmonics  = list(highest_harmonics),
       pseudo_octave        = f0$pseudo_octave,
-      num_harmonics        = f0$harmonic_number-1,
+      num_harmonics        = f0$harmonic_number,
       fundamentals_span    = estimate_span(f0$reference_freq, min(f), f0$pseudo_octave),
       harmonics_span       = estimate_span(max(f), f0$reference_freq, f0$pseudo_octave),
       chord_span           = estimate_span(max(f), min(f), f0$pseudo_octave),
@@ -139,50 +139,31 @@ listen_for_highest_fundamental = function(x) {
 duplex <- function(x) {
 
   f = x$frequencies[[1]]
+  λ = x$wavelengths[[1]]
 
   x %>% dplyr::mutate(
 
     # estimate the frequency cycle
-    # 1. low
     estimate_cycle(f,
                    min(f),
-                   TOLERANCE,
+                   x$num_harmonics,
                    x$pseudo_octave) %>%
       dplyr::rename_with(~ paste0(.,'_frequency')),
-    # 2. lowest down one
-    # estimate_cycle(f,
-    #                transpose_pitch(min(f), -1, x$pseudo_octave),
-    # x$tolerance_window[[1]],
-    #                x$pseudo_octave) %>%
-    #   dplyr::rename_with(~ paste0(.,'_frequency')),
 
     # estimate the wavelength cycle
-    # 1. max f
-    estimate_cycle(f,
-                   max(f),
-                   TOLERANCE,
+    estimate_cycle(λ,
+                   min(λ),
+                   1 / (x$num_harmonics * x$fundamentals_span),
                    x$pseudo_octave) %>%
       dplyr::rename_with(~ paste0(.,'_wavelength'))
-    # 2. max f0 transposed
-    # estimate_cycle(f,
-    #                transpose_pitch(x$highest_f0, x$harmonics_span, x$pseudo_octave),
-    #                TOLERANCE,
-    #                x$pseudo_octave) %>%
-    #   dplyr::rename_with(~ paste0(.,'_wavelength'))
-    # 3. min f0 transposed
-    # estimate_cycle(f,
-    #                transpose_pitch(min(f), x$chord_span, x$pseudo_octave),
-    # x$tolerance_window[[1]],
-    #                x$pseudo_octave) %>%
-    #   dplyr::rename_with(~ paste0(.,'_wavelength'))
 
   )
 
 }
 
-estimate_cycle <- function(x, reference, tolerance, pseudo_octave) {
+estimate_cycle <- function(x, reference, coefficient, pseudo_octave) {
 
-    r = ratios(x, reference, tolerance, pseudo_octave)
+    r = ratios(x, reference, TOLERANCE, coefficient, pseudo_octave)
 
     tibble::tibble_row(
       lcm        = lcm(r$den),
@@ -258,7 +239,7 @@ frequency_ratio <- function(x, pseudo_octave, steps=TRICIA) {
 }
 
 estimate_span <- function(x, y, pseudo_octave) {
-  ceiling(log((x/y)%>%zapsmall(24),pseudo_octave))
+  floor(log((x/y)%>%zapsmall(24),pseudo_octave)) + 1
 }
 
 transpose_pitch <- function(x, register, pseudo_octave) {
@@ -303,5 +284,5 @@ R_PI_4 = matrix(c(
 
 SPEED_OF_SOUND = 343 # m/S
 
-FREQUENCY = F
-WAVELENGTH = T
+FREQUENCY  = T
+WAVELENGTH = F

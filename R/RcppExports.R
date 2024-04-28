@@ -12,8 +12,8 @@ compute_pseudo_octave <- function(fn, f0, n) {
     .Call(`_mami_codi_R_compute_pseudo_octave`, fn, f0, n)
 }
 
-ratios <- function(x, reference, tolerance, pseudo_octave) {
-    .Call(`_mami_codi_R_ratios`, x, reference, tolerance, pseudo_octave)
+ratios <- function(x, reference, tolerance, coefficient, pseudo_octave) {
+    .Call(`_mami_codi_R_ratios`, x, reference, tolerance, coefficient, pseudo_octave)
 }
 
 find_highest_fundamental <- function(x) {
