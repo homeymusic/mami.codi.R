@@ -146,7 +146,6 @@ duplex <- function(x) {
     # 1. low
     estimate_cycle(f,
                    min(f),
-                   TOLERANCE,
                    x$pseudo_octave) %>%
       dplyr::rename_with(~ paste0(.,'_frequency')),
     # 2. lowest down one
@@ -160,7 +159,6 @@ duplex <- function(x) {
     # 1. max f
     estimate_cycle(f,
                    max(f),
-                   TOLERANCE,
                    x$pseudo_octave) %>%
       dplyr::rename_with(~ paste0(.,'_wavelength'))
     # 2. max f0 transposed
@@ -180,9 +178,9 @@ duplex <- function(x) {
 
 }
 
-estimate_cycle <- function(x, reference, tolerance, pseudo_octave) {
+estimate_cycle <- function(x, reference, pseudo_octave) {
 
-    r = ratios(x, reference, tolerance, pseudo_octave)
+    r = ratios(x, reference, TOLERANCE, pseudo_octave)
 
     tibble::tibble_row(
       lcm        = lcm(r$den),
