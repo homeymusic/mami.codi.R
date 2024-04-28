@@ -101,7 +101,7 @@ listen_for_highest_fundamental = function(x) {
       highest_f0           = f0$reference_freq,
       lowest_f0_harmonics  = list(highest_harmonics),
       pseudo_octave        = f0$pseudo_octave,
-      num_harmonics        = f0$harmonic_number-1,
+      num_harmonics        = f0$harmonic_number,
       fundamentals_span    = estimate_span(f0$reference_freq, min(f), f0$pseudo_octave),
       harmonics_span       = estimate_span(max(f), f0$reference_freq, f0$pseudo_octave),
       chord_span           = estimate_span(max(f), min(f), f0$pseudo_octave),
@@ -146,6 +146,7 @@ duplex <- function(x) {
     # 1. low
     estimate_cycle(f,
                    min(f),
+                   round(max(f) / min(f)),
                    x$pseudo_octave) %>%
       dplyr::rename_with(~ paste0(.,'_frequency')),
     # 2. lowest down one
@@ -159,6 +160,7 @@ duplex <- function(x) {
     # 1. max f
     estimate_cycle(f,
                    max(f),
+                   round(max(f) / min(f)),
                    x$pseudo_octave) %>%
       dplyr::rename_with(~ paste0(.,'_wavelength'))
     # 2. max f0 transposed
@@ -178,9 +180,9 @@ duplex <- function(x) {
 
 }
 
-estimate_cycle <- function(x, reference, pseudo_octave) {
+estimate_cycle <- function(x, reference, harmonic_number, pseudo_octave) {
 
-    r = ratios(x, reference, TOLERANCE, pseudo_octave)
+    r = ratios(x, reference, harmonic_number, TOLERANCE, pseudo_octave)
 
     tibble::tibble_row(
       lcm        = lcm(r$den),

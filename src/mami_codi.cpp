@@ -89,6 +89,7 @@ using namespace Rcpp;
  // [[Rcpp::export]]
  DataFrame ratios(NumericVector x,
                   const double reference,
+                  const double harmonic_number,
                   const double tolerance,
                   const double pseudo_octave) {
 
@@ -97,22 +98,14 @@ using namespace Rcpp;
    int m = x.size();
    NumericVector nums(m);
    NumericVector dens(m);
-   NumericVector harmonic_number(m);
+   NumericVector harmonic_numbers(m);
    NumericVector ratios(m);
    NumericVector pseudo_ratios(m);
    NumericVector fraction(2);
 
    for (int i = 0; i < m; ++i) {
-     if (max(x) > reference) {
-       harmonic_number[i] = std::round(max(x) / reference);
-     } else if (min(x) < reference) {
-       harmonic_number[i] = std::round(reference / min(x));
-     } else {
-       harmonic_number[i] = 1;
-     }
-     ratios[i] = x[i] / reference * harmonic_number[i];
-     // const double rounded_ratio = std::round(ratios[i]/tolerance)*tolerance;
-     const double rounded_ratio = ratios[i];
+     ratios[i] = x[i] / reference * harmonic_number;
+     const double rounded_ratio = std::round(ratios[i] / (tolerance * 10) ) * (tolerance * 10);
      pseudo_ratios[i]   = pow(2.0, log(rounded_ratio) / log(pseudo_octave));
      fraction           = rational_fraction(pseudo_ratios[i],tolerance);
      if (max(x) > reference || min(x) < reference) {
@@ -122,6 +115,7 @@ using namespace Rcpp;
        nums[i]            = 1;
        dens[i]            = 1;
      }
+     harmonic_numbers[i] = harmonic_number;
    }
 
    return DataFrame::create(
