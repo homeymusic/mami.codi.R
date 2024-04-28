@@ -62,14 +62,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // get_harmonics_in_chord
-DataFrame get_harmonics_in_chord(const NumericVector x, const NumericVector potential_harmonics, const NumericVector tolerance);
+DataFrame get_harmonics_in_chord(const NumericVector x, const NumericVector potential_harmonics, const double tolerance);
 RcppExport SEXP _mami_codi_R_get_harmonics_in_chord(SEXP xSEXP, SEXP potential_harmonicsSEXP, SEXP toleranceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const NumericVector >::type x(xSEXP);
     Rcpp::traits::input_parameter< const NumericVector >::type potential_harmonics(potential_harmonicsSEXP);
-    Rcpp::traits::input_parameter< const NumericVector >::type tolerance(toleranceSEXP);
+    Rcpp::traits::input_parameter< const double >::type tolerance(toleranceSEXP);
     rcpp_result_gen = Rcpp::wrap(get_harmonics_in_chord(x, potential_harmonics, tolerance));
     return rcpp_result_gen;
 END_RCPP

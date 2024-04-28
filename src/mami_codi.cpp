@@ -210,13 +210,13 @@ using namespace Rcpp;
  // [[Rcpp::export]]
  DataFrame get_harmonics_in_chord(const NumericVector x,
                                   const NumericVector potential_harmonics,
-                                  const NumericVector tolerance) {
+                                  const double tolerance) {
 
    NumericVector harmonics(x.size());
    int num_matches=0;
    for (int i=0; i<x.size(); i++) {
      for (int j=0; j<potential_harmonics.size(); j++)
-       if ((potential_harmonics[j] * tolerance[0] <  x[i]) && (x[i] < potential_harmonics[j] * tolerance[1]) ) {
+       if ((potential_harmonics[j] - tolerance <  x[i]) && (x[i] < potential_harmonics[j] + tolerance) ) {
          harmonics[num_matches] = x[i];
          num_matches++;
        }

@@ -17,8 +17,6 @@ chord = c(60, 72) %>% mami.codi(verbose=T, num_harmonics=11)
 
 ```{r, echo=F}
 chord %>% dplyr::select(consonance_dissonance, major_minor)
-chord$chord_span
-chord$tolerance_window[[1]]
 ```
 
 #### Frequency
@@ -28,9 +26,6 @@ chord$ratios_frequency[[1]] %>% dplyr::arrange(ratio) %>% dplyr::rename(freq=pit
 ```
 
 ```{r, echo=F}
-chord$ratios_frequency[[1]]$reference[1]
-chord$consonance_frequency
-chord$fundamentals_span
 sort(unique(chord$ratios_frequency[[1]]$den))
 lcm(chord$ratios_frequency[[1]]$den)
 ```
@@ -44,9 +39,6 @@ chord$ratios_wavelength[[1]] %>% dplyr::arrange(ratio) %>% dplyr::rename(wavelen
 ```
 
 ```{r, echo=F}
-SPEED_OF_SOUND / chord$ratios_wavelength[[1]]$reference[1]
-chord$consonance_wavelength
-chord$fundamentals_span
 sort(unique(chord$ratios_wavelength[[1]]$den))
 lcm(chord$ratios_wavelength[[1]]$den)
 ```

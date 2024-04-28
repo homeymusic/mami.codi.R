@@ -88,12 +88,10 @@ listen_for_highest_fundamental = function(x) {
 
     f0 = f0[1,]
 
-    tol_win = tolerance_window(f0$pseudo_octave)
-
     potential_lowest_harmonics = min(f) * f0$pseudo_octave ^ 0:(f0$harmonic_number)
-    lowest_harmonics = (get_harmonics_in_chord(f, potential_lowest_harmonics, tol_win))$harmonics
+    lowest_harmonics = (get_harmonics_in_chord(f, potential_lowest_harmonics, TOLERANCE))$harmonics
     potential_highest_harmonics = f0$reference_freq * f0$pseudo_octave ^ 0:(f0$harmonic_number)
-    highest_harmonics = (get_harmonics_in_chord(f, potential_highest_harmonics, tol_win))$harmonics
+    highest_harmonics = (get_harmonics_in_chord(f, potential_highest_harmonics, TOLERANCE))$harmonics
 
     x %>% dplyr::mutate(
       lowest_f0            = min(f),
@@ -104,8 +102,7 @@ listen_for_highest_fundamental = function(x) {
       num_harmonics        = f0$harmonic_number,
       fundamentals_span    = estimate_span(f0$reference_freq, min(f), f0$pseudo_octave),
       harmonics_span       = estimate_span(max(f), f0$reference_freq, f0$pseudo_octave),
-      chord_span           = estimate_span(max(f), min(f), f0$pseudo_octave),
-      tolerance_window     = list(tol_win)
+      chord_span           = estimate_span(max(f), min(f), f0$pseudo_octave)
     )
   } else if (length(f) > 1) {
     x %>% dplyr::mutate(
@@ -117,8 +114,7 @@ listen_for_highest_fundamental = function(x) {
       num_harmonics        = length(f),
       fundamentals_span    = estimate_span(max(f), min(f), .data$pseudo_octave),
       harmonics_span       = estimate_span(max(f), min(f), .data$pseudo_octave),
-      chord_span           = estimate_span(max(f), min(f), .data$pseudo_octave),
-      tolerance_window     = list(tolerance_window(.data$pseudo_octave))
+      chord_span           = estimate_span(max(f), min(f), .data$pseudo_octave)
     )
   } else {
     x %>% dplyr::mutate(
@@ -130,8 +126,7 @@ listen_for_highest_fundamental = function(x) {
       num_harmonics        = 0,
       fundamentals_span    = 1,
       harmonics_span       = 1,
-      chord_span           = 1,
-      tolerance_window     = list(tolerance_window(.data$pseudo_octave))
+      chord_span           = 1
     )
   }
 }
@@ -251,18 +246,6 @@ frequency_ratio <- function(x, pseudo_octave) {
   pseudo_octave^(x*TRICIA)
 }
 
-tolerance_window <- function(pseudo_octave) {
-  c(
-    frequency_ratio(-TOLERANCE, pseudo_octave),
-    frequency_ratio(+TOLERANCE, pseudo_octave)
-  )
-}
-
-# it's convenient for us to think in base 10 so we have cents ...
-CENTS     = 12 ^ -1 * 10 ^ -2 # friendly mix of base 12 and base 10
-
-# ... but search results of param space have been compelling with pure base 12
-TRICIA    = 12 ^ -3           # pure base 12
 TOLERANCE = 0.01
 
 # define perfect consonance as the pure-tone unison post-pi/4 rotation
