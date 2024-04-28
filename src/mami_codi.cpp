@@ -93,8 +93,6 @@ using namespace Rcpp;
                   const double tolerance,
                   const double pseudo_octave) {
 
-   x = unique(x);
-
    int m = x.size();
    NumericVector nums(m);
    NumericVector dens(m);
@@ -105,12 +103,17 @@ using namespace Rcpp;
 
    for (int i = 0; i < m; ++i) {
      ratios[i] = x[i] / reference * harmonic_number;
-     const double rounded_ratio = std::round(ratios[i] / (tolerance * 10) ) * (tolerance * 10);
+     const double rounded_ratio = ratios[i];
      pseudo_ratios[i]   = pow(2.0, log(rounded_ratio) / log(pseudo_octave));
      fraction           = rational_fraction(pseudo_ratios[i],tolerance);
      if (max(x) > reference || min(x) < reference) {
-       nums[i]            = fraction[0];
-       dens[i]            = fraction[1];
+       if (harmonic_number >= 1.0) {
+         nums[i]            = fraction[0];
+         dens[i]            = fraction[1];
+       } else {
+         nums[i]            = fraction[1];
+         dens[i]            = fraction[0];
+       }
      } else {
        nums[i]            = 1;
        dens[i]            = 1;

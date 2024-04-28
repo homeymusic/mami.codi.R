@@ -144,42 +144,23 @@ duplex <- function(x) {
   x %>% dplyr::mutate(
 
     # estimate the frequency cycle
-    # 1. low
     estimate_cycle(f,
                    min(f),
                    round(max(f) / min(f)),
                    x$pseudo_octave) %>%
       dplyr::rename_with(~ paste0(.,'_frequency')),
-    # 2. lowest down one
-    # estimate_cycle(f,
-    #                transpose_pitch(min(f), -1, x$pseudo_octave),
-    # x$tolerance_window[[1]],
-    #                x$pseudo_octave) %>%
-    #   dplyr::rename_with(~ paste0(.,'_frequency')),
 
     # estimate the wavelength cycle
-    # 1. max f
-    estimate_cycle(f,
-                   max(f),
-                   round(max(f) / min(f)),
+    estimate_cycle(λ,
+                   min(λ),
+                   1 / round(max(λ) / min(λ)),
                    x$pseudo_octave) %>%
       dplyr::rename_with(~ paste0(.,'_wavelength'))
-    # 2. max f0 transposed
-    # estimate_cycle(f,
-    #                transpose_pitch(x$highest_f0, x$harmonics_span, x$pseudo_octave),
-    #                TOLERANCE,
-    #                x$pseudo_octave) %>%
-    #   dplyr::rename_with(~ paste0(.,'_wavelength'))
-    # 3. min f0 transposed
-    # estimate_cycle(f,
-    #                transpose_pitch(min(f), x$chord_span, x$pseudo_octave),
-    # x$tolerance_window[[1]],
-    #                x$pseudo_octave) %>%
-    #   dplyr::rename_with(~ paste0(.,'_wavelength'))
 
   )
 
 }
+
 
 estimate_cycle <- function(x, reference, harmonic_number, pseudo_octave) {
 
@@ -304,5 +285,5 @@ R_PI_4 = matrix(c(
 
 SPEED_OF_SOUND = 343 # m/S
 
-FREQUENCY = F
-WAVELENGTH = T
+FREQUENCY  = T
+WAVELENGTH = F
