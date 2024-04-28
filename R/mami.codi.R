@@ -139,7 +139,7 @@ duplex <- function(x) {
     # estimate the frequency cycle
     estimate_cycle(f,
                    min(f),
-                   1,
+                   round(max(f) / min(f)),
                    x$pseudo_octave,
                    FREQUENCY_TOLERANCE) %>%
       dplyr::rename_with(~ paste0(.,'_frequency')),
