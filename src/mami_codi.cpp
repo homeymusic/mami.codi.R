@@ -105,26 +105,27 @@ using namespace Rcpp;
 
 
    for (int i = 0; i < m; ++i) {
-     // octave_spans[i]   = floor(abs(log(x[i]/reference) / log(pseudo_octave)));
-     // octave_factors[i] = pow(pseudo_octave, octave_spans[i]);
+     octave_spans[i]   = floor(abs(log(x[i]/reference) / log(pseudo_octave)));
+     octave_factors[i] = pow(pseudo_octave, octave_spans[i]);
      if (harmonic_number >= 1) {
-       // ratios[i] = (x[i] / octave_factors[i]) / reference * harmonic_number;
-       ratios[i] = (x[i]) / reference * harmonic_number;
+       ratios[i] = (x[i] / octave_factors[i]) / reference * harmonic_number;
+       // ratios[i] = (x[i]) / reference * harmonic_number;
        pseudo_ratios[i]   = pow(2.0, log(ratios[i]) / log(pseudo_octave));
      } else if (harmonic_number < 1) {
        // ratios[i] = reference / (x[i] * octave_factors[i]) * harmonic_number;
        // ratios[i] = reference / (x[i]) * harmonic_number;
-       ratios[i] = (x[i]) / reference * harmonic_number;
+       // ratios[i] = (x[i]) / reference * harmonic_number;
+       ratios[i] = (x[i] / octave_factors[i]) / reference * harmonic_number;
        pseudo_ratios[i]   = pow(2.0, log(ratios[i]) / log(pseudo_octave));
      }
      fraction           = rational_fraction(pseudo_ratios[i],tolerance);
      if (max(x) > reference) {
-       // nums[i]            = fraction[0] * octave_factors[i];
-       nums[i]            = fraction[0];
+       nums[i]            = fraction[0] * octave_factors[i];
+       // nums[i]            = fraction[0];
        dens[i]            = fraction[1];
      } else if (min(x) < reference) {
-       // nums[i]            = fraction[0] * octave_factors[i];
-       nums[i]            = fraction[0];
+       nums[i]            = fraction[0] * octave_factors[i];
+       // nums[i]            = fraction[0];
        dens[i]            = fraction[1];
      } else {
        nums[i]            = 1;
