@@ -9,6 +9,96 @@ always_allow_html: true
 devtools::load_all(".")
 c(0) %>% mami.codi()
 ```
+### P4 Wavelengths 2 Harmonics
+```{r, echo=T}
+ref = 1.311034
+λ = 0.9821657
+harmonic_num = 1 / 4
+octave_span = floor(log(ref/λ) / log(2)) + 1
+octave_factor = 2^octave_span
+t = tibble::tibble(
+  
+  
+  ratio = (ref  / (λ)) * harmonic_num,
+  
+  pseudo_ratio = (1 / .data$ratio) / octave_factor,
+  
+  fraction = list(rational_fraction(pseudo_ratio, WAVELENGTH_TOLERANCE)),
+  
+  
+  num = .data$fraction[[1]][1],
+  den = .data$fraction[[1]][2],
+  just_P5 = 3 / 2,
+  et_P5 = 2^(7/12),
+  pre = ref / λ,
+  pre_harm = (1 / (ref / λ * harmonic_num)) / 2,
+  pseudo_raw = 1 / .data$pre,
+  raw_ratio = list(rational_fraction(1 / .data$pseudo_raw, WAVELENGTH_TOLERANCE)),
+  raw_num = .data$raw_ratio[[1]][1],
+  raw_den = .data$raw_ratio[[1]][2],
+  λ,
+  ref,
+  octave_span,
+  octave_factor
+)
+t
+```
+### M3 Wavelengths 2 Harmonics
+```{r, echo=T}
+ref = 1.311034
+λ = 1.0405683
+harmonic_num = 1 / 4
+octave_span = floor(log(ref/λ) / log(2)) + 1
+octave_factor = 2^octave_span
+t = tibble::tibble(
+  just_P5 = 3 / 2,
+  et_P5 = 2^(7/12),
+  pre = ref / λ,
+  pre_harm = (1 / (ref / λ * harmonic_num)) / 2,
+  pseudo_raw = 1 / .data$pre,
+  raw_ratio = list(rational_fraction(1 / .data$pseudo_raw, WAVELENGTH_TOLERANCE)),
+  raw_num = .data$raw_ratio[[1]][1],
+  raw_den = .data$raw_ratio[[1]][2],
+  ratio = ref / (λ) * harmonic_num,
+  fraction = list(rational_fraction((1 / .data$ratio) / octave_factor, WAVELENGTH_TOLERANCE)),
+  num = .data$fraction[[1]][1],
+  den = .data$fraction[[1]][2],
+  λ,
+  ref,
+  octave_span,
+  octave_factor
+)
+t
+```
+
+### M3 Wavelengths
+```{r, echo=T}
+ref = 1.311034
+λ = 1.0405683
+harmonic_num = 1 / 6
+octave_span = floor(log(ref/λ) / log(2))
+octave_factor = 2^octave_span
+t = tibble::tibble(
+  just_m6 = 8 / 5,
+  et_m6 = 2^(8/12),
+  pre_harm = 1 / (ref / λ * harmonic_num),
+  pre = ref / λ,
+  raw = .data$pre,
+  pseudo_raw = 1 / .data$raw,
+  raw_ratio = list(rational_fraction(1 / .data$pseudo_raw, WAVELENGTH_TOLERANCE)),
+  raw_num = .data$raw_ratio[[1]][1],
+  raw_den = .data$raw_ratio[[1]][2],
+  ratio = ref / (λ * octave_factor) * harmonic_num,
+  fraction = list(rational_fraction(1 / .data$ratio, WAVELENGTH_TOLERANCE)),
+  num = .data$fraction[[1]][1] * octave_factor,
+  den = .data$fraction[[1]][2],
+  λ,
+  ref,
+  octave_span,
+  octave_factor
+)
+t
+```
 
 ### Frequencies
 ```{r, echo=T}

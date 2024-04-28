@@ -106,13 +106,13 @@ using namespace Rcpp;
 
    for (int i = 0; i < m; ++i) {
      if (max(x) > reference) {
-       octave_spans[i]   = floor(log(x[i]/reference) / log(2));
-       octave_factors[i] = pow(2, octave_spans[i]);
+       octave_spans[i]   = floor(log(x[i]/reference) / log(pseudo_octave));
+       octave_factors[i] = pow(pseudo_octave, octave_spans[i]);
        ratios[i] = (x[i] / octave_factors[i]) / reference * harmonic_number;
        pseudo_ratios[i]   = pow(2.0, log(ratios[i]) / log(pseudo_octave));
      } else if (min(x) < reference) {
-       octave_spans[i]  = floor(log(reference / x[i]) / log(2));
-       octave_factors[i] = pow(2, octave_spans[i]);
+       octave_spans[i]  = floor(log(reference / x[i]) / log(pseudo_octave));
+       octave_factors[i] = pow(pseudo_octave, octave_spans[i]);
        ratios[i] = reference / (x[i] * octave_factors[i]) * harmonic_number;
        pseudo_ratios[i]   = pow(2.0, log(1 / ratios[i]) / log(pseudo_octave));
      }
