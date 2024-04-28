@@ -99,23 +99,30 @@ using namespace Rcpp;
    NumericVector harmonic_numbers(m);
    NumericVector ratios(m);
    NumericVector pseudo_ratios(m);
+   NumericVector octave_spans(m);
+   NumericVector octave_factors(m);
    NumericVector fraction(2);
+
 
    for (int i = 0; i < m; ++i) {
      if (max(x) > reference) {
-       ratios[i] = x[i] / reference * harmonic_number;
+       octave_spans[i]   = floor(log(x[i]/reference) / log(2));
+       octave_factors[i] = pow(2, octave_spans[i]);
+       ratios[i] = (x[i] / octave_factors[i]) / reference * harmonic_number;
+       pseudo_ratios[i]   = pow(2.0, log(ratios[i]) / log(pseudo_octave));
      } else if (min(x) < reference) {
-       ratios[i] = reference / x[i] * harmonic_number;
+       octave_spans[i]  = floor(log(reference / x[i]) / log(2));
+       octave_factors[i] = pow(2, octave_spans[i]);
+       ratios[i] = reference / (x[i] * octave_factors[i]) * harmonic_number;
+       pseudo_ratios[i]   = pow(2.0, log(1 / ratios[i]) / log(pseudo_octave));
      }
-     const double rounded_ratio = ratios[i];
-     pseudo_ratios[i]   = pow(2.0, log(rounded_ratio) / log(pseudo_octave));
      fraction           = rational_fraction(pseudo_ratios[i],tolerance);
      if (max(x) > reference) {
-       nums[i]            = fraction[0];
+       nums[i]            = fraction[0] * octave_factors[i];
        dens[i]            = fraction[1];
      } else if (min(x) < reference) {
-       nums[i]            = fraction[1];
-       dens[i]            = fraction[0];
+       nums[i]            = fraction[0] * octave_factors[i];
+       dens[i]            = fraction[1];
      } else {
        nums[i]            = 1;
        dens[i]            = 1;
@@ -130,7 +137,9 @@ using namespace Rcpp;
      _("pseudo_ratio")        = pseudo_ratios,
      _("pitch")               = x,
      _("reference")           = reference,
-     _("harmonic_number")     = harmonic_number
+     _("harmonic_number")     = harmonic_number,
+     _("octave_spans")        = octave_spans,
+     _("octave_factor")       = octave_factors
    );
  }
 

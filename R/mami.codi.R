@@ -247,8 +247,8 @@ frequency_ratio <- function(x, pseudo_octave) {
 }
 
 TOLERANCE = 0.01
-FREQUENCY_TOLERANCE = 0.01
-WAVELENGTH_TOLERANCE = 0.01
+FREQUENCY_TOLERANCE = 0.05
+WAVELENGTH_TOLERANCE = 0.05
 
 # define perfect consonance as the pure-tone unison post-pi/4 rotation
 # pure tones show pure octave-complementarity so tip of the hat to Zarlino

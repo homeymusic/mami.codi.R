@@ -10,6 +10,44 @@ devtools::load_all(".")
 c(0) %>% mami.codi()
 ```
 
+### Frequencies
+```{r, echo=T}
+ref = 261.6256
+f = 1245.9141
+octave_span = floor(log(f/ref) / log(2))
+octave_factor = 2^octave_span
+harmonic_num = 1
+t = tibble::tibble(
+  ratio = ( f / octave_factor) / ref  * harmonic_num,
+  fraction = list(rational_fraction(.data$ratio, FREQUENCY_TOLERANCE)),
+  num = .data$fraction[[1]][1] * octave_factor,
+  den = .data$fraction[[1]][2]
+)
+t
+```
+
+### Wavelengths
+```{r, echo=T}
+ref = 1.311034
+λ = 0.4129498
+harmonic_num = 1 / 6
+octave_span = floor(log(ref/λ) / log(2))
+octave_factor = 2^octave_span
+t = tibble::tibble(
+  ratio = ref  / (λ * octave_factor) * harmonic_num,
+  fraction = list(rational_fraction(1 / .data$ratio, WAVELENGTH_TOLERANCE)),
+  num = .data$fraction[[1]][1] * octave_factor,
+  den = .data$fraction[[1]][2],
+  λ,
+  ref,
+  octave_span,
+  octave_factor
+)
+t
+```
+
+### Other Stuff
+
 ```{r, echo=T}
 tibble::tibble(
   h = (12-1:11) %>% sort(),
@@ -51,6 +89,15 @@ t = tibble::tibble(
   fraction = list(rational_fraction(.data$ratio, TOLERANCE)),
   num = .data$fraction[[1]][2],
   den = .data$fraction[[1]][1]
+)
+t
+```
+```{r, echo=T}
+t = tibble::tibble(
+  ratio = 1.311034  / 0.4129498 * 0.1666667,
+  fraction = list(rational_fraction(1 / .data$ratio, WAVELENGTH_TOLERANCE)),
+  num = .data$fraction[[1]][1],
+  den = .data$fraction[[1]][2]
 )
 t
 ```
