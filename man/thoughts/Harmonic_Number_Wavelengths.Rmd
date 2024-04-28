@@ -9,6 +9,39 @@ always_allow_html: true
 devtools::load_all(".")
 c(0) %>% mami.codi()
 ```
+
+### m3 M6 Ratios
+```{r, echo=T}
+C4f  = 261.6256
+Eb4f = 311.1270
+A4f  = 440.0000
+C5f  = 523.2511
+
+C4w  = SPEED_OF_SOUND / C4f
+Eb4w = SPEED_OF_SOUND / Eb4f
+A4w  = SPEED_OF_SOUND / A4f
+C5w  = SPEED_OF_SOUND / C5f
+
+tibble::tibble(
+  jm3f = 6 / 5,
+  m3f  = Eb4f / C4f,
+  m3w  = C4w / Eb4w,
+  dM6w = A4w / C5w,
+  jM6f = 5 / 3,
+  dm3w = Eb4w / C5w,
+  M6f  = A4f / C4f,
+  M6w  = C4w / A4w,
+  C4f,
+  Eb4f,
+  A4f,
+  C5f,
+  C4w,
+  Eb4w,
+  A4w,
+  C5w
+)
+```
+
 ### P4 Wavelengths 2 Harmonics
 ```{r, echo=T}
 ref = 1.311034
@@ -43,6 +76,32 @@ t = tibble::tibble(
 )
 t
 ```
+### M6 Wavelengths 2 Harmonics
+```{r, echo=T}
+ref = 1.311034
+λ = 0.7795455
+harmonic_num = 1 / 4
+octave_span = floor(log(ref/λ) / log(2))
+octave_factor = 2^octave_span
+t = tibble::tibble(
+  ratio = ref / (λ) * harmonic_num,
+  fraction = list(rational_fraction((1 / .data$ratio) / octave_factor, WAVELENGTH_TOLERANCE)),
+  num = .data$fraction[[1]][1],
+  den = .data$fraction[[1]][2],
+  pre = ref / λ,
+  pre_harm = (1 / (ref / λ * harmonic_num)) / 2,
+  pseudo_raw = 1 / .data$pre,
+  raw_ratio = list(rational_fraction(1 / .data$pseudo_raw, WAVELENGTH_TOLERANCE)),
+  raw_num = .data$raw_ratio[[1]][1],
+  raw_den = .data$raw_ratio[[1]][2],
+  λ,
+  ref,
+  octave_span,
+  octave_factor
+)
+t
+```
+
 ### M3 Wavelengths 2 Harmonics
 ```{r, echo=T}
 ref = 1.311034

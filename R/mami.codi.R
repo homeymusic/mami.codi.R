@@ -146,7 +146,7 @@ duplex <- function(x) {
 
     # estimate the wavelength cycle
     estimate_cycle(λ,
-                   max(λ),
+                   min(λ),
                    1 / round(max(λ) / min(λ)),
                    x$pseudo_octave,
                    WAVELENGTH_TOLERANCE) %>%
