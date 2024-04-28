@@ -90,8 +90,8 @@ using namespace Rcpp;
  DataFrame ratios(NumericVector x,
                   const double reference,
                   const double harmonic_number,
-                  const double tolerance,
-                  const double pseudo_octave) {
+                  const double pseudo_octave,
+                  const double tolerance) {
 
    int m = x.size();
    NumericVector nums(m);
@@ -102,17 +102,22 @@ using namespace Rcpp;
    NumericVector fraction(2);
 
    for (int i = 0; i < m; ++i) {
-     ratios[i] = x[i] / reference * harmonic_number;
+     if (max(x) > reference) {
+       ratios[i] = x[i] / reference * harmonic_number;
+     } else if (min(x) < reference) {
+       ratios[i] = reference / x[i] * harmonic_number;
+     }
      const double rounded_ratio = ratios[i];
      pseudo_ratios[i]   = pow(2.0, log(rounded_ratio) / log(pseudo_octave));
      fraction           = rational_fraction(pseudo_ratios[i],tolerance);
-     if (max(x) > reference || min(x) < reference) {
-       if (harmonic_number >= 1.0) {
-         nums[i]            = fraction[0];
-         dens[i]            = fraction[1];
-       } else {
-         nums[i]            = fraction[1];
-         dens[i]            = fraction[0];
+     if (max(x) > reference) {
+       nums[i]            = fraction[0];
+       dens[i]            = fraction[1];
+     } else if (min(x) < reference) {
+       nums[i]            = fraction[1];
+       dens[i]            = fraction[0];
+       if (dens[i] == 0) {
+         dens[i] = 1;
        }
      } else {
        nums[i]            = 1;

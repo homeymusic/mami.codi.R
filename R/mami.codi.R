@@ -52,8 +52,6 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 
 }
 
-# TODO: write a test for c(60,60+4*12) %>% mami.codi(verbose=T, num_harmonics=11)
-# the function is hearing 15 instead of 11 harmonics
 listen_for_highest_fundamental = function(x) {
 
   f = x$frequencies[[1]]
@@ -141,15 +139,17 @@ duplex <- function(x) {
     # estimate the frequency cycle
     estimate_cycle(f,
                    min(f),
-                   round(max(f) / min(f)),
-                   x$pseudo_octave) %>%
+                   1,
+                   x$pseudo_octave,
+                   FREQUENCY_TOLERANCE) %>%
       dplyr::rename_with(~ paste0(.,'_frequency')),
 
     # estimate the wavelength cycle
     estimate_cycle(λ,
-                   min(λ),
+                   max(λ),
                    1 / round(max(λ) / min(λ)),
-                   x$pseudo_octave) %>%
+                   x$pseudo_octave,
+                   WAVELENGTH_TOLERANCE) %>%
       dplyr::rename_with(~ paste0(.,'_wavelength'))
 
   )
@@ -157,9 +157,9 @@ duplex <- function(x) {
 }
 
 
-estimate_cycle <- function(x, reference, harmonic_number, pseudo_octave) {
+estimate_cycle <- function(x, reference, harmonic_number, pseudo_octave, tolerance) {
 
-    r = ratios(x, reference, harmonic_number, TOLERANCE, pseudo_octave)
+    r = ratios(x, reference, harmonic_number, pseudo_octave, tolerance)
 
     tibble::tibble_row(
       lcm        = lcm(r$den),
@@ -247,6 +247,8 @@ frequency_ratio <- function(x, pseudo_octave) {
 }
 
 TOLERANCE = 0.01
+FREQUENCY_TOLERANCE = 0.01
+WAVELENGTH_TOLERANCE = 0.01
 
 # define perfect consonance as the pure-tone unison post-pi/4 rotation
 # pure tones show pure octave-complementarity so tip of the hat to Zarlino
