@@ -116,9 +116,6 @@ using namespace Rcpp;
      } else if (min(x) < reference) {
        nums[i]            = fraction[1];
        dens[i]            = fraction[0];
-       if (dens[i] == 0) {
-         dens[i] = 1;
-       }
      } else {
        nums[i]            = 1;
        dens[i]            = 1;
