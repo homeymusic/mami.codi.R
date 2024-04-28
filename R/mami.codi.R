@@ -139,6 +139,7 @@ listen_for_highest_fundamental = function(x) {
 duplex <- function(x) {
 
   f = x$frequencies[[1]]
+  λ = x$wavelengths[[1]]
 
   x %>% dplyr::mutate(
 
