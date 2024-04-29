@@ -54,26 +54,6 @@ using namespace Rcpp;
    return NumericVector::create(mediant_num, mediant_den);
  }
 
- //' compute_pseudo_octave
- //'
- //' Find the highest fundamental freq
- //'
- //' @param fn freq to eval
- //' @param f0 fundamental freq
- //' @param n  harmonic number
- //'
- //' @return Calculated pseudo octave
- //'
- //' @export
- // [[Rcpp::export]]
- const double compute_pseudo_octave(const double fn, const double f0, const int n) {
-   if (n==1) {
-     return 1.0;
-   } else {
-     return std::round(1000000 * pow(2, log(fn / f0) / log(n))) / 1000000;
-   }
- }
-
  //' ratios
  //'
  //' Creates a list of ratios as rational fractions
@@ -136,6 +116,26 @@ using namespace Rcpp;
      _("octave_spans")        = octave_spans,
      _("octave_factor")       = octave_factors
    );
+ }
+
+ //' compute_pseudo_octave
+ //'
+ //' Find the highest fundamental freq
+ //'
+ //' @param fn freq to eval
+ //' @param f0 fundamental freq
+ //' @param n  harmonic number
+ //'
+ //' @return Calculated pseudo octave
+ //'
+ //' @export
+ // [[Rcpp::export]]
+ const double compute_pseudo_octave(const double fn, const double f0, const int n) {
+   if (n==1) {
+     return 1.0;
+   } else {
+     return std::round(1000000 * pow(2, log(fn / f0) / log(n))) / 1000000;
+   }
  }
 
  //' find_highest_fundamental
@@ -201,36 +201,3 @@ using namespace Rcpp;
    }
 
  }
-
- //' get_harmonics_in_chord
- //'
- //' Determine pseudo octave of all frequencies relative to lowest frequency
- //'
- //' @param x the chord
- //' @param potential_harmonics potential harmonics
- //' @param pseudo_octave Pseudo octave
- //'
- //' @return A data frame of frequencies and pseudo_octaves
- //'
- //' @export
- // [[Rcpp::export]]
- DataFrame get_harmonics_in_chord(const NumericVector x,
-                                  const NumericVector potential_harmonics,
-                                  const double tolerance) {
-
-   NumericVector harmonics(x.size());
-   int num_matches=0;
-   for (int i=0; i<x.size(); i++) {
-     for (int j=0; j<potential_harmonics.size(); j++)
-       if ((potential_harmonics[j] - tolerance <  x[i]) && (x[i] < potential_harmonics[j] + tolerance) ) {
-         harmonics[num_matches] = x[i];
-         num_matches++;
-       }
-   }
-   return DataFrame::create(
-     _("harmonics") = harmonics[Rcpp::Range(0, num_matches-1)]
-   );
- }
-
- // how to print to console from Rcpp
- // Rcout << "harmonic_num: " << harmonic_num << "\n";

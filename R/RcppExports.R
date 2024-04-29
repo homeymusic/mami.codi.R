@@ -8,19 +8,15 @@ rational_fraction <- function(x, tolerance) {
     .Call(`_mami_codi_R_rational_fraction`, x, tolerance)
 }
 
-compute_pseudo_octave <- function(fn, f0, n) {
-    .Call(`_mami_codi_R_compute_pseudo_octave`, fn, f0, n)
-}
-
 ratios <- function(x, reference, harmonic_number, pseudo_octave, tolerance) {
     .Call(`_mami_codi_R_ratios`, x, reference, harmonic_number, pseudo_octave, tolerance)
 }
 
-find_highest_fundamental <- function(x) {
-    .Call(`_mami_codi_R_find_highest_fundamental`, x)
+compute_pseudo_octave <- function(fn, f0, n) {
+    .Call(`_mami_codi_R_compute_pseudo_octave`, fn, f0, n)
 }
 
-get_harmonics_in_chord <- function(x, potential_harmonics, tolerance) {
-    .Call(`_mami_codi_R_get_harmonics_in_chord`, x, potential_harmonics, tolerance)
+find_highest_fundamental <- function(x) {
+    .Call(`_mami_codi_R_find_highest_fundamental`, x)
 }
 
