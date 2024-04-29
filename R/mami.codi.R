@@ -53,12 +53,14 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 }
 
 listen_for_pseudo_octave = function(x) {
-  if (length(x$frequencies[[1]]) > 2) {
 
+  f = x$frequencies[[1]]
+
+  if (length(f) > 2) {
     x %>% dplyr::mutate(
-      pseudo_octave = (x$frequencies[[1]] %>% find_highest_fundamental() %>%
-                                dplyr::count(.data$pseudo_octave, sort=TRUE) %>%
-                                dplyr::slice(1))$pseudo_octave
+      pseudo_octave = (f %>% find_highest_fundamental() %>%
+                         dplyr::count(.data$pseudo_octave, sort=TRUE) %>%
+                         dplyr::slice(1))$pseudo_octave
     )
   } else {
     x %>% dplyr::mutate(
@@ -97,13 +99,13 @@ duplex <- function(x, tolerance) {
 
 estimate_cycle <- function(x, reference, harmonic_number, pseudo_octave, tolerance) {
 
-    r = ratios(x, reference, harmonic_number, pseudo_octave, tolerance)
+  r = ratios(x, reference, harmonic_number, pseudo_octave, tolerance)
 
-    tibble::tibble_row(
-      lcm        = lcm(r$den),
-      dissonance = log2(.data$lcm),
-      ratios     = list(r)
-    )
+  tibble::tibble_row(
+    lcm        = lcm(r$den),
+    dissonance = log2(.data$lcm),
+    ratios     = list(r)
+  )
 
 }
 
@@ -112,7 +114,7 @@ flip <- function(x) {
   consonance_frequency  = ZARLINO - x$dissonance_frequency
   consonance_wavelength = ZARLINO - x$dissonance_wavelength
 
-    if (consonance_frequency <= 0 | consonance_wavelength <= 0) {
+  if (consonance_frequency <= 0 | consonance_wavelength <= 0) {
     stop(paste(
       'consonance should never be less than zero',
       'if so the ZARLINO constant is too low'
@@ -134,7 +136,7 @@ rotate <- function(x) {
     x$consonance_frequency
   ))) %>% as.vector %>% zapsmall
 
-x %>% dplyr::mutate(
+  x %>% dplyr::mutate(
     consonance_dissonance = rotated[1],
     major_minor           = rotated[2],
     .before=1
