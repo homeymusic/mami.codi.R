@@ -359,13 +359,13 @@ plot_semitone_registers <- function(chords, title='') {
       color=colors_homey$neutral,
       linetype = "dashed") +
     ggplot2::geom_point(color=colors_homey$minor, size=0.5,
-                        ggplot2::aes(y = .data$reference_freq_wavelength)) +
+                        ggplot2::aes(y = max(.data$frequencies))) +
     ggplot2::geom_point(color=colors_homey$major, size=0.5,
-                        ggplot2::aes(y = .data$reference_freq_frequency)) +
+                        ggplot2::aes(y = min(.data$frequencies))) +
     ggplot2::geom_point(color=colors_homey$fundamental, size=0.0625,
-                        ggplot2::aes(y = .data$chord_max)) +
+                        ggplot2::aes(y = max(.data$frequencies))) +
     ggplot2::geom_point(color=colors_homey$fundamental, size=0.0625,
-                        ggplot2::aes(y = .data$chord_min)) +
+                        ggplot2::aes(y = min(.data$frequencies)) +
     ggplot2::scale_x_continuous(breaks = 0:15,
                                 minor_breaks = c()) +
     ggplot2::scale_y_continuous(breaks=round(hrep::midi_to_freq(48)*2^(0:7),1),
