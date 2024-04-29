@@ -4,6 +4,10 @@ output:
   github_document: default
 ---
 
+# MaMi CoDi
+
+For the MaMi.CoDi model as it existed for the ICMPC 2023 poster session at Tokyo, see [MaMi.CoDi vICMPC17](https://github.com/homeymusic/mami.codi.R/tree/vICMPC17).
+
 ```{r, echo=F, message=F, include=F}
 devtools::load_all(".")
 source('./man/code/plot.R')

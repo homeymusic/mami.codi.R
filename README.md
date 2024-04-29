@@ -1,6 +1,12 @@
 Major-Minor and Consonance-Dissonance Perception
 ================
 
+# MaMi CoDi
+
+For the MaMi.CoDi model as it existed for the ICMPC 2023 poster session
+at Tokyo, see [MaMi.CoDi
+vICMPC17](https://github.com/homeymusic/mami.codi.R/tree/vICMPC17).
+
 # MaMi CoDi Plots
 
 ## Chords: Consonance-Dissonance ~ Major-Minor
