@@ -17,11 +17,8 @@ knitr::opts_chunk$set(
 knitr::opts_chunk$set(dev = 'png')
 ```
 
-# Lo Buffer: `r LOW_BUFFER`
-# Hi Buffer: `r HIGH_BUFFER`
-
 ```{r, echo=F}
-search_label = 'P8'
+search_label = 'M6'
 ```
 
 ```{r, echo=F}

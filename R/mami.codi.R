@@ -114,10 +114,7 @@ flip <- function(x) {
     if (consonance_frequency <= 0 | consonance_wavelength <= 0) {
     stop(paste(
       'consonance should never be less than zero',
-      'if so the ZARLINO constant is too low',
-      'dissonance_freq',x$dissonance_frequency,
-      'dissonance_wavelength',x$dissonance_wavelength,
-      'chord', x$frequencies
+      'if so the ZARLINO constant is too low'
     ))
   }
 
@@ -160,7 +157,7 @@ format_output <- function(x, metadata, verbose) {
 lcm <- function(x) Reduce(numbers::LCM, x)
 
 SPEED_OF_SOUND = 343 # m/S
-TOLERANCE      = 0.019
+TOLERANCE      = 0.039
 ZARLINO        = 1000 / sqrt(2)     # Z
 MIN_AMPLITUDE  = 1/12
 PI_4           = pi / 4
