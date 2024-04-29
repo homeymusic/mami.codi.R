@@ -141,7 +141,7 @@ duplex <- function(x) {
                    min(f),
                    1,
                    x$pseudo_octave,
-                   FREQUENCY_TOLERANCE) %>%
+                   TOLERANCE) %>%
       dplyr::rename_with(~ paste0(.,'_frequency')),
 
     # estimate the wavelength cycle
@@ -149,7 +149,7 @@ duplex <- function(x) {
                    min(λ),
                    1 / round(max(λ) / min(λ)),
                    x$pseudo_octave,
-                   WAVELENGTH_TOLERANCE) %>%
+                   TOLERANCE) %>%
       dplyr::rename_with(~ paste0(.,'_wavelength'))
 
   )
@@ -246,9 +246,7 @@ frequency_ratio <- function(x, pseudo_octave) {
   pseudo_octave^(x*TRICIA)
 }
 
-TOLERANCE = 0.01
-FREQUENCY_TOLERANCE = 0.019
-WAVELENGTH_TOLERANCE = 0.019
+TOLERANCE = 0.019
 
 # define perfect consonance as the pure-tone unison post-pi/4 rotation
 # pure tones show pure octave-complementarity so tip of the hat to Zarlino
