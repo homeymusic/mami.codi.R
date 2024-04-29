@@ -17,7 +17,147 @@ BEHAVIOURAL_SMOOTH_BROAD  <- 0.2
 BEHAVIOURAL_SMOOTH_NARROW <- 0.035
 ```
 
+#### Notes on Dyads:
+
+* Consider two chords containing C4 and E4: 
+    * C4, E4, C5 (a framed major third) is predicted to sound major and 
+    * E3, C4, E4 (a framed minor sixth) is predicted to sound minor.
+
+* The dyads immediately below, from the timbre study, are true two-pitch dyads. A 
+major third like C4 and E4, for example, only includes C4 and E4.
+
+* The intervals in the last few sections, further below, are actually three-pitch 
+chords with the high and low pitches one octave apart framing the interval, for 
+example: C4, E4 and C5.
+
+* True two-pitch dyads versus octave-framed, three-pitch dyads, might show
+different major-minor polarities.
+
+
 ## Timbre: Consonance-Dissonance and Major-Minor ~ Semitones
+
+This section is based on [Timbral effects on consonance disentangle psychoacoustic mechanisms and suggest perceptual origins for musical scales](https://www.nature.com/articles/s41467-024-45812-z) by Raja Marjieh, Peter M. C. Harrison, Harin Lee, Fotini Deligiannaki & Nori Jacoby.
+
+
+## Frequencies
+
+```{r, include=F}
+timbre_paper = readRDS('./man/data/timbre_paper.rds')
+```
+
+```{r, include=F}
+dyads <- timbre_paper %>% dplyr::rowwise() %>% dplyr::mutate(
+  type          = metadata$type,
+  num_harmonics = metadata$num_harmonics,
+  octave_ratio  = metadata$octave_ratio,
+  semitone      = metadata$semitone,
+  scale         = metadata$scale,
+  label         = round(metadata$semitone),
+  chord_max     = max(frequencies),
+  chord_min     = min(frequencies),
+  .before=1
+)
+```
+
+```{r, fig.height=8, fig.width=12, echo=F, results='asis', message=F}
+params = list(
+  list(h=10,o=2.1,s='macro'),
+  list(h=10,o=2.0,s='macro'),
+  list(h=10,o=1.9,s='macro'),
+  list(h=4,o=2,s='Bonang'),
+  list(h=1, o=2.0,s='macro'),
+  list(h=5, o=2.0,s='macro'),
+  list(h=5,o=2,s='5PartialsNo3'),
+  list(h=10,o=2.0,s='P8'),
+  list(h=10,o=2.0,s='M6'),
+  list(h=10,o=2.0,s='M3')
+)
+
+params %>% purrr::map(\(p) {
+  gray_vlines = c()
+  black_vlines = c()
+  if (p$o<2 & p$s == 'macro') {
+    timbre = 'Compressed'
+    black_vlines  = c(11.10)
+  } else if (p$o>2 & p$s == 'macro') {
+    timbre = 'Stretched'
+    black_vlines  = c(12.78)
+  } else if (p$o==2 & p$h==1 & p$s == 'macro') {
+    timbre = 'Pure'
+    black_vlines = c()
+  } else if (p$s == 'Bonang') {
+    timbre = 'Bonang'
+    black_vlines = c(2.60, 4.80, 11.98)
+    gray_vlines  = c(7.2, 9.6)
+  } else if (p$o==2 & p$h==5 & p$s == '5PartialsNo3') {
+    timbre = '5PartialsNo3'
+    black_vlines = c()
+  } else if (p$o==2 & p$h==5 & p$s == 'macro') {
+    timbre = '5Partials'
+    black_vlines = c()
+  } else if (p$o==2 & p$h==10 & p$s == 'macro') {
+    timbre = 'Harmonic'
+    black_vlines  = c(12.04)
+  } else if (p$s == 'M3') {
+    timbre = 'M3'
+    gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 5/4)-60,4)
+    black_vlines  = c(3.95)
+  } else if (p$s == 'M6') {
+    timbre = 'M6'
+    gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 5/3)-60,9)
+    black_vlines  = c(8.78,8.93)
+  } else if (p$s == 'P8') {
+    timbre = 'P8'
+    gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 2/1)-60)
+    black_vlines  = c(11.94, 12.08)
+  }
+  title = paste(
+    timbre,
+    '~',
+    'Partials:', p$h
+  )
+  
+  chords <- dyads %>% dplyr::filter(num_harmonics  == p$h &
+                                      octave_ratio == p$o &
+                                      scale        == p$s)
+  chords$consonance_dissonance_z = z_scores(chords$consonance_dissonance)
+  
+  experiment.rds = paste0('./man/data/',
+                          timbre,
+                          '.rds')
+  
+  experiment = readRDS(experiment.rds)$profile %>%
+    dplyr::rename(semitone=interval)
+  
+  experiment <- experiment %>% dplyr::mutate(
+    consonance_dissonance = rating,
+    consonance_dissonance_2x = 2*rating,
+    consonance_dissonance_4x = 4*rating
+  )
+  if (p$s == 'macro' | p$s == 'Bonang' | p$s == '5PartialsNo3') {
+    sigma = BEHAVIOURAL_SMOOTH_BROAD
+  } else {
+    sigma = BEHAVIOURAL_SMOOTH_NARROW
+  }
+  cat("  \n###", title, '\n')
+  print(knitr::kable(tibble::tibble_row(
+    pseudo_octave       = paste(round(chords$pseudo_octave %>% unique, 2),
+                                collapse = ' ')
+  )))
+  print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),
+                           goal=experiment,sigma=sigma,
+                           black_vlines=black_vlines,gray_vlines=gray_vlines))
+  print(plot_semitone_mami(chords, paste('Major-Minor'),goal=experiment,
+                           include_line=T,sigma=sigma,
+                           black_vlines=black_vlines,gray_vlines=gray_vlines))
+  print(plot_mami.codi(chords, paste('MaMi.CoDi ~',title), chords_to_label=NULL,
+                       include_labels=F))
+  print(plot_semitone_colo.cohi(chords, paste('Consonance Frequency (gold) & Wavelength (blue)'),
+                                sigma=sigma,
+                                black_vlines=black_vlines,gray_vlines=gray_vlines))
+  cat("  \n")
+})
+```
 
 ## Amplitudes
 
@@ -88,136 +228,10 @@ params %>% purrr::map(\(p) {
 })
 ```
 
-## Frequencies
-
-```{r, include=F}
-timbre_paper = readRDS('./man/data/timbre_paper.rds')
-```
-
-```{r, include=F}
-dyads <- timbre_paper %>% dplyr::rowwise() %>% dplyr::mutate(
-  type          = metadata$type,
-  num_harmonics = metadata$num_harmonics,
-  octave_ratio  = metadata$octave_ratio,
-  semitone      = metadata$semitone,
-  scale         = metadata$scale,
-  label         = round(metadata$semitone),
-  chord_max     = max(frequencies),
-  chord_min     = min(frequencies),
-  .before=1
-)
-```
-
-```{r, fig.height=8, fig.width=12, echo=F, results='asis', message=F}
-params = list(
-  list(h=10,o=2.1,s='macro'),
-  list(h=10,o=2.0,s='macro'),
-  list(h=10,o=1.9,s='macro'),
-  list(h=4,o=2,s='Bonang'),
-  list(h=1, o=2.0,s='macro'),
-  list(h=5, o=2.0,s='macro'),
-  list(h=5,o=2,s='5PartialsNo3'),
-  list(h=10,o=2.0,s='P8'),
-  list(h=10,o=2.0,s='M6'),
-  list(h=10,o=2.0,s='M3'),
-  list(h=5,o=2.0,s='hi_res')
-)
-
-params %>% purrr::map(\(p) {
-  gray_vlines = c()
-  black_vlines = c()
-  if (p$o<2 & p$s == 'macro') {
-    timbre = 'Compressed'
-    black_vlines  = c(11.10)
-  } else if (p$o>2 & p$s == 'macro') {
-    timbre = 'Stretched'
-    black_vlines  = c(12.78)
-  } else if (p$o==2 & p$h==1 & p$s == 'macro') {
-    timbre = 'Pure'
-    black_vlines = c()
-  } else if (p$s == 'Bonang') {
-    timbre = 'Bonang'
-    black_vlines = c(2.60, 4.80, 11.98)
-    gray_vlines  = c(7.2, 9.6)
-  } else if (p$o==2 & p$h==5 & p$s == '5PartialsNo3') {
-    timbre = '5PartialsNo3'
-    black_vlines = c()
-  } else if (p$o==2 & p$h==5 & p$s == 'macro') {
-    timbre = '5Partials'
-    black_vlines = c()
-  } else if (p$o==2 & p$h==10 & p$s == 'macro') {
-    timbre = 'Harmonic'
-    black_vlines  = c(12.04)
-  } else if (p$s == 'M3') {
-    timbre = 'M3'
-    gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 5/4)-60,4)
-    black_vlines  = c(3.95)
-  } else if (p$s == 'M6') {
-    timbre = 'M6'
-    gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 5/3)-60,9)
-    black_vlines  = c(8.78,8.93)
-  } else if (p$s == 'P8') {
-    timbre = 'P8'
-    gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 2/1)-60)
-    black_vlines  = c(11.94, 12.08)
-  } else if (p$s == 'hi_res') {
-    timbre = 'hi_res'
-    gray_vlines = c()
-    black_vlines  = c()
-  }
-  title = paste(
-    timbre,
-    '~',
-    'Partials:', p$h
-  )
-  
-  chords <- dyads %>% dplyr::filter(num_harmonics  == p$h &
-                                      octave_ratio == p$o &
-                                      scale        == p$s)
-  chords$consonance_dissonance_z = z_scores(chords$consonance_dissonance)
-  
-  if (timbre=='hi_res') {
-    experiment = NULL
-  } else {
-    experiment.rds = paste0('./man/data/',
-                            timbre,
-                            '.rds')
-    
-    experiment = readRDS(experiment.rds)$profile %>%
-      dplyr::rename(semitone=interval)
-    
-    experiment <- experiment %>% dplyr::mutate(
-      consonance_dissonance = rating,
-      consonance_dissonance_2x = 2*rating,
-      consonance_dissonance_4x = 4*rating
-    )
-  }
-  if (p$s == 'macro' | p$s == 'Bonang' | p$s == '5PartialsNo3') {
-    sigma = BEHAVIOURAL_SMOOTH_BROAD
-  } else {
-    sigma = BEHAVIOURAL_SMOOTH_NARROW
-  }
-  cat("  \n###", title, '\n')
-  print(knitr::kable(tibble::tibble_row(
-    pseudo_octave       = paste(round(chords$pseudo_octave %>% unique, 2),
-                                collapse = ' ')
-  )))
-  print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),
-                           goal=experiment,sigma=sigma,
-                           black_vlines=black_vlines,gray_vlines=gray_vlines))
-  print(plot_semitone_mami(chords, paste('Major-Minor'),goal=experiment,
-                           include_line=T,sigma=sigma,
-                           black_vlines=black_vlines,gray_vlines=gray_vlines))
-  print(plot_mami.codi(chords, paste('MaMi.CoDi ~',title), chords_to_label=NULL,
-                       include_labels=F))
-  print(plot_semitone_colo.cohi(chords, paste('Consonance Frequency (gold) & Wavelength (blue)'),
-                                sigma=sigma,
-                                black_vlines=black_vlines,gray_vlines=gray_vlines))
-  cat("  \n")
-})
-```
-
 # MaMi CoDi Plots
+
+The dyads below are framed between the tonic and octave. A major third
+like C4 and E4, for example, actually includes C4, E4 and C5.
 
 ```{r, include=F}
 chord_types <- c('Dyads','Triads','Major Triad Progressions',

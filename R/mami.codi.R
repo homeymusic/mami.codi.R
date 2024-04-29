@@ -54,9 +54,10 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 
 listen_for_pseudo_octave = function(x) {
   if (length(x$frequencies[[1]]) > 2) {
+
     x %>% dplyr::mutate(
       pseudo_octave = (x$frequencies[[1]] %>% find_highest_fundamental() %>%
-                                dplyr::count(.data$pseudo_octave, name='harmonic_number',sort=TRUE) %>%
+                                dplyr::count(.data$pseudo_octave, sort=TRUE) %>%
                                 dplyr::slice(1))$pseudo_octave
     )
   } else {
@@ -150,7 +151,7 @@ format_output <- function(x, metadata, verbose) {
     x
   } else {
     x %>%
-      dplyr::select('major_minor', 'consonance_dissonance', 'metadata')
+      dplyr::select('major_minor', 'consonance_dissonance')
   }
 }
 
