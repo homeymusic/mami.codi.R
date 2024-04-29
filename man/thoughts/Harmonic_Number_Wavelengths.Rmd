@@ -10,6 +10,22 @@ devtools::load_all(".")
 c(0) %>% mami.codi()
 ```
 
+### JT Ratios
+1.00000: Unison       1/1
+1.06667: minor 2nd    16/15
+1.12500: Major 2nd    9/8
+1.20000: minor 3rd    6/5
+1.25000: Major 3rd    5/4
+1.33333: Perfect 4th  4/3
+1.40625: Tritone      45/32
+1.50000: Perfect 5th  3/2
+1.60000: minor 6th    8/5
+1.66667: Major 6th    5/3
+1.80000: minor 7th    9/5
+1.87500: Major 7th    15/8
+2.00000: Octave       2/1
+
+
 ### m3 M6 Ratios
 ```{r, echo=T}
 C4f  = 261.6256
