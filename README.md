@@ -39,15 +39,15 @@ In the plots below:
 #### Notes on Dyads:
 
 - The dyads immediately below, from the timbre study, are true two-pitch
-  dyads. True major thirds like C4 and E4, for example, only includes C4
-  and E4
+  dyads. True major thirds like C4 and E4, for example, only include C4
+  and E4.
 
 - The intervals in the last few sections, further below, are actually
-  three-pitch chords with the high and low pitches one octave apart
-  framing the interval, for example: C4, E4 and C5
+  three-pitch chords with the high and low pitches one octave apart,
+  framing the interval. For example: C4, E4 and C5.
 
-- True two-pitch dyads versus octave-framed, three-pitch chords, might
-  show different major-minor polarities
+- Two-pitch dyads versus octave-framed, three-pitch chords, might have
+  different major-minor polarities
 
 - Consider two chords containing C4 and E4:
 
