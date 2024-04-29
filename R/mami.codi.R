@@ -19,7 +19,7 @@
 mami.codi <- function(x, metadata=NA, verbose=FALSE,...) {
 
   parse_input(x, ...)              %>%
-    listen_for_highest_fundamental %>%
+    listen_for_pseudo_octave       %>%
     duplex                         %>%
     flip                           %>%
     rotate                         %>%
@@ -52,7 +52,7 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 
 }
 
-listen_for_highest_fundamental = function(x) {
+listen_for_pseudo_octave = function(x) {
 
   f = x$frequencies[[1]]
   if (length(f) > 2) {
@@ -86,45 +86,16 @@ listen_for_highest_fundamental = function(x) {
 
     f0 = f0[1,]
 
-    potential_lowest_harmonics = min(f) * f0$pseudo_octave ^ 0:(f0$harmonic_number)
-    lowest_harmonics = (get_harmonics_in_chord(f, potential_lowest_harmonics, TOLERANCE))$harmonics
-    potential_highest_harmonics = f0$reference_freq * f0$pseudo_octave ^ 0:(f0$harmonic_number)
-    highest_harmonics = (get_harmonics_in_chord(f, potential_highest_harmonics, TOLERANCE))$harmonics
-
     x %>% dplyr::mutate(
-      lowest_f0            = min(f),
-      lowest_f0_harmonics  = list(lowest_harmonics),
-      highest_f0           = f0$reference_freq,
-      lowest_f0_harmonics  = list(highest_harmonics),
       pseudo_octave        = f0$pseudo_octave,
-      num_harmonics        = f0$harmonic_number,
-      fundamentals_span    = estimate_span(f0$reference_freq, min(f), f0$pseudo_octave),
-      harmonics_span       = estimate_span(max(f), f0$reference_freq, f0$pseudo_octave),
-      chord_span           = estimate_span(max(f), min(f), f0$pseudo_octave)
     )
   } else if (length(f) > 1) {
     x %>% dplyr::mutate(
-      lowest_f0            = min(f),
-      lowest_f0_harmonics  = list(min(f)),
-      highest_f0           = max(f),
-      highest_f0_harmonics = list(max(f)),
       pseudo_octave        = compute_pseudo_octave(max(f), min(f), 2),
-      num_harmonics        = length(f),
-      fundamentals_span    = estimate_span(max(f), min(f), .data$pseudo_octave),
-      harmonics_span       = estimate_span(max(f), min(f), .data$pseudo_octave),
-      chord_span           = estimate_span(max(f), min(f), .data$pseudo_octave)
     )
   } else {
     x %>% dplyr::mutate(
-      lowest_f0            = min(f),
-      lowest_f0_harmonics  = list(min(f)),
-      highest_f0           = max(f),
-      highest_f0_harmonics = list(max(f)),
       pseudo_octave        = 1.0,
-      num_harmonics        = 0,
-      fundamentals_span    = 1,
-      harmonics_span       = 1,
-      chord_span           = 1
     )
   }
 }
@@ -216,50 +187,18 @@ format_output <- function(x, metadata, verbose) {
     x
   } else {
     x %>%
-      dplyr::select('major_minor', 'consonance_dissonance',
-                    'frequencies', 'wavelengths', 'metadata')
+      dplyr::select('major_minor', 'consonance_dissonance', 'metadata')
   }
 }
 
 lcm <- function(x) Reduce(numbers::LCM, x)
 
-frequency_ratio <- function(x, pseudo_octave, steps=TRICIA) {
-  pseudo_octave^(x*steps)
-}
-
-estimate_span <- function(x, y, pseudo_octave) {
-  ceiling(log((x/y)%>%zapsmall(24),pseudo_octave))
-}
-
-transpose_pitch <- function(x, register, pseudo_octave) {
-  x * pseudo_octave ^ register
-}
-
-frequency_ratio <- function(x, pseudo_octave) {
-  pseudo_octave^(x*TRICIA)
-}
-
-TOLERANCE = 0.019
-
-# define perfect consonance as the pure-tone unison post-pi/4 rotation
-# pure tones show pure octave-complementarity so tip of the hat to Zarlino
-ZARLINO                    = 100 / sqrt(2)     # Z
-
-# once log relative cycle length becomes consonance those units will be called:
-# gRameuas (g) or gRams for short :~))
-# heavy, stable, high-gravity chords have higher values than
-# light, passing, low-gravity chords. consonance is like mass.
-
-MIN_AMPLITUDE = 1/12
-
-PI_4 = pi / 4
-
-R_PI_4 = matrix(c(
+SPEED_OF_SOUND = 343 # m/S
+TOLERANCE      = 0.019
+ZARLINO        = 100 / sqrt(2)     # Z
+MIN_AMPLITUDE  = 1/12
+PI_4           = pi / 4
+R_PI_4         = matrix(c(
   cos(PI_4), sin(PI_4),
   -sin(PI_4), cos(PI_4)
 ), nrow = 2, ncol = 2, byrow = TRUE)
-
-SPEED_OF_SOUND = 343 # m/S
-
-FREQUENCY  = T
-WAVELENGTH = F
