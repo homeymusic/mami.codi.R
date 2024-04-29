@@ -7,15 +7,15 @@ Major-Minor and Consonance-Dissonance Perception
 
 ### Harmonic ~ Roll Off: 2
 
-![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->![](man/figures/README-unnamed-chunk-5-2.png)<!-- -->![](man/figures/README-unnamed-chunk-5-3.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->![](man/figures/README-unnamed-chunk-5-2.png)<!-- -->![](man/figures/README-unnamed-chunk-5-3.png)<!-- -->![](man/figures/README-unnamed-chunk-5-4.png)<!-- -->
 
 ### Harmonic ~ Roll Off: 7
 
-![](man/figures/README-unnamed-chunk-5-4.png)<!-- -->![](man/figures/README-unnamed-chunk-5-5.png)<!-- -->![](man/figures/README-unnamed-chunk-5-6.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-5.png)<!-- -->![](man/figures/README-unnamed-chunk-5-6.png)<!-- -->![](man/figures/README-unnamed-chunk-5-7.png)<!-- -->![](man/figures/README-unnamed-chunk-5-8.png)<!-- -->
 
 ### Harmonic ~ Roll Off: 12
 
-![](man/figures/README-unnamed-chunk-5-7.png)<!-- -->![](man/figures/README-unnamed-chunk-5-8.png)<!-- -->![](man/figures/README-unnamed-chunk-5-9.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-9.png)<!-- -->![](man/figures/README-unnamed-chunk-5-10.png)<!-- -->![](man/figures/README-unnamed-chunk-5-11.png)<!-- -->![](man/figures/README-unnamed-chunk-5-12.png)<!-- -->  
 \[\[1\]\] NULL
 
 \[\[2\]\] NULL
@@ -30,7 +30,7 @@ Major-Minor and Consonance-Dissonance Perception
 |:--------------|
 | 2.1           |
 
-![](man/figures/README-unnamed-chunk-8-1.png)<!-- -->![](man/figures/README-unnamed-chunk-8-2.png)<!-- -->![](man/figures/README-unnamed-chunk-8-3.png)<!-- -->
+![](man/figures/README-unnamed-chunk-8-1.png)<!-- -->![](man/figures/README-unnamed-chunk-8-2.png)<!-- -->![](man/figures/README-unnamed-chunk-8-3.png)<!-- -->![](man/figures/README-unnamed-chunk-8-4.png)<!-- -->
 
 ### Harmonic ~ Partials: 10
 
@@ -38,7 +38,7 @@ Major-Minor and Consonance-Dissonance Perception
 |:--------------|
 | 2             |
 
-![](man/figures/README-unnamed-chunk-8-4.png)<!-- -->![](man/figures/README-unnamed-chunk-8-5.png)<!-- -->![](man/figures/README-unnamed-chunk-8-6.png)<!-- -->
+![](man/figures/README-unnamed-chunk-8-5.png)<!-- -->![](man/figures/README-unnamed-chunk-8-6.png)<!-- -->![](man/figures/README-unnamed-chunk-8-7.png)<!-- -->![](man/figures/README-unnamed-chunk-8-8.png)<!-- -->
 
 ### Compressed ~ Partials: 10
 
@@ -46,7 +46,7 @@ Major-Minor and Consonance-Dissonance Perception
 |:--------------|
 | 1.9           |
 
-![](man/figures/README-unnamed-chunk-8-7.png)<!-- -->![](man/figures/README-unnamed-chunk-8-8.png)<!-- -->![](man/figures/README-unnamed-chunk-8-9.png)<!-- -->
+![](man/figures/README-unnamed-chunk-8-9.png)<!-- -->![](man/figures/README-unnamed-chunk-8-10.png)<!-- -->![](man/figures/README-unnamed-chunk-8-11.png)<!-- -->![](man/figures/README-unnamed-chunk-8-12.png)<!-- -->
 
 ### Bonang ~ Partials: 4
 
@@ -54,7 +54,7 @@ Major-Minor and Consonance-Dissonance Perception
 |:--------------|
 | 2             |
 
-![](man/figures/README-unnamed-chunk-8-10.png)<!-- -->![](man/figures/README-unnamed-chunk-8-11.png)<!-- -->![](man/figures/README-unnamed-chunk-8-12.png)<!-- -->
+![](man/figures/README-unnamed-chunk-8-13.png)<!-- -->![](man/figures/README-unnamed-chunk-8-14.png)<!-- -->![](man/figures/README-unnamed-chunk-8-15.png)<!-- -->![](man/figures/README-unnamed-chunk-8-16.png)<!-- -->
 
 ### Pure ~ Partials: 1
 
@@ -62,7 +62,7 @@ Major-Minor and Consonance-Dissonance Perception
 |:--------------|
 | 2             |
 
-![](man/figures/README-unnamed-chunk-8-13.png)<!-- -->![](man/figures/README-unnamed-chunk-8-14.png)<!-- -->![](man/figures/README-unnamed-chunk-8-15.png)<!-- -->
+![](man/figures/README-unnamed-chunk-8-17.png)<!-- -->![](man/figures/README-unnamed-chunk-8-18.png)<!-- -->![](man/figures/README-unnamed-chunk-8-19.png)<!-- -->![](man/figures/README-unnamed-chunk-8-20.png)<!-- -->
 
 ### 5Partials ~ Partials: 5
 
@@ -70,7 +70,7 @@ Major-Minor and Consonance-Dissonance Perception
 |:--------------|
 | 2             |
 
-![](man/figures/README-unnamed-chunk-8-16.png)<!-- -->![](man/figures/README-unnamed-chunk-8-17.png)<!-- -->![](man/figures/README-unnamed-chunk-8-18.png)<!-- -->
+![](man/figures/README-unnamed-chunk-8-21.png)<!-- -->![](man/figures/README-unnamed-chunk-8-22.png)<!-- -->![](man/figures/README-unnamed-chunk-8-23.png)<!-- -->![](man/figures/README-unnamed-chunk-8-24.png)<!-- -->
 
 ### 5PartialsNo3 ~ Partials: 5
 
@@ -78,7 +78,7 @@ Major-Minor and Consonance-Dissonance Perception
 |:--------------|
 | 2             |
 
-![](man/figures/README-unnamed-chunk-8-19.png)<!-- -->![](man/figures/README-unnamed-chunk-8-20.png)<!-- -->![](man/figures/README-unnamed-chunk-8-21.png)<!-- -->
+![](man/figures/README-unnamed-chunk-8-25.png)<!-- -->![](man/figures/README-unnamed-chunk-8-26.png)<!-- -->![](man/figures/README-unnamed-chunk-8-27.png)<!-- -->![](man/figures/README-unnamed-chunk-8-28.png)<!-- -->
 
 ### P8 ~ Partials: 10
 
@@ -86,7 +86,7 @@ Major-Minor and Consonance-Dissonance Perception
 |:--------------|
 | 2             |
 
-![](man/figures/README-unnamed-chunk-8-22.png)<!-- -->![](man/figures/README-unnamed-chunk-8-23.png)<!-- -->![](man/figures/README-unnamed-chunk-8-24.png)<!-- -->
+![](man/figures/README-unnamed-chunk-8-29.png)<!-- -->![](man/figures/README-unnamed-chunk-8-30.png)<!-- -->![](man/figures/README-unnamed-chunk-8-31.png)<!-- -->![](man/figures/README-unnamed-chunk-8-32.png)<!-- -->
 
 ### M6 ~ Partials: 10
 
@@ -94,7 +94,7 @@ Major-Minor and Consonance-Dissonance Perception
 |:--------------|
 | 2             |
 
-![](man/figures/README-unnamed-chunk-8-25.png)<!-- -->![](man/figures/README-unnamed-chunk-8-26.png)<!-- -->![](man/figures/README-unnamed-chunk-8-27.png)<!-- -->
+![](man/figures/README-unnamed-chunk-8-33.png)<!-- -->![](man/figures/README-unnamed-chunk-8-34.png)<!-- -->![](man/figures/README-unnamed-chunk-8-35.png)<!-- -->![](man/figures/README-unnamed-chunk-8-36.png)<!-- -->
 
 ### M3 ~ Partials: 10
 
@@ -102,23 +102,7 @@ Major-Minor and Consonance-Dissonance Perception
 |:--------------|
 | 2             |
 
-![](man/figures/README-unnamed-chunk-8-28.png)<!-- -->![](man/figures/README-unnamed-chunk-8-29.png)<!-- -->![](man/figures/README-unnamed-chunk-8-30.png)<!-- -->
-
-### m3 ~ Partials: 10
-
-| pseudo_octave |
-|:--------------|
-| 2             |
-
-![](man/figures/README-unnamed-chunk-8-31.png)<!-- -->![](man/figures/README-unnamed-chunk-8-32.png)<!-- -->![](man/figures/README-unnamed-chunk-8-33.png)<!-- -->
-
-### m6 ~ Partials: 10
-
-| pseudo_octave |
-|:--------------|
-| 2             |
-
-![](man/figures/README-unnamed-chunk-8-34.png)<!-- -->![](man/figures/README-unnamed-chunk-8-35.png)<!-- -->![](man/figures/README-unnamed-chunk-8-36.png)<!-- -->
+![](man/figures/README-unnamed-chunk-8-37.png)<!-- -->![](man/figures/README-unnamed-chunk-8-38.png)<!-- -->![](man/figures/README-unnamed-chunk-8-39.png)<!-- -->![](man/figures/README-unnamed-chunk-8-40.png)<!-- -->
 
 ### hi_res ~ Partials: 5
 
@@ -126,7 +110,7 @@ Major-Minor and Consonance-Dissonance Perception
 |:--------------|
 | 2             |
 
-![](man/figures/README-unnamed-chunk-8-37.png)<!-- -->![](man/figures/README-unnamed-chunk-8-38.png)<!-- -->![](man/figures/README-unnamed-chunk-8-39.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-8-41.png)<!-- -->![](man/figures/README-unnamed-chunk-8-42.png)<!-- -->![](man/figures/README-unnamed-chunk-8-43.png)<!-- -->![](man/figures/README-unnamed-chunk-8-44.png)<!-- -->  
 \[\[1\]\] NULL
 
 \[\[2\]\] NULL
@@ -148,10 +132,6 @@ Major-Minor and Consonance-Dissonance Perception
 \[\[10\]\] NULL
 
 \[\[11\]\] NULL
-
-\[\[12\]\] NULL
-
-\[\[13\]\] NULL
 
 # MaMi CoDi Plots
 
