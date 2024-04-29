@@ -9,6 +9,7 @@
 #' helpful for analysis and plots
 #' @param verbose Determines the amount of data to return from chord evaluation
 #' TRUE is all and FALSE is just major-minor and consonance-dissonance
+#' @param tolerance An optional tolerance value for creating rational fractions
 #' @param ... parameters for hrep::sparse_fr_spectrum
 #'
 #' @return Major-Minor and Consonance-Dissonance plus additional information
