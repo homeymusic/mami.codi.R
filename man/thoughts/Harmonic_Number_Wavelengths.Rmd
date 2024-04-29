@@ -25,39 +25,6 @@ c(0) %>% mami.codi()
 1.87500: Major 7th    15/8
 2.00000: Octave       2/1
 
-
-### m3 M6 Ratios
-```{r, echo=T}
-C4f  = 261.6256
-Eb4f = 311.1270
-A4f  = 440.0000
-C5f  = 523.2511
-
-C4w  = SPEED_OF_SOUND / C4f
-Eb4w = SPEED_OF_SOUND / Eb4f
-A4w  = SPEED_OF_SOUND / A4f
-C5w  = SPEED_OF_SOUND / C5f
-
-tibble::tibble(
-  jm3f = 6 / 5,
-  m3f  = Eb4f / C4f,
-  m3w  = C4w / Eb4w,
-  dM6w = A4w / C5w,
-  jM6f = 5 / 3,
-  dm3w = Eb4w / C5w,
-  M6f  = A4f / C4f,
-  M6w  = C4w / A4w,
-  C4f,
-  Eb4f,
-  A4f,
-  C5f,
-  C4w,
-  Eb4w,
-  A4w,
-  C5w
-)
-```
-
 ### P4 Wavelengths 2 Harmonics
 ```{r, echo=T}
 ref = 1.311034
@@ -92,6 +59,39 @@ t = tibble::tibble(
 )
 t
 ```
+
+### m3 M6 Ratios
+```{r, echo=T}
+C4f  = 261.6256
+Eb4f = 311.1270
+A4f  = 440.0000
+C5f  = 523.2511
+
+C4w  = SPEED_OF_SOUND / C4f
+Eb4w = SPEED_OF_SOUND / Eb4f
+A4w  = SPEED_OF_SOUND / A4f
+C5w  = SPEED_OF_SOUND / C5f
+
+tibble::tibble(
+  jm3f = 6 / 5,
+  m3f  = Eb4f / C4f,
+  m3w  = C4w / Eb4w,
+  dM6w = A4w / C5w,
+  jM6f = 5 / 3,
+  dm3w = Eb4w / C5w,
+  M6f  = A4f / C4f,
+  M6w  = C4w / A4w,
+  C4f,
+  Eb4f,
+  A4f,
+  C5f,
+  C4w,
+  Eb4w,
+  A4w,
+  C5w
+)
+```
+
 ### M6 Wavelengths 2 Harmonics
 ```{r, echo=T}
 ref = 1.311034
