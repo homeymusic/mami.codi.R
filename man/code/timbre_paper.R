@@ -1,7 +1,5 @@
-
-
 source('./utils.R')
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R', ref="wavelength_vs_frequency")
 
 library(mami.codi.R)
 devtools::load_all(".")
