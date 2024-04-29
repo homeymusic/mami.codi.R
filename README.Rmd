@@ -33,8 +33,8 @@ dyads <- timbre_paper %>% dplyr::rowwise() %>% dplyr::mutate(
   semitone      = metadata$semitone,
   roll_off      = metadata$roll_off,
   label         = round(metadata$semitone),
-  chord_max     = max(frequencies),
-  chord_min     = min(frequencies),
+  chord_max     = max(chord_freqs),
+  chord_min     = min(chord_freqs),
   .before=1
 )
 ```

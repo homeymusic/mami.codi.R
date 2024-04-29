@@ -4,6 +4,11 @@ devtools::install_github('git@github.com:homeymusic/mami.codi.R', ref="wavelengt
 library(mami.codi.R)
 devtools::load_all(".")
 
+P8 <- c(60,72) %>% mami.codi.R::mami.codi(verbose=T)
+stopifnot(
+  dplyr::near(max(P8$wavelengths[[1]]),  343 / hrep::midi_to_freq(60))
+)
+
 output.rds = '../data/timbre_paper.rds'
 prepare(output.rds)
 
