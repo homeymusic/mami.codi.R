@@ -9,45 +9,6 @@ Harmonic Number Wavelengths
 1.66667: Major 6th 5/3 1.80000: minor 7th 9/5 1.87500: Major 7th 15/8
 2.00000: Octave 2/1
 
-### m3 M6 Ratios
-
-``` r
-C4f  = 261.6256
-Eb4f = 311.1270
-A4f  = 440.0000
-C5f  = 523.2511
-
-C4w  = SPEED_OF_SOUND / C4f
-Eb4w = SPEED_OF_SOUND / Eb4f
-A4w  = SPEED_OF_SOUND / A4f
-C5w  = SPEED_OF_SOUND / C5f
-
-tibble::tibble(
-  jm3f = 6 / 5,
-  m3f  = Eb4f / C4f,
-  m3w  = C4w / Eb4w,
-  dM6w = A4w / C5w,
-  jM6f = 5 / 3,
-  dm3w = Eb4w / C5w,
-  M6f  = A4f / C4f,
-  M6w  = C4w / A4w,
-  C4f,
-  Eb4f,
-  A4f,
-  C5f,
-  C4w,
-  Eb4w,
-  A4w,
-  C5w
-)
-```
-
-    ## # A tibble: 1 × 16
-    ##    jm3f   m3f   m3w  dM6w  jM6f  dm3w   M6f   M6w   C4f  Eb4f   A4f   C5f   C4w
-    ##   <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
-    ## 1   1.2  1.19  1.19  1.19  1.67  1.68  1.68  1.68  262.  311.   440  523.  1.31
-    ## # ℹ 3 more variables: Eb4w <dbl>, A4w <dbl>, C5w <dbl>
-
 ### P4 Wavelengths 2 Harmonics
 
 ``` r
@@ -91,6 +52,45 @@ t
     ## # ℹ 8 more variables: pseudo_raw <dbl>, raw_ratio <list>, raw_num <dbl>,
     ## #   raw_den <dbl>, λ <dbl>, ref <dbl>, octave_span <dbl>, octave_factor <dbl>
 
+### m3 M6 Ratios
+
+``` r
+C4f  = 261.6256
+Eb4f = 311.1270
+A4f  = 440.0000
+C5f  = 523.2511
+
+C4w  = SPEED_OF_SOUND / C4f
+Eb4w = SPEED_OF_SOUND / Eb4f
+A4w  = SPEED_OF_SOUND / A4f
+C5w  = SPEED_OF_SOUND / C5f
+
+tibble::tibble(
+  jm3f = 6 / 5,
+  m3f  = Eb4f / C4f,
+  m3w  = C4w / Eb4w,
+  dM6w = A4w / C5w,
+  jM6f = 5 / 3,
+  dm3w = Eb4w / C5w,
+  M6f  = A4f / C4f,
+  M6w  = C4w / A4w,
+  C4f,
+  Eb4f,
+  A4f,
+  C5f,
+  C4w,
+  Eb4w,
+  A4w,
+  C5w
+)
+```
+
+    ## # A tibble: 1 × 16
+    ##    jm3f   m3f   m3w  dM6w  jM6f  dm3w   M6f   M6w   C4f  Eb4f   A4f   C5f   C4w
+    ##   <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+    ## 1   1.2  1.19  1.19  1.19  1.67  1.68  1.68  1.68  262.  311.   440  523.  1.31
+    ## # ℹ 3 more variables: Eb4w <dbl>, A4w <dbl>, C5w <dbl>
+
 ### M6 Wavelengths 2 Harmonics
 
 ``` r
@@ -121,7 +121,7 @@ t
     ## # A tibble: 1 × 14
     ##   ratio fraction   num   den   pre pre_harm pseudo_raw raw_ratio raw_num raw_den
     ##   <dbl> <list>   <dbl> <dbl> <dbl>    <dbl>      <dbl> <list>      <dbl>   <dbl>
-    ## 1 0.420 <dbl>        7     3  1.68     1.19      0.595 <dbl [2]>       5       3
+    ## 1 0.420 <dbl>       19     8  1.68     1.19      0.595 <dbl [2]>       5       3
     ## # ℹ 4 more variables: λ <dbl>, ref <dbl>, octave_span <dbl>,
     ## #   octave_factor <dbl>
 
@@ -244,7 +244,7 @@ t
     ## # A tibble: 1 × 8
     ##   ratio fraction    num   den     λ   ref octave_span octave_factor
     ##   <dbl> <list>    <dbl> <dbl> <dbl> <dbl>       <dbl>         <dbl>
-    ## 1 0.265 <dbl [2]>    30     4 0.413  1.31           1             2
+    ## 1 0.265 <dbl [2]>    68     9 0.413  1.31           1             2
 
 ### Other Stuff
 
@@ -353,4 +353,4 @@ t
     ## # A tibble: 1 × 4
     ##   ratio fraction    num   den
     ##   <dbl> <list>    <dbl> <dbl>
-    ## 1 0.529 <dbl [2]>    13     7
+    ## 1 0.529 <dbl [2]>    15     8
