@@ -170,12 +170,13 @@ estimate_cycle <- function(x, reference, harmonic_number, pseudo_octave, toleran
 }
 
 flip <- function(x) {
-  consonance_frequency  = ZARLINO - x$dissonance_frequency
-  consonance_wavelength = ZARLINO - x$dissonance_wavelength
 
-  duplexed_lowest_f0 <- x %>% dplyr::mutate(chord_freqs = x$lowest_f0_harmonics) %>% duplex
-  # consonance_frequency  = ZARLINO - x$dissonance_frequency  + duplexed_lowest_f0$dissonance_frequency
-  # consonance_wavelength = ZARLINO - x$dissonance_wavelength + duplexed_lowest_f0$dissonance_wavelength
+  # consonance_frequency  = ZARLINO - x$dissonance_frequency
+  # consonance_wavelength = ZARLINO - x$dissonance_wavelength
+
+  duplexed_unison <- x %>% dplyr::mutate(chord_freqs = x$lowest_f0_harmonics) %>% duplex
+  consonance_frequency  = ZARLINO - x$dissonance_frequency  + duplexed_unison$dissonance_frequency
+  consonance_wavelength = ZARLINO - x$dissonance_wavelength + duplexed_unison$dissonance_wavelength
 
 
     if (consonance_frequency <= 0 | consonance_wavelength <= 0) {
@@ -191,8 +192,8 @@ flip <- function(x) {
   x %>% dplyr::mutate(
     consonance_frequency,
     consonance_wavelength,
-    lowest_f0_dissonance = sqrt(duplexed_lowest_f0$dissonance_frequency^2 +
-                                  duplexed_lowest_f0$dissonance_wavelength^2),
+    unison_dissonance = sqrt(duplexed_unison$dissonance_frequency^2 +
+                               duplexed_unison$dissonance_wavelength^2),
     .before=1
   )
 
@@ -203,8 +204,8 @@ rotate <- function(x) {
   rotated = (R_PI_4 %*% matrix(c(
     x$consonance_wavelength,
     x$consonance_frequency
-  ))) %>% as.vector %>% zapsmall
-  # )) - matrix(c(x$lowest_f0_dissonance,0))) %>% as.vector %>% zapsmall
+  # ))) %>% as.vector %>% zapsmall
+  )) - matrix(c(x$unison_dissonance,0))) %>% as.vector %>% zapsmall
 
 x %>% dplyr::mutate(
     consonance_dissonance = rotated[1],
