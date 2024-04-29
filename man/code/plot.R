@@ -165,9 +165,9 @@ plot_dilo.dihi <- function(chords, title, chords_to_label=NULL,
   if (is.null(chords_to_label)) {
     chords_to_label = chords
   }
-  slope = chords$dissonance_high[tonic_index] / chords$dissonance_low[tonic_index]
-  ggplot2::ggplot(chords, ggplot2::aes(x = .data$dissonance_low,
-                                       y = .data$dissonance_high)) +
+  slope = chords$dissonance_wavelength[tonic_index] / chords$dissonance_frequency[tonic_index]
+  ggplot2::ggplot(chords, ggplot2::aes(x = .data$dissonance_frequency,
+                                       y = .data$dissonance_wavelength)) +
     { if(include_abline) ggplot2::geom_abline(slope = slope, color = colors_homey$neutral) } +
     ggplot2::geom_point(shape=21, stroke=NA, size=0.5, fill=colors_homey$neutral) +
     ggrepel::geom_text_repel(data=chords_to_label, color=colors_homey$neutral,
@@ -178,7 +178,7 @@ plot_dilo.dihi <- function(chords, title, chords_to_label=NULL,
     ggplot2::scale_color_manual(guide='none') +
     ggplot2::ggtitle(title) +
     ggplot2::scale_x_continuous(
-      limits=c(0,max(c(chords$dissonance_low,chords$dissonance_high)))) +
+      limits=c(0,max(c(chords$dissonance_frequency,chords$dissonance_wavelength)))) +
     {if (minimal) theme_homey_minimal(aspect.ratio=aspect.ratio) else theme_homey(aspect.ratio=aspect.ratio)}
 }
 plot_colo.cohi <- function(chords, title, chords_to_label=NULL,
@@ -187,9 +187,9 @@ plot_colo.cohi <- function(chords, title, chords_to_label=NULL,
   if (is.null(chords_to_label)) {
     chords_to_label = chords
   }
-  slope = chords$consonance_high[tonic_index] / chords$consonance_low[tonic_index]
-  ggplot2::ggplot(chords, ggplot2::aes(x = .data$consonance_low,
-                                       y = .data$consonance_high)) +
+  slope = chords$consonance_wavelength[tonic_index] / chords$consonance_frequency[tonic_index]
+  ggplot2::ggplot(chords, ggplot2::aes(x = .data$consonance_frequency,
+                                       y = .data$consonance_wavelength)) +
     { if(include_abline) ggplot2::geom_abline(slope = slope, color = colors_homey$neutral) } +
     ggplot2::geom_point(shape=21, stroke=NA, size=0.5, fill=colors_homey$neutral) +
     ggrepel::geom_text_repel(data=chords_to_label, color=colors_homey$neutral,
@@ -200,16 +200,16 @@ plot_colo.cohi <- function(chords, title, chords_to_label=NULL,
     ggplot2::scale_color_manual(guide='none') +
     ggplot2::ggtitle(title) +
     ggplot2::scale_x_continuous(
-      limits=c(min(c(chords$consonance_low,chords$consonance_high)),
-                   max(c(chords$consonance_low,chords$consonance_high)))) +
+      limits=c(min(c(chords$consonance_frequency,chords$consonance_wavelength)),
+                   max(c(chords$consonance_frequency,chords$consonance_wavelength)))) +
     {if (minimal) theme_homey_minimal(aspect.ratio=aspect.ratio) else theme_homey(aspect.ratio=aspect.ratio)}
 }
 plot_semitone_codi <- function(chords, title='', include_line=T, sigma=0.2,
                                include_points=T,
                                include_linear_regression = F, goal=NULL,
                                black_vlines=c(),gray_vlines=c()) {
-  low_semitone  = chords$semitone %>% min
-  high_semitone = chords$semitone %>% max
+  frequency_semitone  = chords$semitone %>% min
+  wavelength_semitone = chords$semitone %>% max
   chords$smoothed.consonance_dissonance = smoothed(chords$semitone,
                                                    chords$consonance_dissonance_z,
                                                    sigma)
@@ -246,8 +246,8 @@ plot_semitone_codi <- function(chords, title='', include_line=T, sigma=0.2,
 plot_semitone_mami <- function(chords, title='', include_line=T, sigma=0.2,
                                include_linear_regression=F,goal=NULL,abs=F,
                                black_vlines=c(),gray_vlines=c()) {
-  low_semitone =chords$semitone %>% min
-  high_semitone =chords$semitone %>% max
+  frequency_semitone =chords$semitone %>% min
+  wavelength_semitone =chords$semitone %>% max
 
   chords$smoothed.major_minor = smoothed(
     chords$semitone,
@@ -287,20 +287,20 @@ plot_semitone_mami <- function(chords, title='', include_line=T, sigma=0.2,
 plot_semitone_colo.cohi <- function(chords, title='', include_line=T, sigma=0.2,
                                     include_linear_regression = F, goal=NULL,
                                     black_vlines=c(),gray_vlines=c()) {
-  low_semitone  = chords$semitone %>% min
-  high_semitone = chords$semitone %>% max
-  chords$smoothed.consonance_low = smoothed(chords$semitone,
-                                            chords$consonance_low,
+  frequency_semitone  = chords$semitone %>% min
+  wavelength_semitone = chords$semitone %>% max
+  chords$smoothed.consonance_frequency = smoothed(chords$semitone,
+                                            chords$consonance_frequency,
                                             sigma)
-  chords$smoothed.consonance_high = smoothed(chords$semitone,
-                                             chords$consonance_high,
+  chords$smoothed.consonance_wavelength = smoothed(chords$semitone,
+                                             chords$consonance_wavelength,
                                              sigma)
   ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
-    ggplot2::geom_line(ggplot2::aes(y = smoothed.consonance_low), linewidth = 1,
+    ggplot2::geom_line(ggplot2::aes(y = smoothed.consonance_frequency), linewidth = 1,
                        color=colors_homey$major) +
-    ggplot2::geom_line(ggplot2::aes(y = smoothed.consonance_high), linewidth = 1,
+    ggplot2::geom_line(ggplot2::aes(y = smoothed.consonance_wavelength), linewidth = 1,
                        color=colors_homey$minor) +
     {if (!is.null(goal))
       ggplot2::geom_line(data=goal,
@@ -312,34 +312,34 @@ plot_semitone_colo.cohi <- function(chords, title='', include_line=T, sigma=0.2,
     ggplot2::ggtitle(title) +
     ggplot2::scale_x_continuous(breaks = 0:15,
                                 minor_breaks = c()) +
-    ggplot2::ylab('Consonance Low (gold) and High (blue)') +
+    ggplot2::ylab('Consonance Frequency (gold) and Wavelength (blue)') +
     theme_homey()
 }
 plot_semitone_co <- function(chords, title='') {
-  low_semitone =chords$semitone %>% min
-  high_semitone =chords$semitone %>% max
+  frequency_semitone =chords$semitone %>% min
+  wavelength_semitone =chords$semitone %>% max
   ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone,
                                        y = .data$consonance)) +
     ggplot2::geom_point(color=colors_homey$neutral) +
-    ggplot2::scale_x_continuous(breaks = seq(low_semitone,high_semitone),
+    ggplot2::scale_x_continuous(breaks = seq(frequency_semitone,wavelength_semitone),
                                 minor_breaks = c()) +
     ggplot2::ggtitle(title) +
     theme_homey()
 }
 plot_semitone_tolerance <- function(chords, title='') {
-  low_semitone =chords$semitone %>% min
-  high_semitone =chords$semitone %>% max
+  frequency_semitone =chords$semitone %>% min
+  wavelength_semitone =chords$semitone %>% max
   ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone,
                                        y = .data$tolerance)) +
     ggplot2::geom_point(color=colors_homey$neutral, size=0.5) +
-    ggplot2::scale_x_continuous(breaks = seq(low_semitone,high_semitone),
+    ggplot2::scale_x_continuous(breaks = seq(frequency_semitone,wavelength_semitone),
                                 minor_breaks = c()) +
     ggplot2::ggtitle(title) +
     theme_homey()
 }
 plot_semitone_rotation_angle <- function(chords, title='') {
-  low_semitone =chords$semitone %>% min
-  high_semitone =chords$semitone %>% max
+  frequency_semitone =chords$semitone %>% min
+  wavelength_semitone =chords$semitone %>% max
   ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone,
                                        y = .data$rotation_angle * 180 / pi,1)) +
     ggplot2::geom_point(color=colors_homey$neutral, size=0.5) +
@@ -350,8 +350,8 @@ plot_semitone_rotation_angle <- function(chords, title='') {
     theme_homey()
 }
 plot_semitone_registers <- function(chords, title='') {
-  low_semitone =chords$semitone %>% min
-  high_semitone =chords$semitone %>% max
+  frequency_semitone =chords$semitone %>% min
+  wavelength_semitone =chords$semitone %>% max
   ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone)) +
     ggplot2::geom_hline(yintercept = unique(round(
       c(chords$tonic_freqs[[1]]),
@@ -359,9 +359,9 @@ plot_semitone_registers <- function(chords, title='') {
       color=colors_homey$neutral,
       linetype = "dashed") +
     ggplot2::geom_point(color=colors_homey$minor, size=0.5,
-                        ggplot2::aes(y = .data$reference_freq_high)) +
+                        ggplot2::aes(y = .data$reference_freq_wavelength)) +
     ggplot2::geom_point(color=colors_homey$major, size=0.5,
-                        ggplot2::aes(y = .data$reference_freq_low)) +
+                        ggplot2::aes(y = .data$reference_freq_frequency)) +
     ggplot2::geom_point(color=colors_homey$fundamental, size=0.0625,
                         ggplot2::aes(y = .data$chord_max)) +
     ggplot2::geom_point(color=colors_homey$fundamental, size=0.0625,
@@ -397,14 +397,14 @@ plot_semitone_codi_grid <- function(theory, experiment,
                                     black_vlines=c(), gray_vlines=c(),
                                     title) {
   per_plot_labels = tidyr::expand_grid(
-    tolerance_low  = theory$tolerance_low  %>% unique,
-    tolerance_high = theory$tolerance_high %>% unique
+    tolerance_frequency  = theory$tolerance_frequency  %>% unique,
+    tolerance_wavelength = theory$tolerance_wavelength %>% unique
   )
   per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(tolerance_low,tolerance_high) {
+    purrr::pmap_vec(\(tolerance_frequency,tolerance_wavelength) {
       tols = paste(
-        'h:', tolerance_high,
-        'l:', tolerance_low
+        'h:', tolerance_wavelength,
+        'l:', tolerance_frequency
       )
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
@@ -428,7 +428,7 @@ plot_semitone_codi_grid <- function(theory, experiment,
                                                           vjust="inward",hjust="inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_grid(tolerance_low ~ tolerance_high, scales = 'free_y') +
+    ggplot2::facet_grid(tolerance_frequency ~ tolerance_wavelength, scales = 'free_y') +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()
