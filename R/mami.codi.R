@@ -156,9 +156,9 @@ format_output <- function(x, metadata, verbose) {
 
 lcm <- function(x) Reduce(numbers::LCM, x)
 
-SPEED_OF_SOUND = 343 # m/S
+SPEED_OF_SOUND = 343
 TOLERANCE      = 0.039
-ZARLINO        = 1000 / sqrt(2)     # Z
+ZARLINO        = 100 / sqrt(2)
 MIN_AMPLITUDE  = 1/12
 PI_4           = pi / 4
 R_PI_4         = matrix(c(
