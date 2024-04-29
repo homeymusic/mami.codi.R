@@ -33,8 +33,8 @@ dyads <- timbre_paper %>% dplyr::rowwise() %>% dplyr::mutate(
   semitone      = metadata$semitone,
   roll_off      = metadata$roll_off,
   label         = round(metadata$semitone),
-  chord_max     = max(chord_freqs),
-  chord_min     = min(chord_freqs),
+  chord_max     = max(frequencies),
+  chord_min     = min(frequencies),
   .before=1
 )
 ```
@@ -88,7 +88,7 @@ params %>% purrr::map(\(p) {
     plot_semitone_colo.cohi(chords, paste('Consonance Frequency & Wavelength'),
                             sigma=sigma,
                             black_vlines=black_vlines,gray_vlines=gray_vlines),
-    plot_semitone_registers(chords, paste('Ref Freqs & Tonic Timbre'))
+    plot_semitone_registers(chords, paste('Ref Freqs'))
   )  
   cat("  \n###", title, '\n')
   print(patchwork::wrap_plots(core_plots, ncol=1))
@@ -233,7 +233,7 @@ params %>% purrr::map(\(p) {
     plot_semitone_colo.cohi(chords, paste('Consonance Frequency & Wavelength'),
                             sigma=sigma,
                             black_vlines=black_vlines,gray_vlines=gray_vlines),
-    plot_semitone_registers(chords, paste('Ref Freqs & Tonic Timbre'))
+    plot_semitone_registers(chords, paste('Ref Freqs'))
   )  
   cat("  \n###", title, '\n')
   print(knitr::kable(tibble::tibble_row(
@@ -261,17 +261,17 @@ minor_i = chords %>% dplyr::filter(type == 'Minor Triad Progressions' &
 
 progression_tonics = list(
   'Major Triad Progressions 1' = (major_I$pitches[[1]] %>%
-                                    mami.codi.R::mami.codi(num_harmonics=1))$chord[[1]],
+                                    mami.codi.R::mami.codi(num_harmonics=1))$frequencies[[1]],
   'Minor Triad Progressions 1' = (minor_i$pitches[[1]] %>% 
-                                    mami.codi.R::mami.codi(num_harmonics=1))$chord[[1]],
+                                    mami.codi.R::mami.codi(num_harmonics=1))$frequencies[[1]],
   'Major Triad Progressions 5' = (major_I$pitches[[1]] %>%
-                                    mami.codi.R::mami.codi(num_harmonics=5))$chord[[1]],
+                                    mami.codi.R::mami.codi(num_harmonics=5))$frequencies[[1]],
   'Minor Triad Progressions 5' = (minor_i$pitches[[1]] %>% 
-                                    mami.codi.R::mami.codi(num_harmonics=5))$chord[[1]],
+                                    mami.codi.R::mami.codi(num_harmonics=5))$frequencies[[1]],
   'Major Triad Progressions 10' = (major_I$pitches[[1]] %>%
-                                     mami.codi.R::mami.codi(num_harmonics=10))$chord[[1]],
+                                     mami.codi.R::mami.codi(num_harmonics=10))$frequencies[[1]],
   'Minor Triad Progressions 10' = (minor_i$pitches[[1]] %>% 
-                                     mami.codi.R::mami.codi(num_harmonics=10))$chord[[1]]
+                                     mami.codi.R::mami.codi(num_harmonics=10))$frequencies[[1]]
 )
 
 ```

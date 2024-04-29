@@ -350,22 +350,17 @@ plot_semitone_rotation_angle <- function(chords, title='') {
     theme_homey()
 }
 plot_semitone_registers <- function(chords, title='') {
-  frequency_semitone =chords$semitone %>% min
-  wavelength_semitone =chords$semitone %>% max
+  frequency_semitone  = chords$semitone %>% min
+  wavelength_semitone = chords$semitone %>% max
   ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone)) +
-    ggplot2::geom_hline(yintercept = unique(round(
-      c(chords$tonic_freqs[[1]]),
-      1)),
-      color=colors_homey$neutral,
-      linetype = "dashed") +
     ggplot2::geom_point(color=colors_homey$minor, size=0.5,
-                        ggplot2::aes(y = max(.data$frequencies))) +
+                        ggplot2::aes(y = max(.data$frequencies[[1]]))) +
     ggplot2::geom_point(color=colors_homey$major, size=0.5,
-                        ggplot2::aes(y = min(.data$frequencies))) +
+                        ggplot2::aes(y = min(.data$frequencies[[1]]))) +
     ggplot2::geom_point(color=colors_homey$fundamental, size=0.0625,
-                        ggplot2::aes(y = max(.data$frequencies))) +
+                        ggplot2::aes(y = max(.data$frequencies[[1]]))) +
     ggplot2::geom_point(color=colors_homey$fundamental, size=0.0625,
-                        ggplot2::aes(y = min(.data$frequencies)) +
+                        ggplot2::aes(y = min(.data$frequencies[[1]]))) +
     ggplot2::scale_x_continuous(breaks = 0:15,
                                 minor_breaks = c()) +
     ggplot2::scale_y_continuous(breaks=round(hrep::midi_to_freq(48)*2^(0:7),1),
@@ -375,6 +370,7 @@ plot_semitone_registers <- function(chords, title='') {
     ggplot2::ylab('Ref Freqs & Tonic Timbre') +
     theme_homey()
 }
+
 plot_num_harmonics_deviation <- function(num_harmonics_deviation, title='') {
   num_harmonics = num_harmonics_deviation$num_harmonics
   ggplot2::ggplot(num_harmonics_deviation, ggplot2::aes(x = .data$num_harmonics)) +
