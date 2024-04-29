@@ -9,48 +9,134 @@ Harmonic Number Wavelengths
 1.66667: Major 6th 5/3 1.80000: minor 7th 9/5 1.87500: Major 7th 15/8
 2.00000: Octave 2/1
 
-### P4 Wavelengths 2 Harmonics
+### m3 Wavelengths 4 Harmonics
 
 ``` r
-ref = 1.311034
-λ = 0.9821657
-harmonic_num = 1 / 4
-octave_span = floor(log(ref/λ) / log(2)) + 1
+λ = 1.1024438
+ref = 0.1638792
+max_λ = 1.3110340
+harmonic_num = 1 / 8
+     # octave_spans[i]   = floor(abs(log(x[i]/reference) / log(pseudo_octave)));
+octave_span = floor(abs(log(λ/max_λ) / log(2)))
+     # octave_factors[i] = pow(pseudo_octave, octave_spans[i]);
 octave_factor = 2^octave_span
 t = tibble::tibble(
-  
-  
-  ratio = (ref  / (λ)) * harmonic_num,
-  
-  pseudo_ratio = (1 / .data$ratio) / octave_factor,
-  
-  fraction = list(rational_fraction(pseudo_ratio, WAVELENGTH_TOLERANCE)),
-  
-  
-  num = .data$fraction[[1]][1],
-  den = .data$fraction[[1]][2],
-  just_P5 = 3 / 2,
-  et_P5 = 2^(7/12),
-  pre = ref / λ,
-  pre_harm = (1 / (ref / λ * harmonic_num)) / 2,
-  pseudo_raw = 1 / .data$pre,
-  raw_ratio = list(rational_fraction(1 / .data$pseudo_raw, WAVELENGTH_TOLERANCE)),
-  raw_num = .data$raw_ratio[[1]][1],
-  raw_den = .data$raw_ratio[[1]][2],
-  λ,
-  ref,
+  # ratios[i] = (x[i] / octave_factors[i]) / reference * harmonic_number;
+  # pseudo_ratios[i]   = pow(2.0, log(ratios[i]) / log(pseudo_octave));
+  ratio_div_har = 2 * 2^(log((λ / octave_factor) / ref * harmonic_num)/log(2)),
+  wavelength = λ,
+  reference = ref,
+  harmonic_num = harmonic_num,
+  fraction_div_har = list(rational_fraction(.data$ratio_div_har, WAVELENGTH_TOLERANCE)),
+  num_div_har = .data$fraction_div_har[[1]][1] * octave_factor,
+  den_div_har = .data$fraction_div_har[[1]][2],
   octave_span,
-  octave_factor
+  octave_factor,
+  ratio = (λ/octave_factor)/ref,
+  fraction = list(rational_fraction(.data$ratio, WAVELENGTH_TOLERANCE)),
+  num = .data$fraction[[1]][1] * octave_factor,
+  den = .data$fraction[[1]][2],
+  ratio_har = .data$ratio * harmonic_num,
+  fraction_har = list(rational_fraction(.data$ratio_har, WAVELENGTH_TOLERANCE)),
+  num_har = .data$fraction_har[[1]][1] * octave_factor,
+  den_har = .data$fraction_har[[1]][2]
 )
 t
 ```
 
     ## # A tibble: 1 × 17
-    ##   ratio pseudo_ratio fraction    num   den just_P5 et_P5   pre pre_harm
-    ##   <dbl>        <dbl> <list>    <dbl> <dbl>   <dbl> <dbl> <dbl>    <dbl>
-    ## 1 0.334         1.50 <dbl [2]>     3     2     1.5  1.50  1.33     1.50
-    ## # ℹ 8 more variables: pseudo_raw <dbl>, raw_ratio <list>, raw_num <dbl>,
-    ## #   raw_den <dbl>, λ <dbl>, ref <dbl>, octave_span <dbl>, octave_factor <dbl>
+    ##   ratio_div_har wavelength reference harmonic_num fraction_div_har num_div_har
+    ##           <dbl>      <dbl>     <dbl>        <dbl> <list>                 <dbl>
+    ## 1          1.68       1.10     0.164        0.125 <dbl [2]>                  5
+    ## # ℹ 11 more variables: den_div_har <dbl>, octave_span <dbl>,
+    ## #   octave_factor <dbl>, ratio <dbl>, fraction <list>, num <dbl>, den <dbl>,
+    ## #   ratio_har <dbl>, fraction_har <list>, num_har <dbl>, den_har <dbl>
+
+### M3 Wavelengths 4 Harmonics
+
+``` r
+ref = 0.1638792
+λ = 0.2601421
+max_λ = 1.3110340
+harmonic_num = 1 / 8
+     # octave_spans[i]   = floor(abs(log(x[i]/reference) / log(pseudo_octave)));
+octave_span = floor(abs(log(λ/max_λ) / log(2)))
+     # octave_factors[i] = pow(pseudo_octave, octave_spans[i]);
+octave_factor = 2^octave_span
+t = tibble::tibble(
+  # ratios[i] = (x[i] / octave_factors[i]) / reference * harmonic_number;
+  # pseudo_ratios[i]   = pow(2.0, log(ratios[i]) / log(pseudo_octave));
+  ratio_div_har = 2 * 2^(log((λ / octave_factor) / ref * harmonic_num)/log(2)),
+  wavelength = λ,
+  reference = ref,
+  harmonic_num = harmonic_num,
+  fraction_div_har = list(rational_fraction(.data$ratio_div_har, WAVELENGTH_TOLERANCE)),
+  num_div_har = .data$fraction_div_har[[1]][1] * octave_factor,
+  den_div_har = .data$fraction_div_har[[1]][2],
+  octave_span,
+  octave_factor,
+  ratio = (λ/octave_factor)/ref,
+  fraction = list(rational_fraction(.data$ratio, WAVELENGTH_TOLERANCE)),
+  num = .data$fraction[[1]][1] * octave_factor,
+  den = .data$fraction[[1]][2],
+  ratio_har = .data$ratio * harmonic_num,
+  fraction_har = list(rational_fraction(.data$ratio_har, WAVELENGTH_TOLERANCE)),
+  num_har = .data$fraction_har[[1]][1] * octave_factor,
+  den_har = .data$fraction_har[[1]][2]
+)
+t
+```
+
+    ## # A tibble: 1 × 17
+    ##   ratio_div_har wavelength reference harmonic_num fraction_div_har num_div_har
+    ##           <dbl>      <dbl>     <dbl>        <dbl> <list>                 <dbl>
+    ## 1        0.0992      0.260     0.164        0.125 <dbl [2]>                  4
+    ## # ℹ 11 more variables: den_div_har <dbl>, octave_span <dbl>,
+    ## #   octave_factor <dbl>, ratio <dbl>, fraction <list>, num <dbl>, den <dbl>,
+    ## #   ratio_har <dbl>, fraction_har <list>, num_har <dbl>, den_har <dbl>
+
+### M3 Wavelengths 4 Harmonics
+
+``` r
+ref = 0.1638792
+λ = 1.0405683
+max_λ = 1.3110340
+harmonic_num = 1 / 8
+     # octave_spans[i]   = floor(abs(log(x[i]/reference) / log(pseudo_octave)));
+octave_span = floor(abs(log(λ/max_λ) / log(2)))
+     # octave_factors[i] = pow(pseudo_octave, octave_spans[i]);
+octave_factor = 2^octave_span
+t = tibble::tibble(
+  # ratios[i] = (x[i] / octave_factors[i]) / reference * harmonic_number;
+  # pseudo_ratios[i]   = pow(2.0, log(ratios[i]) / log(pseudo_octave));
+  ratio_div_har =  2^(log((λ / octave_factor) / ref * harmonic_num)/log(2)),
+  wavelength = λ,
+  reference = ref,
+  harmonic_num = harmonic_num,
+  fraction_div_har = list(rational_fraction(.data$ratio_div_har, WAVELENGTH_TOLERANCE)),
+  num_div_har = .data$fraction_div_har[[1]][1] * octave_factor,
+  den_div_har = .data$fraction_div_har[[1]][2],
+  octave_span,
+  octave_factor,
+  ratio = (λ/octave_factor)/ref,
+  fraction = list(rational_fraction(.data$ratio, WAVELENGTH_TOLERANCE)),
+  num = .data$fraction[[1]][1] * octave_factor,
+  den = .data$fraction[[1]][2],
+  ratio_har = .data$ratio * harmonic_num,
+  fraction_har = list(rational_fraction(.data$ratio_har, WAVELENGTH_TOLERANCE)),
+  num_har = .data$fraction_har[[1]][1] * octave_factor,
+  den_har = .data$fraction_har[[1]][2]
+)
+t
+```
+
+    ## # A tibble: 1 × 17
+    ##   ratio_div_har wavelength reference harmonic_num fraction_div_har num_div_har
+    ##           <dbl>      <dbl>     <dbl>        <dbl> <list>                 <dbl>
+    ## 1         0.794       1.04     0.164        0.125 <dbl [2]>                  4
+    ## # ℹ 11 more variables: den_div_har <dbl>, octave_span <dbl>,
+    ## #   octave_factor <dbl>, ratio <dbl>, fraction <list>, num <dbl>, den <dbl>,
+    ## #   ratio_har <dbl>, fraction_har <list>, num_har <dbl>, den_har <dbl>
 
 ### m3 M6 Ratios
 

@@ -25,7 +25,41 @@ c(0) %>% mami.codi()
 1.87500: Major 7th    15/8
 2.00000: Octave       2/1
 
-### P1 Wavelengths 4 Harmonics
+### m3 Wavelengths 4 Harmonics
+```{r, echo=T}
+λ = 1.1024438
+ref = 0.1638792
+max_λ = 1.3110340
+harmonic_num = 1 / 8
+     # octave_spans[i]   = floor(abs(log(x[i]/reference) / log(pseudo_octave)));
+octave_span = floor(abs(log(λ/max_λ) / log(2)))
+     # octave_factors[i] = pow(pseudo_octave, octave_spans[i]);
+octave_factor = 2^octave_span
+t = tibble::tibble(
+  # ratios[i] = (x[i] / octave_factors[i]) / reference * harmonic_number;
+  # pseudo_ratios[i]   = pow(2.0, log(ratios[i]) / log(pseudo_octave));
+  ratio_div_har = 2 * 2^(log((λ / octave_factor) / ref * harmonic_num)/log(2)),
+  wavelength = λ,
+  reference = ref,
+  harmonic_num = harmonic_num,
+  fraction_div_har = list(rational_fraction(.data$ratio_div_har, WAVELENGTH_TOLERANCE)),
+  num_div_har = .data$fraction_div_har[[1]][1] * octave_factor,
+  den_div_har = .data$fraction_div_har[[1]][2],
+  octave_span,
+  octave_factor,
+  ratio = (λ/octave_factor)/ref,
+  fraction = list(rational_fraction(.data$ratio, WAVELENGTH_TOLERANCE)),
+  num = .data$fraction[[1]][1] * octave_factor,
+  den = .data$fraction[[1]][2],
+  ratio_har = .data$ratio * harmonic_num,
+  fraction_har = list(rational_fraction(.data$ratio_har, WAVELENGTH_TOLERANCE)),
+  num_har = .data$fraction_har[[1]][1] * octave_factor,
+  den_har = .data$fraction_har[[1]][2]
+)
+t
+```
+
+### M3 Wavelengths 4 Harmonics
 ```{r, echo=T}
 ref = 0.1638792
 λ = 0.2601421

@@ -109,15 +109,19 @@ using namespace Rcpp;
        octave_spans[i]   = floor(abs(log(x[i]/min(x)) / log(pseudo_octave)));
        octave_factors[i] = pow(pseudo_octave, octave_spans[i]);
        ratios[i] = (x[i] / octave_factors[i]) / reference * harmonic_number;
+       pseudo_ratios[i]   = pow(2.0, log(ratios[i]) / log(pseudo_octave));
+       fraction           = rational_fraction(pseudo_ratios[i],tolerance);
+       nums[i]            = fraction[0] * octave_factors[i];
+       dens[i]            = fraction[1];
      } else if (harmonic_number<1) {
        octave_spans[i]   = floor(abs(log(x[i]/max(x)) / log(pseudo_octave)));
        octave_factors[i] = pow(pseudo_octave, octave_spans[i]);
-       ratios[i] = (x[i] * octave_factors[i]) / reference * harmonic_number;
+       ratios[i] = 2 * (x[i] * octave_factors[i]) / reference * harmonic_number;
+       pseudo_ratios[i]   = pow(2.0, log(ratios[i]) / log(pseudo_octave));
+       fraction           = rational_fraction(pseudo_ratios[i],tolerance);
+       nums[i]            = fraction[0] * octave_factors[i] / 2;
+       dens[i]            = fraction[1];
      }
-     pseudo_ratios[i]   = pow(2.0, log(ratios[i]) / log(pseudo_octave));
-     fraction           = rational_fraction(pseudo_ratios[i],tolerance);
-     nums[i]            = fraction[0] * octave_factors[i];
-     dens[i]            = fraction[1];
      harmonic_numbers[i] = harmonic_number;
    }
 
