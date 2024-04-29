@@ -17,26 +17,47 @@ BEHAVIOURAL_SMOOTH_BROAD  <- 0.2
 BEHAVIOURAL_SMOOTH_NARROW <- 0.035
 ```
 
+## Timbre: Consonance-Dissonance and Major-Minor ~ Semitones
+
+This section is based on [Timbral effects on consonance disentangle psychoacoustic mechanisms and suggest perceptual origins for musical scales](https://www.nature.com/articles/s41467-024-45812-z) by Raja Marjieh, Peter M. C. Harrison, Harin Lee, Fotini Deligiannaki & Nori Jacoby.
+
+#### Notes on Plots:
+
+In the plots below:
+
+* The cream lines are smoothed experimental data from Marjieh, Harrison et al.
+
+* The multi-colored points are MaMi.CoDi computational predictions
+
+* The multi-colored lines are smoothed MaMi.CoDi computational predictions
+
+* The colors represent MaMi.CoDi computational predictions for major-minor polarity:
+    * Gold is major
+    * Red is neutral
+    * Blue is minor
+
+* The vertical axis is z-scored consonance-dissonance
+
+* The horizontal axis is the width of the dyad that was judged from 0 to 15 semitones.
+    * For example, the data at 4 represents the equal tempered major third, M3.
+    * While the data at 8 represents the equal tempered minor sixth, m6.
+    
+
 #### Notes on Dyads:
 
-* Consider two chords containing C4 and E4: 
-    * C4, E4, C5 (a framed major third) is predicted to sound major and 
-    * E3, C4, E4 (a framed minor sixth) is predicted to sound minor.
-
-* The dyads immediately below, from the timbre study, are true two-pitch dyads. A 
-major third like C4 and E4, for example, only includes C4 and E4.
+* The dyads immediately below, from the timbre study, are true two-pitch dyads. True 
+major thirds like C4 and E4, for example, only includes C4 and E4.
 
 * The intervals in the last few sections, further below, are actually three-pitch 
 chords with the high and low pitches one octave apart framing the interval, for 
 example: C4, E4 and C5.
 
-* True two-pitch dyads versus octave-framed, three-pitch dyads, might show
+* True two-pitch dyads versus octave-framed, three-pitch chords, might show
 different major-minor polarities.
 
-
-## Timbre: Consonance-Dissonance and Major-Minor ~ Semitones
-
-This section is based on [Timbral effects on consonance disentangle psychoacoustic mechanisms and suggest perceptual origins for musical scales](https://www.nature.com/articles/s41467-024-45812-z) by Raja Marjieh, Peter M. C. Harrison, Harin Lee, Fotini Deligiannaki & Nori Jacoby.
+* Consider two chords containing C4 and E4: 
+    * C4, E4, C5 (a framed major third) is predicted to sound major and 
+    * E3, C4, E4 (a framed minor sixth) is predicted to sound minor.
 
 
 ## Frequencies
@@ -147,14 +168,6 @@ params %>% purrr::map(\(p) {
   print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),
                            goal=experiment,sigma=sigma,
                            black_vlines=black_vlines,gray_vlines=gray_vlines))
-  print(plot_semitone_mami(chords, paste('Major-Minor'),goal=experiment,
-                           include_line=T,sigma=sigma,
-                           black_vlines=black_vlines,gray_vlines=gray_vlines))
-  print(plot_mami.codi(chords, paste('MaMi.CoDi ~',title), chords_to_label=NULL,
-                       include_labels=F))
-  print(plot_semitone_colo.cohi(chords, paste('Consonance Frequency (gold) & Wavelength (blue)'),
-                                sigma=sigma,
-                                black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")
 })
 ```
@@ -216,14 +229,6 @@ params %>% purrr::map(\(p) {
   print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),
                            goal=experiment,sigma=sigma,
                            black_vlines=black_vlines,gray_vlines=gray_vlines))
-  print(plot_semitone_mami(chords, paste('Major-Minor'),goal=experiment,
-                           include_line=T,sigma=sigma,
-                           black_vlines=black_vlines,gray_vlines=gray_vlines))
-  print(plot_mami.codi(chords, paste('MaMi.CoDi ~',title),
-                       include_labels=F))
-  print(plot_semitone_colo.cohi(chords, paste('Consonance Frequency (gold) & Wavelength (blue)'),
-                                sigma=sigma,
-                                black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")
 })
 ```
@@ -234,8 +239,8 @@ The dyads below are framed between the tonic and octave. A major third
 like C4 and E4, for example, actually includes C4, E4 and C5.
 
 ```{r, include=F}
-chord_types <- c('Dyads','Triads','Major Triad Progressions',
-                 'Minor Triad Progressions', 'Scales')
+chord_types <- c('Dyads','Triads','Scales', 'Major Triad Progressions',
+                 'Minor Triad Progressions')
 chords <- chords %>% dplyr::filter(type %in% chord_types)
 
 major_I = chords %>% dplyr::filter(type == 'Major Triad Progressions' &
