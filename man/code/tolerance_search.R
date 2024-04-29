@@ -1,8 +1,15 @@
 source('./utils.R')
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R', ref="wavelength_vs_frequency")
 
 library(mami.codi.R)
 devtools::load_all(".")
+
+P8 <- c(60,72) %>% mami.codi.R::mami.codi(verbose=T)
+if (dplyr::near(max(P8$wavelengths[[1]]),  343 / hrep::midi_to_freq(60))) {
+  print("Seems to be the correct version mami.codi.R")
+} else {
+  stop("This is not the expected version of mami.codi.R")
+}
 
 delete_3rd_partial = F
 num_harmonics = 10
@@ -34,7 +41,7 @@ chords = tibble::tibble(
 )
 index = seq_along(chords$pitches)
 
-tolerances = 1:48
+tolerances = seq(from=0.001, to=0.1, by=0.001)
 
 grid = tidyr::expand_grid(
   index,
@@ -66,7 +73,7 @@ data = grid %>% furrr::future_pmap_dfr(\(
 
   mami.codi.R::mami.codi(
     chord,
-    tolerance_semitone_ratio = tolerance,
+    tolerance=tolerance,
     metadata  = list(
       tolerance=tolerance,
       octave_ratio=octave_ratio,

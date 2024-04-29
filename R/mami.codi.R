@@ -16,11 +16,11 @@
 #'
 #' @rdname mami.codi
 #' @export
-mami.codi <- function(x, metadata=NA, verbose=FALSE,...) {
+mami.codi <- function(x, metadata=NA, verbose=FALSE, tolerance=TOLERANCE, ...) {
 
   parse_input(x, ...)              %>%
     listen_for_pseudo_octave       %>%
-    duplex                         %>%
+    duplex(tolerance)              %>%
     flip                           %>%
     rotate                         %>%
     format_output(metadata, verbose)
@@ -66,7 +66,7 @@ listen_for_pseudo_octave = function(x) {
   }
 }
 
-duplex <- function(x) {
+duplex <- function(x, tolerance) {
 
   f = x$frequencies[[1]]
   λ = x$wavelengths[[1]]
@@ -78,7 +78,7 @@ duplex <- function(x) {
                    min(f),
                    1,
                    x$pseudo_octave,
-                   TOLERANCE) %>%
+                   tolerance) %>%
       dplyr::rename_with(~ paste0(.,'_frequency')),
 
     # estimate the wavelength cycle
@@ -86,7 +86,7 @@ duplex <- function(x) {
                    min(λ),
                    1 / round(max(λ) / min(λ)),
                    x$pseudo_octave,
-                   TOLERANCE) %>%
+                   tolerance) %>%
       dplyr::rename_with(~ paste0(.,'_wavelength'))
 
   )
@@ -161,7 +161,7 @@ lcm <- function(x) Reduce(numbers::LCM, x)
 
 SPEED_OF_SOUND = 343 # m/S
 TOLERANCE      = 0.019
-ZARLINO        = 100 / sqrt(2)     # Z
+ZARLINO        = 1000 / sqrt(2)     # Z
 MIN_AMPLITUDE  = 1/12
 PI_4           = pi / 4
 R_PI_4         = matrix(c(
