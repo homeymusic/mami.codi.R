@@ -38,26 +38,26 @@ In the plots below:
 
 * The vertical axis is z-scored consonance-dissonance
 
-* The horizontal axis is the width of the dyad that was judged from 0 to 15 semitones.
-    * For example, the data at 4 represents the equal tempered major third, M3.
-    * While the data at 8 represents the equal tempered minor sixth, m6.
+* The horizontal axis is the width of the dyad from 0 to 15 semitones
+    * For example, the data at 4 represents the equal tempered major third, M3
+    * While the data at 8 represents the equal tempered minor sixth, m6
     
 
 #### Notes on Dyads:
 
 * The dyads immediately below, from the timbre study, are true two-pitch dyads. True 
-major thirds like C4 and E4, for example, only includes C4 and E4.
+major thirds like C4 and E4, for example, only includes C4 and E4
 
 * The intervals in the last few sections, further below, are actually three-pitch 
 chords with the high and low pitches one octave apart framing the interval, for 
-example: C4, E4 and C5.
+example: C4, E4 and C5
 
 * True two-pitch dyads versus octave-framed, three-pitch chords, might show
-different major-minor polarities.
+different major-minor polarities
 
 * Consider two chords containing C4 and E4: 
     * C4, E4, C5 (a framed major third) is predicted to sound major and 
-    * E3, C4, E4 (a framed minor sixth) is predicted to sound minor.
+    * E3, C4, E4 (a framed minor sixth) is predicted to sound minor
 
 
 ## Frequencies
