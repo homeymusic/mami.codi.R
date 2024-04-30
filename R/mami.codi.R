@@ -76,7 +76,7 @@ duplex <- function(x, tolerance) {
   f = x$frequencies[[1]]
   λ = x$wavelengths[[1]]
 
-  highest_harmonic_num = round(max(f) / min(f))
+  highest_harmonic_num = ceiling(max(f) / min(f))
 
   x %>% dplyr::mutate(
 
