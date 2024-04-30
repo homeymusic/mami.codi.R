@@ -1,4 +1,4 @@
-search_label  = 'P8'
+search_label  = 'M3'
 
 source('./utils.R')
 devtools::install_github('git@github.com:homeymusic/mami.codi.R')
