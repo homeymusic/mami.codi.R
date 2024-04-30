@@ -437,10 +437,7 @@ plot_semitone_codi_wrap <- function(theory, experiment,
   )
   per_plot_labels$label = per_plot_labels %>%
     purrr::pmap_vec(\(tolerance) {
-      tols = paste0(
-        '  ', round(tolerance*1200/12^3,2), ' cents (',
-        tolerance, ' tricia)'
-      )
+      tols = paste0('  ', tolerance)
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +

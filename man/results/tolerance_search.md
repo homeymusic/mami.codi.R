@@ -21,4 +21,4 @@ Octave Ratios:
 
     #> [1] 2
 
-![](../figures/tolerance_search/unnamed-chunk-12-1.png)<!-- -->
+![](../figures/tolerance_search/unnamed-chunk-13-1.png)<!-- -->

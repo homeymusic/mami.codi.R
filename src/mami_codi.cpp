@@ -102,7 +102,7 @@ using namespace Rcpp;
      _("den")                 = dens,
      _("ratio")               = ratios,
      _("pseudo_ratio")        = pseudo_ratios,
-     _("pitch")               = x,
+     _("tone")                = x,
      _("harmonic")            = harmonics,
      _("octave_span")         = octave_spans,
      _("octave_factor")       = octave_factors

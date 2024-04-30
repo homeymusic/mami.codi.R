@@ -6,7 +6,7 @@ always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'Harmonic'
+search_label = 'M3'
 ```
 
 ```{r, echo=F, message=F, include=F}
@@ -70,8 +70,6 @@ theory <- theory %>% dplyr::rowwise() %>% dplyr::mutate(
 Tolerances:
 ```{r, echo=F}
 tols = theory$tolerance %>% unique
-cols = ceiling(length(tols)/12)
-rows = if (length(tols)<12) length(tols) else 12
 tols
 ```
 
@@ -128,6 +126,11 @@ experiment <- experiment %>%
     z_score = z_scores(rating),
     smooth  = smoothed(semitone, z_score, params$sigma)
   )
+```
+
+```{r, echo=F}
+cols = 1
+rows = length(tols)
 ```
 
 ```{r, fig.height=3*rows, fig.width=12*cols, echo=F}
