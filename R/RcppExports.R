@@ -16,7 +16,7 @@ compute_pseudo_octave <- function(fn, f0, n) {
     .Call(`_mami_codi_R_compute_pseudo_octave`, fn, f0, n)
 }
 
-find_highest_fundamental <- function(x) {
-    .Call(`_mami_codi_R_find_highest_fundamental`, x)
+listen_for_highest_fundamental <- function(x) {
+    .Call(`_mami_codi_R_listen_for_highest_fundamental`, x)
 }
 

@@ -59,7 +59,7 @@ listen_for_pseudo_octave = function(x) {
 
   if (length(f) > 2) {
     x %>% dplyr::mutate(
-      pseudo_octave = (f %>% find_highest_fundamental() %>%
+      pseudo_octave = (f %>% listen_for_highest_fundamental() %>%
                          dplyr::count(.data$pseudo_octave, sort=TRUE) %>%
                          dplyr::slice(1))$pseudo_octave
     )
@@ -80,14 +80,14 @@ duplex <- function(x, tolerance) {
 
     # estimate the frequency cycle
     estimate_cycle(f,
-                   1,
+                   max(f) / min(f),
                    x$pseudo_octave,
                    tolerance) %>%
       dplyr::rename_with(~ paste0(.,'_frequency')),
 
     # estimate the wavelength cycle
     estimate_cycle(λ,
-                   1 / round(max(λ) / min(λ)),
+                   min(λ) / max(λ),
                    x$pseudo_octave,
                    tolerance) %>%
       dplyr::rename_with(~ paste0(.,'_wavelength'))

@@ -49,14 +49,14 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// find_highest_fundamental
-DataFrame find_highest_fundamental(const NumericVector x);
-RcppExport SEXP _mami_codi_R_find_highest_fundamental(SEXP xSEXP) {
+// listen_for_highest_fundamental
+DataFrame listen_for_highest_fundamental(const NumericVector x);
+RcppExport SEXP _mami_codi_R_listen_for_highest_fundamental(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const NumericVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(find_highest_fundamental(x));
+    rcpp_result_gen = Rcpp::wrap(listen_for_highest_fundamental(x));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -65,7 +65,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_mami_codi_R_rational_fraction", (DL_FUNC) &_mami_codi_R_rational_fraction, 2},
     {"_mami_codi_R_ratios", (DL_FUNC) &_mami_codi_R_ratios, 4},
     {"_mami_codi_R_compute_pseudo_octave", (DL_FUNC) &_mami_codi_R_compute_pseudo_octave, 3},
-    {"_mami_codi_R_find_highest_fundamental", (DL_FUNC) &_mami_codi_R_find_highest_fundamental, 1},
+    {"_mami_codi_R_listen_for_highest_fundamental", (DL_FUNC) &_mami_codi_R_listen_for_highest_fundamental, 1},
     {NULL, NULL, 0}
 };
 

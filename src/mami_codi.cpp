@@ -129,7 +129,7 @@ using namespace Rcpp;
    }
  }
 
- //' find_highest_fundamental
+ //' listen_for_highest_fundamental
  //'
  //' Find the highest fundamental freq
  //'
@@ -139,7 +139,7 @@ using namespace Rcpp;
  //'
  //' @export
  // [[Rcpp::export]]
- DataFrame find_highest_fundamental(const NumericVector x) {
+ DataFrame listen_for_highest_fundamental(const NumericVector x) {
 
    const int x_size   = x.size();
    const double f_max = max(x);
@@ -178,7 +178,7 @@ using namespace Rcpp;
        _("harmonic_number") = 1,
        _("evaluation_freq") = f_max,
        _("reference_freq")  = f_max,
-       _("pseudo_octave")   = 1.0,
+       _("pseudo_octave")   = 2.0,
        _("highest_freq")    = f_max
      );
    } else {
