@@ -13,8 +13,8 @@ if (dplyr::near(max(P8$wavelengths[[1]]),  343 / hrep::midi_to_freq(60))) {
 
 delete_3rd_partial = F
 num_harmonics = 10
-search_label  = 'Harmonic'
-octave_ratio  = 2.0
+search_label  = 'Stretched'
+octave_ratio  = 2.1
 
 print(search_label)
 if (delete_3rd_partial) {

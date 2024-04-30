@@ -19,6 +19,6 @@ Number of Harmonics:
 
 Octave Ratios:
 
-    #> [1] 2
+    #> [1] 2.1
 
 ![](../figures/tolerance_search/unnamed-chunk-12-1.png)<!-- -->
