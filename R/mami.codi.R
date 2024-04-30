@@ -76,18 +76,20 @@ duplex <- function(x, tolerance) {
   f = x$frequencies[[1]]
   λ = x$wavelengths[[1]]
 
+  highest_harmonic_num = round(max(f) / min(f))
+
   x %>% dplyr::mutate(
 
     # estimate the frequency cycle
     estimate_cycle(f,
-                   round(max(f) / min(f)),
+                   highest_harmonic_num,
                    x$pseudo_octave,
                    tolerance) %>%
       dplyr::rename_with(~ paste0(.,'_frequency')),
 
     # estimate the wavelength cycle
     estimate_cycle(λ,
-                   1 / round(max(λ) / min(λ)),
+                   1 / highest_harmonic_num,
                    x$pseudo_octave,
                    tolerance) %>%
       dplyr::rename_with(~ paste0(.,'_wavelength'))
