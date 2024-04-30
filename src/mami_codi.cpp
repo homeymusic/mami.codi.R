@@ -78,8 +78,6 @@ using namespace Rcpp;
    NumericVector harmonics(m);
    NumericVector ratios(m);
    NumericVector pseudo_ratios(m);
-   NumericVector octave_spans(m);
-   NumericVector octave_factors(m);
    NumericVector fraction(2);
 
    for (int i = 0; i < m; ++i) {
@@ -97,9 +95,7 @@ using namespace Rcpp;
      _("ratio")               = ratios,
      _("pseudo_ratio")        = pseudo_ratios,
      _("tone")                = x,
-     _("harmonic")            = harmonics,
-     _("octave_span")         = octave_spans,
-     _("octave_factor")       = octave_factors
+     _("harmonic")            = harmonics
    );
  }
 
