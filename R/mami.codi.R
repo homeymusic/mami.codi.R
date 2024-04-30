@@ -88,7 +88,7 @@ duplex <- function(x, tolerance) {
 
     # estimate the wavelength cycle
     estimate_cycle(λ,
-                   1 / n,
+                   1,
                    x$pseudo_octave,
                    tolerance) %>%
       dplyr::rename_with(~ paste0(.,'_wavelength'))
