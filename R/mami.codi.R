@@ -75,7 +75,7 @@ duplex <- function(x, tolerance) {
 
   f = x$frequencies[[1]]
   λ = x$wavelengths[[1]]
-  n = max(f) / min(f)
+  n = round(max(f) / min(f))
 
   x %>% dplyr::mutate(
 
