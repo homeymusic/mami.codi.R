@@ -80,14 +80,14 @@ duplex <- function(x, tolerance) {
 
     # estimate the frequency cycle
     estimate_cycle(f,
-                   max(f) / min(f),
+                   round(max(f) / min(f)),
                    x$pseudo_octave,
                    tolerance) %>%
       dplyr::rename_with(~ paste0(.,'_frequency')),
 
     # estimate the wavelength cycle
     estimate_cycle(λ,
-                   min(λ) / max(λ),
+                   1 / round(max(λ) / min(λ)),
                    x$pseudo_octave,
                    tolerance) %>%
       dplyr::rename_with(~ paste0(.,'_wavelength'))
