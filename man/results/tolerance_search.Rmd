@@ -18,7 +18,7 @@ knitr::opts_chunk$set(dev = 'png')
 ```
 
 ```{r, echo=F}
-search_label = 'Stretched'
+search_label = 'Harmonic'
 ```
 
 ```{r, echo=F}

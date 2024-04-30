@@ -23,17 +23,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // ratios
-DataFrame ratios(NumericVector x, const double reference, const double harmonic_number, const double pseudo_octave, const double tolerance);
-RcppExport SEXP _mami_codi_R_ratios(SEXP xSEXP, SEXP referenceSEXP, SEXP harmonic_numberSEXP, SEXP pseudo_octaveSEXP, SEXP toleranceSEXP) {
+DataFrame ratios(NumericVector x, const double harmonic, const double pseudo_octave, const double tolerance);
+RcppExport SEXP _mami_codi_R_ratios(SEXP xSEXP, SEXP harmonicSEXP, SEXP pseudo_octaveSEXP, SEXP toleranceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< const double >::type reference(referenceSEXP);
-    Rcpp::traits::input_parameter< const double >::type harmonic_number(harmonic_numberSEXP);
+    Rcpp::traits::input_parameter< const double >::type harmonic(harmonicSEXP);
     Rcpp::traits::input_parameter< const double >::type pseudo_octave(pseudo_octaveSEXP);
     Rcpp::traits::input_parameter< const double >::type tolerance(toleranceSEXP);
-    rcpp_result_gen = Rcpp::wrap(ratios(x, reference, harmonic_number, pseudo_octave, tolerance));
+    rcpp_result_gen = Rcpp::wrap(ratios(x, harmonic, pseudo_octave, tolerance));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -64,7 +63,7 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_mami_codi_R_rational_fraction", (DL_FUNC) &_mami_codi_R_rational_fraction, 2},
-    {"_mami_codi_R_ratios", (DL_FUNC) &_mami_codi_R_ratios, 5},
+    {"_mami_codi_R_ratios", (DL_FUNC) &_mami_codi_R_ratios, 4},
     {"_mami_codi_R_compute_pseudo_octave", (DL_FUNC) &_mami_codi_R_compute_pseudo_octave, 3},
     {"_mami_codi_R_find_highest_fundamental", (DL_FUNC) &_mami_codi_R_find_highest_fundamental, 1},
     {NULL, NULL, 0}

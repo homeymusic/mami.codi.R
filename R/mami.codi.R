@@ -68,6 +68,7 @@ listen_for_pseudo_octave = function(x) {
       pseudo_octave = 2.0
     )
   }
+
 }
 
 duplex <- function(x, tolerance) {
@@ -79,7 +80,6 @@ duplex <- function(x, tolerance) {
 
     # estimate the frequency cycle
     estimate_cycle(f,
-                   min(f),
                    1,
                    x$pseudo_octave,
                    tolerance) %>%
@@ -87,7 +87,6 @@ duplex <- function(x, tolerance) {
 
     # estimate the wavelength cycle
     estimate_cycle(λ,
-                   min(λ),
                    1 / round(max(λ) / min(λ)),
                    x$pseudo_octave,
                    tolerance) %>%
@@ -97,10 +96,9 @@ duplex <- function(x, tolerance) {
 
 }
 
+estimate_cycle <- function(x, harmonic, pseudo_octave, tolerance) {
 
-estimate_cycle <- function(x, reference, harmonic_number, pseudo_octave, tolerance) {
-
-  r = ratios(x, reference, harmonic_number, pseudo_octave, tolerance)
+  r = ratios(x, harmonic, pseudo_octave, tolerance)
 
   tibble::tibble_row(
     lcm        = lcm(r$den),
@@ -161,7 +159,7 @@ format_output <- function(x, metadata, verbose) {
 lcm <- function(x) Reduce(numbers::LCM, x)
 
 SPEED_OF_SOUND = 343
-TOLERANCE      = 0.038
+TOLERANCE      = 0.019
 ZARLINO        = 100 / sqrt(2)
 MIN_AMPLITUDE  = 1/12
 PI_4           = pi / 4

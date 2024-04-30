@@ -8,8 +8,8 @@ rational_fraction <- function(x, tolerance) {
     .Call(`_mami_codi_R_rational_fraction`, x, tolerance)
 }
 
-ratios <- function(x, reference, harmonic_number, pseudo_octave, tolerance) {
-    .Call(`_mami_codi_R_ratios`, x, reference, harmonic_number, pseudo_octave, tolerance)
+ratios <- function(x, harmonic, pseudo_octave, tolerance) {
+    .Call(`_mami_codi_R_ratios`, x, harmonic, pseudo_octave, tolerance)
 }
 
 compute_pseudo_octave <- function(fn, f0, n) {

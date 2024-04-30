@@ -68,42 +68,33 @@ using namespace Rcpp;
  //' @export
  // [[Rcpp::export]]
  DataFrame ratios(NumericVector x,
-                  const double reference,
-                  const double harmonic_number,
+                  const double harmonic,
                   const double pseudo_octave,
                   const double tolerance) {
 
    int m = x.size();
    NumericVector nums(m);
    NumericVector dens(m);
-   NumericVector harmonic_numbers(m);
+   NumericVector harmonics(m);
    NumericVector ratios(m);
    NumericVector pseudo_ratios(m);
    NumericVector octave_spans(m);
    NumericVector octave_factors(m);
    NumericVector fraction(2);
 
-
    for (int i = 0; i < m; ++i) {
-     if (harmonic_number>=1) {
-       octave_spans[i]   = floor(abs(log(x[i]/min(x)) / log(pseudo_octave)));
-       octave_factors[i] = pow(pseudo_octave, octave_spans[i]);
-       ratios[i] = (x[i] / octave_factors[i]) / reference * harmonic_number;
-       pseudo_ratios[i]   = pow(2.0, log(ratios[i]) / log(pseudo_octave));
-       fraction           = rational_fraction(pseudo_ratios[i],tolerance);
-       nums[i]            = fraction[0] * octave_factors[i];
-     } else if (harmonic_number<1) {
-       octave_spans[i]   = floor(abs(log(x[i]/max(x)) / log(pseudo_octave)));
-       octave_factors[i] = pow(pseudo_octave, octave_spans[i]);
-       // ratios[i] = 2 * (x[i] * octave_factors[i]) / reference * harmonic_number;
-       ratios[i] = (x[i] * octave_factors[i]) / reference * harmonic_number;
-       pseudo_ratios[i]   = pow(2.0, log(ratios[i]) / log(pseudo_octave));
-       fraction           = rational_fraction(pseudo_ratios[i],tolerance);
-       // nums[i]            = fraction[0] * octave_factors[i] / 2;
-       nums[i]            = fraction[0] * octave_factors[i];
+     if (harmonic>=1) {
+       octave_spans[i]   = floor((log(x[i]/min(x)) / log(pseudo_octave)));
+     } else if (harmonic<1) {
+       octave_spans[i]   = floor((log(x[i]/max(x)) / log(pseudo_octave)));
      }
-     dens[i]            = fraction[1];
-     harmonic_numbers[i] = harmonic_number;
+     octave_factors[i] = pow(pseudo_octave, octave_spans[i]);
+     ratios[i] = (x[i] / octave_factors[i]) / min(x) * harmonic;
+     pseudo_ratios[i]  = pow(2.0, log(ratios[i]) / log(pseudo_octave));
+     fraction          = rational_fraction(pseudo_ratios[i],tolerance);
+     nums[i]           = fraction[0];
+     dens[i]           = fraction[1];
+     harmonics[i]  = harmonic;
    }
 
    return DataFrame::create(
@@ -112,9 +103,8 @@ using namespace Rcpp;
      _("ratio")               = ratios,
      _("pseudo_ratio")        = pseudo_ratios,
      _("pitch")               = x,
-     _("reference")           = reference,
-     _("harmonic_number")     = harmonic_number,
-     _("octave_spans")        = octave_spans,
+     _("harmonic")            = harmonics,
+     _("octave_span")         = octave_spans,
      _("octave_factor")       = octave_factors
    );
  }
@@ -194,10 +184,10 @@ using namespace Rcpp;
    } else {
      return DataFrame::create(
        _("harmonic_number") = harmonic_number[Rcpp::Range(0, num_matches-1)],
-                                             _("evaluation_freq") = evaluation_freq[Rcpp::Range(0, num_matches-1)],
-                                                                                   _("reference_freq")  = reference_freq[Rcpp::Range(0, num_matches-1)],
-                                                                                                                        _("pseudo_octave")   = pseudo_octave[Rcpp::Range(0, num_matches-1)],
-                                                                                                                                                            _("highest_freq")    = highest_freq[Rcpp::Range(0, num_matches-1)]
+       _("evaluation_freq") = evaluation_freq[Rcpp::Range(0, num_matches-1)],
+       _("reference_freq")  = reference_freq[Rcpp::Range(0, num_matches-1)],
+       _("pseudo_octave")   = pseudo_octave[Rcpp::Range(0, num_matches-1)],
+       _("highest_freq")    = highest_freq[Rcpp::Range(0, num_matches-1)]
      );
    }
 
