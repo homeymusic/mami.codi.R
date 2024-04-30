@@ -83,13 +83,7 @@ using namespace Rcpp;
    NumericVector fraction(2);
 
    for (int i = 0; i < m; ++i) {
-     if (harmonic>=1) {
-       octave_spans[i]   = floor((log(x[i]/min(x)) / log(pseudo_octave)));
-     } else if (harmonic<1) {
-       octave_spans[i]   = floor((log(x[i]/max(x)) / log(pseudo_octave)));
-     }
-     octave_factors[i] = pow(pseudo_octave, octave_spans[i]);
-     ratios[i] = (x[i] / octave_factors[i]) / min(x) * harmonic;
+     ratios[i] = (x[i] / min(x)) * harmonic;
      pseudo_ratios[i]  = pow(2.0, log(ratios[i]) / log(pseudo_octave));
      fraction          = rational_fraction(pseudo_ratios[i],tolerance);
      nums[i]           = fraction[0];
