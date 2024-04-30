@@ -1,3 +1,5 @@
+search_label  = 'Harmonic'
+
 source('./utils.R')
 devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 
@@ -13,7 +15,6 @@ if (dplyr::near(max(P8$wavelengths[[1]]),  343 / hrep::midi_to_freq(60))) {
 
 delete_3rd_partial = F
 num_harmonics = 10
-search_label  = 'Compressed'
 octave_ratio  = 2.0
 
 if (search_label == 'Stretched') {
