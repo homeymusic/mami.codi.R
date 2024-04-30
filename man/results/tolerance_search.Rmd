@@ -5,6 +5,10 @@ output:
 always_allow_html: true
 ---
 
+```{r, echo=F}
+search_label = 'Compressed'
+```
+
 ```{r, echo=F, message=F, include=F}
 devtools::load_all(".")
 source('../code/plot.R')
@@ -15,10 +19,6 @@ knitr::opts_chunk$set(
   fig.path = "../figures/tolerance_search/"
 )
 knitr::opts_chunk$set(dev = 'png')
-```
-
-```{r, echo=F}
-search_label = 'Harmonic'
 ```
 
 ```{r, echo=F}
