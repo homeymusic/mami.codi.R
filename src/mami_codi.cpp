@@ -68,14 +68,14 @@ using namespace Rcpp;
  //' @export
  // [[Rcpp::export]]
  DataFrame ratios(NumericVector x,
-                  const double harmonic,
+                  const double reference_tone,
                   const double pseudo_octave,
                   const double tolerance) {
 
    int m = x.size();
    NumericVector nums(m);
    NumericVector dens(m);
-   NumericVector harmonics(m);
+   NumericVector reference_tones(m);
    NumericVector ratios(m);
    NumericVector pseudo_ratios(m);
    NumericVector octave_spans(m);
@@ -83,18 +83,14 @@ using namespace Rcpp;
    NumericVector fraction(2);
 
    for (int i = 0; i < m; ++i) {
-     if (harmonic>=1) {
-       octave_spans[i]   = floor((log(x[i]/min(x)) / log(pseudo_octave)));
-     } else if (harmonic<1) {
-       octave_spans[i]   = floor((log(x[i]/max(x)) / log(pseudo_octave)));
-     }
+     octave_spans[i]   = floor((log(x[i]/reference_tone) / log(pseudo_octave)));
      octave_factors[i] = pow(pseudo_octave, octave_spans[i]);
-     ratios[i] = (x[i] / octave_factors[i]) / min(x) * harmonic;
+     ratios[i] = (x[i] / octave_factors[i]) / reference_tone;
      pseudo_ratios[i]  = pow(2.0, log(ratios[i]) / log(pseudo_octave));
      fraction          = rational_fraction(pseudo_ratios[i],tolerance);
      nums[i]           = fraction[0];
      dens[i]           = fraction[1];
-     harmonics[i]  = harmonic;
+     reference_tones[i]  = reference_tone;
    }
 
    return DataFrame::create(
@@ -103,7 +99,7 @@ using namespace Rcpp;
      _("ratio")               = ratios,
      _("pseudo_ratio")        = pseudo_ratios,
      _("tone")                = x,
-     _("harmonic")            = harmonics,
+     _("reference_tone")      = reference_tone,
      _("octave_span")         = octave_spans,
      _("octave_factor")       = octave_factors
    );
