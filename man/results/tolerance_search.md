@@ -21,4 +21,10 @@ Octave Ratios:
 
     #> [1] 2
 
+## CoDi Wrap
+
 ![](../figures/tolerance_search/unnamed-chunk-13-1.png)<!-- -->
+
+## MaMi Wrap
+
+![](../figures/tolerance_search/unnamed-chunk-14-1.png)<!-- -->

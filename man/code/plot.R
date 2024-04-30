@@ -432,6 +432,7 @@ plot_semitone_codi_grid <- function(theory, experiment,
 plot_semitone_codi_wrap <- function(theory, experiment,
                                     black_vlines=c(), gray_vlines=c(),
                                     title,ncols=12) {
+  tol = theory$tolerance
   per_plot_labels = tidyr::expand_grid(
     tolerance  = theory$tolerance  %>% unique,
   )
@@ -455,6 +456,34 @@ plot_semitone_codi_wrap <- function(theory, experiment,
       ggplot2::aes(x = semitone, y = smooth,
                    group=1,
                    color=color_factor_homey(theory,'major_minor'))) +
+    ggplot2::scale_color_manual(values=color_values_homey(), guide='none') +
+    ggplot2::geom_text(data=per_plot_labels, color=colors_homey$neutral,
+                       ggplot2::aes(x=-Inf,y=-Inf,label=label,
+                                    vjust="inward",hjust="inward")) +
+    ggplot2::xlab(NULL) +
+    ggplot2::ylab(NULL) +
+    ggplot2::facet_wrap(~tolerance,ncol=ncols,dir='v') +
+    ggplot2::scale_x_continuous(breaks = c(),
+                                minor_breaks = 0:15) +
+    theme_homey()
+}
+plot_semitone_mami_wrap <- function(theory, experiment,
+                                    black_vlines=c(), gray_vlines=c(),
+                                    title,ncols=12) {
+  per_plot_labels = tidyr::expand_grid(
+    tolerance  = theory$tolerance  %>% unique,
+  )
+  per_plot_labels$label = per_plot_labels %>%
+    purrr::pmap_vec(\(tolerance) {
+      tols = paste0('  ', tolerance)
+    })
+  theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=major_minor)) +
+    ggplot2::geom_vline(xintercept = black_vlines, color='black') +
+    ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
+    ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
+                        ggplot2::aes(x = semitone, y = major_minor,
+                                     fill=color_factor_homey(theory,'major_minor'))) +
+    ggplot2::scale_fill_manual(values=color_values_homey(), guide="none") +
     ggplot2::scale_color_manual(values=color_values_homey(), guide='none') +
     ggplot2::geom_text(data=per_plot_labels, color=colors_homey$neutral,
                        ggplot2::aes(x=-Inf,y=-Inf,label=label,

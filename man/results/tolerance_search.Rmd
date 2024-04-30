@@ -133,10 +133,27 @@ cols = 1
 rows = length(tols)
 ```
 
+## CoDi Wrap
+
 ```{r, fig.height=3*rows, fig.width=12*cols, echo=F}
 # height = 3 per row and width = 5 per column
 # so for grid of 4x12 it would be height=12 and width=60
 plot_semitone_codi_wrap(
+  theory, 
+  experiment, 
+  gray_vlines  = params$gray_vlines[[1]],
+  black_vlines = params$black_vlines[[1]],
+  title=paste(search_label),
+  ncols=cols
+)
+```
+
+## MaMi Wrap
+
+```{r, fig.height=3*rows, fig.width=12*cols, echo=F}
+# height = 3 per row and width = 5 per column
+# so for grid of 4x12 it would be height=12 and width=60
+plot_semitone_mami_wrap(
   theory, 
   experiment, 
   gray_vlines  = params$gray_vlines[[1]],
