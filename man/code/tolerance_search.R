@@ -1,5 +1,5 @@
 source('./utils.R')
-devtools::install_github('git@github.com:homeymusic/mami.codi.R', ref="wavelength_vs_frequency")
+devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 
 library(mami.codi.R)
 devtools::load_all(".")
@@ -13,7 +13,7 @@ if (dplyr::near(max(P8$wavelengths[[1]]),  343 / hrep::midi_to_freq(60))) {
 
 delete_3rd_partial = F
 num_harmonics = 10
-search_label  = 'M6'
+search_label  = 'Harmonic'
 octave_ratio  = 2.0
 
 print(search_label)
