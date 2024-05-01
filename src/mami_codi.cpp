@@ -73,20 +73,21 @@ using namespace Rcpp;
                   const double tolerance) {
 
    int m = x.size();
-   NumericVector nums(m);
-   NumericVector dens(m);
-   NumericVector reference_tones(m);
-   NumericVector ratios(m);
-   NumericVector pseudo_ratios(m);
    NumericVector fraction(2);
 
+   NumericVector nums(m);
+   NumericVector dens(m);
+   NumericVector ratios(m);
+   NumericVector pseudo_ratios(m);
+   NumericVector reference_tones(m);
+
    for (int i = 0; i < m; ++i) {
-     ratios[i] = x[i] / reference_tone;
-     pseudo_ratios[i]  = pow(2.0, log(ratios[i]) / log(pseudo_octave));
-     fraction          = rational_fraction(pseudo_ratios[i],tolerance);
-     nums[i]           = fraction[0];
-     dens[i]           = fraction[1];
-     reference_tones[i]  = reference_tone;
+     ratios[i]          = x[i] / reference_tone;
+     pseudo_ratios[i]   = pow(2.0, log(ratios[i]) / log(pseudo_octave));
+     fraction           = rational_fraction(pseudo_ratios[i],tolerance);
+     nums[i]            = fraction[0];
+     dens[i]            = fraction[1];
+     reference_tones[i] = reference_tone;
    }
 
    return DataFrame::create(
