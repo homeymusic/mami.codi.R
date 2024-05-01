@@ -75,7 +75,7 @@ duplex <- function(x, tolerance) {
 
   f = x$frequencies[[1]]
   λ = x$wavelengths[[1]]
-  n = ceiling(2^(log(max(f) / min(f)) / log(x$pseudo_octave)))
+  n = (x$pseudo_octave ^ log2(ceiling(2^(log(max(f) / min(f)) / log(x$pseudo_octave)))))
 
   x %>% dplyr::mutate(
 
@@ -88,7 +88,7 @@ duplex <- function(x, tolerance) {
 
     # estimate the wavelength cycle
     estimate_cycle(λ,
-                   max(λ) / (x$pseudo_octave ^ log2(n)), # this is the highest harmonic of the lowest tone
+                   max(λ) / n, # this is the highest harmonic of the lowest tone
                    x$pseudo_octave,
                    tolerance) %>%
       dplyr::rename_with(~ paste0(.,'_wavelength'))
