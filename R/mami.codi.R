@@ -76,24 +76,20 @@ duplex <- function(x, tolerance) {
   f = x$frequencies[[1]]
   λ = x$wavelengths[[1]]
 
-  extra_partials = 0
+  extra_partials = 1
   n = x$pseudo_octave ^ log2(ceiling(2^(log(max(f) / min(f)) / log(x$pseudo_octave)))
                              + extra_partials)
-  n = x$pseudo_octave * n
-
   x %>% dplyr::mutate(
 
     # estimate the frequency cycle
     estimate_cycle(f,
-                   # min(f),
-                   max(f) / n, # missing lowest fundamental of the highest partial
+                   min(f),
                    x$pseudo_octave,
                    tolerance) %>%
       dplyr::rename_with(~ paste0(.,'_frequency')),
 
     # estimate the wavelength cycle
     estimate_cycle(λ,
-                   # min(λ),
                    max(λ) / n, # highest missing partial of the lowest fundamental
                    x$pseudo_octave,
                    tolerance) %>%
