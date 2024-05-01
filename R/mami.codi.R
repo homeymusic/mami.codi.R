@@ -84,8 +84,8 @@ duplex <- function(x, tolerance) {
 
     # estimate the frequency cycle
     estimate_cycle(f,
-                   min(f),
-                   # max(f) / n, # missing lowest fundamental of the highest partial
+                   # min(f),
+                   max(f) / n, # missing lowest fundamental of the highest partial
                    x$pseudo_octave,
                    tolerance) %>%
       dplyr::rename_with(~ paste0(.,'_frequency')),
