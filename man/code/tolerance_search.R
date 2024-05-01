@@ -1,7 +1,7 @@
-search_label  = 'P8'
+search_label  = 'Compressed'
 
 source('./utils.R')
-devtools::install_github('git@github.com:homeymusic/mami.codi.R', ref="tone_n")
+devtools::install_github('git@github.com:homeymusic/mami.codi.R', ref="framed_by_harmonics")
 
 library(mami.codi.R)
 devtools::load_all(".")
