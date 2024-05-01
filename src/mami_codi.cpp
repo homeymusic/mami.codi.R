@@ -78,20 +78,10 @@ using namespace Rcpp;
    NumericVector reference_tones(m);
    NumericVector ratios(m);
    NumericVector pseudo_ratios(m);
-   NumericVector octave_spans(m);
-   NumericVector octave_factors(m);
    NumericVector fraction(2);
 
    for (int i = 0; i < m; ++i) {
-     octave_spans[i]   = floor((log(x[i]/reference_tone) / log(pseudo_octave)));
-
-     if (octave_spans[i] < 0) {
-       throw std::range_error("mami.codi.cpp: the octave span should not be negative");
-       return R_NilValue;
-     }
-
-     octave_factors[i] = pow(pseudo_octave, octave_spans[i]);
-     ratios[i] = (x[i] / octave_factors[i]) / reference_tone;
+     ratios[i] = x[i] / reference_tone;
      pseudo_ratios[i]  = pow(2.0, log(ratios[i]) / log(pseudo_octave));
      fraction          = rational_fraction(pseudo_ratios[i],tolerance);
      nums[i]           = fraction[0];
@@ -105,9 +95,7 @@ using namespace Rcpp;
      _("ratio")               = ratios,
      _("pseudo_ratio")        = pseudo_ratios,
      _("tone")                = x,
-     _("reference_tone")      = reference_tone,
-     _("octave_span")         = octave_spans,
-     _("octave_factor")       = octave_factors
+     _("reference_tone")      = reference_tone
    );
  }
 

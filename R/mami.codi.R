@@ -76,9 +76,8 @@ duplex <- function(x, tolerance) {
   f = x$frequencies[[1]]
   λ = x$wavelengths[[1]]
 
-  missing_partials = 0
   n = (x$pseudo_octave ^ log2(missing_partials + ceiling(2^(log(max(f) / min(f)) / log(x$pseudo_octave)))))
-  n = n * x$pseudo_octave
+  n = n * x$pseudo_octave ^ 1
   # TODO: try going down a full octave so
   # missing_partials = 0 but then
   # n = n * x$pseudo_octave
