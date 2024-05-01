@@ -91,7 +91,8 @@ duplex <- function(x, tolerance) {
 
     # estimate the wavelength cycle
     estimate_cycle(λ,
-                   max(λ) / n, # highest missing partial of the lowest fundamental
+                   min(λ),
+                   # max(λ) / n, # highest missing partial of the lowest fundamental
                    x$pseudo_octave,
                    tolerance) %>%
       dplyr::rename_with(~ paste0(.,'_wavelength'))
