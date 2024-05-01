@@ -1,4 +1,4 @@
-search_label  = 'Harmonic'
+search_label  = 'P8'
 
 source('./utils.R')
 devtools::install_github('git@github.com:homeymusic/mami.codi.R', ref="framed_no_octave_factor")
@@ -48,7 +48,7 @@ chords = tibble::tibble(
 )
 index = seq_along(chords$pitches)
 
-tolerances = seq(from=0.001, to=0.05, by=0.001)
+tolerances = seq(from=0.001, to=0.1, by=0.001)
 
 grid = tidyr::expand_grid(
   index,
