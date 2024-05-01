@@ -6,7 +6,7 @@ always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'Compressed'
+search_label = 'P8'
 ```
 
 ```{r, echo=F, message=F, include=F}
