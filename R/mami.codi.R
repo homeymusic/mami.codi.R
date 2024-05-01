@@ -81,7 +81,7 @@ duplex <- function(x, tolerance) {
 
     # estimate the frequency cycle
     estimate_cycle(f,
-                   max(f) / (x$pseudo_octave ^ log2(n)), # this is the lowest harmonic of the highest tone
+                   min(f), # this is the lowest harmonic of the highest tone
                    x$pseudo_octave,
                    tolerance) %>%
       dplyr::rename_with(~ paste0(.,'_frequency')),
