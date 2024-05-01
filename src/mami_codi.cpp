@@ -84,6 +84,12 @@ using namespace Rcpp;
 
    for (int i = 0; i < m; ++i) {
      octave_spans[i]   = floor((log(x[i]/reference_tone) / log(pseudo_octave)));
+
+     // if (octave_spans[i] < 0) {
+     //   throw std::range_error("mami.codi.cpp: the octave span cannot be negative");
+     //   return R_NilValue;
+     // }
+
      octave_factors[i] = pow(pseudo_octave, octave_spans[i]);
      ratios[i] = (x[i] / octave_factors[i]) / reference_tone;
      pseudo_ratios[i]  = pow(2.0, log(ratios[i]) / log(pseudo_octave));
