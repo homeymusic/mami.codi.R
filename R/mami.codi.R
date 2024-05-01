@@ -76,7 +76,7 @@ duplex <- function(x, tolerance) {
   f = x$frequencies[[1]]
   λ = x$wavelengths[[1]]
 
-  extra_partials = 3
+  extra_partials = 4
   n = x$pseudo_octave ^ log2(ceiling(2^(log(max(f) / min(f)) / log(x$pseudo_octave)))
                              + extra_partials)
 
