@@ -1,4 +1,4 @@
-search_label  = 'Harmonic'
+search_label  = 'Stretched'
 
 source('./utils.R')
 devtools::install_github('git@github.com:homeymusic/mami.codi.R', ref="framed_by_harmonics")
