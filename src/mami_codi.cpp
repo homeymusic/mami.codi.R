@@ -86,7 +86,7 @@ using namespace Rcpp;
      octave_spans[i]   = floor((log(x[i]/reference_tone) / log(pseudo_octave)));
 
      if (octave_spans[i] < 0) {
-       throw std::range_error("mami.codi.cpp: the octave span cannot be negative");
+       throw std::range_error("mami.codi.cpp: the octave span should not be negative");
        return R_NilValue;
      }
 
