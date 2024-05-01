@@ -76,7 +76,8 @@ duplex <- function(x, tolerance) {
   f = x$frequencies[[1]]
   λ = x$wavelengths[[1]]
   n = ceiling(max(f) / min(f))
-  pseudo_n = 2.1 ^ log2(n)
+  pseudo_n = n
+  # pseudo_n = x$pseudo_octave ^ log2(n)
 
   x %>% dplyr::mutate(
 

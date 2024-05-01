@@ -15,7 +15,7 @@ Number of Harmonics:
 
 Octave Ratios:
 
-    #> [1] 1.9
+    #> [1] 2
 
 ## CoDi Wrap
 
