@@ -84,14 +84,21 @@ dissonant_M3 %>% dplyr::select('semitone', 'consonance_dissonance')
 dissonant_M3$ratios_frequency[[1]]
 ```
 
-#### The second highest consonance
+#### The Pythagorean third is the second highest consonance
+
 
 ```{r, echo=F}
 homey_M3 = mami.codi.data %>% dplyr::slice(2)
 ```
 
+MIDI:
 ```{r, echo=F}
 homey_M3$semitone
+```
+
+Cents:
+```{r, echo=F}
+1200*log(hrep::midi_to_freq(homey_M3$semitone)/hrep::midi_to_freq(60))/log(2)
 ```
 
 ```{r, echo=F}
@@ -103,3 +110,9 @@ homey_M3 %>% dplyr::select('semitone', 'consonance_dissonance')
 ```{r, echo=F}
 homey_M3$ratios_frequency[[1]]
 ```
+
+###### References for the Pythagorean third
+
+* "19/15 409.2443014 (good approximation of Pythagorean 3rd)"
+     * from [M3 in the Encyclopedia of Microtonal Music Theory](http://www.tonalsoft.com/enc/m/major-3rd.aspx)
+* [Pythagorean ditone](https://en.wikipedia.org/wiki/Ditone)
