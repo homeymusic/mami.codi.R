@@ -24,6 +24,8 @@ if (search_label == 'Stretched') {
   octave_ratio  = 2.1
 } else if (search_label == 'Compressed') {
   octave_ratio  = 1.9
+} else if (search_label == 'Pure') {
+  num_harmonics = 1
 }
 
 if (delete_3rd_partial) {

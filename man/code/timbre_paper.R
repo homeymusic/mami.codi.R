@@ -53,7 +53,6 @@ grid_10 = tidyr::expand_grid(
 
 num_harmonics = 10
 octave_ratio  = c(2.0)
-
 experiment.rds = '../data/M3.rds'
 intervals = 60 + readRDS(experiment.rds)$profile$interval
 M3_chords = tibble::tibble(
@@ -99,13 +98,6 @@ hi_res_chords = tibble::tibble(
 )
 index = seq_along(hi_res_chords$pitches)
 
-grid_hi_res_5 = tidyr::expand_grid(
-  index,
-  num_harmonics=5,
-  octave_ratio,
-  scale = 'hi_res'
-)
-
 experiment.rds = '../data/Bonang.rds'
 intervals = 60 + readRDS(experiment.rds)$profile$interval
 Bonang_chords = tibble::tibble(
@@ -133,7 +125,7 @@ grid_5PartialsNo3 = tidyr::expand_grid(
 )
 
 grid = dplyr::bind_rows(grid_1,grid_5,grid_10,grid_M3,grid_M6,
-                        grid_P8,grid_hi_res_5,
+                        grid_P8,
                         grid_Bonang,grid_5PartialsNo3)
 
 
