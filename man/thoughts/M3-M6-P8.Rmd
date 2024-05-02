@@ -11,7 +11,6 @@ devtools::load_all(".")
 source('../code/plot.R')
 source('../code/utils.R')
 c(0) %>% mami.codi()
-tonic_midi = 60
 ```
 
 ## M3 Major Third
@@ -20,6 +19,7 @@ tonic_midi = 60
 * ET: 2^(4/12)
 
 ```{r, echo=F}
+tonic_midi = 60
 tibble::tibble(
   just_M3_freq = hrep::midi_to_freq(60) * 5 / 4,
   just_M3_midi = hrep::freq_to_midi(just_M3_freq),
@@ -88,27 +88,29 @@ dissonant_M3$ratios_frequency[[1]]
 
 
 ```{r, echo=F}
-homey_M3 = mami.codi.data %>% dplyr::slice(2)
+P_M3 = mami.codi.data %>% dplyr::slice(2)
 ```
 
 MIDI:
 ```{r, echo=F}
-homey_M3$semitone
+P_M3$semitone
 ```
 
 Cents:
 ```{r, echo=F}
-1200*log(hrep::midi_to_freq(homey_M3$semitone)/hrep::midi_to_freq(60))/log(2)
+1200*log(hrep::midi_to_freq(P_M3$semitone)/hrep::midi_to_freq(60))/log(2)
 ```
 
+Consonance:
+
 ```{r, echo=F}
-homey_M3 %>% dplyr::select('semitone', 'consonance_dissonance')
+P_M3 %>% dplyr::select('semitone', 'consonance_dissonance')
 ```
 
 ##### Frequency ratios of the second highest consonance
 
 ```{r, echo=F}
-homey_M3$ratios_frequency[[1]]
+P_M3$ratios_frequency[[1]]
 ```
 
 ###### References for the Pythagorean third
@@ -116,3 +118,108 @@ homey_M3$ratios_frequency[[1]]
 * "19/15 409.2443014 (good approximation of Pythagorean 3rd)"
      * from [M3 in the Encyclopedia of Microtonal Music Theory](http://www.tonalsoft.com/enc/m/major-3rd.aspx)
 * [Pythagorean ditone](https://en.wikipedia.org/wiki/Ditone)
+
+
+## M6 Major Sixth
+
+* JT: 5/3
+* ET: 2^(9/12)
+
+```{r, echo=F}
+tibble::tibble(
+  just_M6_freq = hrep::midi_to_freq(60) * 5 / 3,
+  just_M6_midi = hrep::freq_to_midi(just_M6_freq),
+  M6_freq      = hrep::midi_to_freq(69),
+  M6_midi      = hrep::freq_to_midi(M6_freq),
+)
+```
+
+### Intervals near the major sixth ranked by consonance
+
+```{r, echo=F}
+mami.codi.data <- mami.codi.map('M6', c(0.0002), tonic_midi) %>% dplyr::rowwise() %>% dplyr::mutate(
+  semitone       = metadata$semitone + tonic_midi,
+  .before=1
+) %>% dplyr::ungroup() %>% dplyr::arrange(dplyr::desc(consonance_dissonance))
+mami.codi.data %>% dplyr::select('semitone', 'consonance_dissonance')
+```
+
+#### The JT M6 has the highest consonance
+
+```{r, echo=F}
+just_M6 = mami.codi.data %>% dplyr::slice(1)
+```
+
+```{r, echo=F}
+just_M6$semitone
+```
+
+```{r, echo=F}
+just_M6 %>% dplyr::select('semitone', 'consonance_dissonance')
+```
+
+##### Frequency ratios of the JT M6
+
+```{r, echo=F}
+just_M6$ratios_frequency[[1]]
+```
+
+### Intervals near the major sixth ranked by lowest consonance
+
+```{r, echo=F}
+mami.codi.data %>% dplyr::arrange(consonance_dissonance) %>% 
+  dplyr::select('semitone', 'consonance_dissonance')
+```
+
+#### The lowest consonance
+```{r, echo=F}
+dissonant_M6 = mami.codi.data %>% dplyr::arrange(consonance_dissonance) %>% dplyr::slice(1)
+```
+
+```{r, echo=F}
+dissonant_M6$semitone
+```
+
+```{r, echo=F}
+dissonant_M6 %>% dplyr::select('semitone', 'consonance_dissonance')
+```
+
+##### The lowest consonance ratios
+
+```{r, echo=F}
+dissonant_M6$ratios_frequency[[1]]
+```
+
+#### The grave major sixth is the second highest consonance
+
+
+```{r, echo=F}
+G_M6 = mami.codi.data %>% dplyr::slice(2)
+```
+
+MIDI:
+```{r, echo=F}
+G_M6$semitone
+```
+
+Cents:
+```{r, echo=F}
+1200*log(hrep::midi_to_freq(G_M6$semitone)/hrep::midi_to_freq(60))/log(2)
+```
+
+Consonance:
+
+```{r, echo=F}
+G_M6 %>% dplyr::select('semitone', 'consonance_dissonance')
+```
+
+##### Frequency ratios of the second highest consonance
+
+```{r, echo=F}
+G_M6$ratios_frequency[[1]]
+```
+
+###### References for the grave major sixth
+
+* [List of Pitch Intervals](https://en.wikipedia.org/wiki/List_of_pitch_intervals)
+* [Grave major sixth on C](https://en.m.wikipedia.org/wiki/File:Grave_major_sixth_on_C.png)

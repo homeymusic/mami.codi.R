@@ -124,7 +124,7 @@ params %>% purrr::map(\(p) {
     black_vlines  = c(3.95)
   } else if (p$s == 'M6') {
     timbre = 'M6'
-    gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 5/3)-60,9)
+    gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 5/3)-60,9,8.66952)
     black_vlines  = c(8.78,8.93)
   } else if (p$s == 'P8') {
     timbre = 'P8'
@@ -167,6 +167,7 @@ params %>% purrr::map(\(p) {
   print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),
                            goal=experiment,sigma=sigma,
                            black_vlines=black_vlines,gray_vlines=gray_vlines))
+  knit_child("./man/thoughts/M3.Rmd")
   cat("  \n")
 })
 ```
