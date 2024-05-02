@@ -136,11 +136,11 @@ grid = dplyr::bind_rows(grid_1,grid_5,grid_10,grid_M3,grid_M6,
                         grid_P8,grid_hi_res_5,
                         grid_Bonang,grid_5PartialsNo3)
 
+
 plan(multisession, workers=parallelly::availableCores())
 
 output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
                                            scale) {
-
   if (scale == 'Bonang') {
     study_chords = Bonang_chords
 
