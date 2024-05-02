@@ -8,7 +8,7 @@ chord = c(60, 72) %>% mami.codi(verbose=T, num_harmonics=11, octave_ratio=2.0)
     ## # A tibble: 1 × 2
     ##   consonance_dissonance major_minor
     ##                   <dbl>       <dbl>
-    ## 1                 0.780       0.634
+    ## 1                  93.8        6.16
 
 #### Frequency
 

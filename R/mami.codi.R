@@ -161,8 +161,8 @@ ENDOLYMPH_SPEED_OF_SOUND_SALT = 1563 # 40*C sea water
 ENDOLYMPH_SPEED_OF_SOUND_SALT = 1526 # 40*C fresh water
 TOLERANCE      = 0.05
 ZARLINO        = 100 / sqrt(2)
-MIN_CONSONANCE = .Machine$double.xmin
-MIN_AMPLITUDE  = 1/12
+MIN_CONSONANCE = 1 / 1000000
+MIN_AMPLITUDE  = 1 / 12
 PI_4           = pi / 4
 R_PI_4         = matrix(c(
   cos(PI_4), sin(PI_4),
