@@ -102,7 +102,8 @@ estimate_cycle <- function(x, harmonic, pseudo_octave, tolerance) {
   tibble::tibble_row(
     lcm        = lcm(r$den),
     dissonance = log2(.data$lcm),
-    ratios     = list(r)
+    ratios     = list(r),
+    tolerance
   )
 
 }
