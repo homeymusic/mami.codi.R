@@ -4,7 +4,7 @@
 \alias{mami.codi}
 \title{Major-Minor Consonance-Dissonance}
 \usage{
-mami.codi(x, metadata = NA, verbose = FALSE, ...)
+mami.codi(x, metadata = NA, verbose = FALSE, tolerance = TOLERANCE, ...)
 }
 \arguments{
 \item{x}{Chord to analyse specified in MIDI, coerced to
@@ -15,6 +15,8 @@ helpful for analysis and plots}
 
 \item{verbose}{Determines the amount of data to return from chord evaluation
 TRUE is all and FALSE is just major-minor and consonance-dissonance}
+
+\item{tolerance}{An optional tolerance value for creating rational fractions}
 
 \item{...}{parameters for hrep::sparse_fr_spectrum}
 }
