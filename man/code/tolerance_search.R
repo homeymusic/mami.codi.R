@@ -7,7 +7,7 @@ library(mami.codi.R)
 devtools::load_all(".")
 
 P8 <- c(60,72) %>% mami.codi.R::mami.codi(verbose=T)
-if (dplyr::near(max(P8$wavelengths[[1]]),  ENDOLYMPH_SPEED_OF_SOUND / hrep::midi_to_freq(60))) {
+if (dplyr::near(max(P8$wavelengths[[1]]),  SPEED_OF_SOUND / hrep::midi_to_freq(60))) {
   print("Seems to be the correct version mami.codi.R")
 } else {
   stop("This is not the expected version of mami.codi.R")

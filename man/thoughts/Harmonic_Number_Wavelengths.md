@@ -146,10 +146,10 @@ Eb4f = 311.1270
 A4f  = 440.0000
 C5f  = 523.2511
 
-C4w  = ENDOLYMPH_SPEED_OF_SOUND / C4f
-Eb4w = ENDOLYMPH_SPEED_OF_SOUND / Eb4f
-A4w  = ENDOLYMPH_SPEED_OF_SOUND / A4f
-C5w  = ENDOLYMPH_SPEED_OF_SOUND / C5f
+C4w  = SPEED_OF_SOUND / C4f
+Eb4w = SPEED_OF_SOUND / Eb4f
+A4w  = SPEED_OF_SOUND / A4f
+C5w  = SPEED_OF_SOUND / C5f
 
 tibble::tibble(
   jm3f = 6 / 5,
@@ -337,7 +337,7 @@ t
 ``` r
 tibble::tibble(
   h = (12-1:11) %>% sort(),
-  λ = ENDOLYMPH_SPEED_OF_SOUND / hrep::midi_to_freq(60) / .data$h
+  λ = SPEED_OF_SOUND / hrep::midi_to_freq(60) / .data$h
 )
 ```
 

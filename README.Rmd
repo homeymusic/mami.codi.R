@@ -120,7 +120,7 @@ params %>% purrr::map(\(p) {
     black_vlines  = c(12.04)
   } else if (p$s == 'M3') {
     timbre = 'M3'
-    gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 5/4)-60,4)
+    gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 5/4)-60,4,4.092442)
     black_vlines  = c(3.95)
   } else if (p$s == 'M6') {
     timbre = 'M6'

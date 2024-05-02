@@ -1,0 +1,99 @@
+---
+title: "M3 M6 P8 Results"
+output:
+  github_document: default
+always_allow_html: true
+---
+
+```{r, echo=F, message=F, include=F}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+devtools::load_all(".")
+source('../code/plot.R')
+c(0) %>% mami.codi()
+```
+
+## M3
+```{r, echo=T}
+tibble::tibble(
+  just_M3_freq = hrep::midi_to_freq(60) * 5 / 4,
+  M3_freq      = hrep::midi_to_freq(60) * 5 / 4,
+  foo_cents    = 1200*log(hrep::midi_to_freq(64.092442) / hrep::midi_to_freq(60))/log(2),
+  M3_midi      = hrep::freq_to_midi(M3_freq),
+  low_freq     = hrep::midi_to_freq(63.65),
+  high_freq    = hrep::midi_to_freq(64.15),
+)
+```
+```{r, echo=T}
+
+```
+
+```{r, echo=F}
+tonic_midi = 60
+num_harmonics = 10
+octave_ratio = 2.0
+tolerances = c(0.0002)
+behavior = readRDS('../data/M3.rds')
+chords = tibble::tibble(
+  pitches = behavior$profile$interval %>% lapply(\(i) list(c(tonic_midi,tonic_midi+i)))
+)
+index = seq_along(chords$pitches)
+grid = tidyr::expand_grid(
+  index,
+  tolerance  = tolerances
+)
+data = grid %>% furrr::future_pmap_dfr(\(
+  index,
+  tolerance
+) {
+
+  chord = hrep::sparse_fr_spectrum(chords$pitches[index][[1]][[1]],
+                                   num_harmonics = num_harmonics,
+                                   octave_ratio  = octave_ratio)
+
+  mami.codi.R::mami.codi(
+    chord,
+    tolerance=tolerance,
+    metadata  = list(
+      tolerance=tolerance,
+      octave_ratio=octave_ratio,
+      num_harmonics  = num_harmonics,
+      semitone = chords$pitches[index][[1]][[1]][2] - tonic_midi
+    ),
+    verbose=T
+  )
+}, .progress=TRUE, .options = furrr::furrr_options(seed = T))
+
+sorted <- data %>% dplyr::rowwise() %>% dplyr::mutate(
+  semitone       = metadata$semitone,
+  .before=1
+) %>% dplyr::ungroup() %>% dplyr::arrange(dplyr::desc(consonance_dissonance))
+```
+
+```{r, echo=T}
+sorted
+```
+
+```{r, echo=T}
+just_M3 = sorted %>% dplyr::slice(1)
+just_M3
+```
+```{r, echo=T}
+just_M3$ratios_frequency[[1]]
+```
+```{r, echo=T}
+homey_M3 = sorted %>% dplyr::slice(2)
+homey_M3
+```
+```{r, echo=T}
+homey_M3$ratios_frequency[[1]]
+```
+```{r, echo=T}
+homey_M3$semitone
+```
+```{r, echo=T}
+dissonant_M3 = sorted %>% dplyr::arrange(consonance_dissonance) %>% dplyr::slice(1)
+dissonant_M3
+```
+```{r, echo=T}
+dissonant_M3$ratios_frequency[[1]]
+```
