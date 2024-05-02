@@ -68,11 +68,12 @@ using namespace Rcpp;
  //' @export
  // [[Rcpp::export]]
  DataFrame ratios(NumericVector x,
-                  const double reference_tone,
                   const double pseudo_octave,
                   const double tolerance) {
 
-   int m = x.size();
+   const int m = x.size();
+   const double reference_tone = min(x);
+
    NumericVector fraction(2);
 
    NumericVector nums(m);

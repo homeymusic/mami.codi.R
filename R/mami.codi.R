@@ -22,7 +22,6 @@ mami.codi <- function(x, metadata=NA, verbose=FALSE, tolerance=TOLERANCE, ...) {
   parse_input(x, ...)              %>%
     listen_for_pseudo_octave       %>%
     duplex(tolerance)              %>%
-    flip                           %>%
     rotate                         %>%
     format_output(metadata, verbose)
 
@@ -79,14 +78,12 @@ duplex <- function(x, tolerance) {
 
     # estimate the frequency cycle
     estimate_cycle(f,
-                   min(f),
                    x$pseudo_octave,
                    tolerance) %>%
       dplyr::rename_with(~ paste0(.,'_frequency')),
 
     # estimate the wavelength cycle
     estimate_cycle(λ,
-                   min(λ),
                    x$pseudo_octave,
                    tolerance) %>%
       dplyr::rename_with(~ paste0(.,'_wavelength'))
@@ -95,13 +92,15 @@ duplex <- function(x, tolerance) {
 
 }
 
-estimate_cycle <- function(x, harmonic, pseudo_octave, tolerance) {
+estimate_cycle <- function(x, pseudo_octave, tolerance) {
 
-  r = ratios(x, harmonic, pseudo_octave, tolerance)
+  r = ratios(x, pseudo_octave, tolerance)
 
   tibble::tibble_row(
     lcm        = lcm(r$den),
+    cycle      = min(x) / .data$lcm,
     dissonance = log2(.data$lcm),
+    consonance = flip(.data$dissonance),
     ratios     = list(r),
     tolerance
   )
@@ -109,23 +108,12 @@ estimate_cycle <- function(x, harmonic, pseudo_octave, tolerance) {
 }
 
 flip <- function(x) {
-
-  consonance_frequency  = ZARLINO - x$dissonance_frequency
-  consonance_wavelength = ZARLINO - x$dissonance_wavelength
-
-  if (consonance_frequency < MIN_CONSONANCE | is.na(consonance_frequency)) {
-    consonance_frequency = MIN_CONSONANCE
+  consonance  = ZARLINO - x
+  if (consonance < MIN_CONSONANCE) {
+    MIN_CONSONANCE
+  } else {
+    consonance
   }
-  if (consonance_wavelength < MIN_CONSONANCE | is.na(consonance_wavelength)) {
-    consonance_wavelength = MIN_CONSONANCE
-  }
-
-  x %>% dplyr::mutate(
-    consonance_frequency,
-    consonance_wavelength,
-    .before=1
-  )
-
 }
 
 rotate <- function(x) {
@@ -158,8 +146,9 @@ format_output <- function(x, metadata, verbose) {
 
 lcm <- function(x) Reduce(numbers::LCM, x)
 SPEED_OF_SOUND = 343
-ENDOLYMPH_SPEED_OF_SOUND_SALT = 1563 # 40*C sea water
-ENDOLYMPH_SPEED_OF_SOUND_SALT = 1526 # 40*C fresh water
+SPEED_OF_SOUND_SALT  = 1526 # 40*C fresh water
+SPEED_OF_SOUND_FRESH = 1563 # 40*C sea water
+ENDOLYMPH_SPEED_OF_SOUND = SPEED_OF_SOUND_SALT
 TOLERANCE      = 0.05
 ZOOMED_TOLERANCE = 0.0002
 ZARLINO        = 100 / sqrt(2)
