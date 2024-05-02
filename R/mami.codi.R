@@ -75,7 +75,6 @@ duplex <- function(x, tolerance) {
   λ = x$wavelengths[[1]]
 
   x %>% dplyr::mutate(
-
     # estimate the frequency cycle
     estimate_cycle(f,
                    x$pseudo_octave,
@@ -86,7 +85,9 @@ duplex <- function(x, tolerance) {
     estimate_cycle(λ,
                    x$pseudo_octave,
                    tolerance) %>%
-      dplyr::rename_with(~ paste0(.,'_wavelength'))
+      dplyr::rename_with(~ paste0(.,'_wavelength')),
+
+    tolerance
 
   )
 
@@ -101,14 +102,13 @@ estimate_cycle <- function(x, pseudo_octave, tolerance) {
     cycle      = min(x) / .data$lcm,
     dissonance = log2(.data$lcm),
     consonance = flip(.data$dissonance),
-    ratios     = list(r),
-    tolerance
+    ratios     = list(r)
   )
 
 }
 
 flip <- function(x) {
-  consonance  = ZARLINO - x
+  consonance = ZARLINO - x
   if (consonance < MIN_CONSONANCE) {
     MIN_CONSONANCE
   } else {

@@ -6,7 +6,7 @@ always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'Harmonic'
+search_label = 'Pure'
 ```
 
 ```{r, echo=F, message=F, include=F}
@@ -26,18 +26,22 @@ BEHAVIOURAL_SMOOTH_BROAD  <- 0.2
 BEHAVIOURAL_SMOOTH_NARROW <- 0.035
 
 search_params = tibble::tibble(
-  search       = c('Stretched','Harmonic','Compressed',
+  search       = c('Pure',
+                   'Stretched','Harmonic','Compressed',
                    'Bonang',
                    'M3','M6','P8'),
-  sigma        = c(BEHAVIOURAL_SMOOTH_BROAD,BEHAVIOURAL_SMOOTH_BROAD,BEHAVIOURAL_SMOOTH_BROAD,
+  sigma        = c(BEHAVIOURAL_SMOOTH_BROAD,
+                   BEHAVIOURAL_SMOOTH_BROAD,BEHAVIOURAL_SMOOTH_BROAD,BEHAVIOURAL_SMOOTH_BROAD,
                    BEHAVIOURAL_SMOOTH_BROAD,
                    BEHAVIOURAL_SMOOTH_NARROW,BEHAVIOURAL_SMOOTH_NARROW,BEHAVIOURAL_SMOOTH_NARROW),
-  gray_vlines  = c(list(0:15),list(0:15),list(0:15),
+  gray_vlines  = c(list(0:15),
+                   list(0:15),list(0:15),list(0:15),
                    list((12/5)*1:6),
                    list(c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 5/4)-60,4,4.092442)),
                    list(c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 5/3)-60,8.66952)),
                    c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 2/1)-60)),
-  black_vlines = c(list(c(4.2,7.5,9.3,12.78)),list(c(2,3,4,5,7,8,9,12)),list(c(3.8,4.8,11.1,14.5)),
+  black_vlines = c(list(c(2,3,4,5,7,8,9,12)),
+                   list(c(4.2,7.5,9.3,12.78)),list(c(2,3,4,5,7,8,9,12)),list(c(3.8,4.8,11.1,14.5)),
                    list(c(2.6,4.8,12.0)),
                    list(c(3.95)),list(c(8.78,8.93)),list(c(11.94, 12.08)))
 )
@@ -59,12 +63,12 @@ theory = readRDS(theory.rds)
 
 ```{r, echo=F, results='asis', message=F}
 theory <- theory %>% dplyr::rowwise() %>% dplyr::mutate(
-  tolerance      = metadata$tolerance,
+  tolerance      = theory$tolerance,
   num_harmonics  = metadata$num_harmonics,
   octave_ratio   = metadata$octave_ratio,
   semitone       = metadata$semitone,
   .before=1
-) %>% dplyr::group_by(tolerance)
+) %>% dplyr::ungroup() %>% dplyr::group_by(tolerance)
 ```
 
 Tolerances:

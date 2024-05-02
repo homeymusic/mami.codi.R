@@ -30,7 +30,6 @@ mami.codi.map <- function(study, tolerances, tonic_midi) {
       chord,
       tolerance=tolerance,
       metadata  = list(
-        tolerance=tolerance,
         octave_ratio=octave_ratio,
         num_harmonics  = num_harmonics,
         semitone = chords$pitches[index][[1]][[1]][2] - tonic_midi
