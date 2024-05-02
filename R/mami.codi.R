@@ -43,7 +43,7 @@ parse_input.default <- function(x, ...) {
 parse_input.sparse_fr_spectrum <- function(x, ...) {
 
   f = x %>% dplyr::filter(.data$y>MIN_AMPLITUDE) %>% hrep::freq()
-  λ = SPEED_OF_SOUND / f
+  λ = ENDOLYMPH_SPEED_OF_SOUND / f
 
   tibble::tibble_row(
     frequencies = list(f),
@@ -157,7 +157,7 @@ format_output <- function(x, metadata, verbose) {
 
 lcm <- function(x) Reduce(numbers::LCM, x)
 
-SPEED_OF_SOUND = 343
+ENDOLYMPH_SPEED_OF_SOUND = 1563 # 40*C water salinity 35.17 g/kg
 TOLERANCE      = 0.05
 ZARLINO        = 1000 / sqrt(2)
 MIN_AMPLITUDE  = 1/12

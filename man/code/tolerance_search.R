@@ -1,13 +1,13 @@
-search_label  = 'P8'
+search_label  = 'M3'
 
 source('./utils.R')
-devtools::install_github('git@github.com:homeymusic/mami.codi.R', ref="framed_no_octave_factor")
+devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 
 library(mami.codi.R)
 devtools::load_all(".")
 
 P8 <- c(60,72) %>% mami.codi.R::mami.codi(verbose=T)
-if (dplyr::near(max(P8$wavelengths[[1]]),  343 / hrep::midi_to_freq(60))) {
+if (dplyr::near(max(P8$wavelengths[[1]]),  ENDOLYMPH_SPEED_OF_SOUND / hrep::midi_to_freq(60))) {
   print("Seems to be the correct version mami.codi.R")
 } else {
   stop("This is not the expected version of mami.codi.R")
@@ -48,8 +48,7 @@ chords = tibble::tibble(
 )
 index = seq_along(chords$pitches)
 
-tolerances = seq(from=0.001, to=0.1, by=0.001)
-tolerances = seq(from=0.0001, to=0.001, by=0.0001)
+tolerances = seq(from=0.00001, to=0.001, by=0.00001)
 
 grid = tidyr::expand_grid(
   index,
