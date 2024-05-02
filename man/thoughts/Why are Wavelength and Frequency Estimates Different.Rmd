@@ -1,0 +1,18 @@
+---
+title: "Why are wavelength and frequency estimates different?"
+output:
+  github_document: default
+always_allow_html: true
+---
+
+```{r, echo=F, message=F, include=F}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+devtools::load_all(".")
+source('../code/plot.R')
+source('../code/utils.R')
+c(0) %>% mami.codi()
+```
+
+Show the ratios of pure tone P4 and P5. They are different.
+
+Change the tolerance until they are the same.
