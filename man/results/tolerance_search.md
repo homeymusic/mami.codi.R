@@ -15,7 +15,7 @@ Tolerances:
 
 Number of Harmonics:
 
-    #> [1] 10
+    #> [1] 1
 
 Octave Ratios:
 
