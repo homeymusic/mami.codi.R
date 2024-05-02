@@ -1,4 +1,7 @@
-search_label  = 'Harmonic'
+search_label = 'Pure'
+from_tol     = 0.001
+to_tol       = 0.1
+by_tol       = 0.001
 
 source('./utils.R')
 devtools::install_github('git@github.com:homeymusic/mami.codi.R')
@@ -48,7 +51,7 @@ chords = tibble::tibble(
 )
 index = seq_along(chords$pitches)
 
-tolerances = seq(from=0.04, to=0.06, by=0.001)
+tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
 
 grid = tidyr::expand_grid(
   index,
