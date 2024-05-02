@@ -62,13 +62,13 @@ theory = readRDS(theory.rds)
 ```
 
 ```{r, echo=F, results='asis', message=F}
+
 theory <- theory %>% dplyr::rowwise() %>% dplyr::mutate(
-  tolerance      = theory$tolerance,
   num_harmonics  = metadata$num_harmonics,
   octave_ratio   = metadata$octave_ratio,
   semitone       = metadata$semitone,
   .before=1
-) %>% dplyr::ungroup() %>% dplyr::group_by(tolerance)
+) %>% dplyr::group_by(tolerance)
 ```
 
 Tolerances:

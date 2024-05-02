@@ -140,7 +140,7 @@ format_output <- function(x, metadata, verbose) {
     x
   } else {
     x %>%
-      dplyr::select('major_minor', 'consonance_dissonance', 'metadata')
+      dplyr::select('major_minor', 'consonance_dissonance', 'tolerance', 'metadata')
   }
 }
 
