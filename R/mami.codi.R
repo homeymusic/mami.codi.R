@@ -112,11 +112,11 @@ flip <- function(x) {
   consonance_frequency  = ZARLINO - x$dissonance_frequency
   consonance_wavelength = ZARLINO - x$dissonance_wavelength
 
-  if (consonance_frequency < 0) {
-    consonance_frequency = 0
+  if (consonance_frequency <= 0) {
+    consonance_frequency = MIN_CONSONANCE
   }
-  if (consonance_wavelength < 0) {
-    consonance_wavelength = 0
+  if (consonance_wavelength <= 0) {
+    consonance_wavelength = MIN_CONSONANCE
   }
 
   x %>% dplyr::mutate(
@@ -161,6 +161,7 @@ ENDOLYMPH_SPEED_OF_SOUND_SALT = 1563 # 40*C sea water
 ENDOLYMPH_SPEED_OF_SOUND_SALT = 1526 # 40*C fresh water
 TOLERANCE      = 0.05
 ZARLINO        = 100 / sqrt(2)
+MIN_CONSONANCE = .Machine$double.xmin
 MIN_AMPLITUDE  = 1/12
 PI_4           = pi / 4
 R_PI_4         = matrix(c(
