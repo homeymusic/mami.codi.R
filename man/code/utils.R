@@ -5,6 +5,41 @@ library(furrr)
 library(purrr)
 library(parallelly)
 
+mami.codi.map <- function(study, tolerances, tonic_midi) {
+  num_harmonics = 10
+  octave_ratio = 2.0
+  behavior = readRDS(paste0('../data/',study,'.rds'))
+  chords = tibble::tibble(
+    pitches = behavior$profile$interval %>% lapply(\(i) list(c(tonic_midi,tonic_midi+i)))
+  )
+  index = seq_along(chords$pitches)
+  grid = tidyr::expand_grid(
+    index,
+    tolerance  = tolerances
+  )
+  data = grid %>% furrr::future_pmap_dfr(\(
+    index,
+    tolerance
+  ) {
+
+    chord = hrep::sparse_fr_spectrum(chords$pitches[index][[1]][[1]],
+                                     num_harmonics = num_harmonics,
+                                     octave_ratio  = octave_ratio)
+
+    mami.codi.R::mami.codi(
+      chord,
+      tolerance=tolerance,
+      metadata  = list(
+        tolerance=tolerance,
+        octave_ratio=octave_ratio,
+        num_harmonics  = num_harmonics,
+        semitone = chords$pitches[index][[1]][[1]][2] - tonic_midi
+      ),
+      verbose=T
+    )
+  }, .progress=TRUE, .options = furrr::furrr_options(seed = T))
+}
+
 prepare <- function(rds) {
   if (file.exists(rds)) {
     file.remove(rds)

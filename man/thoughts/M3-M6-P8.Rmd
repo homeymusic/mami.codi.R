@@ -9,91 +9,97 @@ always_allow_html: true
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 devtools::load_all(".")
 source('../code/plot.R')
+source('../code/utils.R')
 c(0) %>% mami.codi()
+tonic_midi = 60
 ```
 
-## M3
-```{r, echo=T}
+## M3 Major Third
+
+* JT: 5/4
+* ET: 2^(4/12)
+
+```{r, echo=F}
 tibble::tibble(
   just_M3_freq = hrep::midi_to_freq(60) * 5 / 4,
-  M3_freq      = hrep::midi_to_freq(60) * 5 / 4,
-  foo_cents    = 1200*log(hrep::midi_to_freq(64.092442) / hrep::midi_to_freq(60))/log(2),
+  just_M3_midi = hrep::freq_to_midi(just_M3_freq),
+  M3_freq      = hrep::midi_to_freq(64),
   M3_midi      = hrep::freq_to_midi(M3_freq),
-  low_freq     = hrep::midi_to_freq(63.65),
-  high_freq    = hrep::midi_to_freq(64.15),
 )
 ```
-```{r, echo=T}
 
+### Intervals near the major third ranked by consonance
+
+```{r, echo=F}
+mami.codi.data <- mami.codi.map('M3', c(0.0002), tonic_midi) %>% dplyr::rowwise() %>% dplyr::mutate(
+  semitone       = metadata$semitone + tonic_midi,
+  .before=1
+) %>% dplyr::ungroup() %>% dplyr::arrange(dplyr::desc(consonance_dissonance))
+mami.codi.data %>% dplyr::select('semitone', 'consonance_dissonance')
+```
+
+#### The JT M3 has the highest consonance
+
+```{r, echo=F}
+just_M3 = mami.codi.data %>% dplyr::slice(1)
 ```
 
 ```{r, echo=F}
-tonic_midi = 60
-num_harmonics = 10
-octave_ratio = 2.0
-tolerances = c(0.0002)
-behavior = readRDS('../data/M3.rds')
-chords = tibble::tibble(
-  pitches = behavior$profile$interval %>% lapply(\(i) list(c(tonic_midi,tonic_midi+i)))
-)
-index = seq_along(chords$pitches)
-grid = tidyr::expand_grid(
-  index,
-  tolerance  = tolerances
-)
-data = grid %>% furrr::future_pmap_dfr(\(
-  index,
-  tolerance
-) {
-
-  chord = hrep::sparse_fr_spectrum(chords$pitches[index][[1]][[1]],
-                                   num_harmonics = num_harmonics,
-                                   octave_ratio  = octave_ratio)
-
-  mami.codi.R::mami.codi(
-    chord,
-    tolerance=tolerance,
-    metadata  = list(
-      tolerance=tolerance,
-      octave_ratio=octave_ratio,
-      num_harmonics  = num_harmonics,
-      semitone = chords$pitches[index][[1]][[1]][2] - tonic_midi
-    ),
-    verbose=T
-  )
-}, .progress=TRUE, .options = furrr::furrr_options(seed = T))
-
-sorted <- data %>% dplyr::rowwise() %>% dplyr::mutate(
-  semitone       = metadata$semitone,
-  .before=1
-) %>% dplyr::ungroup() %>% dplyr::arrange(dplyr::desc(consonance_dissonance))
+just_M3$semitone
 ```
 
-```{r, echo=T}
-sorted
+```{r, echo=F}
+just_M3 %>% dplyr::select('semitone', 'consonance_dissonance')
 ```
 
-```{r, echo=T}
-just_M3 = sorted %>% dplyr::slice(1)
-just_M3
-```
-```{r, echo=T}
+##### Frequency ratios of the JT M3
+
+```{r, echo=F}
 just_M3$ratios_frequency[[1]]
 ```
-```{r, echo=T}
-homey_M3 = sorted %>% dplyr::slice(2)
-homey_M3
+
+### Intervals near the major third ranked by lowest consonance
+
+```{r, echo=F}
+mami.codi.data %>% dplyr::arrange(consonance_dissonance) %>% 
+  dplyr::select('semitone', 'consonance_dissonance')
 ```
-```{r, echo=T}
-homey_M3$ratios_frequency[[1]]
+
+#### The lowest consonance
+```{r, echo=F}
+dissonant_M3 = mami.codi.data %>% dplyr::arrange(consonance_dissonance) %>% dplyr::slice(1)
 ```
-```{r, echo=T}
+
+```{r, echo=F}
+dissonant_M3$semitone
+```
+
+```{r, echo=F}
+dissonant_M3 %>% dplyr::select('semitone', 'consonance_dissonance')
+```
+
+##### The lowest consonance ratios
+
+```{r, echo=F}
+dissonant_M3$ratios_frequency[[1]]
+```
+
+#### The second highest consonance
+
+```{r, echo=F}
+homey_M3 = mami.codi.data %>% dplyr::slice(2)
+```
+
+```{r, echo=F}
 homey_M3$semitone
 ```
-```{r, echo=T}
-dissonant_M3 = sorted %>% dplyr::arrange(consonance_dissonance) %>% dplyr::slice(1)
-dissonant_M3
+
+```{r, echo=F}
+homey_M3 %>% dplyr::select('semitone', 'consonance_dissonance')
 ```
-```{r, echo=T}
-dissonant_M3$ratios_frequency[[1]]
+
+##### Frequency ratios of the second highest consonance
+
+```{r, echo=F}
+homey_M3$ratios_frequency[[1]]
 ```
