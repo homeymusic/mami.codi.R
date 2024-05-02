@@ -112,7 +112,7 @@ In the plots below:
 
 ![](man/figures/README-unnamed-chunk-4-7.png)<!-- -->
 
-### P8 ~ Partials: 10
+### M3 ~ Partials: 10
 
 | pseudo_octave |
 |:--------------|
@@ -128,7 +128,7 @@ In the plots below:
 
 ![](man/figures/README-unnamed-chunk-4-9.png)<!-- -->
 
-### M3 ~ Partials: 10
+### P8 ~ Partials: 10
 
 | pseudo_octave |
 |:--------------|

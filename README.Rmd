@@ -88,9 +88,9 @@ params = list(
   list(h=1, o=2.0,s='macro'),
   list(h=5, o=2.0,s='macro'),
   list(h=5,o=2,s='5PartialsNo3'),
-  list(h=10,o=2.0,s='P8'),
+  list(h=10,o=2.0,s='M3'),
   list(h=10,o=2.0,s='M6'),
-  list(h=10,o=2.0,s='M3')
+  list(h=10,o=2.0,s='P8')
 )
 
 params %>% purrr::map(\(p) {
