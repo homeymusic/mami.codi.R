@@ -1,5 +1,5 @@
 source('./utils.R')
-devtools::install_github('git@github.com:homeymusic/mami.codi.R', ref="framed_no_octave_factor")
+devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 
 library(mami.codi.R)
 devtools::load_all(".")

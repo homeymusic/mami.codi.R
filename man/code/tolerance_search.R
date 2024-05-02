@@ -1,4 +1,4 @@
-search_label  = 'M3'
+search_label  = 'Harmonic'
 
 source('./utils.R')
 devtools::install_github('git@github.com:homeymusic/mami.codi.R')
@@ -48,7 +48,7 @@ chords = tibble::tibble(
 )
 index = seq_along(chords$pitches)
 
-tolerances = seq(from=0.00001, to=0.001, by=0.00001)
+tolerances = seq(from=0.04, to=0.06, by=0.001)
 
 grid = tidyr::expand_grid(
   index,

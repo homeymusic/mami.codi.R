@@ -167,7 +167,7 @@ params %>% purrr::map(\(p) {
   print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),
                            goal=experiment,sigma=sigma,
                            black_vlines=black_vlines,gray_vlines=gray_vlines))
-  knit_child("./man/thoughts/M3.Rmd")
+  # knit_child("./man/thoughts/M3.Rmd")
   cat("  \n")
 })
 ```

@@ -22,6 +22,7 @@ mami.codi <- function(x, metadata=NA, verbose=FALSE, tolerance=TOLERANCE, ...) {
   parse_input(x, ...)              %>%
     listen_for_pseudo_octave       %>%
     duplex(tolerance)              %>%
+    flip                           %>%
     rotate                         %>%
     format_output(metadata, verbose)
 
@@ -100,8 +101,28 @@ estimate_cycle <- function(x, harmonic, pseudo_octave, tolerance) {
 
   tibble::tibble_row(
     lcm        = lcm(r$den),
-    consonance = 1 / (log2(.data$lcm)+1),
+    dissonance = log2(.data$lcm),
     ratios     = list(r)
+  )
+
+}
+
+flip <- function(x) {
+
+  consonance_frequency  = ZARLINO - x$dissonance_frequency
+  consonance_wavelength = ZARLINO - x$dissonance_wavelength
+
+  if (consonance_frequency <= 0 | consonance_wavelength <= 0) {
+    stop(paste(
+      'consonance should never be less than zero',
+      'if so the ZARLINO constant is too low'
+    ))
+  }
+
+  x %>% dplyr::mutate(
+    consonance_frequency,
+    consonance_wavelength,
+    .before=1
   )
 
 }
@@ -139,6 +160,7 @@ SPEED_OF_SOUND = 343
 ENDOLYMPH_SPEED_OF_SOUND_SALT = 1563 # 40*C sea water
 ENDOLYMPH_SPEED_OF_SOUND_SALT = 1526 # 40*C fresh water
 TOLERANCE      = 0.05
+ZARLINO        = 100000 / sqrt(2)
 MIN_AMPLITUDE  = 1/12
 PI_4           = pi / 4
 R_PI_4         = matrix(c(
