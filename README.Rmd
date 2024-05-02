@@ -161,8 +161,8 @@ params %>% purrr::map(\(p) {
   }
   cat("  \n###", title, '\n')
   print(knitr::kable(tibble::tibble_row(
-    pseudo_octave       = paste(round(chords$pseudo_octave %>% unique, 2),
-                                collapse = ' ')
+    pseudo_octave = paste(round(chords$pseudo_octave %>% unique, 2), collapse = ' '),
+    tolerance     = paste(round(chords$tolerance %>% unique, 5), collapse = ' ')
   )))
   print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),
                            goal=experiment,sigma=sigma,

@@ -58,81 +58,81 @@ In the plots below:
 
 ### Stretched ~ Partials: 10
 
-| pseudo_octave |
-|:--------------|
-| 2.1           |
+| pseudo_octave | tolerance |
+|:--------------|:----------|
+| 2.1           | 0.05      |
 
 ![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->
 
 ### Harmonic ~ Partials: 10
 
-| pseudo_octave |
-|:--------------|
-| 2             |
+| pseudo_octave | tolerance |
+|:--------------|:----------|
+| 2             | 0.05      |
 
 ![](man/figures/README-unnamed-chunk-4-2.png)<!-- -->
 
 ### Compressed ~ Partials: 10
 
-| pseudo_octave |
-|:--------------|
-| 1.9           |
+| pseudo_octave | tolerance |
+|:--------------|:----------|
+| 1.9           | 0.05      |
 
 ![](man/figures/README-unnamed-chunk-4-3.png)<!-- -->
 
 ### Bonang ~ Partials: 4
 
-| pseudo_octave |
-|:--------------|
-| 2             |
+| pseudo_octave | tolerance |
+|:--------------|:----------|
+| 2             | 0.05      |
 
 ![](man/figures/README-unnamed-chunk-4-4.png)<!-- -->
 
 ### Pure ~ Partials: 1
 
-| pseudo_octave |
-|:--------------|
-| 2             |
+| pseudo_octave | tolerance |
+|:--------------|:----------|
+| 2             | 0.05      |
 
 ![](man/figures/README-unnamed-chunk-4-5.png)<!-- -->
 
 ### 5Partials ~ Partials: 5
 
-| pseudo_octave |
-|:--------------|
-| 2             |
+| pseudo_octave | tolerance |
+|:--------------|:----------|
+| 2             | 0.05      |
 
 ![](man/figures/README-unnamed-chunk-4-6.png)<!-- -->
 
 ### 5PartialsNo3 ~ Partials: 5
 
-| pseudo_octave |
-|:--------------|
-| 2             |
+| pseudo_octave | tolerance |
+|:--------------|:----------|
+| 2             | 0.05      |
 
 ![](man/figures/README-unnamed-chunk-4-7.png)<!-- -->
 
 ### M3 ~ Partials: 10
 
-| pseudo_octave |
-|:--------------|
-| 2             |
+| pseudo_octave | tolerance |
+|:--------------|:----------|
+| 2             | 2e-04     |
 
 ![](man/figures/README-unnamed-chunk-4-8.png)<!-- -->
 
 ### M6 ~ Partials: 10
 
-| pseudo_octave |
-|:--------------|
-| 2             |
+| pseudo_octave | tolerance |
+|:--------------|:----------|
+| 2             | 2e-04     |
 
 ![](man/figures/README-unnamed-chunk-4-9.png)<!-- -->
 
 ### P8 ~ Partials: 10
 
-| pseudo_octave |
-|:--------------|
-| 2             |
+| pseudo_octave | tolerance |
+|:--------------|:----------|
+| 2             | 2e-04     |
 
 ![](man/figures/README-unnamed-chunk-4-10.png)<!-- -->  
 \[\[1\]\] NULL
