@@ -6,7 +6,7 @@ always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'Compressed'
+search_label = 'Pure'
 ```
 
 ```{r, echo=F, message=F, include=F}
@@ -116,7 +116,7 @@ smoothed <- function(x,val,sigma=BEHAVIOURAL_SMOOTH_BROAD) {
 theory <- theory %>% 
   dplyr::mutate(
     z_score = z_scores(consonance_dissonance),
-    smooth  = smoothed(semitone, z_score, params$sigma)
+    smooth  = smoothed(semitone, .data$z_score, params$sigma)
   )
 ```
 
