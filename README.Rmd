@@ -79,9 +79,7 @@ dyads <- timbre_paper %>% dplyr::rowwise() %>% dplyr::mutate(
 )
 ```
 
-(dyads %>% dplyr::filter(scale=='5PartialsNo3') %>% dplyr::slice(1))$spectrum[[1]]
-
-```{r, fig.height=8, fig.width=12, echo=F, results='hide', message=F}
+```{r, fig.height=8, fig.width=12, echo=F, results='asis', message=F}
 params = list(
   list(h=10,o=2.0,s='macro'),
   list(h=5, o=2.0,s='macro'),
@@ -164,6 +162,7 @@ params %>% purrr::map(\(p) {
   cat("  \n###", title, '\n')
   print(knitr::kable(tibble::tibble_row(
     pseudo_octave = paste(round(chords$pseudo_octave %>% unique, 2), collapse = ' '),
+    min_amplitude = paste(round(chords$min_amplitude %>% unique, 2), collapse = ' '),
     tolerance     = paste(round(chords$tolerance %>% unique, 5), collapse = ' ')
   )))
   print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),
@@ -201,7 +200,7 @@ params = list(
 )
 ```
 
-```{r, fig.height=8, fig.width=12, echo=F, results='hide', message=F}
+```{r, fig.height=8, fig.width=12, echo=F, results='asis', message=F}
 params %>% purrr::map(\(p) {
   gray_vlines = c()
   black_vlines = c()
@@ -234,6 +233,11 @@ params %>% purrr::map(\(p) {
   )
   sigma = BEHAVIOURAL_SMOOTH_BROAD
   cat("  \n###", title, '\n')
+  print(knitr::kable(tibble::tibble_row(
+    pseudo_octave = paste(round(chords$pseudo_octave %>% unique, 2), collapse = ' '),
+    min_amplitude = paste(round(chords$min_amplitude %>% unique, 2), collapse = ' '),
+    tolerance     = paste(round(chords$tolerance %>% unique, 5), collapse = ' ')
+  )))
   print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),
                            goal=experiment,sigma=sigma,
                            black_vlines=black_vlines,gray_vlines=gray_vlines))
