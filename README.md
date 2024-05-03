@@ -60,7 +60,7 @@ In the plots below:
 
 | pseudo_octave | tolerance |
 |:--------------|:----------|
-| 2             | 0.072     |
+| 2             | 0.071     |
 
 ![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->
 
@@ -68,9 +68,17 @@ In the plots below:
 
 | pseudo_octave | tolerance |
 |:--------------|:----------|
-| 2             | 0.072     |
+| 2             | 0.071     |
 
 ![](man/figures/README-unnamed-chunk-4-2.png)<!-- -->
+
+### 5PartialsNo3 ~ Partials: 5
+
+| pseudo_octave | tolerance |
+|:--------------|:----------|
+| 2             | 0.071     |
+
+![](man/figures/README-unnamed-chunk-4-3.png)<!-- -->
 
 ### Pure ~ Partials: 1
 
@@ -78,37 +86,29 @@ In the plots below:
 |:--------------|:----------|
 | 2             | 0.035     |
 
-![](man/figures/README-unnamed-chunk-4-3.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-4.png)<!-- -->
 
 ### Stretched ~ Partials: 10
 
 | pseudo_octave | tolerance |
 |:--------------|:----------|
-| 2.1           | 0.072     |
+| 2.1           | 0.071     |
 
-![](man/figures/README-unnamed-chunk-4-4.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-5.png)<!-- -->
 
 ### Compressed ~ Partials: 10
 
 | pseudo_octave | tolerance |
 |:--------------|:----------|
-| 1.9           | 0.072     |
+| 1.9           | 0.071     |
 
-![](man/figures/README-unnamed-chunk-4-5.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-6.png)<!-- -->
 
 ### Bonang ~ Partials: 4
 
 | pseudo_octave | tolerance |
 |:--------------|:----------|
-| 2             | 0.072     |
-
-![](man/figures/README-unnamed-chunk-4-6.png)<!-- -->
-
-### 5PartialsNo3 ~ Partials: 5
-
-| pseudo_octave | tolerance |
-|:--------------|:----------|
-| 2             | 0.072     |
+| 2             | 0.071     |
 
 ![](man/figures/README-unnamed-chunk-4-7.png)<!-- -->
 
