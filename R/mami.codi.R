@@ -23,7 +23,7 @@ mami.codi <- function(x, min_amplitude=MIN_AMPLITUDE, tolerance=TOLERANCE,
   parse_input(x, ...)                       %>%
     listen_for_min_amplitude(min_amplitude) %>%
     listen_for_pseudo_octave()              %>%
-    duplex(tolerance)                       %>%
+    estimate_cycles(tolerance)                       %>%
     rotate()                                %>%
     format_output(metadata, verbose)
 
@@ -50,6 +50,7 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 }
 
 listen_for_min_amplitude = function(x, min_amplitude) {
+
   f = x$spectrum[[1]] %>% dplyr::filter(.data$y>min_amplitude) %>% hrep::freq()
   λ = SPEED_OF_SOUND / f
 
@@ -79,7 +80,7 @@ listen_for_pseudo_octave = function(x) {
 
 }
 
-duplex <- function(x, tolerance) {
+estimate_cycles <- function(x, tolerance) {
 
   f = x$frequencies[[1]]
   λ = x$wavelengths[[1]]
