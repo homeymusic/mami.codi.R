@@ -134,26 +134,7 @@ In the plots below:
 |:-----------------------|:--------------|:----------|
 | 2                      | 0.03          | 2e-04     |
 
-![](man/figures/README-unnamed-chunk-4-10.png)<!-- -->  
-\[\[1\]\] NULL
-
-\[\[2\]\] NULL
-
-\[\[3\]\] NULL
-
-\[\[4\]\] NULL
-
-\[\[5\]\] NULL
-
-\[\[6\]\] NULL
-
-\[\[7\]\] NULL
-
-\[\[8\]\] NULL
-
-\[\[9\]\] NULL
-
-\[\[10\]\] NULL
+![](man/figures/README-unnamed-chunk-4-10.png)<!-- -->
 
 ## Amplitudes
 
@@ -179,9 +160,4 @@ In the plots below:
 |:-----------------------|:--------------|:----------|
 | 2                      | 0.03          | 0.071     |
 
-![](man/figures/README-unnamed-chunk-8-3.png)<!-- -->  
-\[\[1\]\] NULL
-
-\[\[2\]\] NULL
-
-\[\[3\]\] NULL
+![](man/figures/README-unnamed-chunk-8-3.png)<!-- -->

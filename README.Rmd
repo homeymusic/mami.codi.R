@@ -93,7 +93,7 @@ params = list(
   list(h=10,o=2.0,s='P8')
 )
 
-params %>% purrr::map(\(p) {
+p = params %>% purrr::map(\(p) {
   gray_vlines = c()
   black_vlines = c()
   if (p$o<2 & p$s == 'macro') {
@@ -201,7 +201,7 @@ params = list(
 ```
 
 ```{r, fig.height=8, fig.width=12, echo=F, results='asis', message=F}
-params %>% purrr::map(\(p) {
+p =params %>% purrr::map(\(p) {
   gray_vlines = c()
   black_vlines = c()
   if (p$r == 12) {
