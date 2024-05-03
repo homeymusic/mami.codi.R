@@ -100,10 +100,10 @@ params %>% purrr::map(\(p) {
   black_vlines = c()
   if (p$o<2 & p$s == 'macro') {
     timbre = 'Compressed'
-    black_vlines  = c(11.10)
+    black_vlines  = c(3.8,4.8,11.1,14.5)
   } else if (p$o>2 & p$s == 'macro') {
     timbre = 'Stretched'
-    black_vlines  = c(12.78)
+    black_vlines  = c(4.2,7.5,9.3,12.78)
   } else if (p$o==2 & p$h==1 & p$s == 'Pure') {
     timbre = 'Pure'
     black_vlines = c()
@@ -119,7 +119,7 @@ params %>% purrr::map(\(p) {
     black_vlines = c()
   } else if (p$o==2 & p$h==10 & p$s == 'macro') {
     timbre = 'Harmonic'
-    black_vlines  = c(12.04)
+    black_vlines  = c(2,3,4,5,7,8,9,12.04)
   } else if (p$s == 'M3') {
     timbre = 'M3'
     gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 5/4)-60,4,4.092442)
