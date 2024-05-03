@@ -60,7 +60,7 @@ In the plots below:
 
 | pseudo_octave | tolerance |
 |:--------------|:----------|
-| 2.1           | 0.1       |
+| 2.1           | 0.06      |
 
 ![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->
 
@@ -68,7 +68,7 @@ In the plots below:
 
 | pseudo_octave | tolerance |
 |:--------------|:----------|
-| 2             | 0.1       |
+| 2             | 0.06      |
 
 ![](man/figures/README-unnamed-chunk-4-2.png)<!-- -->
 
@@ -76,7 +76,7 @@ In the plots below:
 
 | pseudo_octave | tolerance |
 |:--------------|:----------|
-| 1.9           | 0.1       |
+| 1.9           | 0.06      |
 
 ![](man/figures/README-unnamed-chunk-4-3.png)<!-- -->
 
@@ -84,7 +84,7 @@ In the plots below:
 
 | pseudo_octave | tolerance |
 |:--------------|:----------|
-| 2             | 0.1       |
+| 2             | 0.06      |
 
 ![](man/figures/README-unnamed-chunk-4-4.png)<!-- -->
 
@@ -92,7 +92,7 @@ In the plots below:
 
 | pseudo_octave | tolerance |
 |:--------------|:----------|
-| 2             | 0.025     |
+| 2             | 0.035     |
 
 ![](man/figures/README-unnamed-chunk-4-5.png)<!-- -->
 
@@ -100,7 +100,7 @@ In the plots below:
 
 | pseudo_octave | tolerance |
 |:--------------|:----------|
-| 2             | 0.1       |
+| 2             | 0.06      |
 
 ![](man/figures/README-unnamed-chunk-4-6.png)<!-- -->
 
@@ -108,7 +108,7 @@ In the plots below:
 
 | pseudo_octave | tolerance |
 |:--------------|:----------|
-| 2             | 0.1       |
+| 2             | 0.06      |
 
 ![](man/figures/README-unnamed-chunk-4-7.png)<!-- -->
 
