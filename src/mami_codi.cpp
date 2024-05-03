@@ -71,7 +71,7 @@ using namespace Rcpp;
                   const double pseudo_octave,
                   const double tolerance) {
 
-   const int m = x.size();
+   const int    m = x.size();
    const double reference_tone = min(x);
    const double pseudo_tolerance = pow(2.0, log(tolerance) / log(pseudo_octave));
 

@@ -15,11 +15,11 @@ Tolerances:
 
 Number of Harmonics:
 
-    #> [1] 1
+    #> [1] 10
 
 Octave Ratios:
 
-    #> [1] 2
+    #> [1] 2.1
 
 ## CoDi Wrap
 
