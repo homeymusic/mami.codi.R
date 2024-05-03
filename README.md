@@ -56,51 +56,51 @@ In the plots below:
 
 ## Frequencies
 
-### Stretched ~ Partials: 10
-
-| pseudo_octave | tolerance |
-|:--------------|:----------|
-| 2.1           | 0.06      |
-
-![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->
-
 ### Harmonic ~ Partials: 10
 
 | pseudo_octave | tolerance |
 |:--------------|:----------|
-| 2             | 0.06      |
+| 2             | 0.07      |
 
-![](man/figures/README-unnamed-chunk-4-2.png)<!-- -->
-
-### Compressed ~ Partials: 10
-
-| pseudo_octave | tolerance |
-|:--------------|:----------|
-| 1.9           | 0.06      |
-
-![](man/figures/README-unnamed-chunk-4-3.png)<!-- -->
-
-### Bonang ~ Partials: 4
-
-| pseudo_octave | tolerance |
-|:--------------|:----------|
-| 2             | 0.06      |
-
-![](man/figures/README-unnamed-chunk-4-4.png)<!-- -->
-
-### Pure ~ Partials: 1
-
-| pseudo_octave | tolerance |
-|:--------------|:----------|
-| 2             | 0.03      |
-
-![](man/figures/README-unnamed-chunk-4-5.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->
 
 ### 5Partials ~ Partials: 5
 
 | pseudo_octave | tolerance |
 |:--------------|:----------|
-| 2             | 0.06      |
+| 2             | 0.07      |
+
+![](man/figures/README-unnamed-chunk-4-2.png)<!-- -->
+
+### Pure ~ Partials: 1
+
+| pseudo_octave | tolerance |
+|:--------------|:----------|
+| 2             | 0.04      |
+
+![](man/figures/README-unnamed-chunk-4-3.png)<!-- -->
+
+### Stretched ~ Partials: 10
+
+| pseudo_octave | tolerance |
+|:--------------|:----------|
+| 2.1           | 0.07      |
+
+![](man/figures/README-unnamed-chunk-4-4.png)<!-- -->
+
+### Compressed ~ Partials: 10
+
+| pseudo_octave | tolerance |
+|:--------------|:----------|
+| 1.9           | 0.07      |
+
+![](man/figures/README-unnamed-chunk-4-5.png)<!-- -->
+
+### Bonang ~ Partials: 4
+
+| pseudo_octave | tolerance |
+|:--------------|:----------|
+| 2             | 0.07      |
 
 ![](man/figures/README-unnamed-chunk-4-6.png)<!-- -->
 
@@ -108,7 +108,7 @@ In the plots below:
 
 | pseudo_octave | tolerance |
 |:--------------|:----------|
-| 2             | 0.06      |
+| 2             | 0.07      |
 
 ![](man/figures/README-unnamed-chunk-4-7.png)<!-- -->
 
