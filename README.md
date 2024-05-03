@@ -76,7 +76,7 @@ In the plots below:
 
 | pseudo_octave | tolerance |
 |:--------------|:----------|
-| 2             | 0.04      |
+| 2             | 0.035     |
 
 ![](man/figures/README-unnamed-chunk-4-3.png)<!-- -->
 
