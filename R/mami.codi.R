@@ -158,16 +158,24 @@ format_output <- function(x, metadata, verbose) {
 }
 
 lcm <- function(x) Reduce(numbers::LCM, x)
-SPEED_OF_SOUND = 343
-SPEED_OF_SOUND_SALT  = 1526 # 40*C fresh water
-SPEED_OF_SOUND_FRESH = 1563 # 40*C sea water
-ENDOLYMPH_SPEED_OF_SOUND = SPEED_OF_SOUND_SALT
+
 TOLERANCE        = 0.071
-PURE_TOLERANCE   = 0.071
+PURE_TOLERANCE   = TOLERANCE
 ZOOMED_TOLERANCE = 0.0002
-ZARLINO        = 100 / sqrt(2)
-MIN_CONSONANCE = .Machine$double.xmin
+
 MIN_AMPLITUDE  = 0.03
+
+SPEED_OF_SOUND_AIR        = 343
+SPEED_OF_SOUND_SALTWATER  = 1526 # 40*C fresh water
+SPEED_OF_SOUND_FRESHWATER = 1563 # 40*C sea water
+
+SPEED_OF_SOUND            = SPEED_OF_SOUND_AIR
+ENDOLYMPH_SPEED_OF_SOUND  = SPEED_OF_SOUND_SALTWATER
+
+ZARLINO        = 100 / sqrt(2)
+
+MIN_CONSONANCE = .Machine$double.xmin
+
 PI_4           = pi / 4
 R_PI_4         = matrix(c(
   cos(PI_4), sin(PI_4),
