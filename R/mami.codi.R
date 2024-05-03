@@ -174,7 +174,9 @@ default_tolerance <- function(scale) {
     ZOOMED_TOLERANCE
   } else if (scale == 'pure') {
     PURE_TOLERANCE
-  } else {
+  } else if (scale == 'macro') {
     TOLERANCE
+  } else {
+    stop("no default tolerance for selection")
   }
 }

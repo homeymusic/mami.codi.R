@@ -30,7 +30,7 @@ grid_1 = tidyr::expand_grid(
   index=macro_index,
   num_harmonics,
   octave_ratio,
-  scale
+  scale = 'Pure'
 )
 
 num_harmonics = 5
@@ -152,7 +152,7 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
     study_chord = chord_df %>% as.list() %>% hrep::sparse_fr_spectrum()
 
   } else {
-    if (scale == 'macro' | scale == '5PartialsNo3') {
+    if (scale == 'macro' | scale == '5PartialsNo3' | scale == 'Pure') {
       study_chords = macro_chords
     } else if (scale == 'M3') {
       study_chords = M3_chords
