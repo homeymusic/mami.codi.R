@@ -68,13 +68,18 @@ theory <- theory %>% dplyr::rowwise() %>% dplyr::mutate(
   octave_ratio   = metadata$octave_ratio,
   semitone       = metadata$semitone,
   .before=1
-) %>% dplyr::group_by(tolerance)
+) %>% dplyr::group_by(frequency_tolerance, wavelength_tolerance)
 ```
 
 Tolerances:
 ```{r, echo=F}
-tols = theory$tolerance %>% unique
-tols
+freq_tols = theory$frequency_tolerance %>% unique
+freq_tols
+```
+
+```{r, echo=F}
+wave_tols = theory$wavelength_tolerance %>% unique
+wave_tols
 ```
 
 Number of Harmonics:
@@ -133,8 +138,8 @@ experiment <- experiment %>%
 ```
 
 ```{r, echo=F}
-cols = 1
-rows = length(tols)
+cols = length(wave_tols)
+rows = length(freq_tols) 
 ```
 
 ## CoDi Wrap
@@ -142,12 +147,11 @@ rows = length(tols)
 ```{r, fig.height=7*rows, fig.width=12*cols, echo=F}
 # height = 3 per row and width = 5 per column
 # so for grid of 4x12 it would be height=12 and width=60
-plot_semitone_codi_wrap(
+plot_semitone_codi_grid(
   theory, 
   experiment, 
   gray_vlines  = params$gray_vlines[[1]],
   black_vlines = params$black_vlines[[1]],
-  title=paste(search_label),
-  ncols=cols
+  title=paste(search_label)
 )
 ```

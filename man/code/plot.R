@@ -393,14 +393,14 @@ plot_semitone_codi_grid <- function(theory, experiment,
                                     black_vlines=c(), gray_vlines=c(),
                                     title) {
   per_plot_labels = tidyr::expand_grid(
-    tolerance_frequency  = theory$tolerance_frequency  %>% unique,
-    tolerance_wavelength = theory$tolerance_wavelength %>% unique
+    frequency_tolerance  = theory$frequency_tolerance  %>% unique,
+    wavelength_tolerance = theory$wavelength_tolerance %>% unique
   )
   per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(tolerance_frequency,tolerance_wavelength) {
+    purrr::pmap_vec(\(frequency_tolerance,wavelength_tolerance) {
       tols = paste(
-        'h:', tolerance_wavelength,
-        'l:', tolerance_frequency
+        'f:', frequency_tolerance,
+        'λ:', wavelength_tolerance
       )
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
@@ -412,7 +412,7 @@ plot_semitone_codi_grid <- function(theory, experiment,
     ggplot2::scale_fill_manual(values=color_values_homey(), guide="none") +
     ggplot2::geom_line(
       data=experiment,
-      linetype = "dashed",
+      color    = colors_homey$neutral,
       ggplot2::aes(x = semitone, y = smooth)) +
     ggplot2::geom_line(
       data=theory,
@@ -424,7 +424,7 @@ plot_semitone_codi_grid <- function(theory, experiment,
                                                           vjust="inward",hjust="inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_grid(tolerance_frequency ~ tolerance_wavelength, scales = 'free_y') +
+    ggplot2::facet_grid(frequency_tolerance ~ wavelength_tolerance, scales = 'free_y') +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()
