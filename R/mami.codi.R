@@ -149,8 +149,9 @@ SPEED_OF_SOUND = 343
 SPEED_OF_SOUND_SALT  = 1526 # 40*C fresh water
 SPEED_OF_SOUND_FRESH = 1563 # 40*C sea water
 ENDOLYMPH_SPEED_OF_SOUND = SPEED_OF_SOUND_SALT
-TOLERANCE      = 0.04
+TOLERANCE        = 0.1
 ZOOMED_TOLERANCE = 0.0002
+PURE_TOLERANCE   = 0.025
 ZARLINO        = 100 / sqrt(2)
 MIN_CONSONANCE = .Machine$double.xmin
 MIN_AMPLITUDE  = 1 / 12
@@ -168,17 +169,12 @@ R_PI_4         = matrix(c(
 #'
 #' @rdname default_tolerance
 #' @export
-default_tolerance <- function() {
-  TOLERANCE
-}
-
-#' Default Zoomed Tolerance
-#'
-#'
-#' @return Default tolerance
-#'
-#' @rdname default_zoomed_tolerance
-#' @export
-default_zoomed_tolerance <- function() {
-  ZOOMED_TOLERANCE
+default_tolerance <- function(scale) {
+  if (scale == 'zoomed') {
+    ZOOMED_TOLERANCE
+  } else if (scale == 'pure') {
+    PURE_TOLERANCE
+  } else {
+    TOLERANCE
+  }
 }

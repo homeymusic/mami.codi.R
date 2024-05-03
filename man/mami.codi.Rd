@@ -14,7 +14,7 @@ hrep::sparse_fr_spectrum}
 helpful for analysis and plots}
 
 \item{verbose}{Determines the amount of data to return from chord evaluation
-TRUE is all and FALSE is just major-minor and consonance-dissonance}
+TRUE is all and FALSE is just major-minor, consonance-dissonance, tolerance and metadata.}
 
 \item{tolerance}{An optional tolerance value for creating rational fractions}
 

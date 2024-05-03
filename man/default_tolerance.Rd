@@ -4,7 +4,7 @@
 \alias{default_tolerance}
 \title{Default Tolerance}
 \usage{
-default_tolerance()
+default_tolerance(scale)
 }
 \value{
 Default tolerance

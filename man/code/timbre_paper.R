@@ -179,21 +179,15 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
   }
 
   if (scale=='M3' || scale=='M6' || scale=='P8') {
-    mami.codi.R::mami.codi(study_chord,
-                           tolerance=mami.codi.R::default_zoomed_tolerance(),
-                           metadata = list(
-                             num_harmonics = num_harmonics,
-                             octave_ratio  = octave_ratio,
-                             semitone      = study_chords$pitches[index][[1]][[1]][2] - tonic,
-                             scale         = scale
-                           ),
-                           num_harmonics=num_harmonics,
-                           octave_ratio=octave_ratio,
-                           verbose=TRUE)
-
+    tol = mami.codi.R::default_tolerance('zoomed')
+  } else if (scale=='Pure') {
+    tol = mami.codi.R::default_tolerance('pure')
   } else {
+    tol = mami.codi.R::default_tolerance('macro')
+  }
+
     mami.codi.R::mami.codi(study_chord,
-                           tolerance=mami.codi.R::default_tolerance(),
+                           tolerance=tol,
                            metadata = list(
                              num_harmonics = num_harmonics,
                              octave_ratio  = octave_ratio,
@@ -204,7 +198,6 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
                            octave_ratio=octave_ratio,
                            verbose=TRUE)
 
-  }
 
 }, .progress=TRUE, .options = furrr::furrr_options(seed = T))
 
