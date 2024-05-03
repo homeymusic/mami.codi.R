@@ -84,7 +84,7 @@ In the plots below:
 
 | pseudo_octave | tolerance |
 |:--------------|:----------|
-| 2             | 0.035     |
+| 2             | 0.071     |
 
 ![](man/figures/README-unnamed-chunk-4-4.png)<!-- -->
 

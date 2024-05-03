@@ -111,49 +111,50 @@ plan(multisession, workers=parallelly::availableCores())
 output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
                                            scale) {
 
-  study_intervals = macro_intervals
+  if (scale == 'M3') {
+    study_intervals = M3_intervals
+  } else if (scale == 'M6') {
+    study_intervals = M6_intervals
+  } else if (scale == 'P8') {
+    study_intervals = P8_intervals
+  } else {
+    study_intervals = macro_intervals
+  }
 
   if (scale == 'Bonang') {
     study_intervals = Bonang_intervals
 
     bass_f0 <- hrep::midi_to_freq(tonic_midi)
-    bass_df <- tibble::tibble(
-      frequency = bass_f0 * 1:4,
-      amplitude = 1
-    )
-
     upper_f0 <- hrep::midi_to_freq(study_intervals[index])
+
     chord_df <- tibble::tibble(
-      frequency = c(upper_f0 * c(1, 1.52, 3.46, 3.92),
-                    bass_df$frequency) %>% unique %>% sort,
+      frequency = c(
+        bass_f0 * 1:4,
+        upper_f0 * c(1, 1.52, 3.46, 3.92)
+      ) %>% unique %>% sort,
       amplitude = 1
     )
 
     study_chord = chord_df %>% as.list() %>% hrep::sparse_fr_spectrum()
+  } else if (scale == '5PartialsNo3') {
+    bass_f0 <- hrep::midi_to_freq(tonic_midi)
+    bass <- tibble::tibble(
+      frequency = bass_f0 * 1:5,
+      amplitude = c(1, 1, 0, 1, 1)
+    ) %>% as.list() %>%  hrep::sparse_fr_spectrum()
 
+    upper_f0 <- hrep::midi_to_freq(study_intervals[index])
+    upper <- tibble::tibble(
+      frequency = upper_f0 * 1:5,
+      amplitude = c(1, 1, 0, 1, 1)
+    ) %>% as.list() %>%  hrep::sparse_fr_spectrum()
+
+    study_chord = do.call(hrep::combine_sparse_spectra, list(bass,upper))
   } else {
-    if (scale == 'M3') {
-      study_intervals = M3_intervals
-    } else if (scale == 'M6') {
-      study_intervals = M6_intervals
-    } else if (scale == 'P8') {
-      study_intervals = P8_intervals
-    }
-
     study_chord = c(tonic_midi, study_intervals[index]) %>% hrep::sparse_fr_spectrum(
       num_harmonics = num_harmonics,
       octave_ratio  = octave_ratio
     )
-
-    if (scale == '5PartialsNo3') {
-      if (length(study_chord$y)==5) {
-        study_chord$y[3] = 0
-      } else if (length(study_chord$y)==10) {
-        study_chord$y[c(5,6)] = 0
-      } else {
-        stop('only dyads are supported for deleted harmonics.')
-      }
-    }
   }
 
   if (scale=='M3' || scale=='M6' || scale=='P8') {
@@ -177,5 +178,4 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
                          verbose=TRUE)
 
 }, .progress=TRUE, .options = furrr::furrr_options(seed = T))
-
 saveRDS(output,output.rds)

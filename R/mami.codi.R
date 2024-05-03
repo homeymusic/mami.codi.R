@@ -46,7 +46,8 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 
   tibble::tibble_row(
     frequencies = list(f),
-    wavelengths = list(λ)
+    wavelengths = list(λ),
+    spectrum    = list(x)
   )
 
 }

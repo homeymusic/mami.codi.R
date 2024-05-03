@@ -79,6 +79,8 @@ dyads <- timbre_paper %>% dplyr::rowwise() %>% dplyr::mutate(
 )
 ```
 
+(dyads %>% dplyr::filter(scale=='5PartialsNo3') %>% dplyr::slice(1))$spectrum[[1]]
+
 ```{r, fig.height=8, fig.width=12, echo=F, results='asis', message=F}
 params = list(
   list(h=10,o=2.0,s='macro'),
