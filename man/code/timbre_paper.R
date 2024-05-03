@@ -4,8 +4,10 @@ devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 library(mami.codi.R)
 devtools::load_all(".")
 
-P8 <- c(60,72) %>% mami.codi.R::mami.codi(verbose=T)
-if (dplyr::near(max(P8$wavelengths[[1]]),  343 / hrep::midi_to_freq(60))) {
+tonic_midi = 60
+
+P8 <- c(tonic_midi,72) %>% mami.codi.R::mami.codi(verbose=T)
+if (dplyr::near(max(P8$wavelengths[[1]]),  343 / hrep::midi_to_freq(tonic_midi))) {
   print("Seems to be the correct version mami.codi.R")
 } else {
   stop("This is not the expected version of mami.codi.R")
@@ -14,14 +16,10 @@ if (dplyr::near(max(P8$wavelengths[[1]]),  343 / hrep::midi_to_freq(60))) {
 output.rds = '../data/timbre_paper.rds'
 prepare(output.rds)
 
-tonic = 60
 
 macro_experiment.rds = '../data/Pure.rds'
-macro_chords = tibble::tibble(
-  pitches =  readRDS(macro_experiment.rds)$profile$interval %>%
-    lapply(\(i) list(c(tonic,tonic+i)))
-)
-macro_index = seq_along(macro_chords$pitches)
+macro_intervals = tonic_midi + readRDS(macro_experiment.rds)$profile$interval
+macro_index = seq_along(macro_intervals)
 
 num_harmonics = 1
 octave_ratio  = 2.0
@@ -54,11 +52,8 @@ grid_10 = tidyr::expand_grid(
 num_harmonics = 10
 octave_ratio  = c(2.0)
 experiment.rds = '../data/M3.rds'
-intervals = 60 + readRDS(experiment.rds)$profile$interval
-M3_chords = tibble::tibble(
-  pitches = intervals %>% lapply(\(i) list(c(tonic,i)))
-)
-index = seq_along(M3_chords$pitches)
+M3_intervals = tonic_midi + readRDS(experiment.rds)$profile$interval
+index = seq_along(M3_intervals)
 grid_M3 = tidyr::expand_grid(
   index,
   num_harmonics,
@@ -67,11 +62,8 @@ grid_M3 = tidyr::expand_grid(
 )
 
 experiment.rds = '../data/M6.rds'
-intervals = 60 + readRDS(experiment.rds)$profile$interval
-M6_chords = tibble::tibble(
-  pitches = intervals %>% lapply(\(i) list(c(tonic,i)))
-)
-index = seq_along(M6_chords$pitches)
+M6_intervals = tonic_midi + readRDS(experiment.rds)$profile$interval
+index = seq_along(M6_intervals)
 grid_M6 = tidyr::expand_grid(
   index,
   num_harmonics,
@@ -80,11 +72,8 @@ grid_M6 = tidyr::expand_grid(
 )
 
 experiment.rds = '../data/P8.rds'
-intervals = 60 + readRDS(experiment.rds)$profile$interval
-P8_chords = tibble::tibble(
-  pitches = intervals %>% lapply(\(i) list(c(tonic,i)))
-)
-index = seq_along(P8_chords$pitches)
+P8_intervals = tonic_midi + readRDS(experiment.rds)$profile$interval
+index = seq_along(P8_intervals)
 grid_P8 = tidyr::expand_grid(
   index,
   num_harmonics,
@@ -92,18 +81,9 @@ grid_P8 = tidyr::expand_grid(
   scale = 'P8'
 )
 
-intervals = tonic + seq(0, 15 , 1/4000)
-hi_res_chords = tibble::tibble(
-  pitches = intervals %>% lapply(\(i) list(c(tonic,i)))
-)
-index = seq_along(hi_res_chords$pitches)
-
 experiment.rds = '../data/Bonang.rds'
-intervals = 60 + readRDS(experiment.rds)$profile$interval
-Bonang_chords = tibble::tibble(
-  pitches = intervals %>% lapply(\(i) list(c(tonic,i)))
-)
-index = seq_along(Bonang_chords$pitches)
+Bonang_intervals = tonic_midi + readRDS(experiment.rds)$profile$interval
+index = seq_along(Bonang_intervals)
 grid_Bonang = tidyr::expand_grid(
   index,
   num_harmonics=4,
@@ -112,15 +92,12 @@ grid_Bonang = tidyr::expand_grid(
 )
 
 experiment.rds = '../data/5PartialsNo3.rds'
-intervals = 60 + readRDS(experiment.rds)$profile$interval
-FivePartialsNo3_chords = tibble::tibble(
-  pitches = intervals %>% lapply(\(i) list(c(tonic,i)))
-)
-index = seq_along(FivePartialsNo3_chords$pitches)
+FivePartialsNo3_intervals = tonic_midi + readRDS(experiment.rds)$profile$interval
+index = seq_along(FivePartialsNo3_intervals)
 grid_5PartialsNo3 = tidyr::expand_grid(
   index,
   num_harmonics=5,
-  octave_ratio=2, # the bass is harmonic
+  octave_ratio=2,
   scale = '5PartialsNo3'
 )
 
@@ -133,39 +110,40 @@ plan(multisession, workers=parallelly::availableCores())
 
 output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
                                            scale) {
-  if (scale == 'Bonang') {
-    study_chords = Bonang_chords
 
-    tonic_f0 <- hrep::midi_to_freq(study_chords$pitches[index][[1]][[1]][1])
-    tonic_df <- tibble::tibble(
-      frequency = tonic_f0 * 1:4,
+  study_intervals = macro_intervals
+
+  if (scale == 'Bonang') {
+    study_intervals = Bonang_intervals
+
+    bass_f0 <- hrep::midi_to_freq(tonic_midi)
+    bass_df <- tibble::tibble(
+      frequency = bass_f0 * 1:4,
       amplitude = 1
     )
 
-    upper_f0 <- hrep::midi_to_freq(study_chords$pitches[index][[1]][[1]][2])
+    upper_f0 <- hrep::midi_to_freq(study_intervals[index])
     chord_df <- tibble::tibble(
       frequency = c(upper_f0 * c(1, 1.52, 3.46, 3.92),
-                    tonic_df$frequency) %>% unique %>% sort,
+                    bass_df$frequency) %>% unique %>% sort,
       amplitude = 1
     )
 
     study_chord = chord_df %>% as.list() %>% hrep::sparse_fr_spectrum()
 
   } else {
-    if (scale == 'macro' | scale == '5PartialsNo3' | scale == 'Pure') {
-      study_chords = macro_chords
-    } else if (scale == 'M3') {
-      study_chords = M3_chords
+    if (scale == 'M3') {
+      study_intervals = M3_intervals
     } else if (scale == 'M6') {
-      study_chords = M6_chords
+      study_intervals = M6_intervals
     } else if (scale == 'P8') {
-      study_chords = P8_chords
-    } else if (scale == 'hi_res') {
-      study_chords = hi_res_chords
+      study_intervals = P8_intervals
     }
-    study_chord = hrep::sparse_fr_spectrum(study_chords$pitches[index][[1]][[1]],
-                                           num_harmonics = num_harmonics,
-                                           octave_ratio  = octave_ratio)
+
+    study_chord = c(tonic_midi, study_intervals[index]) %>% hrep::sparse_fr_spectrum(
+      num_harmonics = num_harmonics,
+      octave_ratio  = octave_ratio
+    )
 
     if (scale == '5PartialsNo3') {
       if (length(study_chord$y)==5) {
@@ -186,18 +164,17 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
     tol = mami.codi.R::default_tolerance('macro')
   }
 
-    mami.codi.R::mami.codi(study_chord,
-                           tolerance=tol,
-                           metadata = list(
-                             num_harmonics = num_harmonics,
-                             octave_ratio  = octave_ratio,
-                             semitone      = study_chords$pitches[index][[1]][[1]][2] - tonic,
-                             scale         = scale
-                           ),
-                           num_harmonics=num_harmonics,
-                           octave_ratio=octave_ratio,
-                           verbose=TRUE)
-
+  mami.codi.R::mami.codi(study_chord,
+                         tolerance=tol,
+                         metadata = list(
+                           num_harmonics = num_harmonics,
+                           octave_ratio  = octave_ratio,
+                           semitone      = study_intervals[index] - tonic_midi,
+                           scale         = scale
+                         ),
+                         num_harmonics=num_harmonics,
+                         octave_ratio=octave_ratio,
+                         verbose=TRUE)
 
 }, .progress=TRUE, .options = furrr::furrr_options(seed = T))
 
