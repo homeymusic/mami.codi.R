@@ -18,8 +18,9 @@ if (dplyr::near(max(P8$wavelengths[[1]]),  SPEED_OF_SOUND / hrep::midi_to_freq(6
 }
 
 delete_3rd_partial = F
-num_harmonics = 10
-octave_ratio  = 2.0
+num_harmonics      = 10
+octave_ratio       = 2.0
+roll_off           = 3
 
 if (search_label == 'Stretched') {
   octave_ratio  = 2.1
@@ -37,6 +38,7 @@ if (delete_3rd_partial) {
 print(search_label)
 print(paste('octave_ratio:',octave_ratio))
 print(paste('num_harmonics:',num_harmonics))
+print(paste('roll_off:',roll_off))
 
 rds = paste0('../data/tolerance_',
              search_label,
@@ -82,7 +84,9 @@ data = grid %>% furrr::future_pmap_dfr(\(
   } else {
     chord = hrep::sparse_fr_spectrum(c(tonic_midi, intervals[index]),
                                      num_harmonics = num_harmonics,
-                                     octave_ratio  = octave_ratio)
+                                     roll_off_dB   = roll_off,
+                                     octave_ratio  = octave_ratio
+                                     )
   }
 
   if (delete_3rd_partial) {
@@ -97,10 +101,11 @@ data = grid %>% furrr::future_pmap_dfr(\(
 
   mami.codi.R::mami.codi(
     chord,
-    tolerance=tolerance,
-    metadata  = list(
+    tolerance      = tolerance,
+    metadata       = list(
       octave_ratio   = octave_ratio,
       num_harmonics  = num_harmonics,
+      roll_off_dB    = roll_off,
       semitone       = intervals[index] - tonic_midi
     ),
     verbose=F

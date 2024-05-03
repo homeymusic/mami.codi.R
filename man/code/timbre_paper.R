@@ -23,6 +23,7 @@ macro_index = seq_along(macro_intervals)
 
 num_harmonics = 1
 octave_ratio  = 2.0
+roll_off      = 3
 scale = 'macro'
 grid_1 = tidyr::expand_grid(
   index=macro_index,
@@ -153,7 +154,8 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
   } else {
     study_chord = c(tonic_midi, study_intervals[index]) %>% hrep::sparse_fr_spectrum(
       num_harmonics = num_harmonics,
-      octave_ratio  = octave_ratio
+      octave_ratio  = octave_ratio,
+      roll_off_dB   = roll_off
     )
   }
 
@@ -173,8 +175,6 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
                            semitone      = study_intervals[index] - tonic_midi,
                            scale         = scale
                          ),
-                         num_harmonics=num_harmonics,
-                         octave_ratio=octave_ratio,
                          verbose=TRUE)
 
 }, .progress=TRUE, .options = furrr::furrr_options(seed = T))
