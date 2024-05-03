@@ -403,7 +403,7 @@ plot_semitone_codi_grid <- function(theory, experiment,
         'λ:', wavelength_tolerance
       )
     })
-  theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
+  theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=z_score)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
     # ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
@@ -419,6 +419,8 @@ plot_semitone_codi_grid <- function(theory, experiment,
       ggplot2::aes(x = semitone, y = smooth,
                    group=1,
                    color=color_factor_homey(theory,'major_minor'))) +
+    ggplot2::geom_point(shape=21, stroke=NA, size=1,
+                        ggplot2::aes(fill=color_factor_homey(theory,'major_minor'))) +
     ggplot2::scale_color_manual(values=color_values_homey(), guide='none') +
     ggplot2::geom_text(data=per_plot_labels, ggplot2::aes(x=-Inf,y=-Inf,label=label,
                                                           vjust="inward",hjust="inward")) +
