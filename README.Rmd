@@ -85,7 +85,7 @@ params = list(
   list(h=10,o=2.0,s='macro'),
   list(h=10,o=1.9,s='macro'),
   list(h=4,o=2,s='Bonang'),
-  list(h=1, o=2.0,s='macro'),
+  list(h=1, o=2.0,s='Pure'),
   list(h=5, o=2.0,s='macro'),
   list(h=5,o=2,s='5PartialsNo3'),
   list(h=10,o=2.0,s='M3'),
@@ -102,7 +102,7 @@ params %>% purrr::map(\(p) {
   } else if (p$o>2 & p$s == 'macro') {
     timbre = 'Stretched'
     black_vlines  = c(12.78)
-  } else if (p$o==2 & p$h==1 & p$s == 'macro') {
+  } else if (p$o==2 & p$h==1 & p$s == 'Pure') {
     timbre = 'Pure'
     black_vlines = c()
   } else if (p$s == 'Bonang') {
@@ -154,7 +154,7 @@ params %>% purrr::map(\(p) {
     consonance_dissonance_2x = 2*rating,
     consonance_dissonance_4x = 4*rating
   )
-  if (p$s == 'macro' | p$s == 'Bonang' | p$s == '5PartialsNo3') {
+  if (p$s == 'macro' | p$s == 'Bonang' | p$s == '5PartialsNo3' | p$s == 'Pure') {
     sigma = BEHAVIOURAL_SMOOTH_BROAD
   } else {
     sigma = BEHAVIOURAL_SMOOTH_NARROW
