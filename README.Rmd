@@ -161,7 +161,7 @@ params %>% purrr::map(\(p) {
   }
   cat("  \n###", title, '\n')
   print(knitr::kable(tibble::tibble_row(
-    pseudo_octave = paste(round(chords$pseudo_octave %>% unique, 2), collapse = ' '),
+    detected_pseudo_octave = paste(round(chords$pseudo_octave %>% unique, 2), collapse = ' '),
     min_amplitude = paste(round(chords$min_amplitude %>% unique, 2), collapse = ' '),
     tolerance     = paste(round(chords$tolerance %>% unique, 5), collapse = ' ')
   )))
@@ -234,7 +234,7 @@ params %>% purrr::map(\(p) {
   sigma = BEHAVIOURAL_SMOOTH_BROAD
   cat("  \n###", title, '\n')
   print(knitr::kable(tibble::tibble_row(
-    pseudo_octave = paste(round(chords$pseudo_octave %>% unique, 2), collapse = ' '),
+    detected_pseudo_octave = paste(round(chords$pseudo_octave %>% unique, 2), collapse = ' '),
     min_amplitude = paste(round(chords$min_amplitude %>% unique, 2), collapse = ' '),
     tolerance     = paste(round(chords$tolerance %>% unique, 5), collapse = ' ')
   )))

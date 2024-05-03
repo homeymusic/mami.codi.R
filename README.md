@@ -58,81 +58,81 @@ In the plots below:
 
 ### Harmonic ~ Partials: 10
 
-| pseudo_octave | tolerance |
-|:--------------|:----------|
-| 2             | 0.071     |
+| detected_pseudo_octave | min_amplitude | tolerance |
+|:-----------------------|:--------------|:----------|
+| 2                      | 0.03          | 0.071     |
 
 ![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->
 
 ### 5Partials ~ Partials: 5
 
-| pseudo_octave | tolerance |
-|:--------------|:----------|
-| 2             | 0.071     |
+| detected_pseudo_octave | min_amplitude | tolerance |
+|:-----------------------|:--------------|:----------|
+| 2                      | 0.03          | 0.071     |
 
 ![](man/figures/README-unnamed-chunk-4-2.png)<!-- -->
 
 ### 5PartialsNo3 ~ Partials: 5
 
-| pseudo_octave | tolerance |
-|:--------------|:----------|
-| 2             | 0.071     |
+| detected_pseudo_octave | min_amplitude | tolerance |
+|:-----------------------|:--------------|:----------|
+| 2                      | 0.03          | 0.071     |
 
 ![](man/figures/README-unnamed-chunk-4-3.png)<!-- -->
 
 ### Pure ~ Partials: 1
 
-| pseudo_octave | tolerance |
-|:--------------|:----------|
-| 2             | 0.071     |
+| detected_pseudo_octave | min_amplitude | tolerance |
+|:-----------------------|:--------------|:----------|
+| 2                      | 0.03          | 0.071     |
 
 ![](man/figures/README-unnamed-chunk-4-4.png)<!-- -->
 
 ### Stretched ~ Partials: 10
 
-| pseudo_octave | tolerance |
-|:--------------|:----------|
-| 2.1           | 0.071     |
+| detected_pseudo_octave | min_amplitude | tolerance |
+|:-----------------------|:--------------|:----------|
+| 2.1                    | 0.03          | 0.071     |
 
 ![](man/figures/README-unnamed-chunk-4-5.png)<!-- -->
 
 ### Compressed ~ Partials: 10
 
-| pseudo_octave | tolerance |
-|:--------------|:----------|
-| 1.9           | 0.071     |
+| detected_pseudo_octave | min_amplitude | tolerance |
+|:-----------------------|:--------------|:----------|
+| 1.9                    | 0.03          | 0.071     |
 
 ![](man/figures/README-unnamed-chunk-4-6.png)<!-- -->
 
 ### Bonang ~ Partials: 4
 
-| pseudo_octave | tolerance |
-|:--------------|:----------|
-| 2             | 0.071     |
+| detected_pseudo_octave | min_amplitude | tolerance |
+|:-----------------------|:--------------|:----------|
+| 2                      | 0.03          | 0.071     |
 
 ![](man/figures/README-unnamed-chunk-4-7.png)<!-- -->
 
 ### M3 ~ Partials: 10
 
-| pseudo_octave | tolerance |
-|:--------------|:----------|
-| 2             | 2e-04     |
+| detected_pseudo_octave | min_amplitude | tolerance |
+|:-----------------------|:--------------|:----------|
+| 2                      | 0.03          | 2e-04     |
 
 ![](man/figures/README-unnamed-chunk-4-8.png)<!-- -->
 
 ### M6 ~ Partials: 10
 
-| pseudo_octave | tolerance |
-|:--------------|:----------|
-| 2             | 2e-04     |
+| detected_pseudo_octave | min_amplitude | tolerance |
+|:-----------------------|:--------------|:----------|
+| 2                      | 0.03          | 2e-04     |
 
 ![](man/figures/README-unnamed-chunk-4-9.png)<!-- -->
 
 ### P8 ~ Partials: 10
 
-| pseudo_octave | tolerance |
-|:--------------|:----------|
-| 2             | 2e-04     |
+| detected_pseudo_octave | min_amplitude | tolerance |
+|:-----------------------|:--------------|:----------|
+| 2                      | 0.03          | 2e-04     |
 
 ![](man/figures/README-unnamed-chunk-4-10.png)<!-- -->  
 \[\[1\]\] NULL
@@ -159,13 +159,25 @@ In the plots below:
 
 ### Harmonic ~ Roll Off: 12
 
+| detected_pseudo_octave | min_amplitude | tolerance |
+|:-----------------------|:--------------|:----------|
+| 2                      | 0.03          | 0.071     |
+
 ![](man/figures/README-unnamed-chunk-8-1.png)<!-- -->
 
 ### Harmonic ~ Roll Off: 7
 
+| detected_pseudo_octave | min_amplitude | tolerance |
+|:-----------------------|:--------------|:----------|
+| 2                      | 0.03          | 0.071     |
+
 ![](man/figures/README-unnamed-chunk-8-2.png)<!-- -->
 
 ### Harmonic ~ Roll Off: 2
+
+| detected_pseudo_octave | min_amplitude | tolerance |
+|:-----------------------|:--------------|:----------|
+| 2                      | 0.03          | 0.071     |
 
 ![](man/figures/README-unnamed-chunk-8-3.png)<!-- -->  
 \[\[1\]\] NULL

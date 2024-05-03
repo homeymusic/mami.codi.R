@@ -14,14 +14,11 @@ if (dplyr::near(max(P8$wavelengths[[1]]),  343 / hrep::midi_to_freq(60))) {
 output.rds = '../data/roll_off_timbre_paper.rds'
 prepare(output.rds)
 
-tonic = 60
+tonic_midi = 60
 
 macro_experiment.rds = '../data/Pure.rds'
-macro_chords = tibble::tibble(
-  pitches =  readRDS(macro_experiment.rds)$profile$interval %>%
-    lapply(\(i) list(c(tonic,tonic+i)))
-)
-macro_index = seq_along(macro_chords$pitches)
+intervals = tonic_midi + readRDS(macro_experiment.rds)$profile$interval
+macro_index = seq_along(intervals)
 
 num_harmonics = 10
 octave_ratio  = 2.0
@@ -41,7 +38,7 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
                                            roll_off) {
 
   study_chords = macro_chords
-  study_chord = hrep::sparse_fr_spectrum(study_chords$pitches[index][[1]][[1]],
+  study_chord = hrep::sparse_fr_spectrum(intervals[index],
                                          num_harmonics = num_harmonics,
                                          octave_ratio  = octave_ratio,
                                          roll_off_dB   = roll_off)
