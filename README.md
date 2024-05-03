@@ -56,6 +56,9 @@ In the plots below:
 
 ## Frequencies
 
+(dyads %\>% dplyr::filter(scale==‘5PartialsNo3’) %\>%
+dplyr::slice(1))\$spectrum\[\[1\]\]
+
 ### Harmonic ~ Partials: 10
 
 | pseudo_octave | tolerance |
