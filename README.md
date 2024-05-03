@@ -64,30 +64,3 @@ dplyr::slice(1))\$spectrum\[\[1\]\]
 ## Amplitudes
 
 ![](man/figures/README-unnamed-chunk-8-1.png)<!-- -->![](man/figures/README-unnamed-chunk-8-2.png)<!-- -->![](man/figures/README-unnamed-chunk-8-3.png)<!-- -->
-
-# MaMi CoDi Plots
-
-The dyads below are framed between the tonic and octave. A major third
-like C4 and E4, for example, actually includes C4, E4 and C5.
-
-## Chords: Consonance-Dissonance ~ Major-Minor
-
-### Dyads
-
-![](man/figures/README-unnamed-chunk-11-1.png)<!-- -->![](man/figures/README-unnamed-chunk-11-2.png)<!-- -->![](man/figures/README-unnamed-chunk-11-3.png)<!-- -->
-
-### Triads
-
-![](man/figures/README-unnamed-chunk-11-4.png)<!-- -->![](man/figures/README-unnamed-chunk-11-5.png)<!-- -->![](man/figures/README-unnamed-chunk-11-6.png)<!-- -->
-
-### Scales
-
-![](man/figures/README-unnamed-chunk-11-7.png)<!-- -->![](man/figures/README-unnamed-chunk-11-8.png)<!-- -->![](man/figures/README-unnamed-chunk-11-9.png)<!-- -->
-
-### Major Triad Progressions
-
-![](man/figures/README-unnamed-chunk-11-10.png)<!-- -->![](man/figures/README-unnamed-chunk-11-11.png)<!-- -->![](man/figures/README-unnamed-chunk-11-12.png)<!-- -->
-
-### Minor Triad Progressions
-
-![](man/figures/README-unnamed-chunk-11-13.png)<!-- -->![](man/figures/README-unnamed-chunk-11-14.png)<!-- -->![](man/figures/README-unnamed-chunk-11-15.png)<!-- -->

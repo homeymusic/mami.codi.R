@@ -44,7 +44,7 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
   study_chord = hrep::sparse_fr_spectrum(study_chords$pitches[index][[1]][[1]],
                                          num_harmonics = num_harmonics,
                                          octave_ratio  = octave_ratio,
-                                         roll_off_dB      = roll_off)
+                                         roll_off_dB   = roll_off)
 
   mami.codi.R::mami.codi(study_chord,
                          metadata = list(

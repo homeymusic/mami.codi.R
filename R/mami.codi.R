@@ -17,17 +17,19 @@
 #'
 #' @rdname mami.codi
 #' @export
-mami.codi <- function(x, metadata=NA, verbose=FALSE, tolerance=TOLERANCE, ...) {
+mami.codi <- function(x, min_amplitude=MIN_AMPLITUDE, tolerance=TOLERANCE,
+                      metadata=NA, verbose=FALSE, ...) {
 
-  parse_input(x, ...)              %>%
-    listen_for_pseudo_octave       %>%
-    duplex(tolerance)              %>%
-    rotate                         %>%
+  parse_input(x, ...) %>%
+    listen_for_min_amplitude(min_amplitude) %>%
+    listen_for_pseudo_octave()              %>%
+    duplex(tolerance)                       %>%
+    rotate()                                %>%
     format_output(metadata, verbose)
 
 }
 
-parse_input <- function(x,...) {
+parse_input <- function(x, ...) {
 
   UseMethod('parse_input', x)
 
@@ -41,13 +43,21 @@ parse_input.default <- function(x, ...) {
 
 parse_input.sparse_fr_spectrum <- function(x, ...) {
 
-  f = x %>% dplyr::filter(.data$y>MIN_AMPLITUDE) %>% hrep::freq()
+  tibble::tibble_row(
+    spectrum    = list(x)
+  )
+
+}
+
+listen_for_min_amplitude = function(x, min_amplitude) {
+
+  f = x$spectrum[[1]] %>% dplyr::filter(.data$y>min_amplitude) %>% hrep::freq()
   λ = SPEED_OF_SOUND / f
 
   tibble::tibble_row(
     frequencies = list(f),
     wavelengths = list(λ),
-    spectrum    = list(x)
+    min_amplitude
   )
 
 }
@@ -141,7 +151,9 @@ format_output <- function(x, metadata, verbose) {
     x
   } else {
     x %>%
-      dplyr::select('major_minor', 'consonance_dissonance', 'tolerance', 'metadata')
+      dplyr::select('major_minor', 'consonance_dissonance',
+                    'tolerance', 'min_amplitude',
+                    'metadata')
   }
 }
 
@@ -155,13 +167,12 @@ PURE_TOLERANCE   = 0.071
 ZOOMED_TOLERANCE = 0.0002
 ZARLINO        = 100 / sqrt(2)
 MIN_CONSONANCE = .Machine$double.xmin
-MIN_AMPLITUDE  = 1 / 24
+MIN_AMPLITUDE  = 0.03
 PI_4           = pi / 4
 R_PI_4         = matrix(c(
   cos(PI_4), sin(PI_4),
   -sin(PI_4), cos(PI_4)
 ), nrow = 2, ncol = 2, byrow = TRUE)
-
 
 #' Default Tolerance
 #'
@@ -180,4 +191,15 @@ default_tolerance <- function(scale) {
   } else {
     stop("no default tolerance for selection")
   }
+}
+
+#' Default Minimum Amplitude
+#'
+#'
+#' @return Default tolerance
+#'
+#' @rdname default_min_amplitude
+#' @export
+default_min_amplitude <- function() {
+  MIN_AMPLITUDE
 }
