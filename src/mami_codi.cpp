@@ -73,6 +73,7 @@ using namespace Rcpp;
 
    const int m = x.size();
    const double reference_tone = min(x);
+   const double pseudo_tolerance = pow(2.0, log(tolerance) / log(pseudo_octave));
 
    NumericVector fraction(2);
 
@@ -85,7 +86,7 @@ using namespace Rcpp;
    for (int i = 0; i < m; ++i) {
      ratios[i]          = x[i] / reference_tone;
      pseudo_ratios[i]   = pow(2.0, log(ratios[i]) / log(pseudo_octave));
-     fraction           = rational_fraction(pseudo_ratios[i],tolerance);
+     fraction           = rational_fraction(pseudo_ratios[i], pseudo_tolerance);
      nums[i]            = fraction[0];
      dens[i]            = fraction[1];
      reference_tones[i] = reference_tone;

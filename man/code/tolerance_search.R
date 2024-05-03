@@ -1,4 +1,4 @@
-search_label = 'Pure'
+search_label = 'Compressed'
 from_tol     = 0.001
 to_tol       = 0.1
 by_tol       = 0.001
