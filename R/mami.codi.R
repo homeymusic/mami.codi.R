@@ -155,7 +155,7 @@ PURE_TOLERANCE   = 0.071
 ZOOMED_TOLERANCE = 0.0002
 ZARLINO        = 100 / sqrt(2)
 MIN_CONSONANCE = .Machine$double.xmin
-MIN_AMPLITUDE  = 1 / 12
+MIN_AMPLITUDE  = 1 / 24
 PI_4           = pi / 4
 R_PI_4         = matrix(c(
   cos(PI_4), sin(PI_4),
