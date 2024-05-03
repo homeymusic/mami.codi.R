@@ -1,7 +1,8 @@
-search_label = 'Harmonic'
+search_label = 'Bonang'
 from_tol     = 0.001
 to_tol       = 0.1
 by_tol       = 0.001
+tonic_midi   = 60
 
 source('./utils.R')
 devtools::install_github('git@github.com:homeymusic/mami.codi.R')
@@ -9,7 +10,7 @@ devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 library(mami.codi.R)
 devtools::load_all(".")
 
-P8 <- c(60,72) %>% mami.codi.R::mami.codi(verbose=T)
+P8 <- c(tonic_midi,72) %>% mami.codi.R::mami.codi(verbose=T)
 if (dplyr::near(max(P8$wavelengths[[1]]),  SPEED_OF_SOUND / hrep::midi_to_freq(60))) {
   print("Seems to be the correct version mami.codi.R")
 } else {
@@ -47,11 +48,8 @@ behavior.rds = paste0('../data/',
                       '.rds')
 behavior = readRDS(behavior.rds)
 
-tonic_midi = 60
-chords = tibble::tibble(
-  pitches = behavior$profile$interval %>% lapply(\(i) list(c(tonic_midi,tonic_midi+i)))
-)
-index = seq_along(chords$pitches)
+intervals = tonic_midi + behavior$profile$interval
+index = seq_along(intervals)
 
 tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
 
@@ -68,10 +66,24 @@ data = grid %>% furrr::future_pmap_dfr(\(
   index,
   tolerance
 ) {
-
-  chord = hrep::sparse_fr_spectrum(chords$pitches[index][[1]][[1]],
-                                   num_harmonics = num_harmonics,
-                                   octave_ratio  = octave_ratio)
+  if (search_label=='Bonang') {
+    bass_f0 <- hrep::midi_to_freq(tonic_midi)
+    bass_df <- tibble::tibble(
+      frequency = bass_f0 * 1:4,
+      amplitude = 1
+    )
+    upper_f0 <- hrep::midi_to_freq(intervals[index])
+    chord_df <- tibble::tibble(
+      frequency = c(upper_f0 * c(1, 1.52, 3.46, 3.92),
+                    bass_df$frequency) %>% unique %>% sort,
+      amplitude = 1
+    )
+    chord = chord_df %>% as.list() %>% hrep::sparse_fr_spectrum()
+  } else {
+    chord = hrep::sparse_fr_spectrum(c(tonic_midi, intervals[index]),
+                                     num_harmonics = num_harmonics,
+                                     octave_ratio  = octave_ratio)
+  }
 
   if (delete_3rd_partial) {
     if (length(chord$y)==num_harmonics) {
@@ -87,9 +99,9 @@ data = grid %>% furrr::future_pmap_dfr(\(
     chord,
     tolerance=tolerance,
     metadata  = list(
-      octave_ratio=octave_ratio,
+      octave_ratio   = octave_ratio,
       num_harmonics  = num_harmonics,
-      semitone = chords$pitches[index][[1]][[1]][2] - tonic_midi
+      semitone       = intervals[index] - tonic_midi
     ),
     verbose=F
   )

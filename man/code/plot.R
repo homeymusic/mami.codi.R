@@ -449,7 +449,7 @@ plot_semitone_codi_wrap <- function(theory, experiment,
     ggplot2::scale_fill_manual(values=color_values_homey(), guide="none") +
     ggplot2::geom_line(
       data=experiment,
-      linetype = "dashed",
+      color    = colors_homey$neutral,
       ggplot2::aes(x = semitone, y = smooth)) +
     ggplot2::geom_line(
       data=theory,
