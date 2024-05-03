@@ -1,6 +1,6 @@
-search_label = 'Bonang'
+search_label = 'Harmonic'
 from_tol     = 0.01
-to_tol       = 0.1
+to_tol       = 0.15
 by_tol       = 0.01
 tonic_midi   = 60
 
