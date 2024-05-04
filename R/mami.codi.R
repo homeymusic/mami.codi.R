@@ -54,7 +54,7 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 listen_for_min_amplitude = function(x, min_amplitude) {
 
   f = x$spectrum[[1]] %>% dplyr::filter(.data$y>min_amplitude) %>% hrep::freq()
-  λ = SPEED_OF_SOUND / f
+  λ = ENDOLYMPH_SPEED_OF_SOUND / f
 
   x %>% dplyr::mutate(
     frequencies = list(f),
@@ -163,25 +163,16 @@ format_output <- function(x, metadata, verbose) {
 
 lcm <- function(x) Reduce(numbers::LCM, x)
 
-TOLERANCE            = 0.071
+WAVELENGTH_TOLERANCE = 0.1
+FREQUENCY_TOLERANCE  = WAVELENGTH_TOLERANCE / 2
 
-FREQUENCY_TOLERANCE  = 0.045
-WAVELENGTH_TOLERANCE = 0.09
-
-FREQUENCY_PURE_TOLERANCE  = FREQUENCY_TOLERANCE
-WAVELENGTH_PURE_TOLERANCE = WAVELENGTH_TOLERANCE
-
-FREQUENCY_ZOOMED_TOLERANCE  = 0.0002
-WAVELENGTH_ZOOMED_TOLERANCE = 0.0002
+# WAVELENGTH_ZOOMED_TOLERANCE = 0.0002
+WAVELENGTH_ZOOMED_TOLERANCE = WAVELENGTH_TOLERANCE
+FREQUENCY_ZOOMED_TOLERANCE  = WAVELENGTH_ZOOMED_TOLERANCE / 2
 
 MIN_AMPLITUDE  = 0.03
 
-SPEED_OF_SOUND_AIR        = 343
-SPEED_OF_SOUND_SALTWATER  = 1526 # 40*C fresh water
-SPEED_OF_SOUND_FRESHWATER = 1563 # 40*C sea water
-
-SPEED_OF_SOUND            = SPEED_OF_SOUND_AIR
-ENDOLYMPH_SPEED_OF_SOUND  = SPEED_OF_SOUND_SALTWATER
+ENDOLYMPH_SPEED_OF_SOUND = 1563
 
 ZARLINO        = 100 / sqrt(2)
 
@@ -221,6 +212,8 @@ default_tolerance <- function(dimension, scale) {
     } else {
       stop("no default tolerance for selection")
     }
+  } else {
+    stop("no default tolerance for selection")
   }
 }
 

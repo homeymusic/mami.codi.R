@@ -1,5 +1,5 @@
 source('./utils.R')
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R', ref='2D_tolerance')
 
 library(mami.codi.R)
 devtools::load_all(".")
@@ -7,7 +7,7 @@ devtools::load_all(".")
 tonic_midi = 60
 
 P8 <- c(tonic_midi,72) %>% mami.codi.R::mami.codi(verbose=T)
-if (dplyr::near(max(P8$wavelengths[[1]]),  343 / hrep::midi_to_freq(tonic_midi))) {
+if (P8$frequency_tolerance == mami.codi.R::default_tolerance('frequency','macro')) {
   print("Seems to be the correct version mami.codi.R")
 } else {
   stop("This is not the expected version of mami.codi.R")
@@ -153,15 +153,16 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
   }
 
   if (scale=='M3' || scale=='M6' || scale=='P8') {
-    tol = mami.codi.R::default_tolerance('zoomed')
-  } else if (scale=='Pure') {
-    tol = mami.codi.R::default_tolerance('pure')
+    frequency_tolerance  = mami.codi.R::default_tolerance('frequency', 'zoomed')
+    wavelength_tolerance = mami.codi.R::default_tolerance('wavelength', 'zoomed')
   } else {
-    tol = mami.codi.R::default_tolerance('macro')
+    frequency_tolerance  = mami.codi.R::default_tolerance('frequency', 'macro')
+    wavelength_tolerance = mami.codi.R::default_tolerance('wavelength', 'macro')
   }
 
   mami.codi.R::mami.codi(study_chord,
-                         tolerance=tol,
+                         frequency_tolerance=frequency_tolerance,
+                         wavelength_tolerance=wavelength_tolerance,
                          metadata = list(
                            num_harmonics = num_harmonics,
                            octave_ratio  = octave_ratio,
