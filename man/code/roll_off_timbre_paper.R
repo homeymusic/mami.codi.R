@@ -1,11 +1,11 @@
 source('./utils.R')
-devtools::install_github('git@github.com:homeymusic/mami.codi.R', ref='2D_tolerance')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R', ref='wave_freq_tol_relationship')
 
 library(mami.codi.R)
 devtools::load_all(".")
 
 P8 <- c(60,72) %>% mami.codi.R::mami.codi(verbose=T)
-if (P8$frequency_tolerance == mami.codi.R::default_tolerance('frequency','macro')) {
+if (P8$tolerance == mami.codi.R::default_tolerance('macro')) {
   print("Seems to be the correct version mami.codi.R")
 } else {
   stop("This is not the expected version of mami.codi.R")
