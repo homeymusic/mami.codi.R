@@ -50,6 +50,20 @@ grid_10 = tidyr::expand_grid(
   scale
 )
 
+grid_Bonang = tidyr::expand_grid(
+  index=macro_index,
+  num_harmonics=4,
+  octave_ratio=2, # the bass is harmonic
+  scale = 'Bonang'
+)
+
+grid_5PartialsNo3 = tidyr::expand_grid(
+  index=macro_index,
+  num_harmonics=5,
+  octave_ratio=2,
+  scale = '5PartialsNo3'
+)
+
 num_harmonics = 10
 octave_ratio  = c(2.0)
 experiment.rds = '../data/M3.rds'
@@ -82,26 +96,6 @@ grid_P8 = tidyr::expand_grid(
   scale = 'P8'
 )
 
-experiment.rds = '../data/Bonang.rds'
-Bonang_intervals = tonic_midi + readRDS(experiment.rds)$profile$interval
-index = seq_along(Bonang_intervals)
-grid_Bonang = tidyr::expand_grid(
-  index,
-  num_harmonics=4,
-  octave_ratio=2, # the bass is harmonic
-  scale = 'Bonang'
-)
-
-experiment.rds = '../data/5PartialsNo3.rds'
-FivePartialsNo3_intervals = tonic_midi + readRDS(experiment.rds)$profile$interval
-index = seq_along(FivePartialsNo3_intervals)
-grid_5PartialsNo3 = tidyr::expand_grid(
-  index,
-  num_harmonics=5,
-  octave_ratio=2,
-  scale = '5PartialsNo3'
-)
-
 grid = dplyr::bind_rows(grid_1,grid_5,grid_10,grid_M3,grid_M6,
                         grid_P8,
                         grid_Bonang,grid_5PartialsNo3)
@@ -123,20 +117,19 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
   }
 
   if (scale == 'Bonang') {
-    study_intervals = Bonang_intervals
-
     bass_f0 <- hrep::midi_to_freq(tonic_midi)
-    upper_f0 <- hrep::midi_to_freq(study_intervals[index])
-
-    chord_df <- tibble::tibble(
-      frequency = c(
-        bass_f0 * 1:4,
-        upper_f0 * c(1, 1.52, 3.46, 3.92)
-      ) %>% unique %>% sort,
+    bass <- tibble::tibble(
+      frequency = bass_f0 * 1:4,
       amplitude = 1
-    )
+    ) %>% as.list() %>%  hrep::sparse_fr_spectrum()
 
-    study_chord = chord_df %>% as.list() %>% hrep::sparse_fr_spectrum()
+    upper_f0 <- hrep::midi_to_freq(study_intervals[index])
+    upper <- tibble::tibble(
+      frequency = upper_f0 * c(1, 1.52, 3.46, 3.92),
+      amplitude = 1
+    ) %>% as.list() %>%  hrep::sparse_fr_spectrum()
+
+    study_chord = do.call(hrep::combine_sparse_spectra, list(bass,upper))
   } else if (scale == '5PartialsNo3') {
     bass_f0 <- hrep::midi_to_freq(tonic_midi)
     bass <- tibble::tibble(
