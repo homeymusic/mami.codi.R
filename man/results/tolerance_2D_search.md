@@ -1,7 +1,7 @@
 Tolerance 2D Search
 ================
 
-# Bonang
+# 5PartialsNo3
 
 Tolerances:
 
@@ -11,7 +11,7 @@ Tolerances:
 
 Number of Harmonics:
 
-    #> [1] 10
+    #> [1] 5
 
 Octave Ratios:
 

@@ -6,8 +6,10 @@ always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'Stretched'
+search_label = 'Harmonic'
 ```
+
+# `r search_label`
 
 ```{r, echo=F, message=F, include=F}
 devtools::load_all(".")
@@ -28,21 +30,21 @@ BEHAVIOURAL_SMOOTH_NARROW <- 0.035
 search_params = tibble::tibble(
   search       = c('Pure',
                    'Stretched','Harmonic','Compressed',
-                   'Bonang',
+                   'Bonang','5PartialsNo3',
                    'M3','M6','P8'),
   sigma        = c(BEHAVIOURAL_SMOOTH_BROAD,
                    BEHAVIOURAL_SMOOTH_BROAD,BEHAVIOURAL_SMOOTH_BROAD,BEHAVIOURAL_SMOOTH_BROAD,
-                   BEHAVIOURAL_SMOOTH_BROAD,
+                   BEHAVIOURAL_SMOOTH_BROAD,BEHAVIOURAL_SMOOTH_BROAD,
                    BEHAVIOURAL_SMOOTH_NARROW,BEHAVIOURAL_SMOOTH_NARROW,BEHAVIOURAL_SMOOTH_NARROW),
   gray_vlines  = c(list(0:15),
                    list(0:15),list(0:15),list(0:15),
-                   list((12/5)*1:6),
+                   list((12/5)*1:6), list(c(4,5,7,9,12,14)),
                    list(c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 5/4)-60,4,4.092442)),
                    list(c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 5/3)-60,8.66952)),
                    c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 2/1)-60)),
   black_vlines = c(list(c(2,3,4,5,7,8,9,12)),
                    list(c(4.2,7.5,9.3,12.78)),list(c(2,3,4,5,7,8,9,12)),list(c(3.8,4.8,11.1,14.5)),
-                   list(c(2.6,4.8,12.0)),
+                   list(c(2.6,4.8,12.0)),list(c(2,3,4,5,7,8,9,12)),
                    list(c(3.95)),list(c(8.78,8.93)),list(c(11.94, 12.08)))
 )
 params = search_params %>% dplyr::filter(search==search_label)
@@ -59,6 +61,11 @@ theory.rds = paste0('../data/tolerance_',
                     search_label,
                     '.rds')
 theory = readRDS(theory.rds)
+
+theory <- theory %>% dplyr::mutate(
+  tolerance = .data$frequency_tolerance
+)
+
 ```
 
 ```{r, echo=F, results='asis', message=F}
