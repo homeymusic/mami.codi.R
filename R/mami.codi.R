@@ -159,7 +159,7 @@ format_output <- function(x, metadata, verbose) {
 
 lcm <- function(x) Reduce(numbers::LCM, x)
 
-TOLERANCE        = 0.071
+TOLERANCE        = 0.085
 PURE_TOLERANCE   = TOLERANCE
 ZOOMED_TOLERANCE = 0.0002
 
