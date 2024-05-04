@@ -1,17 +1,17 @@
-search_label = 'Harmonic'
+search_label = '5PartialsNo3'
 from_tol     = 0.02
 to_tol       = 0.06
 by_tol       = 0.001
 tonic_midi   = 60
 
 source('./utils.R')
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R', ref="wave_freq_tol_relationship")
 
 library(mami.codi.R)
 devtools::load_all(".")
 
 P8 <- c(tonic_midi,72) %>% mami.codi.R::mami.codi(verbose=T)
-if (P8$frequency_tolerance == mami.codi.R::default_tolerance('frequency','macro')) {
+if (P8$tolerance == mami.codi.R::default_tolerance('macro')) {
   print("Seems to be the correct version mami.codi.R")
 } else {
   stop("This is not the expected version of mami.codi.R")
@@ -100,8 +100,7 @@ data = grid %>% furrr::future_pmap_dfr(\(
 
   mami.codi.R::mami.codi(
     chord,
-    frequency_tolerance  = tolerance,
-    wavelength_tolerance = 2 * tolerance,
+    tolerance  = tolerance,
     metadata       = list(
       octave_ratio   = octave_ratio,
       num_harmonics  = num_harmonics,
