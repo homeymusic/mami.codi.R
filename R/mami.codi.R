@@ -18,14 +18,13 @@
 #' @rdname mami.codi
 #' @export
 mami.codi <- function(x, min_amplitude=MIN_AMPLITUDE,
-                      frequency_tolerance  = FREQUENCY_TOLERANCE,
-                      wavelength_tolerance = WAVELENGTH_TOLERANCE,
+                      tolerance = TOLERANCE,
                       metadata=NA, verbose=FALSE, ...) {
 
   parse_input(x, ...)                       %>%
     listen_for_min_amplitude(min_amplitude) %>%
     listen_for_pseudo_octave()              %>%
-    estimate_cycles(frequency_tolerance, wavelength_tolerance) %>%
+    estimate_cycles(tolerance)              %>%
     rotate()                                %>%
     format_output(metadata, verbose)
 
@@ -82,7 +81,7 @@ listen_for_pseudo_octave = function(x) {
 
 }
 
-estimate_cycles <- function(x, frequency_tolerance, wavelength_tolerance) {
+estimate_cycles <- function(x, tolerance) {
 
   f = x$frequencies[[1]]
   λ = x$wavelengths[[1]]
@@ -91,17 +90,16 @@ estimate_cycles <- function(x, frequency_tolerance, wavelength_tolerance) {
     # estimate the frequency cycle
     estimate_cycle(f,
                    x$pseudo_octave,
-                   frequency_tolerance) %>%
+                   tolerance / 2.0) %>%
       dplyr::rename_with(~ paste0(.,'_frequency')),
 
     # estimate the wavelength cycle
     estimate_cycle(λ,
                    x$pseudo_octave,
-                   wavelength_tolerance) %>%
+                   tolerance) %>%
       dplyr::rename_with(~ paste0(.,'_wavelength')),
 
-    frequency_tolerance,
-    wavelength_tolerance
+    tolerance,
 
   )
 
@@ -155,19 +153,16 @@ format_output <- function(x, metadata, verbose) {
   } else {
     x %>%
       dplyr::select('major_minor', 'consonance_dissonance',
-                    'frequency_tolerance', 'wavelength_tolerance',
-                    'min_amplitude',
+                    'tolerance', 'min_amplitude',
                     'metadata')
   }
 }
 
 lcm <- function(x) Reduce(numbers::LCM, x)
 
-WAVELENGTH_TOLERANCE = 0.1
-FREQUENCY_TOLERANCE  = WAVELENGTH_TOLERANCE / 2
+TOLERANCE = 0.1
 
-WAVELENGTH_ZOOMED_TOLERANCE = WAVELENGTH_TOLERANCE / 1000
-FREQUENCY_ZOOMED_TOLERANCE  = WAVELENGTH_ZOOMED_TOLERANCE / 2
+ZOOMED_TOLERANCE = TOLERANCE / 1000
 
 MIN_AMPLITUDE  = 0.03
 
@@ -190,27 +185,11 @@ R_PI_4         = matrix(c(
 #'
 #' @rdname default_tolerance
 #' @export
-default_tolerance <- function(dimension, scale) {
-  if (dimension == 'frequency') {
-    if (scale == 'zoomed') {
-      FREQUENCY_ZOOMED_TOLERANCE
-    } else if (scale == 'pure') {
-      FREQUENCY_PURE_TOLERANCE
-    } else if (scale == 'macro') {
-      FREQUENCY_TOLERANCE
-    } else {
-      stop("no default tolerance for selection")
-    }
-  } else if (dimension == 'wavelength') {
-    if (scale == 'zoomed') {
-      WAVELENGTH_ZOOMED_TOLERANCE
-    } else if (scale == 'pure') {
-      WAVELENGTH_PURE_TOLERANCE
-    } else if (scale == 'macro') {
-      WAVELENGTH_TOLERANCE
-    } else {
-      stop("no default tolerance for selection")
-    }
+default_tolerance <- function(scale) {
+  if (scale == 'macro') {
+    TOLERANCE
+  } else if (scale == 'zoomed') {
+    ZOOMED_TOLERANCE
   } else {
     stop("no default tolerance for selection")
   }
