@@ -6,7 +6,7 @@ always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'Harmonic'
+search_label = '5PartialsNo3'
 ```
 
 # `r search_label`
@@ -61,10 +61,6 @@ theory.rds = paste0('../data/tolerance_',
                     search_label,
                     '.rds')
 theory = readRDS(theory.rds)
-
-theory <- theory %>% dplyr::mutate(
-  tolerance = .data$frequency_tolerance
-)
 
 ```
 

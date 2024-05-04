@@ -1,7 +1,7 @@
-search_label = 'Harmonic'
-from_tol     = 0.02
-to_tol       = 0.06
-by_tol       = 0.001
+search_label = '5PartialsNo3'
+from_tol     = 0.1
+to_tol       = 0.4
+by_tol       = 0.01
 tonic_midi   = 60
 
 source('./utils.R')
@@ -11,7 +11,7 @@ library(mami.codi.R)
 devtools::load_all(".")
 
 P8 <- c(tonic_midi,72) %>% mami.codi.R::mami.codi(verbose=T)
-if (P8$frequency_tolerance == mami.codi.R::default_tolerance('frequency','macro')) {
+if (P8$tolerance == mami.codi.R::default_tolerance('macro')) {
   print("Seems to be the correct version mami.codi.R")
 } else {
   stop("This is not the expected version of mami.codi.R")
@@ -47,7 +47,7 @@ behavior = readRDS(behavior.rds)
 intervals = tonic_midi + behavior$profile$interval
 index = seq_along(intervals)
 
-tolerances = c(seq(from=from_tol, to=to_tol, by=by_tol), 1/30) %>% sort()
+tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
 
 grid = tidyr::expand_grid(
   index,
@@ -100,8 +100,7 @@ data = grid %>% furrr::future_pmap_dfr(\(
 
   mami.codi.R::mami.codi(
     chord,
-    frequency_tolerance  = tolerance,
-    wavelength_tolerance = 2 * tolerance,
+    tolerance  = tolerance,
     metadata       = list(
       octave_ratio   = octave_ratio,
       num_harmonics  = num_harmonics,
