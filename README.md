@@ -60,7 +60,7 @@ In the plots below:
 
 | detected_pseudo_octave | ignore_amplitudes_below | stern_brocot_tolerance |
 |:-----------------------|:------------------------|:-----------------------|
-| 2                      | 0.03                    | 0.071                  |
+| 2                      | 0.03                    | 0.085                  |
 
 ![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->
 
@@ -68,7 +68,7 @@ In the plots below:
 
 | detected_pseudo_octave | ignore_amplitudes_below | stern_brocot_tolerance |
 |:-----------------------|:------------------------|:-----------------------|
-| 2                      | 0.03                    | 0.071                  |
+| 2                      | 0.03                    | 0.085                  |
 
 ![](man/figures/README-unnamed-chunk-4-2.png)<!-- -->
 
@@ -76,7 +76,7 @@ In the plots below:
 
 | detected_pseudo_octave | ignore_amplitudes_below | stern_brocot_tolerance |
 |:-----------------------|:------------------------|:-----------------------|
-| 2                      | 0.03                    | 0.071                  |
+| 2                      | 0.03                    | 0.085                  |
 
 ![](man/figures/README-unnamed-chunk-4-3.png)<!-- -->
 
@@ -84,7 +84,7 @@ In the plots below:
 
 | detected_pseudo_octave | ignore_amplitudes_below | stern_brocot_tolerance |
 |:-----------------------|:------------------------|:-----------------------|
-| 2                      | 0.03                    | 0.071                  |
+| 2                      | 0.03                    | 0.085                  |
 
 ![](man/figures/README-unnamed-chunk-4-4.png)<!-- -->
 
@@ -92,7 +92,7 @@ In the plots below:
 
 | detected_pseudo_octave | ignore_amplitudes_below | stern_brocot_tolerance |
 |:-----------------------|:------------------------|:-----------------------|
-| 2.1                    | 0.03                    | 0.071                  |
+| 2.1                    | 0.03                    | 0.085                  |
 
 ![](man/figures/README-unnamed-chunk-4-5.png)<!-- -->
 
@@ -100,7 +100,7 @@ In the plots below:
 
 | detected_pseudo_octave | ignore_amplitudes_below | stern_brocot_tolerance |
 |:-----------------------|:------------------------|:-----------------------|
-| 1.9                    | 0.03                    | 0.071                  |
+| 1.9                    | 0.03                    | 0.085                  |
 
 ![](man/figures/README-unnamed-chunk-4-6.png)<!-- -->
 
@@ -108,7 +108,7 @@ In the plots below:
 
 | detected_pseudo_octave | ignore_amplitudes_below | stern_brocot_tolerance |
 |:-----------------------|:------------------------|:-----------------------|
-| 2                      | 0.03                    | 0.071                  |
+| 2                      | 0.03                    | 0.085                  |
 
 ![](man/figures/README-unnamed-chunk-4-7.png)<!-- -->
 
