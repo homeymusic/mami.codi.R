@@ -58,81 +58,81 @@ In the plots below:
 
 ### Harmonic ~ Partials: 10
 
-| detected_pseudo_octave | ignore_amplitudes_below | frequency_tolerance | wavelength_tolerance |
-|:-----------------------|:------------------------|:--------------------|:---------------------|
-| 2                      | 0.03                    | 0.05                | 0.1                  |
+| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
+|:-----------------------|:------------------------|:---------------------|:--------------------|
+| 2                      | 0.03                    | 0.1                  | 0.05                |
 
 ![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->
 
 ### 5Partials ~ Partials: 5
 
-| detected_pseudo_octave | ignore_amplitudes_below | frequency_tolerance | wavelength_tolerance |
-|:-----------------------|:------------------------|:--------------------|:---------------------|
-| 2                      | 0.03                    | 0.05                | 0.1                  |
+| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
+|:-----------------------|:------------------------|:---------------------|:--------------------|
+| 2                      | 0.03                    | 0.1                  | 0.05                |
 
 ![](man/figures/README-unnamed-chunk-4-2.png)<!-- -->
 
 ### 5PartialsNo3 ~ Partials: 5
 
-| detected_pseudo_octave | ignore_amplitudes_below | frequency_tolerance | wavelength_tolerance |
-|:-----------------------|:------------------------|:--------------------|:---------------------|
-| 2                      | 0.03                    | 0.05                | 0.1                  |
+| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
+|:-----------------------|:------------------------|:---------------------|:--------------------|
+| 2                      | 0.03                    | 0.1                  | 0.05                |
 
 ![](man/figures/README-unnamed-chunk-4-3.png)<!-- -->
 
 ### Pure ~ Partials: 1
 
-| detected_pseudo_octave | ignore_amplitudes_below | frequency_tolerance | wavelength_tolerance |
-|:-----------------------|:------------------------|:--------------------|:---------------------|
-| 2                      | 0.03                    | 0.05                | 0.1                  |
+| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
+|:-----------------------|:------------------------|:---------------------|:--------------------|
+| 2                      | 0.03                    | 0.1                  | 0.05                |
 
 ![](man/figures/README-unnamed-chunk-4-4.png)<!-- -->
 
 ### Stretched ~ Partials: 10
 
-| detected_pseudo_octave | ignore_amplitudes_below | frequency_tolerance | wavelength_tolerance |
-|:-----------------------|:------------------------|:--------------------|:---------------------|
-| 2.1                    | 0.03                    | 0.05                | 0.1                  |
+| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
+|:-----------------------|:------------------------|:---------------------|:--------------------|
+| 2.1                    | 0.03                    | 0.1                  | 0.05                |
 
 ![](man/figures/README-unnamed-chunk-4-5.png)<!-- -->
 
 ### Compressed ~ Partials: 10
 
-| detected_pseudo_octave | ignore_amplitudes_below | frequency_tolerance | wavelength_tolerance |
-|:-----------------------|:------------------------|:--------------------|:---------------------|
-| 1.9                    | 0.03                    | 0.05                | 0.1                  |
+| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
+|:-----------------------|:------------------------|:---------------------|:--------------------|
+| 1.9                    | 0.03                    | 0.1                  | 0.05                |
 
 ![](man/figures/README-unnamed-chunk-4-6.png)<!-- -->
 
 ### Bonang ~ Partials: 4
 
-| detected_pseudo_octave | ignore_amplitudes_below | frequency_tolerance | wavelength_tolerance |
-|:-----------------------|:------------------------|:--------------------|:---------------------|
-| 2                      | 0.03                    | 0.05                | 0.1                  |
+| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
+|:-----------------------|:------------------------|:---------------------|:--------------------|
+| 2                      | 0.03                    | 0.1                  | 0.05                |
 
 ![](man/figures/README-unnamed-chunk-4-7.png)<!-- -->
 
 ### M3 ~ Partials: 10
 
-| detected_pseudo_octave | ignore_amplitudes_below | frequency_tolerance | wavelength_tolerance |
-|:-----------------------|:------------------------|:--------------------|:---------------------|
-| 2                      | 0.03                    | 1e-04               | 2e-04                |
+| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
+|:-----------------------|:------------------------|:---------------------|:--------------------|
+| 2                      | 0.03                    | 2e-04                | 1e-04               |
 
 ![](man/figures/README-unnamed-chunk-4-8.png)<!-- -->
 
 ### M6 ~ Partials: 10
 
-| detected_pseudo_octave | ignore_amplitudes_below | frequency_tolerance | wavelength_tolerance |
-|:-----------------------|:------------------------|:--------------------|:---------------------|
-| 2                      | 0.03                    | 1e-04               | 2e-04                |
+| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
+|:-----------------------|:------------------------|:---------------------|:--------------------|
+| 2                      | 0.03                    | 2e-04                | 1e-04               |
 
 ![](man/figures/README-unnamed-chunk-4-9.png)<!-- -->
 
 ### P8 ~ Partials: 10
 
-| detected_pseudo_octave | ignore_amplitudes_below | frequency_tolerance | wavelength_tolerance |
-|:-----------------------|:------------------------|:--------------------|:---------------------|
-| 2                      | 0.03                    | 1e-04               | 2e-04                |
+| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
+|:-----------------------|:------------------------|:---------------------|:--------------------|
+| 2                      | 0.03                    | 2e-04                | 1e-04               |
 
 ![](man/figures/README-unnamed-chunk-4-10.png)<!-- -->
 
@@ -140,24 +140,24 @@ In the plots below:
 
 ### Harmonic ~ Roll Off: 12
 
-| detected_pseudo_octave | ignore_amplitudes_below | frequency_tolerance | wavelength_tolerance |
-|:-----------------------|:------------------------|:--------------------|:---------------------|
-| 2                      | 0.03                    | 0.05                | 0.1                  |
+| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
+|:-----------------------|:------------------------|:---------------------|:--------------------|
+| 2                      | 0.03                    | 0.1                  | 0.05                |
 
 ![](man/figures/README-unnamed-chunk-8-1.png)<!-- -->
 
 ### Harmonic ~ Roll Off: 7
 
-| detected_pseudo_octave | ignore_amplitudes_below | frequency_tolerance | wavelength_tolerance |
-|:-----------------------|:------------------------|:--------------------|:---------------------|
-| 2                      | 0.03                    | 0.05                | 0.1                  |
+| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
+|:-----------------------|:------------------------|:---------------------|:--------------------|
+| 2                      | 0.03                    | 0.1                  | 0.05                |
 
 ![](man/figures/README-unnamed-chunk-8-2.png)<!-- -->
 
 ### Harmonic ~ Roll Off: 2
 
-| detected_pseudo_octave | ignore_amplitudes_below | frequency_tolerance | wavelength_tolerance |
-|:-----------------------|:------------------------|:--------------------|:---------------------|
-| 2                      | 0.03                    | 0.05                | 0.1                  |
+| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
+|:-----------------------|:------------------------|:---------------------|:--------------------|
+| 2                      | 0.03                    | 0.1                  | 0.05                |
 
 ![](man/figures/README-unnamed-chunk-8-3.png)<!-- -->
