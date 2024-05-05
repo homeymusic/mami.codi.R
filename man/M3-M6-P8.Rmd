@@ -176,7 +176,6 @@ dissonant_M6$ratios_frequency[[1]]
 
 ###### The grave major sixth is the second highest consonance
 
-
 ```{r, echo=F}
 G_M6 = mami.codi.data %>% dplyr::slice(2)
 ```
@@ -203,7 +202,7 @@ G_M6 %>% dplyr::select('semitone', 'consonance_dissonance')
 G_M6$ratios_frequency[[1]]
 ```
 
-####### References for the grave major sixth
+###### References for the grave major sixth
 
 * [List of Pitch Intervals](https://en.wikipedia.org/wiki/List_of_pitch_intervals)
 * [Grave major sixth on C](https://en.m.wikipedia.org/wiki/File:Grave_major_sixth_on_C.png)

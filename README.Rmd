@@ -151,34 +151,38 @@ results and the MaMi.CoDi theoretical
 predictions both show dissonance troughs 
 centered on the JT dyads.\
 
-MaMi.CoDi, though, predicts the local maximum 
-consonace to be in the center of each 
-dissonance trough at the JT dyad.
-Interestingly the secondary 
-maximums are at the Pythagorean third and
-grave major sixth. And those secondary peaks
-are also surrounded by disaonace troughs.
-Those dissonance troughs pull 
-down forming the shapes we see for both 
-the theoretical and behavioral curves.\
+MaMi.CoDi, though, predicts a local maximum 
+consonance at a JT dyad in the center of each 
+dissonance trough. Secondary 
+maximums occur at the Pythagorean third and
+grave major sixth. Those secondary peaks
+are also surrounded by dissonance troughs.
+Those secondary dissonance troughs pull 
+the curve down forming the shapes we see for both 
+the theoretical predictions and the behavioral results
+for M3 and M6.\
 
-So is this a data smoothing issue? 
-Or do consonance peaks exist in the
-center of dissonance troughs?\
+Do consonance peaks actually exist in the
+center of those dissonance troughs
+as MaMi.CoDi predicts? Why are those peaks missing
+from the behavioral results? Are there examples at other
+resolutions of a consonance peak in the center of a dissonance trough?\
 
-Pianists and guitarists, especially beginners
-and their audiences, are painfully aware that
-a dissonant pitch (the wrong note) is adjacent
-to a consonant pitch (the right note).\
+Performers of instruments with quantized semitones, 
+like piano keyboards and fretted guitars--especially beginners
+and their audiences--are aware that highly dissonant 
+intervals (M7 and m2) surround the globally maximum
+consonant tonic peak at the unison interval (P1).
+Dissonance decreases with each semitone step away from the tonic until 
+we reach the perfect fifth below (P5) and the perfect fourth above (P4).
+That is to say, the tonic pitch is a consonance peak 
+in the center of a dissonance trough.\
 
-Show a plot of a dissonance trough at the scale 
-of ET semitones from -P4 to P4. Perhaps include 
-pitches at -P8 and P8.\
+TODO: include plot of the -5:5 at semitone resolution.
 
 The MaMi.CoDi model predicts consonance peaks
-in the center of dissonance troughs at multiple
-scales of resolution.\
-
+in the center of dissonance troughs at both
+of those scales of resolution.\
 
 ```{r, child=c('man/M3-M6-P8.Rmd')}
 ```
