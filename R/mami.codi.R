@@ -121,7 +121,7 @@ estimate_cycle <- function(x, pseudo_octave, tolerance) {
 
 flip <- function(x) {
   consonance = ZARLINO - x
-  if (consonance < MIN_CONSONANCE) {
+  if (is.na(consonance) | consonance < MIN_CONSONANCE) {
     MIN_CONSONANCE
   } else {
     consonance
