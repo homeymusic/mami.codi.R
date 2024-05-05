@@ -1,4 +1,4 @@
-search_label = '5PartialsNo3'
+search_label = 'P8'
 from_tol     = 0.1
 to_tol       = 0.4
 by_tol       = 0.01

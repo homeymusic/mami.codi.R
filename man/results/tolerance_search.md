@@ -1,7 +1,7 @@
 Tolerance Search
 ================
 
-# 5PartialsNo3
+# Harmonic
 
 Tolerances:
 
@@ -19,4 +19,4 @@ Octave Ratios:
 
 ## CoDi Wrap
 
-![](../figures/tolerance_search/unnamed-chunk-13-1.png)<!-- -->
+![](../figures/tolerance_search/unnamed-chunk-12-1.png)<!-- -->

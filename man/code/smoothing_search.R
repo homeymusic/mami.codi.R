@@ -1,7 +1,9 @@
 search_label = 'P8'
-from_sigma     = 0.1
-to_sigma       = 0.4
-by_sigma       = 0.01
+from_sigma   = 0.01
+to_sigma     = 0.07
+by_sigma     = 0.005
+sigmas       = seq(from=from_sigma, to=to_sigma, by=by_sigma)
+
 tonic_midi   = 60
 
 source('./utils.R')
@@ -47,7 +49,6 @@ behavior = readRDS(behavior.rds)
 intervals = tonic_midi + behavior$profile$interval
 index = seq_along(intervals)
 
-tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
 
 grid = tidyr::expand_grid(
   index,

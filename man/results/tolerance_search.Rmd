@@ -6,7 +6,7 @@ always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = '5PartialsNo3'
+search_label = 'Harmonic'
 ```
 
 # `r search_label`
@@ -56,6 +56,12 @@ experiment.rds = paste0('../data/',
              '.rds')
 experiment = readRDS(experiment.rds)$profile %>% 
   dplyr::rename(semitone=interval)
+
+experiment <- experiment %>% dplyr::mutate(
+  consonance_dissonance = rating,
+  consonance_dissonance_2x = 2*rating,
+  consonance_dissonance_4x = 4*rating
+)
 
 theory.rds = paste0('../data/tolerance_',
                     search_label,
@@ -124,14 +130,6 @@ theory <- theory %>%
   dplyr::mutate(
     z_score = z_scores(consonance_dissonance),
     smooth  = smoothed(semitone, .data$z_score, params$sigma)
-  )
-```
-
-```{r, echo=F}
-experiment <- experiment %>% 
-  dplyr::mutate(
-    z_score = z_scores(rating),
-    smooth  = smoothed(semitone, z_score, params$sigma)
   )
 ```
 

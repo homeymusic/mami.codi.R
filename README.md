@@ -114,14 +114,15 @@ troughs as MaMi.CoDi predicts? Why are those peaks missing from the
 behavioral results? Are there examples at other resolutions of a
 consonance peak in the center of a dissonance trough?  
 
-Performers of instruments with quantized semitones, like piano keyboards
-and fretted guitars–especially beginners and their audiences–are aware
-that highly dissonant intervals (M7 and m2) surround the globally
-maximum consonant tonic peak at the unison interval (P1). Dissonance
-decreases with each semitone step away from the tonic until we reach the
-perfect fifth below (P5) and the perfect fourth above (P4). That is to
-say, the tonic pitch is a consonance peak in the center of a dissonance
-trough.  
+Performers of instruments with quantized semitones, like keyboards and
+fretted strings–especially beginners and their audiences–are aware that
+highly dissonant intervals (M7 and m2) surround the globally maximum
+consonant tonic peak at the unison interval (P1). Dissonance decreases
+with each semitone step away from the tonic until we reach the perfect
+fifth below (P5) and the perfect fourth above (P4).  
+
+That is to say, at the resolution of 11 semitones the tonic pitch is a
+consonance peak in the center of a dissonance trough.  
 
 TODO: include plot of the -5:5 at semitone resolution.
 
