@@ -1,7 +1,7 @@
 search_label = 'P8'
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
-  from_tol     = 0.001 - 0.01
-  to_tol       = 0.001 + 0.01
+  from_tol     = 0.001 / 10
+  to_tol       = 0.001 * 10
   by_tol       = 0.001
 } else {
   from_tol     = 0.1
