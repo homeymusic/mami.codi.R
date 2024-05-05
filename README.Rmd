@@ -114,9 +114,7 @@ p = params %>% purrr::map(\(p) {
     dplyr::rename(semitone=interval)
   
   experiment <- experiment %>% dplyr::mutate(
-    consonance_dissonance = rating,
-    consonance_dissonance_2x = 2*rating,
-    consonance_dissonance_4x = 4*rating
+    consonance_dissonance = rating
   )
   if (p$s == 'macro' | p$s == 'Bonang' | p$s == '5PartialsNo3' | p$s == 'Pure') {
     sigma = BEHAVIOURAL_SMOOTH_BROAD
@@ -244,9 +242,7 @@ p =params %>% purrr::map(\(p) {
     dplyr::rename(semitone=interval)
   
   experiment <- experiment %>% dplyr::mutate(
-    consonance_dissonance = rating,
-    consonance_dissonance_2x = 2*rating,
-    consonance_dissonance_4x = 4*rating
+    consonance_dissonance = rating
   )
   sigma = BEHAVIOURAL_SMOOTH_BROAD
   cat("  \n###", title, '\n')

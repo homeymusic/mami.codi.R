@@ -58,9 +58,7 @@ experiment = readRDS(experiment.rds)$profile %>%
   dplyr::rename(semitone=interval)
 
 experiment <- experiment %>% dplyr::mutate(
-  consonance_dissonance = rating,
-  consonance_dissonance_2x = 2*rating,
-  consonance_dissonance_4x = 4*rating
+  consonance_dissonance = rating
 )
 
 theory.rds = paste0('../data/tolerance_',

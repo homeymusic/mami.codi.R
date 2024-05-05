@@ -7,6 +7,9 @@ always_allow_html: true
 
 ```{r, echo=F}
 search_label = 'P8'
+BEHAVIOURAL_SMOOTH_BROAD  <- 0.2
+BEHAVIOURAL_SMOOTH_NARROW <- 0.035
+test_sigma = BEHAVIOURAL_SMOOTH_NARROW
 ```
 
 # `r search_label`
@@ -24,9 +27,6 @@ knitr::opts_chunk$set(dev = 'png')
 ```
 
 ```{r, echo=F}
-BEHAVIOURAL_SMOOTH_BROAD  <- 0.2
-BEHAVIOURAL_SMOOTH_NARROW <- 0.035
-
 search_params = tibble::tibble(
   search       = c('Pure',
                    'Stretched','Harmonic','Compressed',
@@ -54,13 +54,17 @@ params = search_params %>% dplyr::filter(search==search_label)
 experiment.rds = paste0('../data/',
              search_label,
              '.rds')
-experiment = readRDS(experiment.rds)$profile %>% 
+
+experiment_full = readRDS(experiment.rds)
+
+experiment_raw = experiment_full$data %>% 
+  dplyr::rename(semitone=interval, consonance_dissonance_z=rating)
+  
+experiment_smooth = experiment_full$profile %>% 
   dplyr::rename(semitone=interval)
 
-experiment <- experiment %>% dplyr::mutate(
-  consonance_dissonance = rating,
-  consonance_dissonance_2x = 2*rating,
-  consonance_dissonance_4x = 4*rating
+experiment_smooth <- experiment_smooth %>% dplyr::mutate(
+  consonance_dissonance = rating
 )
 
 theory.rds = paste0('../data/tolerance_',
@@ -133,44 +137,19 @@ theory <- theory %>%
 ```
 
 ```{r, echo=F}
-experiment <- experiment %>% 
-  dplyr::mutate(
-    z_score = z_scores(rating),
-    smooth  = smoothed(semitone, z_score, params$sigma)
-  )
-```
-
-```{r, echo=F}
 cols = 1
 rows = length(tols)
 ```
 
-## Behavioral CoDi 
+## Behavioral CoDi
 
 ```{r, echo=F}
-# height = 3 per row and width = 5 per column
-# so for grid of 4x12 it would be height=12 and width=60
 plot_semitone_behavioral_codi(
-  theory, 
-  experiment, 
-  gray_vlines  = params$gray_vlines[[1]],
-  black_vlines = params$black_vlines[[1]],
+  experiment_raw=experiment_raw,
+  experiment_smooth=experiment_smooth,
   title=paste(search_label),
-  ncols=cols
-)
-```
-
-## CoDi Wrap
-
-```{r, fig.height=7*rows, fig.width=12*cols, echo=F}
-# height = 3 per row and width = 5 per column
-# so for grid of 4x12 it would be height=12 and width=60
-plot_semitone_codi_wrap(
-  theory, 
-  experiment, 
+  sigma=test_sigma,
   gray_vlines  = params$gray_vlines[[1]],
-  black_vlines = params$black_vlines[[1]],
-  title=paste(search_label),
-  ncols=cols
+  black_vlines = params$black_vlines[[1]]
 )
 ```

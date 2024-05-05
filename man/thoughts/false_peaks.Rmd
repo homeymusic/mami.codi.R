@@ -26,9 +26,6 @@ experiment = readRDS(experiment.rds)$profile %>%
   dplyr::rename(
     semitone=interval,
     consonance_dissonance=rating
-  ) %>% dplyr::mutate(
-    consonance_dissonance_2x = 2*consonance_dissonance,
-    consonance_dissonance_4x = 4*consonance_dissonance
   )
 ```
 
