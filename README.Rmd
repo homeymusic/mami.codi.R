@@ -11,13 +11,15 @@ source('./man/code/utils.R')
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "man/figures/README-"
+  fig.path = "man/figures/README-",
+  warning = FALSE, 
+  message = FALSE
 )
 BEHAVIOURAL_SMOOTH_BROAD  <- 0.2
 BEHAVIOURAL_SMOOTH_NARROW <- 0.035
 ```
 
-## Timbre: Consonance-Dissonance and Major-Minor ~ Semitones
+# Timbre: Consonance-Dissonance and Major-Minor ~ Semitones
 
 This section is based on [Timbral effects on consonance disentangle psychoacoustic mechanisms and suggest perceptual origins for musical scales](https://www.nature.com/articles/s41467-024-45812-z) by Raja Marjieh, Peter M. C. Harrison, Harin Lee, Fotini Deligiannaki & Nori Jacoby.
 
@@ -59,7 +61,7 @@ major-minor polarities
     * C4, E4, C5 (a framed major third) is predicted to sound major and 
     * E3, C4, E4 (a framed minor sixth) is predicted to sound minor
 
-## Frequencies
+# Frequencies
 
 ```{r, include=F}
 timbre_paper = readRDS('./man/data/timbre_paper.rds')
@@ -159,6 +161,12 @@ p = params %>% purrr::map(\(p) {
   } else {
     sigma = BEHAVIOURAL_SMOOTH_NARROW
   }
+  if (timbre=='Harmonic') {
+  cat('  \n## Dyads Spanning 15 Semitones\n')
+  }
+  if (timbre=='M3') {
+  cat('  \n## Dyads Spanning 1 Quarter Tone\n')
+  }
   cat("  \n###", title, '\n')
   print(knitr::kable(tibble::tibble_row(
     detected_pseudo_octave  = paste(round(chords$pseudo_octave %>% unique, 2), collapse = ' '),
@@ -171,6 +179,11 @@ p = params %>% purrr::map(\(p) {
                            black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")
 })
+```
+
+### Additional Data on the Quarter Tone Studies
+
+```{r, child=c('man/M3-M6-P8.Rmd')}
 ```
 
 ## Amplitudes

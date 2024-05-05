@@ -8,7 +8,7 @@ library(parallelly)
 mami.codi.map <- function(study, tolerances, tonic_midi) {
   num_harmonics = 10
   octave_ratio = 2.0
-  behavior = readRDS(paste0('../data/',study,'.rds'))
+  behavior = readRDS(paste0('./data/',study,'.rds'))
   chords = tibble::tibble(
     pitches = behavior$profile$interval %>% lapply(\(i) list(c(tonic_midi,tonic_midi+i)))
   )
