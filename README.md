@@ -76,7 +76,7 @@ Jacoby.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
 |:-----------------------|:------------------------|:---------------------|:--------------------|
-| 2                      | 0.03                    | 1e-04                | 5e-05               |
+| 2                      | 0.03                    | 2e-04                | 1e-04               |
 
 ![](man/figures/README-unnamed-chunk-4-8.png)<!-- -->
 
@@ -84,7 +84,7 @@ Jacoby.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
 |:-----------------------|:------------------------|:---------------------|:--------------------|
-| 2                      | 0.03                    | 1e-04                | 5e-05               |
+| 2                      | 0.03                    | 2e-04                | 1e-04               |
 
 ![](man/figures/README-unnamed-chunk-4-9.png)<!-- -->
 
@@ -92,7 +92,7 @@ Jacoby.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
 |:-----------------------|:------------------------|:---------------------|:--------------------|
-| 2                      | 0.03                    | 1e-04                | 5e-05               |
+| 2                      | 0.03                    | 2e-04                | 1e-04               |
 
 ![](man/figures/README-unnamed-chunk-4-10.png)<!-- -->
 
