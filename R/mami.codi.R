@@ -53,7 +53,7 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 listen_for_min_amplitude = function(x, min_amplitude) {
 
   f = x$spectrum[[1]] %>% dplyr::filter(.data$y>min_amplitude) %>% hrep::freq()
-  λ = ENDOLYMPH_SPEED_OF_SOUND / f
+  λ = SPEED_OF_SOUND / f
 
   x %>% dplyr::mutate(
     frequencies = list(f),
@@ -166,7 +166,7 @@ ZOOMED_TOLERANCE = 0.0002
 
 MIN_AMPLITUDE  = 0.03
 
-ENDOLYMPH_SPEED_OF_SOUND = 1563
+SPEED_OF_SOUND = 343
 
 ZARLINO        = 100 / sqrt(2)
 
