@@ -153,11 +153,14 @@ centered on the JT dyads.\
 
 MaMi.CoDi, though, predicts the local maximum 
 consonace to be in the center of each 
-dissonance trough at the JT dyad and secondary 
-maximums at the Pythagorean third and
-grave major sixth. Those secondary troughs
-pull those curves down forming the shapes we 
-see for both theoretical and behavioral curves.\
+dissonance trough at the JT dyad.
+Interestingly the secondary 
+maximums are at the Pythagorean third and
+grave major sixth. And those secondary peaks
+are also surrounded by disaonace troughs.
+Those dissonance troughs pull 
+down forming the shapes we see for both 
+the theoretical and behavioral curves.\
 
 So is this a data smoothing issue? 
 Or do consonance peaks exist in the
