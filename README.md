@@ -1,60 +1,16 @@
-Major-Minor and Consonance-Dissonance Perception
+MaMi.CoDi: A Spatial-Temporal Periodicity Model Of Consonance Perception
 ================
 
-# Timbre: Consonance-Dissonance and Major-Minor ~ Semitones
+# Theoretical Predictions and Large-Scale Behavioral Results
 
-This section is based on [Timbral effects on consonance disentangle
-psychoacoustic mechanisms and suggest perceptual origins for musical
+The large-scale behavioral data in the plots below are from [Timbral
+effects on consonance disentangle psychoacoustic mechanisms and suggest
+perceptual origins for musical
 scales](https://www.nature.com/articles/s41467-024-45812-z) by Raja
 Marjieh, Peter M. C. Harrison, Harin Lee, Fotini Deligiannaki & Nori
 Jacoby.
 
-#### Notes on Plots:
-
-In the plots below:
-
-- The cream lines are smoothed experimental data from Marjieh, Harrison
-  et al.
-
-- The multi-colored points are MaMi.CoDi computational predictions
-
-- The multi-colored lines are smoothed MaMi.CoDi computational
-  predictions
-
-- The colors represent MaMi.CoDi computational predictions for
-  major-minor polarity:
-
-  - Gold is major
-  - Red is neutral
-  - Blue is minor
-
-- The vertical axis is z-scored consonance-dissonance
-
-- The horizontal axis is the width of the dyad from 0 to 15 semitones
-
-  - For example, the data at 4 represents the equal tempered major
-    third, M3
-  - While the data at 8 represents the equal tempered minor sixth, m6
-
-#### Notes on Dyads:
-
-- The dyads immediately below, from the timbre study, are true two-pitch
-  dyads. True major thirds like C4 and E4, for example, only include C4
-  and E4.
-
-- The intervals in the last few sections, further below, are actually
-  three-pitch chords with the high and low pitches one octave apart,
-  framing the interval. For example: C4, E4 and C5.
-
-- Two-pitch dyads versus octave-framed, three-pitch chords, might have
-  different major-minor polarities
-
-- Consider two chords containing C4 and E4:
-
-  - C4, E4, C5 (a framed major third) is predicted to sound major and
-  - E3, C4, E4 (a framed minor sixth) is predicted to sound minor
-
-# Frequencies
+# Manipulating Harmonic Frequencies
 
 ## Dyads Spanning 15 Semitones
 
@@ -140,9 +96,9 @@ In the plots below:
 
 ![](man/figures/README-unnamed-chunk-4-10.png)<!-- -->
 
-### Additional Data on the Quarter Tone Studies
+### Additional Data for Dyads Spanning 1 Quarter Tone
 
-### M3 Major Third
+#### M3 Major Third
 
 - JT: 5/4
 - ET: 2^(4/12)
@@ -154,7 +110,7 @@ In the plots below:
     #>          <dbl>        <dbl>   <dbl>   <dbl>
     #> 1         327.         63.9    330.      64
 
-#### Intervals near the major third ranked by consonance
+##### Intervals near the major third ranked by consonance
 
     #> # A tibble: 1,000 × 2
     #>    semitone consonance_dissonance
@@ -171,7 +127,7 @@ In the plots below:
     #> 10     64.0                  85.2
     #> # ℹ 990 more rows
 
-##### The JT M3 has the highest consonance
+###### The JT M3 has the highest consonance
 
     #> [1] 63.86321
 
@@ -204,7 +160,7 @@ In the plots below:
     #> 19  45   4 11.250049    11.250049 2943.3005       261.6256
     #> 20  25   2 12.500055    12.500055 3270.3339       261.6256
 
-#### Intervals near the major third ranked by lowest consonance
+##### Intervals near the major third ranked by lowest consonance
 
     #> # A tibble: 1,000 × 2
     #>    semitone consonance_dissonance
@@ -221,7 +177,7 @@ In the plots below:
     #> 10     63.9                 13.0 
     #> # ℹ 990 more rows
 
-##### The lowest consonance
+###### The lowest consonance
 
     #> [1] 63.86622
 
@@ -254,7 +210,7 @@ In the plots below:
     #> 19 1339  119 11.252001    11.252001 2943.8111       261.6256
     #> 20 2713  217 12.502223    12.502223 3270.9012       261.6256
 
-##### The Pythagorean third is the second highest consonance
+###### The Pythagorean third is the second highest consonance
 
 MIDI:
 
@@ -302,7 +258,7 @@ Consonance:
     Theory](http://www.tonalsoft.com/enc/m/major-3rd.aspx)
 - [Pythagorean ditone](https://en.wikipedia.org/wiki/Ditone)
 
-### M6 Major Sixth
+#### M6 Major Sixth
 
 - JT: 5/3
 - ET: 2^(9/12)
@@ -314,7 +270,7 @@ Consonance:
     #>          <dbl>        <dbl>   <dbl>   <dbl>
     #> 1         436.         68.8     440      69
 
-#### Intervals near the major sixth ranked by consonance
+##### Intervals near the major sixth ranked by consonance
 
     #> # A tibble: 1,000 × 2
     #>    semitone consonance_dissonance
@@ -331,7 +287,7 @@ Consonance:
     #> 10     68.9                  82.8
     #> # ℹ 990 more rows
 
-##### The JT M6 has the highest consonance
+###### The JT M6 has the highest consonance
 
     #> [1] 68.66952
 
@@ -364,7 +320,7 @@ Consonance:
     #> 19 297  20 14.849938    14.849938 3885.1234       261.6256
     #> 20  33   2 16.499931    16.499931 4316.8038       261.6256
 
-#### Intervals near the major sixth ranked by lowest consonance
+##### Intervals near the major sixth ranked by lowest consonance
 
     #> # A tibble: 1,000 × 2
     #>    semitone consonance_dissonance
@@ -381,7 +337,7 @@ Consonance:
     #> 10     68.8                 13.5 
     #> # ℹ 990 more rows
 
-##### The lowest consonance
+###### The lowest consonance
 
     #> [1] 68.84169
 
@@ -414,7 +370,7 @@ Consonance:
     #> 19 8624  575 14.998358    14.998358 3923.9539       261.6256
     #> 20 2933  176 16.664842    16.664842 4359.9488       261.6256
 
-##### The grave major sixth is the second highest consonance
+###### The grave major sixth is the second highest consonance
 
 MIDI:
 
@@ -462,13 +418,13 @@ Consonance:
 - [Grave major sixth on
   C](https://en.m.wikipedia.org/wiki/File:Grave_major_sixth_on_C.png)
 
-### P8 Octave
+#### P8 Octave
 
 Where is the consonance peak at P8? The experiment does not include the
 perfect 8th at 12.0. The two closest semitones are 11.99700 and
 12.01201.
 
-## Amplitudes
+# Manipulating Harmonic Amplitudes
 
 ### Harmonic ~ Roll Off: 12
 
@@ -493,3 +449,30 @@ perfect 8th at 12.0. The two closest semitones are 11.99700 and
 | 2                      | 0.03                    | 0.1                  | 0.05                |
 
 ![](man/figures/README-unnamed-chunk-9-3.png)<!-- -->
+
+#### Notes on Plots:
+
+In the plots above:
+
+- The cream lines are smoothed experimental data from Marjieh, Harrison
+  et al.
+
+- The multi-colored points are MaMi.CoDi computational predictions
+
+- The multi-colored lines are smoothed MaMi.CoDi computational
+  predictions
+
+- The colors represent MaMi.CoDi computational predictions for
+  major-minor polarity:
+
+  - Gold is major
+  - Red is neutral
+  - Blue is minor
+
+- The vertical axis is z-scored consonance-dissonance
+
+- The horizontal axis is the width of the dyad from 0 to 15 semitones
+
+  - For example, the data at 4 represents the equal tempered major
+    third, M3
+  - While the data at 8 represents the equal tempered minor sixth, m6

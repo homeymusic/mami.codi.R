@@ -1,5 +1,5 @@
 ---
-title: "Major-Minor and Consonance-Dissonance Perception"
+title: "MaMi.CoDi: A Spatial-Temporal Periodicity Model Of Consonance Perception"
 output:
   github_document: default
 ---
@@ -19,49 +19,11 @@ BEHAVIOURAL_SMOOTH_BROAD  <- 0.2
 BEHAVIOURAL_SMOOTH_NARROW <- 0.035
 ```
 
-# Timbre: Consonance-Dissonance and Major-Minor ~ Semitones
+# Theoretical Predictions and Large-Scale Behavioral Results
 
-This section is based on [Timbral effects on consonance disentangle psychoacoustic mechanisms and suggest perceptual origins for musical scales](https://www.nature.com/articles/s41467-024-45812-z) by Raja Marjieh, Peter M. C. Harrison, Harin Lee, Fotini Deligiannaki & Nori Jacoby.
+The large-scale behavioral data in the plots below are from [Timbral effects on consonance disentangle psychoacoustic mechanisms and suggest perceptual origins for musical scales](https://www.nature.com/articles/s41467-024-45812-z) by Raja Marjieh, Peter M. C. Harrison, Harin Lee, Fotini Deligiannaki & Nori Jacoby.
 
-#### Notes on Plots:
-
-In the plots below:
-
-* The cream lines are smoothed experimental data from Marjieh, Harrison et al.
-
-* The multi-colored points are MaMi.CoDi computational predictions
-
-* The multi-colored lines are smoothed MaMi.CoDi computational predictions
-
-* The colors represent MaMi.CoDi computational predictions for major-minor polarity:
-    * Gold is major
-    * Red is neutral
-    * Blue is minor
-
-* The vertical axis is z-scored consonance-dissonance
-
-* The horizontal axis is the width of the dyad from 0 to 15 semitones
-    * For example, the data at 4 represents the equal tempered major third, M3
-    * While the data at 8 represents the equal tempered minor sixth, m6
-    
-
-#### Notes on Dyads:
-
-* The dyads immediately below, from the timbre study, are true two-pitch dyads. 
-True major thirds like C4 and E4, for example, only include C4 and E4.
-
-* The intervals in the last few sections, further below, are actually three-pitch 
-chords with the high and low pitches one octave apart, framing the interval. For 
-example: C4, E4 and C5.
-
-* Two-pitch dyads versus octave-framed, three-pitch chords, might have different 
-major-minor polarities
-
-* Consider two chords containing C4 and E4: 
-    * C4, E4, C5 (a framed major third) is predicted to sound major and 
-    * E3, C4, E4 (a framed minor sixth) is predicted to sound minor
-
-# Frequencies
+# Manipulating Harmonic Frequencies
 
 ```{r, include=F}
 timbre_paper = readRDS('./man/data/timbre_paper.rds')
@@ -181,12 +143,12 @@ p = params %>% purrr::map(\(p) {
 })
 ```
 
-### Additional Data on the Quarter Tone Studies
+### Additional Data for Dyads Spanning 1 Quarter Tone
 
 ```{r, child=c('man/M3-M6-P8.Rmd')}
 ```
 
-## Amplitudes
+# Manipulating Harmonic Amplitudes
 
 ```{r, include=F}
 timbre_paper = readRDS('./man/data/roll_off_timbre_paper.rds')
@@ -259,3 +221,24 @@ p =params %>% purrr::map(\(p) {
   cat("  \n")
 })
 ```
+
+#### Notes on Plots:
+
+In the plots above:
+
+* The cream lines are smoothed experimental data from Marjieh, Harrison et al.
+
+* The multi-colored points are MaMi.CoDi computational predictions
+
+* The multi-colored lines are smoothed MaMi.CoDi computational predictions
+
+* The colors represent MaMi.CoDi computational predictions for major-minor polarity:
+    * Gold is major
+    * Red is neutral
+    * Blue is minor
+
+* The vertical axis is z-scored consonance-dissonance
+
+* The horizontal axis is the width of the dyad from 0 to 15 semitones
+    * For example, the data at 4 represents the equal tempered major third, M3
+    * While the data at 8 represents the equal tempered minor sixth, m6
