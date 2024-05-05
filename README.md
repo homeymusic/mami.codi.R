@@ -98,6 +98,40 @@ Jacoby.
 
 ### Additional Data for Dyads Spanning 1 Quarter Tone
 
+For the high-resolution dyads centered on 
+M3, M6 and P8, the large-scale behavioral 
+results and the MaMi.CoDi theoretical 
+predictions both show dissonance troughs 
+centered on the JT dyads.\
+
+MaMi.CoDi, though, predicts the local maximum 
+consonace to be in the center of each 
+dissonance trough at the JT dyad.
+Interestingly the secondary 
+maximums are at the Pythagorean third and
+grave major sixth. And those secondary peaks
+are also surrounded by disaonace troughs.
+Those dissonance troughs pull 
+down forming the shapes we see for both 
+the theoretical and behavioral curves.\
+
+So is this a data smoothing issue? 
+Or do consonance peaks exist in the
+center of dissonance troughs?\
+
+Pianists and guitarists, especially beginners
+and their audiences, are painfully aware that
+a dissonant pitch (the wrong note) is adjacent
+to a consonant pitch (the right note).\
+
+Show a plot of a dissonance trough at the scale 
+of ET semitones from -P4 to P4. Perhaps include 
+pitches at -P8 and P8.\
+
+The MaMi.CoDi model predicts consonance peaks
+in the center of dissonance troughs at multiple
+scales of resolution.\
+
 #### M3 Major Third
 
 - JT: 5/4
