@@ -96,7 +96,7 @@ Jacoby.
 
 ![](man/figures/README-unnamed-chunk-4-10.png)<!-- -->
 
-### Dissonance Troughs with Centered Consonance Peaks
+### Consonance Peaks in Dissonance Troughs
 
 For the high-resolution dyads centered on M3, M6 and P8, the large-scale
 behavioral results and the MaMi.CoDi theoretical predictions both show
@@ -107,27 +107,31 @@ MaMi.CoDi, though, predicts a local maximum consonance at the JT dyad
 maximums occur at the Pythagorean third and grave major sixth. Those
 secondary peaks are also surrounded by dissonance troughs. There are
 also tertiary troughs near the ET intervals. Those secondary and
-tertiary dissonance troughs pull the curves down forming the shapes we
-see for both the theoretical predictions for M3 and M6.  
+tertiary dissonance troughs pull the curves down forming the smoothed
+shapes we see for the theoretical predictions.  
 
 Do consonance peaks actually exist in the center of those dissonance
 troughs as MaMi.CoDi predicts? Why are those peaks missing from the
 behavioral results? Are there examples at other resolutions of a
 consonance peak in the center of a dissonance trough?  
 
-##### Dissonance Trough with Centered Consonance Peak at P1
+##### Consonance Peak in Dissonance Troughs at P1
 
 ![](man/figures/README-unnamed-chunk-15-1.png)<!-- -->
 
 Performers of instruments with quantized semitones, like keyboards and
 fretted strings–especially beginners and their audiences–are aware that
 the globally maximum consonant peak at the unison interval, P1, has
-highly dissonant neighbors on both sides, M7 and m2. Dissonance
-decreases with each semitone step away from M7 and m2 until the perfect
-fifth, P5, below and the perfect fourth, P4, above.  
+highly-dissonant, playable neighbors on both sides, M7 and m2.
+Dissonance decreases with each semitone step away from M7 and m2 until
+the perfect fifth, P5, below and the perfect fourth, P4, above.  
 
 That is to say, at the resolution of 10 semitones, the tonic pitch is a
 consonance peak in the center of a dissonance trough.  
+
+At other resolutions, for example stringed instruments without frets,
+the nearest playable neighbors are not dissonant. A slight roll of the
+finger will not throw the audience down into a dissonance trough.
 
 As the tolerance value of the MaMi.CoDi model increases the consonance
 peaks expand width until they over come the dissonance peaks. See plots,
