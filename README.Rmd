@@ -1,5 +1,5 @@
 ---
-title: "MaMi.CoDi: A Spatial-Temporal Periodicity Model Of Consonance Perception"
+title: "MaMi.CoDi: a spatiotemporal periodicity model of consonance perception."
 output:
   github_document: default
 ---
