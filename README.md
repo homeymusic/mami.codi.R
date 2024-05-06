@@ -1,7 +1,7 @@
-MaMi.CoDi: A Spatial-Temporal Periodicity Model Of Consonance Perception
+MaMi.CoDi: A Spatiotemporal Periodicity Model of Consonance Perception
 ================
 
-# Theoretical Predictions and Large-Scale Behavioral Results
+# Theoretical predictions compared to large-scale behavioral results
 
 The large-scale behavioral data in the plots below are from [Timbral
 effects on consonance disentangle psychoacoustic mechanisms and suggest
@@ -10,9 +10,9 @@ scales](https://www.nature.com/articles/s41467-024-45812-z) by Raja
 Marjieh, Peter M. C. Harrison, Harin Lee, Fotini Deligiannaki & Nori
 Jacoby.
 
-# Manipulating Harmonic Frequencies
+# Manipulating harmonic frequencies
 
-## Dyads Spanning 15 Semitones
+## Dyads spanning 15 semitones
 
 ### Harmonic ~ Partials: 10
 
@@ -62,7 +62,7 @@ For 5 harmonics with the 3rd partial deleted, behavioral results and
 theoretical predictions largely agree. As expected, the m3 peak without
 the third partial is now lower than the m3 peak with all 5 harmonics
 while the M3 peak is mostly the same for both sets of harmonics.
-MaMi.CoDi predicts a peak with minor polatiry just below the tritone
+MaMi.CoDi predicts a peak with minor polarity just below the tritone
 that does not exist in the behavioral data. Near M2, the theoretical
 smoothed curve is relatively lower than the theoretical predictions
 plotted as points.
@@ -131,7 +131,7 @@ appear in the behavioral results.
 
 ![](man/figures/README-unnamed-chunk-4-8.png)<!-- -->
 
-## Dyads Spanning 1 Quarter Tone
+## Dyads spanning 1 quarter tone
 
 ### M3 ~ Partials: 10
 
@@ -163,7 +163,7 @@ Detailed description in the section below.
 
 ![](man/figures/README-unnamed-chunk-4-11.png)<!-- -->
 
-### Consonance Peaks in Dissonance Troughs
+### Consonance peaks in dissonance troughs
 
 For the high-resolution dyads centered on M3, M6 and P8, the large-scale
 behavioral results and the MaMi.CoDi theoretical predictions both show
@@ -180,7 +180,7 @@ troughs as MaMi.CoDi predicts? Why are those peaks missing from the
 behavioral results? Are there examples at other resolutions of a
 consonance peak in the center of a dissonance trough?  
 
-##### Consonance Peak in Dissonance Trough at P1 in Octave Span
+##### Consonance peak at P1 in dissonance trough spanning 1 octave
 
 ![](man/figures/README-unnamed-chunk-15-1.png)<!-- -->
 
@@ -198,7 +198,7 @@ At other resolutions, for example stringed instruments without frets,
 the nearest playable neighbors are not dissonant. A slight roll of the
 finger will not throw the audience down into a dissonance trough.
 
-### MaMi.CoDi Resolution Correlates with Dissonance Troughs and Consonance Peaks
+### MaMi.CoDi resolution correlates with dissonance troughs and consonance peaks
 
 As the tolerance value of the MaMi.CoDi model varies from very small to
 very large the consonance peaks expand their width until they overcome
@@ -214,7 +214,7 @@ the wavelength and frequency signals.
 - Large tolerances create less accurate fractions which create shorter
   period estimates.
 
-#### M3 Major Third
+#### M3 ~ Major Third
 
 Plot of M3 with MaMi.CoDi tolerance values varying from 1e-08 to 0.1:
 ![M3 with a range of MaMi.CoDi tolerance
@@ -378,7 +378,7 @@ Consonance:
     Theory](http://www.tonalsoft.com/enc/m/major-3rd.aspx)
 - [Pythagorean ditone](https://en.wikipedia.org/wiki/Ditone)
 
-#### M6 Major Sixth
+#### M6 ~ Major Sixth
 
 Plot of M6 with MaMi.CoDi tolerance values varying from 1e-08 to 0.1:
 ![M6 with a range of MaMi.CoDi tolerance
@@ -548,7 +548,7 @@ Plot of P8 with MaMi.CoDi tolerance values varying from 1e-08 to 0.1:
 ![P8 with a range of MaMi.CoDi tolerance
 values.](./man/tolerance_search_plots/P8%20Orders%20of%20Magnitude.png)
 
-# Manipulating Harmonic Amplitudes
+# Manipulating harmonic amplitudes
 
 ### Harmonic ~ Roll Off: 12
 
@@ -574,7 +574,7 @@ values.](./man/tolerance_search_plots/P8%20Orders%20of%20Magnitude.png)
 
 ![](man/figures/README-unnamed-chunk-9-3.png)<!-- -->
 
-#### Notes on Plots:
+#### Notes on plots:
 
 In the plots above:
 

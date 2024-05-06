@@ -1,4 +1,4 @@
-### Consonance Peaks in Dissonance Troughs
+### Consonance peaks in dissonance troughs
 
 For the high-resolution dyads centered on 
 M3, M6 and P8, the large-scale behavioral 
@@ -21,7 +21,7 @@ from the behavioral results? Are there examples at other
 resolutions of a consonance peak in the center of a dissonance trough?\
 
 ```{r, fig.height=8, fig.width=12, echo=F, results='asis', message=F, root.dir='./code'}
-title = "Consonance Peak in Dissonance Trough at P1 in Octave Span"
+title = "Consonance peak at P1 in dissonance trough spanning 1 octave"
 tonic_midi    = 60
 span          = 7.1
 intervals     = seq(from=tonic_midi-span, to=tonic_midi+span, by=2*span/1000)
@@ -80,7 +80,7 @@ At other resolutions, for example stringed instruments without frets,
 the nearest playable neighbors are not dissonant. A slight roll of the finger
 will not throw the audience down into a dissonance trough.
 
-### MaMi.CoDi Resolution Correlates with Dissonance Troughs and Consonance Peaks
+### MaMi.CoDi resolution correlates with dissonance troughs and consonance peaks
 
 As the tolerance value of the MaMi.CoDi model varies from very small to very large
 the consonance peaks expand their width until they overcome the dissonance peaks.
@@ -95,7 +95,7 @@ frequency signals.\
 * Large tolerances
 create less accurate fractions which create shorter period estimates.
 
-#### M3 Major Third
+#### M3 ~ Major Third
 
 Plot of M3 with MaMi.CoDi tolerance values varying from 1e-08 to 0.1:
 ![M3 with a range of MaMi.CoDi tolerance values.](./man/tolerance_search_plots/M3 Orders of Magnitude.png)
@@ -204,7 +204,7 @@ P_M3$ratios_frequency[[1]]
 * [Pythagorean ditone](https://en.wikipedia.org/wiki/Ditone)
 
 
-#### M6 Major Sixth
+#### M6 ~ Major Sixth
 
 Plot of M6 with MaMi.CoDi tolerance values varying from 1e-08 to 0.1:
 ![M6 with a range of MaMi.CoDi tolerance values.](./man/tolerance_search_plots/M6 Orders of Magnitude.png)

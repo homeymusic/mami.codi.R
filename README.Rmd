@@ -1,5 +1,5 @@
 ---
-title: "MaMi.CoDi: a spatiotemporal periodicity model of consonance perception."
+title: "MaMi.CoDi: A Spatiotemporal Periodicity Model of Consonance Perception"
 output:
   github_document: default
 ---
@@ -19,11 +19,11 @@ BEHAVIOURAL_SMOOTH_BROAD  <- 0.2
 BEHAVIOURAL_SMOOTH_NARROW <- 0.035
 ```
 
-# Theoretical Predictions and Large-Scale Behavioral Results
+# Theoretical predictions compared to large-scale behavioral results
 
 The large-scale behavioral data in the plots below are from [Timbral effects on consonance disentangle psychoacoustic mechanisms and suggest perceptual origins for musical scales](https://www.nature.com/articles/s41467-024-45812-z) by Raja Marjieh, Peter M. C. Harrison, Harin Lee, Fotini Deligiannaki & Nori Jacoby.
 
-# Manipulating Harmonic Frequencies
+# Manipulating harmonic frequencies
 
 ```{r, include=F}
 timbre_paper = readRDS('./man/data/timbre_paper.rds')
@@ -72,7 +72,7 @@ p = params %>% purrr::map(\(p) {
   } else if (p$o==2 & p$h==5 & p$s == '5PartialsNo3') {
     timbre = '5PartialsNo3'
     black_vlines  = c(4,5,7,9,12,14)
-    description = '  For 5 harmonics with the 3rd partial deleted, behavioral results and theoretical predictions largely agree. As expected, the m3 peak without the third partial is now lower than the m3 peak with all 5 harmonics while the M3 peak is mostly the same for both sets of harmonics. MaMi.CoDi predicts a peak with minor polatiry just below the tritone that does not exist in the behavioral data. Near M2, the theoretical smoothed curve is relatively lower than the theoretical predictions plotted as points.'
+    description = '  For 5 harmonics with the 3rd partial deleted, behavioral results and theoretical predictions largely agree. As expected, the m3 peak without the third partial is now lower than the m3 peak with all 5 harmonics while the M3 peak is mostly the same for both sets of harmonics. MaMi.CoDi predicts a peak with minor polarity just below the tritone that does not exist in the behavioral data. Near M2, the theoretical smoothed curve is relatively lower than the theoretical predictions plotted as points.'
   } else if (p$o==2 & p$h==1 & p$s == 'Pure') {
     timbre = 'Pure'
     black_vlines  = c(7,12)
@@ -140,10 +140,10 @@ p = params %>% purrr::map(\(p) {
     sigma = BEHAVIOURAL_SMOOTH_NARROW
   }
   if (timbre=='Harmonic') {
-    cat('  \n## Dyads Spanning 15 Semitones\n')
+    cat('  \n## Dyads spanning 15 semitones\n')
   }
   if (timbre=='M3') {
-    cat('  \n## Dyads Spanning 1 Quarter Tone\n')
+    cat('  \n## Dyads spanning 1 quarter tone\n')
   }
   cat("  \n###", title, '\n')
   cat(description)
@@ -183,7 +183,7 @@ p = params %>% purrr::map(\(p) {
 ```{r, child=c('man/M3-M6-P8.Rmd')}
 ```
 
-# Manipulating Harmonic Amplitudes
+# Manipulating harmonic amplitudes
 
 ```{r, include=F}
 timbre_paper = readRDS('./man/data/roll_off_timbre_paper.rds')
@@ -256,7 +256,7 @@ p =params %>% purrr::map(\(p) {
 })
 ```
 
-#### Notes on Plots:
+#### Notes on plots:
 
 In the plots above:
 
