@@ -24,7 +24,7 @@ from the behavioral results? Are there examples at other
 resolutions of a consonance peak in the center of a dissonance trough?\
 
 ```{r, fig.height=8, fig.width=12, echo=F, results='asis', message=F, root.dir='./code'}
-title = "Consonance Peak in Dissonance Troughs at P1"
+title = "Consonance Peak in Dissonance Trough at P1"
 tonic_midi    = 60
 span          = 5
 intervals     = seq(from=tonic_midi-span, to=tonic_midi+span, by=2*span/1000)
