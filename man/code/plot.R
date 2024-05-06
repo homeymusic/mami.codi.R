@@ -236,7 +236,7 @@ plot_semitone_codi <- function(chords, title='', include_line=T, sigma=0.2,
     ggplot2::scale_fill_manual(values=color_values_homey(), guide="none") +
     ggplot2::scale_color_manual(values=color_values_homey(), guide='none') +
     ggplot2::ggtitle(title) +
-    ggplot2::scale_x_continuous(breaks = 0:15,
+    ggplot2::scale_x_continuous(breaks = -15:15,
                                 minor_breaks = c()) +
     ggplot2::ylab('Consonance-Dissonance Z-Score') +
     theme_homey()

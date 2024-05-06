@@ -23,7 +23,49 @@ as MaMi.CoDi predicts? Why are those peaks missing
 from the behavioral results? Are there examples at other
 resolutions of a consonance peak in the center of a dissonance trough?\
 
-TODO: add a plot that matches this text:
+```{r, fig.height=8, fig.width=12, echo=F, results='asis', message=F, root.dir='./code'}
+title = "Dissonance Trough with Centered Consonance Peak at P1"
+tonic_midi    = 60
+span          = 5
+intervals     = seq(from=tonic_midi-span, to=tonic_midi+span, by=2*span/1000)
+index         = seq_along(intervals)
+num_harmonics = 10
+octave_ratio  = 2.0
+roll_off      = 3
+grid = tidyr::expand_grid(
+  index,
+  num_harmonics,
+  octave_ratio,
+  roll_off
+)
+chords = grid %>% purrr::pmap_dfr(\(index, num_harmonics, octave_ratio, roll_off) {
+  spectrum = c(tonic_midi, intervals[index]) %>% hrep::sparse_fr_spectrum(
+    num_harmonics = num_harmonics,
+    octave_ratio  = octave_ratio,
+    roll_off_dB   = roll_off
+  )
+  spectrum %>% mami.codi.R::mami.codi(
+    metadata = list(
+      semitone      = intervals[index] - tonic_midi,
+      num_harmonics = num_harmonics,
+      octave_ratio  = octave_ratio,
+      roll_off      = roll_off
+    ),
+    verbose=TRUE
+  )
+})
+chords <- chords %>% dplyr::rowwise() %>% dplyr::mutate(
+  semitone      = metadata$semitone,
+  num_harmonics = metadata$num_harmonics,
+  octave_ratio  = metadata$octave_ratio,
+  roll_off      = metadata$roll_off
+)
+chords$consonance_dissonance_z = z_scores(chords$consonance_dissonance)
+cat("  \n#####", title, '\n')
+print(plot_semitone_codi(chords, title))
+cat("  \n")
+
+```
 
 Performers of instruments with quantized semitones, 
 like keyboards and fretted strings--especially beginners

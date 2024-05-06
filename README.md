@@ -115,7 +115,9 @@ troughs as MaMi.CoDi predicts? Why are those peaks missing from the
 behavioral results? Are there examples at other resolutions of a
 consonance peak in the center of a dissonance trough?  
 
-TODO: add a plot that matches this text:
+##### Dissonance Trough with Centered Consonance Peak at P1
+
+![](man/figures/README-unnamed-chunk-15-1.png)<!-- -->
 
 Performers of instruments with quantized semitones, like keyboards and
 fretted strings–especially beginners and their audiences–are aware that
