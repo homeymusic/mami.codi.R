@@ -1,0 +1,118 @@
+```{r, echo=F}
+selection = tibble::tibble(
+  search_label  = 'Harmonic',
+  num_harmonics = 10,
+  octave_ratio  = 2.0,
+  roll_off      = 3,
+  scale         = 'macro',
+  sigma         = 0.02
+)
+```
+
+# `r selection$search_label`
+
+```{r, echo=F, message=F, include=F}
+devtools::load_all(".")
+source('../code/plot.R')
+source('../code/utils.R')
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "../figures/smoothing_search/"
+)
+knitr::opts_chunk$set(dev = 'png')
+```
+
+```{r, echo=F}
+search_params = tibble::tibble(
+  search       = c('Pure',
+                   'Stretched','Harmonic','Compressed',
+                   'Bonang','5PartialsNo3',
+                   'M3','M6','P8'),
+  sigma        = selection$sigma,
+  gray_vlines  = c(list(0:15),
+                   list(0:15),list(0:15),list(0:15),
+                   list((12/5)*1:6), list(c(4,5,7,9,12,14)),
+                   list(c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 5/4)-60,4,4.092442)),
+                   list(c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 5/3)-60,8.66952)),
+                   c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 2/1)-60)),
+  black_vlines = c(list(c(2,3,4,5,7,8,9,12)),
+                   list(c(4.2,7.5,9.3,12.78)),list(c(2,3,4,5,7,8,9,12)),list(c(3.8,4.8,11.1,14.5)),
+                   list(c(2.6,4.8,12.0)),list(c(2,3,4,5,7,8,9,12)),
+                   list(c(3.95)),list(c(8.78,8.93)),list(c(11.94, 12.08)))
+)
+params = search_params %>% dplyr::filter(search==selection$search_label)
+```
+
+```{r, echo=F}
+z_scores <- function(x) {
+  sd = sd(x)
+  if (sd == 0) {
+    0
+  }  else {
+    (x-mean(x)) / sd(x) 
+  }
+}
+smoothing_file = './tests/notes/code/smooth_2d_gaussian.cpp'
+if (file.exists(smoothing_file))  {
+  Rcpp::sourceCpp(smoothing_file)
+} else {
+  Rcpp::sourceCpp('../code/smooth_2d_gaussian.cpp')
+}
+smoothed <- function(x,val,sigma=sigma) {
+  y = rep(0.0, times = length(x))
+  smooth_2d_gaussian(
+    data_x   = x,
+    data_y   = y,
+    data_val = val,
+    probe_x  = x,
+    probe_y  = y, 
+    sigma_x  = sigma,
+    sigma_y  = sigma
+  )
+}
+```
+
+```{r, echo=F}
+experiment.rds = paste0('../data/',
+                        selection$search_label,
+                        '.rds')
+
+experiment_raw = readRDS(experiment.rds)$data %>% 
+  dplyr::rename(semitone=interval, 
+                consonance_dissonance_z=rating)
+
+```
+
+```{r, include=F}
+theory.rds = '../data/timbre_paper.rds'
+theory_raw = readRDS(theory.rds) %>% dplyr::rowwise() %>% dplyr::mutate(
+  num_harmonics = metadata$num_harmonics,
+  octave_ratio  = metadata$octave_ratio,
+  roll_off      = metadata$roll_off,
+  scale         = metadata$scale,
+  semitone      = metadata$semitone
+)
+theory_raw %>% dplyr::filter(scale == scale)
+
+theory_raw = theory_raw %>% dplyr::filter(num_harmonics   == selection$num_harmonics &
+                                             octave_ratio == selection$octave_ratio &
+                                             scale        == selection$scale)
+theory_raw$consonance_dissonance_z = z_scores(theory_raw$consonance_dissonance)
+```
+
+```{r, echo=F}
+title = paste(selection$search_label, "~ Smoothing Variation ~ sigma:", selection$sigma)
+cat("  \n###", title, '\n')
+print(knitr::kable(tibble::tibble_row(
+  detected_pseudo_octave  = paste(round(theory_raw$pseudo_octave %>% unique, 2), collapse = ' '),
+  ignore_amplitudes_below = paste(round(theory_raw$min_amplitude %>% unique, 2), collapse = ' '),
+  wavelength_tolerance    = paste(round(theory_raw$tolerance %>% unique, 5), collapse = ' '),
+  frequency_tolerance     = paste(round(theory_raw$tolerance %>% unique, 5) / 2.0, collapse = ' '),
+  smoothing_sigma         = selection$sigma
+)))
+print(plot_semitone_codi_raw(theory_raw=theory_raw, 
+                             experiment_raw=experiment_raw,
+                             sigma=selection$sigma,
+                             title=title))
+```

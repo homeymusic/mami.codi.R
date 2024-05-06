@@ -520,3 +520,43 @@ plot_semitone_behavioral_codi <- function(experiment_raw,
     ggplot2::ylab('Consonance-Dissonance Z-Score') +
     theme_homey()
 }
+
+plot_semitone_codi_raw <- function(theory_raw,
+                                   experiment_raw,
+                                   sigma=0.2,
+                                   black_vlines=c(),
+                                   gray_vlines=c(),
+                                   title='') {
+
+  theory_raw$smoothed.consonance_dissonance = smoothed(theory_raw$semitone,
+                                                       theory_raw$consonance_dissonance_z,
+                                                       sigma)
+
+  experiment_raw$smoothed.consonance_dissonance = smoothed(experiment_raw$semitone,
+                                                           experiment_raw$consonance_dissonance_z,
+                                                           sigma)
+
+  ggplot2::ggplot(theory_raw, ggplot2::aes(x = .data$semitone,
+                                           y = .data$consonance_dissonance_z)) +
+    ggplot2::geom_vline(xintercept = black_vlines, color=colors_homey$highlight) +
+    ggplot2::geom_vline(xintercept = gray_vlines,color=colors_homey$highlight,linetype = 'dotted') +
+    ggplot2::geom_point(shape=21, stroke=NA, size=1,
+                        ggplot2::aes(fill=color_factor_homey(theory_raw,'major_minor'))) +
+    ggplot2::geom_line(data=theory_raw,
+                       ggplot2::aes(x = semitone,
+                                    y = smoothed.consonance_dissonance,
+                                    color=color_factor_homey(theory_raw,'major_minor'),
+                                    group=1), linewidth = 0.65) +
+    ggplot2::geom_line(data=experiment_raw,
+                       color=colors_homey$neutral,
+                       ggplot2::aes(x = semitone,
+                                    y = smoothed.consonance_dissonance,
+                                    group=1), linewidth = 0.65) +
+    ggplot2::scale_fill_manual(values=color_values_homey(), guide="none") +
+    ggplot2::scale_color_manual(values=color_values_homey(), guide='none') +
+    ggplot2::ggtitle(title) +
+    ggplot2::scale_x_continuous(breaks = 0:15,
+                                minor_breaks = c()) +
+    ggplot2::ylab('Consonance-Dissonance Z-Score') +
+    theme_homey()
+}

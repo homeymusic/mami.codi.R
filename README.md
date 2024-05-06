@@ -16,85 +16,152 @@ Jacoby.
 
 ### Harmonic ~ Partials: 10
 
-| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
-|:-----------------------|:------------------------|:---------------------|:--------------------|
-| 2                      | 0.03                    | 0.1                  | 0.05                |
+For 10 harmonics, behavioral results and theoretical predictions agree.
+With the default smoothing parameter from the large-scale behavioral
+study, the smoothed theoretical peaks at M2 and P8 are relatively lower
+than the theoretical predictions plotted as points. In a plot below, we
+temporarily adjust the smoothing parameter to show how the behavioral
+and theoretical curves change.
+
+| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
+| 2                      | 0.03                    | 0.1                  | 0.05                |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->
 
-### 5Partials ~ Partials: 5
+### Harmonic ~ Smoothing Variation ~ Sigma: 0.02
 
-| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
-|:-----------------------|:------------------------|:---------------------|:--------------------|
-| 2                      | 0.03                    | 0.1                  | 0.05                |
+With a smaller smoothing parameter (0.02 versus 0.2), the smoothed peaks
+at M2 and P8 more closely align with the theoretical predictions plotted
+as points. However, for the remaining plots we will continue to use the
+larger smoothing parameter from the large-scale behavioral study.
+
+| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
+| 2                      | 0.03                    | 0.1                  | 0.05                |            0.02 |
 
 ![](man/figures/README-unnamed-chunk-4-2.png)<!-- -->
 
-### 5PartialsNo3 ~ Partials: 5
+### 5Partials ~ Partials: 5
 
-| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
-|:-----------------------|:------------------------|:---------------------|:--------------------|
-| 2                      | 0.03                    | 0.1                  | 0.05                |
+For 5 harmonics, behavioral results and theoretical predictions agree.
+For comparison with the study below with the third partial deleted,
+notice that the m3 peak is only slightly lower than the M3 peak. Near
+M2, the theoretical smoothed curve is relatively lower than the
+theoretical predictions plotted as points.
+
+| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
+| 2                      | 0.03                    | 0.1                  | 0.05                |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-3.png)<!-- -->
 
-### Pure ~ Partials: 1
+### 5PartialsNo3 ~ Partials: 5
 
-| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
-|:-----------------------|:------------------------|:---------------------|:--------------------|
-| 2                      | 0.03                    | 0.1                  | 0.05                |
+For 5 harmonics with the 3rd partial deleted, behavioral results and
+theoretical predictions largely agree. As expected, the m3 peak without
+the third partial is now lower than the m3 peak with all 5 harmonics
+while the M3 peak is mostly the same for both sets of harmonics.
+MaMi.CoDi predicts a peak with minor polatiry just below the tritone
+that does not exist in the behavioral data. Near M2, the theoretical
+smoothed curve is relatively lower than the theoretical predictions
+plotted as points.
+
+| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
+| 2                      | 0.03                    | 0.1                  | 0.05                |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-4.png)<!-- -->
 
-### Stretched ~ Partials: 10
+### Pure ~ Partials: 1
 
-| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
-|:-----------------------|:------------------------|:---------------------|:--------------------|
-| 2.1                    | 0.03                    | 0.1                  | 0.05                |
+For pure tones, the behavioral results and the theoretical predictions
+agree. Only P5 and P8 have pronounced two-sided peaks. The behavioral
+results show more variation in consonance height across the 15 semitones
+than MaMi.CoDi predicts.
+
+| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
+| 2                      | 0.03                    | 0.1                  | 0.05                |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-5.png)<!-- -->
 
-### Compressed ~ Partials: 10
+### Stretched ~ Partials: 10
 
-| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
-|:-----------------------|:------------------------|:---------------------|:--------------------|
-| 1.9                    | 0.03                    | 0.1                  | 0.05                |
+For stretched harmonics, behavioral results and theoretical predictions
+mostly agree. MaMi.CoDi predicts a relatively higher consonance peak
+just above P4 than the behavioral results. MaMi.Codi predicts peaks with
+minor polarity just above m3 and m7 that do not exist in the behavioral
+results. Near M2, the theoretical smoothed curve is relatively lower
+than the theoretical predictions plotted as points.
+
+| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
+| 2.1                    | 0.03                    | 0.1                  | 0.05                |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-6.png)<!-- -->
 
-### Bonang ~ Partials: 4
+### Compressed ~ Partials: 10
 
-| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
-|:-----------------------|:------------------------|:---------------------|:--------------------|
-| 2                      | 0.03                    | 0.1                  | 0.05                |
+For compressed harmonics, the pronounced behavioral peaks mostly agree
+with the theoretical peaks. However, for the behavioral peak between the
+14th and 15th semitones, the MaMi.CoDi model predicts a trough. For some
+of the non-peak dyads there are differences. MaMi.Codi predicts peaks
+with mostly minor polarity just above m2, at m3, just above P4 and
+halfway between M6 and m7 that do not exist in the behavioral results.
+
+| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
+| 1.9                    | 0.03                    | 0.1                  | 0.05                |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-7.png)<!-- -->
+
+### Bonang ~ Partials: 4
+
+For gamalan dyads with a harmonic bass pitch and bonang upper pitch,
+behavioral results and theoretical predictions mostly agree. MaMi.CoDi’s
+predicted peak at P5 is relatively higher than the behavioral results.
+The predicted peak at P4 is shifted slightly lower than the behavioral
+results. MaMi.CoDi predicts a peak between m3 and M3 that does not
+appear in the behavioral results.
+
+| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
+| 2                      | 0.03                    | 0.1                  | 0.05                |             0.2 |
+
+![](man/figures/README-unnamed-chunk-4-8.png)<!-- -->
 
 ## Dyads Spanning 1 Quarter Tone
 
 ### M3 ~ Partials: 10
 
-| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
-|:-----------------------|:------------------------|:---------------------|:--------------------|
-| 2                      | 0.03                    | 3e-04                | 0.00015             |
+Detailed description in the section below.
 
-![](man/figures/README-unnamed-chunk-4-8.png)<!-- -->
-
-### M6 ~ Partials: 10
-
-| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
-|:-----------------------|:------------------------|:---------------------|:--------------------|
-| 2                      | 0.03                    | 3e-04                | 0.00015             |
+| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
+| 2                      | 0.03                    | 3e-04                | 0.00015             |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-4-9.png)<!-- -->
 
-### P8 ~ Partials: 10
+### M6 ~ Partials: 10
 
-| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
-|:-----------------------|:------------------------|:---------------------|:--------------------|
-| 2                      | 0.03                    | 3e-04                | 0.00015             |
+Detailed description in the section below.
+
+| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
+| 2                      | 0.03                    | 3e-04                | 0.00015             |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-4-10.png)<!-- -->
+
+### P8 ~ Partials: 10
+
+Detailed description in the section below.
+
+| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
+| 2                      | 0.03                    | 3e-04                | 0.00015             |           0.035 |
+
+![](man/figures/README-unnamed-chunk-4-11.png)<!-- -->
 
 ### Consonance Peaks in Dissonance Troughs
 
@@ -485,25 +552,25 @@ values.](./man/tolerance_search_plots/P8%20Orders%20of%20Magnitude.png)
 
 ### Harmonic ~ Roll Off: 12
 
-| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
-|:-----------------------|:------------------------|:---------------------|:--------------------|
-| 2                      | 0.03                    | 0.1                  | 0.05                |
+| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
+| 2                      | 0.03                    | 0.1                  | 0.05                |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-9-1.png)<!-- -->
 
 ### Harmonic ~ Roll Off: 7
 
-| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
-|:-----------------------|:------------------------|:---------------------|:--------------------|
-| 2                      | 0.03                    | 0.1                  | 0.05                |
+| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
+| 2                      | 0.03                    | 0.1                  | 0.05                |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-9-2.png)<!-- -->
 
 ### Harmonic ~ Roll Off: 2
 
-| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
-|:-----------------------|:------------------------|:---------------------|:--------------------|
-| 2                      | 0.03                    | 0.1                  | 0.05                |
+| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
+| 2                      | 0.03                    | 0.1                  | 0.05                |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-9-3.png)<!-- -->
 
@@ -522,14 +589,17 @@ In the plots above:
 - The colors represent MaMi.CoDi computational predictions for
   major-minor polarity:
 
-  - Gold is major
-  - Red is neutral
-  - Blue is minor
+- Gold is major
+
+- Red is neutral
+
+- Blue is minor
 
 - The vertical axis is z-scored consonance-dissonance
 
 - The horizontal axis is the width of the dyad from 0 to 15 semitones
 
-  - For example, the data at 4 represents the equal tempered major
-    third, M3
-  - While the data at 8 represents the equal tempered minor sixth, m6
+- For example, the data at 4 represents the equal tempered major third,
+  M3
+
+- While the data at 8 represents the equal tempered minor sixth, m6

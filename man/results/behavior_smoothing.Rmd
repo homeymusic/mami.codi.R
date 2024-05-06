@@ -1,15 +1,6 @@
----
-title: "Smoothing Search"
-output:
-  github_document: default
-always_allow_html: true
----
-
 ```{r, echo=F}
-search_label = 'P8'
-BEHAVIOURAL_SMOOTH_BROAD  <- 0.2
-BEHAVIOURAL_SMOOTH_NARROW <- 0.035
-test_sigma = BEHAVIOURAL_SMOOTH_NARROW
+search_label = 'Harmonic'
+sigma        = 0.02
 ```
 
 # `r search_label`
@@ -32,10 +23,7 @@ search_params = tibble::tibble(
                    'Stretched','Harmonic','Compressed',
                    'Bonang','5PartialsNo3',
                    'M3','M6','P8'),
-  sigma        = c(BEHAVIOURAL_SMOOTH_BROAD,
-                   BEHAVIOURAL_SMOOTH_BROAD,BEHAVIOURAL_SMOOTH_BROAD,BEHAVIOURAL_SMOOTH_BROAD,
-                   BEHAVIOURAL_SMOOTH_BROAD,BEHAVIOURAL_SMOOTH_BROAD,
-                   BEHAVIOURAL_SMOOTH_NARROW,BEHAVIOURAL_SMOOTH_NARROW,BEHAVIOURAL_SMOOTH_NARROW),
+  sigma        = sigma,
   gray_vlines  = c(list(0:15),
                    list(0:15),list(0:15),list(0:15),
                    list((12/5)*1:6), list(c(4,5,7,9,12,14)),
@@ -83,22 +71,6 @@ theory <- theory %>% dplyr::rowwise() %>% dplyr::mutate(
 ) %>% dplyr::group_by(tolerance)
 ```
 
-Tolerances:
-```{r, echo=F}
-tols = theory$tolerance %>% unique
-tols
-```
-
-Number of Harmonics:
-```{r, echo=F}
-theory$num_harmonics %>% unique
-```
-
-Octave Ratios:
-```{r, echo=F}
-theory$octave_ratio %>% unique
-```
-
 ```{r, echo=F}
 z_scores <- function(x) {
   sd = sd(x)
@@ -114,7 +86,7 @@ if (file.exists(smoothing_file))  {
 } else {
   Rcpp::sourceCpp('../code/smooth_2d_gaussian.cpp')
 }
-smoothed <- function(x,val,sigma=BEHAVIOURAL_SMOOTH_BROAD) {
+smoothed <- function(x,val,sigma=sigma) {
   y = rep(0.0, times = length(x))
   smooth_2d_gaussian(
     data_x   = x,
@@ -138,7 +110,7 @@ theory <- theory %>%
 
 ```{r, echo=F}
 cols = 1
-rows = length(tols)
+rows = 1
 ```
 
 ## Behavioral CoDi
@@ -148,7 +120,7 @@ plot_semitone_behavioral_codi(
   experiment_raw=experiment_raw,
   experiment_smooth=experiment_smooth,
   title=paste(search_label),
-  sigma=test_sigma,
+  sigma=sigma,
   gray_vlines  = params$gray_vlines[[1]],
   black_vlines = params$black_vlines[[1]]
 )

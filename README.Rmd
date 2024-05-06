@@ -60,40 +60,51 @@ params = list(
 p = params %>% purrr::map(\(p) {
   gray_vlines = c()
   black_vlines = c()
-  if (p$o<2 & p$s == 'macro') {
-    timbre = 'Compressed'
-    black_vlines  = c(3.8,4.8,11.1,14.5)
-  } else if (p$o>2 & p$s == 'macro') {
-    timbre = 'Stretched'
-    black_vlines  = c(4.2,7.5,9.3,12.78)
+  description = ''
+  if (p$o==2 & p$h==10 & p$s == 'macro') {
+    timbre = 'Harmonic'
+    black_vlines  = c(2,3,4,5,7,8,9,12)
+    description   = '   For 10 harmonics, behavioral results and theoretical predictions agree. With the default smoothing parameter from the large-scale behavioral study, the smoothed theoretical peaks at M2 and P8 are relatively lower than the theoretical predictions plotted as points. In a plot below, we temporarily adjust the smoothing parameter to show how the behavioral and theoretical curves change.'
+  } else if (p$o==2 & p$h==5 & p$s == 'macro') {
+    timbre = '5Partials'
+    black_vlines  = c(3,4,5,7,9,12,14)
+    description = '  For 5 harmonics, behavioral results and theoretical predictions agree. For comparison with the study below with the third partial deleted, notice that the m3 peak is only slightly lower than the M3 peak. Near M2, the theoretical smoothed curve is relatively lower than the theoretical predictions plotted as points.'
+  } else if (p$o==2 & p$h==5 & p$s == '5PartialsNo3') {
+    timbre = '5PartialsNo3'
+    black_vlines  = c(4,5,7,9,12,14)
+    description = '  For 5 harmonics with the 3rd partial deleted, behavioral results and theoretical predictions largely agree. As expected, the m3 peak without the third partial is now lower than the m3 peak with all 5 harmonics while the M3 peak is mostly the same for both sets of harmonics. MaMi.CoDi predicts a peak with minor polatiry just below the tritone that does not exist in the behavioral data. Near M2, the theoretical smoothed curve is relatively lower than the theoretical predictions plotted as points.'
   } else if (p$o==2 & p$h==1 & p$s == 'Pure') {
     timbre = 'Pure'
     black_vlines  = c(7,12)
+    description = '  For pure tones, the behavioral results and the theoretical predictions agree. Only P5 and P8 have pronounced two-sided peaks. The behavioral results show more variation in consonance height across the 15 semitones than MaMi.CoDi predicts.'
+  } else if (p$o>2 & p$s == 'macro') {
+    timbre = 'Stretched'
+    black_vlines  = c(4.2,7.5,9.3,12.78)
+    description = '  For stretched harmonics, behavioral results and theoretical predictions mostly agree. MaMi.CoDi predicts a relatively higher consonance peak just above P4 than the behavioral results. MaMi.Codi predicts peaks with minor polarity just above m3 and m7 that do not exist in the behavioral results. Near M2, the theoretical smoothed curve is relatively lower than the theoretical predictions plotted as points.'
+  } else if (p$o<2 & p$s == 'macro') {
+    timbre = 'Compressed'
+    black_vlines  = c(3.8,4.8,11.1,14.5)
+    description = '  For compressed harmonics, the pronounced behavioral peaks mostly agree with the theoretical peaks. However, for the behavioral peak between the 14th and 15th semitones, the MaMi.CoDi model predicts a trough. For some of the non-peak dyads there are differences. MaMi.Codi predicts peaks with mostly minor polarity just above m2, at m3, just above P4 and halfway between M6 and m7 that do not exist in the behavioral results.'
   } else if (p$s == 'Bonang') {
     timbre = 'Bonang'
     black_vlines = c(2.60, 4.80, 11.98)
     gray_vlines  = c(7.2, 9.6)
-  } else if (p$o==2 & p$h==5 & p$s == '5PartialsNo3') {
-    timbre = '5PartialsNo3'
-    black_vlines  = c(4,5,7,9,12,14)
-  } else if (p$o==2 & p$h==5 & p$s == 'macro') {
-    timbre = '5Partials'
-    black_vlines  = c(3,4,5,7,9,12,14)
-  } else if (p$o==2 & p$h==10 & p$s == 'macro') {
-    timbre = 'Harmonic'
-    black_vlines  = c(2,3,4,5,7,8,9,12)
+    description = "  For gamalan dyads with a harmonic bass pitch and bonang upper pitch, behavioral results and theoretical predictions mostly agree. MaMi.CoDi's predicted peak at P5 is relatively higher than the behavioral results. The predicted peak at P4 is shifted slightly lower than the behavioral results. MaMi.CoDi predicts a peak between m3 and M3 that does not appear in the behavioral results."
   } else if (p$s == 'M3') {
     timbre = 'M3'
     gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 5/4)-60,4,4.092442)
     black_vlines  = c(3.95)
+    description = '  Detailed description in the section below.'
   } else if (p$s == 'M6') {
     timbre = 'M6'
     gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 5/3)-60,9,8.66952)
     black_vlines  = c(8.78,8.93)
+    description = '  Detailed description in the section below.'
   } else if (p$s == 'P8') {
     timbre = 'P8'
     gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 2/1)-60)
     black_vlines  = c(11.94, 12.08)
+    description = '  Detailed description in the section below.'
   }
   title = paste(
     timbre,
@@ -110,34 +121,62 @@ p = params %>% purrr::map(\(p) {
                           timbre,
                           '.rds')
   
-  experiment = readRDS(experiment.rds)$profile %>%
+  experiment_all = readRDS(experiment.rds)
+  
+  experiment = experiment_all$profile %>%
     dplyr::rename(semitone=interval)
   
   experiment <- experiment %>% dplyr::mutate(
     consonance_dissonance = rating
   )
+  
+  experiment_raw = experiment_all$data %>% 
+    dplyr::rename(semitone=interval, 
+                  consonance_dissonance_z=rating)
+  
   if (p$s == 'macro' | p$s == 'Bonang' | p$s == '5PartialsNo3' | p$s == 'Pure') {
     sigma = BEHAVIOURAL_SMOOTH_BROAD
   } else {
     sigma = BEHAVIOURAL_SMOOTH_NARROW
   }
   if (timbre=='Harmonic') {
-  cat('  \n## Dyads Spanning 15 Semitones\n')
+    cat('  \n## Dyads Spanning 15 Semitones\n')
   }
   if (timbre=='M3') {
-  cat('  \n## Dyads Spanning 1 Quarter Tone\n')
+    cat('  \n## Dyads Spanning 1 Quarter Tone\n')
   }
   cat("  \n###", title, '\n')
+  cat(description)
   print(knitr::kable(tibble::tibble_row(
     detected_pseudo_octave  = paste(round(chords$pseudo_octave %>% unique, 2), collapse = ' '),
     ignore_amplitudes_below = paste(round(chords$min_amplitude %>% unique, 2), collapse = ' '),
     wavelength_tolerance    = paste(round(chords$tolerance %>% unique, 5), collapse = ' '),
-    frequency_tolerance     = paste(round(chords$tolerance %>% unique, 5) / 2.0, collapse = ' ')
+    frequency_tolerance     = paste(round(chords$tolerance %>% unique, 5) / 2.0, collapse = ' '),
+    smoothing_sigma         = sigma
   )))
   print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),
                            goal=experiment,sigma=sigma,
                            black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")
+  if (timbre=='Harmonic') {
+    sigma_variation = sigma / 10
+    title = paste(timbre, "~ Smoothing Variation ~ Sigma:", sigma_variation)
+    cat("  \n###", title, '\n')
+    cat(paste0("   With a smaller smoothing parameter (",sigma_variation," versus ", sigma, "), the smoothed peaks at M2 and P8 more closely align with the theoretical predictions plotted as points. However, for the remaining plots we will continue to use the larger smoothing parameter from the large-scale behavioral study."))
+    print(knitr::kable(tibble::tibble_row(
+      detected_pseudo_octave  = paste(round(chords$pseudo_octave %>% unique, 2), collapse = ' '),
+      ignore_amplitudes_below = paste(round(chords$min_amplitude %>% unique, 2), collapse = ' '),
+      wavelength_tolerance    = paste(round(chords$tolerance %>% unique, 5), collapse = ' '),
+      frequency_tolerance     = paste(round(chords$tolerance %>% unique, 5) / 2.0, collapse = ' '),
+      smoothing_sigma         = sigma_variation
+    )))
+    print(plot_semitone_codi_raw(theory_raw=chords,
+                                 experiment_raw=experiment_raw,
+                                 sigma=sigma_variation,
+                                 black_vlines = black_vlines,
+                                 title=title))
+    cat("  \n")
+  }
 })
 ```
 
@@ -207,7 +246,8 @@ p =params %>% purrr::map(\(p) {
     detected_pseudo_octave  = paste(round(chords$pseudo_octave %>% unique, 2), collapse = ' '),
     ignore_amplitudes_below = paste(round(chords$min_amplitude %>% unique, 2), collapse = ' '),
     wavelength_tolerance    = paste(round(chords$tolerance %>% unique, 5), collapse = ' '),
-    frequency_tolerance     = paste(round(chords$tolerance %>% unique, 5) / 2.0, collapse = ' ')
+    frequency_tolerance     = paste(round(chords$tolerance %>% unique, 5) / 2.0, collapse = ' '),
+    smoothing_sigma         = sigma
   )))
   print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),
                            goal=experiment,sigma=sigma,
@@ -227,12 +267,12 @@ In the plots above:
 * The multi-colored lines are smoothed MaMi.CoDi computational predictions
 
 * The colors represent MaMi.CoDi computational predictions for major-minor polarity:
-    * Gold is major
-    * Red is neutral
-    * Blue is minor
+* Gold is major
+* Red is neutral
+* Blue is minor
 
 * The vertical axis is z-scored consonance-dissonance
 
 * The horizontal axis is the width of the dyad from 0 to 15 semitones
-    * For example, the data at 4 represents the equal tempered major third, M3
-    * While the data at 8 represents the equal tempered minor sixth, m6
+* For example, the data at 4 represents the equal tempered major third, M3
+* While the data at 8 represents the equal tempered minor sixth, m6
