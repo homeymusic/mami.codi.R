@@ -1,13 +1,16 @@
 search_label = 'P8'
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
-  from_tol     = 0.001 / 10
-  to_tol       = 0.001 * 10
-  by_tol       = 0.001
+  from_tol     = 0.00001
+  by_tol       = 0.00001
+  to_tol       = 0.001
+  tolerances   = 10^-(1:10)
 } else {
   from_tol     = 0.1
   to_tol       = 0.4
   by_tol       = 0.01
+  tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
 }
+
 tonic_midi   = 60
 
 source('./utils.R')
@@ -52,8 +55,6 @@ behavior = readRDS(behavior.rds)
 
 intervals = tonic_midi + behavior$profile$interval
 index = seq_along(intervals)
-
-tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
 
 grid = tidyr::expand_grid(
   index,
