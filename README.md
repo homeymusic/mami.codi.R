@@ -76,7 +76,7 @@ Jacoby.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
 |:-----------------------|:------------------------|:---------------------|:--------------------|
-| 2                      | 0.03                    | 0.001                | 5e-04               |
+| 2                      | 0.03                    | 2e-04                | 1e-04               |
 
 ![](man/figures/README-unnamed-chunk-4-8.png)<!-- -->
 
@@ -84,7 +84,7 @@ Jacoby.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
 |:-----------------------|:------------------------|:---------------------|:--------------------|
-| 2                      | 0.03                    | 0.001                | 5e-04               |
+| 2                      | 0.03                    | 2e-04                | 1e-04               |
 
 ![](man/figures/README-unnamed-chunk-4-9.png)<!-- -->
 
@@ -92,7 +92,7 @@ Jacoby.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
 |:-----------------------|:------------------------|:---------------------|:--------------------|
-| 2                      | 0.03                    | 0.001                | 5e-04               |
+| 2                      | 0.03                    | 2e-04                | 1e-04               |
 
 ![](man/figures/README-unnamed-chunk-4-10.png)<!-- -->
 
@@ -102,12 +102,13 @@ For the high-resolution dyads centered on M3, M6 and P8, the large-scale
 behavioral results and the MaMi.CoDi theoretical predictions both show
 dissonance troughs centered on the JT dyads.  
 
-MaMi.CoDi, though, predicts a local maximum consonance at a JT dyad in
-the center of each dissonance trough. Secondary maximums occur at the
-Pythagorean third and grave major sixth. Those secondary peaks are also
-surrounded by dissonance troughs. Those secondary dissonance troughs
-pull the curve down forming the shapes we see for both the theoretical
-predictions and the behavioral results for M3 and M6.  
+MaMi.CoDi, though, predicts a local maximum consonance at the JT dyad
+(M3, M6 and P8) in the center of each dissonance trough. Secondary
+maximums occur at the Pythagorean third and grave major sixth. Those
+secondary peaks are also surrounded by dissonance troughs. Those
+secondary dissonance troughs pull the curve down forming the shapes we
+see for both the theoretical predictions and the behavioral results for
+M3 and M6.  
 
 Do consonance peaks actually exist in the center of those dissonance
 troughs as MaMi.CoDi predicts? Why are those peaks missing from the
@@ -121,15 +122,17 @@ consonant tonic peak at the unison interval (P1). Dissonance decreases
 with each semitone step away from the tonic until we reach the perfect
 fifth below (P5) and the perfect fourth above (P4).  
 
-That is to say, at the resolution of 11 semitones the tonic pitch is a
+That is to say, at the resolution of 11 semitones, the tonic pitch is a
 consonance peak in the center of a dissonance trough.  
-
-TODO: include plot of the -5:5 at semitone resolution.
 
 The MaMi.CoDi model predicts consonance peaks in the center of
 dissonance troughs at both of those scales of resolution.  
 
 #### M3 Major Third
+
+Plot of M3 with MaMi.CoDi tolerance values varying from 1e-08 to 0.1:
+![M3 with a range of MaMi.CoDi tolerance
+values.](./man/tolerance_search_plots/M3%20Orders%20of%20Magnitude.png)
 
 - JT: 5/4
 - ET: 2^(4/12)
@@ -291,6 +294,10 @@ Consonance:
 
 #### M6 Major Sixth
 
+Plot of M6 with MaMi.CoDi tolerance values varying from 1e-08 to 0.1:
+![M6 with a range of MaMi.CoDi tolerance
+values.](./man/tolerance_search_plots/M6%20Orders%20of%20Magnitude.png)
+
 - JT: 5/3
 - ET: 2^(9/12)
 
@@ -451,9 +458,9 @@ Consonance:
 
 #### P8 Octave
 
-Where is the consonance peak at P8? The experiment does not include the
-perfect 8th at 12.0. The two closest semitones are 11.99700 and
-12.01201.
+Plot of P8 with MaMi.CoDi tolerance values varying from 1e-08 to 0.1:
+![P8 with a range of MaMi.CoDi tolerance
+values.](./man/tolerance_search_plots/P8%20Orders%20of%20Magnitude.png)
 
 # Manipulating Harmonic Amplitudes
 

@@ -160,9 +160,9 @@ format_output <- function(x, metadata, verbose) {
 
 lcm <- function(x) Reduce(numbers::LCM, x)
 
-TOLERANCE = 0.1
-
-ZOOMED_TOLERANCE = 0.0002
+TOLERANCE      = 0.1
+M3M6_TOLERANCE = 0.0002
+P8_TOLERANCE   = 0.00001
 
 MIN_AMPLITUDE  = 0.03
 
@@ -188,8 +188,10 @@ R_PI_4         = matrix(c(
 default_tolerance <- function(scale) {
   if (scale == 'macro') {
     TOLERANCE
-  } else if (scale == 'zoomed') {
-    ZOOMED_TOLERANCE
+  } else if (scale == 'M3M6') {
+    M3M6_TOLERANCE
+  } else if (scale == 'P8') {
+    P8_TOLERANCE
   } else {
     stop("no default tolerance for selection")
   }

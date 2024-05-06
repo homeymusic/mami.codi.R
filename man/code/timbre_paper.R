@@ -152,8 +152,10 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
     )
   }
 
-  if (scale=='M3' || scale=='M6' || scale=='P8') {
-    tolerance  = mami.codi.R::default_tolerance('zoomed')
+  if (scale=='M3' || scale=='M6') {
+    tolerance  = mami.codi.R::default_tolerance('M3M6')
+  } else if (scale=='P8') {
+    tolerance  = mami.codi.R::default_tolerance('P8')
   } else {
     tolerance  = mami.codi.R::default_tolerance('macro')
   }
