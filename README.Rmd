@@ -76,7 +76,7 @@ p = params %>% purrr::map(\(p) {
   } else if (p$o==2 & p$h==1 & p$s == 'Pure') {
     timbre = 'Pure'
     black_vlines  = c(7,12)
-    description = '  For pure tones, the behavioral results and the theoretical predictions agree. Only P5 and P8 have pronounced two-sided peaks. The behavioral results show more variation in consonance height across the 15 semitones than MaMi.CoDi predicts.'
+    description = '  For pure tones, the behavioral results and the theoretical predictions agree. Only P5 and P8 have pronounced two-sided peaks. The behavioral results show subtle variations in consonance height across the 15 semitones but the overall shape agrees with MaMi.CoDi predictions.'
   } else if (p$o>2 & p$s == 'macro') {
     timbre = 'Stretched'
     black_vlines  = c(4.2,7.5,9.3,12.78)

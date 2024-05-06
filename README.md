@@ -77,8 +77,8 @@ plotted as points.
 
 For pure tones, the behavioral results and the theoretical predictions
 agree. Only P5 and P8 have pronounced two-sided peaks. The behavioral
-results show more variation in consonance height across the 15 semitones
-than MaMi.CoDi predicts.
+results show subtle variations in consonance height across the 15
+semitones but the overall shape agrees with MaMi.CoDi predictions.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|

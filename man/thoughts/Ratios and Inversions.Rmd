@@ -1,0 +1,42 @@
+# Why is MaMi.CoDi's wavelength tolerance twice the frequency tolerance?\
+
+Is it related to the octave complement formula?\
+
+Octave-complement intervals represented as ratios r follow the relation r1 r2 = 2. For given r the unknown x can be calculated by the formula x := 2/r or (for the ratio representation r = a/b) into x := 2 (b / a).\
+
+The result sometimes has to be reduced by the factor 2.\
+
+Examples\
+5/4 vs. 2*4/5 = 8/5\
+4/3 vs. 2*3/4 = 6/4 = 3/2\
+
+from [Xenharmonic Wiki](https://en.xen.wiki/w/Octave_complement)\
+
+# The wavelength and frequency ratio
+
+l = s / f\
+ 
+where l is wavelength, f is frequency and s is the speed of sound.\
+
+but what about ratios?\
+
+f_64 / f_60
+
+```{r, echo=F, results='asis', message=F}
+devtools::load_all(".")
+t = tibble::tibble(
+  f_64                 = hrep::midi_to_freq(64),
+  l_64                 = SPEED_OF_SOUND / f_64,
+  f_60                 = hrep::midi_to_freq(60),
+  l_60                 = SPEED_OF_SOUND / f_60,
+  major_third_fr       = f_64  / f_60,
+  major_third_fr_fract = list(rational_fraction(t$major_third_fr, default_tolerance('macro'))),
+  major_third_lr       = l_64  / l_60,
+  major_third_fr_inv   = 1  / major_third_fr,
+  major_third_lr_inv   = 1  / major_third_lr,
+  
+)
+t$major_third_fr
+t$major_third_fr_fract[[1]][1]
+t$major_third_fr_fract[[1]][2]
+```
