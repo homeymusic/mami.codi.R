@@ -115,7 +115,7 @@ troughs as MaMi.CoDi predicts? Why are those peaks missing from the
 behavioral results? Are there examples at other resolutions of a
 consonance peak in the center of a dissonance trough?  
 
-##### Consonance Peak in Dissonance Troughs at P1
+##### Consonance Peak in Dissonance Trough at P1
 
 ![](man/figures/README-unnamed-chunk-15-1.png)<!-- -->
 
