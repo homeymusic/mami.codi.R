@@ -40,7 +40,7 @@ just_M3 %>% dplyr::select('semitone', 'consonance_dissonance')
 ##### Frequency ratios of the JT M3
 
 ```{r, echo=F}
-just_M3$ratios_frequency[[1]]
+just_M3$frequency_ratios[[1]]
 ```
 
 ### Intervals near the major third ranked by lowest consonance
@@ -66,7 +66,7 @@ dissonant_M3 %>% dplyr::select('semitone', 'consonance_dissonance')
 ##### The lowest consonance ratios
 
 ```{r, echo=F}
-dissonant_M3$ratios_frequency[[1]]
+dissonant_M3$frequency_ratios[[1]]
 ```
 
 #### The Pythagorean third is the second highest consonance
@@ -95,7 +95,7 @@ P_M3 %>% dplyr::select('semitone', 'consonance_dissonance')
 ##### Frequency ratios of the second highest consonance
 
 ```{r, echo=F}
-P_M3$ratios_frequency[[1]]
+P_M3$frequency_ratios[[1]]
 ```
 
 ###### References for the Pythagorean third

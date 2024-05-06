@@ -22,21 +22,21 @@ chord %>% dplyr::select(consonance_dissonance, major_minor)
 #### Frequency
 
 ```{r, echo=F}
-chord$ratios_frequency[[1]] %>% dplyr::rename(freq=tone) %>% dplyr::arrange(freq)
+chord$frequency_ratios[[1]] %>% dplyr::rename(freq=tone) %>% dplyr::arrange(freq)
 ```
 
 ```{r, echo=F}
-sort(unique(chord$ratios_frequency[[1]]$den))
-lcm(chord$ratios_frequency[[1]]$den)
+sort(unique(chord$frequency_ratios[[1]]$den))
+lcm(chord$frequency_ratios[[1]]$den)
 ```
 
 #### Wavelength
  
 ```{r, echo=F}
-chord$ratios_wavelength[[1]] %>% dplyr::rename(wavelength=tone) %>% dplyr::arrange(wavelength)
+chord$wavelength_ratios[[1]] %>% dplyr::rename(wavelength=tone) %>% dplyr::arrange(wavelength)
 ```
 
 ```{r, echo=F}
-sort(unique(chord$ratios_wavelength[[1]]$den))
-lcm(chord$ratios_wavelength[[1]]$den)
+sort(unique(chord$wavelength_ratios[[1]]$den))
+lcm(chord$wavelength_ratios[[1]]$den)
 ```

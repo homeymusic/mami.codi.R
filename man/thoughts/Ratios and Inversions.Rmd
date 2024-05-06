@@ -15,7 +15,7 @@ from [Xenharmonic Wiki](https://en.xen.wiki/w/Octave_complement)\
 # The wavelength and frequency ratio
 
 l = s / f\
- 
+
 where l is wavelength, f is frequency and s is the speed of sound.\
 
 but what about ratios?\
@@ -24,19 +24,35 @@ f_64 / f_60
 
 ```{r, echo=F, results='asis', message=F}
 devtools::load_all(".")
-t = tibble::tibble(
-  f_64                 = hrep::midi_to_freq(64),
-  l_64                 = SPEED_OF_SOUND / f_64,
-  f_60                 = hrep::midi_to_freq(60),
-  l_60                 = SPEED_OF_SOUND / f_60,
-  major_third_fr       = f_64  / f_60,
-  major_third_fr_fract = list(rational_fraction(t$major_third_fr, default_tolerance('macro'))),
-  major_third_lr       = l_64  / l_60,
-  major_third_fr_inv   = 1  / major_third_fr,
-  major_third_lr_inv   = 1  / major_third_lr,
-  
-)
-t$major_third_fr
-t$major_third_fr_fract[[1]][1]
-t$major_third_fr_fract[[1]][2]
+f_60                 = hrep::midi_to_freq(60)
+f_64                 = hrep::midi_to_freq(64)
+l_60                 = SPEED_OF_SOUND / f_60
+l_64                 = SPEED_OF_SOUND / f_64
+```
+
+```{r, echo=T, results='asis', message=F}
+M3_lr =  l_64 / l_60
+M3_lr
+```
+```{r, echo=T, results='asis', message=F}
+M3_lr_frac = rational_fraction(M3_lr, TOLERANCE)
+M3_lr_frac
+```
+```{r, echo=T, results='asis', message=F}
+M3_fr =  f_64 / f_60
+M3_fr
+```
+```{r, echo=T, results='asis', message=F}
+M3_fr_frac = rational_fraction(M3_fr, TOLERANCE/2)
+M3_fr_frac
+```
+```{r, echo=T, results='asis', message=F}
+M3 = c(60,67) %>% mami.codi(num_harmonics=10, verbose=T)
+M3
+```
+```{r, echo=T, results='asis', message=F}
+M3$frequency_lcm
+```
+```{r, echo=T, results='asis', message=F}
+M3$wavelength_lcm
 ```

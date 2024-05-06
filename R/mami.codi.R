@@ -91,13 +91,13 @@ estimate_cycles <- function(x, tolerance) {
     estimate_cycle(f,
                    x$pseudo_octave,
                    tolerance / 2.0) %>%
-      dplyr::rename_with(~ paste0(.,'_frequency')),
+      dplyr::rename_with(~ paste0('frequency_',.)),
 
     # estimate the wavelength cycle
     estimate_cycle(λ,
                    x$pseudo_octave,
                    tolerance) %>%
-      dplyr::rename_with(~ paste0(.,'_wavelength')),
+      dplyr::rename_with(~ paste0('wavelength_',.)),
 
     tolerance,
 
@@ -131,8 +131,8 @@ flip <- function(x) {
 rotate <- function(x) {
   browser
   rotated = (R_PI_4 %*% matrix(c(
-    x$consonance_wavelength,
-    x$consonance_frequency
+    x$wavelength_consonance,
+    x$frequency_consonance
   ))) %>% as.vector %>% zapsmall
 
   x %>% dplyr::mutate(
