@@ -1,4 +1,4 @@
-### Additional Data for Dyads Spanning 1 Quarter Tone
+### Dissonance Troughs with Centered Consonance Peaks
 
 For the high-resolution dyads centered on 
 M3, M6 and P8, the large-scale behavioral 
@@ -9,13 +9,13 @@ centered on the JT dyads.\
 MaMi.CoDi, though, predicts a local maximum 
 consonance at the JT dyad (M3, M6 and P8) in the center of each 
 dissonance trough. Secondary 
-maximums occur at the Pythagorean third and
-grave major sixth. Those secondary peaks
+maximums occur at the Pythagorean third and grave major sixth. 
+Those secondary peaks
 are also surrounded by dissonance troughs.
-Those secondary dissonance troughs pull 
-the curve down forming the shapes we see for both 
-the theoretical predictions and the behavioral results
-for M3 and M6.\
+There are also tertiary troughs near the ET intervals.
+Those secondary and tertiary dissonance troughs pull 
+the curves down forming the shapes we see for both 
+the theoretical predictions for M3 and M6.\
 
 Do consonance peaks actually exist in the
 center of those dissonance troughs
@@ -71,11 +71,11 @@ Performers of instruments with quantized semitones,
 like keyboards and fretted strings--especially beginners
 and their audiences--are aware that the globally maximum
 consonant peak at the unison interval, P1, has
-highly dissonant interval neighbors on both sides, M7 and m2.
+highly dissonant neighbors on both sides, M7 and m2.
 Dissonance decreases with each semitone step away from M7 and m2 until 
 the perfect fifth, P5, below and the perfect fourth, P4, above.\
 
-That is to say, at the resolution of 11 semitones,
+That is to say, at the resolution of 10 semitones,
 the tonic pitch is a consonance peak 
 in the center of a dissonance trough.\
 

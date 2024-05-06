@@ -92,11 +92,11 @@ Jacoby.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance |
 |:-----------------------|:------------------------|:---------------------|:--------------------|
-| 2                      | 0.03                    | 1e-05                | 5e-06               |
+| 2                      | 0.03                    | 3e-04                | 0.00015             |
 
 ![](man/figures/README-unnamed-chunk-4-10.png)<!-- -->
 
-### Additional Data for Dyads Spanning 1 Quarter Tone
+### Dissonance Troughs with Centered Consonance Peaks
 
 For the high-resolution dyads centered on M3, M6 and P8, the large-scale
 behavioral results and the MaMi.CoDi theoretical predictions both show
@@ -105,10 +105,10 @@ dissonance troughs centered on the JT dyads.
 MaMi.CoDi, though, predicts a local maximum consonance at the JT dyad
 (M3, M6 and P8) in the center of each dissonance trough. Secondary
 maximums occur at the Pythagorean third and grave major sixth. Those
-secondary peaks are also surrounded by dissonance troughs. Those
-secondary dissonance troughs pull the curve down forming the shapes we
-see for both the theoretical predictions and the behavioral results for
-M3 and M6.  
+secondary peaks are also surrounded by dissonance troughs. There are
+also tertiary troughs near the ET intervals. Those secondary and
+tertiary dissonance troughs pull the curves down forming the shapes we
+see for both the theoretical predictions for M3 and M6.  
 
 Do consonance peaks actually exist in the center of those dissonance
 troughs as MaMi.CoDi predicts? Why are those peaks missing from the
@@ -122,11 +122,11 @@ consonance peak in the center of a dissonance trough?
 Performers of instruments with quantized semitones, like keyboards and
 fretted strings–especially beginners and their audiences–are aware that
 the globally maximum consonant peak at the unison interval, P1, has
-highly dissonant interval neighbors on both sides, M7 and m2. Dissonance
+highly dissonant neighbors on both sides, M7 and m2. Dissonance
 decreases with each semitone step away from M7 and m2 until the perfect
 fifth, P5, below and the perfect fourth, P4, above.  
 
-That is to say, at the resolution of 11 semitones, the tonic pitch is a
+That is to say, at the resolution of 10 semitones, the tonic pitch is a
 consonance peak in the center of a dissonance trough.  
 
 As the tolerance value of the MaMi.CoDi model increases the consonance
