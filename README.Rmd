@@ -94,17 +94,17 @@ p = params %>% purrr::map(\(p) {
     timbre = 'M3'
     gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 5/4)-60,4,4.092442)
     black_vlines  = c(3.95)
-    description = '  Detailed description in the section below.'
+    description = '  Description is below.'
   } else if (p$s == 'M6') {
     timbre = 'M6'
     gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 5/3)-60,9,8.66952)
     black_vlines  = c(8.78,8.93)
-    description = '  Detailed description in the section below.'
+    description = '  Description is below.'
   } else if (p$s == 'P8') {
     timbre = 'P8'
     gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 2/1)-60)
     black_vlines  = c(11.94, 12.08)
-    description = '  Detailed description in the section below.'
+    description = '  Description is below.'
   }
   title = paste(
     timbre,

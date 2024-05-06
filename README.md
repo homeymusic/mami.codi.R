@@ -135,7 +135,7 @@ appear in the behavioral results.
 
 ### M3 ~ Partials: 10
 
-Detailed description in the section below.
+Description is below.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
@@ -145,7 +145,7 @@ Detailed description in the section below.
 
 ### M6 ~ Partials: 10
 
-Detailed description in the section below.
+Description is below.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
@@ -155,7 +155,7 @@ Detailed description in the section below.
 
 ### P8 ~ Partials: 10
 
-Detailed description in the section below.
+Description is below.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
@@ -169,11 +169,12 @@ For the high-resolution dyads centered on M3, M6 and P8, the large-scale
 behavioral results and the MaMi.CoDi theoretical predictions both show
 dissonance troughs centered on the JT dyads.  
 
-MaMi.CoDi, though, predicts a local maximum consonance at the JT dyad
-(M3, M6 and P8) in the center of each dissonance trough. Secondary
-maximums occur at the Pythagorean third and grave major sixth. Those
-secondary peaks are also surrounded by dissonance troughs. There are
-also tertiary troughs near the ET intervals.
+MaMi.CoDi, though, predicts a local maximum consonance peak at the
+center of each dissonance trough.  
+
+Secondary maximums occur at the Pythagorean third and grave major sixth.
+Those secondary peaks are also surrounded by dissonance troughs. There
+are also tertiary troughs near the ET intervals.  
 
 Do consonance peaks actually exist in the center of those dissonance
 troughs as MaMi.CoDi predicts? Why are those peaks missing from the
@@ -192,7 +193,7 @@ Dissonance decreases with each semitone step away from M7 and m2 until
 the perfect fifth, P5, above and the perfect fourth, P4, below  
 
 That is to say, at the resolution of an octave, the tonic pitch is the
-maximum consonance peak in the center of a deep dissonance trough.  
+maximum consonance peak in the center of a dissonance trough.  
 
 At other resolutions, for example stringed instruments without frets,
 the nearest playable neighbors are not dissonant. A slight roll of the

@@ -7,12 +7,13 @@ predictions both show dissonance troughs
 centered on the JT dyads.\
 
 MaMi.CoDi, though, predicts a local maximum 
-consonance at the JT dyad (M3, M6 and P8) in the center of each 
-dissonance trough. Secondary 
-maximums occur at the Pythagorean third and grave major sixth. 
+consonance peak at the center of each 
+dissonance trough.\
+
+Secondary maximums occur at the Pythagorean third and grave major sixth. 
 Those secondary peaks
 are also surrounded by dissonance troughs.
-There are also tertiary troughs near the ET intervals.
+There are also tertiary troughs near the ET intervals.\
 
 Do consonance peaks actually exist in the
 center of those dissonance troughs
@@ -74,7 +75,7 @@ the perfect fifth, P5, above and the perfect fourth, P4, below\
 
 That is to say, at the resolution of an octave,
 the tonic pitch is the maximum consonance peak 
-in the center of a deep dissonance trough.\
+in the center of a dissonance trough.\
 
 At other resolutions, for example stringed instruments without frets, 
 the nearest playable neighbors are not dissonant. A slight roll of the finger
@@ -83,17 +84,16 @@ will not throw the audience down into a dissonance trough.
 ### MaMi.CoDi resolution correlates with dissonance troughs and consonance peaks
 
 As the tolerance value of the MaMi.CoDi model varies from very small to very large
-the consonance peaks expand their width until they overcome the dissonance peaks.
+the consonance peaks expand their width until they overcome the dissonance troughs.
 See plot sets, below, for M3, M6 and P8.\
 
 MaMi.CoDi's tolerance value is the only parameter in the model and indicates
 the resolution for turning irrational ratios into rational fractions.
-Those fractions are then used to estimate the periodicity of the wavelength and 
-frequency signals.\
+Those fractions are then used to estimate wavelength periodicity and 
+frequency periodicity.\
 
-* Small tolerances create more accurate fractions which create longer period estimates. 
-* Large tolerances
-create less accurate fractions which create shorter period estimates.
+* Small tolerances give more accurate fractions which give longer periods.
+* Large tolerances give less accurate fractions which give shorter period estimates.
 
 #### M3 ~ Major Third
 
