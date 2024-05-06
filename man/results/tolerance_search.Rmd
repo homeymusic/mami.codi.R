@@ -6,7 +6,7 @@ always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'P8'
+search_label = 'M3'
 ```
 
 # `r search_label`
