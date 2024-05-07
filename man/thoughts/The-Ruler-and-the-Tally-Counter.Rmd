@@ -1,0 +1,13 @@
+# The Ruler and the Tally Counter
+
+```{r, echo=F, results='asis', message=F}
+devtools::load_all(".")
+analogies = tibble::tibble(
+  Ruler = c('ruled straightedge','meters'),
+  Wavelengths = c('tonotopic hair cells', 'meters'),
+  Tally = c('paired with timer', 'hertz'),
+  Frequencies = c('paired with chopper','hertz')
+)
+knitr::kable(analogies)
+```
+
