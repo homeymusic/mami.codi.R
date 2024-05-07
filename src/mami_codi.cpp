@@ -69,7 +69,8 @@ using namespace Rcpp;
  // [[Rcpp::export]]
  DataFrame ratios(NumericVector x,
                   const double pseudo_octave,
-                  const double tolerance) {
+                  const double tolerance,
+                  const double factor) {
 
    const int    m = x.size();
    const double reference_tone = min(x);
@@ -84,7 +85,7 @@ using namespace Rcpp;
    NumericVector reference_tones(m);
 
    for (int i = 0; i < m; ++i) {
-     ratios[i]          = x[i] / reference_tone;
+     ratios[i]          = x[i] / reference_tone / factor;
      pseudo_ratios[i]   = pow(2.0, log(ratios[i]) / log(pseudo_octave));
      fraction           = rational_fraction(pseudo_ratios[i], pseudo_tolerance);
      nums[i]            = fraction[0];

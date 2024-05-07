@@ -90,13 +90,15 @@ estimate_cycles <- function(x, tolerance) {
     # estimate the frequency cycle
     estimate_cycle(f,
                    x$pseudo_octave,
-                   tolerance / 2.0) %>%
+                   tolerance,
+                   factor = 2) %>%
       dplyr::rename_with(~ paste0('frequency_',.)),
 
     # estimate the wavelength cycle
     estimate_cycle(λ,
                    x$pseudo_octave,
-                   tolerance) %>%
+                   tolerance,
+                   factor = 1) %>%
       dplyr::rename_with(~ paste0('wavelength_',.)),
 
     tolerance,
@@ -105,16 +107,17 @@ estimate_cycles <- function(x, tolerance) {
 
 }
 
-estimate_cycle <- function(x, pseudo_octave, tolerance) {
+estimate_cycle <- function(x, pseudo_octave, tolerance, factor) {
 
-  r = ratios(x, pseudo_octave, tolerance)
+  r = ratios(x, pseudo_octave, tolerance, factor)
 
   tibble::tibble_row(
     lcm        = lcm(r$den),
     cycle      = min(x) / .data$lcm,
     dissonance = log2(.data$lcm),
     consonance = flip(.data$dissonance),
-    ratios     = list(r)
+    ratios     = list(r),
+    factor
   )
 
 }
