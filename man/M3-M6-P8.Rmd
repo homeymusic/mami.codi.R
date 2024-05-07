@@ -15,14 +15,9 @@ Those secondary peaks
 are also surrounded by dissonance troughs.
 There are also tertiary troughs near the ET intervals.\
 
-Do consonance peaks actually exist in the
-center of those dissonance troughs
-as MaMi.CoDi predicts? Why are those peaks missing
-from the behavioral results? Are there examples at other
-resolutions of a consonance peak in the center of a dissonance trough?\
-
 ```{r, fig.height=8, fig.width=12, echo=F, results='asis', message=F, root.dir='./code'}
-title = "Consonance peak at P1 in dissonance trough spanning 1 octave"
+devtools::load_all(".")
+title = "Consonance peak at P1 in octave-wide dissonance trough"
 tonic_midi    = 60
 span          = 7.1
 intervals     = seq(from=tonic_midi-span, to=tonic_midi+span, by=2*span/1000)
@@ -68,18 +63,17 @@ cat("  \n")
 Performers of instruments with quantized semitones 
 like keyboards and fretted strings--especially beginners
 and their audiences--are aware that the globally maximum
-consonant peak at the unison interval, P1, has
-highly-dissonant, playable neighbors on both sides, M7 and m2.
-Dissonance decreases with each semitone step away from M7 and m2 until 
-the perfect fifth, P5, above and the perfect fourth, P4, below\
+consonant peak at the unison, P1, has
+dissonant neighbors on both sides, M7 and m2.
+Consonance increases with each semitone step out of the trough: downward from M7 
+to P4 below and upward from m2 to P5 above.\
 
-That is to say, at the resolution of an octave,
+That is, at the resolution of an octave,
 the tonic pitch is the maximum consonance peak 
 in the center of a dissonance trough.\
 
 At other resolutions, for example stringed instruments without frets, 
-the nearest playable neighbors are not dissonant. A slight roll of the finger
-will not throw the audience down into a dissonance trough.
+the nearest playable neighbors are not dissonant.
 
 ### MaMi.CoDi resolution correlates with dissonance troughs and consonance peaks
 

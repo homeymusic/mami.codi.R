@@ -176,43 +176,37 @@ Secondary maximums occur at the Pythagorean third and grave major sixth.
 Those secondary peaks are also surrounded by dissonance troughs. There
 are also tertiary troughs near the ET intervals.  
 
-Do consonance peaks actually exist in the center of those dissonance
-troughs as MaMi.CoDi predicts? Why are those peaks missing from the
-behavioral results? Are there examples at other resolutions of a
-consonance peak in the center of a dissonance trough?  
-
-##### Consonance peak at P1 in dissonance trough spanning 1 octave
+##### Consonance peak at P1 in octave-wide dissonance trough
 
 ![](man/figures/README-unnamed-chunk-15-1.png)<!-- -->
 
 Performers of instruments with quantized semitones like keyboards and
 fretted strings–especially beginners and their audiences–are aware that
-the globally maximum consonant peak at the unison interval, P1, has
-highly-dissonant, playable neighbors on both sides, M7 and m2.
-Dissonance decreases with each semitone step away from M7 and m2 until
-the perfect fifth, P5, above and the perfect fourth, P4, below  
+the globally maximum consonant peak at the unison, P1, has dissonant
+neighbors on both sides, M7 and m2. Consonance increases with each
+semitone step out of the trough: downward from M7 to P4 below and upward
+from m2 to P5 above.  
 
-That is to say, at the resolution of an octave, the tonic pitch is the
-maximum consonance peak in the center of a dissonance trough.  
+That is, at the resolution of an octave, the tonic pitch is the maximum
+consonance peak in the center of a dissonance trough.  
 
 At other resolutions, for example stringed instruments without frets,
-the nearest playable neighbors are not dissonant. A slight roll of the
-finger will not throw the audience down into a dissonance trough.
+the nearest playable neighbors are not dissonant.
 
 ### MaMi.CoDi resolution correlates with dissonance troughs and consonance peaks
 
 As the tolerance value of the MaMi.CoDi model varies from very small to
 very large the consonance peaks expand their width until they overcome
-the dissonance peaks. See plot sets, below, for M3, M6 and P8.  
+the dissonance troughs. See plot sets, below, for M3, M6 and P8.  
 
 MaMi.CoDi’s tolerance value is the only parameter in the model and
 indicates the resolution for turning irrational ratios into rational
-fractions. Those fractions are then used to estimate the periodicity of
-the wavelength and frequency signals.  
+fractions. Those fractions are then used to estimate wavelength
+periodicity and frequency periodicity.  
 
-- Small tolerances create more accurate fractions which create longer
-  period estimates.
-- Large tolerances create less accurate fractions which create shorter
+- Small tolerances give more accurate fractions which give longer
+  periods.
+- Large tolerances give less accurate fractions which give shorter
   period estimates.
 
 #### M3 ~ Major Third
