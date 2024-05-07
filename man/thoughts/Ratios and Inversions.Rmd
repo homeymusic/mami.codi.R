@@ -33,14 +33,14 @@ f_64 / f_60
 
 ```{r, echo=F, results='asis', message=F}
 devtools::load_all(".")
-f_60                 = hrep::midi_to_freq(60)
-f_64                 = hrep::midi_to_freq(64)
-l_60                 = SPEED_OF_SOUND / f_60
-l_64                 = SPEED_OF_SOUND / f_64
+f_min = hrep::midi_to_freq(60)
+f_max = 5 / 4 * f_min
+l_min = SPEED_OF_SOUND / f_max
+l_max = SPEED_OF_SOUND / f_min
 ```
 
 ```{r, echo=T, results='asis', message=F}
-M3_lr =  l_64 / l_60
+M3_lr =  l_max / l_min
 M3_lr
 ```
 ```{r, echo=T, results='asis', message=F}
@@ -48,20 +48,23 @@ M3_lr_frac = rational_fraction(M3_lr, TOLERANCE)
 M3_lr_frac
 ```
 ```{r, echo=T, results='asis', message=F}
-M3_fr =  f_64 / f_60
+M3_fr =  f_max / f_min
 M3_fr
 ```
 ```{r, echo=T, results='asis', message=F}
-M3_fr_frac = rational_fraction(M3_fr, TOLERANCE/2)
+M3_fr_frac = rational_fraction(M3_fr, TOLERANCE)
 M3_fr_frac
 ```
 ```{r, echo=T, results='asis', message=F}
-M3 = c(60,67) %>% mami.codi(num_harmonics=10, verbose=T)
-M3
-```
-```{r, echo=T, results='asis', message=F}
+M3 = c(60,67) %>% mami.codi(num_harmonics=3, verbose=T)
 M3$frequency_lcm
 ```
 ```{r, echo=T, results='asis', message=F}
 M3$wavelength_lcm
+```
+```{r, echo=T, results='asis', message=F}
+knitr::kable(M3$frequency_ratios[[1]])
+```
+```{r, echo=T, results='asis', message=F}
+knitr::kable(M3$wavelength_ratios[[1]])
 ```
