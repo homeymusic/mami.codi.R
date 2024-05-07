@@ -9,7 +9,8 @@
 #' helpful for analysis and plots
 #' @param verbose Determines the amount of data to return from chord evaluation
 #' TRUE is all and FALSE is just major-minor, consonance-dissonance, tolerance and metadata.
-#' @param tolerance An optional tolerance value for creating rational fractions
+#' @param frequency_tolerance An optional tolerance value for creating rational fractions for frequency ratios
+#' @param wavelength_tolerance An optional tolerance value for creating rational fractions for wavelength ratios
 #' @param ... parameters for hrep::sparse_fr_spectrum
 #'
 #' @return Major-Minor and Consonance-Dissonance plus additional information
@@ -17,14 +18,16 @@
 #'
 #' @rdname mami.codi
 #' @export
-mami.codi <- function(x, min_amplitude=MIN_AMPLITUDE,
-                      tolerance = TOLERANCE,
+mami.codi <- function(x, min_amplitude     = MIN_AMPLITUDE,
+                      frequency_tolerance  = TOLERANCE,
+                      wavelength_tolerance = TOLERANCE,
                       metadata=NA, verbose=FALSE, ...) {
 
   parse_input(x, ...)                       %>%
     listen_for_min_amplitude(min_amplitude) %>%
     listen_for_pseudo_octave()              %>%
-    estimate_cycles(tolerance)              %>%
+    estimate_cycles(frequency_tolerance,
+                    wavelength_tolerance)   %>%
     rotate()                                %>%
     format_output(metadata, verbose)
 
@@ -52,17 +55,24 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 
 listen_for_min_amplitude = function(x, min_amplitude) {
 
-  f  = x$spectrum[[1]] %>% dplyr::filter(.data$y>min_amplitude) %>% hrep::freq()
-  λ  = SPEED_OF_SOUND / f
-  bm = log10( f / 165.4 + 0.88 ) / 2.1
+  f = x$spectrum[[1]] %>% dplyr::filter(.data$y>min_amplitude) %>% hrep::freq()
+  λ = 1 - greenwood(f)
 
   x %>% dplyr::mutate(
     frequencies = list(f),
     wavelengths = list(λ),
-    bm_position = list(bm),
     min_amplitude
   )
 
+}
+
+# returns the fractional length along the cochlear spiral measured from the apical
+# end of the cochlea to the region of interest. 0 < x < 1.
+greenwood = function(f) {
+  A = 165.4 # scaling constant between the characteristic frequency and the upper frequency limit of the species
+  a = 2.1   # slope of the straight-line portion of the frequency-position curve, which has shown to be conserved throughout all investigated species after scaling the length of the cochlea
+  K = 0.88  # constant of integration that represents the divergence from the log nature of the curve and is determined by the lower frequency audible limit in the species.
+  log10( f / A + K ) / a
 }
 
 listen_for_pseudo_octave = function(x) {
@@ -83,25 +93,26 @@ listen_for_pseudo_octave = function(x) {
 
 }
 
-estimate_cycles <- function(x, tolerance) {
+estimate_cycles <- function(x, frequency_tolerance, wavelength_tolerance) {
 
-  f  = x$frequencies[[1]]
-  bm = 1 - x$bm_position[[1]]
+  f = x$frequencies[[1]]
+  λ = x$wavelengths[[1]]
 
   x %>% dplyr::mutate(
     # estimate the frequency cycle
     estimate_cycle(f,
                    x$pseudo_octave,
-                   tolerance / 2.0) %>%
+                   frequency_tolerance) %>%
       dplyr::rename_with(~ paste0('frequency_',.)),
 
-    # estimate the bm position cycle
-    estimate_cycle(bm,
+    # estimate the wavelength cycle
+    estimate_cycle(λ,
                    x$pseudo_octave,
-                   tolerance) %>%
+                   wavelength_tolerance) %>%
       dplyr::rename_with(~ paste0('wavelength_',.)),
 
-    tolerance,
+    frequency_tolerance,
+    wavelength_tolerance
 
   )
 
@@ -155,7 +166,7 @@ format_output <- function(x, metadata, verbose) {
   } else {
     x %>%
       dplyr::select('major_minor', 'consonance_dissonance',
-                    'tolerance', 'min_amplitude',
+                    'frequency_tolerance', 'wavelength_tolerance', 'min_amplitude',
                     'metadata')
   }
 }
@@ -167,8 +178,6 @@ M3M6_TOLERANCE = 0.0003
 P8_TOLERANCE   = M3M6_TOLERANCE
 
 MIN_AMPLITUDE  = 0.03
-
-SPEED_OF_SOUND = 343
 
 ZARLINO        = 100 / sqrt(2)
 
