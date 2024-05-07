@@ -85,8 +85,8 @@ listen_for_pseudo_octave = function(x) {
 
 estimate_cycles <- function(x, tolerance) {
 
-  f = x$frequencies[[1]]
-  λ = x$wavelengths[[1]]
+  f  = x$frequencies[[1]]
+  bm = 1 - x$bm_position[[1]]
 
   x %>% dplyr::mutate(
     # estimate the frequency cycle
@@ -95,8 +95,8 @@ estimate_cycles <- function(x, tolerance) {
                    tolerance / 2.0) %>%
       dplyr::rename_with(~ paste0('frequency_',.)),
 
-    # estimate the wavelength cycle
-    estimate_cycle(λ,
+    # estimate the bm position cycle
+    estimate_cycle(bm,
                    x$pseudo_octave,
                    tolerance) %>%
       dplyr::rename_with(~ paste0('wavelength_',.)),
