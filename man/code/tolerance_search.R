@@ -1,18 +1,18 @@
-search_label = 'M3'
+search_label = '5Partials'
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # tolerances   = 10^-(1:10)
   tolerances   = c(1:9 %o% 10^(-6:-4))
 } else {
-  from_tol     = 0.1
-  to_tol       = 0.4
-  by_tol       = 0.01
+  from_tol     = 0.001
+  to_tol       = 0.04
+  by_tol       = 0.001
   tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
 }
 
 tonic_midi   = 60
 
 source('./utils.R')
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R', ref='bm_ratios')
 
 library(mami.codi.R)
 devtools::load_all(".")
@@ -100,7 +100,7 @@ data = grid %>% furrr::future_pmap_dfr(\(
                                      num_harmonics = num_harmonics,
                                      roll_off_dB   = roll_off,
                                      octave_ratio  = octave_ratio
-                                     )
+    )
   }
 
   mami.codi.R::mami.codi(

@@ -92,7 +92,7 @@ estimate_cycles <- function(x, tolerance) {
     # estimate the frequency cycle
     estimate_cycle(f,
                    x$pseudo_octave,
-                   tolerance / 2.0) %>%
+                   tolerance) %>%
       dplyr::rename_with(~ paste0('frequency_',.)),
 
     # estimate the bm position cycle
