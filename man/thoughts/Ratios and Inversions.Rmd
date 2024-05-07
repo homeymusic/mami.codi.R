@@ -1,4 +1,62 @@
-# Period Length Uncertainty 
+# Above 2 Harmonics Wavelength and Frequency Estimates of Period Differ
+
+## Even though they have the same set of tones
+
+Wavelengths come from tonotopic hair cells 
+Frequencies come from chopper units
+
+### P5 Pure Tone
+
+```{r, echo=F, results='asis', message=F}
+devtools::load_all(".")
+M3 = c(60,67) %>% mami.codi(num_harmonics=1, verbose=T)
+knitr::kable(M3 %>% dplyr::select(frequency_lcm, wavelength_lcm))
+```
+
+#### Frequency Ratios
+```{r, echo=F, results='asis', message=F}
+knitr::kable(M3$frequency_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
+```
+
+#### Wavelength Ratios
+```{r, echo=F, results='asis', message=F}
+knitr::kable(M3$wavelength_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
+```
+
+### P5 2 Harmonics
+```{r, echo=F, results='asis', message=F}
+M3 = c(60,67) %>% mami.codi(num_harmonics=2, verbose=T)
+knitr::kable(M3 %>% dplyr::select(frequency_lcm, wavelength_lcm))
+```
+
+#### Frequency Ratios
+
+```{r, echo=F, results='asis', message=F}
+knitr::kable(M3$frequency_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
+```
+#### Wavelength Ratios
+
+```{r, echo=F, results='asis', message=F}
+knitr::kable(M3$wavelength_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
+```
+### P5 3 Harmonics
+```{r, echo=F, results='asis', message=F}
+M3 = c(60,67) %>% mami.codi(num_harmonics=3, verbose=T)
+knitr::kable(M3 %>% dplyr::select(frequency_lcm, wavelength_lcm))
+```
+#### Frequency Ratios
+
+```{r, echo=F, results='asis', message=F}
+knitr::kable(M3$frequency_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
+```
+#### Wavelength Ratios
+```{r, echo=F, results='asis', message=F}
+knitr::kable(M3$wavelength_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
+```
+
+# Thoughts
+
+## Period Length Uncertainty 
 
 Frequency and wavelength are simple inversions. Why would the signal processing 
 estimate using wavelengths give a different results than the signal processing 
@@ -8,6 +66,18 @@ Is it a limitation of the sensors or the processing of the sensors' signals by
 higher parts of the perception system?\
 
 ### Why is MaMi.CoDi's wavelength tolerance twice its frequency tolerance?\
+
+Is it because harmonics are base 10 and octaves are base 2?
+
+```{r, echo=T, results='asis', message=F}
+num_octaves = 6
+C4_Harmonics = hrep::midi_to_freq(60) * 1:(2^num_octaves)
+C4_Harmonics
+```
+```{r, echo=T, results='asis', message=F}
+C4_octaves   = hrep::midi_to_freq(60) * 2^(0:num_octaves)
+C4_octaves
+```
 
 Is it related to the octave complement formula?\
 
@@ -20,18 +90,3 @@ Examples\
 4/3 vs. 2*3/4 = 6/4 = 3/2\
 
 from [Xenharmonic Wiki](https://en.xen.wiki/w/Octave_complement)\
-
-```{r, echo=T, results='asis', message=F}
-devtools::load_all(".")
-M3 = c(60,67) %>% mami.codi(num_harmonics=3, verbose=T)
-M3$frequency_lcm
-```
-```{r, echo=T, results='asis', message=F}
-M3$wavelength_lcm
-```
-```{r, echo=T, results='asis', message=F}
-knitr::kable(M3$frequency_ratios[[1]])
-```
-```{r, echo=T, results='asis', message=F}
-knitr::kable(M3$wavelength_ratios[[1]])
-```
