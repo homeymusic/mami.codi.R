@@ -17,11 +17,12 @@ Jacoby.
 ### Harmonic ~ Partials: 10
 
 For 10 harmonics, behavioral results and theoretical predictions agree.
-With the default smoothing parameter from the large-scale behavioral
+With the broad smoothing parameter from the large-scale behavioral
 study, the smoothed theoretical peaks at M2 and P8 are relatively lower
 than the theoretical predictions plotted as points. In a plot below, we
-temporarily adjust the smoothing parameter to show how the behavioral
-and theoretical curves change.
+use the narrow smoothing parameter from the large-scale behavioral study
+to see how the theoretical curve changes with respect to the theoretical
+predictions.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
@@ -29,16 +30,17 @@ and theoretical curves change.
 
 ![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->
 
-### Harmonic ~ Smoothing Variation ~ Sigma: 0.02
+### Harmonic ~ Smoothing Variation ~ Sigma: 0.035
 
-With a smaller smoothing parameter (0.02 versus 0.2), the smoothed peaks
-at M2 and P8 more closely align with the theoretical predictions plotted
-as points. However, for the remaining plots we will continue to use the
-larger smoothing parameter from the large-scale behavioral study.
+With the narrow smoothing parameter (0.035 versus 0.2) from the
+large-scale behavioral study, the smoothed peaks at M2 and P8 more
+closely align with the theoretical predictions plotted as points.
+However, for the remaining plots we will continue to use the broad
+smoothing parameter from the large-scale behavioral study.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 0.1                  | 0.05                |            0.02 |
+| 2                      | 0.03                    | 0.1                  | 0.05                |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-4-2.png)<!-- -->
 

@@ -1,3 +1,12 @@
+# Period Length Uncertainty 
+
+Frequency and wavelength are simple inversions. Why would the signal processing 
+estimate using wavelengths give a different results than the signal processing 
+estimate using frequencies?\
+
+Is it a limitation of the sensors or the processing of the sensors' signals by 
+higher parts of the perception system?\
+
 # Why is MaMi.CoDi's wavelength tolerance twice the frequency tolerance?\
 
 Is it related to the octave complement formula?\
