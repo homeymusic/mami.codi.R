@@ -66,7 +66,8 @@ plan(multisession, workers=parallelly::availableCores())
 
 data = grid %>% furrr::future_pmap_dfr(\(
   index,
-  tolerance
+  frequency_tolerance,
+  wavelength_tolerance
 ) {
 
   if (search_label=='Bonang') {

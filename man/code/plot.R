@@ -395,9 +395,9 @@ plot_semitone_codi_grid <- function(theory, experiment,
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=z_score)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
-    # ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
-    #                     ggplot2::aes(x = semitone, y = z_score,
-    #                                  fill=color_factor_homey(theory,'major_minor'))) +
+    ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
+                        ggplot2::aes(x = semitone, y = z_score,
+                                     fill=color_factor_homey(theory,'major_minor'))) +
     ggplot2::scale_fill_manual(values=color_values_homey(), guide="none") +
     ggplot2::geom_line(
       data=experiment,
