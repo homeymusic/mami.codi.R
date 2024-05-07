@@ -361,11 +361,10 @@ signal processing estimate using frequencies?<br />
 <p>Is it a limitation of the sensors or the processing of the sensors’
 signals by higher parts of the perception system?<br />
 </p>
-</div>
-<div id="why-is-mami.codis-wavelength-tolerance-twice-the-frequency-tolerance" class="section level1">
-<h1>Why is MaMi.CoDi’s wavelength tolerance twice the frequency
+<div id="why-is-mami.codis-wavelength-tolerance-twice-its-frequency-tolerance" class="section level3">
+<h3>Why is MaMi.CoDi’s wavelength tolerance twice its frequency
 tolerance?<br />
-</h1>
+</h3>
 <p>Is it related to the octave complement formula?<br />
 </p>
 <p>Octave-complement intervals represented as ratios r follow the
@@ -382,30 +381,8 @@ formula x := 2/r or (for the ratio representation r = a/b) into x := 2
 <p>from <a href="https://en.xen.wiki/w/Octave_complement">Xenharmonic
 Wiki</a><br />
 </p>
-</div>
-<div id="the-wavelength-and-frequency-ratio" class="section level1">
-<h1>The wavelength and frequency ratio</h1>
-<p>l = s / f<br />
-</p>
-<p>where l is wavelength, f is frequency and s is the speed of
-sound.<br />
-</p>
-<p>but what about ratios?<br />
-</p>
-<p>f_64 / f_60</p>
-<pre class="r"><code>M3_lr =  l_max / l_min
-M3_lr</code></pre>
-<p>[1] 1.25</p>
-<pre class="r"><code>M3_lr_frac = rational_fraction(M3_lr, TOLERANCE)
-M3_lr_frac</code></pre>
-<p>[1] 4 3</p>
-<pre class="r"><code>M3_fr =  f_max / f_min
-M3_fr</code></pre>
-<p>[1] 1.25</p>
-<pre class="r"><code>M3_fr_frac = rational_fraction(M3_fr, TOLERANCE)
-M3_fr_frac</code></pre>
-<p>[1] 4 3</p>
-<pre class="r"><code>M3 = c(60,67) %&gt;% mami.codi(num_harmonics=3, verbose=T)
+<pre class="r"><code>devtools::load_all(&quot;.&quot;)
+M3 = c(60,67) %&gt;% mami.codi(num_harmonics=3, verbose=T)
 M3$frequency_lcm</code></pre>
 <p>[1] 2</p>
 <pre class="r"><code>M3$wavelength_lcm</code></pre>
@@ -536,6 +513,7 @@ M3$frequency_lcm</code></pre>
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 
 
