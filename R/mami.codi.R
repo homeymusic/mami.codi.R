@@ -52,12 +52,14 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 
 listen_for_min_amplitude = function(x, min_amplitude) {
 
-  f = x$spectrum[[1]] %>% dplyr::filter(.data$y>min_amplitude) %>% hrep::freq()
-  λ = SPEED_OF_SOUND / f
+  f  = x$spectrum[[1]] %>% dplyr::filter(.data$y>min_amplitude) %>% hrep::freq()
+  λ  = SPEED_OF_SOUND / f
+  bm = log10( f / 165.4 + 0.88 ) / 2.1
 
   x %>% dplyr::mutate(
     frequencies = list(f),
     wavelengths = list(λ),
+    bm_position = list(bm),
     min_amplitude
   )
 
