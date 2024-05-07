@@ -18,11 +18,11 @@ Jacoby.
 
 For 10 harmonics, behavioral results and theoretical predictions agree.
 With the broad smoothing parameter from the large-scale behavioral
-study, the smoothed theoretical peaks at M2 and P8 are relatively lower
-than the theoretical predictions plotted as points. In a plot below, we
-use the narrow smoothing parameter from the large-scale behavioral study
-to see how the theoretical curve changes with respect to the theoretical
-predictions.
+study, used in this plot, the smoothed theoretical peaks at M2 and P8
+are relatively lower than the theoretical predictions plotted as points.
+In a plot below, we narrow the smoothing parameter by an order of
+magnitude to see how the theoretical curve changes with respect to the
+theoretical predictions.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
@@ -30,17 +30,19 @@ predictions.
 
 ![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->
 
-### Harmonic ~ Smoothing Variation ~ Sigma: 0.035
+### Harmonic ~ Narrow Smoothing Variation ~ Sigma: 0.02
 
-With the narrow smoothing parameter (0.035 versus 0.2) from the
-large-scale behavioral study, the smoothed peaks at M2 and P8 more
-closely align with the theoretical predictions plotted as points.
-However, for the remaining plots we will continue to use the broad
-smoothing parameter from the large-scale behavioral study.
+With a narrow smoothing parameter (0.02 versus 0.2), the smoothed
+theoretical peaks at M2 and P8 more closely align with the raw
+theoretical predictions plotted as points. At this resolution, where
+MaMi.CoDi predicts consonance peaks, the behavioral results shows
+dissonance troughs. See the zoomed-in quarter tone spans at M3, M6 and
+P8, below, for more discussion about consonance peaks in dissonance
+troughs.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 0.1                  | 0.05                |           0.035 |
+| 2                      | 0.03                    | 0.1                  | 0.05                |            0.02 |
 
 ![](man/figures/README-unnamed-chunk-4-2.png)<!-- -->
 
@@ -193,7 +195,11 @@ That is, at the resolution of an octave, the tonic pitch is the maximum
 consonance peak in the center of a dissonance trough.  
 
 At other resolutions, for example stringed instruments without frets,
-the nearest playable neighbors are not dissonant.
+the nearest playable neighbors to P1 are not necessarily dissonant.
+
+In the harmonic study with the narrow resolution, above, the behavioral
+results shows dissonance troughs and MaMi.CoDi predicts consonance peaks
+in the center of those dissonance troughs.
 
 ### MaMi.CoDi resolution correlates with dissonance troughs and consonance peaks
 

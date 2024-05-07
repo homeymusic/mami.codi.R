@@ -73,7 +73,11 @@ the tonic pitch is the maximum consonance peak
 in the center of a dissonance trough.\
 
 At other resolutions, for example stringed instruments without frets, 
-the nearest playable neighbors are not dissonant.
+the nearest playable neighbors to P1 are not necessarily dissonant.
+
+In the harmonic study with the narrow resolution, above, the behavioral 
+results shows dissonance troughs and MaMi.CoDi predicts consonance peaks in the center 
+of those dissonance troughs.
 
 ### MaMi.CoDi resolution correlates with dissonance troughs and consonance peaks
 
