@@ -1,5 +1,5 @@
 source('./utils.R')
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R', ref='bm_ratios')
 
 library(mami.codi.R)
 devtools::load_all(".")
@@ -7,7 +7,7 @@ devtools::load_all(".")
 tonic_midi = 60
 
 P8 <- c(tonic_midi,72) %>% mami.codi.R::mami.codi(verbose=T)
-if (P8$tolerance == mami.codi.R::default_tolerance('macro')) {
+if (P8$wavelength_tolerance == mami.codi.R::default_tolerance('macro')) {
   print("Seems to be the correct version mami.codi.R")
 } else {
   stop("This is not the expected version of mami.codi.R")
@@ -161,7 +161,8 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
   }
 
   mami.codi.R::mami.codi(study_chord,
-                         tolerance=tolerance,
+                         frequency_tolerance=tolerance,
+                         wavelength_tolerance=tolerance,
                          metadata = list(
                            num_harmonics = num_harmonics,
                            octave_ratio  = octave_ratio,
