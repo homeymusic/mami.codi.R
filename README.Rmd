@@ -64,7 +64,7 @@ p = params %>% purrr::map(\(p) {
   if (p$o==2 & p$h==10 & p$s == 'macro') {
     timbre = 'Harmonic'
     black_vlines  = c(2,3,4,5,7,8,9,12)
-    description   = '   For 10 harmonics, behavioral results and theoretical predictions agree. With the broad smoothing parameter from the large-scale behavioral study, used in this plot, the smoothed theoretical peaks at M2 and P8 are relatively lower than the theoretical predictions plotted as points. In a plot below, we narrow the smoothing parameter by an order of magnitude to see how the theoretical curve changes with respect to the theoretical predictions.'
+    description   = '   For 10 harmonics, behavioral results and theoretical predictions agree.'
   } else if (p$o==2 & p$h==5 & p$s == 'macro') {
     timbre = '5Partials'
     black_vlines  = c(3,4,5,7,9,12,14)
@@ -158,27 +158,6 @@ p = params %>% purrr::map(\(p) {
                            goal=experiment,sigma=sigma,
                            black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")
-  if (timbre=='Harmonic') {
-    sigma_variation = sigma / 10
-    title = paste(timbre, "~ Narrow Smoothing Variation ~ Sigma:", sigma_variation)
-    cat("  \n###", title, '\n')
-    cat(paste0("   With a narrow smoothing parameter (",sigma_variation," versus ", sigma, "), the smoothed theoretical peaks at M2 and P8 more closely align with the raw theoretical predictions plotted as points. At this resolution, 
-    where MaMi.CoDi predicts consonance peaks, the behavioral results shows dissonance troughs. 
-    See the zoomed-in quarter tone spans at M3, M6 and P8, below, for more discussion about consonance peaks in dissonance troughs."))
-    print(knitr::kable(tibble::tibble_row(
-      detected_pseudo_octave  = paste(round(chords$pseudo_octave %>% unique, 2), collapse = ' '),
-      ignore_amplitudes_below = paste(round(chords$min_amplitude %>% unique, 2), collapse = ' '),
-      wavelength_tolerance    = paste(round(chords$tolerance %>% unique, 5), collapse = ' '),
-      frequency_tolerance     = paste(round(chords$tolerance %>% unique, 5) / 2.0, collapse = ' '),
-      smoothing_sigma         = sigma_variation
-    )))
-    print(plot_semitone_codi_raw(theory_raw=chords,
-                                 experiment_raw=experiment_raw,
-                                 sigma=sigma_variation,
-                                 black_vlines = black_vlines,
-                                 title=title))
-    cat("  \n")
-  }
 })
 ```
 

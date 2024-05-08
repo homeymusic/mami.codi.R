@@ -17,34 +17,12 @@ Jacoby.
 ### Harmonic ~ Partials: 10
 
 For 10 harmonics, behavioral results and theoretical predictions agree.
-With the broad smoothing parameter from the large-scale behavioral
-study, used in this plot, the smoothed theoretical peaks at M2 and P8
-are relatively lower than the theoretical predictions plotted as points.
-In a plot below, we narrow the smoothing parameter by an order of
-magnitude to see how the theoretical curve changes with respect to the
-theoretical predictions.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
 | 2                      | 0.03                    | 0.15                 | 0.075               |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->
-
-### Harmonic ~ Narrow Smoothing Variation ~ Sigma: 0.02
-
-With a narrow smoothing parameter (0.02 versus 0.2), the smoothed
-theoretical peaks at M2 and P8 more closely align with the raw
-theoretical predictions plotted as points. At this resolution, where
-MaMi.CoDi predicts consonance peaks, the behavioral results shows
-dissonance troughs. See the zoomed-in quarter tone spans at M3, M6 and
-P8, below, for more discussion about consonance peaks in dissonance
-troughs.
-
-| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 0.15                 | 0.075               |            0.02 |
-
-![](man/figures/README-unnamed-chunk-4-2.png)<!-- -->
 
 ### 5Partials ~ Partials: 5
 
@@ -58,7 +36,7 @@ theoretical predictions plotted as points.
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
 | 2                      | 0.03                    | 0.15                 | 0.075               |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-3.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-2.png)<!-- -->
 
 ### 5PartialsNo3 ~ Partials: 5
 
@@ -75,7 +53,7 @@ plotted as points.
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
 | 2                      | 0.03                    | 0.15                 | 0.075               |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-4.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-3.png)<!-- -->
 
 ### Pure ~ Partials: 1
 
@@ -88,7 +66,7 @@ semitones but the overall shape agrees with MaMi.CoDi predictions.
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
 | 2                      | 0.03                    | 0.15                 | 0.075               |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-5.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-4.png)<!-- -->
 
 ### Stretched ~ Partials: 10
 
@@ -103,7 +81,7 @@ than the theoretical predictions plotted as points.
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
 | 2.1                    | 0.03                    | 0.15                 | 0.075               |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-6.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-5.png)<!-- -->
 
 ### Compressed ~ Partials: 10
 
@@ -118,7 +96,7 @@ halfway between M6 and m7 that do not exist in the behavioral results.
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
 | 1.9                    | 0.03                    | 0.15                 | 0.075               |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-7.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-6.png)<!-- -->
 
 ### Bonang ~ Partials: 4
 
@@ -133,7 +111,7 @@ appear in the behavioral results.
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
 | 2                      | 0.03                    | 0.15                 | 0.075               |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-8.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-7.png)<!-- -->
 
 ## Dyads spanning 1 quarter tone
 
@@ -145,7 +123,7 @@ Description is below.
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
 | 2                      | 0.03                    | 3e-04                | 0.00015             |           0.035 |
 
-![](man/figures/README-unnamed-chunk-4-9.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-8.png)<!-- -->
 
 ### M6 ~ Partials: 10
 
@@ -155,7 +133,7 @@ Description is below.
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
 | 2                      | 0.03                    | 3e-04                | 0.00015             |           0.035 |
 
-![](man/figures/README-unnamed-chunk-4-10.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-9.png)<!-- -->
 
 ### P8 ~ Partials: 10
 
@@ -165,7 +143,7 @@ Description is below.
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
 | 2                      | 0.03                    | 3e-04                | 0.00015             |           0.035 |
 
-![](man/figures/README-unnamed-chunk-4-11.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-10.png)<!-- -->
 
 ### Consonance peaks in dissonance troughs
 
