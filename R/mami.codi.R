@@ -160,7 +160,7 @@ format_output <- function(x, metadata, verbose) {
 
 lcm <- function(x) Reduce(numbers::LCM, x)
 
-TOLERANCE      = 0.1
+TOLERANCE      = 0.15
 M3M6_TOLERANCE = 0.0003
 P8_TOLERANCE   = M3M6_TOLERANCE
 

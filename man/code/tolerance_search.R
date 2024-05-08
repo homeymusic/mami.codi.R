@@ -1,10 +1,10 @@
-search_label = '5PartialsNo3'
+search_label = '5Partials'
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # tolerances   = 10^-(1:10)
   tolerances   = c(1:9 %o% 10^(-6:-4))
 } else {
   from_tol     = 0.09
-  to_tol       = 0.11
+  to_tol       = 0.2
   by_tol       = 0.001
   tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
 }
