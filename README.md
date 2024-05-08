@@ -10,7 +10,7 @@ scales](https://www.nature.com/articles/s41467-024-45812-z) by Raja
 Marjieh, Peter M. C. Harrison, Harin Lee, Fotini Deligiannaki & Nori
 Jacoby.
 
-# Manipulating harmonic frequencies
+## Manipulating harmonic frequencies
 
 ## Dyads spanning 15 semitones
 
@@ -525,6 +525,67 @@ Consonance:
 Plot of P8 with MaMi.CoDi tolerance values varying from 1e-08 to 0.1:
 ![P8 with a range of MaMi.CoDi tolerance
 values.](./man/tolerance_search_plots/P8%20Orders%20of%20Magnitude.png)
+
+# How MaMi.CoDi Works
+
+## Chord Period Estimates
+
+To estimate the periodicity of a chord, the MaMi.CoDi model uses a
+classical signal processing technique. It creates ratios for every tone
+in the chord (fundamental, harmonics, noise, etc.) relative to a
+reference tone. The least common multiple of those ratios is the period
+of the whole signal, relative to the periodicity of the reference
+tone.  
+
+MaMi.CoDi creates two estimates of the chord’s period: a wavelength
+estimate and a frequency estimate. Because frequency is the inverse of
+wavelength, one might intuitively believe that all estimates would be
+the same. For two pure tones, that is true. But for complex tones, the
+estimates can be and usually are different.  
+
+For the wavelength (i.e. rate-place or spatial) estimate, the reference
+tone is the smallest wavelength. Small wavelengths are detected by the
+inner ear hair cells closest to the base of the cochlea, which is the
+end closest to the middle ear, the source of the wave.  
+
+For the frequency (i.e. phase-locking or temporal) estimate the
+reference tone is the smallest frequency. Small frequencies are detected
+by the inner ear hair cells closest to the apex of the cochlea, which is
+the end furthest from the source of the wave.  
+
+## Finding the Tolerance Values
+
+MaMi.CoDi uses the Stern-Brocot tree to find rational fractions for the
+ratios within a given tolerance. How do we find the best tolerance
+values? For the MaMi.CoDi model we ran thousands of computations with
+various tolerance values and compared the predictions with results from
+six of the large-scale behavioral experiments.  
+
+Because spatial and temporal information is encoded via different
+mechanisms by the cochlea, we assume that the wavelength and frequency
+tolerances will have different values.  
+
+So, our tolerance searches were two-dimensional. The image below is a
+sample of a 2D tolerance search using the harmonic experiment from
+large-scale behavioral study.  
+
+![Two-dimensional tolerance search for frequency and wavelength
+tolerance values for finding rational fractions for tone
+ratios.](https://github.com/homeymusic/mami.codi.R/blob/2D_tolerance/man/tolerance_search_plots/Harmonic2DCropped.png?raw=true)
+Click here, for the [full 2D tolerance
+search](https://github.com/homeymusic/mami.codi.R/blob/2D_tolerance/man/tolerance_search_plots/Harmonic2D.jpg)
+image for the harmonics experiment. Click here, for the [2D_tolerance
+branch on
+GitHub](https://github.com/homeymusic/mami.codi.R/tree/2D_tolerance) to
+recreate all the 2D searches.  
+
+The best fits across the experiments were given by a wavelength
+tolerance of 0.15 and a frequency tolerance of 0.075. The frequency
+tolerance is half the size of the wavelength tolerance. Does that mean
+that the perception mechanism for frequency is twice as discriminating
+as the wavelength mechanism? “At 1 kHz information contained in temporal
+discharges was an order of magnitude better than that obtained by a
+rate–place mechanism. Heinz et al. (2001)” from Winter (2005).  
 
 #### Notes on plots:
 

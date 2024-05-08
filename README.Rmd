@@ -202,8 +202,8 @@ different values.\
 So, our tolerance searches were two-dimensional. The image below is a sample of 
 a 2D tolerance search using the harmonic experiment from large-scale behavioral study.\
 
-![Two-dimensional tolerance search for frequency and wavelength tolerance values for finding rational fractions for tone ratios.](./man/tolerance_search_plots/Harmonic2DCropped.png)
-Click here, for the [full 2D tolerance search](https://github.com/homeymusic/mami.codi.R/blob/main/man/tolerance_search_plots/Harmonic2D.jpg) image. Click here, for the
+![Two-dimensional tolerance search for frequency and wavelength tolerance values for finding rational fractions for tone ratios.](https://github.com/homeymusic/mami.codi.R/blob/2D_tolerance/man/tolerance_search_plots/Harmonic2DCropped.png?raw=true)
+Click here, for the [full 2D tolerance search](https://github.com/homeymusic/mami.codi.R/blob/2D_tolerance/man/tolerance_search_plots/Harmonic2D.jpg) image for the harmonics experiment. Click here, for the
 [2D_tolerance branch on GitHub](https://github.com/homeymusic/mami.codi.R/tree/2D_tolerance) to recreate all the 2D searches.\
 
 The best fits across the experiments were given by a wavelength tolerance of 0.15
