@@ -1,12 +1,8 @@
-search_label = 'Harmonic'
+search_label = '5Partials'
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
-  # tolerances   = 10^-(1:10)
   tolerances   = c(1:9 %o% 10^(-6:-4))
 } else {
-  from_tol     = 0.1
-  to_tol       = 0.2
-  by_tol       = 0.01
-  tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
+  tolerances = c(1:9 %o% 10^(-3:-1))
 }
 
 tonic_midi   = 60
