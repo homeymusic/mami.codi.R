@@ -1,7 +1,7 @@
 search_label = '5Partials'
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # tolerances   = 10^-(1:10)
-  tolerances   = c(1:9 %o% 10^(-6:-4))
+  tolerances   = c(1:9 %o% 10^(-3:-1))
 } else {
   from_tol     = 0.09
   to_tol       = 0.2

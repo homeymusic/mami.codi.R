@@ -152,7 +152,7 @@ are also tertiary troughs near the ET intervals.
 |------------------------:|-----------------:|:--------------|:---------------------|:--------------------|
 |                     0.2 |                2 | 2             | 0.15                 | 0.075               |
 
-![](man/figures/README-unnamed-chunk-15-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-11-1.png)<!-- -->
 
 Performers of instruments with quantized semitones like keyboards and
 fretted strings–especially beginners and their audiences–are aware that
@@ -525,32 +525,6 @@ Consonance:
 Plot of P8 with MaMi.CoDi tolerance values varying from 1e-08 to 0.1:
 ![P8 with a range of MaMi.CoDi tolerance
 values.](./man/tolerance_search_plots/P8%20Orders%20of%20Magnitude.png)
-
-# Manipulating harmonic amplitudes
-
-### Harmonic ~ Roll Off: 12
-
-| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 0.08333              | 0.041665            |             0.2 |
-
-![](man/figures/README-unnamed-chunk-9-1.png)<!-- -->
-
-### Harmonic ~ Roll Off: 7
-
-| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 0.08333              | 0.041665            |             0.2 |
-
-![](man/figures/README-unnamed-chunk-9-2.png)<!-- -->
-
-### Harmonic ~ Roll Off: 2
-
-| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 0.08333              | 0.041665            |             0.2 |
-
-![](man/figures/README-unnamed-chunk-9-3.png)<!-- -->
 
 #### Notes on plots:
 

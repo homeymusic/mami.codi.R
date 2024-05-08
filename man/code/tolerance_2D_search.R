@@ -1,7 +1,5 @@
-search_label = 'Pure'
-from_tol     = 0.01
-to_tol       = 0.15
-by_tol       = 0.01
+search_label = 'Harmonic'
+tolerances   = c(1:9 %o% 10^(-3:-1))
 
 tonic_midi         = 60
 delete_3rd_partial = T
@@ -53,8 +51,6 @@ behavior = readRDS(behavior.rds)
 
 intervals = tonic_midi + behavior$profile$interval
 index = seq_along(intervals)
-
-tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
 
 grid = tidyr::expand_grid(
   index,
