@@ -26,7 +26,7 @@ theoretical predictions.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 0.1                  | 0.05                |             0.2 |
+| 2                      | 0.03                    | 0.15                 | 0.075               |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->
 
@@ -42,7 +42,7 @@ troughs.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 0.1                  | 0.05                |            0.02 |
+| 2                      | 0.03                    | 0.15                 | 0.075               |            0.02 |
 
 ![](man/figures/README-unnamed-chunk-4-2.png)<!-- -->
 
@@ -56,7 +56,7 @@ theoretical predictions plotted as points.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 0.1                  | 0.05                |             0.2 |
+| 2                      | 0.03                    | 0.15                 | 0.075               |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-3.png)<!-- -->
 
@@ -73,7 +73,7 @@ plotted as points.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 0.1                  | 0.05                |             0.2 |
+| 2                      | 0.03                    | 0.15                 | 0.075               |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-4.png)<!-- -->
 
@@ -86,7 +86,7 @@ semitones but the overall shape agrees with MaMi.CoDi predictions.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 0.1                  | 0.05                |             0.2 |
+| 2                      | 0.03                    | 0.15                 | 0.075               |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-5.png)<!-- -->
 
@@ -101,7 +101,7 @@ than the theoretical predictions plotted as points.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2.1                    | 0.03                    | 0.1                  | 0.05                |             0.2 |
+| 2.1                    | 0.03                    | 0.15                 | 0.075               |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-6.png)<!-- -->
 
@@ -116,7 +116,7 @@ halfway between M6 and m7 that do not exist in the behavioral results.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 1.9                    | 0.03                    | 0.1                  | 0.05                |             0.2 |
+| 1.9                    | 0.03                    | 0.15                 | 0.075               |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-7.png)<!-- -->
 
@@ -131,7 +131,7 @@ appear in the behavioral results.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 0.1                  | 0.05                |             0.2 |
+| 2                      | 0.03                    | 0.15                 | 0.075               |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-8.png)<!-- -->
 
