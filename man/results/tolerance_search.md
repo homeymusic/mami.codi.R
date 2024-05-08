@@ -1,7 +1,7 @@
 Tolerance Search
 ================
 
-# 5PartialsNo3
+# 5Partials
 
 Tolerances:
 
