@@ -20,7 +20,7 @@
 #' @export
 mami.codi <- function(x, min_amplitude     = MIN_AMPLITUDE,
                       frequency_tolerance  = TOLERANCE,
-                      wavelength_tolerance = TOLERANCE,
+                      wavelength_tolerance = TOLERANCE / 2,
                       metadata=NA, verbose=FALSE, ...) {
 
   parse_input(x, ...)                       %>%
@@ -173,7 +173,7 @@ format_output <- function(x, metadata, verbose) {
 
 lcm <- function(x) Reduce(numbers::LCM, x)
 
-TOLERANCE      = 0.08
+TOLERANCE      = 0.15
 M3M6_TOLERANCE = 0.0003
 P8_TOLERANCE   = M3M6_TOLERANCE
 
