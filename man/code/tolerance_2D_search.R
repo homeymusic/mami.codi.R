@@ -1,7 +1,7 @@
-search_label = 'Pure'
-from_tol     = 0.01
-to_tol       = 0.15
-by_tol       = 0.01
+devtools::load_all(".")
+
+search_label = 'Harmonic'
+tolerances   = c(1:9 %o% 10^(-3:-1))
 
 tonic_midi         = 60
 delete_3rd_partial = T
@@ -13,10 +13,9 @@ source('./utils.R')
 devtools::install_github('git@github.com:homeymusic/mami.codi.R', ref="2D_tolerance")
 
 library(mami.codi.R)
-devtools::load_all(".")
 
 P8 <- c(tonic_midi,72) %>% mami.codi.R::mami.codi(verbose=T)
-if (dplyr::near(max(P8$wavelengths[[1]]),  SPEED_OF_SOUND / hrep::midi_to_freq(60))) {
+if (dplyr::near(max(P8$wavelengths[[1]]),  ENDOLYMPH_SPEED_OF_SOUND / hrep::midi_to_freq(60))) {
   print("Seems to be the correct version mami.codi.R")
 } else {
   stop("This is not the expected version of mami.codi.R")
@@ -53,8 +52,6 @@ behavior = readRDS(behavior.rds)
 
 intervals = tonic_midi + behavior$profile$interval
 index = seq_along(intervals)
-
-tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
 
 grid = tidyr::expand_grid(
   index,
