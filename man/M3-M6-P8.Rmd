@@ -16,8 +16,7 @@ are also surrounded by dissonance troughs.
 There are also tertiary troughs near the ET intervals.\
 
 ```{r, fig.height=8, fig.width=12, echo=F, results='asis', message=F, root.dir='./code'}
-devtools::load_all(".")
-title = "Consonance peak at P1 in octave-wide dissonance trough"
+title = "Theoretical consonance peak at P1 in octave-wide dissonance trough"
 tonic_midi    = 60
 span          = 7.1
 intervals     = seq(from=tonic_midi-span, to=tonic_midi+span, by=2*span/1000)
@@ -54,8 +53,15 @@ chords <- chords %>% dplyr::rowwise() %>% dplyr::mutate(
   roll_off      = metadata$roll_off
 )
 chords$consonance_dissonance_z = z_scores(chords$consonance_dissonance)
-cat("  \n#####", title, '\n')
-print(plot_semitone_codi(chords, title))
+cat("  \n###", title, '\n')
+print(knitr::kable(tibble::tibble_row(
+  multicolored_line_sigma  = 0.2,
+  green_line_sigma         = 2.0,
+  pseudo_octave            = paste(round(chords$pseudo_octave %>% unique, 2), collapse = ' '),
+  wavelength_tolerance    = paste(round(chords$tolerance %>% unique, 5), collapse = ' '),
+  frequency_tolerance     = paste(round(chords$tolerance %>% unique, 5) / 2.0, collapse = ' ')
+)))
+print(plot_semitone_codi_2_smooth(chords, title))
 cat("  \n")
 
 ```
@@ -68,9 +74,13 @@ dissonant neighbors on both sides, M7 and m2.
 Consonance increases with each semitone step out of the trough: downward from M7 
 to P4 below and upward from m2 to P5 above.\
 
-That is, at the resolution of an octave,
-the tonic pitch is the maximum consonance peak 
-in the center of a dissonance trough.\
+The green line in the plot above was generated using a smoothing sigma an order
+of magnitude broader than the default soothing sigma, 2.0 versus 0.2. At the
+broader resolution, the green line highlights the dissonance trough and ignore
+the consonance peak at P1.
+
+That is, at the resolution of an octave, MaMi.CoDi predicts a global maximum 
+consonance peak in the center of a smoothed dissonance trough.\
 
 At other resolutions, for example stringed instruments without frets, 
 the nearest playable neighbors to P1 are not necessarily dissonant.

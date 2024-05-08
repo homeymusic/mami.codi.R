@@ -27,10 +27,9 @@ For 10 harmonics, behavioral results and theoretical predictions agree.
 ### 5Partials ~ Partials: 5
 
 For 5 harmonics, behavioral results and theoretical predictions agree.
-For comparison with the study below with the third partial deleted,
-notice that the m3 peak is only slightly lower than the M3 peak. Near
-M2, the theoretical smoothed curve is relatively lower than the
-theoretical predictions plotted as points.
+For comparison with the study below (5 partils with the third partial
+deleted), notice that the m3 peak is only slightly lower than the M3
+peak.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
@@ -41,13 +40,9 @@ theoretical predictions plotted as points.
 ### 5PartialsNo3 ~ Partials: 5
 
 For 5 harmonics with the 3rd partial deleted, behavioral results and
-theoretical predictions largely agree. As expected, the m3 peak without
+theoretical predictions mostly agree. As expected, the m3 peak without
 the third partial is now lower than the m3 peak with all 5 harmonics
-while the M3 peak is mostly the same for both sets of harmonics.
-MaMi.CoDi predicts a peak with minor polarity just below the tritone
-that does not exist in the behavioral data. Near M2, the theoretical
-smoothed curve is relatively lower than the theoretical predictions
-plotted as points.
+while the M3 peak is slightly higher without the 3rd partial.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
@@ -58,9 +53,10 @@ plotted as points.
 ### Pure ~ Partials: 1
 
 For pure tones, the behavioral results and the theoretical predictions
-agree. Only P5 and P8 have pronounced two-sided peaks. The behavioral
-results show subtle variations in consonance height across the 15
-semitones but the overall shape agrees with MaMi.CoDi predictions.
+mostly agree. Only P5 and P8 have pronounced two-sided peaks. The
+behavioral results show subtle variations in consonance height across
+the 15 semitones but the overall peak structure agrees with MaMi.CoDi
+predictions.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
@@ -71,11 +67,8 @@ semitones but the overall shape agrees with MaMi.CoDi predictions.
 ### Stretched ~ Partials: 10
 
 For stretched harmonics, behavioral results and theoretical predictions
-mostly agree. MaMi.CoDi predicts a relatively higher consonance peak
-just above P4 than the behavioral results. MaMi.Codi predicts peaks with
-minor polarity just above m3 and m7 that do not exist in the behavioral
-results. Near M2, the theoretical smoothed curve is relatively lower
-than the theoretical predictions plotted as points.
+mostly agree. MaMi.Codi predicts peaks with minor polarity just above m3
+and m7 that do not exist in the behavioral results.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
@@ -86,11 +79,7 @@ than the theoretical predictions plotted as points.
 ### Compressed ~ Partials: 10
 
 For compressed harmonics, the pronounced behavioral peaks mostly agree
-with the theoretical peaks. However, for the behavioral peak between the
-14th and 15th semitones, the MaMi.CoDi model predicts a trough. For some
-of the non-peak dyads there are differences. MaMi.Codi predicts peaks
-with mostly minor polarity just above m2, at m3, just above P4 and
-halfway between M6 and m7 that do not exist in the behavioral results.
+with the theoretical peaks.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
@@ -101,11 +90,10 @@ halfway between M6 and m7 that do not exist in the behavioral results.
 ### Bonang ~ Partials: 4
 
 For gamalan dyads with a harmonic bass pitch and bonang upper pitch,
-behavioral results and theoretical predictions mostly agree. MaMi.CoDi’s
-predicted peak at P5 is relatively higher than the behavioral results.
-The predicted peak at P4 is shifted slightly lower than the behavioral
-results. MaMi.CoDi predicts a peak between m3 and M3 that does not
-appear in the behavioral results.
+behavioral results and theoretical predictions mostly agree. MaMi.CoDi
+predicts a dissonance trough with minor polarity at P4 that is not in
+the behavioral results. MaMi.CoDi predicts P5 to have minor polarity and
+be relatively higher than the behavioral results.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
@@ -158,7 +146,11 @@ Secondary maximums occur at the Pythagorean third and grave major sixth.
 Those secondary peaks are also surrounded by dissonance troughs. There
 are also tertiary troughs near the ET intervals.  
 
-##### Consonance peak at P1 in octave-wide dissonance trough
+### Theoretical consonance peak at P1 in octave-wide dissonance trough
+
+| multicolored_line_sigma | green_line_sigma | pseudo_octave | wavelength_tolerance | frequency_tolerance |
+|------------------------:|-----------------:|:--------------|:---------------------|:--------------------|
+|                     0.2 |                2 | 2             | 0.15                 | 0.075               |
 
 ![](man/figures/README-unnamed-chunk-15-1.png)<!-- -->
 
@@ -169,8 +161,13 @@ neighbors on both sides, M7 and m2. Consonance increases with each
 semitone step out of the trough: downward from M7 to P4 below and upward
 from m2 to P5 above.  
 
-That is, at the resolution of an octave, the tonic pitch is the maximum
-consonance peak in the center of a dissonance trough.  
+The green line in the plot above was generated using a smoothing sigma
+an order of magnitude broader than the default soothing sigma, 2.0
+versus 0.2. At the broader resolution, the green line highlights the
+dissonance trough and ignore the consonance peak at P1.
+
+That is, at the resolution of an octave, MaMi.CoDi predicts a global
+maximum consonance peak in the center of a smoothed dissonance trough.  
 
 At other resolutions, for example stringed instruments without frets,
 the nearest playable neighbors to P1 are not necessarily dissonant.
