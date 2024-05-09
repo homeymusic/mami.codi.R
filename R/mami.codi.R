@@ -20,8 +20,8 @@
 mami.codi <- function(
     x,
     min_amplitude        = MIN_AMPLITUDE,
-    frequency_tolerance  = TOLERANCE / 2.0,
-    wavelength_tolerance = TOLERANCE,
+    frequency_tolerance  = FREQUENCY_TOLERANCE,
+    wavelength_tolerance = WAVELENGTH_TOLERANCE,
     metadata             = NA,
     verbose              = FALSE,
     ...
@@ -173,9 +173,14 @@ format_output <- function(x, metadata, verbose) {
 
 lcm <- function(x) Reduce(numbers::LCM, x)
 
-TOLERANCE      = 0.15
-M3M6_TOLERANCE = 0.0003
-P8_TOLERANCE   = M3M6_TOLERANCE
+WAVELENGTH_TOLERANCE = 0.15
+FREQUENCY_TOLERANCE  = WAVELENGTH_TOLERANCE / 2
+
+WAVELENGTH_M3M6_TOLERANCE = 0.0003
+FREQUENCY_M3M6_TOLERANCE  = WAVELENGTH_M3M6_TOLERANCE / 2
+
+WAVELENGTH_P8_TOLERANCE   = WAVELENGTH_M3M6_TOLERANCE
+FREQUENCY_P8_TOLERANCE    = WAVELENGTH_P8_TOLERANCE / 2
 
 MIN_AMPLITUDE  = 0.03
 
@@ -198,15 +203,27 @@ R_PI_4         = matrix(c(
 #'
 #' @rdname default_tolerance
 #' @export
-default_tolerance <- function(scale) {
-  if (scale == 'macro') {
-    TOLERANCE
-  } else if (scale == 'M3M6') {
-    M3M6_TOLERANCE
-  } else if (scale == 'P8') {
-    P8_TOLERANCE
-  } else {
-    stop("no default tolerance for selection")
+default_tolerance <- function(dimension, scale) {
+  if (dimension == 'frequency') {
+    if (scale == 'macro') {
+      FREQUENCY_TOLERANCE
+    } else if (scale == 'M3M6') {
+      FREQUENCY_M3M6_TOLERANCE
+    } else if (scale == 'P8') {
+      FREQUENCY_P8_TOLERANCE
+    } else {
+      stop("no default tolerance for selection")
+    }
+  } else if (dimension == 'wavelength') {
+    if (scale == 'macro') {
+      WAVELENGTH_TOLERANCE
+    } else if (scale == 'M3M6') {
+      WAVELENGTH_M3M6_TOLERANCE
+    } else if (scale == 'P8') {
+      WAVELENGTH_P8_TOLERANCE
+    } else {
+      stop("no default tolerance for selection")
+    }
   }
 }
 

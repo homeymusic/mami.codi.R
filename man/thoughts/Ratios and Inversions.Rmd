@@ -8,14 +8,12 @@ output:
 
 ```{r, echo=F, results='asis', message=F}
 devtools::load_all('.')
-chord = (60+c(0,1,12)) %>% mami.codi(
+midi  = c(0,4,7) + 60
+chord = midi %>% mami.codi(
   verbose=T,
-  num_harmonics=10
+  num_harmonics=1
 )
-knitr::kable(tibble::tibble(
- f=chord$frequencies[[1]],
- l=chord$wavelengths[[1]]
-))
+midi
 ```
 
 ### Cycles Estimates
@@ -23,37 +21,226 @@ knitr::kable(tibble::tibble(
 #### Spatial Estimate
 ```{r, echo=F, results='asis', message=F}
 knitr::kable(tibble::tibble(
-  min    = min(chord$wavelengths[[1]]),
-  lcd    = chord$wavelength_lcd,
-  something_wavelength = min * lcd,
-  period  = 1 / (SPEED_OF_SOUND / something_wavelength)
+  tol_l   = chord$wavelength_tolerance,
+  min_l   = min(chord$wavelengths[[1]]),
+  lcd_l   = chord$wavelength_lcd,
+  chord_l = min_l * lcd_l,
+  chord_T = chord_l / SPEED_OF_SOUND * max(chord$wavelengths[[1]])/min_l
 ))
+```
+
+```{r, echo=F, results='asis', message=F}
+l_ratios = chord$wavelength_ratios[[1]]
+
+# each row gets ceiling(den/num * lcd) count of bricks
+
+bricks <- tibble::tibble(
+  x = 0+l_ratios$tone/2,
+  y = seq_along(l_ratios$den),
+  z = 1,
+  w = l_ratios$tone
+)
+
+# longest
+bricks = bricks %>% tibble::add_row(
+  x = l_ratios$tone[1] + l_ratios$tone[1]/2,
+  y = 1,
+  z = 1,
+  w = l_ratios$tone[1]
+)
+bricks = bricks %>% tibble::add_row(
+  x = 2*l_ratios$tone[1] + l_ratios$tone[1]/2,
+  y = 1,
+  z = 1,
+  w = l_ratios$tone[1]
+)
+bricks = bricks %>% tibble::add_row(
+  x = 3*l_ratios$tone[1] + l_ratios$tone[1]/2,
+  y = 1,
+  z = 1,
+  w = l_ratios$tone[1]
+)
+
+# middle
+bricks = bricks %>% tibble::add_row(
+  x = l_ratios$tone[2] + l_ratios$tone[2]/2,
+  y = 2,
+  z = 1,
+  w = l_ratios$tone[2]
+)
+bricks = bricks %>% tibble::add_row(
+  x = 2*l_ratios$tone[2] + l_ratios$tone[2]/2,
+  y = 2,
+  z = 1,
+  w = l_ratios$tone[2]
+)
+bricks = bricks %>% tibble::add_row(
+  x = 3*l_ratios$tone[2] + l_ratios$tone[2]/2,
+  y = 2,
+  z = 1,
+  w = l_ratios$tone[2]
+)
+bricks = bricks %>% tibble::add_row(
+  x = 4*l_ratios$tone[2] + l_ratios$tone[2]/2,
+  y = 2,
+  z = 1,
+  w = l_ratios$tone[2]
+)
+
+
+# shortest
+bricks = bricks %>% tibble::add_row(
+  x = l_ratios$tone[3] + l_ratios$tone[3]/2,
+  y = 3,
+  z = 1,
+  w = l_ratios$tone[3]
+)
+bricks = bricks %>% tibble::add_row(
+  x = 2*l_ratios$tone[3] + l_ratios$tone[3]/2,
+  y = 3,
+  z = 1,
+  w = l_ratios$tone[3]
+)
+bricks = bricks %>% tibble::add_row(
+  x = 3*l_ratios$tone[3] + l_ratios$tone[3]/2,
+  y = 3,
+  z = 1,
+  w = l_ratios$tone[3]
+)
+bricks = bricks %>% tibble::add_row(
+  x = 4*l_ratios$tone[3] + l_ratios$tone[3]/2,
+  y = 3,
+  z = 1,
+  w = l_ratios$tone[3]
+)
+bricks = bricks %>% tibble::add_row(
+  x = 5*l_ratios$tone[3] + l_ratios$tone[3]/2,
+  y = 3,
+  z = 1,
+  w = l_ratios$tone[3]
+)
+```
+
+```{r, echo=F, results='asis', message=F}
+ggplot2::ggplot(bricks, ggplot2::aes(x, y, width=w)) +
+  ggplot2::geom_tile(ggplot2::aes(fill = z), colour = "grey50")
 ```
 
 #### Temporal Estimate
 ```{r, echo=F, results='asis', message=F}
 knitr::kable(tibble::tibble(
-  min    = min(chord$frequencies[[1]]),
-  lcd    = chord$frequency_lcd,
-  envelope_frequency = min / lcd,
-  period    = 1 / envelope_frequency
+  tol_f   = chord$frequency_tolerance,
+  min_f   = min(chord$frequencies[[1]]),
+  lcd_f   = chord$frequency_lcd,
+  chord_f = min_f / lcd_f,
+  chord_T = 1 / chord_f
 ))
+```
+
+```{r, echo=F, results='asis', message=F}
+f_ratios = chord$frequency_ratios[[1]]
+f_ratios$periods = 1 / f_ratios$tone
+bricks <- tibble::tibble(
+  x = 0+(f_ratios$period)/2,
+  y = seq_along(f_ratios$den),
+  z = 1,
+  w = f_ratios$period
+)
+
+# longest
+bricks = bricks %>% tibble::add_row(
+  x = f_ratios$period[1] + f_ratios$period[1]/2,
+  y = 1,
+  z = 1,
+  w = f_ratios$period[1]
+)
+bricks = bricks %>% tibble::add_row(
+  x = 2*f_ratios$period[1] + f_ratios$period[1]/2,
+  y = 1,
+  z = 1,
+  w = f_ratios$period[1]
+)
+bricks = bricks %>% tibble::add_row(
+  x = 3*f_ratios$period[1] + f_ratios$period[1]/2,
+  y = 1,
+  z = 1,
+  w = f_ratios$period[1]
+)
+
+# middle
+bricks = bricks %>% tibble::add_row(
+  x = f_ratios$period[2] + f_ratios$period[2]/2,
+  y = 2,
+  z = 1,
+  w = f_ratios$period[2]
+)
+bricks = bricks %>% tibble::add_row(
+  x = 2*f_ratios$period[2] + f_ratios$period[2]/2,
+  y = 2,
+  z = 1,
+  w = f_ratios$period[2]
+)
+bricks = bricks %>% tibble::add_row(
+  x = 3*f_ratios$period[2] + f_ratios$period[2]/2,
+  y = 2,
+  z = 1,
+  w = f_ratios$period[2]
+)
+bricks = bricks %>% tibble::add_row(
+  x = 4*f_ratios$period[2] + f_ratios$period[2]/2,
+  y = 2,
+  z = 1,
+  w = f_ratios$period[2]
+)
+
+
+# shortest
+bricks = bricks %>% tibble::add_row(
+  x = f_ratios$period[3] + f_ratios$period[3]/2,
+  y = 3,
+  z = 1,
+  w = f_ratios$period[3]
+)
+bricks = bricks %>% tibble::add_row(
+  x = 2*f_ratios$period[3] + f_ratios$period[3]/2,
+  y = 3,
+  z = 1,
+  w = f_ratios$period[3]
+)
+bricks = bricks %>% tibble::add_row(
+  x = 3*f_ratios$period[3] + f_ratios$period[3]/2,
+  y = 3,
+  z = 1,
+  w = f_ratios$period[3]
+)
+bricks = bricks %>% tibble::add_row(
+  x = 4*f_ratios$period[3] + f_ratios$period[3]/2,
+  y = 3,
+  z = 1,
+  w = f_ratios$period[3]
+)
+bricks = bricks %>% tibble::add_row(
+  x = 5*f_ratios$period[3] + f_ratios$period[3]/2,
+  y = 3,
+  z = 1,
+  w = f_ratios$period[3]
+)
+```
+
+```{r, echo=F, results='asis', message=F}
+ggplot2::ggplot(bricks, ggplot2::aes(x, y, width=w)) +
+  ggplot2::geom_tile(ggplot2::aes(fill = z), colour = "grey50")
+```
+
+### Wavelength Ratios
+
+```{r, echo=F, results='asis', message=F}
+knitr::kable(chord$wavelength_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
 ```
 
 ### Frequency Ratios
 ```{r, echo=F, results='asis', message=F}
-chord$frequency_tolerance
-```
-```{r, echo=F, results='asis', message=F}
 knitr::kable(chord$frequency_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
-```
-
-### Wavelength Ratios
-```{r, echo=F, results='asis', message=F}
-chord$wavelength_tolerance
-```
-```{r, echo=F, results='asis', message=F}
-knitr::kable(chord$wavelength_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
 ```
 
 #### References
