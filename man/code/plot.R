@@ -118,8 +118,8 @@ plot_mami.codi <- function(chords, title='', chords_to_label=NULL,include_labels
     {if (minimal) theme_homey_minimal(aspect.ratio=aspect.ratio) else theme_homey(aspect.ratio=aspect.ratio)}
 }
 plot_smoothed_mami.codi <- function(chords, title='', chords_to_label=NULL,
-                           include_path=FALSE, aspect.ratio=NULL,
-                           minimal=F, sigma=0.25) {
+                                    include_path=FALSE, aspect.ratio=NULL,
+                                    minimal=F, sigma=0.25) {
 
   chords$smoothed_consonance_dissonance = smoothed(chords$semitone,
                                                    chords$consonance_dissonance,
@@ -132,7 +132,7 @@ plot_smoothed_mami.codi <- function(chords, title='', chords_to_label=NULL,
   }
 
   ggplot2::ggplot(chords, ggplot2::aes(x = major_minor,
-                                          y = smoothed_consonance_dissonance)) +
+                                       y = smoothed_consonance_dissonance)) +
     ggplot2::geom_vline(xintercept = 0, color = colors_homey$neutral) +
     ggplot2::geom_point(shape=21, stroke=NA, size=1,
                         ggplot2::aes(fill=color_factor_homey(chords,'major_minor'))) +
@@ -201,7 +201,7 @@ plot_colo.cohi <- function(chords, title, chords_to_label=NULL,
     ggplot2::ggtitle(title) +
     ggplot2::scale_x_continuous(
       limits=c(min(c(chords$frequency_consonance,chords$wavelength_consonance)),
-                   max(c(chords$frequency_consonance,chords$wavelength_consonance)))) +
+               max(c(chords$frequency_consonance,chords$wavelength_consonance)))) +
     {if (minimal) theme_homey_minimal(aspect.ratio=aspect.ratio) else theme_homey(aspect.ratio=aspect.ratio)}
 }
 plot_semitone_codi <- function(chords, title='', include_line=T, sigma=0.2,
@@ -283,11 +283,11 @@ plot_semitone_colo.cohi <- function(chords, title='', include_line=T, sigma=0.2,
                                     include_linear_regression = F, goal=NULL,
                                     black_vlines=c(),gray_vlines=c()) {
   chords$smoothed.frequency_consonance = smoothed(chords$semitone,
-                                            chords$frequency_consonance,
-                                            sigma)
+                                                  chords$frequency_consonance,
+                                                  sigma)
   chords$smoothed.wavelength_consonance = smoothed(chords$semitone,
-                                             chords$wavelength_consonance,
-                                             sigma)
+                                                   chords$wavelength_consonance,
+                                                   sigma)
   ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
@@ -570,8 +570,8 @@ plot_semitone_codi_2_smooth <- function(chords, title='', include_line=T,
                                                    sigma)
 
   chords$smoothed2.consonance_dissonance = smoothed(chords$semitone,
-                                                   chords$consonance_dissonance_z,
-                                                   sigma2)
+                                                    chords$consonance_dissonance_z,
+                                                    sigma2)
 
   ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone,
                                        y = .data$consonance_dissonance_z)) +
@@ -588,7 +588,7 @@ plot_semitone_codi_2_smooth <- function(chords, title='', include_line=T,
                                       y = smoothed.consonance_dissonance,
                                       color=color_factor_homey(chords,'major_minor'),
                                       group=1), linewidth = 1)} +
-  {if (!is.null(goal))
+    {if (!is.null(goal))
       ggplot2::geom_line(data=goal,
                          color    = colors_homey$neutral,
                          ggplot2::aes(x = semitone,
@@ -608,25 +608,31 @@ plot_semitone_codi_2_smooth <- function(chords, title='', include_line=T,
     theme_homey()
 }
 
-plot_periodicity <- function(ratios, lcd) {
+plot_periodicity <- function(ratios, lcd, log2_scale = F) {
   brickwork = ratios %>% purrr::pmap_dfr(\(index, num, den, tone) {
     course_of_bricks <- tibble::tibble(
-      x = numeric(),
-      y = numeric(),
-      z = numeric(),
-      w = numeric(),
+      xmin = numeric(),
+      xmax = numeric(),
+      ymin = numeric(),
+      ymax = numeric()
     )
     brick_count = ceiling(den/num*lcd)
     for (brick in 0:(brick_count-1)) {
       course_of_bricks = course_of_bricks %>% tibble::add_row(
-        x = brick*tone + tone/2,
-        y = index,
-        z = 1,
-        w = tone
+        xmin = brick*tone,
+        xmax = brick*tone + tone,
+        ymin = index,
+        ymax = index + 1
       )
     }
     course_of_bricks
   })
-  ggplot2::ggplot(brickwork, ggplot2::aes(x, y, width=w)) +
-    ggplot2::geom_tile(ggplot2::aes(fill = z), colour = "grey50")
+  ggplot2::ggplot(brickwork, ggplot2::aes(
+    xmin=xmin,
+    xmax=xmax,
+    ymin=ymin,
+    ymax=ymax
+  )) +
+    ggplot2::geom_rect(ggplot2::aes(fill = 1), colour = "grey50") +
+    {if (log2_scale) ggplot2::scale_x_continuous(trans='log2')}
 }

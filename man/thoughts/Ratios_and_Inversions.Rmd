@@ -17,7 +17,7 @@ chord = midi %>% mami.codi(
   period_tolerance     = tolerance,
   wavelength_tolerance = tolerance,
   verbose=T,
-  num_harmonics=3
+  num_harmonics=10
 )
 midi
 ```
@@ -42,6 +42,10 @@ lcd    = chord$wavelength_lcd
 plot_periodicity(ratios, lcd)
 ```
 
+```{r, echo=F, results='asis', message=F}
+plot_periodicity(ratios, lcd, log2_scale = T)
+```
+
 #### Temporal Estimate
 ```{r, echo=F, results='asis', message=F}
 knitr::kable(tibble::tibble(
@@ -57,6 +61,10 @@ ratios = chord$period_ratios[[1]] %>%
   dplyr::select(index, num, den, tone)
 lcd    = chord$period_lcd
 plot_periodicity(ratios, lcd)
+```
+
+```{r, echo=F, results='asis', message=F}
+plot_periodicity(ratios, lcd, log2_scale = T)
 ```
 
 ### Wavelength Ratios
