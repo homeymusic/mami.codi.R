@@ -15,8 +15,8 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```
 
 ```{r, echo=F, results='asis'}
-midi  = c(0,4, 7) + 60
-tolerance = 0.1
+midi  = c(0,2,7) + 60
+tolerance = 0.15
 chord = midi %>% mami.codi(
   period_tolerance     = tolerance,
   wavelength_tolerance = tolerance,
@@ -34,7 +34,8 @@ knitr::kable(tibble::tibble(
   min_l   = min(chord$wavelengths[[1]]),
   lcd_l   = chord$wavelength_lcd,
   chord_l = min_l * lcd_l,
-  chord_T = chord_l / SPEED_OF_SOUND * max(chord$wavelengths[[1]])/min_l
+  chord_T = chord_l / SPEED_OF_SOUND
+  # chord_T = chord_l / SPEED_OF_SOUND * max(chord$wavelengths[[1]])/min_l
 ))
 ```
 
