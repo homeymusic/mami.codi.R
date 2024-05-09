@@ -210,11 +210,11 @@ R_PI_4         = matrix(c(
 default_tolerance <- function(dimension, scale) {
   if (dimension == 'period') {
     if (scale == 'macro') {
-      period_TOLERANCE
+      PERIOD_TOLERANCE
     } else if (scale == 'M3M6') {
-      period_M3M6_TOLERANCE
+      PERIOD_M3M6_TOLERANCE
     } else if (scale == 'P8') {
-      period_P8_TOLERANCE
+      PERIOD_P8_TOLERANCE
     } else {
       stop("no default tolerance for selection")
     }
