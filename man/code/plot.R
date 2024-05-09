@@ -607,3 +607,26 @@ plot_semitone_codi_2_smooth <- function(chords, title='', include_line=T,
     ggplot2::ylab('Consonance-Dissonance Z-Score') +
     theme_homey()
 }
+
+plot_periodicity <- function(ratios, lcd) {
+  brickwork = ratios %>% purrr::pmap_dfr(\(index, num, den, tone) {
+    course_of_bricks <- tibble::tibble(
+      x = numeric(),
+      y = numeric(),
+      z = numeric(),
+      w = numeric(),
+    )
+    brick_count = ceiling(den/num*lcd)
+    for (brick in 0:(brick_count-1)) {
+      course_of_bricks = course_of_bricks %>% tibble::add_row(
+        x = brick*tone + tone/2,
+        y = index,
+        z = 1,
+        w = tone
+      )
+    }
+    course_of_bricks
+  })
+  ggplot2::ggplot(brickwork, ggplot2::aes(x, y, width=w)) +
+    ggplot2::geom_tile(ggplot2::aes(fill = z), colour = "grey50")
+}

@@ -77,6 +77,7 @@ using namespace Rcpp;
 
    NumericVector fraction(2);
 
+   NumericVector index(m);
    NumericVector nums(m);
    NumericVector dens(m);
    NumericVector ratios(m);
@@ -84,6 +85,7 @@ using namespace Rcpp;
    NumericVector reference_tones(m);
 
    for (int i = 0; i < m; ++i) {
+     index[i]           = i+1;
      ratios[i]          = x[i] / reference_tone;
      pseudo_ratios[i]   = pow(2.0, log(ratios[i]) / log(pseudo_octave));
      fraction           = rational_fraction(pseudo_ratios[i], pseudo_tolerance);
@@ -93,6 +95,7 @@ using namespace Rcpp;
    }
 
    return DataFrame::create(
+     _("index")               = index,
      _("num")                 = nums,
      _("den")                 = dens,
      _("ratio")               = ratios,

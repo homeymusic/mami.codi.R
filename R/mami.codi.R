@@ -9,7 +9,8 @@
 #' helpful for analysis and plots
 #' @param verbose Determines the amount of data to return from chord evaluation
 #' TRUE is all and FALSE is just major-minor, consonance-dissonance, tolerance and metadata.
-#' @param tolerance An optional tolerance value for creating rational fractions
+#' @param period_tolerance An optional tolerance value for creating rational fractions
+#' @param wavelength_tolerance An optional tolerance value for creating rational fractions
 #' @param ... parameters for hrep::sparse_fr_spectrum
 #'
 #' @return Major-Minor and Consonance-Dissonance plus additional information
@@ -20,7 +21,7 @@
 mami.codi <- function(
     x,
     min_amplitude        = MIN_AMPLITUDE,
-    frequency_tolerance  = FREQUENCY_TOLERANCE,
+    period_tolerance     = PERIOD_TOLERANCE,
     wavelength_tolerance = WAVELENGTH_TOLERANCE,
     metadata             = NA,
     verbose              = FALSE,
@@ -31,7 +32,7 @@ mami.codi <- function(
     listen_for_min_amplitude(min_amplitude) %>%
     listen_for_pseudo_octave()              %>%
     estimate_cycles(
-      frequency_tolerance,
+      period_tolerance,
       wavelength_tolerance
     )                                       %>%
     rotate()                                %>%
@@ -62,10 +63,12 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 listen_for_min_amplitude = function(x, min_amplitude) {
 
   f = x$spectrum[[1]] %>% dplyr::filter(.data$y>min_amplitude) %>% hrep::freq()
-  λ = SPEED_OF_SOUND / f
+  p = 1 / f
+  λ = SPEED_OF_SOUND * p
 
   x %>% dplyr::mutate(
     frequencies = list(f),
+    periods     = list(p),
     wavelengths = list(λ),
     min_amplitude
   )
@@ -92,19 +95,19 @@ listen_for_pseudo_octave = function(x) {
 
 estimate_cycles <- function(
     x,
-    frequency_tolerance,
+    period_tolerance,
     wavelength_tolerance
 ) {
 
-  f = x$frequencies[[1]]
+  p = x$periods[[1]]
   λ = x$wavelengths[[1]]
 
   x %>% dplyr::mutate(
     # estimate the frequency cycle
-    estimate_cycle(f,
+    estimate_cycle(p,
                    x$pseudo_octave,
-                   frequency_tolerance) %>%
-      dplyr::rename_with(~ paste0('frequency_',.)),
+                   period_tolerance) %>%
+      dplyr::rename_with(~ paste0('period_',.)),
 
     # estimate the wavelength cycle
     estimate_cycle(λ,
@@ -112,7 +115,7 @@ estimate_cycles <- function(
                    wavelength_tolerance) %>%
       dplyr::rename_with(~ paste0('wavelength_',.)),
 
-    frequency_tolerance,
+    period_tolerance,
     wavelength_tolerance
 
   )
@@ -145,7 +148,7 @@ rotate <- function(x) {
   browser
   rotated = (R_PI_4 %*% matrix(c(
     x$wavelength_consonance,
-    x$frequency_consonance
+    x$period_consonance
   ))) %>% as.vector %>% zapsmall
 
   x %>% dplyr::mutate(
@@ -166,7 +169,8 @@ format_output <- function(x, metadata, verbose) {
   } else {
     x %>%
       dplyr::select('major_minor', 'consonance_dissonance',
-                    'tolerance', 'min_amplitude',
+                    'period_tolerance', 'wavelength_tolerance',
+                    'min_amplitude',
                     'metadata')
   }
 }
@@ -174,13 +178,13 @@ format_output <- function(x, metadata, verbose) {
 lcm <- function(x) Reduce(numbers::LCM, x)
 
 WAVELENGTH_TOLERANCE = 0.15
-FREQUENCY_TOLERANCE  = WAVELENGTH_TOLERANCE / 2
+PERIOD_TOLERANCE  = WAVELENGTH_TOLERANCE / 2
 
 WAVELENGTH_M3M6_TOLERANCE = 0.0003
-FREQUENCY_M3M6_TOLERANCE  = WAVELENGTH_M3M6_TOLERANCE / 2
+PERIOD_M3M6_TOLERANCE  = WAVELENGTH_M3M6_TOLERANCE / 2
 
 WAVELENGTH_P8_TOLERANCE   = WAVELENGTH_M3M6_TOLERANCE
-FREQUENCY_P8_TOLERANCE    = WAVELENGTH_P8_TOLERANCE / 2
+PERIOD_P8_TOLERANCE    = WAVELENGTH_P8_TOLERANCE / 2
 
 MIN_AMPLITUDE  = 0.03
 
@@ -206,11 +210,11 @@ R_PI_4         = matrix(c(
 default_tolerance <- function(dimension, scale) {
   if (dimension == 'frequency') {
     if (scale == 'macro') {
-      FREQUENCY_TOLERANCE
+      period_TOLERANCE
     } else if (scale == 'M3M6') {
-      FREQUENCY_M3M6_TOLERANCE
+      period_M3M6_TOLERANCE
     } else if (scale == 'P8') {
-      FREQUENCY_P8_TOLERANCE
+      period_P8_TOLERANCE
     } else {
       stop("no default tolerance for selection")
     }
