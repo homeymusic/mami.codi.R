@@ -1,92 +1,56 @@
-# Above 2 Harmonics Wavelength and Frequency Estimates of Period Differ
+---
+title: "Frequency and Wavelength Relative Periodicity"
+output:
+  github_document: default
+---
 
-## Even though they have the same set of tones
-
-Wavelengths come from tonotopic hair cells 
-Frequencies come from chopper units
-
-### P5 Pure Tone
-
-```{r, echo=F, results='asis', message=F}
-devtools::load_all(".")
-M3 = c(60,67) %>% mami.codi(num_harmonics=1, verbose=T)
-knitr::kable(M3 %>% dplyr::select(frequency_lcm, wavelength_lcm))
-```
-
-#### Frequency Ratios
-```{r, echo=F, results='asis', message=F}
-knitr::kable(M3$frequency_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
-```
-
-#### Wavelength Ratios
-```{r, echo=F, results='asis', message=F}
-knitr::kable(M3$wavelength_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
-```
-
-### P5 2 Harmonics
-```{r, echo=F, results='asis', message=F}
-M3 = c(60,67) %>% mami.codi(num_harmonics=2, verbose=T)
-knitr::kable(M3 %>% dplyr::select(frequency_lcm, wavelength_lcm))
-```
-
-#### Frequency Ratios
+## Chord
 
 ```{r, echo=F, results='asis', message=F}
-knitr::kable(M3$frequency_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
+devtools::load_all('.')
+chord = c(12,19) %>% mami.codi(
+  frequency_tolerance  = TOLERANCE,
+  wavelength_tolerance = TOLERANCE,
+  verbose=T,
+  num_harmonics=6
+)
+knitr::kable(tibble::tibble(
+ f=chord$frequencies[[1]],
+ l=chord$wavelengths[[1]]
+))
 ```
-#### Wavelength Ratios
 
+### Cycles Estimates
+
+#### Spatial Estimate
 ```{r, echo=F, results='asis', message=F}
-knitr::kable(M3$wavelength_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
+knitr::kable(tibble::tibble(
+  min    = min(chord$wavelengths[[1]]),
+  lcd    = chord$wavelength_lcd,
+  something_wavelength = min / lcd,
+  something_period     = something_wavelength / SPEED_OF_SOUND
+))
 ```
-### P5 3 Harmonics
+
+#### Temporal Estimate
 ```{r, echo=F, results='asis', message=F}
-M3 = c(60,67) %>% mami.codi(num_harmonics=3, verbose=T)
-knitr::kable(M3 %>% dplyr::select(frequency_lcm, wavelength_lcm))
+knitr::kable(tibble::tibble(
+  min    = min(chord$frequencies[[1]]),
+  lcd    = chord$frequency_lcd,
+  envelope_frequency = min / lcd,
+  envelope_period    = 1 / envelope_frequency
+))
 ```
-#### Frequency Ratios
 
+### Frequency Ratios
 ```{r, echo=F, results='asis', message=F}
-knitr::kable(M3$frequency_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
+knitr::kable(chord$frequency_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
 ```
-#### Wavelength Ratios
+
+### Wavelength Ratios
 ```{r, echo=F, results='asis', message=F}
-knitr::kable(M3$wavelength_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
+knitr::kable(chord$wavelength_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
 ```
 
-# Thoughts
-
-## Period Length Uncertainty 
-
-Frequency and wavelength are simple inversions. Why would the signal processing 
-estimate using wavelengths give a different results than the signal processing 
-estimate using frequencies?\
-
-Is it a limitation of the sensors or the processing of the sensors' signals by 
-higher parts of the perception system?\
-
-### Why is MaMi.CoDi's wavelength tolerance twice its frequency tolerance?\
-
-Is it because harmonics are base 10 and octaves are base 2?
-
-```{r, echo=T, results='asis', message=F}
-num_octaves = 6
-C4_Harmonics = hrep::midi_to_freq(60) * 1:(2^num_octaves)
-C4_Harmonics
-```
-```{r, echo=T, results='asis', message=F}
-C4_octaves   = hrep::midi_to_freq(60) * 2^(0:num_octaves)
-C4_octaves
-```
-
-Is it related to the octave complement formula?\
-
-Octave-complement intervals represented as ratios r follow the relation r1 r2 = 2. For given r the unknown x can be calculated by the formula x := 2/r or (for the ratio representation r = a/b) into x := 2 (b / a).\
-
-The result sometimes has to be reduced by the factor 2.\
-
-Examples\
-5/4 vs. 2*4/5 = 8/5\
-4/3 vs. 2*3/4 = 6/4 = 3/2\
-
-from [Xenharmonic Wiki](https://en.xen.wiki/w/Octave_complement)\
+#### References
+[Periodic function from Wikipedia](https://en.wikipedia.org/wiki/Periodic_function)

@@ -17,14 +17,23 @@
 #'
 #' @rdname mami.codi
 #' @export
-mami.codi <- function(x, min_amplitude=MIN_AMPLITUDE,
-                      tolerance = TOLERANCE,
-                      metadata=NA, verbose=FALSE, ...) {
+mami.codi <- function(
+    x,
+    min_amplitude        = MIN_AMPLITUDE,
+    frequency_tolerance  = TOLERANCE / 2.0,
+    wavelength_tolerance = TOLERANCE,
+    metadata             = NA,
+    verbose              = FALSE,
+    ...
+) {
 
   parse_input(x, ...)                       %>%
     listen_for_min_amplitude(min_amplitude) %>%
     listen_for_pseudo_octave()              %>%
-    estimate_cycles(tolerance)              %>%
+    estimate_cycles(
+      frequency_tolerance,
+      wavelength_tolerance
+    )                                       %>%
     rotate()                                %>%
     format_output(metadata, verbose)
 
@@ -81,7 +90,11 @@ listen_for_pseudo_octave = function(x) {
 
 }
 
-estimate_cycles <- function(x, tolerance) {
+estimate_cycles <- function(
+    x,
+    frequency_tolerance,
+    wavelength_tolerance
+) {
 
   f = x$frequencies[[1]]
   λ = x$wavelengths[[1]]
@@ -90,16 +103,17 @@ estimate_cycles <- function(x, tolerance) {
     # estimate the frequency cycle
     estimate_cycle(f,
                    x$pseudo_octave,
-                   tolerance / 2.0) %>%
+                   frequency_tolerance) %>%
       dplyr::rename_with(~ paste0('frequency_',.)),
 
     # estimate the wavelength cycle
     estimate_cycle(λ,
                    x$pseudo_octave,
-                   tolerance) %>%
+                   wavelength_tolerance) %>%
       dplyr::rename_with(~ paste0('wavelength_',.)),
 
-    tolerance,
+    frequency_tolerance,
+    wavelength_tolerance
 
   )
 
@@ -110,9 +124,8 @@ estimate_cycle <- function(x, pseudo_octave, tolerance) {
   r = ratios(x, pseudo_octave, tolerance)
 
   tibble::tibble_row(
-    lcm        = lcm(r$den),
-    cycle      = min(x) / .data$lcm,
-    dissonance = log2(.data$lcm),
+    lcd        = lcm(r$den),
+    dissonance = log2(.data$lcd),
     consonance = flip(.data$dissonance),
     ratios     = list(r)
   )
