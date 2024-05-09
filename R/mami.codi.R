@@ -103,13 +103,13 @@ estimate_cycles <- function(
   λ = x$wavelengths[[1]]
 
   x %>% dplyr::mutate(
-    # estimate the frequency cycle
+    # estimate the chord period
     estimate_cycle(p,
                    x$pseudo_octave,
                    period_tolerance) %>%
       dplyr::rename_with(~ paste0('period_',.)),
 
-    # estimate the wavelength cycle
+    # estimate the chord wavelength
     estimate_cycle(λ,
                    x$pseudo_octave,
                    wavelength_tolerance) %>%
@@ -208,7 +208,7 @@ R_PI_4         = matrix(c(
 #' @rdname default_tolerance
 #' @export
 default_tolerance <- function(dimension, scale) {
-  if (dimension == 'frequency') {
+  if (dimension == 'period') {
     if (scale == 'macro') {
       period_TOLERANCE
     } else if (scale == 'M3M6') {

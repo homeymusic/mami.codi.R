@@ -8,13 +8,13 @@ octave_ratio       = 2.0
 roll_off           = 3
 
 source('./utils.R')
-devtools::install_github('git@github.com:homeymusic/mami.codi.R', ref="2D_tolerance")
+devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 
 library(mami.codi.R)
 devtools::load_all(".")
 
 P8 <- c(tonic_midi,72) %>% mami.codi.R::mami.codi(verbose=T)
-if (P8$frequency_tolerance == mami.codi.R::default_tolerance('frequency','macro')) {
+if (P8$period_tolerance == mami.codi.R::default_tolerance('period','macro')) {
   print("Seems to be the correct version mami.codi.R")
 } else {
   stop("This is not the expected version of mami.codi.R")
@@ -54,7 +54,7 @@ index = seq_along(intervals)
 
 grid = tidyr::expand_grid(
   index,
-  frequency_tolerance  = tolerances,
+  period_tolerance  = tolerances,
   wavelength_tolerance = tolerances
 )
 
@@ -64,7 +64,7 @@ plan(multisession, workers=parallelly::availableCores())
 
 data = grid %>% furrr::future_pmap_dfr(\(
   index,
-  frequency_tolerance,
+  period_tolerance,
   wavelength_tolerance
 ) {
   if (search_label=='Bonang') {
@@ -106,7 +106,7 @@ data = grid %>% furrr::future_pmap_dfr(\(
 
   mami.codi.R::mami.codi(
     chord,
-    frequency_tolerance  = frequency_tolerance,
+    period_tolerance  = period_tolerance,
     wavelength_tolerance = wavelength_tolerance,
     metadata       = list(
       octave_ratio   = octave_ratio,
