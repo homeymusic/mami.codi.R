@@ -1,4 +1,4 @@
-search_label = 'Bonang'
+search_label = 'Harmonic'
 tolerances   = c(c(1,5) %o% 10^(-2:-1))
 
 tonic_midi         = 60

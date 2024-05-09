@@ -384,13 +384,13 @@ plot_semitone_codi_grid <- function(theory, experiment,
                                     black_vlines=c(), gray_vlines=c(),
                                     title) {
   per_plot_labels = tidyr::expand_grid(
-    period_tolerance  = theory$period_tolerance  %>% unique,
+    frequency_tolerance  = theory$frequency_tolerance  %>% unique,
     wavelength_tolerance = theory$wavelength_tolerance %>% unique
   )
   per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(period_tolerance,wavelength_tolerance) {
+    purrr::pmap_vec(\(frequency_tolerance,wavelength_tolerance) {
       tols = paste(
-        'f:', period_tolerance,
+        'f:', frequency_tolerance,
         'λ:', wavelength_tolerance
       )
     })
@@ -417,7 +417,7 @@ plot_semitone_codi_grid <- function(theory, experiment,
                                                           vjust="inward",hjust="inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_grid(period_tolerance ~ wavelength_tolerance, scales = 'free_y') +
+    ggplot2::facet_grid(frequency_tolerance ~ wavelength_tolerance, scales = 'free_y') +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()
