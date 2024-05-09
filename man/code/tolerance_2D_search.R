@@ -1,5 +1,5 @@
-search_label = 'Harmonic'
-tolerances   = c(1:9 %o% 10^(-3:-1))
+search_label = 'Bonang'
+tolerances   = c(c(1,5,9) %o% 10^(-3:-1))
 
 tonic_midi         = 60
 delete_3rd_partial = T
