@@ -1,8 +1,7 @@
 search_label = 'Bonang'
-tolerances   = c(c(1,5,9) %o% 10^(-3:-1))
+tolerances   = c(c(1,5) %o% 10^(-2:-1))
 
 tonic_midi         = 60
-delete_3rd_partial = T
 num_harmonics      = 5
 octave_ratio       = 2.0
 roll_off           = 3
@@ -29,11 +28,6 @@ if (search_label == 'Stretched') {
   num_harmonics = 1
 }
 
-if (delete_3rd_partial) {
-  print(paste('!!! WARNING: DELETING 3rd PARTIAL:',delete_3rd_partial,'!!!'))
-} else {
-  print(paste('delete 3rd partial?',delete_3rd_partial))
-}
 print(search_label)
 print(paste('octave_ratio:',octave_ratio))
 print(paste('num_harmonics:',num_harmonics))

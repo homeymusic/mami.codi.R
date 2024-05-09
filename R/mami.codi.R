@@ -166,7 +166,7 @@ format_output <- function(x, metadata, verbose) {
   } else {
     x %>%
       dplyr::select('major_minor', 'consonance_dissonance',
-                    'frequency_tolerance', 'frequency_tolerance',
+                    'frequency_tolerance', 'wavelength_tolerance',
                     'min_amplitude',
                     'metadata')
   }

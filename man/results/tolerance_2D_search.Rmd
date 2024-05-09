@@ -70,12 +70,12 @@ theory <- theory %>% dplyr::rowwise() %>% dplyr::mutate(
   octave_ratio   = metadata$octave_ratio,
   semitone       = metadata$semitone,
   .before=1
-) %>% dplyr::group_by(period_tolerance, wavelength_tolerance)
+) %>% dplyr::group_by(frequency_tolerance, wavelength_tolerance)
 ```
 
 Tolerances:
 ```{r, echo=F}
-freq_tols = theory$period_tolerance %>% unique
+freq_tols = theory$frequency_tolerance %>% unique
 freq_tols
 ```
 
