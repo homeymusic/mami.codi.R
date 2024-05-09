@@ -8,11 +8,9 @@ output:
 
 ```{r, echo=F, results='asis', message=F}
 devtools::load_all('.')
-chord = c(12,19) %>% mami.codi(
-  frequency_tolerance  = TOLERANCE,
-  wavelength_tolerance = TOLERANCE,
+chord = (60+c(0,1,12)) %>% mami.codi(
   verbose=T,
-  num_harmonics=6
+  num_harmonics=10
 )
 knitr::kable(tibble::tibble(
  f=chord$frequencies[[1]],
@@ -27,8 +25,8 @@ knitr::kable(tibble::tibble(
 knitr::kable(tibble::tibble(
   min    = min(chord$wavelengths[[1]]),
   lcd    = chord$wavelength_lcd,
-  something_wavelength = min / lcd,
-  something_period     = something_wavelength / SPEED_OF_SOUND
+  something_wavelength = min * lcd,
+  period  = 1 / (SPEED_OF_SOUND / something_wavelength)
 ))
 ```
 
@@ -38,16 +36,22 @@ knitr::kable(tibble::tibble(
   min    = min(chord$frequencies[[1]]),
   lcd    = chord$frequency_lcd,
   envelope_frequency = min / lcd,
-  envelope_period    = 1 / envelope_frequency
+  period    = 1 / envelope_frequency
 ))
 ```
 
 ### Frequency Ratios
 ```{r, echo=F, results='asis', message=F}
+chord$frequency_tolerance
+```
+```{r, echo=F, results='asis', message=F}
 knitr::kable(chord$frequency_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
 ```
 
 ### Wavelength Ratios
+```{r, echo=F, results='asis', message=F}
+chord$wavelength_tolerance
+```
 ```{r, echo=F, results='asis', message=F}
 knitr::kable(chord$wavelength_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
 ```
