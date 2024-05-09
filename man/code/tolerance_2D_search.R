@@ -14,7 +14,7 @@ library(mami.codi.R)
 devtools::load_all(".")
 
 P8 <- c(tonic_midi,72) %>% mami.codi.R::mami.codi(verbose=T)
-if (P8$period_tolerance == mami.codi.R::default_tolerance('period','macro')) {
+if (P8$frequency_tolerance == mami.codi.R::default_tolerance('frequency','macro')) {
   print("Seems to be the correct version mami.codi.R")
 } else {
   stop("This is not the expected version of mami.codi.R")
@@ -54,7 +54,7 @@ index = seq_along(intervals)
 
 grid = tidyr::expand_grid(
   index,
-  period_tolerance  = tolerances,
+  frequency_tolerance  = tolerances,
   wavelength_tolerance = tolerances
 )
 
@@ -64,7 +64,7 @@ plan(multisession, workers=parallelly::availableCores())
 
 data = grid %>% furrr::future_pmap_dfr(\(
   index,
-  period_tolerance,
+  frequency_tolerance,
   wavelength_tolerance
 ) {
   if (search_label=='Bonang') {
@@ -106,7 +106,7 @@ data = grid %>% furrr::future_pmap_dfr(\(
 
   mami.codi.R::mami.codi(
     chord,
-    period_tolerance  = period_tolerance,
+    frequency_tolerance  = frequency_tolerance,
     wavelength_tolerance = wavelength_tolerance,
     metadata       = list(
       octave_ratio   = octave_ratio,
