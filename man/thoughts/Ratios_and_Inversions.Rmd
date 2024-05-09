@@ -1,5 +1,5 @@
 ---
-title: "Period and Wavelength Relative Periodicity"
+title: "Frequency and Wavelength Relative Periodicity"
 output:
   github_document: default
 ---
@@ -15,13 +15,13 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```
 
 ```{r, echo=F, results='asis'}
-midi  = c(0,2,7) + 60
+midi  = c(0,4,7) + 60
 tolerance = 0.15
 chord = midi %>% mami.codi(
-  period_tolerance     = tolerance,
+  frequency_tolerance     = tolerance,
   wavelength_tolerance = tolerance,
   verbose=T,
-  num_harmonics=10
+  num_harmonics=1
 )
 midi
 ```
@@ -43,7 +43,24 @@ knitr::kable(tibble::tibble(
 ratios = chord$wavelength_ratios[[1]] %>%
   dplyr::select(index, num, den, tone)
 lcd    = chord$wavelength_lcd
-plot_periodicity(ratios, lcd, 'space', log2_scale = T)
+plot_periodicity(ratios, lcd, 'space', log2_scale = F)
+```
+
+## Temporal
+```{r, echo=F, results='asis', message=F}
+knitr::kable(tibble::tibble(
+  tol_f   = chord$frequency_tolerance,
+  min_f   = min(chord$frequencies[[1]]),
+  lcd_f   = chord$frequency_lcd,
+  chord_T = lcd_f / min_f / (max(chord$frequencies[[1]])/min(chord$frequencies[[1]]))
+))
+```
+
+```{r, echo=F, results='asis', message=F}
+ratios = chord$frequency_ratios[[1]] %>% 
+  dplyr::select(index, num, den, tone)
+lcd    = chord$frequency_lcd
+plot_periodicity(ratios, lcd, 'time', log2_scale = F)
 ```
 
 ### Wavelength Ratios
@@ -52,26 +69,9 @@ plot_periodicity(ratios, lcd, 'space', log2_scale = T)
 knitr::kable(chord$wavelength_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
 ```
 
-## Temporal
-```{r, echo=F, results='asis', message=F}
-knitr::kable(tibble::tibble(
-  tol_T   = chord$period_tolerance,
-  min_T   = min(chord$periods[[1]]),
-  lcd_T   = chord$period_lcd,
-  chord_T = lcd_T * min_T
-))
-```
-
-```{r, echo=F, results='asis', message=F}
-ratios = chord$period_ratios[[1]] %>% 
-  dplyr::select(index, num, den, tone)
-lcd    = chord$period_lcd
-plot_periodicity(ratios, lcd, 'time', log2_scale = T)
-```
-
 ### Frequency Ratios
 ```{r, echo=F, results='asis', message=F}
-knitr::kable(chord$period_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
+knitr::kable(chord$frequency_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
 ```
 
 ## References

@@ -1,7 +1,7 @@
 Tolerance 2D Search
 ================
 
-# Bonang
+# Pure
 
 Tolerances:
 
@@ -11,7 +11,7 @@ Tolerances:
 
 Number of Harmonics:
 
-    #> [1] 5
+    #> [1] 1
 
 Octave Ratios:
 

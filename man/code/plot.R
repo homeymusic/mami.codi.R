@@ -625,7 +625,7 @@ plot_periodicity <- function(ratios, lcd, dimension, log2_scale = F) {
       ymin = numeric(),
       ymax = numeric()
     )
-    brick_count = max(c(1,round(den/num*lcd)))
+    brick_count = max(c(1,ceiling(den/num*lcd)))
     for (brick in 0:(brick_count-1)) {
       course_of_bricks = course_of_bricks %>% tibble::add_row(
         xmin = brick*tone,

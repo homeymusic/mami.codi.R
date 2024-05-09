@@ -1,4 +1,4 @@
-search_label = 'Harmonic'
+search_label = 'Pure'
 tolerances   = c(c(1,5) %o% 10^(-2:-1))
 
 tonic_midi         = 60
