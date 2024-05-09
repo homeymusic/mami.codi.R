@@ -17,7 +17,7 @@ Frequency and Wavelength Relative Periodicity
 
 | tol_f |    min_f | lcd_f |   chord_T |
 |------:|---------:|------:|----------:|
-|  0.15 | 261.6256 |     6 | 0.0153063 |
+| 0.075 | 261.6256 |     6 | 0.0153063 |
 
 ![](Ratios_and_Inversions_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 

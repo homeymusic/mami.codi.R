@@ -16,10 +16,9 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 ```{r, echo=F, results='asis'}
 midi  = c(0,4,7) + 60
-tolerance = 0.15
 chord = midi %>% mami.codi(
-  frequency_tolerance     = tolerance,
-  wavelength_tolerance = tolerance,
+  frequency_tolerance  = 0.15/2,
+  wavelength_tolerance = 0.15,
   verbose=T,
   num_harmonics=1
 )
