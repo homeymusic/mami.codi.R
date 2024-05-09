@@ -8,8 +8,10 @@ output:
 
 ```{r, echo=F, results='asis', message=F}
 devtools::load_all('.')
-midi  = c(0,4,7) + 60
+midi  = c(0,7) + 72
 chord = midi %>% mami.codi(
+  frequency_tolerance  = WAVELENGTH_TOLERANCE,
+  wavelength_tolerance = WAVELENGTH_TOLERANCE,
   verbose=T,
   num_harmonics=1
 )
