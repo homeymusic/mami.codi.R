@@ -1,6 +1,7 @@
 search_label = 'Pure'
 tolerances   = c(c(1,5) %o% 10^(-2:-1))
-
+wavelength_tolerance = tolerances
+frequency_tolerance  = tolerances
 tonic_midi         = 60
 num_harmonics      = 5
 octave_ratio       = 2.0
@@ -48,8 +49,8 @@ index = seq_along(intervals)
 
 grid = tidyr::expand_grid(
   index,
-  frequency_tolerance  = tolerances,
-  wavelength_tolerance = tolerances
+  frequency_tolerance  = frequency_tolerance,
+  wavelength_tolerance = wavelength_tolerance
 )
 
 print(grid)

@@ -18,7 +18,7 @@ library(mami.codi.R)
 devtools::load_all(".")
 
 P8 <- c(tonic_midi,72) %>% mami.codi.R::mami.codi(verbose=T)
-if (P8$tolerance == mami.codi.R::default_tolerance('macro')) {
+if (P8$frequency_tolerance == mami.codi.R::default_tolerance('frequency','macro')) {
   print("Seems to be the correct version mami.codi.R")
 } else {
   stop("This is not the expected version of mami.codi.R")
@@ -105,7 +105,8 @@ data = grid %>% furrr::future_pmap_dfr(\(
 
   mami.codi.R::mami.codi(
     chord,
-    tolerance  = tolerance,
+    frequency_tolerance  = tolerance / 2,
+    wavelength_tolerance = tolerance,
     metadata       = list(
       octave_ratio   = octave_ratio,
       num_harmonics  = num_harmonics,
