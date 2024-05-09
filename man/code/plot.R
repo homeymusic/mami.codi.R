@@ -21,9 +21,11 @@ colors_homey <- list(
   'highlight'         = '#C18160',
   'foreground'        = '#291B14',
   'subtle_foreground' = '#7F745A',
-  'minor'             = '#ABDAF3',
+  'minor'             = '#8AC5FF',
+  'minor_dark'        = '#6894BF',
   'neutral'           = '#F3DDAB',
-  'major'             = '#F3A904',
+  'major'             = '#FFB000',
+  'major_dark'        = '#BF8400',
   'light_neutral'     = '#FFF6E2',
   'fundamental'       = '#FF5500',
   'green'             = '#74DE7E',
@@ -608,7 +610,14 @@ plot_semitone_codi_2_smooth <- function(chords, title='', include_line=T,
     theme_homey()
 }
 
-plot_periodicity <- function(ratios, lcd, log2_scale = F) {
+plot_periodicity <- function(ratios, lcd, dimension, log2_scale = F) {
+  if (dimension == 'space') {
+    fill_color   = colors_homey$minor
+    border_color = colors_homey$minor_dark
+  } else if (dimension == 'time') {
+    fill_color = colors_homey$major
+    border_color = colors_homey$major_dark
+  }
   brickwork = ratios %>% purrr::pmap_dfr(\(index, num, den, tone) {
     course_of_bricks <- tibble::tibble(
       xmin = numeric(),
@@ -616,7 +625,7 @@ plot_periodicity <- function(ratios, lcd, log2_scale = F) {
       ymin = numeric(),
       ymax = numeric()
     )
-    brick_count = ceiling(den/num*lcd)
+    brick_count = max(c(1,round(den/num*lcd)))
     for (brick in 0:(brick_count-1)) {
       course_of_bricks = course_of_bricks %>% tibble::add_row(
         xmin = brick*tone,
@@ -633,6 +642,7 @@ plot_periodicity <- function(ratios, lcd, log2_scale = F) {
     ymin=ymin,
     ymax=ymax
   )) +
-    ggplot2::geom_rect(ggplot2::aes(fill = 1), colour = "grey50") +
+    ggplot2::theme(legend.position="none") +
+    ggplot2::geom_rect(fill=fill_color, color=border_color) +
     {if (log2_scale) ggplot2::scale_x_continuous(trans='log2')}
 }

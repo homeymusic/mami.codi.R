@@ -1,37 +1,17 @@
 Period and Wavelength Relative Periodicity
 ================
 
-## Chord
+# Chord Cycle Estimates
 
 \[1\] 60 64 67
 
-### Cycles Estimates
-
-#### Spatial Estimate
+## Spatial
 
 | tol_l |    min_l | lcd_l |  chord_l |   chord_T |
 |------:|---------:|------:|---------:|----------:|
 |   0.1 | 0.087501 |    60 | 5.250061 | 0.2293354 |
 
-![](Ratios_and_Inversions_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
-
-    ## Warning in ggplot2::scale_x_continuous(trans = "log2"): log-2 transformation
-    ## introduced infinite values.
-
 ![](Ratios_and_Inversions_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
-
-#### Temporal Estimate
-
-| tol_T |     min_T | lcd_T |   chord_T |
-|------:|----------:|------:|----------:|
-|   0.1 | 0.0002551 |    60 | 0.0153063 |
-
-![](Ratios_and_Inversions_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
-
-    ## Warning in ggplot2::scale_x_continuous(trans = "log2"): log-2 transformation
-    ## introduced infinite values.
-
-![](Ratios_and_Inversions_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
 ### Wavelength Ratios
 
@@ -68,6 +48,14 @@ Period and Wavelength Relative Periodicity
 |     2 |  59 |   5 | 11.892071 | 1.0405683 |       0.087501 |
 |     1 |  15 |   1 | 14.983071 | 1.3110340 |       0.087501 |
 
+## Temporal
+
+| tol_T |     min_T | lcd_T |   chord_T |
+|------:|----------:|------:|----------:|
+|   0.1 | 0.0002551 |    60 | 0.0153063 |
+
+![](Ratios_and_Inversions_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+
 ### Frequency Ratios
 
 | index | num | den |     ratio |      tone | reference_tone |
@@ -103,7 +91,7 @@ Period and Wavelength Relative Periodicity
 |     2 |  59 |   5 | 11.892071 | 0.0030337 |      0.0002551 |
 |     1 |  15 |   1 | 14.983071 | 0.0038223 |      0.0002551 |
 
-#### References
+## References
 
 [Periodic function from
 Wikipedia](https://en.wikipedia.org/wiki/Periodic_Tunction)

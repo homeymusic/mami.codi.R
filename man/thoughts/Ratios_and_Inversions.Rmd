@@ -4,15 +4,19 @@ output:
   github_document: default
 ---
 
-## Chord
+# Chord Cycle Estimates
 
-```{r, echo=F, results='asis', message=F}
+```{r, echo=F, message=F, warning=F}
 devtools::load_all('.')
 setwd('.')
 source('./man/code/plot.R')
 source('./man/code/utils.R')
-midi  = c(0,4,7) + 60
-tolerance = 1e-01
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+```
+
+```{r, echo=F, results='asis'}
+midi  = c(0,4, 7) + 60
+tolerance = 0.1
 chord = midi %>% mami.codi(
   period_tolerance     = tolerance,
   wavelength_tolerance = tolerance,
@@ -22,9 +26,8 @@ chord = midi %>% mami.codi(
 midi
 ```
 
-### Cycles Estimates
+## Spatial
 
-#### Spatial Estimate
 ```{r, echo=F, results='asis', message=F}
 knitr::kable(tibble::tibble(
   tol_l   = chord$wavelength_tolerance,
@@ -39,14 +42,16 @@ knitr::kable(tibble::tibble(
 ratios = chord$wavelength_ratios[[1]] %>%
   dplyr::select(index, num, den, tone)
 lcd    = chord$wavelength_lcd
-plot_periodicity(ratios, lcd)
+plot_periodicity(ratios, lcd, 'space', log2_scale = T)
 ```
+
+### Wavelength Ratios
 
 ```{r, echo=F, results='asis', message=F}
-plot_periodicity(ratios, lcd, log2_scale = T)
+knitr::kable(chord$wavelength_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
 ```
 
-#### Temporal Estimate
+## Temporal
 ```{r, echo=F, results='asis', message=F}
 knitr::kable(tibble::tibble(
   tol_T   = chord$period_tolerance,
@@ -60,17 +65,7 @@ knitr::kable(tibble::tibble(
 ratios = chord$period_ratios[[1]] %>% 
   dplyr::select(index, num, den, tone)
 lcd    = chord$period_lcd
-plot_periodicity(ratios, lcd)
-```
-
-```{r, echo=F, results='asis', message=F}
-plot_periodicity(ratios, lcd, log2_scale = T)
-```
-
-### Wavelength Ratios
-
-```{r, echo=F, results='asis', message=F}
-knitr::kable(chord$wavelength_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
+plot_periodicity(ratios, lcd, 'time', log2_scale = T)
 ```
 
 ### Frequency Ratios
@@ -78,5 +73,5 @@ knitr::kable(chord$wavelength_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::s
 knitr::kable(chord$period_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
 ```
 
-#### References
+## References
 [Periodic function from Wikipedia](https://en.wikipedia.org/wiki/Periodic_Tunction)
