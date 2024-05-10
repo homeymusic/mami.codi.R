@@ -166,9 +166,13 @@ For 10 harmonics, behavioral results and theoretical predictions agree.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 0.15                 | 0.075               |             0.2 |
+| 2                      | 0.03                    | 0.15                 | 0.0375              |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->
+
+![](man/figures/README-unnamed-chunk-5-2.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-3.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-4.png)<!-- -->
 
 ##### 5Partials ~ Partials: 5
 
@@ -179,9 +183,13 @@ peak.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 0.15                 | 0.075               |             0.2 |
+| 2                      | 0.03                    | 0.15                 | 0.0375              |             0.2 |
 
-![](man/figures/README-unnamed-chunk-5-2.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-5.png)<!-- -->
+
+![](man/figures/README-unnamed-chunk-5-6.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-7.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-8.png)<!-- -->
 
 ##### 5PartialsNo3 ~ Partials: 5
 
@@ -192,9 +200,13 @@ while the M3 peak is slightly higher without the 3rd partial.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 0.15                 | 0.075               |             0.2 |
+| 2                      | 0.03                    | 0.15                 | 0.0375              |             0.2 |
 
-![](man/figures/README-unnamed-chunk-5-3.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-9.png)<!-- -->
+
+![](man/figures/README-unnamed-chunk-5-10.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-11.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-12.png)<!-- -->
 
 ##### Pure ~ Partials: 1
 
@@ -207,12 +219,16 @@ major-minor versus the behavioral results are included in a plot below.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 0.15                 | 0.075               |             0.2 |
+| 2                      | 0.03                    | 0.15                 | 0.0375              |             0.2 |
 
-![](man/figures/README-unnamed-chunk-5-4.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-13.png)<!-- -->
+
+![](man/figures/README-unnamed-chunk-5-14.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-15.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-16.png)<!-- -->  
 For pure tones, MaMi.CoDi’s theoretical predictions for major-minor have
 similar contours to the behavioral results for
-consonance-dissonance.![](man/figures/README-unnamed-chunk-5-5.png)<!-- -->
+consonance-dissonance.![](man/figures/README-unnamed-chunk-5-17.png)<!-- -->
 
 ##### Stretched ~ Partials: 10
 
@@ -222,9 +238,13 @@ and m7 that do not exist in the behavioral results.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2.1                    | 0.03                    | 0.15                 | 0.075               |             0.2 |
+| 2.1                    | 0.03                    | 0.15                 | 0.0375              |             0.2 |
 
-![](man/figures/README-unnamed-chunk-5-6.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-18.png)<!-- -->
+
+![](man/figures/README-unnamed-chunk-5-19.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-20.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-21.png)<!-- -->
 
 ##### Compressed ~ Partials: 10
 
@@ -233,9 +253,13 @@ with the theoretical peaks.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 1.9                    | 0.03                    | 0.15                 | 0.075               |             0.2 |
+| 1.9                    | 0.03                    | 0.15                 | 0.0375              |             0.2 |
 
-![](man/figures/README-unnamed-chunk-5-7.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-22.png)<!-- -->
+
+![](man/figures/README-unnamed-chunk-5-23.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-24.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-25.png)<!-- -->
 
 ##### Bonang ~ Partials: 4
 
@@ -247,9 +271,13 @@ be relatively higher than the behavioral results.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 0.15                 | 0.075               |             0.2 |
+| 2                      | 0.03                    | 0.15                 | 0.0375              |             0.2 |
 
-![](man/figures/README-unnamed-chunk-5-8.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-26.png)<!-- -->
+
+![](man/figures/README-unnamed-chunk-5-27.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-28.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-29.png)<!-- -->
 
 #### Dyads spanning 1 quarter tone
 
@@ -259,9 +287,13 @@ Description is below.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 3e-04                | 0.00015             |           0.035 |
+| 2                      | 0.03                    | 3e-04                | 7.5e-05             |           0.035 |
 
-![](man/figures/README-unnamed-chunk-5-9.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-30.png)<!-- -->
+
+![](man/figures/README-unnamed-chunk-5-31.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-32.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-33.png)<!-- -->
 
 ##### M6 ~ Partials: 10
 
@@ -269,9 +301,13 @@ Description is below.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 3e-04                | 0.00015             |           0.035 |
+| 2                      | 0.03                    | 3e-04                | 7.5e-05             |           0.035 |
 
-![](man/figures/README-unnamed-chunk-5-10.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-34.png)<!-- -->
+
+![](man/figures/README-unnamed-chunk-5-35.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-36.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-37.png)<!-- -->
 
 ##### P8 ~ Partials: 10
 
@@ -279,9 +315,13 @@ Description is below.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 3e-04                | 0.00015             |           0.035 |
+| 2                      | 0.03                    | 3e-04                | 7.5e-05             |           0.035 |
 
-![](man/figures/README-unnamed-chunk-5-11.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-38.png)<!-- -->
+
+![](man/figures/README-unnamed-chunk-5-39.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-40.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-41.png)<!-- -->
 
 ### Consonance peaks in dissonance troughs
 
