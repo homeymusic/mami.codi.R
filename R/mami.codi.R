@@ -143,7 +143,7 @@ flip <- function(x) {
 
 rotate <- function(x) {
   browser
-  rotated = (R_PI_4 %*% matrix(c(
+  rotated = (R_PI_2 %*% matrix(c(
     x$wavelength_consonance,
     x$frequency_consonance
   ))) %>% as.vector %>% zapsmall
@@ -192,6 +192,12 @@ PI_4           = pi / 4
 R_PI_4         = matrix(c(
   cos(PI_4), sin(PI_4),
   -sin(PI_4), cos(PI_4)
+), nrow = 2, ncol = 2, byrow = TRUE)
+
+
+R_PI_2         = matrix(c(
+   0, 1,
+  -1, 0
 ), nrow = 2, ncol = 2, byrow = TRUE)
 
 #' Default Tolerance
