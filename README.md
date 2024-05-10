@@ -27,6 +27,10 @@ are detected by the inner ear hair cells closest to the base of the
 cochlea, which is the end closest to the middle ear, the source of the
 wave.  
 
+MaMi.CoDi combines the two cycle estimates into a two-dimensional space
+with consonance-dissonance along one dimension and major-minor on the
+orthogonal dimension.
+
 #### Chord
 
 Below, we estimate the periodicity of the C4, E4 and G4 major triad with
