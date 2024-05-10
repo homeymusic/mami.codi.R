@@ -11,13 +11,13 @@ devtools::load_all('.')
 setwd('.')
 source('./man/code/plot.R')
 source('./man/code/utils.R')
-midi  = c(0,4, 7) + 60
+midi  = c(0, 4, 7) + 60
 tolerance = 1e-01
 chord = midi %>% mami.codi(
   frequency_tolerance  = tolerance,
   wavelength_tolerance = tolerance,
   verbose=T,
-  num_harmonics=1
+  num_harmonics = 10
 )
 midi
 ```
@@ -27,11 +27,11 @@ midi
 #### Spatial Estimate
 ```{r, echo=F, results='asis', message=F}
 knitr::kable(tibble::tibble(
-  tol_l   = chord$wavelength_tolerance,
-  min_l   = min(chord$wavelengths[[1]]),
-  lcd_l   = chord$wavelength_lcd,
-  chord_l = min_l * lcd_l,
-  chord_T = chord_l / SPEED_OF_SOUND * max(chord$wavelengths[[1]])/min_l
+  tol_l     = chord$wavelength_tolerance,
+  min_l_m   = min(chord$wavelengths[[1]]),
+  lcd_l_Sz  = chord$wavelength_lcd,
+  chord_l_m = min_l_m * lcd_l_Sz,
+  chord_T_s = chord_l_m / SPEED_OF_SOUND
 ))
 ```
 
@@ -50,10 +50,11 @@ knitr::kable(chord$wavelength_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::s
 #### Temporal Estimate
 ```{r, echo=F, results='asis', message=F}
 knitr::kable(tibble::tibble(
-  tol_T   = chord$frequency_tolerance,
-  min_T   = min(chord$frequencies[[1]]),
-  lcd_T   = chord$frequency_lcd,
-  chord_T = lcd_T * min_T
+  tol_T      = chord$frequency_tolerance,
+  min_f_Hz   = min(chord$frequencies[[1]]),
+  lcd_f_Sz   = chord$frequency_lcd,
+  chord_f_Hz = min_f_Hz / lcd_f_Sz,
+  chord_T    = 1 / chord_f_Hz
 ))
 ```
 
