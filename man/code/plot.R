@@ -246,32 +246,28 @@ plot_semitone_codi <- function(chords, title='', include_line=T, sigma=0.2,
 plot_semitone_mami <- function(chords, title='', include_line=T, sigma=0.2,
                                include_linear_regression=F,goal=NULL,abs=F,
                                black_vlines=c(),gray_vlines=c()) {
-  chords$smoothed.major_minor = smoothed(
-    chords$semitone,
-    if (abs) abs(z_scores(chords$major_minor)) else z_scores(chords$major_minor),
-    sigma)
+
+  z = if (abs) abs(z_scores(chords$major_minor)) else z_scores(chords$major_minor)
+  chords$smoothed.major_minor = smoothed(chords$semitone, z, sigma)
 
   ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone,
-                                       y = .data$major_minor)) +
+                                       y = z)) +
     ggplot2::geom_vline(xintercept = black_vlines, color=colors_homey$highlight) +
     ggplot2::geom_vline(xintercept = gray_vlines,color=colors_homey$highlight,linetype = 'dotted') +
-    # ggplot2::geom_hline(yintercept = 0, color = colors_homey$neutral) +
     ggplot2::geom_point(shape=21, stroke=NA, size=1,
                         ggplot2::aes(fill=color_factor_homey(chords,'major_minor'))) +
     { if (include_linear_regression) ggplot2::stat_smooth(method=lm)} +
     { if (include_line)
       ggplot2::geom_line(data=chords,
                          ggplot2::aes(x = semitone,
-                                      y = 4*smoothed.major_minor,
+                                      y = smoothed.major_minor,
                                       color=color_factor_homey(chords,'major_minor'),
                                       group=1), linewidth = 1)} +
     {if (!is.null(goal))
       ggplot2::geom_line(data=goal,
                          color    = colors_homey$neutral,
                          ggplot2::aes(x = semitone,
-                                      y = consonance_dissonance *
-                                        (max(chords$smoothed.major_minor) -
-                                           min(chords$smoothed.major_minor)),
+                                      y = consonance_dissonance,
                                       group=1), linewidth = 0.5)} +
     ggplot2::scale_fill_manual(values=color_values_homey(), guide="none") +
     ggplot2::scale_color_manual(values=color_values_homey(), guide='none') +
@@ -609,7 +605,8 @@ plot_semitone_codi_2_smooth <- function(chords, title='', include_line=T,
     theme_homey()
 }
 
-plot_periodicity <- function(ratios, lcd, dimension) {
+plot_periodicity <- function(ratios, lcd, dimension,
+                             relative = T, log2_scale = F) {
   if (dimension=='wavelength') {
     fill_color   = colors_homey$minor
     border_color = colors_homey$minor_dark
@@ -617,26 +614,49 @@ plot_periodicity <- function(ratios, lcd, dimension) {
     fill_color   = colors_homey$major
     border_color = colors_homey$major_dark
   }
-  brick_count = 8
   brickwork = ratios %>% purrr::pmap_dfr(\(index, num, den, tone) {
+    if (dimension=='wavelength') {
+      freq = SPEED_OF_SOUND / tone
+    } else if (dimension=='frequency') {
+      freq = tone
+    }
+    midi = hrep::freq_to_midi(freq)
     course_of_bricks <- tibble::tibble(
       xmin = numeric(),
       xmax = numeric(),
       ymin = numeric(),
       ymax = numeric()
     )
-    brick_width = den / num
-    brick_count = lcd * num / den
+    if (relative) {
+      brick_width = den / num
+      brick_count = num / den * lcd
+    } else {
+      brick_width = 1 / tone
+      brick_count = 1
+    }
     for (brick in 0:(brick_count-1)) {
       course_of_bricks = course_of_bricks %>% tibble::add_row(
         xmin = brick*brick_width,
         xmax = brick*brick_width + brick_width,
-        ymin = index,
-        ymax = index + 1
+        ymin = midi - 0.5,
+        ymax = midi + 0.5
       )
     }
     course_of_bricks
   })
+  if (dimension=='wavelength') {
+    if (relative) {
+      xlab = 'Relative Spatial Frequency (Sz)'
+    } else {
+      xlab = bquote('Wavenumber'~(m^-1))
+    }
+  } else if (dimension=='frequency') {
+    if (relative) {
+      xlab = 'Relative Periodicity (Sz)'
+    } else {
+      xlab = bquote('Period'~(s))
+    }
+  }
   ggplot2::ggplot(brickwork, ggplot2::aes(
     xmin=xmin,
     xmax=xmax,
@@ -644,5 +664,8 @@ plot_periodicity <- function(ratios, lcd, dimension) {
     ymax=ymax
   )) +
     ggplot2::theme(legend.position="none") +
-    ggplot2::geom_rect(fill=fill_color, color=border_color)
+    ggplot2::geom_rect(fill=fill_color, color=border_color) +
+    ggplot2::xlab(xlab) +
+    ggplot2::ylab("MIDI") +
+    {if (log2_scale) ggplot2::scale_x_continuous(trans='log2') }
 }

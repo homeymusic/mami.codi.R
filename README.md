@@ -1,7 +1,146 @@
 MaMi.CoDi: A Spatiotemporal Periodicity Model of Consonance Perception
 ================
 
-# Theoretical predictions compared to large-scale behavioral results
+## How MaMi.CoDi Works
+
+### How MaMi.CoDi Predicts Spatiotemporal Periodicity
+
+To estimate the periodicity of a chord, the MaMi.CoDi model uses a
+signal processing technique. It creates ratios for every tone in the
+chord (fundamental, harmonics, noise, etc.) relative to a reference
+tone. The least common multiple of those ratios is a measure of the
+cycle length, relative to the reference tone.  
+
+MaMi.CoDi creates two estimates of the chord’s period: a spatial
+estimate and a temporal estimate.  
+
+For the frequency (i.e. phase-locking or temporal) estimate the
+reference tone is the smallest frequency. Small frequencies are low
+tones and are detected by the inner ear hair cells closest to the apex
+of the cochlea, which is the end furthest from the source of the wave.  
+
+For the wavelength (i.e. rate-place or spatial) estimate, the reference
+tone is the smallest wavelength. Small wavelengths are high tones and
+are detected by the inner ear hair cells closest to the base of the
+cochlea, which is the end closest to the middle ear, the source of the
+wave.  
+
+#### Chord
+
+Below, we estimate the periodicity of the C4, E4 and G4 major triad with
+5 harmonics per pitch.
+
+- Frequencies: 261.6255653, 329.6275569, 391.995436  
+
+- Wavelengths: 1.311034, 1.0405683, 0.8750102  
+
+- MIDI: 60, 64, 67  
+
+- Number of Harmonics: 5
+
+#### Temporal Estimate
+
+| chord_Hz |  chord_m |   chord_s | chord_Sz | tol |
+|---------:|---------:|----------:|---------:|----:|
+| 21.80213 | 15.73241 | 0.0458671 |       12 | 0.1 |
+
+##### Periods
+
+![](man/figures/README-unnamed-chunk-11-1.png)<!-- -->
+
+##### Relative Periodicity
+
+![](man/figures/README-unnamed-chunk-12-1.png)<!-- -->
+
+#### Frequency Ratios
+
+| index | num | den |    ratio |      tone | reference_tone |
+|------:|----:|----:|---------:|----------:|---------------:|
+|     1 |   1 |   1 | 1.000000 |  261.6256 |       261.6256 |
+|     2 |   4 |   3 | 1.259921 |  329.6276 |       261.6256 |
+|     3 |   3 |   2 | 1.498307 |  391.9954 |       261.6256 |
+|     4 |   2 |   1 | 2.000000 |  523.2511 |       261.6256 |
+|     5 |   5 |   2 | 2.519842 |  659.2551 |       261.6256 |
+|     6 |   3 |   1 | 2.996614 |  783.9909 |       261.6256 |
+|     7 |   3 |   1 | 3.000000 |  784.8767 |       261.6256 |
+|     8 |  15 |   4 | 3.779763 |  988.8827 |       261.6256 |
+|     9 |   4 |   1 | 4.000000 | 1046.5023 |       261.6256 |
+|    10 |   9 |   2 | 4.494921 | 1175.9863 |       261.6256 |
+|    11 |   5 |   1 | 5.000000 | 1308.1278 |       261.6256 |
+|    12 |   5 |   1 | 5.039684 | 1318.5102 |       261.6256 |
+|    13 |   6 |   1 | 5.993228 | 1567.9817 |       261.6256 |
+|    14 |  19 |   3 | 6.299605 | 1648.1378 |       261.6256 |
+|    15 |  15 |   2 | 7.491535 | 1959.9772 |       261.6256 |
+
+#### Spatial Estimate
+
+| chord_Hz |  chord_m |   chord_s | chord_Sz | tol |
+|---------:|---------:|----------:|---------:|----:|
+| 4.360426 | 10.50012 | 0.2293354 |       60 | 0.1 |
+
+##### Wavenumbers
+
+![](man/figures/README-unnamed-chunk-15-1.png)<!-- -->
+
+##### Relative Spatial Frequency
+
+![](man/figures/README-unnamed-chunk-16-1.png)<!-- -->
+
+##### Wavelength Ratios
+
+| index | num | den |    ratio |      tone | reference_tone |
+|------:|----:|----:|---------:|----------:|---------------:|
+|    15 |   1 |   1 | 1.000000 | 0.1750020 |       0.175002 |
+|    14 |   5 |   4 | 1.189207 | 0.2081137 |       0.175002 |
+|    13 |   4 |   3 | 1.250000 | 0.2187525 |       0.175002 |
+|    12 |   3 |   2 | 1.486509 | 0.2601421 |       0.175002 |
+|    11 |   3 |   2 | 1.498307 | 0.2622068 |       0.175002 |
+|    10 |   5 |   3 | 1.666667 | 0.2916701 |       0.175002 |
+|     9 |   9 |   5 | 1.872884 | 0.3277585 |       0.175002 |
+|     8 |   2 |   1 | 1.982012 | 0.3468561 |       0.175002 |
+|     7 |   5 |   2 | 2.497178 | 0.4370113 |       0.175002 |
+|     6 |   5 |   2 | 2.500000 | 0.4375051 |       0.175002 |
+|     5 |   3 |   1 | 2.973018 | 0.5202842 |       0.175002 |
+|     4 |  11 |   3 | 3.745768 | 0.6555170 |       0.175002 |
+|     3 |   5 |   1 | 5.000000 | 0.8750102 |       0.175002 |
+|     2 |   6 |   1 | 5.946035 | 1.0405683 |       0.175002 |
+|     1 |  15 |   2 | 7.491535 | 1.3110340 |       0.175002 |
+
+### Finding the Tolerance Values
+
+MaMi.CoDi uses the Stern-Brocot tree to find rational fractions for the
+ratios within a given tolerance. How do we find the best tolerance
+values? For the MaMi.CoDi model we ran thousands of computations with
+various tolerance values and compared the predictions with results from
+six of the large-scale behavioral experiments.  
+
+Because spatial and temporal information is encoded via different
+mechanisms by the cochlea, we assume that the wavelength and frequency
+tolerances will have different values.  
+
+So, our tolerance searches were two-dimensional. The image below is a
+sample of a 2D tolerance search using the harmonic experiment from
+large-scale behavioral study.  
+
+![Two-dimensional tolerance search for frequency and wavelength
+tolerance values for finding rational fractions for tone
+ratios.](https://github.com/homeymusic/mami.codi.R/blob/2D_tolerance/man/tolerance_search_plots/Harmonic2DCropped.png?raw=true)
+Click here, for the [full 2D tolerance
+search](https://github.com/homeymusic/mami.codi.R/blob/2D_tolerance/man/tolerance_search_plots/Harmonic2D.jpg)
+image for the harmonics experiment. Click here, for the [2D_tolerance
+branch on
+GitHub](https://github.com/homeymusic/mami.codi.R/tree/2D_tolerance) to
+recreate all the 2D searches.  
+
+The best fits across the experiments were given by a wavelength
+tolerance of 0.15 and a frequency tolerance of 0.075. The frequency
+tolerance is half the size of the wavelength tolerance. Does that mean
+that the perception mechanism for frequency is twice as discriminating
+as the wavelength mechanism? “At 1 kHz information contained in temporal
+discharges was an order of magnitude better than that obtained by a
+rate–place mechanism. Heinz et al. (2001)” from Winter (2005).  
+
+## Theoretical predictions compared to large-scale behavioral results
 
 The large-scale behavioral data in the plots below are from [Timbral
 effects on consonance disentangle psychoacoustic mechanisms and suggest
@@ -10,11 +149,11 @@ scales](https://www.nature.com/articles/s41467-024-45812-z) by Raja
 Marjieh, Peter M. C. Harrison, Harin Lee, Fotini Deligiannaki & Nori
 Jacoby.
 
-## Manipulating harmonic frequencies
+### Manipulating harmonic frequencies
 
-## Dyads spanning 15 semitones
+#### Dyads spanning 15 semitones
 
-### Harmonic ~ Partials: 10
+##### Harmonic ~ Partials: 10
 
 For 10 harmonics, behavioral results and theoretical predictions agree.
 
@@ -22,9 +161,9 @@ For 10 harmonics, behavioral results and theoretical predictions agree.
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
 | 2                      | 0.03                    | 0.15                 | 0.075               |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->
 
-### 5Partials ~ Partials: 5
+##### 5Partials ~ Partials: 5
 
 For 5 harmonics, behavioral results and theoretical predictions agree.
 For comparison with the study below (5 partils with the third partial
@@ -35,9 +174,9 @@ peak.
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
 | 2                      | 0.03                    | 0.15                 | 0.075               |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-2.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-2.png)<!-- -->
 
-### 5PartialsNo3 ~ Partials: 5
+##### 5PartialsNo3 ~ Partials: 5
 
 For 5 harmonics with the 3rd partial deleted, behavioral results and
 theoretical predictions mostly agree. As expected, the m3 peak without
@@ -48,23 +187,27 @@ while the M3 peak is slightly higher without the 3rd partial.
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
 | 2                      | 0.03                    | 0.15                 | 0.075               |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-3.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-3.png)<!-- -->
 
-### Pure ~ Partials: 1
+##### Pure ~ Partials: 1
 
 For pure tones, the behavioral results and the theoretical predictions
 mostly agree. Only P5 and P8 have pronounced two-sided peaks. The
 behavioral results show subtle variations in consonance height across
 the 15 semitones but the overall peak structure agrees with MaMi.CoDi
-predictions.
+predictions. Theoretical predictions for major-minor versus the
+beharvoiral results are included in a plot further below.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
 | 2                      | 0.03                    | 0.15                 | 0.075               |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-4.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-4.png)<!-- -->  
+For pure tones, MaMi.CoDi’s theoretical predictions for major-minor have
+similar contours to the behavioral results for
+consonance-dissonance.![](man/figures/README-unnamed-chunk-5-5.png)<!-- -->
 
-### Stretched ~ Partials: 10
+##### Stretched ~ Partials: 10
 
 For stretched harmonics, behavioral results and theoretical predictions
 mostly agree. MaMi.Codi predicts peaks with minor polarity just above m3
@@ -74,9 +217,9 @@ and m7 that do not exist in the behavioral results.
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
 | 2.1                    | 0.03                    | 0.15                 | 0.075               |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-5.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-6.png)<!-- -->
 
-### Compressed ~ Partials: 10
+##### Compressed ~ Partials: 10
 
 For compressed harmonics, the pronounced behavioral peaks mostly agree
 with the theoretical peaks.
@@ -85,9 +228,9 @@ with the theoretical peaks.
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
 | 1.9                    | 0.03                    | 0.15                 | 0.075               |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-6.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-7.png)<!-- -->
 
-### Bonang ~ Partials: 4
+##### Bonang ~ Partials: 4
 
 For gamalan dyads with a harmonic bass pitch and bonang upper pitch,
 behavioral results and theoretical predictions mostly agree. MaMi.CoDi
@@ -99,21 +242,11 @@ be relatively higher than the behavioral results.
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
 | 2                      | 0.03                    | 0.15                 | 0.075               |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-7.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-8.png)<!-- -->
 
-## Dyads spanning 1 quarter tone
+#### Dyads spanning 1 quarter tone
 
-### M3 ~ Partials: 10
-
-Description is below.
-
-| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 3e-04                | 0.00015             |           0.035 |
-
-![](man/figures/README-unnamed-chunk-4-8.png)<!-- -->
-
-### M6 ~ Partials: 10
+##### M3 ~ Partials: 10
 
 Description is below.
 
@@ -121,9 +254,9 @@ Description is below.
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
 | 2                      | 0.03                    | 3e-04                | 0.00015             |           0.035 |
 
-![](man/figures/README-unnamed-chunk-4-9.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-9.png)<!-- -->
 
-### P8 ~ Partials: 10
+##### M6 ~ Partials: 10
 
 Description is below.
 
@@ -131,7 +264,17 @@ Description is below.
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
 | 2                      | 0.03                    | 3e-04                | 0.00015             |           0.035 |
 
-![](man/figures/README-unnamed-chunk-4-10.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-10.png)<!-- -->
+
+##### P8 ~ Partials: 10
+
+Description is below.
+
+| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
+| 2                      | 0.03                    | 3e-04                | 0.00015             |           0.035 |
+
+![](man/figures/README-unnamed-chunk-5-11.png)<!-- -->
 
 ### Consonance peaks in dissonance troughs
 
@@ -150,9 +293,9 @@ are also tertiary troughs near the ET intervals.
 
 | multicolored_line_sigma | green_line_sigma | pseudo_octave | wavelength_tolerance | frequency_tolerance |
 |------------------------:|-----------------:|:--------------|:---------------------|:--------------------|
-|                     0.2 |                2 | 2             | 0.15                 | 0.075               |
+|                     0.2 |                2 | 2             | 0.15                 | 0.0375              |
 
-![](man/figures/README-unnamed-chunk-11-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-31-1.png)<!-- -->
 
 Performers of instruments with quantized semitones like keyboards and
 fretted strings–especially beginners and their audiences–are aware that
@@ -213,141 +356,141 @@ values.](./man/tolerance_search_plots/M3%20Orders%20of%20Magnitude.png)
     #> # A tibble: 1,000 × 2
     #>    semitone consonance_dissonance
     #>       <dbl>                 <dbl>
-    #>  1     63.9                  91.5
-    #>  2     64.1                  88.8
-    #>  3     63.7                  87.8
-    #>  4     64.0                  87.1
-    #>  5     63.8                  86.6
-    #>  6     63.8                  85.8
-    #>  7     63.9                  85.8
-    #>  8     63.7                  85.4
-    #>  9     64.0                  85.4
-    #> 10     64.0                  85.2
+    #>  1     63.8                  96.1
+    #>  2     63.8                  96.1
+    #>  3     63.8                  96.1
+    #>  4     63.8                  96.1
+    #>  5     63.8                  96.1
+    #>  6     63.8                  96.1
+    #>  7     63.8                  96.1
+    #>  8     63.9                  96.1
+    #>  9     63.9                  96.1
+    #> 10     63.9                  96.1
     #> # ℹ 990 more rows
 
 ###### The JT M3 has the highest consonance
 
-    #> [1] 63.86321
+    #> [1] 63.8467
 
     #> # A tibble: 1 × 2
     #>   semitone consonance_dissonance
     #>      <dbl>                 <dbl>
-    #> 1     63.9                  91.5
+    #> 1     63.8                  96.1
 
 ###### Frequency ratios of the JT M3
 
-    #>    num den     ratio pseudo_ratio      tone reference_tone
-    #> 1    1   1  1.000000     1.000000  261.6256       261.6256
-    #> 2    5   4  1.250005     1.250005  327.0334       261.6256
-    #> 3    2   1  2.000000     2.000000  523.2511       261.6256
-    #> 4    5   2  2.500011     2.500011  654.0668       261.6256
-    #> 5    3   1  3.000000     3.000000  784.8767       261.6256
-    #> 6   15   4  3.750016     3.750016  981.1002       261.6256
-    #> 7    4   1  4.000000     4.000000 1046.5023       261.6256
-    #> 8    5   1  5.000000     5.000000 1308.1278       261.6256
-    #> 9    5   1  5.000022     5.000022 1308.1336       261.6256
-    #> 10   6   1  6.000000     6.000000 1569.7534       261.6256
-    #> 11  25   4  6.250027     6.250027 1635.1669       261.6256
-    #> 12   7   1  7.000000     7.000000 1831.3790       261.6256
-    #> 13  15   2  7.500033     7.500033 1962.2003       261.6256
-    #> 14   8   1  8.000000     8.000000 2093.0045       261.6256
-    #> 15  35   4  8.750038     8.750038 2289.2337       261.6256
-    #> 16   9   1  9.000000     9.000000 2354.6301       261.6256
-    #> 17  10   1 10.000000    10.000000 2616.2556       261.6256
-    #> 18  10   1 10.000044    10.000044 2616.2671       261.6256
-    #> 19  45   4 11.250049    11.250049 2943.3005       261.6256
-    #> 20  25   2 12.500055    12.500055 3270.3339       261.6256
+    #>    index num den     ratio pseudo_ratio      tone reference_tone
+    #> 1      1   1   1  1.000000     1.000000  261.6256       261.6256
+    #> 2      2   5   4  1.248814     1.248814  326.7215       261.6256
+    #> 3      3   2   1  2.000000     2.000000  523.2511       261.6256
+    #> 4      4   5   2  2.497627     2.497627  653.4431       261.6256
+    #> 5      5   3   1  3.000000     3.000000  784.8767       261.6256
+    #> 6      6  15   4  3.746441     3.746441  980.1646       261.6256
+    #> 7      7   4   1  4.000000     4.000000 1046.5023       261.6256
+    #> 8      8   5   1  4.995254     4.995254 1306.8862       261.6256
+    #> 9      9   5   1  5.000000     5.000000 1308.1278       261.6256
+    #> 10    10   6   1  6.000000     6.000000 1569.7534       261.6256
+    #> 11    11  25   4  6.244068     6.244068 1633.6077       261.6256
+    #> 12    12   7   1  7.000000     7.000000 1831.3790       261.6256
+    #> 13    13  15   2  7.492881     7.492881 1960.3293       261.6256
+    #> 14    14   8   1  8.000000     8.000000 2093.0045       261.6256
+    #> 15    15  35   4  8.741695     8.741695 2287.0508       261.6256
+    #> 16    16   9   1  9.000000     9.000000 2354.6301       261.6256
+    #> 17    17  10   1  9.990508     9.990508 2613.7724       261.6256
+    #> 18    18  10   1 10.000000    10.000000 2616.2556       261.6256
+    #> 19    19  45   4 11.239322    11.239322 2940.4939       261.6256
+    #> 20    20  25   2 12.488135    12.488135 3267.2155       261.6256
 
 ##### Intervals near the major third ranked by lowest consonance
 
     #> # A tibble: 1,000 × 2
     #>    semitone consonance_dissonance
     #>       <dbl>                 <dbl>
-    #>  1     63.9                  4.81
-    #>  2     63.9                  7.32
-    #>  3     63.9                  9.44
-    #>  4     63.9                  9.62
-    #>  5     63.9                  9.70
-    #>  6     63.9                 10.0 
-    #>  7     63.9                 10.6 
-    #>  8     63.9                 11.3 
-    #>  9     63.9                 12.2 
-    #> 10     63.9                 13.0 
+    #>  1     64.0                  91.3
+    #>  2     64.0                  91.3
+    #>  3     64.0                  91.3
+    #>  4     64.0                  91.3
+    #>  5     64.0                  91.3
+    #>  6     64.0                  91.3
+    #>  7     64.0                  91.3
+    #>  8     64.0                  91.3
+    #>  9     64.0                  91.3
+    #> 10     64.0                  91.3
     #> # ℹ 990 more rows
 
 ###### The lowest consonance
 
-    #> [1] 63.86622
+    #> [1] 64.01136
 
     #> # A tibble: 1 × 2
     #>   semitone consonance_dissonance
     #>      <dbl>                 <dbl>
-    #> 1     63.9                  4.81
+    #> 1     64.0                  91.3
 
 ###### The lowest consonance ratios
 
-    #>     num  den     ratio pseudo_ratio      tone reference_tone
-    #> 1     1    1  1.000000     1.000000  261.6256       261.6256
-    #> 2   974  779  1.250222     1.250222  327.0901       261.6256
-    #> 3     2    1  2.000000     2.000000  523.2511       261.6256
-    #> 4  2298  919  2.500445     2.500445  654.1802       261.6256
-    #> 5     3    1  3.000000     3.000000  784.8767       261.6256
-    #> 6  1234  329  3.750667     3.750667  981.2704       261.6256
-    #> 7     4    1  4.000000     4.000000 1046.5023       261.6256
-    #> 8     5    1  5.000000     5.000000 1308.1278       261.6256
-    #> 9  5056 1011  5.000889     5.000889 1308.3605       261.6256
-    #> 10    6    1  6.000000     6.000000 1569.7534       261.6256
-    #> 11 1294  207  6.251112     6.251112 1635.4506       261.6256
-    #> 12    7    1  7.000000     7.000000 1831.3790       261.6256
-    #> 13 2618  349  7.501334     7.501334 1962.5407       261.6256
-    #> 14    8    1  8.000000     8.000000 2093.0045       261.6256
-    #> 15 1339  153  8.751556     8.751556 2289.6308       261.6256
-    #> 16    9    1  9.000000     9.000000 2354.6301       261.6256
-    #> 17   10    1 10.000000    10.000000 2616.2556       261.6256
-    #> 18 5331  533 10.001779    10.001779 2616.7210       261.6256
-    #> 19 1339  119 11.252001    11.252001 2943.8111       261.6256
-    #> 20 2713  217 12.502223    12.502223 3270.9012       261.6256
+    #>    index num den     ratio pseudo_ratio      tone reference_tone
+    #> 1      1   1   1  1.000000     1.000000  261.6256       261.6256
+    #> 2      2   4   3  1.260748     1.260748  329.8439       261.6256
+    #> 3      3   2   1  2.000000     2.000000  523.2511       261.6256
+    #> 4      4   5   2  2.521496     2.521496  659.6879       261.6256
+    #> 5      5   3   1  3.000000     3.000000  784.8767       261.6256
+    #> 6      6  15   4  3.782244     3.782244  989.5318       261.6256
+    #> 7      7   4   1  4.000000     4.000000 1046.5023       261.6256
+    #> 8      8   5   1  5.000000     5.000000 1308.1278       261.6256
+    #> 9      9   5   1  5.042993     5.042993 1319.3758       261.6256
+    #> 10    10   6   1  6.000000     6.000000 1569.7534       261.6256
+    #> 11    11  19   3  6.303741     6.303741 1649.2198       261.6256
+    #> 12    12   7   1  7.000000     7.000000 1831.3790       261.6256
+    #> 13    13  15   2  7.564489     7.564489 1979.0636       261.6256
+    #> 14    14   8   1  8.000000     8.000000 2093.0045       261.6256
+    #> 15    15  44   5  8.825237     8.825237 2308.9076       261.6256
+    #> 16    16   9   1  9.000000     9.000000 2354.6301       261.6256
+    #> 17    17  10   1 10.000000    10.000000 2616.2556       261.6256
+    #> 18    18  71   7 10.085985    10.085985 2638.7515       261.6256
+    #> 19    19  34   3 11.346733    11.346733 2968.5955       261.6256
+    #> 20    20  38   3 12.607482    12.607482 3298.4396       261.6256
 
 ###### The Pythagorean third is the second highest consonance
 
 MIDI:
 
-    #> [1] 64.09244
+    #> [1] 63.8472
 
 Cents:
 
-    #> [1] 409.2442
+    #> [1] 384.7197
 
 Consonance:
 
     #> # A tibble: 1 × 2
     #>   semitone consonance_dissonance
     #>      <dbl>                 <dbl>
-    #> 1     64.1                  88.8
+    #> 1     63.8                  96.1
 
 ###### Frequency ratios of the second highest consonance
 
-    #>    num den     ratio pseudo_ratio      tone reference_tone
-    #> 1    1   1  1.000000     1.000000  261.6256       261.6256
-    #> 2   19  15  1.266667     1.266667  331.3924       261.6256
-    #> 3    2   1  2.000000     2.000000  523.2511       261.6256
-    #> 4   38  15  2.533333     2.533333  662.7847       261.6256
-    #> 5    3   1  3.000000     3.000000  784.8767       261.6256
-    #> 6   19   5  3.800000     3.800000  994.1771       261.6256
-    #> 7    4   1  4.000000     4.000000 1046.5023       261.6256
-    #> 8    5   1  5.000000     5.000000 1308.1278       261.6256
-    #> 9   76  15  5.066666     5.066666 1325.5695       261.6256
-    #> 10   6   1  6.000000     6.000000 1569.7534       261.6256
-    #> 11  19   3  6.333333     6.333333 1656.9619       261.6256
-    #> 12   7   1  7.000000     7.000000 1831.3790       261.6256
-    #> 13  38   5  7.600000     7.600000 1988.3542       261.6256
-    #> 14   8   1  8.000000     8.000000 2093.0045       261.6256
-    #> 15 133  15  8.866667     8.866667 2319.7467       261.6256
-    #> 16   9   1  9.000000     9.000000 2354.6301       261.6256
-    #> 17  10   1 10.000000    10.000000 2616.2556       261.6256
-    #> 18 152  15 10.133333    10.133333 2651.1389       261.6256
-    #> 19  57   5 11.399999    11.399999 2982.5313       261.6256
-    #> 20  38   3 12.666667    12.666667 3313.9238       261.6256
+    #>    index num den     ratio pseudo_ratio      tone reference_tone
+    #> 1      1   1   1  1.000000     1.000000  261.6256       261.6256
+    #> 2      2   5   4  1.248850     1.248850  326.7310       261.6256
+    #> 3      3   2   1  2.000000     2.000000  523.2511       261.6256
+    #> 4      4   5   2  2.497699     2.497699  653.4620       261.6256
+    #> 5      5   3   1  3.000000     3.000000  784.8767       261.6256
+    #> 6      6  15   4  3.746549     3.746549  980.1930       261.6256
+    #> 7      7   4   1  4.000000     4.000000 1046.5023       261.6256
+    #> 8      8   5   1  4.995398     4.995398 1306.9239       261.6256
+    #> 9      9   5   1  5.000000     5.000000 1308.1278       261.6256
+    #> 10    10   6   1  6.000000     6.000000 1569.7534       261.6256
+    #> 11    11  25   4  6.244248     6.244248 1633.6549       261.6256
+    #> 12    12   7   1  7.000000     7.000000 1831.3790       261.6256
+    #> 13    13  15   2  7.493098     7.493098 1960.3859       261.6256
+    #> 14    14   8   1  8.000000     8.000000 2093.0045       261.6256
+    #> 15    15  35   4  8.741947     8.741947 2287.1169       261.6256
+    #> 16    16   9   1  9.000000     9.000000 2354.6301       261.6256
+    #> 17    17  10   1  9.990797     9.990797 2613.8479       261.6256
+    #> 18    18  10   1 10.000000    10.000000 2616.2556       261.6256
+    #> 19    19  45   4 11.239646    11.239646 2940.5789       261.6256
+    #> 20    20  25   2 12.488496    12.488496 3267.3098       261.6256
 
 ###### References for the Pythagorean third
 
@@ -377,141 +520,141 @@ values.](./man/tolerance_search_plots/M6%20Orders%20of%20Magnitude.png)
     #> # A tibble: 1,000 × 2
     #>    semitone consonance_dissonance
     #>       <dbl>                 <dbl>
-    #>  1     68.7                  88.2
-    #>  2     69.0                  87.1
-    #>  3     68.8                  86.4
-    #>  4     69.0                  86.0
-    #>  5     68.8                  84.6
-    #>  6     69.0                  84.1
-    #>  7     69.0                  83.9
-    #>  8     69.1                  83.3
-    #>  9     68.8                  83.0
-    #> 10     68.9                  82.8
+    #>  1     68.9                  97.1
+    #>  2     68.9                  97.1
+    #>  3     68.9                  97.1
+    #>  4     68.9                  97.1
+    #>  5     68.9                  97.1
+    #>  6     68.9                  97.1
+    #>  7     68.9                  97.1
+    #>  8     68.9                  97.1
+    #>  9     68.9                  97.1
+    #> 10     68.9                  97.1
     #> # ℹ 990 more rows
 
 ###### The JT M6 has the highest consonance
 
-    #> [1] 68.66952
+    #> [1] 68.91276
 
     #> # A tibble: 1 × 2
     #>   semitone consonance_dissonance
     #>      <dbl>                 <dbl>
-    #> 1     68.7                  88.2
+    #> 1     68.9                  97.1
 
 ###### Frequency ratios of the JT M6
 
-    #>    num den     ratio pseudo_ratio      tone reference_tone
-    #> 1    1   1  1.000000     1.000000  261.6256       261.6256
-    #> 2   33  20  1.649993     1.649993  431.6804       261.6256
-    #> 3    2   1  2.000000     2.000000  523.2511       261.6256
-    #> 4    3   1  3.000000     3.000000  784.8767       261.6256
-    #> 5   33  10  3.299986     3.299986  863.3608       261.6256
-    #> 6    4   1  4.000000     4.000000 1046.5023       261.6256
-    #> 7   99  20  4.949979     4.949979 1295.0411       261.6256
-    #> 8    5   1  5.000000     5.000000 1308.1278       261.6256
-    #> 9    6   1  6.000000     6.000000 1569.7534       261.6256
-    #> 10  33   5  6.599972     6.599972 1726.7215       261.6256
-    #> 11   7   1  7.000000     7.000000 1831.3790       261.6256
-    #> 12   8   1  8.000000     8.000000 2093.0045       261.6256
-    #> 13  33   4  8.249965     8.249965 2158.4019       261.6256
-    #> 14   9   1  9.000000     9.000000 2354.6301       261.6256
-    #> 15  99  10  9.899959     9.899959 2590.0823       261.6256
-    #> 16  10   1 10.000000    10.000000 2616.2556       261.6256
-    #> 17 231  20 11.549952    11.549952 3021.7626       261.6256
-    #> 18  66   5 13.199945    13.199945 3453.4430       261.6256
-    #> 19 297  20 14.849938    14.849938 3885.1234       261.6256
-    #> 20  33   2 16.499931    16.499931 4316.8038       261.6256
+    #>    index num den     ratio pseudo_ratio      tone reference_tone
+    #> 1      1   1   1  1.000000     1.000000  261.6256       261.6256
+    #> 2      2   5   3  1.673340     1.673340  437.7884       261.6256
+    #> 3      3   2   1  2.000000     2.000000  523.2511       261.6256
+    #> 4      4   3   1  3.000000     3.000000  784.8767       261.6256
+    #> 5      5  10   3  3.346679     3.346679  875.5768       261.6256
+    #> 6      6   4   1  4.000000     4.000000 1046.5023       261.6256
+    #> 7      7   5   1  5.000000     5.000000 1308.1278       261.6256
+    #> 8      8   5   1  5.020019     5.020019 1313.3652       261.6256
+    #> 9      9   6   1  6.000000     6.000000 1569.7534       261.6256
+    #> 10    10  20   3  6.693358     6.693358 1751.1537       261.6256
+    #> 11    11   7   1  7.000000     7.000000 1831.3790       261.6256
+    #> 12    12   8   1  8.000000     8.000000 2093.0045       261.6256
+    #> 13    13  25   3  8.366698     8.366698 2188.9421       261.6256
+    #> 14    14   9   1  9.000000     9.000000 2354.6301       261.6256
+    #> 15    15  10   1 10.000000    10.000000 2616.2556       261.6256
+    #> 16    16  10   1 10.040037    10.040037 2626.7305       261.6256
+    #> 17    17  35   3 11.713377    11.713377 3064.5189       261.6256
+    #> 18    18  40   3 13.386717    13.386717 3502.3073       261.6256
+    #> 19    19  15   1 15.060056    15.060056 3940.0957       261.6256
+    #> 20    20  50   3 16.733396    16.733396 4377.8841       261.6256
 
 ##### Intervals near the major sixth ranked by lowest consonance
 
     #> # A tibble: 1,000 × 2
     #>    semitone consonance_dissonance
     #>       <dbl>                 <dbl>
-    #>  1     68.8                  7.42
-    #>  2     68.8                  7.85
-    #>  3     68.8                  9.72
-    #>  4     68.8                  9.72
-    #>  5     68.8                 10.0 
-    #>  6     68.8                 10.0 
-    #>  7     68.7                 11.2 
-    #>  8     68.8                 12.2 
-    #>  9     68.7                 12.4 
-    #> 10     68.8                 13.5 
+    #>  1     68.7                  91.3
+    #>  2     68.7                  91.3
+    #>  3     68.7                  91.3
+    #>  4     68.7                  91.3
+    #>  5     68.7                  91.3
+    #>  6     68.7                  91.3
+    #>  7     68.7                  91.3
+    #>  8     68.7                  91.3
+    #>  9     68.7                  91.3
+    #> 10     68.7                  91.3
     #> # ℹ 990 more rows
 
 ###### The lowest consonance
 
-    #> [1] 68.84169
+    #> [1] 68.68453
 
     #> # A tibble: 1 × 2
     #>   semitone consonance_dissonance
     #>      <dbl>                 <dbl>
-    #> 1     68.8                  7.42
+    #> 1     68.7                  91.3
 
 ###### The lowest consonance ratios
 
-    #>     num  den     ratio pseudo_ratio      tone reference_tone
-    #> 1     1    1  1.000000     1.000000  261.6256       261.6256
-    #> 2  1968 1181  1.666484     1.666484  435.9949       261.6256
-    #> 3     2    1  2.000000     2.000000  523.2511       261.6256
-    #> 4     3    1  3.000000     3.000000  784.8767       261.6256
-    #> 5  2393  718  3.332968     3.332968  871.9898       261.6256
-    #> 6     4    1  4.000000     4.000000 1046.5023       261.6256
-    #> 7  7724 1545  4.999453     4.999453 1307.9846       261.6256
-    #> 8     5    1  5.000000     5.000000 1308.1278       261.6256
-    #> 9     6    1  6.000000     6.000000 1569.7534       261.6256
-    #> 10 2693  404  6.665937     6.665937 1743.9795       261.6256
-    #> 11    7    1  7.000000     7.000000 1831.3790       261.6256
-    #> 12    8    1  8.000000     8.000000 2093.0045       261.6256
-    #> 13 2758  331  8.332421     8.332421 2179.9744       261.6256
-    #> 14    9    1  9.000000     9.000000 2354.6301       261.6256
-    #> 15 8379  838  9.998905     9.998905 2615.9693       261.6256
-    #> 16   10    1 10.000000    10.000000 2616.2556       261.6256
-    #> 17 2858  245 11.665390    11.665390 3051.9641       261.6256
-    #> 18 2853  214 13.331874    13.331874 3487.9590       261.6256
-    #> 19 8624  575 14.998358    14.998358 3923.9539       261.6256
-    #> 20 2933  176 16.664842    16.664842 4359.9488       261.6256
+    #>    index num den     ratio pseudo_ratio      tone reference_tone
+    #> 1      1   1   1  1.000000     1.000000  261.6256       261.6256
+    #> 2      2   5   3  1.651425     1.651425  432.0549       261.6256
+    #> 3      3   2   1  2.000000     2.000000  523.2511       261.6256
+    #> 4      4   3   1  3.000000     3.000000  784.8767       261.6256
+    #> 5      5  10   3  3.302850     3.302850  864.1099       261.6256
+    #> 6      6   4   1  4.000000     4.000000 1046.5023       261.6256
+    #> 7      7   5   1  4.954274     4.954274 1296.1648       261.6256
+    #> 8      8   5   1  5.000000     5.000000 1308.1278       261.6256
+    #> 9      9   6   1  6.000000     6.000000 1569.7534       261.6256
+    #> 10    10  20   3  6.605699     6.605699 1728.2198       261.6256
+    #> 11    11   7   1  7.000000     7.000000 1831.3790       261.6256
+    #> 12    12   8   1  8.000000     8.000000 2093.0045       261.6256
+    #> 13    13  33   4  8.257124     8.257124 2160.2747       261.6256
+    #> 14    14   9   1  9.000000     9.000000 2354.6301       261.6256
+    #> 15    15  69   7  9.908549     9.908549 2592.3296       261.6256
+    #> 16    16  10   1 10.000000    10.000000 2616.2556       261.6256
+    #> 17    17  23   2 11.559973    11.559973 3024.3846       261.6256
+    #> 18    18  53   4 13.211398    13.211398 3456.4395       261.6256
+    #> 19    19  74   5 14.862823    14.862823 3888.4944       261.6256
+    #> 20    20  33   2 16.514248    16.514248 4320.5494       261.6256
 
 ###### The grave major sixth is the second highest consonance
 
 MIDI:
 
-    #> [1] 69.04039
+    #> [1] 68.91326
 
 Cents:
 
-    #> [1] 904.039
+    #> [1] 891.3263
 
 Consonance:
 
     #> # A tibble: 1 × 2
     #>   semitone consonance_dissonance
     #>      <dbl>                 <dbl>
-    #> 1     69.0                  87.1
+    #> 1     68.9                  97.1
 
 ###### Frequency ratios of the second highest consonance
 
-    #>    num den     ratio pseudo_ratio      tone reference_tone
-    #> 1    1   1  1.000000     1.000000  261.6256       261.6256
-    #> 2   59  35  1.685721     1.685721  441.0277       261.6256
-    #> 3    2   1  2.000000     2.000000  523.2511       261.6256
-    #> 4    3   1  3.000000     3.000000  784.8767       261.6256
-    #> 5  118  35  3.371442     3.371442  882.0555       261.6256
-    #> 6    4   1  4.000000     4.000000 1046.5023       261.6256
-    #> 7    5   1  5.000000     5.000000 1308.1278       261.6256
-    #> 8  177  35  5.057163     5.057163 1323.0832       261.6256
-    #> 9    6   1  6.000000     6.000000 1569.7534       261.6256
-    #> 10 236  35  6.742884     6.742884 1764.1109       261.6256
-    #> 11   7   1  7.000000     7.000000 1831.3790       261.6256
-    #> 12   8   1  8.000000     8.000000 2093.0045       261.6256
-    #> 13  59   7  8.428606     8.428606 2205.1387       261.6256
-    #> 14   9   1  9.000000     9.000000 2354.6301       261.6256
-    #> 15  10   1 10.000000    10.000000 2616.2556       261.6256
-    #> 16 354  35 10.114326    10.114326 2646.1664       261.6256
-    #> 17  59   5 11.800047    11.800047 3087.1941       261.6256
-    #> 18 472  35 13.485769    13.485769 3528.2218       261.6256
-    #> 19 531  35 15.171490    15.171490 3969.2495       261.6256
-    #> 20 118   7 16.857211    16.857211 4410.2775       261.6256
+    #>    index num den     ratio pseudo_ratio      tone reference_tone
+    #> 1      1   1   1  1.000000     1.000000  261.6256       261.6256
+    #> 2      2   5   3  1.673388     1.673388  437.8011       261.6256
+    #> 3      3   2   1  2.000000     2.000000  523.2511       261.6256
+    #> 4      4   3   1  3.000000     3.000000  784.8767       261.6256
+    #> 5      5  10   3  3.346776     3.346776  875.6021       261.6256
+    #> 6      6   4   1  4.000000     4.000000 1046.5023       261.6256
+    #> 7      7   5   1  5.000000     5.000000 1308.1278       261.6256
+    #> 8      8   5   1  5.020164     5.020164 1313.4032       261.6256
+    #> 9      9   6   1  6.000000     6.000000 1569.7534       261.6256
+    #> 10    10  20   3  6.693552     6.693552 1751.2042       261.6256
+    #> 11    11   7   1  7.000000     7.000000 1831.3790       261.6256
+    #> 12    12   8   1  8.000000     8.000000 2093.0045       261.6256
+    #> 13    13  25   3  8.366939     8.366939 2189.0053       261.6256
+    #> 14    14   9   1  9.000000     9.000000 2354.6301       261.6256
+    #> 15    15  10   1 10.000000    10.000000 2616.2556       261.6256
+    #> 16    16  10   1 10.040327    10.040327 2626.8063       261.6256
+    #> 17    17  35   3 11.713715    11.713715 3064.6074       261.6256
+    #> 18    18  40   3 13.387103    13.387103 3502.4085       261.6256
+    #> 19    19  15   1 15.060491    15.060491 3940.2095       261.6256
+    #> 20    20  50   3 16.733879    16.733879 4378.0105       261.6256
 
 ###### References for the grave major sixth
 
@@ -525,67 +668,6 @@ Consonance:
 Plot of P8 with MaMi.CoDi tolerance values varying from 1e-08 to 0.1:
 ![P8 with a range of MaMi.CoDi tolerance
 values.](./man/tolerance_search_plots/P8%20Orders%20of%20Magnitude.png)
-
-# How MaMi.CoDi Works
-
-## Chord Period Estimates
-
-To estimate the periodicity of a chord, the MaMi.CoDi model uses a
-classical signal processing technique. It creates ratios for every tone
-in the chord (fundamental, harmonics, noise, etc.) relative to a
-reference tone. The least common multiple of those ratios is the period
-of the whole signal, relative to the periodicity of the reference
-tone.  
-
-MaMi.CoDi creates two estimates of the chord’s period: a wavelength
-estimate and a frequency estimate. Because frequency is the inverse of
-wavelength, one might intuitively believe that all estimates would be
-the same. For two pure tones, that is true. But for complex tones, the
-estimates can be and usually are different.  
-
-For the wavelength (i.e. rate-place or spatial) estimate, the reference
-tone is the smallest wavelength. Small wavelengths are detected by the
-inner ear hair cells closest to the base of the cochlea, which is the
-end closest to the middle ear, the source of the wave.  
-
-For the frequency (i.e. phase-locking or temporal) estimate the
-reference tone is the smallest frequency. Small frequencies are detected
-by the inner ear hair cells closest to the apex of the cochlea, which is
-the end furthest from the source of the wave.  
-
-## Finding the Tolerance Values
-
-MaMi.CoDi uses the Stern-Brocot tree to find rational fractions for the
-ratios within a given tolerance. How do we find the best tolerance
-values? For the MaMi.CoDi model we ran thousands of computations with
-various tolerance values and compared the predictions with results from
-six of the large-scale behavioral experiments.  
-
-Because spatial and temporal information is encoded via different
-mechanisms by the cochlea, we assume that the wavelength and frequency
-tolerances will have different values.  
-
-So, our tolerance searches were two-dimensional. The image below is a
-sample of a 2D tolerance search using the harmonic experiment from
-large-scale behavioral study.  
-
-![Two-dimensional tolerance search for frequency and wavelength
-tolerance values for finding rational fractions for tone
-ratios.](https://github.com/homeymusic/mami.codi.R/blob/2D_tolerance/man/tolerance_search_plots/Harmonic2DCropped.png?raw=true)
-Click here, for the [full 2D tolerance
-search](https://github.com/homeymusic/mami.codi.R/blob/2D_tolerance/man/tolerance_search_plots/Harmonic2D.jpg)
-image for the harmonics experiment. Click here, for the [2D_tolerance
-branch on
-GitHub](https://github.com/homeymusic/mami.codi.R/tree/2D_tolerance) to
-recreate all the 2D searches.  
-
-The best fits across the experiments were given by a wavelength
-tolerance of 0.15 and a frequency tolerance of 0.075. The frequency
-tolerance is half the size of the wavelength tolerance. Does that mean
-that the perception mechanism for frequency is twice as discriminating
-as the wavelength mechanism? “At 1 kHz information contained in temporal
-discharges was an order of magnitude better than that obtained by a
-rate–place mechanism. Heinz et al. (2001)” from Winter (2005).  
 
 #### Notes on plots:
 

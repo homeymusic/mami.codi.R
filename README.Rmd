@@ -19,11 +19,40 @@ BEHAVIOURAL_SMOOTH_BROAD  <- 0.2
 BEHAVIOURAL_SMOOTH_NARROW <- 0.035
 ```
 
-# Theoretical predictions compared to large-scale behavioral results
+## How MaMi.CoDi Works
+
+```{r, child=c('man/Spatiotemporal_Periodicity.Rmd')}
+```
+
+### Finding the Tolerance Values
+
+MaMi.CoDi uses the Stern-Brocot tree to find rational fractions for the ratios 
+within a given tolerance. How do we find the best tolerance values? For the 
+MaMi.CoDi model we ran thousands of computations with various tolerance values 
+and compared the predictions with results from six of the large-scale behavioral 
+experiments.\
+
+Because spatial and temporal information is encoded via different mechanisms by 
+the cochlea, we assume that the wavelength and frequency tolerances will have 
+different values.\
+
+So, our tolerance searches were two-dimensional. The image below is a sample of 
+a 2D tolerance search using the harmonic experiment from large-scale behavioral study.\
+
+![Two-dimensional tolerance search for frequency and wavelength tolerance values for finding rational fractions for tone ratios.](https://github.com/homeymusic/mami.codi.R/blob/2D_tolerance/man/tolerance_search_plots/Harmonic2DCropped.png?raw=true)
+Click here, for the [full 2D tolerance search](https://github.com/homeymusic/mami.codi.R/blob/2D_tolerance/man/tolerance_search_plots/Harmonic2D.jpg) image for the harmonics experiment. Click here, for the
+[2D_tolerance branch on GitHub](https://github.com/homeymusic/mami.codi.R/tree/2D_tolerance) to recreate all the 2D searches.\
+
+The best fits across the experiments were given by a wavelength tolerance of 0.15
+and a frequency tolerance of 0.075. The frequency tolerance is half the size of 
+the wavelength tolerance. Does that mean that the perception mechanism for frequency 
+is twice as discriminating as the wavelength mechanism? "At 1 kHz information contained in temporal discharges was an order of magnitude better than that obtained by a rate–place mechanism. Heinz et al. (2001)" from Winter (2005).\
+
+## Theoretical predictions compared to large-scale behavioral results
 
 The large-scale behavioral data in the plots below are from [Timbral effects on consonance disentangle psychoacoustic mechanisms and suggest perceptual origins for musical scales](https://www.nature.com/articles/s41467-024-45812-z) by Raja Marjieh, Peter M. C. Harrison, Harin Lee, Fotini Deligiannaki & Nori Jacoby.
 
-## Manipulating harmonic frequencies
+### Manipulating harmonic frequencies
 
 ```{r, include=F}
 timbre_paper = readRDS('./man/data/timbre_paper.rds')
@@ -76,7 +105,7 @@ p = params %>% purrr::map(\(p) {
   } else if (p$o==2 & p$h==1 & p$s == 'Pure') {
     timbre = 'Pure'
     black_vlines  = c(7,12)
-    description = '  For pure tones, the behavioral results and the theoretical predictions mostly agree. Only P5 and P8 have pronounced two-sided peaks. The behavioral results show subtle variations in consonance height across the 15 semitones but the overall peak structure agrees with MaMi.CoDi predictions.'
+    description = '  For pure tones, the behavioral results and the theoretical predictions mostly agree. Only P5 and P8 have pronounced two-sided peaks. The behavioral results show subtle variations in consonance height across the 15 semitones but the overall peak structure agrees with MaMi.CoDi predictions. Theoretical predictions for major-minor versus the beharvoiral results are included in a plot further below.'
   } else if (p$o>2 & p$s == 'macro') {
     timbre = 'Stretched'
     black_vlines  = c(4.2,7.5,9.3,12.78)
@@ -140,12 +169,12 @@ p = params %>% purrr::map(\(p) {
     sigma = BEHAVIOURAL_SMOOTH_NARROW
   }
   if (timbre=='Harmonic') {
-    cat('  \n## Dyads spanning 15 semitones\n')
+    cat('  \n#### Dyads spanning 15 semitones\n')
   }
   if (timbre=='M3') {
-    cat('  \n## Dyads spanning 1 quarter tone\n')
+    cat('  \n#### Dyads spanning 1 quarter tone\n')
   }
-  cat("  \n###", title, '\n')
+  cat("  \n#####", title, '\n')
   cat(description)
   print(knitr::kable(tibble::tibble_row(
     detected_pseudo_octave  = paste(round(chords$pseudo_octave %>% unique, 2), collapse = ' '),
@@ -158,59 +187,18 @@ p = params %>% purrr::map(\(p) {
                            goal=experiment,sigma=sigma,
                            black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")
+  if (timbre=='Pure') {
+  cat("  For pure tones, MaMi.CoDi's theoretical predictions for major-minor have similar contours to the behavioral results for consonance-dissonance.")
+  print(plot_semitone_mami(chords, paste('Major-Minor'),
+                           goal=experiment,sigma=sigma,
+                           black_vlines=black_vlines,gray_vlines=gray_vlines))
+  cat("  \n")
+  }
 })
 ```
 
-```{r, child=c('man/M3-M6-P8.Rmd')}
+```{r, child=c('man/M3_M6_P8.Rmd')}
 ```
-
-# How MaMi.CoDi Works
-
-## Chord Period Estimates
-
-To estimate the periodicity of a chord, the MaMi.CoDi model uses a classical signal 
-processing technique. It creates ratios for every tone in the chord (fundamental, 
-harmonics, noise, etc.) relative to a reference tone. The least common multiple
-of those ratios is the period of the whole signal, relative to the periodicity of 
-the reference tone.\
-
-MaMi.CoDi creates two estimates of the chord's period: a wavelength estimate and 
-a frequency estimate. Because frequency is the inverse of wavelength, one might
-intuitively believe that all estimates would be the same. For two pure tones, that 
-is true. But for complex tones, the estimates can be and usually are different.\
-
-For the wavelength (i.e. rate-place or spatial) estimate, the reference tone is the 
-smallest wavelength. Small wavelengths are detected by the inner ear hair cells closest
-to the base of the cochlea, which is the end closest to the middle ear, the source of the wave.\
-
-For the frequency (i.e. phase-locking or temporal) estimate the reference tone is the 
-smallest frequency. Small frequencies are detected by the inner ear hair cells closest
-to the apex of the cochlea, which is the end furthest from the source of the wave.\
-
-## Finding the Tolerance Values
-
-MaMi.CoDi uses the Stern-Brocot tree to find rational fractions for the ratios 
-within a given tolerance. How do we find the best tolerance values? For the 
-MaMi.CoDi model we ran thousands of computations with various tolerance values 
-and compared the predictions with results from six of the large-scale behavioral 
-experiments.\
-
-Because spatial and temporal information is encoded via different mechanisms by 
-the cochlea, we assume that the wavelength and frequency tolerances will have 
-different values.\
-
-So, our tolerance searches were two-dimensional. The image below is a sample of 
-a 2D tolerance search using the harmonic experiment from large-scale behavioral study.\
-
-![Two-dimensional tolerance search for frequency and wavelength tolerance values for finding rational fractions for tone ratios.](https://github.com/homeymusic/mami.codi.R/blob/2D_tolerance/man/tolerance_search_plots/Harmonic2DCropped.png?raw=true)
-Click here, for the [full 2D tolerance search](https://github.com/homeymusic/mami.codi.R/blob/2D_tolerance/man/tolerance_search_plots/Harmonic2D.jpg) image for the harmonics experiment. Click here, for the
-[2D_tolerance branch on GitHub](https://github.com/homeymusic/mami.codi.R/tree/2D_tolerance) to recreate all the 2D searches.\
-
-The best fits across the experiments were given by a wavelength tolerance of 0.15
-and a frequency tolerance of 0.075. The frequency tolerance is half the size of 
-the wavelength tolerance. Does that mean that the perception mechanism for frequency 
-is twice as discriminating as the wavelength mechanism? "At 1 kHz information contained in temporal discharges was an order of magnitude better than that obtained by a rate–place mechanism. Heinz et al. (2001)" from Winter (2005).\
-
 
 #### Notes on plots:
 

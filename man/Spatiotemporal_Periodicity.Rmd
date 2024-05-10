@@ -1,0 +1,111 @@
+### How MaMi.CoDi Predicts Spatiotemporal Periodicity
+
+To estimate the periodicity of a chord, the MaMi.CoDi model uses a signal 
+processing technique. It creates ratios for every tone in the chord (fundamental, 
+harmonics, noise, etc.) relative to a reference tone. The least common multiple
+of those ratios is a measure of the cycle length, relative to the reference tone.\
+
+MaMi.CoDi creates two estimates of the chord's period: a spatial estimate and 
+a temporal estimate.\
+
+For the frequency (i.e. phase-locking or temporal) estimate the reference tone is the 
+smallest frequency. Small frequencies are low tones and are detected by the inner 
+ear hair cells closest to the apex of the cochlea, which is the end furthest from
+the source of the wave.\
+
+For the wavelength (i.e. rate-place or spatial) estimate, the reference tone is the 
+smallest wavelength. Small wavelengths are high tones and are detected by the 
+inner ear hair cells closest to the base of the cochlea, which is the end closest 
+to the middle ear, the source of the wave. \
+
+#### Chord
+
+Below, we estimate the periodicity of the C4, E4 and 
+G4 major triad with 5 harmonics per pitch.
+
+```{r, echo=F, results='asis', message=F}
+midi  = c(0, 4, 7) + 60
+tolerance = 1e-01
+num_harmonics = 5
+chord = midi %>% mami.codi(
+  frequency_tolerance  = tolerance,
+  wavelength_tolerance = tolerance,
+  verbose=T,
+  num_harmonics = num_harmonics
+)
+
+```
+
+* Frequencies: `r midi %>% hrep::midi_to_freq()`\
+
+* Wavelengths: `r SPEED_OF_SOUND / (midi %>% hrep::midi_to_freq())`\
+
+* MIDI: `r midi`\
+
+* Number of Harmonics: `r num_harmonics`
+
+#### Temporal Estimate
+```{r, echo=F, results='asis', message=F}
+knitr::kable(tibble::tibble(
+  tol    = chord$frequency_tolerance,
+  min_f_Hz = min(chord$frequencies[[1]]),
+  max_f_Hz = max(chord$frequencies[[1]]),
+  chord_Sz = chord$frequency_lcd,
+  chord_Hz = min_f_Hz / chord_Sz,
+  chord_s  = 1 / chord_Hz,
+  chord_m  = SPEED_OF_SOUND / chord_Hz
+) %>% dplyr::select(chord_Hz, chord_m, chord_s, chord_Sz, tol))
+```
+
+##### Periods
+
+```{r, echo=F, results='asis', message=F}
+ratios = chord$frequency_ratios[[1]] %>% 
+  dplyr::select(index, num, den, tone)
+lcd    = chord$frequency_lcd
+plot_periodicity(ratios, lcd, 'frequency', relative = F)
+```
+
+##### Relative Periodicity
+
+```{r, echo=F, results='asis', message=F}
+plot_periodicity(ratios, lcd, 'frequency')
+```
+
+#### Frequency Ratios
+```{r, echo=F, results='asis', message=F}
+knitr::kable(chord$frequency_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
+```
+
+#### Spatial Estimate
+```{r, echo=F, results='asis', message=F}
+knitr::kable(tibble::tibble(
+  tol      = chord$wavelength_tolerance,
+  min_l_m  = min(chord$wavelengths[[1]]),
+  max_l_m  = max(chord$wavelengths[[1]]),
+  chord_Sz = chord$wavelength_lcd,
+  chord_m  = min_l_m * chord_Sz,
+  chord_s  = chord_m / SPEED_OF_SOUND * (max_l_m / min_l_m),
+  chord_Hz = 1 / chord_s,
+) %>% dplyr::select(chord_Hz, chord_m, chord_s, chord_Sz, tol))
+```
+
+##### Wavenumbers
+
+```{r, echo=F, results='asis', message=F}
+ratios = chord$wavelength_ratios[[1]] %>%
+  dplyr::select(index, num, den, tone)
+lcd    = chord$wavelength_lcd
+plot_periodicity(ratios, lcd, 'wavelength', relative = F)
+```
+
+##### Relative Spatial Frequency
+
+```{r, echo=F, results='asis', message=F}
+plot_periodicity(ratios, lcd, 'wavelength')
+```
+
+##### Wavelength Ratios
+```{r, echo=F, results='asis', message=F}
+knitr::kable(chord$wavelength_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
+```

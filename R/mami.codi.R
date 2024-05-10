@@ -134,8 +134,8 @@ estimate_cycle <- function(x, pseudo_octave, tolerance) {
 
 flip <- function(x) {
   consonance = ZARLINO - x
-  if (is.na(consonance) | consonance < MIN_CONSONANCE) {
-    MIN_CONSONANCE
+  if (is.na(consonance) | consonance < SMALLEST_POSSIBLE) {
+    SMALLEST_POSSIBLE
   } else {
     consonance
   }
@@ -189,7 +189,7 @@ SPEED_OF_SOUND = 343
 
 ZARLINO        = 100 / sqrt(2)
 
-MIN_CONSONANCE = .Machine$double.xmin
+SMALLEST_POSSIBLE = .Machine$double.xmin
 
 PI_4           = pi / 4
 R_PI_4         = matrix(c(

@@ -58,8 +58,8 @@ print(knitr::kable(tibble::tibble_row(
   multicolored_line_sigma  = 0.2,
   green_line_sigma         = 2.0,
   pseudo_octave            = paste(round(chords$pseudo_octave %>% unique, 2), collapse = ' '),
-  wavelength_tolerance    = paste(round(chords$tolerance %>% unique, 5), collapse = ' '),
-  frequency_tolerance     = paste(round(chords$tolerance %>% unique, 5) / 2.0, collapse = ' ')
+  wavelength_tolerance    = paste(round(chords$wavelength_tolerance %>% unique, 5), collapse = ' '),
+  frequency_tolerance     = paste(round(chords$frequency_tolerance %>% unique, 5) / 2.0, collapse = ' ')
 )))
 print(plot_semitone_codi_2_smooth(chords, title))
 cat("  \n")
