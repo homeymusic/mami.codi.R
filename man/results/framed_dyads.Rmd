@@ -6,8 +6,8 @@ output:
 
 ```{r, echo=F, message=F, include=F}
 devtools::load_all(".")
-source('./man/code/plot.R')
-source('./man/code/utils.R')
+source('../code/plot.R')
+source('../code/utils.R')
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -22,7 +22,7 @@ BEHAVIOURAL_SMOOTH_NARROW <- 0.035
 ### Manipulating harmonic frequencies
 
 ```{r, include=F}
-framed_dyads = readRDS('./man/data/framed_dyads.rds')
+framed_dyads = readRDS('../data/framed_dyads.rds')
 ```
 
 ```{r, include=F}
@@ -113,7 +113,7 @@ p = params %>% purrr::map(\(p) {
                                       scale        == p$s)
   chords$consonance_dissonance_z = z_scores(chords$consonance_dissonance)
   
-  experiment.rds = paste0('./man/data/',
+  experiment.rds = paste0('../data/',
                           timbre,
                           '.rds')
   
@@ -146,8 +146,8 @@ p = params %>% purrr::map(\(p) {
   print(knitr::kable(tibble::tibble_row(
     detected_pseudo_octave  = paste(round(chords$pseudo_octave %>% unique, 2), collapse = ' '),
     ignore_amplitudes_below = paste(round(chords$min_amplitude %>% unique, 2), collapse = ' '),
-    wavelength_tolerance    = paste(round(chords$tolerance %>% unique, 5), collapse = ' '),
-    frequency_tolerance     = paste(round(chords$tolerance %>% unique, 5) / 2.0, collapse = ' '),
+    wavelength_tolerance    = paste(round(chords$wavelength_tolerance %>% unique, 5), collapse = ' '),
+    frequency_tolerance     = paste(round(chords$frequency_tolerance %>% unique, 5) / 2.0, collapse = ' '),
     smoothing_sigma         = sigma
   )))
   print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),

@@ -177,11 +177,8 @@ lcm <- function(x) Reduce(numbers::LCM, x)
 WAVELENGTH_TOLERANCE = 0.15
 FREQUENCY_TOLERANCE  = WAVELENGTH_TOLERANCE / 2
 
-WAVELENGTH_M3M6_TOLERANCE = 0.0003
-FREQUENCY_M3M6_TOLERANCE  = WAVELENGTH_M3M6_TOLERANCE / 2
-
-WAVELENGTH_P8_TOLERANCE   = WAVELENGTH_M3M6_TOLERANCE
-FREQUENCY_P8_TOLERANCE    = WAVELENGTH_P8_TOLERANCE / 2
+WAVELENGTH_MICRO_TOLERANCE = 0.0003
+FREQUENCY_MICRO_TOLERANCE  = WAVELENGTH_M3M6_TOLERANCE / 2
 
 MIN_AMPLITUDE  = 0.03
 
@@ -208,20 +205,16 @@ default_tolerance <- function(dimension, scale) {
   if (dimension == 'frequency') {
     if (scale == 'macro') {
       FREQUENCY_TOLERANCE
-    } else if (scale == 'M3M6') {
-      FREQUENCY_M3M6_TOLERANCE
-    } else if (scale == 'P8') {
-      FREQUENCY_P8_TOLERANCE
+    } else if (scale == 'micro') {
+      FREQUENCY_MICRO_TOLERANCE
     } else {
       stop("no default tolerance for selection")
     }
   } else if (dimension == 'wavelength') {
     if (scale == 'macro') {
       WAVELENGTH_TOLERANCE
-    } else if (scale == 'M3M6') {
-      WAVELENGTH_M3M6_TOLERANCE
-    } else if (scale == 'P8') {
-      WAVELENGTH_P8_TOLERANCE
+    } else if (scale == 'micro') {
+      WAVELENGTH_MICRO_TOLERANCE
     } else {
       stop("no default tolerance for selection")
     }

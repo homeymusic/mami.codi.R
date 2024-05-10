@@ -7,7 +7,7 @@ devtools::load_all(".")
 tonic_midi = 60
 
 P8 <- c(tonic_midi,72) %>% mami.codi.R::mami.codi(verbose=T)
-if (P8$wavelength_tolerance == mami.codi.R::default_tolerance('macro', 'wavelength')) {
+if (P8$wavelength_tolerance == mami.codi.R::default_tolerance('wavelength', 'macro')) {
   print("Seems to be the correct version mami.codi.R")
 } else {
   stop("This is not the expected version of mami.codi.R")
@@ -152,16 +152,17 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
     )
   }
 
-  if (scale=='M3' || scale=='M6') {
-    tolerance  = mami.codi.R::default_tolerance('M3M6')
-  } else if (scale=='P8') {
-    tolerance  = mami.codi.R::default_tolerance('P8')
+  if (scale=='M3' || scale=='M6' || scale=='P8') {
+    frequency_tolerance  = mami.codi.R::default_tolerance('frequency','micro')
+    wavelength_tolerance  = mami.codi.R::default_tolerance('wavelength','micro')
   } else {
-    tolerance  = mami.codi.R::default_tolerance('macro')
+    frequency_tolerance  = mami.codi.R::default_tolerance('frequency','macro')
+    wavelength_tolerance  = mami.codi.R::default_tolerance('wavelength', 'macro')
   }
 
   mami.codi.R::mami.codi(study_chord,
-                         tolerance=tolerance,
+                         frequency_tolerance  = frequency_tolerance,
+                         wavelength_tolerance = wavelength_tolerance,
                          metadata = list(
                            num_harmonics = num_harmonics,
                            octave_ratio  = octave_ratio,

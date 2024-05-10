@@ -164,16 +164,17 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
     )
   }
 
-  if (scale=='M3' || scale=='M6') {
-    tolerance  = mami.codi.R::default_tolerance('M3M6')
-  } else if (scale=='P8') {
-    tolerance  = mami.codi.R::default_tolerance('P8')
+  if (scale=='M3' || scale=='M6' || scale=='P8') {
+    frequency_tolerance  = mami.codi.R::default_tolerance('frequency','micro')
+    wavelength_tolerance  = mami.codi.R::default_tolerance('wavelength','micro')
   } else {
-    tolerance  = mami.codi.R::default_tolerance('macro')
+    frequency_tolerance  = mami.codi.R::default_tolerance('frequency','macro')
+    wavelength_tolerance  = mami.codi.R::default_tolerance('wavelength', 'macro')
   }
 
   mami.codi.R::mami.codi(study_chord,
-                         tolerance=tolerance,
+                         frequency_tolerance  = frequency_tolerance,
+                         wavelength_tolerance = wavelength_tolerance,
                          metadata = list(
                            num_harmonics = num_harmonics,
                            octave_ratio  = octave_ratio,
