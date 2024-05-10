@@ -115,12 +115,13 @@ various tolerance values and compared the predictions with results from
 six of the large-scale behavioral experiments.  
 
 Because spatial and temporal information is encoded via different
-mechanisms by the cochlea, we assume that the wavelength and frequency
-tolerances will have different values.  
+mechanisms by the cochlea, we assumed that the wavelength and frequency
+tolerances would have different values.  
 
-So, our tolerance searches were two-dimensional. The image below is a
-sample of a 2D tolerance search using the harmonic experiment from
-large-scale behavioral study.  
+So, our tolerance searches were two-dimensional. We searched for
+combinations of frequency tolerance and wavelength tolerance. The image
+below is a sample of a 2D tolerance search using the harmonic experiment
+from large-scale behavioral study.  
 
 ![Two-dimensional tolerance search for frequency and wavelength
 tolerance values for finding rational fractions for tone
@@ -132,11 +133,11 @@ branch on
 GitHub](https://github.com/homeymusic/mami.codi.R/tree/2D_tolerance) to
 recreate all the 2D searches.  
 
-The best fits across the experiments were given by a wavelength
-tolerance of 0.15 and a frequency tolerance of 0.075. The frequency
-tolerance is half the size of the wavelength tolerance. Does that mean
-that the perception mechanism for frequency is twice as discriminating
-as the wavelength mechanism? “At 1 kHz information contained in temporal
+The best fits across the experiments were given by a frequency tolerance
+of 0.075 and a wavelength tolerance of 0.15. The frequency tolerance is
+half the size of the wavelength tolerance. Does that mean that the
+perception mechanism for frequency is twice as discriminating as the
+wavelength mechanism? “At 1 kHz information contained in temporal
 discharges was an order of magnitude better than that obtained by a
 rate–place mechanism. Heinz et al. (2001)” from Winter (2005).  
 
