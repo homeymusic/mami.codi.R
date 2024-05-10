@@ -27,14 +27,14 @@ midi
 #### Spatial Estimate
 ```{r, echo=F, results='asis', message=F}
 knitr::kable(tibble::tibble(
-  tol_l    = chord$wavelength_tolerance,
+  tol      = chord$wavelength_tolerance,
   min_l_m  = min(chord$wavelengths[[1]]),
   max_l_m  = max(chord$wavelengths[[1]]),
   chord_Sz = chord$wavelength_lcd,
   chord_m  = min_l_m * chord_Sz,
   chord_s  = chord_m / SPEED_OF_SOUND * (max_l_m / min_l_m),
   chord_Hz = 1 / chord_s,
-) %>% dplyr::select(chord_Hz, chord_m, chord_s, chord_Sz))
+) %>% dplyr::select(chord_Hz, chord_m, chord_s, chord_Sz, tol))
 ```
 
 ```{r, echo=F, results='asis', message=F}
@@ -52,14 +52,14 @@ knitr::kable(chord$wavelength_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::s
 #### Temporal Estimate
 ```{r, echo=F, results='asis', message=F}
 knitr::kable(tibble::tibble(
-  tol_f    = chord$frequency_tolerance,
+  tol    = chord$frequency_tolerance,
   min_f_Hz = min(chord$frequencies[[1]]),
   max_f_Hz = max(chord$frequencies[[1]]),
   chord_Sz = chord$frequency_lcd,
   chord_Hz = min_f_Hz / chord_Sz,
   chord_s  = 1 / chord_Hz,
   chord_m  = SPEED_OF_SOUND / chord_Hz
-) %>% dplyr::select(chord_Hz, chord_m, chord_s, chord_Sz))
+) %>% dplyr::select(chord_Hz, chord_m, chord_s, chord_Sz, tol))
 ```
 
 ```{r, echo=F, results='asis', message=F}

@@ -9,9 +9,9 @@ Frequency and Wavelength Relative Periodicity
 
 #### Spatial Estimate
 
-| chord_Hz |  chord_m |  chord_s | chord_Sz |
-|---------:|---------:|---------:|---------:|
-| 65.40639 | 3.500041 | 0.015289 |        4 |
+| chord_Hz |  chord_m |  chord_s | chord_Sz | tol |
+|---------:|---------:|---------:|---------:|----:|
+| 65.40639 | 3.500041 | 0.015289 |        4 | 0.1 |
 
 ![](Ratios-and-Inversions_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
@@ -25,9 +25,9 @@ Frequency and Wavelength Relative Periodicity
 
 #### Temporal Estimate
 
-| chord_Hz |  chord_m |   chord_s | chord_Sz |
-|---------:|---------:|----------:|---------:|
-| 43.60426 | 7.866204 | 0.0229335 |        6 |
+| chord_Hz |  chord_m |   chord_s | chord_Sz | tol |
+|---------:|---------:|----------:|---------:|----:|
+| 43.60426 | 7.866204 | 0.0229335 |        6 | 0.1 |
 
 ![](Ratios-and-Inversions_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
