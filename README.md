@@ -6,10 +6,12 @@ MaMi.CoDi: A Spatiotemporal Periodicity Model of Consonance Perception
 ### Estimating Spatiotemporal Periodicity
 
 To estimate the periodicity of a chord, the MaMi.CoDi model uses a
-signal processing technique. It creates ratios for every tone in the
-chord (fundamental, harmonics, noise, etc.) relative to a reference
-tone. The least common multiple of those ratios is a measure of the
-cycle length, relative to the reference tone.  
+signal processing technique. It finds ratios, within a given tolerance,
+for every tone in the chord (fundamental, harmonics, noise, etc.)
+relative to a reference tone. The least common multiple of those ratios
+is a measure of the cycle length, relative to the reference tone. Long
+relative cycles are predicted to sound unpleasant and short relative
+cycles are predicted to sound pleasant.  
 
 MaMi.CoDi creates two estimates of the chord’s period: a temporal
 estimate and a spatial estimate.  
@@ -196,8 +198,8 @@ For pure tones, the behavioral results and the theoretical predictions
 mostly agree. Only P5 and P8 have pronounced two-sided peaks. The
 behavioral results show subtle variations in consonance height across
 the 15 semitones but the overall peak structure agrees with MaMi.CoDi
-predictions. Theoretical predictions for major-minor versus the
-beharvoiral results are included in a plot further below.
+predictions. For futher comparison, the theoretical predictions for
+major-minor versus the behavioral results are included in a plot below.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|

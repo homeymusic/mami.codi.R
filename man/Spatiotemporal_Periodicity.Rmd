@@ -1,9 +1,11 @@
 ### Estimating Spatiotemporal Periodicity
 
 To estimate the periodicity of a chord, the MaMi.CoDi model uses a signal 
-processing technique. It creates ratios for every tone in the chord (fundamental, 
-harmonics, noise, etc.) relative to a reference tone. The least common multiple
-of those ratios is a measure of the cycle length, relative to the reference tone.\
+processing technique. It finds ratios, within a given tolerance, 
+for every tone in the chord (fundamental, harmonics, noise, etc.) relative to 
+a reference tone. The least common multiple of those ratios is a measure of the 
+cycle length, relative to the reference tone. Long relative cycles are predicted 
+to sound unpleasant and short relative cycles are predicted to sound pleasant. \
 
 MaMi.CoDi creates two estimates of the chord's period: a temporal estimate and 
 a spatial estimate.\
@@ -17,6 +19,9 @@ For the wavelength (i.e. rate-place or spatial) estimate, the reference tone is 
 smallest wavelength. Small wavelengths are high tones and are detected by the 
 inner ear hair cells closest to the base of the cochlea, which is the end closest 
 to the middle ear, the source of the wave. \
+
+MaMi.CoDi combines the two cycle estimates into a two-dimensional space with 
+consonance-dissonance along one dimension and major-minor on the orthogonal dimension.
 
 #### Chord
 
