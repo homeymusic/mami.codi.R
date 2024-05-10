@@ -157,7 +157,8 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
 
     study_chord = do.call(hrep::combine_sparse_spectra, list(bass,upper,octave))
   } else {
-    study_chord = c(tonic_midi, study_intervals[index], tonic_midi+12) %>% hrep::sparse_fr_spectrum(
+    octave_midi = hrep::freq_to_midi(octave_ratio * hrep::midi_to_freq(tonic_midi))
+    study_chord = c(tonic_midi, study_intervals[index], tonic_midi+octave_midi) %>% hrep::sparse_fr_spectrum(
       num_harmonics = num_harmonics,
       octave_ratio  = octave_ratio,
       roll_off_dB   = roll_off

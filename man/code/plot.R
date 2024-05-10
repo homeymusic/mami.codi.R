@@ -183,27 +183,28 @@ plot_dilo.dihi <- function(chords, title, chords_to_label=NULL,
       limits=c(0,max(c(chords$period_dissonance,chords$wavelength_dissonance)))) +
     {if (minimal) theme_homey_minimal(aspect.ratio=aspect.ratio) else theme_homey(aspect.ratio=aspect.ratio)}
 }
-plot_colo.cohi <- function(chords, title, chords_to_label=NULL,
+plot_cofreq.cowave <- function(chords, title, chords_to_label=NULL,
                            tonic_index=1, include_abline=T, aspect.ratio=NULL,
-                           minimal=F) {
+                           minimal=F, include_labels=F) {
   if (is.null(chords_to_label)) {
     chords_to_label = chords
   }
-  slope = chords$wavelength_consonance[tonic_index] / chords$period_consonance[tonic_index]
-  ggplot2::ggplot(chords, ggplot2::aes(x = .data$period_consonance,
+  slope = chords$wavelength_consonance[tonic_index] / chords$frequency_consonance[tonic_index]
+  ggplot2::ggplot(chords, ggplot2::aes(x = .data$frequency_consonance,
                                        y = .data$wavelength_consonance)) +
     { if(include_abline) ggplot2::geom_abline(slope = slope, color = colors_homey$neutral) } +
     ggplot2::geom_point(shape=21, stroke=NA, size=0.5, fill=colors_homey$neutral) +
+    { if (include_labels)
     ggrepel::geom_text_repel(data=chords_to_label, color=colors_homey$neutral,
                              ggplot2::aes(label=label),
                              segment.color = colors_homey$subtle_foreground,
                              max.overlaps = Inf,
-                             family='Arial Unicode MS') +
+                             family='Arial Unicode MS')} +
     ggplot2::scale_color_manual(guide='none') +
     ggplot2::ggtitle(title) +
     ggplot2::scale_x_continuous(
-      limits=c(min(c(chords$period_consonance,chords$wavelength_consonance)),
-               max(c(chords$period_consonance,chords$wavelength_consonance)))) +
+      limits=c(min(c(chords$frequency_consonance,chords$wavelength_consonance)),
+               max(c(chords$frequency_consonance,chords$wavelength_consonance)))) +
     {if (minimal) theme_homey_minimal(aspect.ratio=aspect.ratio) else theme_homey(aspect.ratio=aspect.ratio)}
 }
 plot_semitone_codi <- function(chords, title='', include_line=T, sigma=0.2,
