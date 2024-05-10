@@ -1,5 +1,5 @@
 ---
-title: "Period and Wavelength Relative Periodicity"
+title: "Frequency and Wavelength Relative Periodicity"
 output:
   github_document: default
 ---
@@ -11,13 +11,13 @@ devtools::load_all('.')
 setwd('.')
 source('./man/code/plot.R')
 source('./man/code/utils.R')
-midi  = c(0,4,7) + 60
+midi  = c(0,4, 7) + 60
 tolerance = 1e-01
 chord = midi %>% mami.codi(
-  period_tolerance     = tolerance,
+  frequency_tolerance  = tolerance,
   wavelength_tolerance = tolerance,
   verbose=T,
-  num_harmonics=3
+  num_harmonics=1
 )
 midi
 ```
@@ -39,35 +39,34 @@ knitr::kable(tibble::tibble(
 ratios = chord$wavelength_ratios[[1]] %>%
   dplyr::select(index, num, den, tone)
 lcd    = chord$wavelength_lcd
-plot_periodicity(ratios, lcd)
+plot_wavelength_periodicity(ratios, lcd, 'wavelength')
+```
+
+### Wavelength Ratios
+```{r, echo=F, results='asis', message=F}
+knitr::kable(chord$wavelength_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
 ```
 
 #### Temporal Estimate
 ```{r, echo=F, results='asis', message=F}
 knitr::kable(tibble::tibble(
-  tol_T   = chord$period_tolerance,
-  min_T   = min(chord$periods[[1]]),
-  lcd_T   = chord$period_lcd,
+  tol_T   = chord$frequency_tolerance,
+  min_T   = min(chord$frequencies[[1]]),
+  lcd_T   = chord$frequency_lcd,
   chord_T = lcd_T * min_T
 ))
 ```
 
 ```{r, echo=F, results='asis', message=F}
-ratios = chord$period_ratios[[1]] %>% 
+ratios = chord$frequency_ratios[[1]] %>% 
   dplyr::select(index, num, den, tone)
-lcd    = chord$period_lcd
-plot_periodicity(ratios, lcd)
-```
-
-### Wavelength Ratios
-
-```{r, echo=F, results='asis', message=F}
-knitr::kable(chord$wavelength_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
+lcd    = chord$frequency_lcd
+plot_wavelength_periodicity(ratios, lcd, 'frequency')
 ```
 
 ### Frequency Ratios
 ```{r, echo=F, results='asis', message=F}
-knitr::kable(chord$period_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
+knitr::kable(chord$frequency_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
 ```
 
 #### References

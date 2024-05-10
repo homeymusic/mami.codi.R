@@ -609,6 +609,44 @@ plot_semitone_codi_2_smooth <- function(chords, title='', include_line=T,
     theme_homey()
 }
 
+plot_wavelength_periodicity <- function(ratios, lcd, dimension) {
+  if (dimension=='wavelength') {
+    fill_color   = colors_homey$minor
+    border_color = colors_homey$minor_dark
+  } else if (dimension=='frequency') {
+    fill_color   = colors_homey$major
+    border_color = colors_homey$major_dark
+  }
+  brick_count = 8
+  brickwork = ratios %>% purrr::pmap_dfr(\(index, num, den, tone) {
+    course_of_bricks <- tibble::tibble(
+      xmin = numeric(),
+      xmax = numeric(),
+      ymin = numeric(),
+      ymax = numeric()
+    )
+    brick_width = den / num
+    brick_count = lcd * num / den
+    for (brick in 0:(brick_count-1)) {
+      course_of_bricks = course_of_bricks %>% tibble::add_row(
+        xmin = brick*brick_width,
+        xmax = brick*brick_width + brick_width,
+        ymin = index,
+        ymax = index + 1
+      )
+    }
+    course_of_bricks
+  })
+  ggplot2::ggplot(brickwork, ggplot2::aes(
+    xmin=xmin,
+    xmax=xmax,
+    ymin=ymin,
+    ymax=ymax
+  )) +
+    ggplot2::theme(legend.position="none") +
+    ggplot2::geom_rect(fill=fill_color, color=border_color)
+}
+
 plot_periodicity <- function(ratios, lcd, dimension, log2_scale = F) {
   if (dimension == 'space') {
     fill_color   = colors_homey$minor
