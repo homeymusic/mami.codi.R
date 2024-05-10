@@ -1,12 +1,12 @@
-### How MaMi.CoDi Predicts Spatiotemporal Periodicity
+### Estimating Spatiotemporal Periodicity
 
 To estimate the periodicity of a chord, the MaMi.CoDi model uses a signal 
 processing technique. It creates ratios for every tone in the chord (fundamental, 
 harmonics, noise, etc.) relative to a reference tone. The least common multiple
 of those ratios is a measure of the cycle length, relative to the reference tone.\
 
-MaMi.CoDi creates two estimates of the chord's period: a spatial estimate and 
-a temporal estimate.\
+MaMi.CoDi creates two estimates of the chord's period: a temporal estimate and 
+a spatial estimate.\
 
 For the frequency (i.e. phase-locking or temporal) estimate the reference tone is the 
 smallest frequency. Small frequencies are low tones and are detected by the inner 
@@ -36,9 +36,9 @@ chord = midi %>% mami.codi(
 
 ```
 
-* Frequencies: `r midi %>% hrep::midi_to_freq()`\
+* Fundamental Frequencies: `r midi %>% hrep::midi_to_freq()`\
 
-* Wavelengths: `r SPEED_OF_SOUND / (midi %>% hrep::midi_to_freq())`\
+* Fundamental Wavelengths: `r SPEED_OF_SOUND / (midi %>% hrep::midi_to_freq())`\
 
 * MIDI: `r midi`\
 

@@ -3,7 +3,7 @@ MaMi.CoDi: A Spatiotemporal Periodicity Model of Consonance Perception
 
 ## How MaMi.CoDi Works
 
-### How MaMi.CoDi Predicts Spatiotemporal Periodicity
+### Estimating Spatiotemporal Periodicity
 
 To estimate the periodicity of a chord, the MaMi.CoDi model uses a
 signal processing technique. It creates ratios for every tone in the
@@ -11,8 +11,8 @@ chord (fundamental, harmonics, noise, etc.) relative to a reference
 tone. The least common multiple of those ratios is a measure of the
 cycle length, relative to the reference tone.  
 
-MaMi.CoDi creates two estimates of the chord’s period: a spatial
-estimate and a temporal estimate.  
+MaMi.CoDi creates two estimates of the chord’s period: a temporal
+estimate and a spatial estimate.  
 
 For the frequency (i.e. phase-locking or temporal) estimate the
 reference tone is the smallest frequency. Small frequencies are low
@@ -30,9 +30,9 @@ wave.
 Below, we estimate the periodicity of the C4, E4 and G4 major triad with
 5 harmonics per pitch.
 
-- Frequencies: 261.6255653, 329.6275569, 391.995436  
+- Fundamental Frequencies: 261.6255653, 329.6275569, 391.995436  
 
-- Wavelengths: 1.311034, 1.0405683, 0.8750102  
+- Fundamental Wavelengths: 1.311034, 1.0405683, 0.8750102  
 
 - MIDI: 60, 64, 67  
 
