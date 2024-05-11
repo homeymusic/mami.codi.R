@@ -1,5 +1,5 @@
 source('./utils.R')
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R', ref='play_with_rotation')
 
 library(mami.codi.R)
 devtools::load_all(".")

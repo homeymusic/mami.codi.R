@@ -6,7 +6,7 @@ always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'Harmonic'
+search_label = '5Partials'
 ```
 
 # `r search_label`
@@ -126,8 +126,8 @@ smoothed <- function(x,val,sigma=BEHAVIOURAL_SMOOTH_BROAD) {
 ```{r, echo=F}
 theory <- theory %>% 
   dplyr::mutate(
-    z_score = z_scores(wavelength_consonance),
-    # z_score = z_scores(frequency_consonance),
+    # z_score = z_scores(wavelength_consonance),
+    z_score = z_scores(frequency_consonance),
     smooth  = smoothed(semitone, .data$z_score, params$sigma)
   )
 ```
@@ -142,8 +142,9 @@ rows = length(tols)
 ```{r, fig.height=7*rows, fig.width=12*cols, echo=F}
 # height = 3 per row and width = 5 per column
 # so for grid of 4x12 it would be height=12 and width=60
-# plot_semitone_freqco_wrap(
-plot_semitone_waveco_wrap(
+
+plot_semitone_freqco_wrap(
+# plot_semitone_waveco_wrap(
   theory, 
   experiment, 
   gray_vlines  = params$gray_vlines[[1]],
