@@ -62,7 +62,8 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 listen_for_min_amplitude = function(x, min_amplitude) {
 
   f = x$spectrum[[1]] %>% dplyr::filter(.data$y>min_amplitude) %>% hrep::freq()
-  λ = SPEED_OF_SOUND / f
+  s = max(f) / max(1/f)
+  λ = s / f
 
   x %>% dplyr::mutate(
     frequencies = list(f),
@@ -174,7 +175,7 @@ format_output <- function(x, metadata, verbose) {
 
 lcm <- function(x) Reduce(numbers::LCM, x)
 
-WAVELENGTH_TOLERANCE = 1/3 * 1e-05
+WAVELENGTH_TOLERANCE = 9e-02
 FREQUENCY_TOLERANCE  = 9e-02
 
 WAVELENGTH_MICRO_TOLERANCE = 0.0003

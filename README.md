@@ -80,9 +80,9 @@ Below, we estimate the periodicity of the C4, E4 and G4 major triad with
 
 #### Spatial Estimate
 
-| chord_Hz |  chord_m |   chord_s | chord_Sz | tol |
-|---------:|---------:|----------:|---------:|----:|
-| 4.360426 | 10.50012 | 0.2293354 |       60 | 0.1 |
+|  chord_Hz |  chord_m |  chord_s | chord_Sz | tol |
+|----------:|---------:|---------:|---------:|----:|
+| 0.0029167 | 15697.53 | 342.8531 |       60 | 0.1 |
 
 ##### Wavenumbers
 
@@ -96,21 +96,21 @@ Below, we estimate the periodicity of the C4, E4 and G4 major triad with
 
 | index | num | den |    ratio |      tone | reference_tone |
 |------:|----:|----:|---------:|----------:|---------------:|
-|    15 |   1 |   1 | 1.000000 | 0.1750020 |       0.175002 |
-|    14 |   5 |   4 | 1.189207 | 0.2081137 |       0.175002 |
-|    13 |   4 |   3 | 1.250000 | 0.2187525 |       0.175002 |
-|    12 |   3 |   2 | 1.486509 | 0.2601421 |       0.175002 |
-|    11 |   3 |   2 | 1.498307 | 0.2622068 |       0.175002 |
-|    10 |   5 |   3 | 1.666667 | 0.2916701 |       0.175002 |
-|     9 |   9 |   5 | 1.872884 | 0.3277585 |       0.175002 |
-|     8 |   2 |   1 | 1.982012 | 0.3468561 |       0.175002 |
-|     7 |   5 |   2 | 2.497178 | 0.4370113 |       0.175002 |
-|     6 |   5 |   2 | 2.500000 | 0.4375051 |       0.175002 |
-|     5 |   3 |   1 | 2.973018 | 0.5202842 |       0.175002 |
-|     4 |  11 |   3 | 3.745768 | 0.6555170 |       0.175002 |
-|     3 |   5 |   1 | 5.000000 | 0.8750102 |       0.175002 |
-|     2 |   6 |   1 | 5.946035 | 1.0405683 |       0.175002 |
-|     1 |  15 |   2 | 7.491535 | 1.3110340 |       0.175002 |
+|    15 |   1 |   1 | 1.000000 |  261.6256 |       261.6256 |
+|    14 |   5 |   4 | 1.189207 |  311.1270 |       261.6256 |
+|    13 |   4 |   3 | 1.250000 |  327.0320 |       261.6256 |
+|    12 |   3 |   2 | 1.486509 |  388.9087 |       261.6256 |
+|    11 |   3 |   2 | 1.498307 |  391.9954 |       261.6256 |
+|    10 |   5 |   3 | 1.666667 |  436.0426 |       261.6256 |
+|     9 |   9 |   5 | 1.872884 |  489.9943 |       261.6256 |
+|     8 |   2 |   1 | 1.982012 |  518.5450 |       261.6256 |
+|     7 |   5 |   2 | 2.497178 |  653.3257 |       261.6256 |
+|     6 |   5 |   2 | 2.500000 |  654.0639 |       261.6256 |
+|     5 |   3 |   1 | 2.973018 |  777.8175 |       261.6256 |
+|     4 |  11 |   3 | 3.745768 |  979.9886 |       261.6256 |
+|     3 |   5 |   1 | 5.000000 | 1308.1278 |       261.6256 |
+|     2 |   6 |   1 | 5.946035 | 1555.6349 |       261.6256 |
+|     1 |  15 |   2 | 7.491535 | 1959.9772 |       261.6256 |
 
 ### Finding the Tolerance Values
 
@@ -140,10 +140,10 @@ GitHub](https://github.com/homeymusic/mami.codi.R/tree/2D_tolerance) to
 recreate all the 2D searches.  
 
 The best fits across the experiments were given by a frequency tolerance
-of 0.09 and a wavelength tolerance of 3.3333333^{-6}. The frequency
-tolerance is half the size of the wavelength tolerance. Does that mean
-that the perception mechanism for frequency is twice as discriminating
-as the wavelength mechanism? “At 1 kHz information contained in temporal
+of 0.09 and a wavelength tolerance of 0.09. The frequency tolerance is
+half the size of the wavelength tolerance. Does that mean that the
+perception mechanism for frequency is twice as discriminating as the
+wavelength mechanism? “At 1 kHz information contained in temporal
 discharges was an order of magnitude better than that obtained by a
 rate–place mechanism. Heinz et al. (2001)” from Winter (2005).  
 
