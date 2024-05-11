@@ -294,7 +294,7 @@ Description is below.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 3e-04                | 0.00015             |           0.035 |
+| 2                      | 0.03                    | 0                    | 0.07                |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-5-37.png)<!-- -->
 
@@ -309,7 +309,7 @@ Description is below.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 3e-04                | 0.00015             |           0.035 |
+| 2                      | 0.03                    | 0                    | 0.07                |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-5-42.png)<!-- -->
 
@@ -324,7 +324,7 @@ Description is below.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 3e-04                | 0.00015             |           0.035 |
+| 2                      | 0.03                    | 0                    | 0.07                |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-5-47.png)<!-- -->
 
