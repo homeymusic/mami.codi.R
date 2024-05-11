@@ -68,6 +68,7 @@ listen_for_min_amplitude = function(x, min_amplitude) {
   x %>% dplyr::mutate(
     frequencies = list(f),
     wavelengths = list(λ),
+    speed_of_sound = s,
     min_amplitude
   )
 
