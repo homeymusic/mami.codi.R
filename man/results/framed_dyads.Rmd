@@ -42,7 +42,15 @@ dyads <- framed_dyads %>% dplyr::rowwise() %>% dplyr::mutate(
 ```{r, fig.height=8, fig.width=12, echo=F, results='asis', message=F}
 params = list(
   list(h=10,o=2.0,s='macro'),
-  list(h=5, o=2.0,s='macro')
+  list(h=5, o=2.0,s='macro'),
+  list(h=5,o=2,s='5PartialsNo3'),
+  list(h=1, o=2.0,s='Pure'),
+  list(h=10,o=2.1,s='macro'),
+  list(h=10,o=1.9,s='macro'),
+  list(h=4,o=2,s='Bonang'),
+  list(h=10,o=2.0,s='M3'),
+  list(h=10,o=2.0,s='M6'),
+  list(h=10,o=2.0,s='P8')
 )
 
 p = params %>% purrr::map(\(p) {
@@ -138,7 +146,7 @@ p = params %>% purrr::map(\(p) {
     detected_pseudo_octave  = paste(round(chords$pseudo_octave %>% unique, 2), collapse = ' '),
     ignore_amplitudes_below = paste(round(chords$min_amplitude %>% unique, 2), collapse = ' '),
     wavelength_tolerance    = paste(round(chords$wavelength_tolerance %>% unique, 5), collapse = ' '),
-    frequency_tolerance     = paste(round(chords$frequency_tolerance %>% unique, 5) / 2.0, collapse = ' '),
+    frequency_tolerance     = paste(round(chords$frequency_tolerance %>% unique, 5), collapse = ' '),
     smoothing_sigma         = sigma
   )))
   print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),
@@ -150,10 +158,114 @@ p = params %>% purrr::map(\(p) {
                            black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")
   
-  print(plot_cofreq.cowave(chords, title='Spatial-Consonance Temporal-Consonance'))
+  print(plot_semitone_colo.cohi(chords, title='Spatial-Consonance Temporal-Consonance'))
   cat("  \n")
   
-  print(plot_mami.codi(chords, title='Major-Minor Consonance-Dissonance'))
+  print(plot_cofreq.cowave(chords, title='Spatial-Consonance Temporal-Consonance'))
+  cat("  \n")
+
+    print(plot_mami.codi(chords, title='Major-Minor Consonance-Dissonance'))
   cat("  \n")
 })
+```
+
+
+# MaMi CoDi Plots
+
+```{r, include=F}
+source('../code/utils.R')
+
+chord_types <- c('Dyads','Triads','Major Triad Progressions',
+                 'Minor Triad Progressions', 'Scales')
+chords <- chords %>% dplyr::filter(type %in% chord_types)
+
+major_I = chords %>% dplyr::filter(type == 'Major Triad Progressions' &
+                                     label == 'I')
+minor_i = chords %>% dplyr::filter(type == 'Minor Triad Progressions' &
+                                     label == 'i')
+
+progression_tonics = list(
+  'Major Triad Progressions 1' = (major_I$pitches[[1]] %>%
+                                    mami.codi.R::mami.codi(num_harmonics=1))$chord[[1]],
+  'Minor Triad Progressions 1' = (minor_i$pitches[[1]] %>% 
+                                    mami.codi.R::mami.codi(num_harmonics=1))$chord[[1]],
+  'Major Triad Progressions 5' = (major_I$pitches[[1]] %>%
+                                    mami.codi.R::mami.codi(num_harmonics=5))$chord[[1]],
+  'Minor Triad Progressions 5' = (minor_i$pitches[[1]] %>% 
+                                    mami.codi.R::mami.codi(num_harmonics=5))$chord[[1]],
+  'Major Triad Progressions 10' = (major_I$pitches[[1]] %>%
+                                     mami.codi.R::mami.codi(num_harmonics=10))$chord[[1]],
+  'Minor Triad Progressions 10' = (minor_i$pitches[[1]] %>% 
+                                     mami.codi.R::mami.codi(num_harmonics=10))$chord[[1]]
+)
+
+```
+
+```{r, include=F}
+grid = tidyr::expand_grid(
+  index         = seq_along(chords$pitches),
+  num_harmonics = c(1,5,10)
+)
+
+results = grid %>% furrr::future_pmap_dfr(\(index,
+                                     num_harmonics) {
+  
+  chord_spectrum = hrep::sparse_fr_spectrum(chords$pitches[[index]],
+                                            num_harmonics = num_harmonics)
+  
+  if (endsWith(chords$type[index], 'Progressions')) {
+    if (chords$label[index] == 'I' | chords$label[index] == 'i' | chords$label[index] == '') {
+      tonic_spectrum = NULL
+    } else {
+      tonic_spectrum = progression_tonics[[paste(chords$type[index],num_harmonics)]]
+    }
+  } else {
+    if (is.na(chords$tonic[[index]])) {
+      tonic_spectrum = NULL
+    } else {
+      tonic_spectrum = hrep::sparse_fr_spectrum(chords$tonic[[index]],
+                                                num_harmonics = num_harmonics)
+    }
+  }  
+  mami.codi.R::mami.codi(chord_spectrum,
+                         metadata=purrr::flatten(
+                           list(chords$metadata[[index]],
+                                num_harmonics=num_harmonics)
+                         ),
+                         verbose=T)
+}, .progress=TRUE, .options = furrr::furrr_options(seed = T))
+
+results <- results %>% dplyr::rowwise() %>% dplyr::mutate(
+  label = metadata$label,
+  type  = metadata$type, 
+  num_harmonics=metadata$num_harmonics,
+  .before=1
+)
+```
+
+
+## Chords: Consonance-Dissonance ~ Major-Minor
+
+```{r, echo=F, message=F, results='asis'}
+for (t in chord_types) {
+  
+  cat("  \n###", t, '\n')
+  
+  for (n in results$num_harmonics %>% unique) {
+    title = paste(
+      t,
+      '~',
+      'Number of Harmonics:', n
+    )
+    r = results %>% dplyr::filter(
+      type==t & 
+        num_harmonics == n
+    )
+    print(plot_mami.codi(r, title, include_path=endsWith(t, 'Progressions'),
+                         include_labels=T))
+  }
+  
+  cat("  \n")
+  
+}
 ```

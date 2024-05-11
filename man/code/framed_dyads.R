@@ -1,5 +1,5 @@
 source('./utils.R')
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R', ref='play_with_rotation')
 
 library(mami.codi.R)
 devtools::load_all(".")
@@ -167,10 +167,10 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
 
   if (scale=='M3' || scale=='M6' || scale=='P8') {
     frequency_tolerance  = mami.codi.R::default_tolerance('frequency','micro')
-    wavelength_tolerance  = mami.codi.R::default_tolerance('wavelength','micro')
+    wavelength_tolerance  = mami.codi.R::default_tolerance('frequency','micro')
   } else {
     frequency_tolerance  = mami.codi.R::default_tolerance('frequency','macro')
-    wavelength_tolerance  = mami.codi.R::default_tolerance('wavelength', 'macro')
+    wavelength_tolerance  = mami.codi.R::default_tolerance('frequency', 'macro') / 2
   }
 
   mami.codi.R::mami.codi(study_chord,

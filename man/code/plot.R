@@ -202,9 +202,10 @@ plot_cofreq.cowave <- function(chords, title, chords_to_label=NULL,
                              family='Arial Unicode MS')} +
     ggplot2::scale_color_manual(guide='none') +
     ggplot2::ggtitle(title) +
-    ggplot2::scale_x_continuous(
-      limits=c(min(c(chords$frequency_consonance,chords$wavelength_consonance)),
-               max(c(chords$frequency_consonance,chords$wavelength_consonance)))) +
+    ggplot2::coord_fixed() +
+    # ggplot2::scale_x_continuous(
+    #   limits=c(min(c(chords$frequency_consonance,chords$wavelength_consonance)),
+    #            max(c(chords$frequency_consonance,chords$wavelength_consonance)))) +
     {if (minimal) theme_homey_minimal(aspect.ratio=aspect.ratio) else theme_homey(aspect.ratio=aspect.ratio)}
 }
 plot_semitone_codi <- function(chords, title='', include_line=T, sigma=0.2,
@@ -281,8 +282,8 @@ plot_semitone_mami <- function(chords, title='', include_line=T, sigma=0.2,
 plot_semitone_colo.cohi <- function(chords, title='', include_line=T, sigma=0.2,
                                     include_linear_regression = F, goal=NULL,
                                     black_vlines=c(),gray_vlines=c()) {
-  chords$smoothed.period_consonance = smoothed(chords$semitone,
-                                                  chords$period_consonance,
+  chords$smoothed.frequency_consonance = smoothed(chords$semitone,
+                                                  chords$frequency_consonance,
                                                   sigma)
   chords$smoothed.wavelength_consonance = smoothed(chords$semitone,
                                                    chords$wavelength_consonance,
@@ -290,7 +291,7 @@ plot_semitone_colo.cohi <- function(chords, title='', include_line=T, sigma=0.2,
   ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
-    ggplot2::geom_line(ggplot2::aes(y = smoothed.period_consonance), linewidth = 1,
+    ggplot2::geom_line(ggplot2::aes(y = smoothed.frequency_consonance), linewidth = 1,
                        color=colors_homey$major) +
     ggplot2::geom_line(ggplot2::aes(y = smoothed.wavelength_consonance), linewidth = 1,
                        color=colors_homey$minor) +
@@ -304,27 +305,27 @@ plot_semitone_colo.cohi <- function(chords, title='', include_line=T, sigma=0.2,
     ggplot2::ggtitle(title) +
     ggplot2::scale_x_continuous(breaks = 0:15,
                                 minor_breaks = c()) +
-    ggplot2::ylab('Consonance Period (gold) and Wavelength (blue)') +
+    ggplot2::ylab('Consonance frequency (gold) and Wavelength (blue)') +
     theme_homey()
 }
 plot_semitone_co <- function(chords, title='') {
-  period_semitone =chords$semitone %>% min
+  frequency_semitone =chords$semitone %>% min
   wavelength_semitone =chords$semitone %>% max
   ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone,
                                        y = .data$consonance)) +
     ggplot2::geom_point(color=colors_homey$neutral) +
-    ggplot2::scale_x_continuous(breaks = seq(period_semitone,wavelength_semitone),
+    ggplot2::scale_x_continuous(breaks = seq(frequency_semitone,wavelength_semitone),
                                 minor_breaks = c()) +
     ggplot2::ggtitle(title) +
     theme_homey()
 }
 plot_semitone_tolerance <- function(chords, title='') {
-  period_semitone =chords$semitone %>% min
+  frequency_semitone =chords$semitone %>% min
   wavelength_semitone =chords$semitone %>% max
   ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone,
                                        y = .data$tolerance)) +
     ggplot2::geom_point(color=colors_homey$neutral, size=0.5) +
-    ggplot2::scale_x_continuous(breaks = seq(period_semitone,wavelength_semitone),
+    ggplot2::scale_x_continuous(breaks = seq(frequency_semitone,wavelength_semitone),
                                 minor_breaks = c()) +
     ggplot2::ggtitle(title) +
     theme_homey()
@@ -445,6 +446,80 @@ plot_semitone_codi_wrap <- function(theory, experiment,
       ggplot2::aes(x = semitone, y = smooth,
                    group=1,
                    color=color_factor_homey(theory,'major_minor'))) +
+    ggplot2::scale_color_manual(values=color_values_homey(), guide='none') +
+    ggplot2::geom_text(data=per_plot_labels, color=colors_homey$neutral,
+                       ggplot2::aes(x=-Inf,y=-Inf,label=label,
+                                    vjust="inward",hjust="inward")) +
+    ggplot2::xlab(NULL) +
+    ggplot2::ylab(NULL) +
+    ggplot2::facet_wrap(~wavelength_tolerance,ncol=ncols,dir='v') +
+    ggplot2::scale_x_continuous(breaks = c(),
+                                minor_breaks = 0:15) +
+    theme_homey()
+}
+plot_semitone_waveco_wrap <- function(theory, experiment,
+                                    black_vlines=c(), gray_vlines=c(),
+                                    title,ncols=12) {
+  per_plot_labels = tidyr::expand_grid(
+    wavelength_tolerance  = theory$wavelength_tolerance  %>% unique
+  )
+  per_plot_labels$label = per_plot_labels %>%
+    purrr::pmap_vec(\(wavelength_tolerance) {
+      tols = paste0('   λ:', wavelength_tolerance, ' f:', wavelength_tolerance)
+    })
+  theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
+    ggplot2::geom_vline(xintercept = black_vlines, color='black') +
+    ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
+    ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
+                        fill=colors_homey$minor,
+                        ggplot2::aes(x = semitone, y = z_score)) +
+    ggplot2::scale_fill_manual(values=color_values_homey(), guide="none") +
+    ggplot2::geom_line(
+      data=experiment,
+      color    = colors_homey$neutral,
+      ggplot2::aes(x = semitone, y = consonance_dissonance)) +
+    ggplot2::geom_line(
+      color=colors_homey$minor,
+      data=theory,
+      ggplot2::aes(x = semitone, y = smooth,
+                   group=1)) +
+    ggplot2::scale_color_manual(values=color_values_homey(), guide='none') +
+    ggplot2::geom_text(data=per_plot_labels, color=colors_homey$neutral,
+                       ggplot2::aes(x=-Inf,y=-Inf,label=label,
+                                    vjust="inward",hjust="inward")) +
+    ggplot2::xlab(NULL) +
+    ggplot2::ylab(NULL) +
+    ggplot2::facet_wrap(~wavelength_tolerance,ncol=ncols,dir='v') +
+    ggplot2::scale_x_continuous(breaks = c(),
+                                minor_breaks = 0:15) +
+    theme_homey()
+}
+plot_semitone_freqco_wrap <- function(theory, experiment,
+                                      black_vlines=c(), gray_vlines=c(),
+                                      title,ncols=12) {
+  per_plot_labels = tidyr::expand_grid(
+    wavelength_tolerance  = theory$wavelength_tolerance  %>% unique
+  )
+  per_plot_labels$label = per_plot_labels %>%
+    purrr::pmap_vec(\(wavelength_tolerance) {
+      tols = paste0('   λ:', wavelength_tolerance, ' f:', wavelength_tolerance)
+    })
+  theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
+    ggplot2::geom_vline(xintercept = black_vlines, color='black') +
+    ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
+    ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
+                        fill=colors_homey$major,
+                        ggplot2::aes(x = semitone, y = z_score)) +
+    ggplot2::scale_fill_manual(values=color_values_homey(), guide="none") +
+    ggplot2::geom_line(
+      data=experiment,
+      color    = colors_homey$neutral,
+      ggplot2::aes(x = semitone, y = consonance_dissonance)) +
+    ggplot2::geom_line(
+      color=colors_homey$major,
+      data=theory,
+      ggplot2::aes(x = semitone, y = smooth,
+                   group=1)) +
     ggplot2::scale_color_manual(values=color_values_homey(), guide='none') +
     ggplot2::geom_text(data=per_plot_labels, color=colors_homey$neutral,
                        ggplot2::aes(x=-Inf,y=-Inf,label=label,

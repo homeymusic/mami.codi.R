@@ -182,7 +182,7 @@ p = params %>% purrr::map(\(p) {
     detected_pseudo_octave  = paste(round(chords$pseudo_octave %>% unique, 2), collapse = ' '),
     ignore_amplitudes_below = paste(round(chords$min_amplitude %>% unique, 2), collapse = ' '),
     wavelength_tolerance    = paste(round(chords$wavelength_tolerance %>% unique, 5), collapse = ' '),
-    frequency_tolerance     = paste(round(chords$frequency_tolerance %>% unique, 5) / 2.0, collapse = ' '),
+    frequency_tolerance     = paste(round(chords$frequency_tolerance %>% unique, 5), collapse = ' '),
     smoothing_sigma         = sigma
   )))
   print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),

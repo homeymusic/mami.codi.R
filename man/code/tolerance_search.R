@@ -1,12 +1,13 @@
-search_label = '5PartialsNo3'
+search_label = 'Harmonic'
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # tolerances   = 10^-(1:10)
   tolerances   = c(1:9 %o% 10^(-3:-1))
 } else {
-  from_tol     = 0.09
-  to_tol       = 0.2
-  by_tol       = 0.001
-  tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
+  # from_tol     = 0.09
+  # to_tol       = 0.2
+  # by_tol       = 0.001
+  # tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
+  tolerances   = c(1:9 %o% 10^(-7:-5))
 }
 
 tonic_midi   = 60
@@ -56,7 +57,7 @@ index = seq_along(intervals)
 
 grid = tidyr::expand_grid(
   index,
-  tolerance  = tolerances
+  tolerance = tolerances
 )
 
 print(grid)
@@ -105,7 +106,7 @@ data = grid %>% furrr::future_pmap_dfr(\(
 
   mami.codi.R::mami.codi(
     chord,
-    frequency_tolerance  = tolerance / 2,
+    frequency_tolerance  = tolerance,
     wavelength_tolerance = tolerance,
     metadata       = list(
       octave_ratio   = octave_ratio,
