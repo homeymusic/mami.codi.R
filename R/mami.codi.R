@@ -175,7 +175,7 @@ format_output <- function(x, metadata, verbose) {
 lcm <- function(x) Reduce(numbers::LCM, x)
 
 WAVELENGTH_TOLERANCE = 1/3 * 1e-05
-FREQUENCY_TOLERANCE  = 8e-02
+FREQUENCY_TOLERANCE  = 9e-02
 
 WAVELENGTH_MICRO_TOLERANCE = 0.0003
 FREQUENCY_MICRO_TOLERANCE  = WAVELENGTH_MICRO_TOLERANCE / 2

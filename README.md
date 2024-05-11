@@ -140,7 +140,7 @@ GitHub](https://github.com/homeymusic/mami.codi.R/tree/2D_tolerance) to
 recreate all the 2D searches.  
 
 The best fits across the experiments were given by a frequency tolerance
-of 0.07 and a wavelength tolerance of 3.3333333^{-6}. The frequency
+of 0.08 and a wavelength tolerance of 3.3333333^{-6}. The frequency
 tolerance is half the size of the wavelength tolerance. Does that mean
 that the perception mechanism for frequency is twice as discriminating
 as the wavelength mechanism? “At 1 kHz information contained in temporal
@@ -166,7 +166,7 @@ For 10 harmonics, behavioral results and theoretical predictions agree.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 0                    | 0.07                |             0.2 |
+| 2                      | 0.03                    | 0                    | 0.08                |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->
 
@@ -184,7 +184,7 @@ peak.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 0                    | 0.07                |             0.2 |
+| 2                      | 0.03                    | 0                    | 0.08                |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-6.png)<!-- -->
 
@@ -202,7 +202,7 @@ while the M3 peak is slightly higher without the 3rd partial.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 0                    | 0.07                |             0.2 |
+| 2                      | 0.03                    | 0                    | 0.08                |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-11.png)<!-- -->
 
@@ -222,7 +222,7 @@ major-minor versus the behavioral results are included in a plot below.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 0                    | 0.07                |             0.2 |
+| 2                      | 0.03                    | 0                    | 0.08                |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-16.png)<!-- -->
 
@@ -242,7 +242,7 @@ and m7 that do not exist in the behavioral results.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2.1                    | 0.03                    | 0                    | 0.07                |             0.2 |
+| 2.1                    | 0.03                    | 0                    | 0.08                |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-22.png)<!-- -->
 
@@ -258,7 +258,7 @@ with the theoretical peaks.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 1.9                    | 0.03                    | 0                    | 0.07                |             0.2 |
+| 1.9                    | 0.03                    | 0                    | 0.08                |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-27.png)<!-- -->
 
@@ -277,7 +277,7 @@ be relatively higher than the behavioral results.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 0                    | 0.07                |             0.2 |
+| 2                      | 0.03                    | 0                    | 0.08                |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-32.png)<!-- -->
 
@@ -294,7 +294,7 @@ Description is below.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 0                    | 0.07                |           0.035 |
+| 2                      | 0.03                    | 3e-04                | 0.00015             |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-5-37.png)<!-- -->
 
@@ -309,7 +309,7 @@ Description is below.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 0                    | 0.07                |           0.035 |
+| 2                      | 0.03                    | 3e-04                | 0.00015             |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-5-42.png)<!-- -->
 
@@ -324,7 +324,7 @@ Description is below.
 
 | detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 0                    | 0.07                |           0.035 |
+| 2                      | 0.03                    | 3e-04                | 0.00015             |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-5-47.png)<!-- -->
 
