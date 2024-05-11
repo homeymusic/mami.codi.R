@@ -5,16 +5,16 @@ if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
 } else {
 
   # Time
-  from_tol     = 0.07
-  to_tol       = 0.1
-  by_tol       = 0.001
-  tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
+  # from_tol     = 0.07
+  # to_tol       = 0.1
+  # by_tol       = 0.001
+  # tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
 
   # Space
-  # from_tol     = 0.000002
-  # to_tol       = 0.000004
-  # by_tol       = 0.0000001
-  # tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
+  from_tol     = 0.000002
+  to_tol       = 0.000004
+  by_tol       = 0.0000001
+  tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
 
   # Orders of Magnitude
   # tolerances   = c(1:9 %o% 10^(-7:-5))

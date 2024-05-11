@@ -202,7 +202,7 @@ plot_cofreq.cowave <- function(chords, title, chords_to_label=NULL,
                              family='Arial Unicode MS')} +
     ggplot2::scale_color_manual(guide='none') +
     ggplot2::ggtitle(title) +
-    ggplot2::coord_fixed() +
+    # ggplot2::coord_fixed() +
     # ggplot2::scale_x_continuous(
     #   limits=c(min(c(chords$frequency_consonance,chords$wavelength_consonance)),
     #            max(c(chords$frequency_consonance,chords$wavelength_consonance)))) +

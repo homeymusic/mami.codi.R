@@ -143,7 +143,7 @@ flip <- function(x) {
 
 rotate <- function(x) {
   browser
-  rotated = (R_PI_2 %*% matrix(c(
+  rotated = (R_PI_4 %*% matrix(c(
     x$wavelength_consonance,
     x$frequency_consonance
   ))) %>% as.vector %>% zapsmall
@@ -174,11 +174,14 @@ format_output <- function(x, metadata, verbose) {
 
 lcm <- function(x) Reduce(numbers::LCM, x)
 
-WAVELENGTH_TOLERANCE = 4 * 1e-06
+WAVELENGTH_TOLERANCE = 1/3 * 1e-05
 FREQUENCY_TOLERANCE  = 7 * 1e-02
 
-WAVELENGTH_MICRO_TOLERANCE = 0.0003
-FREQUENCY_MICRO_TOLERANCE  = WAVELENGTH_MICRO_TOLERANCE / 2
+WAVELENGTH_MICRO_TOLERANCE = WAVELENGTH_TOLERANCE
+FREQUENCY_MICRO_TOLERANCE  = FREQUENCY_TOLERANCE
+
+# WAVELENGTH_MICRO_TOLERANCE = 0.0003
+# FREQUENCY_MICRO_TOLERANCE  = WAVELENGTH_MICRO_TOLERANCE / 2
 
 MIN_AMPLITUDE  = 0.03
 

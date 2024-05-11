@@ -206,7 +206,8 @@ p = params %>% purrr::map(\(p) {
 
   
   
-  
+  print(plot_semitone_colo.cohi(chords, title='Space and Time Consonance'))
+  cat("  \n")
   
   
   
@@ -220,8 +221,8 @@ p = params %>% purrr::map(\(p) {
 })
 ```
 
-```{r, child=c('man/M3_M6_P8.Rmd')}
-```
+# ```{r, child=c('man/M3_M6_P8.Rmd')}
+# ```
 
 #### Notes on plots:
 
