@@ -289,11 +289,17 @@ plot_semitone_colo.cohi <- function(chords, title='', include_line=T, sigma=0.2,
                                                    chords$wavelength_consonance,
                                                    sigma)
   ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone)) +
-    ggplot2::geom_vline(xintercept = black_vlines, color='black') +
+    ggplot2::geom_vline(xintercept = black_vlines, color=colors_homey$highlight) +
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
-    ggplot2::geom_line(ggplot2::aes(y = smoothed.frequency_consonance), linewidth = 1,
+    ggplot2::geom_point(ggplot2::aes(y = .data$frequency_consonance),
+                        shape=21, stroke=NA, size=1,
+                        fill=colors_homey$major) +
+    ggplot2::geom_point(ggplot2::aes(y = .data$wavelength_consonance),
+                        shape=21, stroke=NA, size=1,
+                        fill=colors_homey$minor) +
+    ggplot2::geom_line(ggplot2::aes(y = .data$smoothed.frequency_consonance), linewidth = 1,
                        color=colors_homey$major) +
-    ggplot2::geom_line(ggplot2::aes(y = smoothed.wavelength_consonance), linewidth = 1,
+    ggplot2::geom_line(ggplot2::aes(y = .data$smoothed.wavelength_consonance), linewidth = 1,
                        color=colors_homey$minor) +
     {if (!is.null(goal))
       ggplot2::geom_line(data=goal,
