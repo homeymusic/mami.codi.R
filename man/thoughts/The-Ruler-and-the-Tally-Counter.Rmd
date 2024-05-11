@@ -11,3 +11,17 @@ analogies = tibble::tibble(
 knitr::kable(analogies)
 ```
 
+```{r, echo=F, results='asis', message=F}
+P1 = c(60) %>% mami.codi(verbose=T)
+f = P1$spectrum[[1]] %>% hrep::freq()
+f
+```
+
+```{r, echo=F, results='asis', message=F}
+IDEALIZED_SPEED_OF_SOUND = max(f) / max(1/f)
+```
+
+```{r, echo=F, results='asis', message=F}
+l = IDEALIZED_SPEED_OF_SOUND / f
+l
+```
