@@ -94,8 +94,6 @@ process_pitch = function(x) {
           .data$pseudo_octave == candidate_pseudo_octave
       ))$evaluation_freq)
 
-    browser()
-
     x %>% dplyr::mutate(
       highest_fundamental,
       highest_fundamental_partials,
@@ -106,6 +104,8 @@ process_pitch = function(x) {
   } else {
     x %>% dplyr::mutate(
       highest_fundamental = max(f),
+      highest_fundamental_partials = list(.data$highest_fundamental),
+      num_harmonics = 1,
       pseudo_octave = 2.0
     )
   }
