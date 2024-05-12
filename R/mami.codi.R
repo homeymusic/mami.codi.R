@@ -27,13 +27,13 @@ mami.codi <- function(
     ...
 ) {
 
-  parse_input(x, ...)                       %>%
-    analyze_spectrum(min_amplitude)   %>%
-    process_pitch()                         %>%
+  parse_input(x, ...)               %>%
+    analyze_spectrum(min_amplitude) %>%
+    process_pitch()                 %>%
     predict_consonance(
       frequency_tolerance,
       wavelength_tolerance
-    )                                       %>%
+    )                               %>%
     format_output(metadata, verbose)
 
 }
