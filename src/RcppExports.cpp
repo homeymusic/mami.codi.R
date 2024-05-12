@@ -48,14 +48,14 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// listen_for_highest_fundamental
-DataFrame listen_for_highest_fundamental(const NumericVector x);
-RcppExport SEXP _mami_codi_R_listen_for_highest_fundamental(SEXP xSEXP) {
+// analyze_harmonics
+DataFrame analyze_harmonics(const NumericVector x);
+RcppExport SEXP _mami_codi_R_analyze_harmonics(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const NumericVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(listen_for_highest_fundamental(x));
+    rcpp_result_gen = Rcpp::wrap(analyze_harmonics(x));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -64,7 +64,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_mami_codi_R_rational_fraction", (DL_FUNC) &_mami_codi_R_rational_fraction, 2},
     {"_mami_codi_R_ratios", (DL_FUNC) &_mami_codi_R_ratios, 3},
     {"_mami_codi_R_compute_pseudo_octave", (DL_FUNC) &_mami_codi_R_compute_pseudo_octave, 3},
-    {"_mami_codi_R_listen_for_highest_fundamental", (DL_FUNC) &_mami_codi_R_listen_for_highest_fundamental, 1},
+    {"_mami_codi_R_analyze_harmonics", (DL_FUNC) &_mami_codi_R_analyze_harmonics, 1},
     {NULL, NULL, 0}
 };
 

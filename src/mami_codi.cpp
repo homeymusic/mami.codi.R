@@ -135,7 +135,7 @@ using namespace Rcpp;
  //'
  //' @export
  // [[Rcpp::export]]
- DataFrame listen_for_highest_fundamental(const NumericVector x) {
+ DataFrame analyze_harmonics(const NumericVector x) {
 
    const int x_size   = x.size();
    const double f_max = max(x);

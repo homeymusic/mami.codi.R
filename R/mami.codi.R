@@ -78,13 +78,34 @@ process_pitch = function(x) {
   f = x$frequencies[[1]]
 
   if (length(f) > 2) {
+    analyzed_harmonics = f %>% analyze_harmonics()
+    candidate_pseudo_octave = (analyzed_harmonics %>%
+                                 dplyr::count(.data$pseudo_octave, sort=TRUE) %>%
+                                 dplyr::slice(1))$pseudo_octave
+    candidate_highest_fundamentals = analyzed_harmonics %>%
+      dplyr::filter(dplyr::near(pseudo_octave, candidate_pseudo_octave), evaluation_freq == highest_freq) %>%
+      dplyr::arrange(dplyr::desc(harmonic_number))
+
+    highest_fundamental = candidate_highest_fundamentals[1,]$reference_freq
+
+    highest_fundamental_partials = list((analyzed_harmonics %>%
+      dplyr::filter(
+        .data$reference_freq == highest_fundamental &
+          .data$pseudo_octave == candidate_pseudo_octave
+      ))$evaluation_freq)
+
+    browser()
+
     x %>% dplyr::mutate(
-      pseudo_octave = (f %>% listen_for_highest_fundamental() %>%
-                         dplyr::count(.data$pseudo_octave, sort=TRUE) %>%
-                         dplyr::slice(1))$pseudo_octave
+      highest_fundamental,
+      highest_fundamental_partials,
+      num_harmonics = candidate_highest_fundamentals[1,]$harmonic_number,
+      pseudo_octave = candidate_pseudo_octave
     )
+
   } else {
     x %>% dplyr::mutate(
+      highest_fundamental = max(f),
       pseudo_octave = 2.0
     )
   }
