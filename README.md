@@ -279,6 +279,8 @@ Description is below.
 ![](man/figures/README-unnamed-chunk-5-29.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-30.png)<!-- -->
 
+### TODO: run the in-depth tolerance searches again for M3, M6 and P8
+
 ### Consonance peaks in dissonance troughs
 
 For the high-resolution dyads centered on M3, M6 and P8, the large-scale
