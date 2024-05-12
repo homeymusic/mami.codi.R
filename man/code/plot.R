@@ -279,6 +279,7 @@ plot_semitone_mami <- function(chords, title='', include_line=T, sigma=0.2,
     theme_homey()
 }
 plot_semitone_cowave.cofreq <- function(chords, title='', include_line=T, sigma=0.2,
+                                        dashed_minor = F,
                                         include_linear_regression = F, goal=NULL,
                                         black_vlines=c(),gray_vlines=c()) {
 
@@ -292,6 +293,8 @@ plot_semitone_cowave.cofreq <- function(chords, title='', include_line=T, sigma=
   mean_theoretical = mean(c(chords$smoothed.frequency_consonance,
                           chords$smoothed.wavelength_consonance))
 
+  linetype_for_minor = if (dashed_minor) {'dashed'} else {'solid'}
+
   ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone)) +
     ggplot2::geom_vline(xintercept = black_vlines, color=colors_homey$highlight) +
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
@@ -301,10 +304,11 @@ plot_semitone_cowave.cofreq <- function(chords, title='', include_line=T, sigma=
     ggplot2::geom_point(ggplot2::aes(y = .data$wavelength_consonance),
                         shape=21, stroke=NA, size=1,
                         fill=colors_homey$minor) +
-    ggplot2::geom_line(ggplot2::aes(y = .data$smoothed.wavelength_consonance), linewidth = 1,
-                       color=colors_homey$minor) +
     ggplot2::geom_line(ggplot2::aes(y = .data$smoothed.frequency_consonance), linewidth = 1,
                        color=colors_homey$major) +
+    ggplot2::geom_line(ggplot2::aes(y = .data$smoothed.wavelength_consonance), linewidth = 1,
+                       linetype = linetype_for_minor,
+                       color=colors_homey$minor) +
     {if (!is.null(goal))
       ggplot2::geom_line(data=goal,
                          color    = colors_homey$neutral,

@@ -120,32 +120,11 @@ values? For the MaMi.CoDi model we ran thousands of computations with
 various tolerance values and compared the predictions with results from
 six of the large-scale behavioral experiments.  
 
-Because spatial and temporal information is encoded via different
-mechanisms by the cochlea, we assumed that the wavelength and frequency
-tolerances would have different values.  
+The best fits across the experiments were given by a tolerance of
+0.08.  
 
-So, our tolerance searches were two-dimensional. We searched for
-combinations of frequency tolerance and wavelength tolerance. The image
-below is a sample of a 2D tolerance search using the harmonic experiment
-from large-scale behavioral study.  
-
-![Two-dimensional tolerance search for frequency and wavelength
-tolerance values for finding rational fractions for tone
-ratios.](https://github.com/homeymusic/mami.codi.R/blob/2D_tolerance/man/tolerance_search_plots/Harmonic2DCropped.png?raw=true)
-Click here, for the [full 2D tolerance
-search](https://github.com/homeymusic/mami.codi.R/blob/2D_tolerance/man/tolerance_search_plots/Harmonic2D.jpg)
-image for the harmonics experiment. Click here, for the [2D_tolerance
-branch on
-GitHub](https://github.com/homeymusic/mami.codi.R/tree/2D_tolerance) to
-recreate all the 2D searches.  
-
-The best fits across the experiments were given by a frequency tolerance
-of 0.08 and a wavelength tolerance of 0.08. The frequency tolerance is
-half the size of the wavelength tolerance. Does that mean that the
-perception mechanism for frequency is twice as discriminating as the
-wavelength mechanism? “At 1 kHz information contained in temporal
-discharges was an order of magnitude better than that obtained by a
-rate–place mechanism. Heinz et al. (2001)” from Winter (2005).  
+The frequency tolerance is half the size of the wavelength tolerance.
+Does that mean that the perception mechanism for frequency.  
 
 ## Theoretical predictions compared to large-scale behavioral results
 
@@ -164,9 +143,9 @@ Jacoby.
 
 For 10 harmonics, behavioral results and theoretical predictions agree.
 
-| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 0.08                 | 0.08                |             0.2 |
+| detected_pseudo_octave | ignore_amplitudes_below | tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:----------|----------------:|
+| 2                      | 0.03                    | 0.08      |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-2.png)<!-- -->  
@@ -179,9 +158,9 @@ For comparison with the study below (5 partils with the third partial
 deleted), notice that the m3 peak is only slightly lower than the M3
 peak.
 
-| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 0.08                 | 0.08                |             0.2 |
+| detected_pseudo_octave | ignore_amplitudes_below | tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:----------|----------------:|
+| 2                      | 0.03                    | 0.08      |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-4.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-5.png)<!-- -->  
@@ -194,9 +173,9 @@ theoretical predictions mostly agree. As expected, the m3 peak without
 the third partial is now lower than the m3 peak with all 5 harmonics
 while the M3 peak is slightly higher without the 3rd partial.
 
-| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 0.08                 | 0.08                |             0.2 |
+| detected_pseudo_octave | ignore_amplitudes_below | tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:----------|----------------:|
+| 2                      | 0.03                    | 0.08      |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-7.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-8.png)<!-- -->  
@@ -211,9 +190,9 @@ the 15 semitones but the overall peak structure agrees with MaMi.CoDi
 predictions. For futher comparison, the theoretical predictions for
 major-minor versus the behavioral results are included in a plot below.
 
-| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 0.08                 | 0.08                |             0.2 |
+| detected_pseudo_octave | ignore_amplitudes_below | tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:----------|----------------:|
+| 2                      | 0.03                    | 0.08      |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-10.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-11.png)<!-- -->  
@@ -225,9 +204,9 @@ For stretched harmonics, behavioral results and theoretical predictions
 mostly agree. MaMi.Codi predicts peaks with minor polarity just above m3
 and m7 that do not exist in the behavioral results.
 
-| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2.1                    | 0.03                    | 0.08                 | 0.08                |             0.2 |
+| detected_pseudo_octave | ignore_amplitudes_below | tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:----------|----------------:|
+| 2.1                    | 0.03                    | 0.08      |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-13.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-14.png)<!-- -->  
@@ -238,9 +217,9 @@ and m7 that do not exist in the behavioral results.
 For compressed harmonics, the pronounced behavioral peaks mostly agree
 with the theoretical peaks.
 
-| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 1.9                    | 0.03                    | 0.08                 | 0.08                |             0.2 |
+| detected_pseudo_octave | ignore_amplitudes_below | tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:----------|----------------:|
+| 1.9                    | 0.03                    | 0.08      |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-16.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-17.png)<!-- -->  
@@ -254,9 +233,9 @@ predicts a dissonance trough with minor polarity at P4 that is not in
 the behavioral results. MaMi.CoDi predicts P5 to have minor polarity and
 be relatively higher than the behavioral results.
 
-| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 0.08                 | 0.08                |             0.2 |
+| detected_pseudo_octave | ignore_amplitudes_below | tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:----------|----------------:|
+| 2                      | 0.03                    | 0.08      |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-19.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-20.png)<!-- -->  
@@ -268,9 +247,9 @@ be relatively higher than the behavioral results.
 
 Description is below.
 
-| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 3e-04                | 0.00015             |           0.035 |
+| detected_pseudo_octave | ignore_amplitudes_below | tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:----------|----------------:|
+| 2                      | 0.03                    | 3e-04     |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-5-22.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-23.png)<!-- -->  
@@ -280,9 +259,9 @@ Description is below.
 
 Description is below.
 
-| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 3e-04                | 0.00015             |           0.035 |
+| detected_pseudo_octave | ignore_amplitudes_below | tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:----------|----------------:|
+| 2                      | 0.03                    | 3e-04     |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-5-25.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-26.png)<!-- -->  
@@ -292,9 +271,9 @@ Description is below.
 
 Description is below.
 
-| detected_pseudo_octave | ignore_amplitudes_below | wavelength_tolerance | frequency_tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:---------------------|:--------------------|----------------:|
-| 2                      | 0.03                    | 3e-04                | 0.00015             |           0.035 |
+| detected_pseudo_octave | ignore_amplitudes_below | tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:----------|----------------:|
+| 2                      | 0.03                    | 3e-04     |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-5-28.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-29.png)<!-- -->  

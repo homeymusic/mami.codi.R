@@ -33,8 +33,7 @@ midi  = c(0, 4, 7) + 60
 tolerance = 1e-01
 num_harmonics = 5
 chord = midi %>% mami.codi(
-  frequency_tolerance  = tolerance,
-  wavelength_tolerance = tolerance,
+  tolerance  = tolerance,
   verbose=T,
   num_harmonics = num_harmonics
 )
@@ -52,7 +51,7 @@ chord = midi %>% mami.codi(
 #### Temporal Estimate
 ```{r, echo=F, results='asis', message=F}
 knitr::kable(tibble::tibble(
-  tol    = chord$frequency_tolerance,
+  tol    = chord$tolerance,
   min_f_Hz = min(chord$frequencies[[1]]),
   max_f_Hz = max(chord$frequencies[[1]]),
   chord_Sz = chord$frequency_lcd,
@@ -85,7 +84,7 @@ knitr::kable(chord$frequency_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::se
 #### Spatial Estimate
 ```{r, echo=F, results='asis', message=F}
 knitr::kable(tibble::tibble(
-  tol      = chord$wavelength_tolerance,
+  tol      = chord$tolerance,
   min_l_m  = min(chord$wavelengths[[1]]),
   max_l_m  = max(chord$wavelengths[[1]]),
   chord_Sz = chord$wavelength_lcd,
