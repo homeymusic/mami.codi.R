@@ -249,7 +249,7 @@ Description is below.
 
 | detected_pseudo_octave | ignore_amplitudes_below | tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:----------|----------------:|
-| 2                      | 0.03                    | 3e-04     |           0.035 |
+| 2                      | 0.03                    | 1e-04     |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-5-22.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-23.png)<!-- -->  
@@ -261,7 +261,7 @@ Description is below.
 
 | detected_pseudo_octave | ignore_amplitudes_below | tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:----------|----------------:|
-| 2                      | 0.03                    | 3e-04     |           0.035 |
+| 2                      | 0.03                    | 1e-04     |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-5-25.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-26.png)<!-- -->  
@@ -273,7 +273,7 @@ Description is below.
 
 | detected_pseudo_octave | ignore_amplitudes_below | tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:----------|----------------:|
-| 2                      | 0.03                    | 3e-04     |           0.035 |
+| 2                      | 0.03                    | 1e-04     |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-5-28.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-29.png)<!-- -->  
