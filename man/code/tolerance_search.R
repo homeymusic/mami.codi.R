@@ -1,13 +1,13 @@
-search_label = 'Bonang'
+search_label = 'Stretched'
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # tolerances   = 10^-(1:10)
   tolerances   = c(1:9 %o% 10^(-3:-1))
 } else {
 
   # Detailed
-  # from_tol     = 0.02
-  # to_tol       = 0.04
-  # by_tol       = 0.0001
+  # from_tol     = 0.05
+  # to_tol       = 0.08
+  # by_tol       = 0.001
   # tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
 
   # Orders of Magnitude

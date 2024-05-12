@@ -300,8 +300,6 @@ Description is below.
 ![](man/figures/README-unnamed-chunk-5-29.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-30.png)<!-- -->
 
-# `{r, child=c('man/M3_M6_P8.Rmd')} #`
-
 #### Notes on plots:
 
 In the plots above:
