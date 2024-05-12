@@ -148,8 +148,13 @@ For 10 harmonics, behavioral results and theoretical predictions agree.
 | 2                      | 0.03                    | 0.07      |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->  
+<details>
+<summary>
+show details
+</summary>
 ![](man/figures/README-unnamed-chunk-5-2.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-3.png)<!-- -->
+</details>
 
 ##### 5Partials ~ Partials: 5
 
@@ -163,8 +168,13 @@ peak.
 | 2                      | 0.03                    | 0.07      |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-4.png)<!-- -->  
+<details>
+<summary>
+show details
+</summary>
 ![](man/figures/README-unnamed-chunk-5-5.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-6.png)<!-- -->
+</details>
 
 ##### 5PartialsNo3 ~ Partials: 5
 
@@ -178,8 +188,13 @@ while the M3 peak is slightly higher without the 3rd partial.
 | 2                      | 0.03                    | 0.07      |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-7.png)<!-- -->  
+<details>
+<summary>
+show details
+</summary>
 ![](man/figures/README-unnamed-chunk-5-8.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-9.png)<!-- -->
+</details>
 
 ##### Pure ~ Partials: 1
 
@@ -195,8 +210,13 @@ major-minor versus the behavioral results are included in a plot below.
 | 2                      | 0.03                    | 0.07      |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-10.png)<!-- -->  
+<details>
+<summary>
+show details
+</summary>
 ![](man/figures/README-unnamed-chunk-5-11.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-12.png)<!-- -->
+</details>
 
 ##### Stretched ~ Partials: 10
 
@@ -209,8 +229,13 @@ and m7 that do not exist in the behavioral results.
 | 2.1                    | 0.03                    | 0.07      |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-13.png)<!-- -->  
+<details>
+<summary>
+show details
+</summary>
 ![](man/figures/README-unnamed-chunk-5-14.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-15.png)<!-- -->
+</details>
 
 ##### Compressed ~ Partials: 10
 
@@ -222,8 +247,13 @@ with the theoretical peaks.
 | 1.9                    | 0.03                    | 0.07      |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-16.png)<!-- -->  
+<details>
+<summary>
+show details
+</summary>
 ![](man/figures/README-unnamed-chunk-5-17.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-18.png)<!-- -->
+</details>
 
 ##### Bonang ~ Partials: 4
 
@@ -238,8 +268,13 @@ be relatively higher than the behavioral results.
 | 2                      | 0.03                    | 0.07      |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-19.png)<!-- -->  
+<details>
+<summary>
+show details
+</summary>
 ![](man/figures/README-unnamed-chunk-5-20.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-21.png)<!-- -->
+</details>
 
 #### Dyads spanning 1 quarter tone
 
@@ -252,8 +287,13 @@ Description is below.
 | 2                      | 0.03                    | 1e-04     |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-5-22.png)<!-- -->  
+<details>
+<summary>
+show details
+</summary>
 ![](man/figures/README-unnamed-chunk-5-23.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-24.png)<!-- -->
+</details>
 
 ##### M6 ~ Partials: 10
 
@@ -264,8 +304,13 @@ Description is below.
 | 2                      | 0.03                    | 1e-04     |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-5-25.png)<!-- -->  
+<details>
+<summary>
+show details
+</summary>
 ![](man/figures/README-unnamed-chunk-5-26.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-27.png)<!-- -->
+</details>
 
 ##### P8 ~ Partials: 10
 
@@ -276,8 +321,13 @@ Description is below.
 | 2                      | 0.03                    | 1e-04     |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-5-28.png)<!-- -->  
+<details>
+<summary>
+show details
+</summary>
 ![](man/figures/README-unnamed-chunk-5-29.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-30.png)<!-- -->
+</details>
 
 ### TODO: run the in-depth tolerance searches again for M3, M6 and P8
 

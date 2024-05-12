@@ -176,6 +176,9 @@ p = params %>% purrr::map(\(p) {
                            black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")
   
+  cat("<details>")
+  cat("<summary>show details</summary>")
+  
   print(plot_semitone_cowave.cofreq(chords, title='Space and Time Consonance',
                                     goal=experiment,sigma=sigma,
                                     dashed_minor = (timbre=='Pure'),
@@ -187,6 +190,7 @@ p = params %>% purrr::map(\(p) {
                            black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")
   
+  cat("</details>")
 })
 ```
 
