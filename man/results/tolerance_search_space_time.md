@@ -1,7 +1,7 @@
 Tolerance Search
 ================
 
-# 5Partials
+# Harmonic
 
 Tolerances:
 
