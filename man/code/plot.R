@@ -437,11 +437,11 @@ plot_semitone_codi_wrap <- function(theory, experiment,
                                     black_vlines=c(), gray_vlines=c(),
                                     title,ncols=12) {
   per_plot_labels = tidyr::expand_grid(
-    wavelength_tolerance  = theory$wavelength_tolerance  %>% unique
+    tolerance  = theory$tolerance  %>% unique
   )
   per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(wavelength_tolerance) {
-      tols = paste0('   λ:', wavelength_tolerance, ' f:', wavelength_tolerance)
+    purrr::pmap_vec(\(tolerance) {
+      tols = paste0('   tolerance:', tolerance)
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
@@ -465,7 +465,7 @@ plot_semitone_codi_wrap <- function(theory, experiment,
                                     vjust="inward",hjust="inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_wrap(~wavelength_tolerance,ncol=ncols,dir='v') +
+    ggplot2::facet_wrap(~tolerance,ncol=ncols,dir='v') +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()
@@ -511,7 +511,7 @@ plot_semitone_freqco_wrap <- function(theory, experiment,
                                       black_vlines=c(), gray_vlines=c(),
                                       title,ncols=12) {
   per_plot_labels = tidyr::expand_grid(
-    wavelength_tolerance  = theory$wavelength_tolerance  %>% unique
+    wavelength_tolerance  = theory$tolerance  %>% unique
   )
   per_plot_labels$label = per_plot_labels %>%
     purrr::pmap_vec(\(wavelength_tolerance) {

@@ -1,7 +1,9 @@
-search_label = '5PartialsNo3'
+devtools::load_all(".")
+
+search_label = 'M6'
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # tolerances   = 10^-(1:10)
-  tolerances   = c(1:9 %o% 10^(-3:-1))
+  tolerances   = c(1 %o% 10^(-8:-1), default_tolerance('macro')) %>% sort()
 } else {
 
   # Detailed
@@ -20,10 +22,9 @@ source('./utils.R')
 devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 
 library(mami.codi.R)
-devtools::load_all(".")
 
 P8 <- c(tonic_midi,72) %>% mami.codi.R::mami.codi(verbose=T)
-if (P8$frequency_tolerance == mami.codi.R::default_tolerance('frequency','macro')) {
+if (P8$tolerance == mami.codi.R::default_tolerance('macro')) {
   print("Seems to be the correct version mami.codi.R")
 } else {
   stop("This is not the expected version of mami.codi.R")
@@ -110,8 +111,7 @@ data = grid %>% furrr::future_pmap_dfr(\(
 
   mami.codi.R::mami.codi(
     chord,
-    frequency_tolerance  = tolerance,
-    wavelength_tolerance = tolerance,
+    tolerance  = tolerance,
     metadata       = list(
       octave_ratio   = octave_ratio,
       num_harmonics  = num_harmonics,

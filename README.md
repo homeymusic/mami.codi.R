@@ -8,7 +8,7 @@ MaMi.CoDi: A Spatiotemporal Periodicity Model of Consonance Perception
 To estimate the periodicity of a chord, the MaMi.CoDi model uses a
 signal processing technique. It finds ratios, within a given tolerance,
 for every tone in the chord (fundamental, harmonics, noise, etc.)
-relative to a reference tone. The least common denominator of those ratios
+relative to a reference tone. The least common multiple of those ratios
 is a measure of the cycle length, relative to the reference tone. Long
 relative cycles are predicted to sound unpleasant and short relative
 cycles are predicted to sound pleasant.  
@@ -16,18 +16,20 @@ cycles are predicted to sound pleasant.
 MaMi.CoDi creates two estimates of the chord’s period: a temporal
 estimate and a spatial estimate.  
 
-For the temporal (i.e. phase-locking or frequency) estimate the
+For the frequency (i.e. phase-locking or temporal) estimate the
 reference tone is the smallest frequency. Small frequencies are low
 tones and are detected by the inner ear hair cells closest to the apex
 of the cochlea, which is the end furthest from the source of the wave.  
 
-For the spatial (i.e. rate-place or wavelength) estimate, the reference
+For the wavelength (i.e. rate-place or spatial) estimate, the reference
 tone is the smallest wavelength. Small wavelengths are high tones and
 are detected by the inner ear hair cells closest to the base of the
 cochlea, which is the end closest to the middle ear, the source of the
 wave.  
 
-The sum of the two signals predicts perceived consonance-dissonance and the difference predicts perceived major-minor.
+MaMi.CoDi combines the two cycle estimates into a two-dimensional space
+with consonance-dissonance along one dimension and major-minor on the
+orthogonal dimension.
 
 #### Chord
 
@@ -119,7 +121,7 @@ various tolerance values and compared the predictions with results from
 six of the large-scale behavioral experiments.  
 
 The best fits across the experiments were given by a tolerance of
-0.08.  
+0.07.  
 
 The frequency tolerance is half the size of the wavelength tolerance.
 Does that mean that the perception mechanism for frequency.  
@@ -143,7 +145,7 @@ For 10 harmonics, behavioral results and theoretical predictions agree.
 
 | detected_pseudo_octave | ignore_amplitudes_below | tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:----------|----------------:|
-| 2                      | 0.03                    | 0.08      |             0.2 |
+| 2                      | 0.03                    | 0.07      |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-2.png)<!-- -->  
@@ -158,7 +160,7 @@ peak.
 
 | detected_pseudo_octave | ignore_amplitudes_below | tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:----------|----------------:|
-| 2                      | 0.03                    | 0.08      |             0.2 |
+| 2                      | 0.03                    | 0.07      |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-4.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-5.png)<!-- -->  
@@ -173,7 +175,7 @@ while the M3 peak is slightly higher without the 3rd partial.
 
 | detected_pseudo_octave | ignore_amplitudes_below | tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:----------|----------------:|
-| 2                      | 0.03                    | 0.08      |             0.2 |
+| 2                      | 0.03                    | 0.07      |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-7.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-8.png)<!-- -->  
@@ -190,7 +192,7 @@ major-minor versus the behavioral results are included in a plot below.
 
 | detected_pseudo_octave | ignore_amplitudes_below | tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:----------|----------------:|
-| 2                      | 0.03                    | 0.08      |             0.2 |
+| 2                      | 0.03                    | 0.07      |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-10.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-11.png)<!-- -->  
@@ -204,7 +206,7 @@ and m7 that do not exist in the behavioral results.
 
 | detected_pseudo_octave | ignore_amplitudes_below | tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:----------|----------------:|
-| 2.1                    | 0.03                    | 0.08      |             0.2 |
+| 2.1                    | 0.03                    | 0.07      |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-13.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-14.png)<!-- -->  
@@ -217,7 +219,7 @@ with the theoretical peaks.
 
 | detected_pseudo_octave | ignore_amplitudes_below | tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:----------|----------------:|
-| 1.9                    | 0.03                    | 0.08      |             0.2 |
+| 1.9                    | 0.03                    | 0.07      |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-16.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-17.png)<!-- -->  
@@ -233,7 +235,7 @@ be relatively higher than the behavioral results.
 
 | detected_pseudo_octave | ignore_amplitudes_below | tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:----------|----------------:|
-| 2                      | 0.03                    | 0.08      |             0.2 |
+| 2                      | 0.03                    | 0.07      |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-19.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-20.png)<!-- -->  
@@ -296,7 +298,7 @@ are also tertiary troughs near the ET intervals.
 
 | multicolored_line_sigma | green_line_sigma | pseudo_octave | tolerance |
 |------------------------:|-----------------:|:--------------|:----------|
-|                     0.2 |                2 | 2             | 0.08      |
+|                     0.2 |                2 | 2             | 0.07      |
 
 ![](man/figures/README-unnamed-chunk-31-1.png)<!-- -->
 

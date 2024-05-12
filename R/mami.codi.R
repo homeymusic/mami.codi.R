@@ -170,7 +170,7 @@ lcm <- function(x) Reduce(numbers::LCM, x)
 
 TOLERANCE = 0.07
 
-MICRO_TOLERANCE = 0.0003
+MICRO_TOLERANCE = 1e-04
 
 MIN_AMPLITUDE  = 0.03
 
