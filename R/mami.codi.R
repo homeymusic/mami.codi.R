@@ -143,54 +143,40 @@ predict_consonance <- function(
   x <- x %>% dplyr::mutate(
     # estimate the frequency cycle
     estimate_cycle(f,
-                   # TODO: pass f0 pitch as frequencies
                    x$pseudo_octave,
-                   frequency_tolerance,
-                   x$highest_fundamental_frequency_partials) %>%
+                   frequency_tolerance) %>%
       dplyr::rename_with(~ paste0('frequency_',.)),
 
     # estimate the wavelength cycle
     estimate_cycle(l,
-                   # TODO: pass f0 pitch as wavelengths
                    x$pseudo_octave,
-                   wavelength_tolerance,
-                   x$highest_fundamental_wavelength_partials) %>%
+                   wavelength_tolerance) %>%
       dplyr::rename_with(~ paste0('wavelength_',.)),
 
+    consonance_dissonance =
+      .data$frequency_consonance + .data$wavelength_consonance,
+
+    major_minor =
+      .data$frequency_consonance - .data$wavelength_consonance,
+
     frequency_tolerance,
+
     wavelength_tolerance
 
   )
 
-  x %>% rotate()
-
 }
 
-# TODO: catch f0 pitch
 estimate_cycle <- function(x, pseudo_octave, tolerance, pitch) {
-
-  tibble::tibble_row(
-    relative_cyclicity(x, pseudo_octave, tolerance),
-    consonance_uncalibrated = flip(.data$dissonance),
-    consonance              = flip(.data$dissonance)
-    # consonance              = calibrate(
-    #   .data$consonance_uncalibrated,
-    #   pitch,
-    #   pseudo_octave,
-    #   tolerance
-    # )
-  )
-
-}
-
-relative_cyclicity <- function(x, pseudo_octave, tolerance) {
   r = ratios(x, pseudo_octave, tolerance)
 
   tibble::tibble_row(
     lcd        = lcm(r$den),
     dissonance = log2(.data$lcd),
+    consonance = flip(.data$dissonance),
     ratios     = list(r)
   )
+
 }
 
 flip <- function(x) {
@@ -200,24 +186,6 @@ flip <- function(x) {
   } else {
     flipped
   }
-}
-
-calibrate <- function(x, pitch, pseudo_octave, tolerance) {
-  x + relative_cyclicity(pitch[[1]], pseudo_octave, tolerance)$dissonance
-}
-
-rotate <- function(x) {
-  rotated = (R_PI_4 %*% matrix(c(
-    x$wavelength_consonance,
-    x$frequency_consonance
-  ))) %>% as.vector %>% zapsmall
-
-  x %>% dplyr::mutate(
-    consonance_dissonance = rotated[1],
-    major_minor           = rotated[2],
-    .before=1
-  )
-
 }
 
 format_output <- function(x, metadata, verbose) {
