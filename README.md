@@ -16,20 +16,18 @@ cycles are predicted to sound pleasant.
 MaMi.CoDi creates two estimates of the chord’s period: a temporal
 estimate and a spatial estimate.  
 
-For the frequency (i.e. phase-locking or temporal) estimate the
+For the temporal (i.e. phase-locking or frequency) estimate the
 reference tone is the smallest frequency. Small frequencies are low
 tones and are detected by the inner ear hair cells closest to the apex
 of the cochlea, which is the end furthest from the source of the wave.  
 
-For the wavelength (i.e. rate-place or spatial) estimate, the reference
+For the spatial (i.e. rate-place or wavelength) estimate, the reference
 tone is the smallest wavelength. Small wavelengths are high tones and
 are detected by the inner ear hair cells closest to the base of the
 cochlea, which is the end closest to the middle ear, the source of the
 wave.  
 
-MaMi.CoDi combines the two cycle estimates into a two-dimensional space
-with consonance-dissonance along one dimension and major-minor on the
-orthogonal dimension.
+The sum of the two signals predicts perceived consonance-dissonance and the difference predicts perceived major-minor.
 
 #### Chord
 
