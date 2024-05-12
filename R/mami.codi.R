@@ -100,15 +100,18 @@ predict_consonance <- function(
   f = x$frequencies[[1]]
   l = x$wavelengths[[1]]
 
+
   x <- x %>% dplyr::mutate(
     # estimate the frequency cycle
     estimate_cycle(f,
+                   # TODO: pass f0 pitch as frequencies
                    x$pseudo_octave,
                    frequency_tolerance) %>%
       dplyr::rename_with(~ paste0('frequency_',.)),
 
     # estimate the wavelength cycle
     estimate_cycle(l,
+                   # TODO: pass f0 pitch as wavelengths
                    x$pseudo_octave,
                    wavelength_tolerance) %>%
       dplyr::rename_with(~ paste0('wavelength_',.)),
@@ -122,6 +125,7 @@ predict_consonance <- function(
 
 }
 
+# TODO: catch f0 pitch
 estimate_cycle <- function(x, pseudo_octave, tolerance) {
 
   r = ratios(x, pseudo_octave, tolerance)
@@ -130,6 +134,7 @@ estimate_cycle <- function(x, pseudo_octave, tolerance) {
     lcd                     = lcm(r$den),
     dissonance              = log2(.data$lcd),
     consonance_uncalibrated = flip(.data$dissonance),
+    # TODO: pass f0 pitch to calibrate()
     consonance              = calibrate(.data$consonance_uncalibrated),
     ratios                  = list(r)
   )
@@ -145,6 +150,7 @@ flip <- function(x) {
   }
 }
 
+# TODO: catch f0 pitch
 calibrate <- function(x) {
   x
 }
