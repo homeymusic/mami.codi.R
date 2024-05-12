@@ -1,7 +1,7 @@
 Tolerance Search
 ================
 
-# Compressed
+# 5PartialsNo3
 
 Tolerances:
 
@@ -20,7 +20,7 @@ Number of Harmonics:
 
 Octave Ratios:
 
-    #> [1] 1.9
+    #> [1] 2
 
 ## CoDi Wrap
 
