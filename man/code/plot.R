@@ -279,15 +279,26 @@ plot_semitone_mami <- function(chords, title='', include_line=T, sigma=0.2,
     ggplot2::ylab('Major-Minor') +
     theme_homey()
 }
-plot_semitone_colo.cohi <- function(chords, title='', include_line=T, sigma=0.2,
+plot_semitone_cowave.cofreq <- function(chords, title='', include_line=T, sigma=0.2,
+                                        calibrated=T,
                                     include_linear_regression = F, goal=NULL,
                                     black_vlines=c(),gray_vlines=c()) {
-  chords$smoothed.frequency_consonance = smoothed(chords$semitone,
-                                                  chords$frequency_consonance,
-                                                  sigma)
-  chords$smoothed.wavelength_consonance = smoothed(chords$semitone,
-                                                   chords$wavelength_consonance,
-                                                   sigma)
+
+  if (calibrated) {
+    chords$smoothed.frequency_consonance = smoothed(chords$semitone,
+                                                    chords$frequency_consonance,
+                                                    sigma)
+    chords$smoothed.wavelength_consonance = smoothed(chords$semitone,
+                                                     chords$wavelength_consonance,
+                                                     sigma)
+  } else {
+    chords$smoothed.frequency_consonance = smoothed(chords$semitone,
+                                                    chords$frequency_consonance_uncalibrated,
+                                                    sigma)
+    chords$smoothed.wavelength_consonance = smoothed(chords$semitone,
+                                                     chords$wavelength_consonance_uncalibrated,
+                                                     sigma)
+  }
   ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone)) +
     ggplot2::geom_vline(xintercept = black_vlines, color=colors_homey$highlight) +
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +

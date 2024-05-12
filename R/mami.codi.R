@@ -126,21 +126,26 @@ estimate_cycle <- function(x, pseudo_octave, tolerance) {
   r = ratios(x, pseudo_octave, tolerance)
 
   tibble::tibble_row(
-    lcd        = lcm(r$den),
-    dissonance = log2(.data$lcd),
-    consonance = flip(.data$dissonance),
+    lcd                     = lcm(r$den),
+    dissonance              = log2(.data$lcd),
+    consonance_uncalibrated = flip(.data$dissonance),
+    consonance              = calibrate(.data$consonance_uncalibrated),
     ratios     = list(r)
   )
 
 }
 
 flip <- function(x) {
-  consonance = ZARLINO - x
-  if (is.na(consonance) | consonance < SMALLEST_POSSIBLE) {
+  flipped = ZARLINO - x
+  if (is.na(flipped) | flipped < SMALLEST_POSSIBLE) {
     SMALLEST_POSSIBLE
   } else {
-    consonance
+    flipped
   }
+}
+
+calibrate <- function(x) {
+  x
 }
 
 rotate <- function(x) {

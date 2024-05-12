@@ -192,7 +192,7 @@ p = params %>% purrr::map(\(p) {
   
   
   
-    cat("  \n")
+  cat("  \n")
   print(plot_semitone_mami(chords, paste('Major-Minor'),
                            goal=experiment,sigma=sigma,
                            black_vlines=black_vlines,gray_vlines=gray_vlines))
@@ -203,22 +203,25 @@ p = params %>% purrr::map(\(p) {
   
   print(plot_mami.codi(chords, title='Major-Minor Consonance-Dissonance'))
   cat("  \n")
-
   
   
-  print(plot_semitone_colo.cohi(chords, title='Space and Time Consonance',
-                                goal=NULL,sigma=sigma,
-                                black_vlines=black_vlines,gray_vlines=gray_vlines))
+  print(plot_semitone_cowave.cofreq(chords, title='Uncalibrated Space and Time Consonance',
+                                    goal=NULL,sigma=sigma,calibrated=F,
+                                    black_vlines=black_vlines,gray_vlines=gray_vlines))
+  
+  print(plot_semitone_cowave.cofreq(chords, title='Space and Time Consonance',
+                                    goal=NULL,sigma=sigma,calibrated=T,
+                                    black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")
   
   
   
   if (timbre=='Pure') {
-  cat("  For pure tones, MaMi.CoDi's theoretical predictions for major-minor have similar contours to the behavioral results for consonance-dissonance.")
-  print(plot_semitone_mami(chords, paste('Major-Minor'),
-                           goal=experiment,sigma=sigma,
-                           black_vlines=black_vlines,gray_vlines=gray_vlines))
-  cat("  \n")
+    cat("  For pure tones, MaMi.CoDi's theoretical predictions for major-minor have similar contours to the behavioral results for consonance-dissonance.")
+    print(plot_semitone_mami(chords, paste('Major-Minor'),
+                             goal=experiment,sigma=sigma,
+                             black_vlines=black_vlines,gray_vlines=gray_vlines))
+    cat("  \n")
   }
 })
 ```
