@@ -140,20 +140,21 @@ predict_consonance <- function(
   f = x$frequencies[[1]]
   l = x$wavelengths[[1]]
 
-
   x <- x %>% dplyr::mutate(
     # estimate the frequency cycle
     estimate_cycle(f,
                    # TODO: pass f0 pitch as frequencies
                    x$pseudo_octave,
-                   frequency_tolerance) %>%
+                   frequency_tolerance,
+                   x$highest_fundamental_frequency_partials) %>%
       dplyr::rename_with(~ paste0('frequency_',.)),
 
     # estimate the wavelength cycle
     estimate_cycle(l,
                    # TODO: pass f0 pitch as wavelengths
                    x$pseudo_octave,
-                   wavelength_tolerance) %>%
+                   wavelength_tolerance,
+                   x$highest_fundamental_wavelength_partials) %>%
       dplyr::rename_with(~ paste0('wavelength_',.)),
 
     frequency_tolerance,
@@ -166,19 +167,28 @@ predict_consonance <- function(
 }
 
 # TODO: catch f0 pitch
-estimate_cycle <- function(x, pseudo_octave, tolerance) {
+estimate_cycle <- function(x, pseudo_octave, tolerance, pitch) {
 
+  tibble::tibble_row(
+    relative_cyclicity(x, pseudo_octave, tolerance),
+    consonance_uncalibrated = flip(.data$dissonance),
+    consonance              = calibrate(
+      .data$consonance_uncalibrated,
+      pitch,
+      pseudo_octave,
+      tolerance)
+  )
+
+}
+
+relative_cyclicity <- function(x, pseudo_octave, tolerance) {
   r = ratios(x, pseudo_octave, tolerance)
 
   tibble::tibble_row(
-    lcd                     = lcm(r$den),
-    dissonance              = log2(.data$lcd),
-    consonance_uncalibrated = flip(.data$dissonance),
-    # TODO: pass f0 pitch to calibrate()
-    consonance              = calibrate(.data$consonance_uncalibrated),
-    ratios                  = list(r)
+    lcd        = lcm(r$den),
+    dissonance = log2(.data$lcd),
+    ratios     = list(r)
   )
-
 }
 
 flip <- function(x) {
@@ -190,9 +200,8 @@ flip <- function(x) {
   }
 }
 
-# TODO: catch f0 pitch
-calibrate <- function(x) {
-  x
+calibrate <- function(x, pitch, pseudo_octave, tolerance) {
+  x + relative_cyclicity(pitch[[1]], pseudo_octave, tolerance)$dissonance
 }
 
 rotate <- function(x) {
