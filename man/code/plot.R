@@ -445,7 +445,7 @@ plot_semitone_codi_wrap <- function(theory, experiment,
   )
   per_plot_labels$label = per_plot_labels %>%
     purrr::pmap_vec(\(wavelength_tolerance) {
-      tols = paste0('   λ:', wavelength_tolerance, ' f:', wavelength_tolerance / 2)
+      tols = paste0('   λ:', wavelength_tolerance, ' f:', wavelength_tolerance)
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +

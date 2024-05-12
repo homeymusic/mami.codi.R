@@ -1,23 +1,17 @@
-search_label = 'Bonang'
+search_label = 'Harmonic'
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # tolerances   = 10^-(1:10)
   tolerances   = c(1:9 %o% 10^(-3:-1))
 } else {
 
-  # Time
-  # from_tol     = 0.07
-  # to_tol       = 0.1
-  # by_tol       = 0.001
-  # tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
-
-  # Space
-  # from_tol     = 0.000002
-  # to_tol       = 0.000004
-  # by_tol       = 0.0000001
-  # tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
+  # Detailed
+  from_tol     = 0.02
+  to_tol       = 0.04
+  by_tol       = 0.0001
+  tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
 
   # Orders of Magnitude
-  tolerances   = c(1:9 %o% 10^(-3:-1))
+  # tolerances   = c(1:9 %o% 10^(-3:-1))
 }
 
 tonic_midi   = 60
