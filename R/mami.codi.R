@@ -89,26 +89,40 @@ process_pitch = function(x) {
       dplyr::filter(dplyr::near(pseudo_octave, candidate_pseudo_octave), evaluation_freq == highest_freq) %>%
       dplyr::arrange(dplyr::desc(harmonic_number))
 
-    highest_fundamental = candidate_highest_fundamentals[1,]$reference_freq
+    highest_fundamental_frequency = candidate_highest_fundamentals[1,]$reference_freq
 
-    highest_fundamental_partials = list(c(highest_fundamental,(analyzed_harmonics %>%
+    highest_fundamental_frequency_partials = c(highest_fundamental_frequency,(analyzed_harmonics %>%
       dplyr::filter(
-        .data$reference_freq == highest_fundamental &
+        .data$reference_freq == highest_fundamental_frequency &
           .data$pseudo_octave == candidate_pseudo_octave
-      ))$evaluation_freq))
+      ))$evaluation_freq)
+
+    c_sound = max(highest_fundamental_frequency_partials) / max(1/highest_fundamental_frequency_partials)
+
+    highest_fundamental_wavelength = c_sound / highest_fundamental_frequency
+
+    highest_fundamental_wavelength_partials = c_sound / highest_fundamental_frequency_partials
 
     x %>% dplyr::mutate(
-      highest_fundamental,
-      highest_fundamental_partials,
+      highest_fundamental_frequency,
+      highest_fundamental_wavelength,
+      highest_fundamental_frequency_partials = list(highest_fundamental_frequency_partials),
+      highest_fundamental_wavelength_partials = list(highest_fundamental_wavelength_partials),
       num_harmonics = candidate_highest_fundamentals[1,]$harmonic_number,
       pseudo_octave = candidate_pseudo_octave
     )
 
   } else {
 
+    c_sound = max(f) / max(1/f)
+    highest_fundamental_frequency = max(f)
+    highest_fundamental_wavelength = c_sound / highest_fundamental_frequency
+
     x %>% dplyr::mutate(
-      highest_fundamental = max(f),
-      highest_fundamental_partials = list(.data$highest_fundamental),
+      highest_fundamental_frequency,
+      highest_fundamental_wavelength,
+      highest_fundamental_frequency_partials = list(highest_fundamental_frequency),
+      highest_fundamental_wavelength_partials = list(highest_fundamental_wavelength),
       num_harmonics = 1,
       pseudo_octave = 2.0
     )
