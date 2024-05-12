@@ -8,7 +8,7 @@ MaMi.CoDi: A Spatiotemporal Periodicity Model of Consonance Perception
 To estimate the periodicity of a chord, the MaMi.CoDi model uses a
 signal processing technique. It finds ratios, within a given tolerance,
 for every tone in the chord (fundamental, harmonics, noise, etc.)
-relative to a reference tone. The least common multiple of those ratios
+relative to a reference tone. The least common denominator of those ratios
 is a measure of the cycle length, relative to the reference tone. Long
 relative cycles are predicted to sound unpleasant and short relative
 cycles are predicted to sound pleasant.  
