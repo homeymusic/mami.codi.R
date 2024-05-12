@@ -184,8 +184,8 @@ plot_dilo.dihi <- function(chords, title, chords_to_label=NULL,
     {if (minimal) theme_homey_minimal(aspect.ratio=aspect.ratio) else theme_homey(aspect.ratio=aspect.ratio)}
 }
 plot_cofreq.cowave <- function(chords, title, chords_to_label=NULL,
-                           tonic_index=1, include_abline=T, aspect.ratio=NULL,
-                           minimal=F, include_labels=F) {
+                               tonic_index=1, include_abline=T, aspect.ratio=NULL,
+                               minimal=F, include_labels=F) {
   if (is.null(chords_to_label)) {
     chords_to_label = chords
   }
@@ -195,11 +195,11 @@ plot_cofreq.cowave <- function(chords, title, chords_to_label=NULL,
     { if(include_abline) ggplot2::geom_abline(slope = slope, color = colors_homey$neutral) } +
     ggplot2::geom_point(shape=21, stroke=NA, size=0.5, fill=colors_homey$neutral) +
     { if (include_labels)
-    ggrepel::geom_text_repel(data=chords_to_label, color=colors_homey$neutral,
-                             ggplot2::aes(label=label),
-                             segment.color = colors_homey$subtle_foreground,
-                             max.overlaps = Inf,
-                             family='Arial Unicode MS')} +
+      ggrepel::geom_text_repel(data=chords_to_label, color=colors_homey$neutral,
+                               ggplot2::aes(label=label),
+                               segment.color = colors_homey$subtle_foreground,
+                               max.overlaps = Inf,
+                               family='Arial Unicode MS')} +
     ggplot2::scale_color_manual(guide='none') +
     ggplot2::ggtitle(title) +
     # ggplot2::coord_fixed() +
@@ -280,25 +280,19 @@ plot_semitone_mami <- function(chords, title='', include_line=T, sigma=0.2,
     theme_homey()
 }
 plot_semitone_cowave.cofreq <- function(chords, title='', include_line=T, sigma=0.2,
-                                        calibrated=T,
-                                    include_linear_regression = F, goal=NULL,
-                                    black_vlines=c(),gray_vlines=c()) {
+                                        include_linear_regression = F, goal=NULL,
+                                        black_vlines=c(),gray_vlines=c()) {
 
-  if (calibrated) {
-    chords$smoothed.frequency_consonance = smoothed(chords$semitone,
-                                                    chords$frequency_consonance,
-                                                    sigma)
-    chords$smoothed.wavelength_consonance = smoothed(chords$semitone,
-                                                     chords$wavelength_consonance,
-                                                     sigma)
-  } else {
-    chords$smoothed.frequency_consonance = smoothed(chords$semitone,
-                                                    chords$frequency_consonance_uncalibrated,
-                                                    sigma)
-    chords$smoothed.wavelength_consonance = smoothed(chords$semitone,
-                                                     chords$wavelength_consonance_uncalibrated,
-                                                     sigma)
-  }
+  chords$smoothed.frequency_consonance = smoothed(chords$semitone,
+                                                  chords$frequency_consonance,
+                                                  sigma)
+  chords$smoothed.wavelength_consonance = smoothed(chords$semitone,
+                                                   chords$wavelength_consonance,
+                                                   sigma)
+
+  mean_theoretical = mean(c(chords$smoothed.frequency_consonance,
+                          chords$smoothed.wavelength_consonance))
+
   ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone)) +
     ggplot2::geom_vline(xintercept = black_vlines, color=colors_homey$highlight) +
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
@@ -314,10 +308,9 @@ plot_semitone_cowave.cofreq <- function(chords, title='', include_line=T, sigma=
                        color=colors_homey$minor) +
     {if (!is.null(goal))
       ggplot2::geom_line(data=goal,
-                         linetype = "dashed",
-                         color    = colors_homey$foreground,
+                         color    = colors_homey$neutral,
                          ggplot2::aes(x = semitone,
-                                      y = consonance_dissonance,
+                                      y = consonance_dissonance + mean_theoretical,
                                       group=1), linewidth = 0.5)} +
     ggplot2::ggtitle(title) +
     ggplot2::scale_x_continuous(breaks = 0:15,
@@ -475,8 +468,8 @@ plot_semitone_codi_wrap <- function(theory, experiment,
     theme_homey()
 }
 plot_semitone_waveco_wrap <- function(theory, experiment,
-                                    black_vlines=c(), gray_vlines=c(),
-                                    title,ncols=12) {
+                                      black_vlines=c(), gray_vlines=c(),
+                                      title,ncols=12) {
   per_plot_labels = tidyr::expand_grid(
     wavelength_tolerance  = theory$wavelength_tolerance  %>% unique
   )
