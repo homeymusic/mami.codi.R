@@ -1,7 +1,7 @@
 Tolerance 2D Search
 ================
 
-# Pure
+# Harmonic
 
 Tolerances:
 
@@ -11,7 +11,7 @@ Tolerances:
 
 Number of Harmonics:
 
-    #> [1] 1
+    #> [1] 5
 
 Octave Ratios:
 
