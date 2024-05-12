@@ -171,12 +171,13 @@ estimate_cycle <- function(x, pseudo_octave, tolerance, pitch) {
 
   tibble::tibble_row(
     relative_cyclicity(x, pseudo_octave, tolerance),
-    consonance_uncalibrated = flip(.data$dissonance),
-    consonance              = calibrate(
-      .data$consonance_uncalibrated,
-      pitch,
-      pseudo_octave,
-      tolerance)
+    consonance = flip(.data$dissonance)
+    # consonance              = calibrate(
+    #   .data$consonance_uncalibrated,
+    #   pitch,
+    #   pseudo_octave,
+    #   tolerance
+    # )
   )
 
 }
