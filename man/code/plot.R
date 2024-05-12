@@ -301,10 +301,10 @@ plot_semitone_cowave.cofreq <- function(chords, title='', include_line=T, sigma=
     ggplot2::geom_point(ggplot2::aes(y = .data$wavelength_consonance),
                         shape=21, stroke=NA, size=1,
                         fill=colors_homey$minor) +
-    ggplot2::geom_line(ggplot2::aes(y = .data$smoothed.frequency_consonance), linewidth = 1,
-                       color=colors_homey$major) +
     ggplot2::geom_line(ggplot2::aes(y = .data$smoothed.wavelength_consonance), linewidth = 1,
                        color=colors_homey$minor) +
+    ggplot2::geom_line(ggplot2::aes(y = .data$smoothed.frequency_consonance), linewidth = 1,
+                       color=colors_homey$major) +
     {if (!is.null(goal))
       ggplot2::geom_line(data=goal,
                          color    = colors_homey$neutral,

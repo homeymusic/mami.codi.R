@@ -19,21 +19,17 @@
 #' @export
 mami.codi <- function(
     x,
-    min_amplitude        = MIN_AMPLITUDE,
-    frequency_tolerance  = FREQUENCY_TOLERANCE,
-    wavelength_tolerance = WAVELENGTH_TOLERANCE,
-    metadata             = NA,
-    verbose              = FALSE,
+    min_amplitude = MIN_AMPLITUDE,
+    tolerance     = TOLERANCE,
+    metadata      = NA,
+    verbose       = FALSE,
     ...
 ) {
 
   parse_input(x, ...)               %>%
     analyze_spectrum(min_amplitude) %>%
-    process_pitch()                 %>%
-    predict_consonance(
-      frequency_tolerance,
-      wavelength_tolerance
-    )                               %>%
+    process_pseudo_octave()         %>%
+    predict_consonance(tolerance)   %>%
     format_output(metadata, verbose)
 
 }
@@ -73,7 +69,7 @@ analyze_spectrum = function(x, min_amplitude) {
 
 }
 
-process_pitch = function(x) {
+process_pseudo_octave= function(x) {
 
   f = x$frequencies[[1]]
 
@@ -85,45 +81,13 @@ process_pitch = function(x) {
                                  dplyr::count(.data$pseudo_octave, sort=TRUE) %>%
                                  dplyr::slice(1))$pseudo_octave
 
-    candidate_highest_fundamentals = analyzed_harmonics %>%
-      dplyr::filter(dplyr::near(pseudo_octave, candidate_pseudo_octave), evaluation_freq == highest_freq) %>%
-      dplyr::arrange(dplyr::desc(harmonic_number))
-
-    highest_fundamental_frequency = candidate_highest_fundamentals[1,]$reference_freq
-
-    highest_fundamental_frequency_partials = c(highest_fundamental_frequency,(analyzed_harmonics %>%
-      dplyr::filter(
-        .data$reference_freq == highest_fundamental_frequency &
-          .data$pseudo_octave == candidate_pseudo_octave
-      ))$evaluation_freq)
-
-    c_sound = max(highest_fundamental_frequency_partials) / max(1/highest_fundamental_frequency_partials)
-
-    highest_fundamental_wavelength = c_sound / highest_fundamental_frequency
-
-    highest_fundamental_wavelength_partials = c_sound / highest_fundamental_frequency_partials
-
     x %>% dplyr::mutate(
-      highest_fundamental_frequency,
-      highest_fundamental_wavelength,
-      highest_fundamental_frequency_partials = list(highest_fundamental_frequency_partials),
-      highest_fundamental_wavelength_partials = list(highest_fundamental_wavelength_partials),
-      num_harmonics = candidate_highest_fundamentals[1,]$harmonic_number,
       pseudo_octave = candidate_pseudo_octave
     )
 
   } else {
 
-    c_sound = max(f) / max(1/f)
-    highest_fundamental_frequency = max(f)
-    highest_fundamental_wavelength = c_sound / highest_fundamental_frequency
-
     x %>% dplyr::mutate(
-      highest_fundamental_frequency,
-      highest_fundamental_wavelength,
-      highest_fundamental_frequency_partials = list(highest_fundamental_frequency),
-      highest_fundamental_wavelength_partials = list(highest_fundamental_wavelength),
-      num_harmonics = 1,
       pseudo_octave = 2.0
     )
 
@@ -133,8 +97,7 @@ process_pitch = function(x) {
 
 predict_consonance <- function(
     x,
-    frequency_tolerance,
-    wavelength_tolerance
+    tolerance
 ) {
 
   f = x$frequencies[[1]]
@@ -144,13 +107,13 @@ predict_consonance <- function(
     # estimate the frequency cycle
     estimate_cycle(f,
                    x$pseudo_octave,
-                   frequency_tolerance) %>%
+                   tolerance) %>%
       dplyr::rename_with(~ paste0('frequency_',.)),
 
     # estimate the wavelength cycle
     estimate_cycle(l,
                    x$pseudo_octave,
-                   wavelength_tolerance) %>%
+                   tolerance) %>%
       dplyr::rename_with(~ paste0('wavelength_',.)),
 
     consonance_dissonance =
@@ -159,9 +122,7 @@ predict_consonance <- function(
     major_minor =
       .data$frequency_consonance - .data$wavelength_consonance,
 
-    frequency_tolerance,
-
-    wavelength_tolerance
+    tolerance
 
   )
 
@@ -197,8 +158,9 @@ format_output <- function(x, metadata, verbose) {
     x
   } else {
     x %>%
-      dplyr::select('major_minor', 'consonance_dissonance',
-                    'frequency_tolerance', 'wavelength_tolerance',
+      dplyr::select('major_minor',
+                    'consonance_dissonance',
+                    'tolerance',
                     'min_amplitude',
                     'metadata')
   }
@@ -206,11 +168,9 @@ format_output <- function(x, metadata, verbose) {
 
 lcm <- function(x) Reduce(numbers::LCM, x)
 
-WAVELENGTH_TOLERANCE = 0.08
-FREQUENCY_TOLERANCE  = 0.08
+TOLERANCE = 0.08
 
-WAVELENGTH_MICRO_TOLERANCE = 0.0003
-FREQUENCY_MICRO_TOLERANCE  = WAVELENGTH_MICRO_TOLERANCE / 2
+MICRO_TOLERANCE = 0.0003
 
 MIN_AMPLITUDE  = 0.03
 
@@ -227,23 +187,13 @@ SMALLEST_POSSIBLE = .Machine$double.xmin
 #'
 #' @rdname default_tolerance
 #' @export
-default_tolerance <- function(dimension, scale) {
-  if (dimension == 'frequency') {
-    if (scale == 'macro') {
-      FREQUENCY_TOLERANCE
-    } else if (scale == 'micro') {
-      FREQUENCY_MICRO_TOLERANCE
-    } else {
-      stop("no default tolerance for selection")
-    }
-  } else if (dimension == 'wavelength') {
-    if (scale == 'macro') {
-      WAVELENGTH_TOLERANCE
-    } else if (scale == 'micro') {
-      WAVELENGTH_MICRO_TOLERANCE
-    } else {
-      stop("no default tolerance for selection")
-    }
+default_tolerance <- function(scale) {
+  if (scale == 'macro') {
+    TOLERANCE
+  } else if (scale == 'micro') {
+    MICRO_TOLERANCE
+  } else {
+    stop("no default tolerance for selection")
   }
 }
 
