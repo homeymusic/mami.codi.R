@@ -28,13 +28,12 @@ mami.codi <- function(
 ) {
 
   parse_input(x, ...)                       %>%
-    listen_for_min_amplitude(min_amplitude) %>%
-    listen_for_pseudo_octave()              %>%
-    estimate_cycles(
+    analyze_spectrum(min_amplitude)   %>%
+    process_pitch()                         %>%
+    predict_consonance(
       frequency_tolerance,
       wavelength_tolerance
     )                                       %>%
-    rotate()                                %>%
     format_output(metadata, verbose)
 
 }
@@ -59,22 +58,22 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 
 }
 
-listen_for_min_amplitude = function(x, min_amplitude) {
+analyze_spectrum = function(x, min_amplitude) {
 
-  f = x$spectrum[[1]] %>% dplyr::filter(.data$y>min_amplitude) %>% hrep::freq()
-  s = max(f) / max(1/f)
-  λ = s / f
+  f       = x$spectrum[[1]] %>% dplyr::filter(.data$y>min_amplitude) %>% hrep::freq()
+  c_sound = max(f) / max(1/f)
+  l       = c_sound / f
 
   x %>% dplyr::mutate(
-    frequencies = list(f),
-    wavelengths = list(λ),
-    speed_of_sound = s,
+    frequencies    = list(f),
+    wavelengths    = list(l),
+    speed_of_sound = c_sound,
     min_amplitude
   )
 
 }
 
-listen_for_pseudo_octave = function(x) {
+process_pitch = function(x) {
 
   f = x$frequencies[[1]]
 
@@ -92,16 +91,16 @@ listen_for_pseudo_octave = function(x) {
 
 }
 
-estimate_cycles <- function(
+predict_consonance <- function(
     x,
     frequency_tolerance,
     wavelength_tolerance
 ) {
 
   f = x$frequencies[[1]]
-  λ = x$wavelengths[[1]]
+  l = x$wavelengths[[1]]
 
-  x %>% dplyr::mutate(
+  x <- x %>% dplyr::mutate(
     # estimate the frequency cycle
     estimate_cycle(f,
                    x$pseudo_octave,
@@ -109,7 +108,7 @@ estimate_cycles <- function(
       dplyr::rename_with(~ paste0('frequency_',.)),
 
     # estimate the wavelength cycle
-    estimate_cycle(λ,
+    estimate_cycle(l,
                    x$pseudo_octave,
                    wavelength_tolerance) %>%
       dplyr::rename_with(~ paste0('wavelength_',.)),
@@ -118,6 +117,8 @@ estimate_cycles <- function(
     wavelength_tolerance
 
   )
+
+  x %>% rotate()
 
 }
 
@@ -130,7 +131,7 @@ estimate_cycle <- function(x, pseudo_octave, tolerance) {
     dissonance              = log2(.data$lcd),
     consonance_uncalibrated = flip(.data$dissonance),
     consonance              = calibrate(.data$consonance_uncalibrated),
-    ratios     = list(r)
+    ratios                  = list(r)
   )
 
 }
@@ -149,7 +150,6 @@ calibrate <- function(x) {
 }
 
 rotate <- function(x) {
-  browser
   rotated = (R_PI_4 %*% matrix(c(
     x$wavelength_consonance,
     x$frequency_consonance
