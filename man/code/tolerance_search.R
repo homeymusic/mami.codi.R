@@ -1,4 +1,4 @@
-search_label = 'Harmonic'
+search_label = 'Bonang'
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # tolerances   = 10^-(1:10)
   tolerances   = c(1:9 %o% 10^(-3:-1))
@@ -14,7 +14,7 @@ if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   tolerances   = c(1:9 %o% 10^(-3:-1))
 }
 
-tonic_midi   = 60
+tonic_midi = 60
 
 source('./utils.R')
 devtools::install_github('git@github.com:homeymusic/mami.codi.R', ref='superposition')

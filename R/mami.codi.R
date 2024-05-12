@@ -206,8 +206,8 @@ format_output <- function(x, metadata, verbose) {
 
 lcm <- function(x) Reduce(numbers::LCM, x)
 
-WAVELENGTH_TOLERANCE = 0.03
-FREQUENCY_TOLERANCE  = 0.03
+WAVELENGTH_TOLERANCE = 0.06
+FREQUENCY_TOLERANCE  = 0.06
 
 WAVELENGTH_MICRO_TOLERANCE = 0.0003
 FREQUENCY_MICRO_TOLERANCE  = WAVELENGTH_MICRO_TOLERANCE / 2
@@ -216,21 +216,9 @@ MIN_AMPLITUDE  = 0.03
 
 SPEED_OF_SOUND = 343
 
-ZARLINO        = 100 / sqrt(2)
+ZARLINO        = 50
 
 SMALLEST_POSSIBLE = .Machine$double.xmin
-
-PI_4           = pi / 4
-R_PI_4         = matrix(c(
-  cos(PI_4), sin(PI_4),
-  -sin(PI_4), cos(PI_4)
-), nrow = 2, ncol = 2, byrow = TRUE)
-
-
-R_PI_2         = matrix(c(
-   0, 1,
-  -1, 0
-), nrow = 2, ncol = 2, byrow = TRUE)
 
 #' Default Tolerance
 #'
