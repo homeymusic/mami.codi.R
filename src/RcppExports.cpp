@@ -11,14 +11,15 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // rational_fraction
-NumericVector rational_fraction(const double x, const double tolerance);
-RcppExport SEXP _mami_codi_R_rational_fraction(SEXP xSEXP, SEXP toleranceSEXP) {
+NumericVector rational_fraction(const double x, const double tolerance, const double pseudo_octave);
+RcppExport SEXP _mami_codi_R_rational_fraction(SEXP xSEXP, SEXP toleranceSEXP, SEXP pseudo_octaveSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const double >::type x(xSEXP);
     Rcpp::traits::input_parameter< const double >::type tolerance(toleranceSEXP);
-    rcpp_result_gen = Rcpp::wrap(rational_fraction(x, tolerance));
+    Rcpp::traits::input_parameter< const double >::type pseudo_octave(pseudo_octaveSEXP);
+    rcpp_result_gen = Rcpp::wrap(rational_fraction(x, tolerance, pseudo_octave));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -61,7 +62,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_mami_codi_R_rational_fraction", (DL_FUNC) &_mami_codi_R_rational_fraction, 2},
+    {"_mami_codi_R_rational_fraction", (DL_FUNC) &_mami_codi_R_rational_fraction, 3},
     {"_mami_codi_R_ratios", (DL_FUNC) &_mami_codi_R_ratios, 3},
     {"_mami_codi_R_compute_pseudo_octave", (DL_FUNC) &_mami_codi_R_compute_pseudo_octave, 3},
     {"_mami_codi_R_analyze_harmonics", (DL_FUNC) &_mami_codi_R_analyze_harmonics, 1},

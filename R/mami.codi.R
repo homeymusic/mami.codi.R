@@ -168,9 +168,9 @@ format_output <- function(x, metadata, verbose) {
 
 lcm <- function(x) Reduce(numbers::LCM, x)
 
-TOLERANCE = 0.07
+TOLERANCE = 1
 
-MICRO_TOLERANCE = 1e-04
+MICRO_TOLERANCE = 1/144
 
 MIN_AMPLITUDE  = 0.03
 

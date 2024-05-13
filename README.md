@@ -9,27 +9,32 @@ To estimate the periodicity of a chord, the MaMi.CoDi model uses a
 signal processing technique. It finds ratios, within a given tolerance,
 for every tone in the chord (fundamental, harmonics, noise, etc.)
 relative to a reference tone. The least common multiple of those ratios
-is a measure of the cycle length, relative to the reference tone. Long
-relative cycles are predicted to sound unpleasant and short relative
-cycles are predicted to sound pleasant.  
+is a measure of the cycle length, relative to the reference tone
+[(Stolzenburg,
+2015)](https://www.tandfonline.com/doi/abs/10.1080/17459737.2015.1033024).
+
+Short relative cycles are predicted to sound pleasant and long relative
+cycles are predicted to sound unpleasant.  
 
 MaMi.CoDi creates two estimates of the chord’s period: a temporal
 estimate and a spatial estimate.  
 
-For the frequency (i.e. phase-locking or temporal) estimate the
+For the temporal (i.e. phase-locking or frequency) estimate the
 reference tone is the smallest frequency. Small frequencies are low
 tones and are detected by the inner ear hair cells closest to the apex
 of the cochlea, which is the end furthest from the source of the wave.  
 
-For the wavelength (i.e. rate-place or spatial) estimate, the reference
+For the spatial (i.e. rate-place or wavelength) estimate, the reference
 tone is the smallest wavelength. Small wavelengths are high tones and
 are detected by the inner ear hair cells closest to the base of the
 cochlea, which is the end closest to the middle ear, the source of the
 wave.  
 
-MaMi.CoDi combines the two cycle estimates into a two-dimensional space
-with consonance-dissonance along one dimension and major-minor on the
-orthogonal dimension.
+MaMi.CoDi adds the two relative cycle estimates together to predict the
+perceived consonance-dissonance. MaMi.CoDi subtracts the spatial
+estimate from the temporal estimate to predict the major-minor polarity;
+positve estimates are predicted to sound major and negative estimates
+are predicted to sound minor.
 
 #### Chord
 
@@ -118,13 +123,10 @@ MaMi.CoDi uses the Stern-Brocot tree to find rational fractions for the
 ratios within a given tolerance. How do we find the best tolerance
 values? For the MaMi.CoDi model we ran thousands of computations with
 various tolerance values and compared the predictions with results from
-six of the large-scale behavioral experiments.  
+the large-scale behavioral experiments.  
 
 The best fits across the experiments were given by a tolerance of
 0.07.  
-
-The frequency tolerance is half the size of the wavelength tolerance.
-Does that mean that the perception mechanism for frequency.  
 
 ## Theoretical predictions compared to large-scale behavioral results
 

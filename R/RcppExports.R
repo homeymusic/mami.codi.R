@@ -4,8 +4,8 @@
 #' rational_fraction
 NULL
 
-rational_fraction <- function(x, tolerance) {
-    .Call(`_mami_codi_R_rational_fraction`, x, tolerance)
+rational_fraction <- function(x, tolerance, pseudo_octave) {
+    .Call(`_mami_codi_R_rational_fraction`, x, tolerance, pseudo_octave)
 }
 
 ratios <- function(x, pseudo_octave, tolerance) {

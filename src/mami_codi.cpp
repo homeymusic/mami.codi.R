@@ -14,11 +14,13 @@ using namespace Rcpp;
  //'
  //' @export
  // [[Rcpp::export]]
- NumericVector rational_fraction(const double x, const double tolerance) {
+ NumericVector rational_fraction(const double x,
+                                 const double tolerance,
+                                 const double pseudo_octave) {
    double approximation;
 
-   const double valid_min = x - tolerance;
-   const double valid_max = x + tolerance;
+   const double valid_min = x * pow(pseudo_octave, -tolerance / 12.0);
+   const double valid_max = x * pow(pseudo_octave, +tolerance / 12.0);
 
    int left_num    = floor(x);
    int left_den    = 1;
@@ -73,7 +75,6 @@ using namespace Rcpp;
 
    const int    m = x.size();
    const double reference_tone = min(x);
-   const double pseudo_tolerance = pow(2.0, log(tolerance) / log(pseudo_octave));
 
    NumericVector fraction(2);
 
@@ -88,7 +89,7 @@ using namespace Rcpp;
      index[i]           = i+1;
      ratios[i]          = x[i] / reference_tone;
      pseudo_ratios[i]   = pow(2.0, log(ratios[i]) / log(pseudo_octave));
-     fraction           = rational_fraction(pseudo_ratios[i], pseudo_tolerance);
+     fraction           = rational_fraction(pseudo_ratios[i], tolerance, pseudo_octave);
      nums[i]            = fraction[0];
      dens[i]            = fraction[1];
      reference_tones[i] = reference_tone;

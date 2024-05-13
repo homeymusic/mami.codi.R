@@ -29,14 +29,27 @@ BEHAVIOURAL_SMOOTH_NARROW <- 0.035
 MaMi.CoDi uses the Stern-Brocot tree to find rational fractions for the ratios 
 within a given tolerance. How do we find the best tolerance values? For the 
 MaMi.CoDi model we ran thousands of computations with various tolerance values 
-and compared the predictions with results from six of the large-scale behavioral 
+and compared the predictions with results from the large-scale behavioral 
 experiments.\
 
 The best fits across the experiments were given by a tolerance of 
 `r default_tolerance(scale='macro')`.\
- 
-The frequency tolerance is half the size of the wavelength tolerance. Does that mean that the perception mechanism for frequency.\
 
+The just-noticeable difference is defined as delta I / I = k.
+ 
+```{r, echo=F, message=F}
+jnd = tibble::tibble(
+  tol = default_tolerance(scale='macro'),
+  C4 = hrep::midi_to_freq(60),
+  E4 = hrep::midi_to_freq(64),
+  r_hi = E4 / C4 + tol,
+  r_lo = E4 / C4 - tol,
+  E4_up = C4 * r_hi,
+  E4_down = C4 * r_lo
+)
+jnd
+```
+ 
 ## Theoretical predictions compared to large-scale behavioral results
 
 The large-scale behavioral data in the plots below are from [Timbral effects on consonance disentangle psychoacoustic mechanisms and suggest perceptual origins for musical scales](https://www.nature.com/articles/s41467-024-45812-z) by Raja Marjieh, Peter M. C. Harrison, Harin Lee, Fotini Deligiannaki & Nori Jacoby.
