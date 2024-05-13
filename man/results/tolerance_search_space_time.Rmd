@@ -6,7 +6,7 @@ always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'Harmonic'
+search_label = 'Bonang'
 ```
 
 # `r search_label`
@@ -133,7 +133,7 @@ rows = length(tols)
 ```{r, echo=F}
 theory <- theory %>% 
   dplyr::mutate(
-    z_score = z_scores(wavelength_consonance),
+    z_score = z_scores(spatial_consonance),
     smooth  = smoothed(semitone, .data$z_score, params$sigma)
   )
 ```
@@ -154,7 +154,7 @@ plot_semitone_waveco_wrap(
 ```{r, echo=F}
 theory <- theory %>% 
   dplyr::mutate(
-    z_score = z_scores(frequency_consonance),
+    z_score = z_scores(temporal_consonance),
     smooth  = smoothed(semitone, .data$z_score, params$sigma)
   )
 ```

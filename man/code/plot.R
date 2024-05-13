@@ -428,7 +428,7 @@ plot_semitone_codi_grid <- function(theory, experiment,
                                                           vjust="inward",hjust="inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_grid(temporal_tolerance ~ spatial_tolerance, scales = 'free_y') +
+    ggplot2::facet_grid(rev(temporal_tolerance) ~ rev(spatial_tolerance), scales = 'free_y') +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()

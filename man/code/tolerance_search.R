@@ -1,6 +1,6 @@
 devtools::load_all(".")
 
-search_label = 'Harmonic'
+search_label = 'Bonang'
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # tolerances   = 10^-(1:10)
   tolerances   = c(1 %o% 10^(-8:-1), default_tolerance('macro')) %>% sort()
@@ -13,7 +13,7 @@ if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
 
   # Orders of Magnitude
-  tolerances   = c(1:9 %o% 10^(-3:-1))
+  tolerances   = c(1:9 %o% 10^(-2:-1)) %>% rev()
 }
 
 tonic_midi = 60
