@@ -12,10 +12,12 @@ if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
 
   # Orders of Magnitude
-  tolerances   = c(1:9 %o% 10^(-2:-1)) %>% rev()
+  # tolerances   = c(1:9 %o% 10^(-2:-1)) %>% rev()
+
+  # Zoomed in Harmonic
+  spatial_tolerance  = seq(from=0.02, to=0.04, by=0.001)
+  temporal_tolerance = seq(from=0.06, to=0.08, by=0.001)
 }
-spatial_tolerance  = tolerances
-temporal_tolerance = tolerances
 tonic_midi         = 60
 num_harmonics      = 5
 octave_ratio       = 2.0
