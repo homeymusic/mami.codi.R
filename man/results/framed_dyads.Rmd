@@ -152,12 +152,13 @@ p = params %>% purrr::map(\(p) {
                            goal=experiment,sigma=sigma,
                            black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")
+
+  print(plot_semitone_cowave.cofreq(chords, title='Spatial-Consonance Temporal-Consonance'))
+  cat("  \n")
+  
   print(plot_semitone_mami(chords, paste('Major-Minor'),
                            goal=experiment,sigma=sigma,
                            black_vlines=black_vlines,gray_vlines=gray_vlines))
-  cat("  \n")
-  
-  print(plot_semitone_cowave.cofreq(chords, title='Spatial-Consonance Temporal-Consonance'))
   cat("  \n")
   
   print(plot_cofreq.cowave(chords, title='Spatial-Consonance Temporal-Consonance'))
