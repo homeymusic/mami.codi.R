@@ -20,7 +20,8 @@
 mami.codi <- function(
     x,
     min_amplitude = MIN_AMPLITUDE,
-    tolerance     = TOLERANCE,
+    spatial_tolerance     = SPATIAL_TOLERANCE,
+    temporal_tolerance    = TEMPORAL_TOLERANCE,
     metadata      = NA,
     verbose       = FALSE,
     ...
@@ -29,7 +30,7 @@ mami.codi <- function(
   parse_input(x, ...)               %>%
     analyze_spectrum(min_amplitude) %>%
     process_pseudo_octave()         %>%
-    predict_consonance(tolerance)   %>%
+    predict_consonance(spatial_tolerance, temporal_tolerance)   %>%
     format_output(metadata, verbose)
 
 }
@@ -97,7 +98,8 @@ process_pseudo_octave= function(x) {
 
 predict_consonance <- function(
     x,
-    tolerance
+    spatial_tolerance,
+    temporal_tolerance
 ) {
 
   f = x$frequencies[[1]]
@@ -122,7 +124,9 @@ predict_consonance <- function(
     major_minor =
       .data$frequency_consonance - .data$wavelength_consonance,
 
-    tolerance
+    spatial_tolerance,
+    temporal_tolerance
+
 
   )
 
@@ -160,7 +164,8 @@ format_output <- function(x, metadata, verbose) {
     x %>%
       dplyr::select('major_minor',
                     'consonance_dissonance',
-                    'tolerance',
+                    'spatial_tolerance',
+                    'temporal_tolerance',
                     'min_amplitude',
                     'metadata')
   }
@@ -168,7 +173,8 @@ format_output <- function(x, metadata, verbose) {
 
 lcm <- function(x) Reduce(numbers::LCM, x)
 
-TOLERANCE = 0.07
+SPATIAL_TOLERANCE  = 0.03
+TEMPORAL_TOLERANCE = 0.08
 
 MICRO_TOLERANCE = 1e-04
 
