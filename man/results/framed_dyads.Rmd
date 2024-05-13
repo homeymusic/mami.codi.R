@@ -145,8 +145,7 @@ p = params %>% purrr::map(\(p) {
   print(knitr::kable(tibble::tibble_row(
     detected_pseudo_octave  = paste(round(chords$pseudo_octave %>% unique, 2), collapse = ' '),
     ignore_amplitudes_below = paste(round(chords$min_amplitude %>% unique, 2), collapse = ' '),
-    wavelength_tolerance    = paste(round(chords$wavelength_tolerance %>% unique, 5), collapse = ' '),
-    frequency_tolerance     = paste(round(chords$frequency_tolerance %>% unique, 5), collapse = ' '),
+    tolerance               = paste(round(chords$tolerance %>% unique, 5), collapse = ' '),
     smoothing_sigma         = sigma
   )))
   print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),
@@ -158,7 +157,7 @@ p = params %>% purrr::map(\(p) {
                            black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")
   
-  print(plot_semitone_colo.cohi(chords, title='Spatial-Consonance Temporal-Consonance'))
+  print(plot_semitone_cowave.cofreq(chords, title='Spatial-Consonance Temporal-Consonance'))
   cat("  \n")
   
   print(plot_cofreq.cowave(chords, title='Spatial-Consonance Temporal-Consonance'))

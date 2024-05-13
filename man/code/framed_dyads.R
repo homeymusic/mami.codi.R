@@ -1,5 +1,5 @@
 source('./utils.R')
-devtools::install_github('git@github.com:homeymusic/mami.codi.R', ref='play_with_rotation')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 
 library(mami.codi.R)
 devtools::load_all(".")
@@ -7,7 +7,7 @@ devtools::load_all(".")
 tonic_midi = 60
 
 P8 <- c(tonic_midi,72) %>% mami.codi.R::mami.codi(verbose=T)
-if (P8$wavelength_tolerance == mami.codi.R::default_tolerance('wavelength', 'macro')) {
+if (P8$tolerance == mami.codi.R::default_tolerance('macro')) {
   print("Seems to be the correct version mami.codi.R")
 } else {
   stop("This is not the expected version of mami.codi.R")
@@ -106,6 +106,8 @@ plan(multisession, workers=parallelly::availableCores())
 output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
                                            scale) {
 
+  octave_midi = hrep::freq_to_midi(octave_ratio * hrep::midi_to_freq(tonic_midi))
+
   if (scale == 'M3') {
     study_intervals = M3_intervals
   } else if (scale == 'M6') {
@@ -129,7 +131,7 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
       amplitude = 1
     ) %>% as.list() %>%  hrep::sparse_fr_spectrum()
 
-    octave_f0 <- hrep::midi_to_freq(tonic_midi + 12)
+    octave_f0 <- hrep::midi_to_freq(octave_midi)
     octave <- tibble::tibble(
       frequency = octave_f0 * c(1:4),
       amplitude = 1
@@ -149,7 +151,7 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
       amplitude = c(1, 1, 0, 1, 1)
     ) %>% as.list() %>%  hrep::sparse_fr_spectrum()
 
-    octave_f0 <- hrep::midi_to_freq(tonic_midi+12)
+    octave_f0 <- hrep::midi_to_freq(octave_midi)
     octave <- tibble::tibble(
       frequency = octave_f0 * c(1:5),
       amplitude = c(1, 1, 0, 1, 1)
@@ -157,8 +159,7 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
 
     study_chord = do.call(hrep::combine_sparse_spectra, list(bass,upper,octave))
   } else {
-    octave_midi = hrep::freq_to_midi(octave_ratio * hrep::midi_to_freq(tonic_midi))
-    study_chord = c(tonic_midi, study_intervals[index], tonic_midi+octave_midi) %>% hrep::sparse_fr_spectrum(
+    study_chord = c(tonic_midi, study_intervals[index], octave_midi) %>% hrep::sparse_fr_spectrum(
       num_harmonics = num_harmonics,
       octave_ratio  = octave_ratio,
       roll_off_dB   = roll_off
@@ -166,17 +167,14 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
   }
 
   if (scale=='M3' || scale=='M6' || scale=='P8') {
-    frequency_tolerance  = mami.codi.R::default_tolerance('frequency','micro')
-    wavelength_tolerance  = mami.codi.R::default_tolerance('frequency','micro')
+    tolerance  = mami.codi.R::default_tolerance('micro')
   } else {
-    frequency_tolerance  = mami.codi.R::default_tolerance('frequency','macro')
-    wavelength_tolerance  = mami.codi.R::default_tolerance('frequency', 'macro') / 2
+    tolerance  = mami.codi.R::default_tolerance('macro')
   }
 
   mami.codi.R::mami.codi(study_chord,
-                         frequency_tolerance  = frequency_tolerance,
-                         wavelength_tolerance = wavelength_tolerance,
-                         metadata = list(
+                         tolerance = tolerance,
+                         metadata  = list(
                            num_harmonics = num_harmonics,
                            octave_ratio  = octave_ratio,
                            semitone      = study_intervals[index] - tonic_midi,
