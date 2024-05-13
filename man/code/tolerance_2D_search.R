@@ -1,20 +1,34 @@
-search_label = 'Pure'
-tolerances   = c(c(1,5) %o% 10^(-2:-1))
-wavelength_tolerance = tolerances
-frequency_tolerance  = tolerances
+search_label = '5PartialsNo3'
+if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
+  # tolerances   = 10^-(1:10)
+  tolerances   = c(1 %o% 10^(-8:-1), default_tolerance('macro')) %>% sort()
+} else {
+
+  # Detailed
+  # from_tol     = 0.01
+  # to_tol       = 0.1
+  # by_tol       = 0.001
+  # tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
+
+  # Orders of Magnitude
+  tolerances   = c(1:9 %o% 10^(-2:-1))
+}
+spatial_tolerance  = tolerances
+temporal_tolerance = tolerances
 tonic_midi         = 60
 num_harmonics      = 5
 octave_ratio       = 2.0
 roll_off           = 3
 
 source('./utils.R')
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R',
+                         ref='major_minor_tuning')
 
 library(mami.codi.R)
 devtools::load_all(".")
 
 P8 <- c(tonic_midi,72) %>% mami.codi.R::mami.codi(verbose=T)
-if (P8$frequency_tolerance == mami.codi.R::default_tolerance('frequency','macro')) {
+if (P8$temporal_tolerance == mami.codi.R::default_tolerance('temporal','macro')) {
   print("Seems to be the correct version mami.codi.R")
 } else {
   stop("This is not the expected version of mami.codi.R")
@@ -49,8 +63,8 @@ index = seq_along(intervals)
 
 grid = tidyr::expand_grid(
   index,
-  frequency_tolerance  = frequency_tolerance,
-  wavelength_tolerance = wavelength_tolerance
+  temporal_tolerance = temporal_tolerance,
+  spatial_tolerance  = spatial_tolerance
 )
 
 print(grid)
@@ -59,8 +73,8 @@ plan(multisession, workers=parallelly::availableCores())
 
 data = grid %>% furrr::future_pmap_dfr(\(
   index,
-  frequency_tolerance,
-  wavelength_tolerance
+  temporal_tolerance,
+  spatial_tolerance
 ) {
   if (search_label=='Bonang') {
     bass_f0 <- hrep::midi_to_freq(tonic_midi)
@@ -101,8 +115,8 @@ data = grid %>% furrr::future_pmap_dfr(\(
 
   mami.codi.R::mami.codi(
     chord,
-    frequency_tolerance  = frequency_tolerance,
-    wavelength_tolerance = wavelength_tolerance,
+    temporal_tolerance  = temporal_tolerance,
+    spatial_tolerance = spatial_tolerance,
     metadata       = list(
       octave_ratio   = octave_ratio,
       num_harmonics  = num_harmonics,

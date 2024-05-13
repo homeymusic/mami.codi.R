@@ -6,7 +6,7 @@ always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'Harmonic'
+search_label = '5PartialsNo3'
 ```
 
 # `r search_label`
@@ -70,17 +70,17 @@ theory <- theory %>% dplyr::rowwise() %>% dplyr::mutate(
   octave_ratio   = metadata$octave_ratio,
   semitone       = metadata$semitone,
   .before=1
-) %>% dplyr::group_by(frequency_tolerance, wavelength_tolerance)
+) %>% dplyr::group_by(temporal_tolerance, spatial_tolerance)
 ```
 
 Tolerances:
 ```{r, echo=F}
-freq_tols = theory$frequency_tolerance %>% unique
+freq_tols = theory$temporal_tolerance %>% unique
 freq_tols
 ```
 
 ```{r, echo=F}
-wave_tols = theory$wavelength_tolerance %>% unique
+wave_tols = theory$spatial_tolerance %>% unique
 wave_tols
 ```
 

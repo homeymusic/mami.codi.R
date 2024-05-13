@@ -32,7 +32,7 @@ colors_homey <- list(
   'gray'              = '#C0C0C0'
 )
 color_factor_homey <- function(x,column_name) {
-  cut(x[[column_name]],c(-Inf,-1e-6,1e-6,Inf),labels=c("minor","neutral","major"))
+  cut(x[[column_name]],c(-Inf,-2,2,Inf),labels=c("minor","neutral","major"))
 }
 color_values_homey <- function() {
   c("minor"=colors_homey$minor,"neutral"=colors_homey$fundamental,"major"=colors_homey$major)
@@ -395,8 +395,8 @@ plot_semitone_codi_grid <- function(theory, experiment,
                                     black_vlines=c(), gray_vlines=c(),
                                     title) {
   per_plot_labels = tidyr::expand_grid(
-    temporal_tolerance  = theory$temporal_tolerance  %>% unique,
-    spatial_tolerance = theory$spatial_tolerance %>% unique
+    temporal_tolerance = theory$temporal_tolerance  %>% unique,
+    spatial_tolerance  = theory$spatial_tolerance %>% unique
   )
   per_plot_labels$label = per_plot_labels %>%
     purrr::pmap_vec(\(temporal_tolerance,spatial_tolerance) {

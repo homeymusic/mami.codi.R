@@ -30,10 +30,12 @@ G4 major triad with 5 harmonics per pitch.
 
 ```{r, echo=F, results='asis', message=F}
 midi  = c(0, 4, 7) + 60
-tolerance = 1e-01
+spatial_tolerance = 0.01
+temporal_tolerance  = 0.01
 num_harmonics = 5
 chord = midi %>% mami.codi(
-  tolerance  = tolerance,
+  spatial_tolerance=spatial_tolerance,
+  temporal_tolerance=temporal_tolerance,
   verbose=T,
   num_harmonics = num_harmonics
 )
@@ -51,10 +53,10 @@ chord = midi %>% mami.codi(
 #### Temporal Estimate
 ```{r, echo=F, results='asis', message=F}
 knitr::kable(tibble::tibble(
-  tol    = chord$tolerance,
+  tol      = chord$spatial_tolerance,
   min_f_Hz = min(chord$frequencies[[1]]),
   max_f_Hz = max(chord$frequencies[[1]]),
-  chord_Sz = chord$frequency_lcd,
+  chord_Sz = chord$temporal_lcd,
   chord_Hz = min_f_Hz / chord_Sz,
   chord_s  = 1 / chord_Hz,
   chord_m  = SPEED_OF_SOUND / chord_Hz
@@ -64,9 +66,9 @@ knitr::kable(tibble::tibble(
 ##### Periods
 
 ```{r, echo=F, results='asis', message=F}
-ratios = chord$frequency_ratios[[1]] %>% 
+ratios = chord$temporal_ratios[[1]] %>% 
   dplyr::select(index, num, den, tone)
-lcd    = chord$frequency_lcd
+lcd    = chord$temporal_lcd
 plot_periodicity(ratios, lcd, 'frequency', relative = F)
 ```
 
@@ -78,7 +80,7 @@ plot_periodicity(ratios, lcd, 'frequency')
 
 #### Frequency Ratios
 ```{r, echo=F, results='asis', message=F}
-knitr::kable(chord$frequency_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
+knitr::kable(chord$temporal_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
 ```
 
 #### Spatial Estimate
@@ -87,7 +89,7 @@ knitr::kable(tibble::tibble(
   tol      = chord$tolerance,
   min_l_m  = min(chord$wavelengths[[1]]),
   max_l_m  = max(chord$wavelengths[[1]]),
-  chord_Sz = chord$wavelength_lcd,
+  chord_Sz = chord$spatial_lcd,
   chord_m  = min_l_m * chord_Sz,
   chord_s  = chord_m / SPEED_OF_SOUND * (max_l_m / min_l_m),
   chord_Hz = 1 / chord_s,
@@ -97,9 +99,9 @@ knitr::kable(tibble::tibble(
 ##### Wavenumbers
 
 ```{r, echo=F, results='asis', message=F}
-ratios = chord$wavelength_ratios[[1]] %>%
+ratios = chord$spatial_ratios[[1]] %>%
   dplyr::select(index, num, den, tone)
-lcd    = chord$wavelength_lcd
+lcd    = chord$spatial_lcd
 plot_periodicity(ratios, lcd, 'wavelength', relative = F)
 ```
 
@@ -111,5 +113,5 @@ plot_periodicity(ratios, lcd, 'wavelength')
 
 ##### Wavelength Ratios
 ```{r, echo=F, results='asis', message=F}
-knitr::kable(chord$wavelength_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
+knitr::kable(chord$spatial_ratios[[1]] %>% dplyr::arrange(ratio) %>% dplyr::select(-pseudo_ratio))
 ```
