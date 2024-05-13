@@ -129,10 +129,10 @@ The best fits across the experiments were given by a tolerance of 1.
 
 The just-noticeable difference is defined as delta I / I = k.
 
-    #> # A tibble: 1 × 7
-    #>     tol    C4    E4  r_hi  r_lo E4_up E4_down
-    #>   <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>   <dbl>
-    #> 1     1  262.  330.  2.26 0.260  591.    68.0
+    #> # A tibble: 1 × 8
+    #>     tol    C4    E4    F4  r_hi  r_lo E4_up E4_down
+    #>   <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>   <dbl>
+    #> 1  0.07  262.  330.  349.  1.33  1.19  348.    311.
 
 ## Theoretical predictions compared to large-scale behavioral results
 

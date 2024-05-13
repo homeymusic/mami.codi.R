@@ -39,13 +39,20 @@ The just-noticeable difference is defined as delta I / I = k.
  
 ```{r, echo=F, message=F}
 jnd = tibble::tibble(
-  tol = default_tolerance(scale='macro'),
+  tol = 0.07,
   C4 = hrep::midi_to_freq(60),
+  Cs4 = hrep::midi_to_freq(61),
   E4 = hrep::midi_to_freq(64),
-  r_hi = E4 / C4 + tol,
-  r_lo = E4 / C4 - tol,
+  F4 = hrep::midi_to_freq(65),
+  G4 = hrep::midi_to_freq(67),
+  r_hi = Cs4 / C4 + tol,
+  r_lo = Cs4 / C4 - tol,
   E4_up = C4 * r_hi,
-  E4_down = C4 * r_lo
+  E4_down = C4 * r_lo,
+  r_ideal = Cs4 / C4,
+  t_ideal = r_ideal - E4 / C4,
+  next_midi = ((F4 / C4 + t_ideal) * C4) %>% hrep::freq_to_midi(),
+  next_next_midi = ((G4 / C4 + t_ideal) * C4) %>% hrep::freq_to_midi()
 )
 jnd
 ```
