@@ -19,11 +19,11 @@
 #' @export
 mami.codi <- function(
     x,
-    min_amplitude = MIN_AMPLITUDE,
-    spatial_tolerance     = SPATIAL_TOLERANCE,
-    temporal_tolerance    = TEMPORAL_TOLERANCE,
-    metadata      = NA,
-    verbose       = FALSE,
+    min_amplitude      = MIN_AMPLITUDE,
+    spatial_tolerance  = SPATIAL_TOLERANCE,
+    temporal_tolerance = TEMPORAL_TOLERANCE,
+    metadata           = NA,
+    verbose            = FALSE,
     ...
 ) {
 
@@ -109,13 +109,13 @@ predict_consonance <- function(
     # estimate the frequency cycle
     estimate_cycle(f,
                    x$pseudo_octave,
-                   0.08) %>%
+                   temporal_tolerance) %>%
       dplyr::rename_with(~ paste0('frequency_',.)),
 
     # estimate the wavelength cycle
     estimate_cycle(l,
                    x$pseudo_octave,
-                   0.03) %>%
+                   spatial_tolerance) %>%
       dplyr::rename_with(~ paste0('wavelength_',.)),
 
     consonance_dissonance =
@@ -193,13 +193,25 @@ SMALLEST_POSSIBLE = .Machine$double.xmin
 #'
 #' @rdname default_tolerance
 #' @export
-default_tolerance <- function(scale) {
-  if (scale == 'macro') {
-    TOLERANCE
-  } else if (scale == 'micro') {
-    MICRO_TOLERANCE
+default_tolerance <- function(dimension, scale) {
+  if (dimension == 'spatial') {
+    if (scale == 'macro') {
+      SPATIAL_TOLERANCE
+    } else if (scale == 'micro') {
+      MICRO_TOLERANCE
+    } else {
+      stop("no default tolerance for this spatial scale")
+    }
+  } else if (dimension == 'temporal') {
+    if (scale == 'macro') {
+      TEMPORAL_TOLERANCE
+    } else if (scale == 'micro') {
+      MICRO_TOLERANCE
+    } else {
+      stop("no default tolerance for this temporal scale")
+    }
   } else {
-    stop("no default tolerance for selection")
+    stop("no default tolerance for this dimension")
   }
 }
 
