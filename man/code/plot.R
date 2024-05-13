@@ -474,11 +474,11 @@ plot_semitone_waveco_wrap <- function(theory, experiment,
                                       black_vlines=c(), gray_vlines=c(),
                                       title,ncols=12) {
   per_plot_labels = tidyr::expand_grid(
-    tolerance  = theory$tolerance  %>% unique
+    spatial_tolerance  = theory$spatial_tolerance  %>% unique
   )
   per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(tolerance) {
-      tols = paste0('   λ:', tolerance, ' f:', tolerance)
+    purrr::pmap_vec(\(spatial_tolerance) {
+      tols = paste0('   λ:', spatial_tolerance, ' f:', spatial_tolerance)
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
@@ -502,7 +502,7 @@ plot_semitone_waveco_wrap <- function(theory, experiment,
                                     vjust="inward",hjust="inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_wrap(~tolerance,ncol=ncols,dir='v') +
+    ggplot2::facet_wrap(~spatial_tolerance,ncol=ncols,dir='v') +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()
@@ -511,11 +511,11 @@ plot_semitone_freqco_wrap <- function(theory, experiment,
                                       black_vlines=c(), gray_vlines=c(),
                                       title,ncols=12) {
   per_plot_labels = tidyr::expand_grid(
-    tolerance  = theory$tolerance  %>% unique
+    spatial_tolerance  = theory$spatial_tolerance  %>% unique
   )
   per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(tolerance) {
-      tols = paste0('   λ:', tolerance, ' f:', tolerance)
+    purrr::pmap_vec(\(spatial_tolerance) {
+      tols = paste0('   λ:', spatial_tolerance, ' f:', spatial_tolerance)
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
@@ -539,7 +539,7 @@ plot_semitone_freqco_wrap <- function(theory, experiment,
                                     vjust="inward",hjust="inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_wrap(~tolerance,ncol=ncols,dir='v') +
+    ggplot2::facet_wrap(~spatial_tolerance,ncol=ncols,dir='v') +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()

@@ -106,23 +106,23 @@ predict_consonance <- function(
   l = x$wavelengths[[1]]
 
   x <- x %>% dplyr::mutate(
-    # estimate the frequency cycle
+    # estimate the temporal cycle
     estimate_cycle(f,
                    x$pseudo_octave,
                    temporal_tolerance) %>%
-      dplyr::rename_with(~ paste0('frequency_',.)),
+      dplyr::rename_with(~ paste0('temporal_',.)),
 
-    # estimate the wavelength cycle
+    # estimate the spatial cycle
     estimate_cycle(l,
                    x$pseudo_octave,
                    spatial_tolerance) %>%
-      dplyr::rename_with(~ paste0('wavelength_',.)),
+      dplyr::rename_with(~ paste0('spatial_',.)),
 
     consonance_dissonance =
-      .data$frequency_consonance + .data$wavelength_consonance,
+      .data$temporal_consonance + .data$spatial_consonance,
 
     major_minor =
-      .data$frequency_consonance - .data$wavelength_consonance,
+      .data$temporal_consonance - .data$spatial_consonance,
 
     spatial_tolerance,
     temporal_tolerance

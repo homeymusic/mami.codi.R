@@ -7,9 +7,9 @@ Framed Dyads
 
 ##### Harmonic ~ Partials: 10
 
-| detected_pseudo_octave | ignore_amplitudes_below | tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:----------|----------------:|
-| 2                      | 0.03                    | 0.07      |             0.2 |
+| detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
+| 2                      | 0.03                    | 0.03              | 0.08               |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-2.png)<!-- -->  
@@ -19,9 +19,9 @@ Framed Dyads
 
 ##### 5Partials ~ Partials: 5
 
-| detected_pseudo_octave | ignore_amplitudes_below | tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:----------|----------------:|
-| 2                      | 0.03                    | 0.07      |             0.2 |
+| detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
+| 2                      | 0.03                    | 0.03              | 0.08               |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-6.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-7.png)<!-- -->  
@@ -31,9 +31,9 @@ Framed Dyads
 
 ##### 5PartialsNo3 ~ Partials: 5
 
-| detected_pseudo_octave | ignore_amplitudes_below | tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:----------|----------------:|
-| 2                      | 0.03                    | 0.07      |             0.2 |
+| detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
+| 2                      | 0.03                    | 0.03              | 0.08               |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-11.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-12.png)<!-- -->  
@@ -43,9 +43,9 @@ Framed Dyads
 
 ##### Pure ~ Partials: 1
 
-| detected_pseudo_octave                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | ignore_amplitudes_below | tolerance | smoothing_sigma |
-|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------|:----------|----------------:|
-| 2 2 2 1.99 1.99 1.99 1.99 1.99 1.99 1.98 1.98 1.98 1.98 1.98 1.98 1.97 1.97 1.97 1.97 1.97 1.97 1.96 1.96 1.96 1.96 1.96 1.96 1.95 1.95 1.95 1.95 1.95 1.95 1.94 1.94 1.94 1.94 1.94 1.94 1.93 1.93 1.93 1.93 1.93 1.93 1.92 1.92 1.92 1.92 1.92 1.92 1.91 1.91 1.91 1.91 1.91 1.91 1.9 1.9 1.9 1.9 1.9 1.9 1.89 1.89 1.89 1.89 1.89 1.89 1.89 1.9 1.9 1.9 1.9 1.9 1.9 1.91 1.91 1.91 1.91 1.91 1.91 1.92 1.92 1.92 1.92 1.92 1.92 1.93 1.93 1.93 1.93 1.93 1.93 1.94 1.94 1.94 1.94 1.94 1.94 1.95 1.95 1.95 1.95 1.95 1.96 1.96 1.96 1.96 1.96 1.96 1.97 1.97 1.97 1.97 1.97 1.97 1.98 1.98 1.98 1.98 1.98 1.98 1.99 1.99 1.99 1.99 1.99 1.99 2 2 2 | 0.03                    | 0.07      |             0.2 |
+| detected_pseudo_octave                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
+|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------|:------------------|:-------------------|----------------:|
+| 2 2 2 1.99 1.99 1.99 1.99 1.99 1.99 1.98 1.98 1.98 1.98 1.98 1.98 1.97 1.97 1.97 1.97 1.97 1.97 1.96 1.96 1.96 1.96 1.96 1.96 1.95 1.95 1.95 1.95 1.95 1.95 1.94 1.94 1.94 1.94 1.94 1.94 1.93 1.93 1.93 1.93 1.93 1.93 1.92 1.92 1.92 1.92 1.92 1.92 1.91 1.91 1.91 1.91 1.91 1.91 1.9 1.9 1.9 1.9 1.9 1.9 1.89 1.89 1.89 1.89 1.89 1.89 1.89 1.9 1.9 1.9 1.9 1.9 1.9 1.91 1.91 1.91 1.91 1.91 1.91 1.92 1.92 1.92 1.92 1.92 1.92 1.93 1.93 1.93 1.93 1.93 1.93 1.94 1.94 1.94 1.94 1.94 1.94 1.95 1.95 1.95 1.95 1.95 1.96 1.96 1.96 1.96 1.96 1.96 1.97 1.97 1.97 1.97 1.97 1.97 1.98 1.98 1.98 1.98 1.98 1.98 1.99 1.99 1.99 1.99 1.99 1.99 2 2 2 | 0.03                    | 0.03              | 0.08               |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-16.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-17.png)<!-- -->  
@@ -55,9 +55,9 @@ Framed Dyads
 
 ##### Stretched ~ Partials: 10
 
-| detected_pseudo_octave | ignore_amplitudes_below | tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:----------|----------------:|
-| 2.1                    | 0.03                    | 0.07      |             0.2 |
+| detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
+| 2.1                    | 0.03                    | 0.03              | 0.08               |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-21.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-22.png)<!-- -->  
@@ -67,9 +67,9 @@ Framed Dyads
 
 ##### Compressed ~ Partials: 10
 
-| detected_pseudo_octave | ignore_amplitudes_below | tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:----------|----------------:|
-| 1.9                    | 0.03                    | 0.07      |             0.2 |
+| detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
+| 1.9                    | 0.03                    | 0.03              | 0.08               |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-26.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-27.png)<!-- -->  
@@ -79,9 +79,9 @@ Framed Dyads
 
 ##### Bonang ~ Partials: 4
 
-| detected_pseudo_octave | ignore_amplitudes_below | tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:----------|----------------:|
-| 2                      | 0.03                    | 0.07      |             0.2 |
+| detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
+| 2                      | 0.03                    | 0.03              | 0.08               |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-31.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-32.png)<!-- -->  
@@ -93,9 +93,9 @@ Framed Dyads
 
 ##### M3 ~ Partials: 10
 
-| detected_pseudo_octave | ignore_amplitudes_below | tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:----------|----------------:|
-| 2                      | 0.03                    | 1e-04     |           0.035 |
+| detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
+| 2                      | 0.03                    | 1e-04             | 1e-04              |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-4-36.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-37.png)<!-- -->  
@@ -105,9 +105,9 @@ Framed Dyads
 
 ##### M6 ~ Partials: 10
 
-| detected_pseudo_octave | ignore_amplitudes_below | tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:----------|----------------:|
-| 2                      | 0.03                    | 1e-04     |           0.035 |
+| detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
+| 2                      | 0.03                    | 1e-04             | 1e-04              |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-4-41.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-42.png)<!-- -->  
@@ -117,9 +117,9 @@ Framed Dyads
 
 ##### P8 ~ Partials: 10
 
-| detected_pseudo_octave | ignore_amplitudes_below | tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:----------|----------------:|
-| 2                      | 0.03                    | 1e-04     |           0.035 |
+| detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
+|:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
+| 2                      | 0.03                    | 1e-04             | 1e-04              |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-4-46.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-47.png)<!-- -->  

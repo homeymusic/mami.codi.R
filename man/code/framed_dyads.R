@@ -8,7 +8,7 @@ devtools::load_all(".")
 tonic_midi = 60
 
 P8 <- c(tonic_midi,72) %>% mami.codi.R::mami.codi(verbose=T)
-if (P8$tolerance == mami.codi.R::default_tolerance('macro')) {
+if (P8$spatial_tolerance == mami.codi.R::default_tolerance('spatial', 'macro')) {
   print("Seems to be the correct version mami.codi.R")
 } else {
   stop("This is not the expected version of mami.codi.R")
