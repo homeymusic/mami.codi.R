@@ -173,7 +173,7 @@ format_output <- function(x, metadata, verbose) {
 
 lcm <- function(x) Reduce(numbers::LCM, x)
 
-SPATIAL_TOLERANCE  = 0.03
+SPATIAL_TOLERANCE  = 0.05
 TEMPORAL_TOLERANCE = 0.08
 
 MICRO_TOLERANCE = 1e-04

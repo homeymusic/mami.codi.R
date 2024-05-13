@@ -12,14 +12,19 @@ if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
 
   # Orders of Magnitude
-  # tolerances   = c(1:9 %o% 10^(-2:-1)) %>% rev()
+  # tolerances   = c(1:9 %o% 10^(-2:-2)) %>% rev()
+  # spatial_tolerance  = tolerances
+  # temporal_tolerance = tolerances
 
-  # Zoomed in Harmonic
-  spatial_tolerance  = seq(from=0.02, to=0.04, by=0.001)
-  temporal_tolerance = seq(from=0.06, to=0.08, by=0.001)
+  # Zoomed in Bonang
+  spatial_tolerance  = seq(from=0.075, to=0.08, by=0.005)
+  temporal_tolerance = seq(from=0.055, to=0.08, by=0.005)
+
+  # for Bonang l > 0.07
+  # for Harmonic f > 0.05
 }
+
 tonic_midi         = 60
-num_harmonics      = 5
 octave_ratio       = 2.0
 roll_off           = 3
 
@@ -38,17 +43,8 @@ if (P8$temporal_tolerance == mami.codi.R::default_tolerance('temporal','macro'))
 }
 
 
-if (search_label == 'Stretched') {
-  octave_ratio  = 2.1
-} else if (search_label == 'Compressed') {
-  octave_ratio  = 1.9
-} else if (search_label == 'Pure') {
-  num_harmonics = 1
-}
-
 print(search_label)
 print(paste('octave_ratio:',octave_ratio))
-print(paste('num_harmonics:',num_harmonics))
 print(paste('roll_off:',roll_off))
 
 rds = paste0('../data/tolerance_2D_',
@@ -74,11 +70,28 @@ print(grid)
 
 plan(multisession, workers=parallelly::availableCores())
 
+
+if (search_label == 'Stretched') {
+  octave_ratio  = 2.1
+  global_num_harmonics = 10
+} else if (search_label == 'Compressed') {
+  octave_ratio  = 1.9
+  global_num_harmonics = 10
+} else if (search_label == 'Pure') {
+  global_num_harmonics = 1
+} else if (search_label=='5Partials') {
+  global_num_harmonics = 5
+} else {
+  global_num_harmonics = 10
+}
+print(paste('num_harmonics:',global_num_harmonics))
+
 data = grid %>% furrr::future_pmap_dfr(\(
   index,
   temporal_tolerance,
   spatial_tolerance
 ) {
+
   if (search_label=='Bonang') {
     bass_f0 <- hrep::midi_to_freq(tonic_midi)
     bass_df <- tibble::tibble(
@@ -109,12 +122,11 @@ data = grid %>% furrr::future_pmap_dfr(\(
 
   } else {
     chord = hrep::sparse_fr_spectrum(c(tonic_midi, intervals[index]),
-                                     num_harmonics = num_harmonics,
+                                     num_harmonics = global_num_harmonics,
                                      roll_off_dB   = roll_off,
                                      octave_ratio  = octave_ratio
     )
   }
-
 
   mami.codi.R::mami.codi(
     chord,
@@ -122,7 +134,7 @@ data = grid %>% furrr::future_pmap_dfr(\(
     spatial_tolerance = spatial_tolerance,
     metadata       = list(
       octave_ratio   = octave_ratio,
-      num_harmonics  = num_harmonics,
+      num_harmonics  = global_num_harmonics,
       roll_off_dB    = roll_off,
       semitone       = intervals[index] - tonic_midi
     ),
