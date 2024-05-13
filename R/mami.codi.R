@@ -107,13 +107,13 @@ predict_consonance <- function(
     # estimate the frequency cycle
     estimate_cycle(f,
                    x$pseudo_octave,
-                   tolerance) %>%
+                   0.08) %>%
       dplyr::rename_with(~ paste0('frequency_',.)),
 
     # estimate the wavelength cycle
     estimate_cycle(l,
                    x$pseudo_octave,
-                   tolerance) %>%
+                   0.03) %>%
       dplyr::rename_with(~ paste0('wavelength_',.)),
 
     consonance_dissonance =
