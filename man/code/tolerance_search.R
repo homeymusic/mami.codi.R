@@ -1,6 +1,6 @@
 devtools::load_all(".")
 
-search_label = 'M6'
+search_label = 'Harmonic'
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # tolerances   = 10^-(1:10)
   tolerances   = c(1 %o% 10^(-8:-1), default_tolerance('macro')) %>% sort()
@@ -19,7 +19,8 @@ if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
 tonic_midi = 60
 
 source('./utils.R')
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R',
+                         ref='major_minor_tuning')
 
 library(mami.codi.R)
 
