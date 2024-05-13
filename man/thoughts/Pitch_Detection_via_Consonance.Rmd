@@ -1,0 +1,106 @@
+---
+title: "Pitch Detection via Consonance"
+output:
+  github_document: default
+always_allow_html: true
+---
+```{r, echo=F, message=F, include=F}
+devtools::load_all(".")
+source('./man/code/plot.R')
+source('./man/code/utils.R')
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "../figures/PERIODS-"
+)
+knitr::opts_chunk$set(dev = 'svg')
+```
+
+### TODO: try a grid pausing combinations of hair cells at the same time
+
+```{r, echo=F, message=F, include=F}
+pause_frequency = function(spectrum, index) {
+  spectrum$y[index] = 0
+  spectrum
+}
+```
+
+```{r, echo=F, message=F, include=F}
+tonic_midi = 60
+num_harmonics = 5
+amount_of_noise = 2
+num_tones= 3*amount_of_noise + num_harmonics
+f0_scoreboard = rep(0,num_tones)
+f1_scoreboard = rep(0,num_tones)
+f2_scoreboard = rep(0,num_tones)
+f3_scoreboard = rep(0,num_tones)
+f4_scoreboard = rep(0,num_tones)
+chord = c(tonic_midi) %>% mami.codi(num_harmonics = num_harmonics, verbose = T)
+chord_spectrum = chord$spectrum[[1]]
+```
+
+```{r, echo=F, message=F, include=F}
+for (trial in 1:100) {
+  noise_spectrum = tibble::tibble(
+    frequency = hrep::midi_to_freq(c(
+      runif(n=amount_of_noise, min=0, max=60),
+      runif(n=amount_of_noise, min=60, max=102),
+      runif(n=amount_of_noise, min=102, max=127)
+    )),
+    amplitude = 1
+  ) %>% as.list() %>%  hrep::sparse_fr_spectrum()
+  
+  noisy_chord_spectrum = do.call(
+    hrep::combine_sparse_spectra,
+    list(chord_spectrum, noise_spectrum)
+  )
+  
+  noisy_chord = noisy_chord_spectrum %>% mami.codi(verbose = T)
+  looped_paused = noisy_chord_spectrum$x %>% purrr::imap_dfr(\(frequency, index) {
+    noisy_chord_spectrum %>%
+      pause_frequency(index) %>%
+      mami.codi(
+        metadata = list(
+          paused_frequency = frequency
+        ),
+        verbose=T
+      )
+  })
+  
+  scores = looped_paused %>% dplyr::rowwise() %>% dplyr::mutate(
+    paused_frequency = metadata$paused_frequency,
+    total_distance  = sqrt((noisy_chord$consonance_dissonance-consonance_dissonance)^2 +
+                             (noisy_chord$major_minor-major_minor)^2),
+    codi_distance  = abs(noisy_chord$consonance_dissonance-consonance_dissonance),
+    mami_distance  = abs(noisy_chord$major_minor-major_minor)
+  )
+  
+  results = scores %>%
+    dplyr::arrange(
+      dplyr::desc(total_distance),
+      paused_frequency
+    )  %>%
+    dplyr::ungroup() %>% 
+    dplyr::mutate(
+      row_id = dplyr::row_number(),
+      .before = 1
+    ) 
+  f = chord_spectrum$x
+  f0_row = results %>% dplyr::filter(paused_frequency == f[1])
+  f0_scoreboard[f0_row[[1]]] = f0_scoreboard[f0_row[[1]]] + 1
+  f1_row = results %>% dplyr::filter(paused_frequency == f[2])
+  f1_scoreboard[f1_row[[1]]] = f1_scoreboard[f1_row[[1]]] + 1
+  f2_row = results %>% dplyr::filter(paused_frequency == f[3])
+  f2_scoreboard[f2_row[[1]]] = f2_scoreboard[f2_row[[1]]] + 1
+  f3_row = results %>% dplyr::filter(paused_frequency == f[4])
+  f3_scoreboard[f3_row[[1]]] = f3_scoreboard[f3_row[[1]]] + 1
+  f4_row = results %>% dplyr::filter(paused_frequency == f[5])
+  f4_scoreboard[f4_row[[1]]] = f4_scoreboard[f4_row[[1]]] + 1
+}
+```
+## pseudo_octave: `r chord$pseudo_octave`
+### f0: `r f0_scoreboard`
+### f1: `r f1_scoreboard`
+### f2: `r f2_scoreboard`
+### f3: `r f3_scoreboard`
+### f4: `r f4_scoreboard`
