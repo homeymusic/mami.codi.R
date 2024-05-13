@@ -35,7 +35,7 @@ G4 major triad with 5 harmonics per pitch.
 
 ```{r, echo=F, results='asis', message=F}
 midi  = c(0, 4, 7) + 60
-tolerance = 1e-01
+tolerance = 1
 num_harmonics = 5
 chord = midi %>% mami.codi(
   tolerance  = tolerance,
