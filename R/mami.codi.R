@@ -120,7 +120,7 @@ predict_consonance <- function(
       .data$frequency_consonance + .data$wavelength_consonance,
 
     major_minor =
-      .data$frequency_consonance - .data$wavelength_consonance - 5.9068901,
+      .data$frequency_consonance - .data$wavelength_consonance,
 
     tolerance
 
