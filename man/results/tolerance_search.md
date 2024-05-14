@@ -1,7 +1,7 @@
 Tolerance Search
 ================
 
-# 5PartialsNo3
+# 5Partials
 
 Tolerances:
 
@@ -10,7 +10,7 @@ Tolerances:
 
 Number of Harmonics:
 
-    #> [1] 10
+    #> [1] 5
 
 Octave Ratios:
 

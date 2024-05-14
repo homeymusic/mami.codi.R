@@ -1,6 +1,6 @@
 devtools::load_all(".")
 
-search_label = '5PartialsNo3'
+search_label = '5Partials'
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # tolerances   = 10^-(1:10)
   tolerances   = c(1 %o% 10^(-8:-1), default_tolerance('macro')) %>% sort()
@@ -40,6 +40,8 @@ if (search_label == 'Stretched') {
   octave_ratio  = 1.9
 } else if (search_label == 'Pure') {
   num_harmonics = 1
+} else if (search_label == '5Partials') {
+  num_harmonics = 5
 }
 
 print(search_label)
