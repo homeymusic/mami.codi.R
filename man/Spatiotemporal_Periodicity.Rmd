@@ -26,7 +26,19 @@ consonance-dissonance along one dimension and major-minor on the orthogonal dime
 #### Chord
 
 Below, we estimate the periodicity of the C4, E4 and 
-G4 major triad with 5 harmonics per pitch.
+G4 major triad with 5 harmonics per pitch. The MaMi.CoDi model is based on 
+ratios of tones - both frequency and wavelength ratios. The input to the model 
+is a sparse frequency spectrum. We convert to wavelength by a speed of sound constant.\
+
+Because they are ratios the value of the speed of sound constant does not matter. 
+Ideally, we could choose any media for speed of sound: air, cochlear fluid, basilar membrane, etc. 
+
+However, we use a computer for calculations so the constant makes a difference in 
+how small or large the wavelength numbers will be. So we choose a constant for each chord
+that ensures that the actual wavelength and frequency numbers are in the same range.\
+
+Choosing this range also makes it more obvious just how different the ratios for the
+spatial and temporal signals will be.
 
 ```{r, echo=F, results='asis', message=F}
 midi  = c(0, 4, 7) + 60
@@ -37,16 +49,17 @@ chord = midi %>% mami.codi(
   verbose=T,
   num_harmonics = num_harmonics
 )
-
 ```
 
-* Fundamental Frequencies: `r midi %>% hrep::midi_to_freq()`\
-
-* Fundamental Wavelengths: `r SPEED_OF_SOUND / (midi %>% hrep::midi_to_freq())`\
-
-* MIDI: `r midi`\
+* Fundamentals in MIDI: `r midi`\
 
 * Number of Harmonics: `r num_harmonics`
+
+* Frequencies: `r sprintf(chord$frequencies[[1]], fmt = '%#.1f')`\
+
+* Wavelengths: `r sprintf(chord$wavelengths[[1]], fmt = '%#.1f')`\
+
+* Speed of Sound: `r sprintf(chord$speed_of_sound, fmt = '%#.1f')`
 
 #### Temporal Estimate
 ```{r, echo=F, results='asis', message=F}

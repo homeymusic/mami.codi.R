@@ -37,20 +37,28 @@ is sounded, the hair cells at each shortened wavelength position send
 signals along the auditory nerve. This spatial or rate-place arrangement
 of hair cell positions and wavelengths of tones is known as tonotopy.  
 
+### The Core Idea of MaMi.CoDi
+
 If we play a chord, freeze time and observe which hair cells are
 displaced, what are we observing? Are we observing frequencies? Periods?
 No. Time is frozen. Frequency (1/s) and period (s) are temporal
 observations. We are making a purely spatial observation about
 wavelengths (m). We will come back to temporal observations shortly.  
 
-When we combine the wavelength components of a chord together, we can
-estimate the overall wavelength for the whole chord. The overall chord
-wavelength will be as long as or longer than the longest component
-wavelength of the chord. Chords with short wavelengths relative to the
-component wavelengths sound pleasant. And chords with long wavelengths
-relative to component wavelengthsound unpleasant. MaMi.CoDi uses this
-measure of relative wavelength to predict the perceived spatial
-consonance of a chord.  
+When we combine all the component parts of a chord together into a
+whole, we can estimate the overall wavelength for the whole chord. A
+technique used in digital signal processing and bricklaying is to
+estimate ratios (within an acceptable tolerance) between each of the
+parts and a selected reference part. The least common denominator (LCD)
+of those part ratios will be a measure of the periodicity of the whole
+relative to the selected reference part.  
+
+The overall chord wavelength will be as long as or longer than the
+longest component wavelength of the chord. Chords with short wavelengths
+relative to the component wavelengths sound pleasant. And chords with
+long wavelengths relative to component wavelengthsound unpleasant.
+MaMi.CoDi uses this measure of relative wavelength to predict the
+perceived spatial consonance of a chord.  
 
 Let us unfreeze time and start counting how often a hair cell moves due
 to a pure tone of our sounded chord. If we count the number of movements
@@ -109,15 +117,34 @@ orthogonal dimension.
 #### Chord
 
 Below, we estimate the periodicity of the C4, E4 and G4 major triad with
-5 harmonics per pitch.
+5 harmonics per pitch. The MaMi.CoDi model is based on ratios of tones -
+both frequency and wavelength ratios. The input to the model is a sparse
+frequency spectrum. We convert to wavelength by a speed of sound
+constant.  
 
-- Fundamental Frequencies: 261.6255653, 329.6275569, 391.995436  
+Because they are ratios the value of the speed of sound constant does
+not matter. Ideally, we could choose any media for speed of sound: air,
+cochlear fluid, basilar membrane, etc.
 
-- Fundamental Wavelengths: 1.311034, 1.0405683, 0.8750102  
+However, we use a computer for calculations so the constant makes a
+difference in how small or large the wavelength numbers will be. So we
+choose a constant for each chord that ensures that the actual wavelength
+and frequency numbers are in the same range.  
 
-- MIDI: 60, 64, 67  
+Choosing this range also makes it more obvious just how different the
+ratios for the spatial and temporal signals will be.
+
+- Fundamentals in MIDI: 60, 64, 67  
 
 - Number of Harmonics: 5
+
+- Frequencies: 261.6, 329.6, 392.0, 523.3, 659.3, 784.0, 784.9, 988.9,
+  1046.5, 1176.0, 1308.1, 1318.5, 1568.0, 1648.1, 1960.0  
+
+- Wavelengths: 1960.0, 1555.6, 1308.1, 980.0, 777.8, 654.1, 653.3,
+  518.5, 490.0, 436.0, 392.0, 388.9, 327.0, 311.1, 261.6  
+
+- Speed of Sound: 512780.1
 
 #### Temporal Estimate
 
