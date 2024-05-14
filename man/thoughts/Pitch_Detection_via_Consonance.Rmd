@@ -30,17 +30,30 @@ tonic_midi = 60
 num_harmonics = 5
 amount_of_noise = 2
 num_tones= 3*amount_of_noise + num_harmonics
-f0_scoreboard = rep(0,num_tones)
-f1_scoreboard = rep(0,num_tones)
-f2_scoreboard = rep(0,num_tones)
-f3_scoreboard = rep(0,num_tones)
-f4_scoreboard = rep(0,num_tones)
+f0_temporal_scoreboard = rep(0,num_tones)
+f1_temporal_scoreboard = rep(0,num_tones)
+f2_temporal_scoreboard = rep(0,num_tones)
+f3_temporal_scoreboard = rep(0,num_tones)
+f4_temporal_scoreboard = rep(0,num_tones)
+f0_spatial_scoreboard = rep(0,num_tones)
+f1_spatial_scoreboard = rep(0,num_tones)
+f2_spatial_scoreboard = rep(0,num_tones)
+f3_spatial_scoreboard = rep(0,num_tones)
+f4_spatial_scoreboard = rep(0,num_tones)
+f0_spatiotemporal_scoreboard = rep(0,num_tones)
+f1_spatiotemporal_scoreboard = rep(0,num_tones)
+f2_spatiotemporal_scoreboard = rep(0,num_tones)
+f3_spatiotemporal_scoreboard = rep(0,num_tones)
+f4_spatiotemporal_scoreboard = rep(0,num_tones)
+best_temporal=c(numeric())
+best_spatial=c(numeric())
+best_spatiotemporal=c(numeric())
 chord = c(tonic_midi) %>% mami.codi(num_harmonics = num_harmonics, verbose = T)
 chord_spectrum = chord$spectrum[[1]]
 ```
 
 ```{r, echo=F, message=F, include=F}
-for (trial in 1:100) {
+for (trial in 1:1000) {
   noise_spectrum = tibble::tibble(
     frequency = hrep::midi_to_freq(c(
       runif(n=amount_of_noise, min=0, max=60),
@@ -67,17 +80,14 @@ for (trial in 1:100) {
       )
   })
   
-  scores = looped_paused %>% dplyr::rowwise() %>% dplyr::mutate(
+  temporal_scores = looped_paused %>% dplyr::rowwise() %>% dplyr::mutate(
     paused_frequency = metadata$paused_frequency,
-    total_distance  = sqrt((noisy_chord$consonance_dissonance-consonance_dissonance)^2 +
-                             (noisy_chord$major_minor-major_minor)^2),
-    codi_distance  = abs(noisy_chord$consonance_dissonance-consonance_dissonance),
-    mami_distance  = abs(noisy_chord$major_minor-major_minor)
+    distance         = abs(noisy_chord$frequency_consonance-frequency_consonance)
   )
   
-  results = scores %>%
+  temporal_results = temporal_scores %>%
     dplyr::arrange(
-      dplyr::desc(total_distance),
+      dplyr::desc(distance),
       paused_frequency
     )  %>%
     dplyr::ungroup() %>% 
@@ -86,21 +96,98 @@ for (trial in 1:100) {
       .before = 1
     ) 
   f = chord_spectrum$x
-  f0_row = results %>% dplyr::filter(paused_frequency == f[1])
-  f0_scoreboard[f0_row[[1]]] = f0_scoreboard[f0_row[[1]]] + 1
-  f1_row = results %>% dplyr::filter(paused_frequency == f[2])
-  f1_scoreboard[f1_row[[1]]] = f1_scoreboard[f1_row[[1]]] + 1
-  f2_row = results %>% dplyr::filter(paused_frequency == f[3])
-  f2_scoreboard[f2_row[[1]]] = f2_scoreboard[f2_row[[1]]] + 1
-  f3_row = results %>% dplyr::filter(paused_frequency == f[4])
-  f3_scoreboard[f3_row[[1]]] = f3_scoreboard[f3_row[[1]]] + 1
-  f4_row = results %>% dplyr::filter(paused_frequency == f[5])
-  f4_scoreboard[f4_row[[1]]] = f4_scoreboard[f4_row[[1]]] + 1
+  f0_row = temporal_results %>% dplyr::filter(paused_frequency == f[1])
+  if (f0_row[[1]] == 1) { best_temporal = append(best_temporal, trial)}
+  f0_temporal_scoreboard[f0_row[[1]]] = f0_temporal_scoreboard[f0_row[[1]]] + 1
+  f1_row = temporal_results %>% dplyr::filter(paused_frequency == f[2])
+  f1_temporal_scoreboard[f1_row[[1]]] = f1_temporal_scoreboard[f1_row[[1]]] + 1
+  f2_row = temporal_results %>% dplyr::filter(paused_frequency == f[3])
+  f2_temporal_scoreboard[f2_row[[1]]] = f2_temporal_scoreboard[f2_row[[1]]] + 1
+  f3_row = temporal_results %>% dplyr::filter(paused_frequency == f[4])
+  f3_temporal_scoreboard[f3_row[[1]]] = f3_temporal_scoreboard[f3_row[[1]]] + 1
+  f4_row = temporal_results %>% dplyr::filter(paused_frequency == f[5])
+  f4_temporal_scoreboard[f4_row[[1]]] = f4_temporal_scoreboard[f4_row[[1]]] + 1
+
+  spatial_scores = looped_paused %>% dplyr::rowwise() %>% dplyr::mutate(
+    paused_frequency = metadata$paused_frequency,
+    distance         = abs(noisy_chord$wavelength_consonance-wavelength_consonance)
+  )
+  
+  spatial_results = spatial_scores %>%
+    dplyr::arrange(
+      dplyr::desc(distance),
+      paused_frequency
+    )  %>%
+    dplyr::ungroup() %>% 
+    dplyr::mutate(
+      row_id = dplyr::row_number(),
+      .before = 1
+    ) 
+  f = chord_spectrum$x
+  f0_row = spatial_results %>% dplyr::filter(paused_frequency == f[1])
+  if (f0_row[[1]] == 1) {best_spatial = append(best_spatial, trial)}
+  f0_spatial_scoreboard[f0_row[[1]]] = f0_spatial_scoreboard[f0_row[[1]]] + 1
+  f1_row = spatial_results %>% dplyr::filter(paused_frequency == f[2])
+  f1_spatial_scoreboard[f1_row[[1]]] = f1_spatial_scoreboard[f1_row[[1]]] + 1
+  f2_row = spatial_results %>% dplyr::filter(paused_frequency == f[3])
+  f2_spatial_scoreboard[f2_row[[1]]] = f2_spatial_scoreboard[f2_row[[1]]] + 1
+  f3_row = spatial_results %>% dplyr::filter(paused_frequency == f[4])
+  f3_spatial_scoreboard[f3_row[[1]]] = f3_spatial_scoreboard[f3_row[[1]]] + 1
+  f4_row = spatial_results %>% dplyr::filter(paused_frequency == f[5])
+  f4_spatial_scoreboard[f4_row[[1]]] = f4_spatial_scoreboard[f4_row[[1]]] + 1
+
+  spatiotemporal_scores = looped_paused %>% dplyr::rowwise() %>% dplyr::mutate(
+    paused_frequency = metadata$paused_frequency,
+    distance         = abs(noisy_chord$consonance_dissonance-consonance_dissonance)
+  )
+  
+  spatiotemporal_results = spatiotemporal_scores %>%
+    dplyr::arrange(
+      dplyr::desc(distance),
+      paused_frequency
+    )  %>%
+    dplyr::ungroup() %>% 
+    dplyr::mutate(
+      row_id = dplyr::row_number(),
+      .before = 1
+    ) 
+  f = chord_spectrum$x
+  f0_row = spatiotemporal_results %>% dplyr::filter(paused_frequency == f[1])
+  if (f0_row[[1]] == 1) {best_spatiotemporal = append(best_spatiotemporal, trial)}
+  f0_spatiotemporal_scoreboard[f0_row[[1]]] = f0_spatiotemporal_scoreboard[f0_row[[1]]] + 1
+  f1_row = spatiotemporal_results %>% dplyr::filter(paused_frequency == f[2])
+  f1_spatiotemporal_scoreboard[f1_row[[1]]] = f1_spatiotemporal_scoreboard[f1_row[[1]]] + 1
+  f2_row = spatiotemporal_results %>% dplyr::filter(paused_frequency == f[3])
+  f2_spatiotemporal_scoreboard[f2_row[[1]]] = f2_spatiotemporal_scoreboard[f2_row[[1]]] + 1
+  f3_row = spatiotemporal_results %>% dplyr::filter(paused_frequency == f[4])
+  f3_spatiotemporal_scoreboard[f3_row[[1]]] = f3_spatiotemporal_scoreboard[f3_row[[1]]] + 1
+  f4_row = spatiotemporal_results %>% dplyr::filter(paused_frequency == f[5])
+  f4_spatiotemporal_scoreboard[f4_row[[1]]] = f4_spatiotemporal_scoreboard[f4_row[[1]]] + 1
+
 }
 ```
-## pseudo_octave: `r chord$pseudo_octave`
-### f0: `r f0_scoreboard`
-### f1: `r f1_scoreboard`
-### f2: `r f2_scoreboard`
-### f3: `r f3_scoreboard`
-### f4: `r f4_scoreboard`
+# Temporal
+### f0: `r f0_temporal_scoreboard`
+### f1: `r f1_temporal_scoreboard`
+### f2: `r f2_temporal_scoreboard`
+### f3: `r f3_temporal_scoreboard`
+### f4: `r f4_temporal_scoreboard`
+### best_temporal: `r best_temporal`
+
+# Spatial
+### f0: `r f0_spatial_scoreboard`
+### f1: `r f1_spatial_scoreboard`
+### f2: `r f2_spatial_scoreboard`
+### f3: `r f3_spatial_scoreboard`
+### f4: `r f4_spatial_scoreboard`
+### best_spatial: `r best_spatial`
+
+# Spatiotemporal
+### f0: `r f0_spatiotemporal_scoreboard`
+### f1: `r f1_spatiotemporal_scoreboard`
+### f2: `r f2_spatiotemporal_scoreboard`
+### f3: `r f3_spatiotemporal_scoreboard`
+### f4: `r f4_spatiotemporal_scoreboard`
+### best_spatiotemporal: `r best_spatiotemporal`
+
+##### Number of Unique Trials `r c(best_temporal,best_spatial,best_spatiotemporal) %>% unique() %>% length()`
