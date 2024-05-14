@@ -100,13 +100,13 @@ knitr::kable(tibble::tibble(
 ratios = chord$wavelength_ratios[[1]] %>%
   dplyr::select(index, num, den, tone)
 lcd    = chord$wavelength_lcd
-plot_periodicity(ratios, lcd, 'wavelength', relative = F)
+plot_periodicity(ratios, lcd, 'wavelength', c_sound = chord$speed_of_sound,relative = F)
 ```
 
 ##### Relative Spatial Frequency
 
 ```{r, echo=F, results='asis', message=F}
-plot_periodicity(ratios, lcd, 'wavelength')
+plot_periodicity(ratios, lcd, 'wavelength', c_sound = chord$speed_of_sound)
 ```
 
 ##### Wavelength Ratios

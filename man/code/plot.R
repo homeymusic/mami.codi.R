@@ -717,6 +717,7 @@ plot_semitone_codi_2_smooth <- function(chords, title='', include_line=T,
 }
 
 plot_periodicity <- function(ratios, lcd, dimension,
+                             c_sound = NULL,
                              relative = T, log2_scale = F) {
   if (dimension=='wavelength') {
     fill_color   = colors_homey$minor
@@ -727,7 +728,7 @@ plot_periodicity <- function(ratios, lcd, dimension,
   }
   brickwork = ratios %>% purrr::pmap_dfr(\(index, num, den, tone) {
     if (dimension=='wavelength') {
-      freq = SPEED_OF_SOUND / tone
+      freq = c_sound / tone
     } else if (dimension=='frequency') {
       freq = tone
     }
