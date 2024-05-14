@@ -1,14 +1,14 @@
 devtools::load_all(".")
 
-search_label = 'M6'
+search_label = '5PartialsNo3'
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # tolerances   = 10^-(1:10)
   tolerances   = c(1 %o% 10^(-8:-1), default_tolerance('macro')) %>% sort()
 } else {
 
   # Detailed
-  from_tol     = 0.01
-  to_tol       = 0.1
+  from_tol     = 0.06
+  to_tol       = 0.08
   by_tol       = 0.001
   tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
 

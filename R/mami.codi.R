@@ -168,15 +168,15 @@ format_output <- function(x, metadata, verbose) {
 
 lcm <- function(x) Reduce(numbers::LCM, x)
 
-TOLERANCE = 0.07
+TOLERANCE       = 2/3 * 1e-01
 
 MICRO_TOLERANCE = 1e-04
 
-MIN_AMPLITUDE  = 0.03
+MIN_AMPLITUDE   = 0.03
 
-SPEED_OF_SOUND = 343
+SPEED_OF_SOUND  = 343
 
-ZARLINO        = 50
+ZARLINO         = 50
 
 SMALLEST_POSSIBLE = .Machine$double.xmin
 
