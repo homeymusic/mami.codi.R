@@ -36,7 +36,7 @@ For 10 harmonics, behavioral results and theoretical predictions agree.
 
 | detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
-| 2                      | 0.03                    | 0.03              | 0.08               |             0.2 |
+| 2                      | 0.03                    | 0.05              | 0.08               |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-2.png)<!-- -->  
@@ -53,7 +53,7 @@ peak.
 
 | detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
-| 2                      | 0.03                    | 0.03              | 0.08               |             0.2 |
+| 2                      | 0.03                    | 0.05              | 0.08               |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-6.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-7.png)<!-- -->  
@@ -70,7 +70,7 @@ while the M3 peak is slightly higher without the 3rd partial.
 
 | detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
-| 2                      | 0.03                    | 0.03              | 0.08               |             0.2 |
+| 2                      | 0.03                    | 0.05              | 0.08               |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-11.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-12.png)<!-- -->  
@@ -89,7 +89,7 @@ major-minor versus the behavioral results are included in a plot below.
 
 | detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
-| 2                      | 0.03                    | 0.03              | 0.08               |             0.2 |
+| 2                      | 0.03                    | 0.05              | 0.08               |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-16.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-17.png)<!-- -->  
@@ -105,7 +105,7 @@ and m7 that do not exist in the behavioral results.
 
 | detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
-| 2.1                    | 0.03                    | 0.03              | 0.08               |             0.2 |
+| 2.1                    | 0.03                    | 0.05              | 0.08               |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-21.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-22.png)<!-- -->  
@@ -120,7 +120,7 @@ with the theoretical peaks.
 
 | detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
-| 1.9                    | 0.03                    | 0.03              | 0.08               |             0.2 |
+| 1.9                    | 0.03                    | 0.05              | 0.08               |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-26.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-27.png)<!-- -->  
@@ -138,7 +138,7 @@ be relatively higher than the behavioral results.
 
 | detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
-| 2                      | 0.03                    | 0.03              | 0.08               |             0.2 |
+| 2                      | 0.03                    | 0.05              | 0.08               |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-31.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-32.png)<!-- -->  
