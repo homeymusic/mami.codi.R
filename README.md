@@ -119,20 +119,19 @@ orthogonal dimension.
 Below, we estimate the periodicity of the C4, E4 and G4 major triad with
 5 harmonics per pitch. The MaMi.CoDi model is based on ratios of tones -
 both frequency and wavelength ratios. The input to the model is a sparse
-frequency spectrum. We convert to wavelength by a speed of sound
-constant.  
+frequency spectrum. We convert frequencies to wavelengths by dividing a
+speed of sound constant by the frequency.  
 
-Because they are ratios the value of the speed of sound constant does
-not matter. Ideally, we could choose any media for speed of sound: air,
-cochlear fluid, basilar membrane, etc.
+For tone ratios, the value of the speed of sound constant does not
+impact the mathematics. Ideally, we could choose any media for the speed
+of sound: air, cochlear fluid, basilar membrane, etc.
 
-However, we use a computer for calculations so the constant makes a
-difference in how small or large the wavelength numbers will be. So we
-choose a constant for each chord that ensures that the actual wavelength
-and frequency numbers are in the same range.  
-
-Choosing this range also makes it more obvious just how different the
-ratios for the spatial and temporal signals will be.
+However, for calculations in a computer, the constant does make a
+difference because of the way computers handle very small and very large
+numbers. So, we chose a constant for each chord that ensures the
+wavelength and frequency values are in the same range. Choosing a
+constant that gives similar ranges for frequencies and wavelengths makes
+it easier to see how different the ratios for the two signals will be.
 
 - Fundamentals in MIDI: 60, 64, 67  
 
@@ -224,9 +223,6 @@ six of the large-scale behavioral experiments.
 
 The best fits across the experiments were given by a tolerance of
 0.0666667.  
-
-The frequency tolerance is half the size of the wavelength tolerance.
-Does that mean that the perception mechanism for frequency.  
 
 ## Theoretical predictions compared to large-scale behavioral results
 

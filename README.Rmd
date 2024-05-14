@@ -114,8 +114,6 @@ experiments.\
 The best fits across the experiments were given by a tolerance of 
 `r default_tolerance(scale='macro')`.\
  
-The frequency tolerance is half the size of the wavelength tolerance. Does that mean that the perception mechanism for frequency.\
-
 ## Theoretical predictions compared to large-scale behavioral results
 
 The large-scale behavioral data in the plots below are from [Timbral effects on consonance disentangle psychoacoustic mechanisms and suggest perceptual origins for musical scales](https://www.nature.com/articles/s41467-024-45812-z) by Raja Marjieh, Peter M. C. Harrison, Harin Lee, Fotini Deligiannaki & Nori Jacoby.
