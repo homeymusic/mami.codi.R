@@ -718,7 +718,7 @@ plot_semitone_codi_2_smooth <- function(chords, title='', include_line=T,
 
 plot_periodicity <- function(ratios, lcd, dimension,
                              c_sound = NULL,
-                             relative = T, log2_scale = F) {
+                             relative = T) {
   if (dimension=='wavelength') {
     fill_color   = colors_homey$minor
     border_color = colors_homey$minor_dark
@@ -759,14 +759,18 @@ plot_periodicity <- function(ratios, lcd, dimension,
   if (dimension=='wavelength') {
     if (relative) {
       xlab = 'Relative Spatial Frequency (Sz)'
+      scaled_label = NULL
     } else {
-      xlab = bquote('Spatial Frequency'~(m^-1))
+      xlab = bquote('Spatial Frequency'~(mm^-1))
+      scaled_label = scales::label_number(scale = 1e-03)
     }
   } else if (dimension=='frequency') {
     if (relative) {
       xlab = 'Relative Periodicity (Sz)'
+      scaled_label = NULL
     } else {
-      xlab = bquote('Period'~(s))
+      xlab = bquote('Period'~(ms))
+      scaled_label = scales::label_number(scale = 1e-03)
     }
   }
   ggplot2::ggplot(brickwork, ggplot2::aes(
@@ -778,6 +782,6 @@ plot_periodicity <- function(ratios, lcd, dimension,
     ggplot2::geom_rect(fill=fill_color, color=border_color) +
     ggplot2::xlab(xlab) +
     ggplot2::ylab("MIDI") +
-    {if (log2_scale) ggplot2::scale_x_continuous(trans='log2') } +
+    ggplot2::scale_x_continuous(labels = scaled_label) +
     theme_homey()
 }

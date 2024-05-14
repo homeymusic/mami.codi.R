@@ -3,19 +3,19 @@
 To estimate the periodicity of a chord, the MaMi.CoDi model uses a signal 
 processing technique. It finds ratios, within a given tolerance, 
 for every tone in the chord (fundamental, harmonics, noise, etc.) relative to 
-a reference tone. The least common multiple of those ratios is a measure of the 
+a reference tone. The least common denominator of those ratios is a measure of the 
 cycle length, relative to the reference tone. Long relative cycles are predicted 
 to sound unpleasant and short relative cycles are predicted to sound pleasant. \
 
 MaMi.CoDi creates two estimates of the chord's period: a temporal estimate and 
 a spatial estimate.\
 
-For the frequency (i.e. phase-locking or temporal) estimate the reference tone is the 
+For the temporal (i.e. phase-locking or frequency) estimate the reference tone is the 
 smallest frequency. Small frequencies are low tones and are detected by the inner 
 ear hair cells closest to the apex of the cochlea, which is the end furthest from
 the source of the wave.\
 
-For the wavelength (i.e. rate-place or spatial) estimate, the reference tone is the 
+For the spatial (i.e. rate-place or wavelength) estimate, the reference tone is the 
 smallest wavelength. Small wavelengths are high tones and are detected by the 
 inner ear hair cells closest to the base of the cochlea, which is the end closest 
 to the middle ear, the source of the wave. \

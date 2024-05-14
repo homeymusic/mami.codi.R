@@ -21,6 +21,77 @@ BEHAVIOURAL_SMOOTH_NARROW <- 0.035
 
 ## How MaMi.CoDi Works
 
+### The Basilar Membrane
+
+When a chord is sounded, pressure waves travel through the air. Those pressure
+waves enter the ear canal where they vibrate the ear drum. The ear drum transfers
+the energy of the pressure waves through a series of bones in the fluid of the 
+middle ear to an oval window on the shell-shaped cochlea of the inner ear. 
+Within the fluid of the cochlea, the sound energy is converted into a traveling 
+surface wave along the basilar membrane.\
+
+Human basilar membranes are around 33 mm long. Thousands of evenly-spaced hair 
+cells are arranged in a line on the basilar membrane. The hair cells transduce
+mechanical vibrations into electrical activity that is sent along the auditory 
+nerve to the central auditory system. When a sound wave travels along the basilar 
+membrane, the hair cells positioned near the wavelength of that sound will send 
+electrical activity along the auditory nerve.\
+
+Consider, though, that the fundamental tone of middle C is 1.31 meters long. 
+The basilar membrane is only 33mm long. 
+How can the hair cells of the inner ear detect wavelengths that are
+longer than the basilar membrane?\
+
+The traveling sound waves shorten as they travel around the spiral
+cochlea. Middle C's fundamental wavelength of 1.31 meters in air shrinks to 
+26 mm along the basilar membrane. So, when the fundamental tone of middle C is 
+sounded, the hair cells positioned 26 mm (81%) from the base of the cochlea
+send electrical activity along the auditory nerve.\
+
+When a musical chord comprised of many fundamental tones and harmonics is sounded,
+the hair cells at each shortened wavelength position send signals along 
+the auditory nerve. This spatial or rate-place arrangement of hair cell positions and 
+wavelengths of tones is known as tonotopy.\
+
+If we play a chord, freeze time and observe which hair cells are displaced, what 
+are we observing? Are we observing frequencies? Periods? No. Time is frozen.
+Frequency (1/s) and period (s) are temporal observations. We are making a purely 
+spatial observation about wavelengths (m). We will come back to temporal
+observations shortly.\
+
+When we combine the wavelength components of a chord together, we can estimate 
+the overall wavelength for the whole chord. The overall chord wavelength will be as long as
+or longer than the longest component wavelength of the chord. Chords with short 
+wavelengths relative to the component wavelengths sound pleasant. And chords 
+with long wavelengths relative to component wavelengthsound unpleasant. 
+MaMi.CoDi uses this measure of relative wavelength to predict the 
+perceived spatial consonance of a chord.\
+
+Let us unfreeze time and start counting how often a hair cell moves due to a 
+pure tone of our sounded chord. If we count the number of movements relative to a
+certain amount of time, we will be observing the frequency of the partial. 
+This would be a temporal observation. The auditory system has a property called 
+phase locking which allows it to encode the time intervals, periods, between spikes from 
+sound waves.\
+
+When we combine the period components of a chord together, we can estimate 
+the overall period for the whole chord. That chord period will be as long as
+or longer than the longest component period of the chord. Short relative periods
+sound pleasant. Long relative periods sound unpleasant.
+MaMi.CoDi uses this measure of chord period to predict the perceived temporal 
+consonance of a chord.\
+
+MaMi.CoDi sums the spatial and temporal consonance predictions to create
+an overall consonance-dissonance prediction. MaMi.CoDi subtracts
+the spatial consonance from the temporal consonance to create a major-minor polarity 
+prediction. Positive values will sound major, negative values minor and values 
+around zero will sound neutral.\
+
+Because wavelength and frequency are inverse of each other one might imagine that 
+the spatial and temporal signals would have the same values. However, for complex 
+pitches that is not the case. The pattern of the two sets of components are different.
+See the example of the major triad with 5 harmonics, below.
+
 ```{r, child=c('man/Spatiotemporal_Periodicity.Rmd')}
 ```
 
