@@ -35,7 +35,15 @@ color_factor_homey <- function(x,column_name) {
   cut(x[[column_name]],c(-Inf,-1e-6,1e-6,Inf),labels=c("minor","neutral","major"))
 }
 color_values_homey <- function() {
-  c("minor"=colors_homey$minor,"neutral"=colors_homey$fundamental,"major"=colors_homey$major)
+  c("minor"=colors_homey$minor,
+    "neutral"=colors_homey$fundamental,
+    "major"=colors_homey$major,
+    'behavioral'=colors_homey$neutral)
+}
+space_time_colors <- function() {
+  c('spatial'=colors_homey$minor,
+    'temporal'=colors_homey$major,
+    'behavioral'=colors_homey$neutral)
 }
 theme_homey <- function(aspect.ratio=NULL){
   font <- "Helvetica"   #assign font family up front
@@ -55,6 +63,7 @@ theme_homey <- function(aspect.ratio=NULL){
     panel.grid.minor = ggplot2::element_line(color = colors_homey$foreground, linewidth=0.05, linetype ="dashed"),
     legend.background = ggplot2::element_rect(fill = colors_homey$light_neutral),
     legend.key = ggplot2::element_rect(fill = colors_homey$background, color = NA),
+    legend.position='bottom',
     aspect.ratio = aspect.ratio
   )
 }
@@ -233,16 +242,18 @@ plot_semitone_codi <- function(chords, title='', include_line=T, sigma=0.2,
                                       group=1), linewidth = 1)} +
     {if (!is.null(goal))
       ggplot2::geom_line(data=goal,
-                         color    = colors_homey$neutral,
                          ggplot2::aes(x = semitone,
                                       y = consonance_dissonance,
-                                      group=1), linewidth = 0.5)} +
+                                      color = 'behavioral'
+                                      ), linewidth = 0.5)} +
     ggplot2::scale_fill_manual(values=color_values_homey(), guide="none") +
-    ggplot2::scale_color_manual(values=color_values_homey(), guide='none') +
+    ggplot2::scale_color_manual(values=color_values_homey()) +
     ggplot2::ggtitle(title) +
     ggplot2::scale_x_continuous(breaks = -15:15,
                                 minor_breaks = c()) +
-    ggplot2::ylab('Consonance-Dissonance Z-Score') +
+    ggplot2::ylab('Consonance (Z-Score)') +
+    ggplot2::xlab('Semitone') +
+    ggplot2::labs(color = NULL) +
     theme_homey()
 }
 plot_semitone_mami <- function(chords, title='', include_line=T, sigma=0.2,
@@ -276,6 +287,7 @@ plot_semitone_mami <- function(chords, title='', include_line=T, sigma=0.2,
     ggplot2::scale_x_continuous(breaks = 0:15,
                                 minor_breaks = c()) +
     ggplot2::ylab('Major-Minor') +
+    ggplot2::guides(col = ggplot2::guide_legend()) +
     theme_homey()
 }
 plot_semitone_cowave.cofreq <- function(chords, title='', include_line=T, sigma=0.2,
@@ -304,21 +316,31 @@ plot_semitone_cowave.cofreq <- function(chords, title='', include_line=T, sigma=
     ggplot2::geom_point(ggplot2::aes(y = .data$wavelength_consonance),
                         shape=21, stroke=NA, size=1,
                         fill=colors_homey$minor) +
-    ggplot2::geom_line(ggplot2::aes(y = .data$smoothed.frequency_consonance), linewidth = 1,
-                       color=colors_homey$major) +
-    ggplot2::geom_line(ggplot2::aes(y = .data$smoothed.wavelength_consonance), linewidth = 1,
-                       linetype = linetype_for_minor,
-                       color=colors_homey$minor) +
+    ggplot2::geom_line(ggplot2::aes(
+      y = .data$smoothed.frequency_consonance,
+      color = 'temporal'),
+      linewidth = 1) +
+    ggplot2::geom_line(ggplot2::aes(
+      y = .data$smoothed.wavelength_consonance,
+      color = 'spatial'),
+      linewidth = 1,
+      linetype = linetype_for_minor) +
     {if (!is.null(goal))
       ggplot2::geom_line(data=goal,
-                         color    = colors_homey$neutral,
                          ggplot2::aes(x = semitone,
                                       y = consonance_dissonance + mean_theoretical,
+                                      color = 'behavioral',
                                       group=1), linewidth = 0.5)} +
     ggplot2::ggtitle(title) +
     ggplot2::scale_x_continuous(breaks = 0:15,
                                 minor_breaks = c()) +
-    ggplot2::ylab('Consonance frequency (gold) and Wavelength (blue)') +
+    ggplot2::guides(col = ggplot2::guide_legend()) +
+    ggplot2::ylab('Consonance') +
+    ggplot2::xlab('Semitone') +
+    ggplot2::scale_color_manual(
+      values=space_time_colors(),
+      breaks=c('spatial', 'temporal', 'behavioral')) +
+    ggplot2::labs(color = NULL) +
     theme_homey()
 }
 plot_semitone_co <- function(chords, title='') {
@@ -737,7 +759,7 @@ plot_periodicity <- function(ratios, lcd, dimension,
     if (relative) {
       xlab = 'Relative Spatial Frequency (Sz)'
     } else {
-      xlab = bquote('Wavenumber'~(m^-1))
+      xlab = bquote('Spatial Frequency'~(m^-1))
     }
   } else if (dimension=='frequency') {
     if (relative) {
@@ -752,9 +774,9 @@ plot_periodicity <- function(ratios, lcd, dimension,
     ymin=ymin,
     ymax=ymax
   )) +
-    ggplot2::theme(legend.position="none") +
     ggplot2::geom_rect(fill=fill_color, color=border_color) +
     ggplot2::xlab(xlab) +
     ggplot2::ylab("MIDI") +
-    {if (log2_scale) ggplot2::scale_x_continuous(trans='log2') }
+    {if (log2_scale) ggplot2::scale_x_continuous(trans='log2') } +
+    theme_homey()
 }

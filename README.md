@@ -84,7 +84,7 @@ Below, we estimate the periodicity of the C4, E4 and G4 major triad with
 |----------:|---------:|---------:|---------:|----:|
 | 0.0029167 | 15697.53 | 342.8531 |       60 | 0.1 |
 
-##### Wavenumbers
+##### Spatial Frequency
 
 ![](man/figures/README-unnamed-chunk-15-1.png)<!-- -->
 

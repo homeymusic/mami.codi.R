@@ -94,7 +94,7 @@ knitr::kable(tibble::tibble(
 ) %>% dplyr::select(chord_Hz, chord_m, chord_s, chord_Sz, tol))
 ```
 
-##### Wavenumbers
+##### Spatial Frequency
 
 ```{r, echo=F, results='asis', message=F}
 ratios = chord$wavelength_ratios[[1]] %>%
