@@ -722,9 +722,14 @@ plot_periodicity <- function(ratios, lcd, dimension,
   if (dimension=='wavelength') {
     fill_color   = colors_homey$minor
     border_color = colors_homey$minor_dark
+    max_tone = ratios$tone %>% max()
+    max_ratio = ratios %>% dplyr::arrange(dplyr::desc(tone)) %>% dplyr::slice(1)
+    max_num = max_ratio$num
+    max_den = max_ratio$den
   } else if (dimension=='frequency') {
     fill_color   = colors_homey$major
     border_color = colors_homey$major_dark
+    min_tone = ratios$tone %>% min()
   }
   brickwork = ratios %>% purrr::pmap_dfr(\(index, num, den, tone) {
     if (dimension=='wavelength') {
@@ -739,12 +744,23 @@ plot_periodicity <- function(ratios, lcd, dimension,
       ymin = numeric(),
       ymax = numeric()
     )
-    if (relative) {
-      brick_width = den / num
-      brick_count = num / den * lcd
-    } else {
-      brick_width = 1 / tone
-      brick_count = 1
+    if (dimension=='wavelength') {
+      if (relative) {
+        ratio_to_max = ( (num / max_num) / (den / max_den) )
+        brick_width = max_tone * ratio_to_max
+        brick_count = lcd / ratio_to_max
+      } else {
+        brick_width = tone
+        brick_count = 1
+      }
+    } else if (dimension=='frequency') {
+      if (relative) {
+        brick_width = (den / num) / min_tone
+        brick_count = lcd * (num / den)
+      } else {
+        brick_width = 1 / tone
+        brick_count = 1
+      }
     }
     for (brick in 0:(brick_count-1)) {
       course_of_bricks = course_of_bricks %>% tibble::add_row(
@@ -757,21 +773,11 @@ plot_periodicity <- function(ratios, lcd, dimension,
     course_of_bricks
   })
   if (dimension=='wavelength') {
-    if (relative) {
-      xlab = 'Relative Spatial Frequency (Sz)'
-      scaled_label = NULL
-    } else {
-      xlab = bquote('Spatial Frequency'~(mm^-1))
-      scaled_label = scales::label_number(scale = 1e-03)
-    }
+    xlab = bquote('Wavelength'~(km))
+    scaled_label = scales::label_number(scale = 1e-03)
   } else if (dimension=='frequency') {
-    if (relative) {
-      xlab = 'Relative Periodicity (Sz)'
-      scaled_label = NULL
-    } else {
-      xlab = bquote('Period'~(ms))
-      scaled_label = scales::label_number(scale = 1e-03)
-    }
+    xlab = bquote('Period'~(ms))
+    scaled_label = scales::label_number(scale = 1e03)
   }
   ggplot2::ggplot(brickwork, ggplot2::aes(
     xmin=xmin,
