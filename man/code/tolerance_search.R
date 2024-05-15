@@ -6,14 +6,21 @@ if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   tolerances   = c(1 %o% 10^(-8:-1), default_tolerance('macro')) %>% sort()
 } else {
 
-  # Space Detail
+  # Space Detail Harmonic
   # from_tol     = 0.02
   # to_tol       = 0.04
   # by_tol       = 0.001
   # tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
 
+  # Time Detail Harmonic
+  from_tol     = 0.08
+  to_tol       = 0.1
+  by_tol       = 0.001
+  tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
+
   # Orders of Magnitude
-  tolerances   = c(1:9 %o% 10^(-7:-5)) %>% rev()
+  # tolerances   = c(1:9 %o% 10^(-2:-1))
+
 }
 
 tonic_midi = 60
