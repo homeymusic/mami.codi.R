@@ -9,6 +9,8 @@
 #  warning = FALSE,
 #  message = FALSE
 # )
+midi  = c(0, 4, 7) + 60
+num_harmonics = 3
 ```
 
 ### Estimating Spatiotemporal Periodicity
@@ -36,10 +38,10 @@ to the middle ear, the source of the wave. \
 MaMi.CoDi combines the two cycle estimates into a two-dimensional space with 
 consonance-dissonance along one dimension and major-minor on the orthogonal dimension.
 
-#### Example Chord: C4 Major Third Dyad
+#### Example Chord: Major Triad
 
-Below, we estimate the periodicity of the C4 and E4 major third dyad 
-with 5 harmonics per pitch. The MaMi.CoDi model is based on 
+Below, we estimate the periodicity of the C4, E4 and G4 major triad 
+with `r num_harmonics` harmonics per pitch. The MaMi.CoDi model is based on 
 ratios of tones - both frequency and wavelength ratios. The input to the model 
 is a sparse frequency spectrum. We convert frequencies to wavelengths by 
 dividing a speed of sound constant by the frequency.\
@@ -56,8 +58,6 @@ frequencies and wavelengths makes it easier to see how different the ratios for 
 two signals will be.
 
 ```{r, echo=F, results='asis', message=F}
-midi  = c(0, 4) + 60
-num_harmonics = 5
 chord = midi %>% mami.codi(
   verbose=T,
   num_harmonics = num_harmonics
@@ -75,111 +75,10 @@ c_sound = chord$speed_of_sound
 
 * Wavelengths: `r sprintf(chord$wavelengths[[1]], fmt = '%#.1f')`\
 
-#### Temporal Periodicity
+###### MaMi.CoDi Predictions
 ```{r, echo=F, results='asis', message=F}
-knitr::kable(tibble::tibble(
-  tol      = chord$tolerance,
-  lcd      = chord$frequency_lcd,
-  chord_Sz = log2(lcd),
-  min_f_Hz = min(chord$frequencies[[1]]),
-  max_T_s  = 1 / min_f_Hz,
-  chord_s  = lcd * max_T_s,
-  chord_Hz = 1 / chord_s,
-  chord_m  = c_sound / chord_Hz,
-  c_sound
-) %>% dplyr::select(lcd, chord_Sz, chord_Hz, c_sound, chord_m, chord_s, tol))
+knitr::kable(chord %>% dplyr::select('consonance_dissonance', 'major_minor', 'frequency_consonance', 'wavelength_consonance'))
 ```
-
-##### Partial Periods
-
-```{r, echo=F, results='asis', message=F}
-ratios = chord$frequency_ratios[[1]] %>% 
-  dplyr::select(index, num, den, tone)
-lcd    = chord$frequency_lcd
-plot_periodicity(ratios, lcd, 'frequency', relative = F)
-```
-
-##### Chord Period
-
-```{r, echo=F, results='asis', message=F}
-plot_periodicity(ratios, lcd, 'frequency')
-```
-
-##### Frequency Ratios
-```{r, echo=F, results='asis', message=F}
-knitr::kable(chord$frequency_ratios[[1]] %>% 
-               dplyr::arrange(ratio) %>% 
-               dplyr::rename(
-                 tone_hz = tone,
-                 reference_tone_hz = reference_tone,
-               ) %>%
-               dplyr::select(-pseudo_ratio))
-```
-
-#### Spatial Periodicity
-```{r, echo=F, results='asis', message=F}
-knitr::kable(tibble::tibble(
-  tol      = chord$tolerance,
-  lcd      = chord$wavelength_lcd,
-  chord_Sz = log2(lcd),
-  max_l_m  = max(chord$wavelengths[[1]]),
-  chord_m  = lcd * max_l_m,
-  chord_Hz = c_sound / chord_m,
-  chord_s  = 1 / chord_Hz,
-  c_sound
-) %>% dplyr::select(lcd, chord_Sz, chord_Hz, c_sound, chord_m, chord_s, tol))
-```
-
-##### Partial Wavelengths
-
-```{r, echo=F, results='asis', message=F}
-ratios = chord$wavelength_ratios[[1]] %>%
-  dplyr::select(index, num, den, tone)
-lcd    = chord$wavelength_lcd
-plot_periodicity(ratios, lcd, 'wavelength', c_sound = c_sound,relative = F)
-```
-
-##### Chord Wavelength
-
-```{r, echo=F, results='asis', message=F}
-plot_periodicity(ratios, lcd, 'wavelength', c_sound = c_sound)
-```
-
-##### Wavelength Ratios
-```{r, echo=F, results='asis', message=F}
-knitr::kable(chord$wavelength_ratios[[1]] %>% 
-               dplyr::arrange(ratio) %>% 
-               dplyr::rename(
-                 tone_m = tone,
-                 reference_tone_m = reference_tone,
-               ) %>%
-               dplyr::select(-pseudo_ratio))
-```
-
-#### Example Chord: C4 Minor Third Dyad
-
-Below, we estimate the periodicity of the C4 and Eb4 minor third dyad with 5 harmonics per pitch.\
-
-For tone ratios, the value of the speed of sound constant does not impact the 
-```{r, echo=F, results='asis', message=F}
-midi  = c(0, 3, 7) + 60
-num_harmonics = 5
-chord = midi %>% mami.codi(
-  verbose=T,
-  num_harmonics = num_harmonics
-)
-c_sound = chord$speed_of_sound
-```
-
-* Fundamentals in MIDI: `r midi`\
-
-* Number of Harmonics: `r num_harmonics`
-
-* Frequencies: `r sprintf(chord$frequencies[[1]], fmt = '%#.1f')`\
-
-* Speed of Sound: `r sprintf(c_sound, fmt = '%#.1f')`
-
-* Wavelengths: `r sprintf(chord$wavelengths[[1]], fmt = '%#.1f')`\
 
 #### Temporal Periodicity
 ```{r, echo=F, results='asis', message=F}

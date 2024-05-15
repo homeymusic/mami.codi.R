@@ -114,13 +114,13 @@ MaMi.CoDi combines the two cycle estimates into a two-dimensional space
 with consonance-dissonance along one dimension and major-minor on the
 orthogonal dimension.
 
-#### Example Chord: C4 Major Third Dyad
+#### Example Chord: Major Triad
 
-Below, we estimate the periodicity of the C4 and E4 major third dyad
-with 5 harmonics per pitch. The MaMi.CoDi model is based on ratios of
-tones - both frequency and wavelength ratios. The input to the model is
-a sparse frequency spectrum. We convert frequencies to wavelengths by
-dividing a speed of sound constant by the frequency.  
+Below, we estimate the periodicity of the C4, E4 and G4 major triad with
+3 harmonics per pitch. The MaMi.CoDi model is based on ratios of tones -
+both frequency and wavelength ratios. The input to the model is a sparse
+frequency spectrum. We convert frequencies to wavelengths by dividing a
+speed of sound constant by the frequency.  
 
 For tone ratios, the value of the speed of sound constant does not
 impact the mathematics. Ideally, we could choose any media for the speed
@@ -133,31 +133,37 @@ wavelength and frequency values are in the same range. Choosing a
 constant that gives similar ranges for frequencies and wavelengths makes
 it easier to see how different the ratios for the two signals will be.
 
-- Fundamentals in MIDI: 60, 64  
+- Fundamentals in MIDI: 60, 64, 67  
 
-- Number of Harmonics: 5
+- Number of Harmonics: 3
 
-- Frequencies: 261.6, 329.6, 523.3, 659.3, 784.9, 988.9, 1046.5, 1308.1,
-  1318.5, 1648.1  
+- Frequencies: 261.6, 329.6, 392.0, 523.3, 659.3, 784.0, 784.9, 988.9,
+  1176.0  
 
-- Speed of Sound: 431195.0
+- Speed of Sound: 307668.1
 
-- Wavelengths: 1648.1, 1308.1, 824.1, 654.1, 549.4, 436.0, 412.0, 329.6,
-  327.0, 261.6  
+- Wavelengths: 1176.0, 933.4, 784.9, 588.0, 466.7, 392.4, 392.0, 311.1,
+  261.6  
+
+###### MaMi.CoDi Predictions
+
+| consonance_dissonance | major_minor | frequency_consonance | wavelength_consonance |
+|----------------------:|------------:|---------------------:|----------------------:|
+|              93.67807 |    2.321928 |                   48 |              45.67807 |
 
 #### Temporal Periodicity
 
-| lcd | chord_Sz | chord_Hz | c_sound |  chord_m |   chord_s |       tol |
-|----:|---------:|---------:|--------:|---------:|----------:|----------:|
-|  12 | 3.584963 | 21.80213 |  431195 | 19777.65 | 0.0458671 | 0.0666667 |
+| lcd | chord_Sz | chord_Hz |  c_sound |  chord_m |  chord_s |       tol |
+|----:|---------:|---------:|---------:|---------:|---------:|----------:|
+|   4 |        2 | 65.40639 | 307668.1 | 4703.945 | 0.015289 | 0.0666667 |
 
 ##### Partial Periods
 
-![](man/figures/README-unnamed-chunk-12-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-13-1.png)<!-- -->
 
 ##### Chord Period
 
-![](man/figures/README-unnamed-chunk-13-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-14-1.png)<!-- -->
 
 ##### Frequency Ratios
 
@@ -165,131 +171,41 @@ it easier to see how different the ratios for the two signals will be.
 |------:|----:|----:|---------:|----------:|------------------:|
 |     1 |   1 |   1 | 1.000000 |  261.6256 |          261.6256 |
 |     2 |   5 |   4 | 1.259921 |  329.6276 |          261.6256 |
-|     3 |   2 |   1 | 2.000000 |  523.2511 |          261.6256 |
-|     4 |   5 |   2 | 2.519842 |  659.2551 |          261.6256 |
-|     5 |   3 |   1 | 3.000000 |  784.8767 |          261.6256 |
-|     6 |  15 |   4 | 3.779763 |  988.8827 |          261.6256 |
-|     7 |   4 |   1 | 4.000000 | 1046.5023 |          261.6256 |
-|     8 |   5 |   1 | 5.000000 | 1308.1278 |          261.6256 |
-|     9 |   5 |   1 | 5.039684 | 1318.5102 |          261.6256 |
-|    10 |  19 |   3 | 6.299605 | 1648.1378 |          261.6256 |
+|     3 |   3 |   2 | 1.498307 |  391.9954 |          261.6256 |
+|     4 |   2 |   1 | 2.000000 |  523.2511 |          261.6256 |
+|     5 |   5 |   2 | 2.519842 |  659.2551 |          261.6256 |
+|     6 |   3 |   1 | 2.996614 |  783.9909 |          261.6256 |
+|     7 |   3 |   1 | 3.000000 |  784.8767 |          261.6256 |
+|     8 |  15 |   4 | 3.779763 |  988.8827 |          261.6256 |
+|     9 |   9 |   2 | 4.494921 | 1175.9863 |          261.6256 |
 
 #### Spatial Periodicity
-
-| lcd | chord_Sz | chord_Hz | c_sound |  chord_m |  chord_s |       tol |
-|----:|---------:|---------:|--------:|---------:|---------:|----------:|
-| 420 | 8.714246 | 0.622918 |  431195 | 692217.9 | 1.605348 | 0.0666667 |
-
-##### Partial Wavelengths
-
-![](man/figures/README-unnamed-chunk-16-1.png)<!-- -->
-
-##### Chord Wavelength
-
-![](man/figures/README-unnamed-chunk-17-1.png)<!-- -->
-
-##### Wavelength Ratios
-
-| index | num | den |    ratio |    tone_m | reference_tone_m |
-|------:|----:|----:|---------:|----------:|-----------------:|
-|    10 |   1 |   1 | 1.000000 |  261.6256 |         261.6256 |
-|     9 |   5 |   4 | 1.250000 |  327.0320 |         261.6256 |
-|     8 |   5 |   4 | 1.259921 |  329.6276 |         261.6256 |
-|     7 |   8 |   5 | 1.574901 |  412.0344 |         261.6256 |
-|     6 |   5 |   3 | 1.666667 |  436.0426 |         261.6256 |
-|     5 |  15 |   7 | 2.099868 |  549.3793 |         261.6256 |
-|     4 |   5 |   2 | 2.500000 |  654.0639 |         261.6256 |
-|     3 |  16 |   5 | 3.149803 |  824.0689 |         261.6256 |
-|     2 |   5 |   1 | 5.000000 | 1308.1278 |         261.6256 |
-|     1 |  19 |   3 | 6.299605 | 1648.1378 |         261.6256 |
-
-#### Example Chord: C4 Minor Third Dyad
-
-Below, we estimate the periodicity of the C4 and Eb4 minor third dyad
-with 5 harmonics per pitch.  
-
-For tone ratios, the value of the speed of sound constant does not
-impact the
-
-- Fundamentals in MIDI: 60, 63, 67  
-
-- Number of Harmonics: 5
-
-- Frequencies: 261.6, 311.1, 392.0, 523.3, 622.3, 784.0, 784.9, 933.4,
-  1046.5, 1176.0, 1244.5, 1308.1, 1555.6, 1568.0, 1960.0  
-
-- Speed of Sound: 512780.1
-
-- Wavelengths: 1960.0, 1648.1, 1308.1, 980.0, 824.1, 654.1, 653.3,
-  549.4, 490.0, 436.0, 412.0, 392.0, 329.6, 327.0, 261.6  
-
-#### Temporal Periodicity
 
 | lcd | chord_Sz | chord_Hz |  c_sound |  chord_m |   chord_s |       tol |
 |----:|---------:|---------:|---------:|---------:|----------:|----------:|
-|  60 | 5.906891 | 4.360426 | 512780.1 | 117598.6 | 0.2293354 | 0.0666667 |
-
-##### Partial Periods
-
-![](man/figures/README-unnamed-chunk-21-1.png)<!-- -->
-
-##### Chord Period
-
-![](man/figures/README-unnamed-chunk-22-1.png)<!-- -->
-
-##### Frequency Ratios
-
-| index | num | den |    ratio |   tone_hz | reference_tone_hz |
-|------:|----:|----:|---------:|----------:|------------------:|
-|     1 |   1 |   1 | 1.000000 |  261.6256 |          261.6256 |
-|     2 |   5 |   4 | 1.189207 |  311.1270 |          261.6256 |
-|     3 |   3 |   2 | 1.498307 |  391.9954 |          261.6256 |
-|     4 |   2 |   1 | 2.000000 |  523.2511 |          261.6256 |
-|     5 |   7 |   3 | 2.378414 |  622.2540 |          261.6256 |
-|     6 |   3 |   1 | 2.996614 |  783.9909 |          261.6256 |
-|     7 |   3 |   1 | 3.000000 |  784.8767 |          261.6256 |
-|     8 |  18 |   5 | 3.567621 |  933.3810 |          261.6256 |
-|     9 |   4 |   1 | 4.000000 | 1046.5023 |          261.6256 |
-|    10 |   9 |   2 | 4.494921 | 1175.9863 |          261.6256 |
-|    11 |  19 |   4 | 4.756829 | 1244.5079 |          261.6256 |
-|    12 |   5 |   1 | 5.000000 | 1308.1278 |          261.6256 |
-|    13 |   6 |   1 | 5.946035 | 1555.6349 |          261.6256 |
-|    14 |   6 |   1 | 5.993228 | 1567.9817 |          261.6256 |
-|    15 |  15 |   2 | 7.491535 | 1959.9772 |          261.6256 |
-
-#### Spatial Periodicity
-
-| lcd | chord_Sz | chord_Hz |  c_sound |  chord_m |  chord_s |       tol |
-|----:|---------:|---------:|---------:|---------:|---------:|----------:|
-| 420 | 8.714246 | 0.622918 | 512780.1 | 823190.4 | 1.605348 | 0.0666667 |
+|  20 | 4.321928 | 13.08128 | 307668.1 | 23519.73 | 0.0764451 | 0.0666667 |
 
 ##### Partial Wavelengths
 
-![](man/figures/README-unnamed-chunk-25-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-17-1.png)<!-- -->
 
 ##### Chord Wavelength
 
-![](man/figures/README-unnamed-chunk-26-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-18-1.png)<!-- -->
 
 ##### Wavelength Ratios
 
 | index | num | den |    ratio |    tone_m | reference_tone_m |
 |------:|----:|----:|---------:|----------:|-----------------:|
-|    15 |   1 |   1 | 1.000000 |  261.6256 |         261.6256 |
-|    14 |   5 |   4 | 1.250000 |  327.0320 |         261.6256 |
-|    13 |   5 |   4 | 1.259921 |  329.6276 |         261.6256 |
-|    12 |   3 |   2 | 1.498307 |  391.9954 |         261.6256 |
-|    11 |   8 |   5 | 1.574901 |  412.0344 |         261.6256 |
-|    10 |   5 |   3 | 1.666667 |  436.0426 |         261.6256 |
-|     9 |  11 |   6 | 1.872884 |  489.9943 |         261.6256 |
-|     8 |  15 |   7 | 2.099868 |  549.3793 |         261.6256 |
-|     7 |   5 |   2 | 2.497178 |  653.3257 |         261.6256 |
-|     6 |   5 |   2 | 2.500000 |  654.0639 |         261.6256 |
-|     5 |  16 |   5 | 3.149803 |  824.0689 |         261.6256 |
-|     4 |  15 |   4 | 3.745768 |  979.9886 |         261.6256 |
-|     3 |   5 |   1 | 5.000000 | 1308.1278 |         261.6256 |
-|     2 |  19 |   3 | 6.299605 | 1648.1378 |         261.6256 |
-|     1 |  15 |   2 | 7.491535 | 1959.9772 |         261.6256 |
+|     9 |   1 |   1 | 1.000000 |  261.6256 |         261.6256 |
+|     8 |   5 |   4 | 1.189207 |  311.1270 |         261.6256 |
+|     7 |   3 |   2 | 1.498307 |  391.9954 |         261.6256 |
+|     6 |   3 |   2 | 1.500000 |  392.4383 |         261.6256 |
+|     5 |   7 |   4 | 1.783811 |  466.6905 |         261.6256 |
+|     4 |   9 |   4 | 2.247461 |  587.9932 |         261.6256 |
+|     3 |   3 |   1 | 3.000000 |  784.8767 |         261.6256 |
+|     2 |  18 |   5 | 3.567621 |  933.3810 |         261.6256 |
+|     1 |   9 |   2 | 4.494921 | 1175.9863 |         261.6256 |
 
 ### Finding the Tolerance Values
 
@@ -474,7 +390,7 @@ are also tertiary troughs near the ET intervals.
 |------------------------:|-----------------:|:--------------|:----------|
 |                     0.2 |                2 | 2             | 0.06667   |
 
-![](man/figures/README-unnamed-chunk-50-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-34-1.png)<!-- -->
 
 Performers of instruments with quantized semitones like keyboards and
 fretted strings–especially beginners and their audiences–are aware that
