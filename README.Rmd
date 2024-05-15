@@ -169,27 +169,43 @@ p = params %>% purrr::map(\(p) {
     temporal_tolerance      = paste(round(chords$temporal_tolerance %>% unique, 5), collapse = ' '),
     smoothing_sigma         = sigma
   )))
-  print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),
+  
+  z_chords = chords
+  t = z_scores(chords$temporal_consonance)
+  s = z_scores(chords$spatial_consonance)
+  z_chords['temporal_consonance'] = t
+  z_chords['spatial_consonance'] = s
+  z_chords['consonance_dissonance'] = t + s
+  z_chords['major_minor'] = t - s
+
+  print(plot_semitone_codi(z_chords, paste('Consonance-Dissonance'),
+                           goal=experiment,sigma=sigma,
+                           black_vlines=black_vlines,gray_vlines=gray_vlines))
+  cat("  \n")
+
+  # print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),
+  #                          goal=experiment,sigma=sigma,
+  #                          black_vlines=black_vlines,gray_vlines=gray_vlines))
+  # cat("  \n")
+  
+  print(plot_semitone_cowave.cofreq(z_chords, title='Spatial-Consonance Temporal-Consonance'))
+  cat("  \n")
+  
+  print(plot_semitone_mami(z_chords, paste('Major-Minor'),
                            goal=experiment,sigma=sigma,
                            black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")
   
-  print(plot_semitone_cowave.cofreq(chords, title='Spatial-Consonance Temporal-Consonance'))
-  cat("  \n")
-
-  print(plot_semitone_mami(chords, paste('Major-Minor'),
-                           goal=experiment,sigma=sigma,
-                           black_vlines=black_vlines,gray_vlines=gray_vlines))
-  cat("  \n")
-
-  print(plot_cofreq.cowave(chords, title='Spatial-Consonance Temporal-Consonance'))
-  cat("  \n")
-
-  print(plot_mami.codi(chords, title='Major-Minor Consonance-Dissonance'))
-  cat("  \n")
-
-  
-  
+  # print(plot_semitone_mami(chords, paste('Major-Minor'),
+  #                          goal=experiment,sigma=sigma,
+  #                          black_vlines=black_vlines,gray_vlines=gray_vlines))
+  # cat("  \n")
+  # 
+  # print(plot_cofreq.cowave(chords, title='Spatial-Consonance Temporal-Consonance'))
+  # cat("  \n")
+  # 
+  # print(plot_mami.codi(chords, title='Major-Minor Consonance-Dissonance'))
+  # cat("  \n")
   
 })
 ```

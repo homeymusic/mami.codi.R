@@ -32,7 +32,7 @@ colors_homey <- list(
   'gray'              = '#C0C0C0'
 )
 color_factor_homey <- function(x,column_name) {
-  cut(x[[column_name]],c(-Inf,-2,2,Inf),labels=c("minor","neutral","major"))
+  cut(x[[column_name]],c(-Inf,-1e-6,1e-6,Inf),labels=c("minor","neutral","major"))
 }
 color_values_homey <- function() {
   c("minor"=colors_homey$minor,"neutral"=colors_homey$fundamental,"major"=colors_homey$major)
@@ -212,6 +212,43 @@ plot_semitone_codi <- function(chords, title='', include_line=T, sigma=0.2,
                                include_points=T,
                                include_linear_regression = F, goal=NULL,
                                black_vlines=c(),gray_vlines=c()) {
+  chords$smoothed.consonance_dissonance = smoothed(chords$semitone,
+                                                   chords$consonance_dissonance_z,
+                                                   sigma)
+
+  ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone,
+                                       y = .data$consonance_dissonance_z)) +
+    ggplot2::geom_vline(xintercept = black_vlines, color=colors_homey$highlight) +
+    ggplot2::geom_vline(xintercept = gray_vlines,color=colors_homey$highlight,linetype = 'dotted') +
+    { if (include_points)
+      ggplot2::geom_point(shape=21, stroke=NA, size=1,
+                          ggplot2::aes(fill=color_factor_homey(chords,'major_minor')))
+    } +
+    { if (include_linear_regression) ggplot2::stat_smooth(method=lm)} +
+    { if (include_line)
+      ggplot2::geom_line(data=chords,
+                         ggplot2::aes(x = semitone,
+                                      y = smoothed.consonance_dissonance,
+                                      color=color_factor_homey(chords,'major_minor'),
+                                      group=1), linewidth = 1)} +
+    {if (!is.null(goal))
+      ggplot2::geom_line(data=goal,
+                         color    = colors_homey$neutral,
+                         ggplot2::aes(x = semitone,
+                                      y = consonance_dissonance,
+                                      group=1), linewidth = 0.5)} +
+    ggplot2::scale_fill_manual(values=color_values_homey(), guide="none") +
+    ggplot2::scale_color_manual(values=color_values_homey(), guide='none') +
+    ggplot2::ggtitle(title) +
+    ggplot2::scale_x_continuous(breaks = -15:15,
+                                minor_breaks = c()) +
+    ggplot2::ylab('Consonance-Dissonance Z-Score') +
+    theme_homey()
+}
+plot_semitone_zscore_sum <- function(chords, title='', include_line=T, sigma=0.2,
+                                     include_points=T,
+                                     include_linear_regression = F, goal=NULL,
+                                     black_vlines=c(),gray_vlines=c()) {
   chords$smoothed.consonance_dissonance = smoothed(chords$semitone,
                                                    chords$consonance_dissonance_z,
                                                    sigma)
