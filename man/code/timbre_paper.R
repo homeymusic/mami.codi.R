@@ -157,8 +157,10 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
     spatial_tolerance  = mami.codi.R::default_tolerance('spatial','micro')
     temporal_tolerance = mami.codi.R::default_tolerance('temporal', 'micro')
   } else {
-    spatial_tolerance  = mami.codi.R::default_tolerance('spatial','macro')
-    temporal_tolerance = mami.codi.R::default_tolerance('temporal', 'macro')
+    # spatial_tolerance  = mami.codi.R::default_tolerance('spatial','macro')
+    spatial_tolerance  = 0.031
+    # temporal_tolerance = mami.codi.R::default_tolerance('temporal', 'macro')
+    temporal_tolerance = 0.095
   }
 
   mami.codi.R::mami.codi(study_chord,
