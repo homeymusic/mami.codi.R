@@ -1,16 +1,16 @@
 devtools::load_all(".")
 
-search_label = 'Harmonic'
+search_label = 'Bonang'
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # tolerances   = 10^-(1:10)
   tolerances   = c(1 %o% 10^(-8:-1), default_tolerance('macro')) %>% sort()
 } else {
 
   # Space Detail Harmonic
-  from_tol     = 0.02
-  to_tol       = 0.04
-  by_tol       = 0.001
-  tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
+  # from_tol     = 0.02
+  # to_tol       = 0.04
+  # by_tol       = 0.001
+  # tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
 
   # Time Detail Harmonic
   # from_tol     = 0.08
@@ -19,7 +19,7 @@ if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
 
   # Orders of Magnitude
-  # tolerances   = c(1:9 %o% 10^(-2:-1))
+  tolerances   = c(1:9 %o% 10^(-2:-1))
 
 }
 
