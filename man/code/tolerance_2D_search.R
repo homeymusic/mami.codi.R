@@ -1,4 +1,4 @@
-search_label = 'Harmonic'
+search_label = '5PartialsNo3'
 devtools::load_all(".")
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # tolerances   = 10^-(1:10)
@@ -134,8 +134,9 @@ data = grid %>% furrr::future_pmap_dfr(\(
 
   mami.codi.R::mami.codi(
     chord,
-    temporal_tolerance  = temporal_tolerance,
-    spatial_tolerance = spatial_tolerance,
+    temporal_tolerance = temporal_tolerance,
+    spatial_tolerance  = spatial_tolerance,
+    min_amplitude      = 0,
     metadata       = list(
       octave_ratio   = octave_ratio,
       num_harmonics  = global_num_harmonics,

@@ -1,7 +1,7 @@
 Tolerance 2D Search
 ================
 
-# Harmonic
+# 5PartialsNo3
 
 Tolerances:
 
