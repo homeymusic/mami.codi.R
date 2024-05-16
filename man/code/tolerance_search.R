@@ -1,14 +1,14 @@
 devtools::load_all(".")
 
-search_label = '5Partials'
+search_label = 'Harmonic'
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # tolerances   = 10^-(1:10)
   tolerances   = c(1 %o% 10^(-8:-1), default_tolerance('macro')) %>% sort()
 } else {
 
   # Detailed
-  from_tol     = 0.06
-  to_tol       = 0.08
+  from_tol     = 0.04
+  to_tol       = 0.07
   by_tol       = 0.001
   tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
 
@@ -22,13 +22,6 @@ source('./utils.R')
 devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 
 library(mami.codi.R)
-
-P8 <- c(tonic_midi,72) %>% mami.codi.R::mami.codi(verbose=T)
-if (P8$tolerance == mami.codi.R::default_tolerance('macro')) {
-  print("Seems to be the correct version mami.codi.R")
-} else {
-  stop("This is not the expected version of mami.codi.R")
-}
 
 num_harmonics = 10
 octave_ratio  = 2.0
@@ -113,7 +106,8 @@ data = grid %>% furrr::future_pmap_dfr(\(
 
   mami.codi.R::mami.codi(
     chord,
-    tolerance  = tolerance,
+    spatial_tolerance  = tolerance,
+    teemporal_tolerance  = tolerance,
     metadata       = list(
       octave_ratio   = octave_ratio,
       num_harmonics  = num_harmonics,

@@ -21,8 +21,8 @@
 mami.codi <- function(
     x,
     min_amplitude      = MIN_AMPLITUDE,
-    spatial_tolerance  = SPATIAL_TOLERANCE,
-    temporal_tolerance = TEMPORAL_TOLERANCE,
+    spatial_tolerance  = TOLERANCE,
+    temporal_tolerance = TOLERANCE,
     metadata           = NA,
     verbose            = FALSE,
     ...
@@ -176,12 +176,8 @@ format_output <- function(x, metadata, verbose) {
 
 lcm <- function(x) Reduce(numbers::LCM, x)
 
-SPATIAL_TOLERANCE  = 0.065
-TEMPORAL_TOLERANCE = 0.05
-
-PURE_SPATIAL_TOLERANCE  = 0.08
-PURE_TEMPORAL_TOLERANCE = 0.03
-
+TOLERANCE       = 0.05
+PURE_TOLERANCE  = TOLERANCE / 2
 MICRO_TOLERANCE = 1e-04
 
 MIN_AMPLITUDE   = 0.03

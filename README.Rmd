@@ -257,8 +257,10 @@ p = params %>% purrr::map(\(p) {
                            goal=experiment,sigma=sigma,
                            black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")
-  print(plot_semitone_cowave.cofreq(chords, paste('Spatial and Temporal Consonance'),
+  
+  print(plot_semitone_spatial_temporal(chords, paste('Spatial and Temporal Consonance'),
                                     goal=experiment,sigma=sigma,
+                                    dashed_minor=T,
                                     black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")
 })
