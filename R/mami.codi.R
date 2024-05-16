@@ -9,7 +9,8 @@
 #' helpful for analysis and plots
 #' @param verbose Determines the amount of data to return from chord evaluation
 #' TRUE is all and FALSE is just major-minor, consonance-dissonance, tolerance and metadata.
-#' @param tolerance An optional tolerance value for creating rational fractions
+#' @param spatial_tolerance An optional tolerance value for creating rational fractions for spatial signals
+#' @param temporal_tolerance An optional tolerance value for creating rational fractions for temporal signals
 #' @param ... parameters for hrep::sparse_fr_spectrum
 #'
 #' @return Major-Minor and Consonance-Dissonance plus additional information
@@ -19,17 +20,21 @@
 #' @export
 mami.codi <- function(
     x,
-    min_amplitude = MIN_AMPLITUDE,
-    tolerance     = TOLERANCE,
-    metadata      = NA,
-    verbose       = FALSE,
+    min_amplitude      = MIN_AMPLITUDE,
+    spatial_tolerance  = SPATIAL_TOLERANCE,
+    temporal_tolerance = TEMPORAL_TOLERANCE,
+    metadata           = NA,
+    verbose            = FALSE,
     ...
 ) {
 
-  parse_input(x, ...)               %>%
-    analyze_spectrum(min_amplitude) %>%
-    process_pseudo_octave()         %>%
-    predict_consonance(tolerance)   %>%
+  parse_input(x, ...)                %>%
+    analyze_spectrum(min_amplitude)  %>%
+    process_pseudo_octave()          %>%
+    predict_consonance(
+      spatial_tolerance,
+      temporal_tolerance
+    )                                %>%
     format_output(metadata, verbose)
 
 }
@@ -97,32 +102,34 @@ process_pseudo_octave= function(x) {
 
 predict_consonance <- function(
     x,
-    tolerance
+    spatial_tolerance,
+    temporal_tolerance
 ) {
 
   f = x$frequencies[[1]]
   l = x$wavelengths[[1]]
 
   x <- x %>% dplyr::mutate(
-    # estimate the frequency cycle
-    estimate_cycle(f,
-                   x$pseudo_octave,
-                   tolerance) %>%
-      dplyr::rename_with(~ paste0('frequency_',.)),
-
-    # estimate the wavelength cycle
+    # estimate the spatial cycle
     estimate_cycle(l,
                    x$pseudo_octave,
-                   tolerance) %>%
-      dplyr::rename_with(~ paste0('wavelength_',.)),
+                   spatial_tolerance) %>%
+      dplyr::rename_with(~ paste0('spatial_',.)),
+
+    # estimate the temporal cycle
+    estimate_cycle(f,
+                   x$pseudo_octave,
+                   temporal_tolerance) %>%
+      dplyr::rename_with(~ paste0('temporal_',.)),
 
     consonance_dissonance =
-      .data$frequency_consonance + .data$wavelength_consonance,
+      .data$temporal_consonance + .data$spatial_consonance,
 
     major_minor =
-      .data$frequency_consonance - .data$wavelength_consonance,
+      .data$temporal_consonance - .data$spatial_consonance,
 
-    tolerance
+    spatial_tolerance,
+    temporal_tolerance
 
   )
 
@@ -160,7 +167,8 @@ format_output <- function(x, metadata, verbose) {
     x %>%
       dplyr::select('major_minor',
                     'consonance_dissonance',
-                    'tolerance',
+                    'spatial_tolerance',
+                    'temporal_tolerance',
                     'min_amplitude',
                     'metadata')
   }
@@ -168,7 +176,11 @@ format_output <- function(x, metadata, verbose) {
 
 lcm <- function(x) Reduce(numbers::LCM, x)
 
-TOLERANCE       = 2/3 * 1e-01
+SPATIAL_TOLERANCE  = 0.065
+TEMPORAL_TOLERANCE = 0.05
+
+PURE_SPATIAL_TOLERANCE  = 0.08
+PURE_TEMPORAL_TOLERANCE = 0.03
 
 MICRO_TOLERANCE = 1e-04
 
@@ -179,31 +191,3 @@ SPEED_OF_SOUND  = 343
 ZARLINO         = 50
 
 SMALLEST_POSSIBLE = .Machine$double.xmin
-
-#' Default Tolerance
-#'
-#'
-#' @return Default tolerance
-#'
-#' @rdname default_tolerance
-#' @export
-default_tolerance <- function(scale) {
-  if (scale == 'macro') {
-    TOLERANCE
-  } else if (scale == 'micro') {
-    MICRO_TOLERANCE
-  } else {
-    stop("no default tolerance for selection")
-  }
-}
-
-#' Default Minimum Amplitude
-#'
-#'
-#' @return Default tolerance
-#'
-#' @rdname default_min_amplitude
-#' @export
-default_min_amplitude <- function() {
-  MIN_AMPLITUDE
-}

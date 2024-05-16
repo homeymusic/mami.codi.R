@@ -6,13 +6,6 @@ devtools::load_all(".")
 
 tonic_midi = 60
 
-P8 <- c(tonic_midi,72) %>% mami.codi.R::mami.codi(verbose=T)
-if (P8$tolerance == mami.codi.R::default_tolerance('macro')) {
-  print("Seems to be the correct version mami.codi.R")
-} else {
-  stop("This is not the expected version of mami.codi.R")
-}
-
 output.rds = '../data/timbre_paper.rds'
 prepare(output.rds)
 
@@ -153,13 +146,19 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
   }
 
   if (scale=='M3' || scale=='M6' || scale=='P8') {
-    tolerance  = mami.codi.R::default_tolerance('micro')
+    spatial_tolerance  = 1e-04
+    temporal_tolerance = spatial_tolerance
+  } else if (scale=='Pure') {
+    spatial_tolerance  = 0.08
+    temporal_tolerance = 0.03
   } else {
-    tolerance  = mami.codi.R::default_tolerance('macro')
+    spatial_tolerance  = 0.065
+    temporal_tolerance = 0.05
   }
 
   mami.codi.R::mami.codi(study_chord,
-                         tolerance  = tolerance,
+                         spatial_tolerance=spatial_tolerance,
+                         temporal_tolerance=temporal_tolerance,
                          metadata = list(
                            num_harmonics = num_harmonics,
                            octave_ratio  = octave_ratio,
