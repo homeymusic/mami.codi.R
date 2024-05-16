@@ -7,7 +7,7 @@ using namespace Rcpp;
  //'
  //' Stern-Brocot: find the highest fundamental freq
  //'
- //' @param r Number to convert to fraction
+ //' @param x Number to convert to fraction
  //' @param tolerance Tolerance for converting
  //'
  //' @return A ratio of num / den
@@ -59,9 +59,8 @@ using namespace Rcpp;
  //' Creates a list of ratios as rational fractions
  //'
  //' @param x Chord values
- //' @param reference Reference value
- //' @param tolerance A vector with two values for the upper and lower tolerance.
  //' @param pseudo_octave Factor for calculating stretched and compressed ratios.
+ //' @param tolerance A vector with two values for the upper and lower tolerance.
  //'
  //' @return A data frame of numerators and denominators
  //'
@@ -125,7 +124,7 @@ using namespace Rcpp;
    }
  }
 
- //' listen_for_highest_fundamental
+ //' analyze_harmonics
  //'
  //' Find the highest fundamental freq
  //'
