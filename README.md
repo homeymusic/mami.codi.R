@@ -234,47 +234,6 @@ Jacoby.
 
 ### Manipulating harmonic frequencies
 
-#### Dyads spanning 15 semitones
-
-##### Harmonic ~ Partials: 10
-
-For 10 harmonics, behavioral results and theoretical predictions agree.
-
-| detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
-| 2                      | 0.03                    | 0.05              | 0.05               |             0.2 |
-
-![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-2.png)<!-- -->
-
-##### 5Partials ~ Partials: 5
-
-For 5 harmonics, behavioral results and theoretical predictions agree.
-For comparison with the study below (5 partils with the third partial
-deleted), notice that the m3 peak is only slightly lower than the M3
-peak.
-
-| detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
-| 2                      | 0.03                    | 0.05              | 0.05               |             0.2 |
-
-![](man/figures/README-unnamed-chunk-5-3.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-4.png)<!-- -->
-
-##### 5PartialsNo3 ~ Partials: 5
-
-For 5 harmonics with the 3rd partial deleted, behavioral results and
-theoretical predictions mostly agree. As expected, the m3 peak without
-the third partial is now lower than the m3 peak with all 5 harmonics
-while the M3 peak is slightly higher without the 3rd partial.
-
-| detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
-| 2                      | 0.03                    | 0.05              | 0.05               |             0.2 |
-
-![](man/figures/README-unnamed-chunk-5-5.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-6.png)<!-- -->
-
 ##### Pure ~ Partials: 1
 
 For pure tones, the behavioral results and the theoretical predictions
@@ -284,37 +243,12 @@ the 15 semitones but the overall peak structure agrees with MaMi.CoDi
 predictions. For futher comparison, the theoretical predictions for
 major-minor versus the behavioral results are included in a plot below.
 
-| detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
-| 2                      | 0.03                    | 0.025             | 0.025              |             0.2 |
+| detected_pseudo_octave | min_amplitude | spatial_tolerance | temporal_tolerance | smoothing_sigma |
+|:-----------------------|:--------------|:------------------|:-------------------|----------------:|
+| 2                      | 0.03          | 0.025             | 0.025              |             0.2 |
 
-![](man/figures/README-unnamed-chunk-5-7.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-8.png)<!-- -->
-
-##### Stretched ~ Partials: 10
-
-For stretched harmonics, behavioral results and theoretical predictions
-mostly agree. MaMi.Codi predicts peaks with minor polarity just above m3
-and m7 that do not exist in the behavioral results.
-
-| detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
-| 2.1                    | 0.03                    | 0.05              | 0.05               |             0.2 |
-
-![](man/figures/README-unnamed-chunk-5-9.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-10.png)<!-- -->
-
-##### Compressed ~ Partials: 10
-
-For compressed harmonics, the pronounced behavioral peaks mostly agree
-with the theoretical peaks.
-
-| detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
-| 1.9                    | 0.03                    | 0.05              | 0.05               |             0.2 |
-
-![](man/figures/README-unnamed-chunk-5-11.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-12.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-2.png)<!-- -->
 
 ##### Bonang ~ Partials: 4
 
@@ -324,9 +258,75 @@ predicts a dissonance trough with minor polarity at P4 that is not in
 the behavioral results. MaMi.CoDi predicts P5 to have minor polarity and
 be relatively higher than the behavioral results.
 
-| detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
-| 2                      | 0.03                    | 0.05              | 0.05               |             0.2 |
+| detected_pseudo_octave | min_amplitude | spatial_tolerance | temporal_tolerance | smoothing_sigma |
+|:-----------------------|:--------------|:------------------|:-------------------|----------------:|
+| 2                      | 0.03          | 0.05              | 0.05               |             0.2 |
+
+![](man/figures/README-unnamed-chunk-5-3.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-4.png)<!-- -->
+
+##### 5Partials ~ Partials: 5
+
+For 5 harmonics, behavioral results and theoretical predictions agree.
+For comparison with the study below (5 partils with the third partial
+deleted), notice that the m3 peak is only slightly lower than the M3
+peak.
+
+| detected_pseudo_octave | min_amplitude | spatial_tolerance | temporal_tolerance | smoothing_sigma |
+|:-----------------------|:--------------|:------------------|:-------------------|----------------:|
+| 2                      | 0.03          | 0.05              | 0.05               |             0.2 |
+
+![](man/figures/README-unnamed-chunk-5-5.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-6.png)<!-- -->
+
+##### 5PartialsNo3 ~ Partials: 5
+
+For 5 harmonics with the 3rd partial deleted, behavioral results and
+theoretical predictions mostly agree. As expected, the m3 peak without
+the third partial is now lower than the m3 peak with all 5 harmonics
+while the M3 peak is slightly higher without the 3rd partial.
+
+| detected_pseudo_octave | min_amplitude | spatial_tolerance | temporal_tolerance | smoothing_sigma |
+|:-----------------------|:--------------|:------------------|:-------------------|----------------:|
+| 2                      | 0.03          | 0.05              | 0.05               |             0.2 |
+
+![](man/figures/README-unnamed-chunk-5-7.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-8.png)<!-- -->
+
+#### Dyads spanning 15 semitones
+
+##### Harmonic ~ Partials: 10
+
+For 10 harmonics, behavioral results and theoretical predictions agree.
+
+| detected_pseudo_octave | min_amplitude | spatial_tolerance | temporal_tolerance | smoothing_sigma |
+|:-----------------------|:--------------|:------------------|:-------------------|----------------:|
+| 2                      | 0.03          | 0.05              | 0.05               |             0.2 |
+
+![](man/figures/README-unnamed-chunk-5-9.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-10.png)<!-- -->
+
+##### Stretched ~ Partials: 10
+
+For stretched harmonics, behavioral results and theoretical predictions
+mostly agree. MaMi.Codi predicts peaks with minor polarity just above m3
+and m7 that do not exist in the behavioral results.
+
+| detected_pseudo_octave | min_amplitude | spatial_tolerance | temporal_tolerance | smoothing_sigma |
+|:-----------------------|:--------------|:------------------|:-------------------|----------------:|
+| 2.1                    | 0.03          | 0.05              | 0.05               |             0.2 |
+
+![](man/figures/README-unnamed-chunk-5-11.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-12.png)<!-- -->
+
+##### Compressed ~ Partials: 10
+
+For compressed harmonics, the pronounced behavioral peaks mostly agree
+with the theoretical peaks.
+
+| detected_pseudo_octave | min_amplitude | spatial_tolerance | temporal_tolerance | smoothing_sigma |
+|:-----------------------|:--------------|:------------------|:-------------------|----------------:|
+| 1.9                    | 0.03          | 0.05              | 0.05               |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-13.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-14.png)<!-- -->
@@ -337,9 +337,9 @@ be relatively higher than the behavioral results.
 
 Description is below.
 
-| detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
-| 2                      | 0.03                    | 1e-04             | 1e-04              |           0.035 |
+| detected_pseudo_octave | min_amplitude | spatial_tolerance | temporal_tolerance | smoothing_sigma |
+|:-----------------------|:--------------|:------------------|:-------------------|----------------:|
+| 2                      | 0.03          | 1e-04             | 1e-04              |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-5-15.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-16.png)<!-- -->
@@ -348,9 +348,9 @@ Description is below.
 
 Description is below.
 
-| detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
-| 2                      | 0.03                    | 1e-04             | 1e-04              |           0.035 |
+| detected_pseudo_octave | min_amplitude | spatial_tolerance | temporal_tolerance | smoothing_sigma |
+|:-----------------------|:--------------|:------------------|:-------------------|----------------:|
+| 2                      | 0.03          | 1e-04             | 1e-04              |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-5-17.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-18.png)<!-- -->
@@ -359,9 +359,9 @@ Description is below.
 
 Description is below.
 
-| detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
-|:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
-| 2                      | 0.03                    | 1e-04             | 1e-04              |           0.035 |
+| detected_pseudo_octave | min_amplitude | spatial_tolerance | temporal_tolerance | smoothing_sigma |
+|:-----------------------|:--------------|:------------------|:-------------------|----------------:|
+| 2                      | 0.03          | 1e-04             | 1e-04              |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-5-19.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-20.png)<!-- -->

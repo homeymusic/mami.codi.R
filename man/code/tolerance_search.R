@@ -1,9 +1,8 @@
 devtools::load_all(".")
 
-search_label = 'Harmonic'
+search_label = 'M3'
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
-  # tolerances   = 10^-(1:10)
-  tolerances   = c(1 %o% 10^(-8:-1), default_tolerance('macro')) %>% sort()
+  tolerances   = c(1 %o% 10^(-8:-1))
 } else {
 
   # Detailed
@@ -107,7 +106,7 @@ data = grid %>% furrr::future_pmap_dfr(\(
   mami.codi.R::mami.codi(
     chord,
     spatial_tolerance  = tolerance,
-    teemporal_tolerance  = tolerance,
+    temporal_tolerance  = tolerance,
     metadata       = list(
       octave_ratio   = octave_ratio,
       num_harmonics  = num_harmonics,

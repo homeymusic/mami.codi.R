@@ -144,13 +144,13 @@ dyads <- timbre_paper %>% dplyr::rowwise() %>% dplyr::mutate(
 
 ```{r, fig.height=8, fig.width=12, echo=F, results='asis', message=F}
 params = list(
-  list(h=10,o=2.0,s='macro'),
-  list(h=5, o=2.0,s='macro'),
-  list(h=5,o=2,s='5PartialsNo3'),
   list(h=1, o=2.0,s='Pure'),
+  list(h=4, o=2.0,s='Bonang'),
+  list(h=5, o=2.0,s='macro'),
+  list(h=5, o=2.0,s='5PartialsNo3'),
+  list(h=10,o=2.0,s='macro'),
   list(h=10,o=2.1,s='macro'),
   list(h=10,o=1.9,s='macro'),
-  list(h=4,o=2,s='Bonang'),
   list(h=10,o=2.0,s='M3'),
   list(h=10,o=2.0,s='M6'),
   list(h=10,o=2.0,s='P8')
@@ -248,7 +248,7 @@ p = params %>% purrr::map(\(p) {
   cat(description)
   print(knitr::kable(tibble::tibble_row(
     detected_pseudo_octave  = paste(round(chords$pseudo_octave %>% unique, 2), collapse = ' '),
-    ignore_amplitudes_below = paste(round(chords$min_amplitude %>% unique, 2), collapse = ' '),
+    min_amplitude           = paste(round(chords$min_amplitude %>% unique, 2), collapse = ' '),
     spatial_tolerance       = paste(round(chords$spatial_tolerance %>% unique, 5), collapse = ' '),
     temporal_tolerance      = paste(round(chords$temporal_tolerance %>% unique, 5), collapse = ' '),
     smoothing_sigma         = sigma
