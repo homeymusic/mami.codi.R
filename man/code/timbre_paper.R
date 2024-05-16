@@ -156,11 +156,15 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
   if (scale=='M3' || scale=='M6' || scale=='P8') {
     spatial_tolerance  = mami.codi.R::default_tolerance('spatial','micro')
     temporal_tolerance = mami.codi.R::default_tolerance('temporal', 'micro')
-  } else {
-    # spatial_tolerance  = mami.codi.R::default_tolerance('spatial','macro')
+  } else if (scale=='Pure') {
     spatial_tolerance  = 0.08
     # temporal_tolerance = mami.codi.R::default_tolerance('temporal', 'macro')
-    temporal_tolerance = 0.06
+    temporal_tolerance = 0.03
+  } else {
+    # spatial_tolerance  = mami.codi.R::default_tolerance('spatial','macro')
+    spatial_tolerance  = 0.065
+    # temporal_tolerance = mami.codi.R::default_tolerance('temporal', 'macro')
+    temporal_tolerance = 0.05
   }
 
   mami.codi.R::mami.codi(study_chord,

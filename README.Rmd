@@ -178,16 +178,17 @@ p = params %>% purrr::map(\(p) {
   z_chords['consonance_dissonance'] = t + s
   z_chords['major_minor'] = t - s
 
-  print(plot_semitone_codi(z_chords, paste('Consonance-Dissonance'),
-                           goal=experiment,sigma=sigma,
-                           black_vlines=black_vlines,gray_vlines=gray_vlines))
-  cat("  \n")
-
   print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),
                            goal=experiment,sigma=sigma,
                            black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")
   
+
+  # print(plot_semitone_codi(z_chords, paste('Consonance-Dissonance Z'),
+  #                          goal=experiment,sigma=sigma,
+  #                          black_vlines=black_vlines,gray_vlines=gray_vlines))
+  # cat("  \n")
+
   print(plot_semitone_cowave.cofreq(z_chords, title='Spatial-Consonance Temporal-Consonance',
                                     black_vlines=black_vlines))
   cat("  \n")

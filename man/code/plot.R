@@ -680,7 +680,7 @@ plot_semitone_codi_raw <- function(theory_raw,
     ggplot2::ggtitle(title) +
     ggplot2::scale_x_continuous(breaks = 0:15,
                                 minor_breaks = c()) +
-    ggplot2::ylab('Consonance-Dissonance Z-Score') +
+    ggplot2::ylab('Consonance-Dissonance') +
     theme_homey()
 }
 plot_semitone_codi_2_smooth <- function(chords, title='', include_line=T,

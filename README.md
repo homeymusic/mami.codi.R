@@ -36,12 +36,11 @@ For 10 harmonics, behavioral results and theoretical predictions agree.
 
 | detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
-| 2                      | 0.03                    | 0.08              | 0.06               |             0.2 |
+| 2                      | 0.03                    | 0.065             | 0.05               |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-2.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-3.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-4.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-3.png)<!-- -->
 
 ##### 5Partials ~ Partials: 5
 
@@ -52,12 +51,11 @@ peak.
 
 | detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
-| 2                      | 0.03                    | 0.08              | 0.06               |             0.2 |
+| 2                      | 0.03                    | 0.065             | 0.05               |             0.2 |
 
+![](man/figures/README-unnamed-chunk-4-4.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-5.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-6.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-7.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-8.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-6.png)<!-- -->
 
 ##### 5PartialsNo3 ~ Partials: 5
 
@@ -68,12 +66,11 @@ while the M3 peak is slightly higher without the 3rd partial.
 
 | detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
-| 2                      | 0.03                    | 0.08              | 0.06               |             0.2 |
+| 2                      | 0.03                    | 0.065             | 0.05               |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-9.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-10.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-11.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-12.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-7.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-4-8.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-4-9.png)<!-- -->
 
 ##### Pure ~ Partials: 1
 
@@ -86,12 +83,11 @@ major-minor versus the behavioral results are included in a plot below.
 
 | detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
-| 2                      | 0.03                    | 0.08              | 0.06               |             0.2 |
+| 2                      | 0.03                    | 0.08              | 0.03               |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-13.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-14.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-15.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-16.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-10.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-4-11.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-4-12.png)<!-- -->
 
 ##### Stretched ~ Partials: 10
 
@@ -101,12 +97,11 @@ and m7 that do not exist in the behavioral results.
 
 | detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
-| 2.1                    | 0.03                    | 0.08              | 0.06               |             0.2 |
+| 2.1                    | 0.03                    | 0.065             | 0.05               |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-17.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-18.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-19.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-20.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-13.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-4-14.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-4-15.png)<!-- -->
 
 ##### Compressed ~ Partials: 10
 
@@ -115,12 +110,11 @@ with the theoretical peaks.
 
 | detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
-| 1.9                    | 0.03                    | 0.08              | 0.06               |             0.2 |
+| 1.9                    | 0.03                    | 0.065             | 0.05               |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-21.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-22.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-23.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-24.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-16.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-4-17.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-4-18.png)<!-- -->
 
 ##### Bonang ~ Partials: 4
 
@@ -132,12 +126,11 @@ be relatively higher than the behavioral results.
 
 | detected_pseudo_octave | ignore_amplitudes_below | spatial_tolerance | temporal_tolerance | smoothing_sigma |
 |:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
-| 2                      | 0.03                    | 0.08              | 0.06               |             0.2 |
+| 2                      | 0.03                    | 0.065             | 0.05               |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-25.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-26.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-27.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-28.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-19.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-4-20.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-4-21.png)<!-- -->
 
 #### Dyads spanning 1 quarter tone
 
@@ -149,10 +142,9 @@ Description is below.
 |:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
 | 2                      | 0.03                    | 1e-04             | 1e-04              |           0.035 |
 
-![](man/figures/README-unnamed-chunk-4-29.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-30.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-31.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-32.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-22.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-4-23.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-4-24.png)<!-- -->
 
 ##### M6 ~ Partials: 10
 
@@ -162,10 +154,9 @@ Description is below.
 |:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
 | 2                      | 0.03                    | 1e-04             | 1e-04              |           0.035 |
 
-![](man/figures/README-unnamed-chunk-4-33.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-34.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-35.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-36.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-25.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-4-26.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-4-27.png)<!-- -->
 
 ##### P8 ~ Partials: 10
 
@@ -175,10 +166,9 @@ Description is below.
 |:-----------------------|:------------------------|:------------------|:-------------------|----------------:|
 | 2                      | 0.03                    | 1e-04             | 1e-04              |           0.035 |
 
-![](man/figures/README-unnamed-chunk-4-37.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-38.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-39.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-40.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-28.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-4-29.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-4-30.png)<!-- -->
 
 ### TODO: run the in-depth tolerance searches again for M3, M6 and P8
 

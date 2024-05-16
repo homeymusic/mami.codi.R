@@ -1,4 +1,4 @@
-search_label = '5PartialsNo3'
+search_label = 'Compressed'
 devtools::load_all(".")
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # tolerances   = 10^-(1:10)
@@ -12,19 +12,34 @@ if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
 
   # Orders of Magnitude
-  # tolerances   = c(1:9 %o% 10^(-2:-2)) %>% rev()
-  # spatial_tolerance  = tolerances
-  # temporal_tolerance = tolerances
+  tolerances   = c(1:9 %o% 10^(-2:-2)) %>% rev()
+  spatial_tolerance  = tolerances
+  temporal_tolerance = tolerances
 
   # Zoomed in Harmonic
   # space 0.056 to 0.072
-  spatial_tolerance  = seq(from=0.02, to=0.07, by=0.005)
+  # spatial_tolerance  = seq(from=0.045, to=0.065, by=0.001)
   # time 0.068 to 0.093
-  temporal_tolerance = seq(from=0.02, to=0.07, by=0.005)
+  # temporal_tolerance = seq(from=0.045, to=0.065, by=0.001)
+
+  # CURRENT LEADER:
+  # t: 0.05 l: 0.065
+
+  # PURE:
+  # 1/2 t and 2.0 l
+  # t: 0.03 and l: 0.08
+
+  # for Pure: space: 0.065 time: 0.045
+  # ideally nudge time down and space up
+  # do space: 0.065 and time 0.50
+
+  # for Harmonic space: 0.063 time: 0.051
+
 
   # for Bonang time  0.02 to 0.05
   # for Bonang space 0.02 to 0.07
 
+  # for Harmonic space:  time:
   # for Harmonic time > 0.05
 }
 
