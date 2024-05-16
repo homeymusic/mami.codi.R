@@ -1,4 +1,4 @@
-search_label = 'Bonang'
+search_label = 'Harmonic'
 devtools::load_all(".")
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # tolerances   = 10^-(1:10)
@@ -16,12 +16,16 @@ if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # spatial_tolerance  = tolerances
   # temporal_tolerance = tolerances
 
-  # Zoomed in Bonang
-  spatial_tolerance  = seq(from=0.075, to=0.08, by=0.005)
-  temporal_tolerance = seq(from=0.055, to=0.08, by=0.005)
+  # Zoomed in Harmonic
+  # space 0.056 to 0.072
+  spatial_tolerance  = seq(from=0.02, to=0.07, by=0.005)
+  # time 0.068 to 0.093
+  temporal_tolerance = seq(from=0.02, to=0.07, by=0.005)
 
-  # for Bonang l > 0.07
-  # for Harmonic f > 0.05
+  # for Bonang time  0.02 to 0.05
+  # for Bonang space 0.02 to 0.07
+
+  # for Harmonic time > 0.05
 }
 
 tonic_midi         = 60

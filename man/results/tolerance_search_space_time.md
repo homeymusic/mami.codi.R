@@ -1,7 +1,7 @@
 Tolerance Search
 ================
 
-# Harmonic
+# Pure
 
 Tolerances:
 
@@ -16,16 +16,20 @@ Tolerances:
 
 Number of Harmonics:
 
-    #> [1] 10
+    #> [1] 1
 
 Octave Ratios:
 
     #> [1] 2
 
+## Space Time Wrap
+
+![](../figures/tolerance_search/unnamed-chunk-11-1.png)<!-- -->
+
 ## Space Wrap
 
-![](../figures/tolerance_search/unnamed-chunk-12-1.png)<!-- -->
+![](../figures/tolerance_search/unnamed-chunk-13-1.png)<!-- -->
 
 ## Time Wrap
 
-![](../figures/tolerance_search/unnamed-chunk-14-1.png)<!-- -->
+![](../figures/tolerance_search/unnamed-chunk-15-1.png)<!-- -->

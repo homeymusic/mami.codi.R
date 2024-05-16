@@ -6,7 +6,7 @@ always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'Harmonic'
+search_label = 'Pure'
 ```
 
 # `r search_label`
@@ -69,7 +69,6 @@ theory = readRDS(theory.rds)
 ```
 
 ```{r, echo=F, results='asis', message=F}
-
 theory <- theory %>% dplyr::rowwise() %>% dplyr::mutate(
   num_harmonics  = metadata$num_harmonics,
   octave_ratio   = metadata$octave_ratio,
@@ -126,6 +125,24 @@ smoothed <- function(x,val,sigma=BEHAVIOURAL_SMOOTH_BROAD) {
 ```{r, echo=F}
 cols = 1
 rows = length(tols)
+```
+
+## Space Time Wrap
+
+```{r, fig.height=7*rows, fig.width=12*cols, echo=F}
+theory <- theory %>% 
+  dplyr::mutate(
+    z_score = z_scores(consonance_dissonance),
+    smooth  = smoothed(semitone, .data$z_score, params$sigma)
+  )
+plot_semitone_codi_wrap(
+  theory, 
+  experiment, 
+  gray_vlines  = params$gray_vlines[[1]],
+  black_vlines = params$black_vlines[[1]],
+  title=paste(search_label),
+  ncols=cols
+)
 ```
 
 ## Space Wrap

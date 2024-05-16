@@ -1,10 +1,18 @@
 devtools::load_all(".")
 
-search_label = 'Harmonic'
+search_label = 'Pure'
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # tolerances   = 10^-(1:10)
   tolerances   = c(1 %o% 10^(-8:-1), default_tolerance('macro')) %>% sort()
 } else {
+
+  # harmonic behavioral order: P5, M3, P4, P8
+  #
+  # theory temporal range that ~satisfies: 0.068 to 0.093
+  # M6 is higher than expected in that range but ok otherwise
+  #
+  # theory space range that gives P5 and P8 peaks: 0.056 to 0.072
+  # space ranks never agree but peak locations sorta do
 
   from_tol     = 0.01
   to_tol       = 0.1
