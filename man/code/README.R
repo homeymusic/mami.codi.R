@@ -6,131 +6,126 @@ devtools::load_all(".")
 
 tonic_midi = 60
 
-output.rds = '../data/timbre_paper.rds'
+output.rds = '../data/readme.rds'
 prepare(output.rds)
 
-
-macro_experiment.rds = '../data/Pure.rds'
-macro_intervals = tonic_midi + readRDS(macro_experiment.rds)$profile$interval
-macro_index = seq_along(macro_intervals)
-
-num_harmonics = 1
-octave_ratio  = 2.0
-roll_off      = 3
-scale = 'macro'
+experiment.rds = '../data/Pure.rds'
 grid_1 = tidyr::expand_grid(
-  index=macro_index,
-  num_harmonics,
-  octave_ratio,
-  scale = 'Pure'
+  interval = tonic_midi + readRDS(experiment.rds)$profile$interval,
+  num_harmonics=1,
+  octave_ratio=2.0,
+  timbre = 'Pure'
 )
 
-num_harmonics = 5
-octave_ratio  = 2.0
-grid_5 = tidyr::expand_grid(
-  index=macro_index,
-  num_harmonics,
-  octave_ratio,
-  scale
-)
-
-num_harmonics = 10
-octave_ratio  = c(1.9,2.0,2.1)
-grid_10 = tidyr::expand_grid(
-  index=macro_index,
-  num_harmonics,
-  octave_ratio,
-  scale
-)
-
+experiment.rds = '../data/Bonang.rds'
 grid_Bonang = tidyr::expand_grid(
-  index=macro_index,
+  interval = tonic_midi + readRDS(experiment.rds)$profile$interval,
   num_harmonics=4,
-  octave_ratio=2, # the bass is harmonic
-  scale = 'Bonang'
-)
-
-grid_5PartialsNo3 = tidyr::expand_grid(
-  index=macro_index,
-  num_harmonics=5,
   octave_ratio=2,
-  scale = '5PartialsNo3'
+  timbre = 'Bonang'
 )
 
-num_harmonics = 10
-octave_ratio  = c(2.0)
+experiment.rds = '../data/5Partials.rds'
+grid_5 = tidyr::expand_grid(
+  interval = tonic_midi + readRDS(experiment.rds)$profile$interval,
+  num_harmonics=5,
+  octave_ratio=2.0,
+  timbre='5Partials'
+)
+
+experiment.rds = '../data/5PartialsNo3.rds'
+grid_5PartialsNo3 = tidyr::expand_grid(
+  interval = tonic_midi + readRDS(experiment.rds)$profile$interval,
+  num_harmonics=5,
+  octave_ratio=2.0,
+  timbre = '5PartialsNo3'
+)
+
+experiment.rds = '../data/Harmonic.rds'
+grid_10 = tidyr::expand_grid(
+  interval = tonic_midi + readRDS(experiment.rds)$profile$interval,
+  num_harmonics=10,
+  octave_ratio=2.0,
+  timbre='Harmonic'
+)
+
+experiment.rds = '../data/Stretched.rds'
+grid_10_stretched = tidyr::expand_grid(
+  interval = tonic_midi + readRDS(experiment.rds)$profile$interval,
+  num_harmonics = 10,
+  octave_ratio = 2.1,
+  timbre = 'Stretched'
+)
+
+experiment.rds = '../data/Compressed.rds'
+grid_10_compressed = tidyr::expand_grid(
+  interval = tonic_midi + readRDS(experiment.rds)$profile$interval,
+  num_harmonics=10,
+  octave_ratio=1.9,
+  timbre = 'Compressed'
+)
+
 experiment.rds = '../data/M3.rds'
-M3_intervals = tonic_midi + readRDS(experiment.rds)$profile$interval
-index = seq_along(M3_intervals)
 grid_M3 = tidyr::expand_grid(
-  index,
-  num_harmonics,
-  octave_ratio,
-  scale = 'M3'
+  interval = tonic_midi + readRDS(experiment.rds)$profile$interval,
+  num_harmonics=10,
+  octave_ratio=2.0,
+  timbre = 'M3'
 )
 
 experiment.rds = '../data/M6.rds'
-M6_intervals = tonic_midi + readRDS(experiment.rds)$profile$interval
-index = seq_along(M6_intervals)
 grid_M6 = tidyr::expand_grid(
-  index,
-  num_harmonics,
-  octave_ratio,
-  scale = 'M6'
+  interval = tonic_midi + readRDS(experiment.rds)$profile$interval,
+  num_harmonics=10,
+  octave_ratio=2.0,
+  timbre = 'M6'
 )
 
 experiment.rds = '../data/P8.rds'
-P8_intervals = tonic_midi + readRDS(experiment.rds)$profile$interval
-index = seq_along(P8_intervals)
 grid_P8 = tidyr::expand_grid(
-  index,
+  interval = tonic_midi + readRDS(experiment.rds)$profile$interval,
   num_harmonics,
   octave_ratio,
-  scale = 'P8'
+  timbre = 'P8'
 )
 
-grid = dplyr::bind_rows(grid_1,grid_5,grid_10,grid_M3,grid_M6,
-                        grid_P8,
-                        grid_Bonang,grid_5PartialsNo3)
+grid = dplyr::bind_rows(grid_1,
+                        grid_Bonang,
+                        grid_5,grid_5PartialsNo3,
+                        grid_10,grid_10_stretched,grid_10_compressed,
+                        grid_M3,grid_M6,grid_P8
+                        )
 
 
 plan(multisession, workers=parallelly::availableCores())
 
-output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
-                                           scale) {
+output = grid %>% furrr::future_pmap_dfr(\(interval,
+                                           num_harmonics,
+                                           octave_ratio,
+                                           timbre) {
 
-  if (scale == 'M3') {
-    study_intervals = M3_intervals
-  } else if (scale == 'M6') {
-    study_intervals = M6_intervals
-  } else if (scale == 'P8') {
-    study_intervals = P8_intervals
-  } else {
-    study_intervals = macro_intervals
-  }
-
-  if (scale == 'Bonang') {
+  if (timbre == 'Bonang') {
     bass_f0 <- hrep::midi_to_freq(tonic_midi)
     bass <- tibble::tibble(
       frequency = bass_f0 * 1:4,
       amplitude = 1
     ) %>% as.list() %>%  hrep::sparse_fr_spectrum()
 
-    upper_f0 <- hrep::midi_to_freq(study_intervals[index])
+    upper_f0 <- hrep::midi_to_freq(interval + tonic_midi)
     upper <- tibble::tibble(
       frequency = upper_f0 * c(1, 1.52, 3.46, 3.92),
       amplitude = 1
     ) %>% as.list() %>%  hrep::sparse_fr_spectrum()
 
     study_chord = do.call(hrep::combine_sparse_spectra, list(bass,upper))
-  } else if (scale == '5PartialsNo3') {
+  } else if (timbre == '5PartialsNo3') {
     bass_f0 <- hrep::midi_to_freq(tonic_midi)
     bass <- tibble::tibble(
       frequency = bass_f0 * 1:5,
       amplitude = c(1, 1, 0, 1, 1)
     ) %>% as.list() %>%  hrep::sparse_fr_spectrum()
 
-    upper_f0 <- hrep::midi_to_freq(study_intervals[index])
+    upper_f0 <- hrep::midi_to_freq(interval + tonic_midi)
     upper <- tibble::tibble(
       frequency = upper_f0 * 1:5,
       amplitude = c(1, 1, 0, 1, 1)
@@ -138,21 +133,21 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
 
     study_chord = do.call(hrep::combine_sparse_spectra, list(bass,upper))
   } else {
-    study_chord = c(tonic_midi, study_intervals[index]) %>% hrep::sparse_fr_spectrum(
+    study_chord = c(tonic_midi, interval + tonic_midi) %>% hrep::sparse_fr_spectrum(
       num_harmonics = num_harmonics,
       octave_ratio  = octave_ratio,
       roll_off_dB   = roll_off
     )
   }
 
-  TOLERANCE       = 2 / 30
-  PURE_TOLERANCE  = 0.025
+  TOLERANCE       = 0.05
+  PURE_TOLERANCE  = TOLERANCE / 2
   MICRO_TOLERANCE = 1e-04
 
-  if (scale=='M3' || scale=='M6' || scale=='P8') {
+  if (timbre=='M3' || timbre=='M6' || timbre=='P8') {
     spatial_tolerance  = MICRO_TOLERANCE
     temporal_tolerance = MICRO_TOLERANCE
-  } else if (scale=='Pure') {
+  } else if (timbre=='Pure') {
     spatial_tolerance  = PURE_TOLERANCE
     temporal_tolerance = PURE_TOLERANCE
   } else {
@@ -166,8 +161,8 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
                          metadata = list(
                            num_harmonics = num_harmonics,
                            octave_ratio  = octave_ratio,
-                           semitone      = study_intervals[index] - tonic_midi,
-                           scale         = scale
+                           semitone      = interval,
+                           timbre        = timbre
                          ),
                          verbose=TRUE)
 
