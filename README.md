@@ -239,9 +239,15 @@ physiological origins, we searched a two-dimensional tolerance space in
 order to match model predictions with the large-scale behavioral
 results. It turned out that the values that best matched large-scale
 behavioral results were always the same for temporal and spatial
-tolerance. This might indicate that the physiological limitations exist
-higher in the auditory system than the low level spatial and temporal
-signals.  
+tolerance. This might indicate that the physiological limitations are
+not specific to place signals or time signals separetely. But instead
+the limitation is higher in the auditory system after the signals have
+been passed along.  
+
+That is to say, the limits that creates differences between temporal and
+spatial signals might not be frequency selectivity or phase locking but
+instead a limit of higher-level perception or pattern recognition, where
+estimates of the period of a complex signal is made from components.  
 
 MaMi.CoDi uses the Stern-Brocot tree to find rational fractions for the
 ratios within a given tolerance. How do we find the best tolerance

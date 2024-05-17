@@ -35,9 +35,9 @@ mami.codi <- function(
 ) {
 
   parse_input(x, ...)                %>%
-    analyze_spectrum(min_amplitude)  %>%
-    process_pseudo_octave()          %>%
-    predict_consonance(
+    compute_wavelengths(min_amplitude)  %>%
+    find_pseudo_octave()          %>%
+    estimate_periodicities(
       spatial_tolerance,
       temporal_tolerance
     )                                %>%
@@ -77,7 +77,7 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 
 }
 
-analyze_spectrum = function(x, min_amplitude) {
+compute_wavelengths = function(x, min_amplitude) {
 
   f       = x$spectrum[[1]] %>% dplyr::filter(.data$y>min_amplitude) %>% hrep::freq()
   c_sound = max(f) / max(1/f)
@@ -92,7 +92,7 @@ analyze_spectrum = function(x, min_amplitude) {
 
 }
 
-process_pseudo_octave= function(x) {
+find_pseudo_octave= function(x) {
 
   f = x$frequencies[[1]]
 
@@ -118,7 +118,7 @@ process_pseudo_octave= function(x) {
 
 }
 
-predict_consonance <- function(
+estimate_periodicities <- function(
     x,
     spatial_tolerance,
     temporal_tolerance
@@ -129,13 +129,13 @@ predict_consonance <- function(
 
   x <- x %>% dplyr::mutate(
     # estimate the spatial cycle
-    estimate_cycle(l,
+    estimate_periodicity(l,
                    x$pseudo_octave,
                    spatial_tolerance) %>%
       dplyr::rename_with(~ paste0('spatial_',.)),
 
     # estimate the temporal cycle
-    estimate_cycle(f,
+    estimate_periodicity(f,
                    x$pseudo_octave,
                    temporal_tolerance) %>%
       dplyr::rename_with(~ paste0('temporal_',.)),
@@ -153,7 +153,7 @@ predict_consonance <- function(
 
 }
 
-estimate_cycle <- function(x, pseudo_octave, tolerance, pitch) {
+estimate_periodicity <- function(x, pseudo_octave, tolerance, pitch) {
   r = ratios(x, pseudo_octave, tolerance)
 
   tibble::tibble_row(
