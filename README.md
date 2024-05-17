@@ -209,6 +209,40 @@ it easier to see how different the ratios for the two signals will be.
 
 ### Finding the Tolerance Values
 
+“One difficulty with distinguishing between place and temporal (or
+place-time) models of pitch is that spectral and temporal
+representations of a signal are mathematically equivalent: any change in
+the spectral representation is reflected by a change in the temporal
+representation, and vice versa . Discovering what the auditory system
+does means focusing on the physiological limits imposed by the cochlea
+and auditory nerve.  
+
+“For instance, the place theory can be tested using known limits of
+frequency selectivity: if pitch can be heard when only unresolved
+harmonics are presented (eliminating place information), then place
+information is not necessary for pitch. Similarly, if all the
+frequencies within a stimulus are above the upper limits of phase
+locking, and the temporal envelope information is somehow suppressed,
+then temporal information is not necessary for pitch perception.”  
+
+from “Revisiting place and temporal theories of pitch”, Andrew J.
+Oxenham, 2014.  
+
+The MaMi.CoDi model, based on Stolzenburg (2015), has one one parameter:
+tolerance. Tolerance is used by the Stern-Brocot algorithm to find tone
+ratios as rational fractions that are then used to estimate the relative
+periodicity of chords. Tolerance acts as the physiological limits
+mentioned by Oxenham, above.  
+
+Considering that the spatial and temporal signals had two different
+physiological origins, we searched a two-dimensional tolerance space in
+order to match model predictions with the large-scale behavioral
+results. It turned out that the values that best matched large-scale
+behavioral results were always the same for temporal and spatial
+tolerance. This might indicate that the physiological limitations exist
+higher in the auditory system than the low level spatial and temporal
+signals.  
+
 MaMi.CoDi uses the Stern-Brocot tree to find rational fractions for the
 ratios within a given tolerance. How do we find the best tolerance
 values? For the MaMi.CoDi model we ran thousands of computations with
