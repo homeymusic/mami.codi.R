@@ -15,8 +15,6 @@ knitr::opts_chunk$set(
   warning = FALSE, 
   message = FALSE
 )
-BEHAVIOURAL_SMOOTH_BROAD  <- 0.2
-BEHAVIOURAL_SMOOTH_NARROW <- 0.035
 ```
 
 ## How MaMi.CoDi Works
@@ -117,7 +115,7 @@ fits to the behavioral data came from spatial and tolerance values being the
 same. Insofar as this model represents processing in the auditory cortex, it 
 would seem that estimating the cyclicity of the two signals happens higher up
 in the auditoray system after the spatial and temporal signals have been processed.\
- 
+
 ## Theoretical predictions compared to large-scale behavioral results
 
 The large-scale behavioral data in the plots below are from [Timbral effects on consonance disentangle psychoacoustic mechanisms and suggest perceptual origins for musical scales](https://www.nature.com/articles/s41467-024-45812-z) by Raja Marjieh, Peter M. C. Harrison, Harin Lee, Fotini Deligiannaki & Nori Jacoby.
@@ -125,7 +123,7 @@ The large-scale behavioral data in the plots below are from [Timbral effects on 
 ### Manipulating harmonic frequencies
 
 ```{r, include=F}
-timbre_paper = readRDS('./man/data/timbre_paper.rds')
+timbre_paper = readRDS('./man/data/readme.rds')
 ```
 
 ```{r, include=F}
@@ -134,7 +132,7 @@ dyads <- timbre_paper %>% dplyr::rowwise() %>% dplyr::mutate(
   num_harmonics = metadata$num_harmonics,
   octave_ratio  = metadata$octave_ratio,
   semitone      = metadata$semitone,
-  scale         = metadata$scale,
+  timbre        = metadata$timbre,
   label         = round(metadata$semitone),
   chord_max     = max(frequencies),
   chord_min     = min(frequencies),
@@ -144,80 +142,82 @@ dyads <- timbre_paper %>% dplyr::rowwise() %>% dplyr::mutate(
 
 ```{r, fig.height=8, fig.width=12, echo=F, results='asis', message=F}
 params = list(
-  list(h=1, o=2.0,s='Pure'),
-  list(h=4, o=2.0,s='Bonang'),
-  list(h=5, o=2.0,s='macro'),
-  list(h=5, o=2.0,s='5PartialsNo3'),
-  list(h=10,o=2.0,s='macro'),
-  list(h=10,o=2.1,s='macro'),
-  list(h=10,o=1.9,s='macro'),
-  list(h=10,o=2.0,s='M3'),
-  list(h=10,o=2.0,s='M6'),
-  list(h=10,o=2.0,s='P8')
+  list(h=1, o=2.0,t='Pure'),
+  list(h=4, o=2.0,t='Bonang'),
+  list(h=5, o=2.0,t='5Partials'),
+  list(h=5, o=2.0,t='5PartialsNo3'),
+  list(h=10,o=2.0,t='Harmonic'),
+  list(h=10,o=2.1,t='Stretched'),
+  list(h=10,o=1.9,t='Compressed'),
+  list(h=10,o=2.0,t='M3'),
+  list(h=10,o=2.0,t='M6'),
+  list(h=10,o=2.0,t='P8')
 )
+
+BEHAVIOURAL_SMOOTH_BROAD  <- 0.2
+BEHAVIOURAL_SMOOTH_NARROW <- 0.035
 
 p = params %>% purrr::map(\(p) {
   gray_vlines = c()
   black_vlines = c()
   description = ''
-  if (p$o==2 & p$h==10 & p$s == 'macro') {
-    timbre = 'Harmonic'
+  
+  if (p$o==2 & p$h==10 & p$t == 'Harmonic') {
     black_vlines  = c(2,3,4,5,7,8,9,12)
     description   = '   For 10 harmonics, behavioral results and theoretical predictions agree.'
-  } else if (p$o==2 & p$h==5 & p$s == 'macro') {
-    timbre = '5Partials'
+    sigma = BEHAVIOURAL_SMOOTH_BROAD
+  } else if (p$o==2 & p$h==5 & p$t == '5Partials') {
     black_vlines  = c(3,4,5,7,9,12,14)
     description = '  For 5 harmonics, behavioral results and theoretical predictions agree. For comparison with the study below (5 partils with the third partial deleted), notice that the m3 peak is only slightly lower than the M3 peak.'
-  } else if (p$o==2 & p$h==5 & p$s == '5PartialsNo3') {
-    timbre = '5PartialsNo3'
+    sigma = BEHAVIOURAL_SMOOTH_BROAD
+  } else if (p$o==2 & p$h==5 & p$t == '5PartialsNo3') {
     black_vlines  = c(4,5,7,9,12,14)
     description = '  For 5 harmonics with the 3rd partial deleted, behavioral results and theoretical predictions mostly agree. As expected, the m3 peak without the third partial is now lower than the m3 peak with all 5 harmonics while the M3 peak is slightly higher without the 3rd partial.'
-  } else if (p$o==2 & p$h==1 & p$s == 'Pure') {
-    timbre = 'Pure'
+    sigma = BEHAVIOURAL_SMOOTH_BROAD
+  } else if (p$o==2 & p$h==1 & p$t == 'Pure') {
     black_vlines  = c(7,12)
     description = '  For pure tones, the behavioral results and the theoretical predictions mostly agree. Only P5 and P8 have pronounced two-sided peaks. The behavioral results show subtle variations in consonance height across the 15 semitones but the overall peak structure agrees with MaMi.CoDi predictions. For futher comparison, the theoretical predictions for major-minor versus the behavioral results are included in a plot below.'
-  } else if (p$o>2 & p$s == 'macro') {
-    timbre = 'Stretched'
+    sigma = BEHAVIOURAL_SMOOTH_BROAD
+  } else if (p$o>2 & p$t == 'Stretched') {
     black_vlines  = c(4.2,7.5,9.3,12.78)
     description = '  For stretched harmonics, behavioral results and theoretical predictions mostly agree. MaMi.Codi predicts peaks with minor polarity just above m3 and m7 that do not exist in the behavioral results.'
-  } else if (p$o<2 & p$s == 'macro') {
-    timbre = 'Compressed'
+    sigma = BEHAVIOURAL_SMOOTH_BROAD
+  } else if (p$o<2 & p$t == 'Compressed') {
     black_vlines  = c(3.8,4.8,11.1,14.5)
     description = '  For compressed harmonics, the pronounced behavioral peaks mostly agree with the theoretical peaks.'
-  } else if (p$s == 'Bonang') {
-    timbre = 'Bonang'
+    sigma = BEHAVIOURAL_SMOOTH_BROAD
+  } else if (p$t == 'Bonang') {
     black_vlines = c(2.60, 4.80, 11.98)
     gray_vlines  = c(7.2, 9.6)
     description = "  For gamalan dyads with a harmonic bass pitch and bonang upper pitch, behavioral results and theoretical predictions mostly agree. MaMi.CoDi predicts a dissonance trough with minor polarity at P4 that is not in the behavioral results.  MaMi.CoDi predicts P5 to have minor polarity and be relatively higher than the behavioral results."
-  } else if (p$s == 'M3') {
-    timbre = 'M3'
+    sigma = BEHAVIOURAL_SMOOTH_BROAD
+  } else if (p$t == 'M3') {
     gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 5/4)-60,4,4.092442)
     black_vlines  = c(3.95)
     description = '  Description is below.'
-  } else if (p$s == 'M6') {
-    timbre = 'M6'
+    sigma = BEHAVIOURAL_SMOOTH_NARROW
+  } else if (p$t == 'M6') {
     gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 5/3)-60,9,8.66952)
     black_vlines  = c(8.78,8.93)
     description = '  Description is below.'
-  } else if (p$s == 'P8') {
-    timbre = 'P8'
+    sigma = BEHAVIOURAL_SMOOTH_NARROW
+  } else if (p$t == 'P8') {
     gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 2/1)-60)
     black_vlines  = c(11.94, 12.08)
     description = '  Description is below.'
+    sigma = BEHAVIOURAL_SMOOTH_NARROW
   }
   title = paste(
-    timbre,
+    p$t,
     '~',
     'Partials:', p$h
   )
   
-  chords <- dyads %>% dplyr::filter(num_harmonics  == p$h &
-                                      octave_ratio == p$o &
-                                      scale        == p$s)
+  chords <- dyads %>% dplyr::filter(timbre == p$t)
   chords$consonance_dissonance_z = z_scores(chords$consonance_dissonance)
   
   experiment.rds = paste0('./man/data/',
-                          timbre,
+                          p$t,
                           '.rds')
   
   experiment_all = readRDS(experiment.rds)
@@ -233,15 +233,10 @@ p = params %>% purrr::map(\(p) {
     dplyr::rename(semitone=interval, 
                   consonance_dissonance_z=rating)
   
-  if (p$s == 'macro' | p$s == 'Bonang' | p$s == '5PartialsNo3' | p$s == 'Pure') {
-    sigma = BEHAVIOURAL_SMOOTH_BROAD
-  } else {
-    sigma = BEHAVIOURAL_SMOOTH_NARROW
-  }
-  if (timbre=='Harmonic') {
+  if (p$t=='Harmonic') {
     cat('  \n#### Dyads spanning 15 semitones\n')
   }
-  if (timbre=='M3') {
+  if (p$t=='M3') {
     cat('  \n#### Dyads spanning 1 quarter tone\n')
   }
   cat("  \n#####", title, '\n')
@@ -259,9 +254,9 @@ p = params %>% purrr::map(\(p) {
   cat("  \n")
   
   print(plot_semitone_spatial_temporal(chords, paste('Spatial and Temporal Consonance'),
-                                    goal=experiment,sigma=sigma,
-                                    dashed_minor=(timbre=='Pure'),
-                                    black_vlines=black_vlines,gray_vlines=gray_vlines))
+                                       goal=experiment,sigma=sigma,
+                                       dashed_minor=(p$t=='Pure'),
+                                       black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")
 })
 ```
