@@ -37,10 +37,10 @@ nerve to the central auditory system. When a sound wave travels along the basila
 membrane, the hair cells positioned near the wavelength of that sound will send 
 electrical activity along the auditory nerve.\
 
-Consider, though, that the fundamental tone of middle C is 1.31 meters long. 
-The basilar membrane is only 33mm long. 
-How can the hair cells of the inner ear detect wavelengths that are
-longer than the basilar membrane?\
+The fundamental tone of middle C is over a meter long
+in room temperature air at sea level. But the basilar membrane is only 33mm long. 
+How can the hair cells positioned along the basilar membrane detect wavelengths that are
+longer than the entire basilar membrane?\
 
 The traveling sound waves shorten as they travel around the spiral
 cochlea. Middle C's fundamental wavelength of 1.31 meters in air shrinks to 
