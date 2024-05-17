@@ -1,15 +1,15 @@
 source('./trials.R')
 
-search_label = 'Bonang'
+search_label = 'Pure'
 
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   tolerances   = c(1 %o% 10^(-8:-1))
 } else {
 
   # Detailed
-  from_tol     = 0.04
-  to_tol       = 0.07
-  by_tol       = 0.001
+  from_tol   = 0.01
+  to_tol     = 0.1
+  by_tol     = 0.001
   tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
 
   # Orders of Magnitude

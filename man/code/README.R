@@ -140,7 +140,7 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
     )
   }
 
-  TOLERANCE       = 0.05
+  TOLERANCE       = 0.063
   PURE_TOLERANCE  = TOLERANCE / 2
   MICRO_TOLERANCE = 1e-04
 

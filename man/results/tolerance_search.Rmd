@@ -6,7 +6,7 @@ always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'Bonang'
+search_label = 'Pure'
 ```
 
 # `r search_label`
@@ -138,7 +138,7 @@ rows = length(tols)
 
 ## CoDi Wrap
 
-```{r, fig.height=7*rows, fig.width=12*cols, echo=F}
+```{r trial, fig.height=7*rows, fig.width=12*cols, echo=F}
 # height = 3 per row and width = 5 per column
 # so for grid of 4x12 it would be height=12 and width=60
 plot_semitone_codi_wrap(
