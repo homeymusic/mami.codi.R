@@ -457,7 +457,8 @@ plot_semitone_codi_grid <- function(theory, experiment,
 }
 plot_semitone_codi_wrap <- function(theory, experiment,
                                     black_vlines=c(), gray_vlines=c(),
-                                    title,ncols=12) {
+                                    title,ncols=12,
+                                    include_points=T) {
   per_plot_labels = tidyr::expand_grid(
     spatial_tolerance  = theory$spatial_tolerance  %>% unique
   )
@@ -468,9 +469,10 @@ plot_semitone_codi_wrap <- function(theory, experiment,
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
+    {if (include_points)
     ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
                         ggplot2::aes(x = semitone, y = z_score,
-                                     fill=color_factor_homey(theory,'major_minor'))) +
+                                     fill=color_factor_homey(theory,'major_minor')))} +
     ggplot2::scale_fill_manual(values=color_values_homey(), guide="none") +
     ggplot2::geom_line(
       data=experiment,

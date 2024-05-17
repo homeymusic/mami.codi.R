@@ -141,9 +141,9 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
     )
   }
 
-  TOLERANCE       = mami.codi.R::default_tolerance()
-  PURE_TOLERANCE  = mami.codi.R::default_tolerance() / 2
-  MICRO_TOLERANCE = 1e-04
+  TOLERANCE       = 9e-04
+  PURE_TOLERANCE  = TOLERANCE
+  MICRO_TOLERANCE = TOLERANCE
 
   if (timbre=='M3' || timbre=='M6' || timbre=='P8') {
     spatial_tolerance  = MICRO_TOLERANCE

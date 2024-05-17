@@ -6,7 +6,7 @@ always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'Stretched'
+search_label = 'Harmonic'
 ```
 
 # `r search_label`
@@ -147,6 +147,7 @@ plot_semitone_codi_wrap(
   gray_vlines  = params$gray_vlines[[1]],
   black_vlines = params$black_vlines[[1]],
   title=paste(search_label),
-  ncols=cols
+  ncols=cols,
+  include_points=F
 )
 ```
