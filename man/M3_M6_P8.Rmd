@@ -57,7 +57,6 @@ cat("  \n###", title, '\n')
 print(knitr::kable(tibble::tibble_row(
   multicolored_line_sigma  = 0.2,
   green_line_sigma         = 2.0,
-  pseudo_octave            = paste(round(chords$pseudo_octave %>% unique, 2), collapse = ' '),
   spatial_tolerance        = paste(round(chords$spatial_tolerance %>% unique, 5), collapse = ' '),
   temporal_tolerance       = paste(round(chords$temporal_tolerance %>% unique, 5), collapse = ' '),
 )))

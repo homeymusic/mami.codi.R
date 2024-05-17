@@ -117,8 +117,7 @@ knitr::kable(chord$temporal_ratios[[1]] %>%
                dplyr::rename(
                  tone_hz = tone,
                  reference_tone_hz = reference_tone,
-               ) %>%
-               dplyr::select(-pseudo_ratio))
+               ))
 ```
 
 #### Spatial Periodicity
@@ -157,6 +156,5 @@ knitr::kable(chord$spatial_ratios[[1]] %>%
                dplyr::rename(
                  tone_m = tone,
                  reference_tone_m = reference_tone,
-               ) %>%
-               dplyr::select(-pseudo_ratio))
+               ))
 ```
