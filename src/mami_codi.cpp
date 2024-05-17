@@ -67,12 +67,10 @@ using namespace Rcpp;
  //' @export
  // [[Rcpp::export]]
  DataFrame ratios(NumericVector x,
-                  const double pseudo_octave,
                   const double tolerance) {
 
    const int    m = x.size();
    const double reference_tone = min(x);
-   const double pseudo_tolerance = pow(2.0, log(tolerance) / log(pseudo_octave));
 
    NumericVector fraction(2);
 
@@ -80,14 +78,12 @@ using namespace Rcpp;
    NumericVector nums(m);
    NumericVector dens(m);
    NumericVector ratios(m);
-   NumericVector pseudo_ratios(m);
    NumericVector reference_tones(m);
 
    for (int i = 0; i < m; ++i) {
      index[i]           = i+1;
      ratios[i]          = x[i] / reference_tone;
-     pseudo_ratios[i]   = pow(2.0, log(ratios[i]) / log(pseudo_octave));
-     fraction           = rational_fraction(pseudo_ratios[i], pseudo_tolerance);
+     fraction           = rational_fraction(ratios[i], tolerance);
      nums[i]            = fraction[0];
      dens[i]            = fraction[1];
      reference_tones[i] = reference_tone;
@@ -98,92 +94,7 @@ using namespace Rcpp;
      _("num")                 = nums,
      _("den")                 = dens,
      _("ratio")               = ratios,
-     _("pseudo_ratio")        = pseudo_ratios,
      _("tone")                = x,
      _("reference_tone")      = reference_tone
    );
- }
-
- //' compute_pseudo_octave
- //'
- //' Find the highest fundamental freq
- //'
- //' @param fn freq to eval
- //' @param f0 fundamental freq
- //' @param n  harmonic number
- //'
- //' @return Calculated pseudo octave
- //'
- //' @export
- // [[Rcpp::export]]
- const double compute_pseudo_octave(const double fn, const double f0, const int n) {
-   if (n==1) {
-     return 1.0;
-   } else {
-     return std::round(1000000 * pow(2, log(fn / f0) / log(n))) / 1000000;
-   }
- }
-
- //' analyze_harmonics
- //'
- //' Find the highest fundamental freq
- //'
- //' @param x Chord frequencies or wavelengths
- //'
- //' @return A data frame of frequencies, harmonics and pseudo_octaves
- //'
- //' @export
- // [[Rcpp::export]]
- DataFrame analyze_harmonics(const NumericVector x) {
-
-   const int x_size   = x.size();
-   const double f_max = max(x);
-   NumericVector harmonic_number(x_size * x_size * x_size);
-   NumericVector evaluation_freq(x_size * x_size * x_size);
-   NumericVector reference_freq(x_size * x_size * x_size);
-   NumericVector reference_amp(x_size * x_size * x_size);
-   NumericVector pseudo_octave(x_size * x_size * x_size);
-   NumericVector highest_freq(x_size * x_size * x_size);
-
-   if (x_size <= 2) {
-     throw std::range_error("find_highest_fundamental requires more than 2 frequencies");
-     return R_NilValue;
-   }
-
-   int num_matches=0;
-
-   for (int eval_freq_index = 0; eval_freq_index < x_size; ++eval_freq_index) {
-     for (int ref_freq_index = 0; ref_freq_index < x_size; ++ref_freq_index) {
-       for (int harmonic_num = 2; harmonic_num <= x_size; ++harmonic_num) {
-         const double p_octave = compute_pseudo_octave(x[eval_freq_index], x[ref_freq_index], harmonic_num);
-         if (1.89 < p_octave && p_octave < 2.11) { // TODO: check with Sethares on limits of stretching and compressing
-           harmonic_number[num_matches] = harmonic_num;
-           evaluation_freq[num_matches] = x[eval_freq_index];
-           reference_freq[num_matches]  = x[ref_freq_index];
-           highest_freq[num_matches]    = f_max;
-           pseudo_octave[num_matches]   = p_octave;
-           num_matches++;
-         }
-       }
-     }
-   }
-
-   if (num_matches == 0) {
-     return DataFrame::create(
-       _("harmonic_number") = 1,
-       _("evaluation_freq") = f_max,
-       _("reference_freq")  = f_max,
-       _("pseudo_octave")   = 2.0,
-       _("highest_freq")    = f_max
-     );
-   } else {
-     return DataFrame::create(
-       _("harmonic_number") = harmonic_number[Rcpp::Range(0, num_matches-1)],
-       _("evaluation_freq") = evaluation_freq[Rcpp::Range(0, num_matches-1)],
-       _("reference_freq")  = reference_freq[Rcpp::Range(0, num_matches-1)],
-       _("pseudo_octave")   = pseudo_octave[Rcpp::Range(0, num_matches-1)],
-       _("highest_freq")    = highest_freq[Rcpp::Range(0, num_matches-1)]
-     );
-   }
-
  }

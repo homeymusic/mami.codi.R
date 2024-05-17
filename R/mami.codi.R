@@ -36,7 +36,6 @@ mami.codi <- function(
 
   parse_input(x, ...)                %>%
     compute_wavelengths(min_amplitude)  %>%
-    find_pseudo_octave()          %>%
     estimate_periodicities(
       spatial_tolerance,
       temporal_tolerance
@@ -92,32 +91,6 @@ compute_wavelengths = function(x, min_amplitude) {
 
 }
 
-find_pseudo_octave= function(x) {
-
-  f = x$frequencies[[1]]
-
-  if (length(f) > 2) {
-
-    analyzed_harmonics = f %>% analyze_harmonics()
-
-    candidate_pseudo_octave = (analyzed_harmonics %>%
-                                 dplyr::count(.data$pseudo_octave, sort=TRUE) %>%
-                                 dplyr::slice(1))$pseudo_octave
-
-    x %>% dplyr::mutate(
-      pseudo_octave = candidate_pseudo_octave
-    )
-
-  } else {
-
-    x %>% dplyr::mutate(
-      pseudo_octave = 2.0
-    )
-
-  }
-
-}
-
 estimate_periodicities <- function(
     x,
     spatial_tolerance,
@@ -130,13 +103,11 @@ estimate_periodicities <- function(
   x <- x %>% dplyr::mutate(
     # estimate the spatial cycle
     estimate_periodicity(l,
-                   x$pseudo_octave,
                    spatial_tolerance) %>%
       dplyr::rename_with(~ paste0('spatial_',.)),
 
     # estimate the temporal cycle
     estimate_periodicity(f,
-                   x$pseudo_octave,
                    temporal_tolerance) %>%
       dplyr::rename_with(~ paste0('temporal_',.)),
 
@@ -153,8 +124,8 @@ estimate_periodicities <- function(
 
 }
 
-estimate_periodicity <- function(x, pseudo_octave, tolerance, pitch) {
-  r = ratios(x, pseudo_octave, tolerance)
+estimate_periodicity <- function(x, tolerance, pitch) {
+  r = ratios(x, tolerance)
 
   tibble::tibble_row(
     lcd        = lcm(r$den),
