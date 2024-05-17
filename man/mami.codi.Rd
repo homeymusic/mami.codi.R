@@ -7,8 +7,8 @@
 mami.codi(
   x,
   min_amplitude = MIN_AMPLITUDE,
-  spatial_tolerance = SPATIAL_TOLERANCE,
-  temporal_tolerance = TEMPORAL_TOLERANCE,
+  spatial_tolerance = TOLERANCE,
+  temporal_tolerance = TOLERANCE,
   metadata = NA,
   verbose = FALSE,
   ...
