@@ -1,3 +1,9 @@
+TOLERANCE         = 0.063
+MIN_AMPLITUDE     = 0.00
+SPEED_OF_SOUND    = 343
+ZARLINO           = 50
+SMALLEST_POSSIBLE = .Machine$double.xmin
+
 #' Major-Minor Consonance-Dissonance
 #'
 #' Provides an auditory model of music perception
@@ -37,6 +43,18 @@ mami.codi <- function(
     )                                %>%
     format_output(metadata, verbose)
 
+}
+
+#' Default Tolerance
+#'
+#' Default tolerance discovered by comparison with large-scale behavioral results
+#'
+#' @return Tolerance value
+#'
+#' @rdname default_tolerance
+#' @export
+default_tolerance <- function() {
+  TOLERANCE
 }
 
 parse_input <- function(x, ...) {
@@ -175,15 +193,3 @@ format_output <- function(x, metadata, verbose) {
 }
 
 lcm <- function(x) Reduce(numbers::LCM, x)
-
-TOLERANCE       = 0.063
-PURE_TOLERANCE  = TOLERANCE / 2
-MICRO_TOLERANCE = 1e-04
-
-MIN_AMPLITUDE   = 0.00
-
-SPEED_OF_SOUND  = 343
-
-ZARLINO         = 50
-
-SMALLEST_POSSIBLE = .Machine$double.xmin

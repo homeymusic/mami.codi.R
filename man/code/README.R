@@ -140,8 +140,8 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
     )
   }
 
-  TOLERANCE       = 0.063
-  PURE_TOLERANCE  = TOLERANCE / 2
+  TOLERANCE       = mami.codi.R::default_tolerance()
+  PURE_TOLERANCE  = mami.codi.R::default_tolerance() / 2
   MICRO_TOLERANCE = 1e-04
 
   if (timbre=='M3' || timbre=='M6' || timbre=='P8') {
