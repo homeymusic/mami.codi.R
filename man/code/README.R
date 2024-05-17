@@ -145,8 +145,8 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
     )
   }
 
-  TOLERANCE       = 0.05
-  PURE_TOLERANCE  = TOLERANCE / 2
+  TOLERANCE       = 2 / 30
+  PURE_TOLERANCE  = 0.025
   MICRO_TOLERANCE = 1e-04
 
   if (scale=='M3' || scale=='M6' || scale=='P8') {
