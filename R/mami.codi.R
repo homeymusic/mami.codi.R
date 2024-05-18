@@ -57,7 +57,7 @@ default_min_amplitude <- function() {
 #'
 #' @rdname default_tolerance
 #' @export
-TOLERANCE = 0.063
+TOLERANCE = 0.05
 default_tolerance <- function() {
   TOLERANCE
 }
