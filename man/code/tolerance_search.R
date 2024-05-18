@@ -1,6 +1,6 @@
 source('./trials.R')
 
-search_label = 'Compressed'
+search_label = 'P8'
 
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   tolerances   = c(1 %o% 10^(-8:-1))

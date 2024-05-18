@@ -6,7 +6,7 @@ always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'Compressed'
+search_label = 'M3'
 ```
 
 # `r search_label`
@@ -148,6 +148,6 @@ plot_semitone_codi_wrap(
   black_vlines = params$black_vlines[[1]],
   title=paste(search_label),
   ncols=cols,
-  include_points=F
+  include_points=T
 )
 ```
