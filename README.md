@@ -366,7 +366,7 @@ with the theoretical peaks.
 
 | min_amplitude | spatial_tolerance | temporal_tolerance | smoothing_sigma |
 |:--------------|:------------------|:-------------------|----------------:|
-| 0             | 0.00333           | 0.00333            |             0.2 |
+| 0             | 9e-04             | 9e-04              |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-13.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-14.png)<!-- -->

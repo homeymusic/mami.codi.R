@@ -160,8 +160,8 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
     spatial_tolerance  = 0.0082
     temporal_tolerance = 0.0082
   } else if (timbre=='Compressed') {
-    spatial_tolerance  = 1 / 300
-    temporal_tolerance = 1 / 300
+    spatial_tolerance  = 0.0009
+    temporal_tolerance = 0.0009
   } else if (timbre=='M3' || timbre=='M6' || timbre=='P8') {
     spatial_tolerance  = 1e-04
     temporal_tolerance = 1e-04
