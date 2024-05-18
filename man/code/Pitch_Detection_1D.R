@@ -1,0 +1,86 @@
+source('./man/code/utils.R')
+# devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+
+spatial_tolerance  = 0.025
+temporal_tolerance = 0.025
+tonic_midi = 60
+num_harmonics = 20
+amount_of_noise = 2
+num_tones= 2*amount_of_noise + num_harmonics
+
+chord = c(tonic_midi) %>% mami.codi(
+  spatial_tolerance  = spatial_tolerance,
+  temporal_tolerance = temporal_tolerance,
+  num_harmonics      = num_harmonics, verbose = T)
+chord_spectrum = chord$spectrum[[1]]
+
+noise_spectrum = tibble::tibble(
+  frequency = hrep::midi_to_freq(c(
+    runif(n=amount_of_noise, min=15, max=60),
+    runif(n=amount_of_noise, min=60, max=102)
+  )),
+  amplitude = 1
+) %>% as.list() %>%  hrep::sparse_fr_spectrum()
+
+noisy_chord_spectrum = do.call(
+  hrep::combine_sparse_spectra,
+  list(chord_spectrum, noise_spectrum)
+)
+
+noisy_chord = noisy_chord_spectrum %>% mami.codi(
+  spatial_tolerance  = spatial_tolerance,
+  temporal_tolerance = temporal_tolerance,
+  verbose = T)
+
+pause_frequency = function(spectrum, pause_index) {
+  spectrum$y[pause_index] = 0
+  spectrum
+}
+
+grid = tidyr::expand_grid(
+  pause_index = seq_along(noisy_chord_spectrum$x)
+)
+
+mami.codi_results = grid %>% purrr::pmap_dfr(\(
+  pause_index
+) {
+  noisy_chord_spectrum           %>%
+    pause_frequency(
+      pause_index
+    ) %>%
+    mami.codi.R::mami.codi(
+      metadata = list(
+        paused_index = pause_index
+      ),
+      verbose=T
+    )
+}, .progress=TRUE)
+
+scores = mami.codi_results %>% dplyr::rowwise() %>% dplyr::mutate(
+        paused_f    = noisy_chord_spectrum$x[metadata$paused_index],
+        change      = consonance_dissonance - noisy_chord$consonance_dissonance,
+        noisy_codi  = noisy_chord$consonance_dissonance,
+        paused_codi = consonance_dissonance,
+        clean_codi  = chord$consonance_dissonance,
+)  %>% dplyr::ungroup()
+
+results = scores %>%
+  dplyr::arrange(
+    change,
+    paused_f
+  )  %>%
+  dplyr::mutate(
+    row_id = dplyr::row_number(),
+    .before = 1
+  )
+
+results %>% dplyr::select(
+  row_id,
+  paused_f,
+  noisy_codi,
+  paused_codi,
+  clean_codi,
+  change,
+) %>% print(n=Inf)
+
+chord$spectrum[[1]]$x
