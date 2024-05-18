@@ -1,7 +1,7 @@
 Tolerance Search
 ================
 
-# Harmonic
+# Stretched
 
 Tolerances:
 
@@ -16,7 +16,7 @@ Number of Harmonics:
 
 Octave Ratios:
 
-    #> [1] 2
+    #> [1] 2.1
 
 ## CoDi Wrap
 
