@@ -82,7 +82,7 @@ for (trial in 1:1000) {
   
   temporal_scores = looped_paused %>% dplyr::rowwise() %>% dplyr::mutate(
     paused_frequency = metadata$paused_frequency,
-    distance         = noisy_chord$frequency_consonance-frequency_consonance
+    distance         = noisy_chord$temporal_consonance-temporal_consonance
   )
   
   temporal_results = temporal_scores %>%
@@ -110,7 +110,7 @@ for (trial in 1:1000) {
 
   spatial_scores = looped_paused %>% dplyr::rowwise() %>% dplyr::mutate(
     paused_frequency = metadata$paused_frequency,
-    distance         = noisy_chord$wavelength_consonance-wavelength_consonance
+    distance         = noisy_chord$spatial_consonance-spatial_consonance
   )
   
   spatial_results = spatial_scores %>%
