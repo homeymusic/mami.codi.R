@@ -142,23 +142,23 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
   }
 
   if (timbre=='Pure') {
-    spatial_tolerance  = 0.02
-    temporal_tolerance = 0.02
+    spatial_tolerance  = 0.025
+    temporal_tolerance = 0.025
   } else if (timbre=='Bonang') {
-    spatial_tolerance  = 0.06
-    temporal_tolerance = 0.06
+    spatial_tolerance  = 0.05
+    temporal_tolerance = 0.05
   } else if (timbre=='5PartialsNo3') {
-    spatial_tolerance  = 0.04
-    temporal_tolerance = 0.04
+    spatial_tolerance  = 0.05
+    temporal_tolerance = 0.05
   } else if (timbre=='5Partials') {
-    spatial_tolerance  = 0.04
-    temporal_tolerance = 0.04
+    spatial_tolerance  = 0.05
+    temporal_tolerance = 0.05
   } else if (timbre=='Harmonic') {
-    spatial_tolerance  = 0.07
-    temporal_tolerance = 0.07
+    spatial_tolerance  = 0.05
+    temporal_tolerance = 0.05
   } else if (timbre=='Stretched') {
-    spatial_tolerance  = 0.009
-    temporal_tolerance = 0.009
+    spatial_tolerance  = 0.0082
+    temporal_tolerance = 0.0082
   } else if (timbre=='Compressed') {
     spatial_tolerance  = 0.0009
     temporal_tolerance = 0.0009

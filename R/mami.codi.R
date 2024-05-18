@@ -1,9 +1,3 @@
-TOLERANCE         = 0.063
-MIN_AMPLITUDE     = 0.00
-SPEED_OF_SOUND    = 343
-ZARLINO           = 50
-SMALLEST_POSSIBLE = .Machine$double.xmin
-
 #' Major-Minor Consonance-Dissonance
 #'
 #' Provides an auditory model of music perception
@@ -15,6 +9,7 @@ SMALLEST_POSSIBLE = .Machine$double.xmin
 #' helpful for analysis and plots
 #' @param verbose Determines the amount of data to return from chord evaluation
 #' TRUE is all and FALSE is just major-minor, consonance-dissonance, tolerance and metadata.
+#' @param min_amplitude An optional minimum amplitude for deciding which signals to include
 #' @param spatial_tolerance An optional tolerance value for creating rational fractions for spatial signals
 #' @param temporal_tolerance An optional tolerance value for creating rational fractions for temporal signals
 #' @param ... parameters for hrep::sparse_fr_spectrum
@@ -34,14 +29,24 @@ mami.codi <- function(
     ...
 ) {
 
-  parse_input(x, ...)                %>%
-    compute_wavelengths(min_amplitude)  %>%
-    estimate_periodicities(
-      spatial_tolerance,
-      temporal_tolerance
-    )                                %>%
+  parse_input(x, ...)                                             %>%
+    compute_wavelengths(min_amplitude)                            %>%
+    estimate_periodicities(spatial_tolerance, temporal_tolerance) %>%
     format_output(metadata, verbose)
 
+}
+
+#' Default Minimum Amplitude
+#'
+#' Default minimum amplitude TODO: discover by comparison with large-scale behavioral results
+#'
+#' @return Minimum amplitude value
+#'
+#' @rdname default_min_amplitude
+#' @export
+MIN_AMPLITUDE = 0.00
+default_min_amplitude <- function() {
+  MIN_AMPLITUDE
 }
 
 #' Default Tolerance
@@ -52,6 +57,7 @@ mami.codi <- function(
 #'
 #' @rdname default_tolerance
 #' @export
+TOLERANCE = 0.063
 default_tolerance <- function() {
   TOLERANCE
 }
@@ -101,12 +107,10 @@ estimate_periodicities <- function(
   l = x$wavelengths[[1]]
 
   x <- x %>% dplyr::mutate(
-    # estimate the spatial cycle
     estimate_periodicity(l,
                    spatial_tolerance) %>%
       dplyr::rename_with(~ paste0('spatial_',.)),
 
-    # estimate the temporal cycle
     estimate_periodicity(f,
                    temporal_tolerance) %>%
       dplyr::rename_with(~ paste0('temporal_',.)),
@@ -136,6 +140,8 @@ estimate_periodicity <- function(x, tolerance, pitch) {
 
 }
 
+ZARLINO           = 50
+SMALLEST_POSSIBLE = .Machine$double.xmin
 flip <- function(x) {
   flipped = ZARLINO - x
   if (is.na(flipped) | flipped < SMALLEST_POSSIBLE) {

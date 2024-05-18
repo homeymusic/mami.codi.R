@@ -302,24 +302,10 @@ be relatively higher than the behavioral results.
 
 | min_amplitude | spatial_tolerance | temporal_tolerance | smoothing_sigma |
 |:--------------|:------------------|:-------------------|----------------:|
-| 0             | 0.025             | 0.025              |             0.2 |
+| 0             | 0.05              | 0.05               |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-3.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-4.png)<!-- -->
-
-##### 5Partials ~ Partials: 5
-
-For 5 harmonics, behavioral results and theoretical predictions agree.
-For comparison with the study below (5 partils with the third partial
-deleted), notice that the m3 peak is only slightly lower than the M3
-peak.
-
-| min_amplitude | spatial_tolerance | temporal_tolerance | smoothing_sigma |
-|:--------------|:------------------|:-------------------|----------------:|
-| 0             | 0.025             | 0.025              |             0.2 |
-
-![](man/figures/README-unnamed-chunk-5-5.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-6.png)<!-- -->
 
 ##### 5PartialsNo3 ~ Partials: 5
 
@@ -330,7 +316,21 @@ while the M3 peak is slightly higher without the 3rd partial.
 
 | min_amplitude | spatial_tolerance | temporal_tolerance | smoothing_sigma |
 |:--------------|:------------------|:-------------------|----------------:|
-| 0             | 0.025             | 0.025              |             0.2 |
+| 0             | 0.05              | 0.05               |             0.2 |
+
+![](man/figures/README-unnamed-chunk-5-5.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-6.png)<!-- -->
+
+##### 5Partials ~ Partials: 5
+
+For 5 harmonics, behavioral results and theoretical predictions agree.
+For comparison with the study below (5 partils with the third partial
+deleted), notice that the m3 peak is only slightly lower than the M3
+peak.
+
+| min_amplitude | spatial_tolerance | temporal_tolerance | smoothing_sigma |
+|:--------------|:------------------|:-------------------|----------------:|
+| 0             | 0.05              | 0.05               |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-7.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-8.png)<!-- -->
@@ -341,7 +341,7 @@ For 10 harmonics, behavioral results and theoretical predictions agree.
 
 | min_amplitude | spatial_tolerance | temporal_tolerance | smoothing_sigma |
 |:--------------|:------------------|:-------------------|----------------:|
-| 0             | 0.025             | 0.025              |             0.2 |
+| 0             | 0.05              | 0.05               |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-9.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-10.png)<!-- -->
@@ -354,7 +354,7 @@ and m7 that do not exist in the behavioral results.
 
 | min_amplitude | spatial_tolerance | temporal_tolerance | smoothing_sigma |
 |:--------------|:------------------|:-------------------|----------------:|
-| 0             | 0.025             | 0.025              |             0.2 |
+| 0             | 0.0082            | 0.0082             |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-11.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-12.png)<!-- -->
@@ -366,7 +366,7 @@ with the theoretical peaks.
 
 | min_amplitude | spatial_tolerance | temporal_tolerance | smoothing_sigma |
 |:--------------|:------------------|:-------------------|----------------:|
-| 0             | 0.025             | 0.025              |             0.2 |
+| 0             | 9e-04             | 9e-04              |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-13.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-14.png)<!-- -->
@@ -379,7 +379,7 @@ Description is below.
 
 | min_amplitude | spatial_tolerance | temporal_tolerance | smoothing_sigma |
 |:--------------|:------------------|:-------------------|----------------:|
-| 0             | 0.025             | 0.025              |           0.035 |
+| 0             | 1e-04             | 1e-04              |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-5-15.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-16.png)<!-- -->
@@ -390,7 +390,7 @@ Description is below.
 
 | min_amplitude | spatial_tolerance | temporal_tolerance | smoothing_sigma |
 |:--------------|:------------------|:-------------------|----------------:|
-| 0             | 0.025             | 0.025              |           0.035 |
+| 0             | 1e-04             | 1e-04              |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-5-17.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-18.png)<!-- -->
@@ -401,7 +401,7 @@ Description is below.
 
 | min_amplitude | spatial_tolerance | temporal_tolerance | smoothing_sigma |
 |:--------------|:------------------|:-------------------|----------------:|
-| 0             | 0.025             | 0.025              |           0.035 |
+| 0             | 1e-04             | 1e-04              |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-5-19.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-20.png)<!-- -->
