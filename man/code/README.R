@@ -145,26 +145,26 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
     spatial_tolerance  = 0.025
     temporal_tolerance = 0.025
   } else if (timbre=='Bonang') {
-    spatial_tolerance  = 0.05
-    temporal_tolerance = 0.05
+    spatial_tolerance  = 0.025
+    temporal_tolerance = 0.025
   } else if (timbre=='5PartialsNo3') {
-    spatial_tolerance  = 0.05
-    temporal_tolerance = 0.05
+    spatial_tolerance  = 0.025
+    temporal_tolerance = 0.025
   } else if (timbre=='5Partials') {
-    spatial_tolerance  = 0.05
-    temporal_tolerance = 0.05
+    spatial_tolerance  = 0.025
+    temporal_tolerance = 0.025
   } else if (timbre=='Harmonic') {
-    spatial_tolerance  = 0.05
-    temporal_tolerance = 0.05
+    spatial_tolerance  = 0.025
+    temporal_tolerance = 0.025
   } else if (timbre=='Stretched') {
-    spatial_tolerance  = 0.0082
-    temporal_tolerance = 0.0082
+    spatial_tolerance  = 0.025
+    temporal_tolerance = 0.025
   } else if (timbre=='Compressed') {
-    spatial_tolerance  = 0.0009
-    temporal_tolerance = 0.0009
+    spatial_tolerance  = 0.025
+    temporal_tolerance = 0.025
   } else if (timbre=='M3' || timbre=='M6' || timbre=='P8') {
-    spatial_tolerance  = 1e-04
-    temporal_tolerance = 1e-04
+    spatial_tolerance  = 5.5e-06
+    temporal_tolerance = 5.5e-06
   }
 
   mami.codi.R::mami.codi(study_chord,

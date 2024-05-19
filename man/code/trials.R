@@ -2,7 +2,8 @@ run_trials <- function(search_label, tolerances) {
   devtools::load_all(".")
   tonic_midi = 60
   source('./utils.R')
-  devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+  devtools::install_github('git@github.com:homeymusic/mami.codi.R',
+                           ref='lcn')
 
   library(mami.codi.R)
 

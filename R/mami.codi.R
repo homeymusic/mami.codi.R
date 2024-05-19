@@ -103,23 +103,16 @@ estimate_periodicities <- function(
     temporal_tolerance
 ) {
 
-  f = x$frequencies[[1]]
-  l = x$wavelengths[[1]]
-
   x <- x %>% dplyr::mutate(
-    estimate_periodicity(l,
-                   spatial_tolerance) %>%
+    estimate_periodicity(x$wavelengths[[1]], spatial_tolerance) %>%
       dplyr::rename_with(~ paste0('spatial_',.)),
 
-    estimate_periodicity(f,
-                   temporal_tolerance) %>%
+    estimate_periodicity(x$frequencies[[1]], temporal_tolerance) %>%
       dplyr::rename_with(~ paste0('temporal_',.)),
 
-    consonance_dissonance =
-      .data$temporal_consonance + .data$spatial_consonance,
+    consonance_dissonance = .data$temporal_consonance + .data$spatial_consonance,
 
-    major_minor =
-      .data$temporal_consonance - .data$spatial_consonance,
+    major_minor           = .data$temporal_consonance - .data$spatial_consonance,
 
     spatial_tolerance,
     temporal_tolerance
@@ -132,25 +125,16 @@ estimate_periodicity <- function(x, tolerance, pitch) {
   r = ratios(x, tolerance)
 
   tibble::tibble_row(
-    lcd        = lcm(r$den),
     gcn        = gcd(r$num),
+    lcd        = lcm(r$den),
     consonance = gcn / lcd,
-    dissonance = flip(.data$consonance),
     ratios     = list(r)
   )
 
 }
 
-ZARLINO           = 50
-SMALLEST_POSSIBLE = .Machine$double.xmin
-flip <- function(x) {
-  flipped = ZARLINO - x
-  if (is.na(flipped) | flipped < SMALLEST_POSSIBLE) {
-    SMALLEST_POSSIBLE
-  } else {
-    flipped
-  }
-}
+gcd <- function(x) Reduce(numbers::GCD, x)
+lcm <- function(x) Reduce(numbers::LCM, x)
 
 format_output <- function(x, metadata, verbose) {
   x <- x %>% tibble::add_column(
@@ -169,6 +153,3 @@ format_output <- function(x, metadata, verbose) {
                     'metadata')
   }
 }
-
-gcd <- function(x) Reduce(numbers::GCD, x)
-lcm <- function(x) Reduce(numbers::LCM, x)
