@@ -105,7 +105,7 @@ frequency periodicity.\
 #### M3 ~ Major Third
 
 Plot of M3 with MaMi.CoDi tolerance values varying from 1e-08 to 0.1:
-![M3 with a range of MaMi.CoDi tolerance values.](./man/tolerance_search_plots/M3.png)
+![M3 with a range of MaMi.CoDi tolerance values.](./man/tolerance_search_plots/M3 Orders of Magnitude.png)
 
 * JT: 5/4
 * ET: 2^(4/12)
@@ -214,7 +214,7 @@ P_M3$temporal_ratios[[1]]
 #### M6 ~ Major Sixth
 
 Plot of M6 with MaMi.CoDi tolerance values varying from 1e-08 to 0.1:
-![M6 with a range of MaMi.CoDi tolerance values.](./man/tolerance_search_plots/M6.png)
+![M6 with a range of MaMi.CoDi tolerance values.](./man/tolerance_search_plots/M6 Orders of Magnitude.png)
 
 * JT: 5/3
 * ET: 2^(9/12)
@@ -320,4 +320,4 @@ G_M6$temporal_ratios[[1]]
 #### P8 Octave
 
 Plot of P8 with MaMi.CoDi tolerance values varying from 1e-08 to 0.1:
-![P8 with a range of MaMi.CoDi tolerance values.](./man/tolerance_search_plots/P8.png)
+![P8 with a range of MaMi.CoDi tolerance values.](./man/tolerance_search_plots/P8 Orders of Magnitude.png)
