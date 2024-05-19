@@ -1,10 +1,10 @@
 source('./man/code/utils.R')
 # devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 
-spatial_tolerance  = 0.025
-temporal_tolerance = 0.025
+spatial_tolerance  = 1e-01
+temporal_tolerance = 1e-01
 tonic_midi = 60
-num_harmonics = 20
+num_harmonics = 10
 amount_of_noise = 2
 num_tones= 2*amount_of_noise + num_harmonics
 
@@ -59,6 +59,7 @@ mami.codi_results = grid %>% purrr::pmap_dfr(\(
 scores = mami.codi_results %>% dplyr::rowwise() %>% dplyr::mutate(
         paused_f    = noisy_chord_spectrum$x[metadata$paused_index],
         change      = consonance_dissonance - noisy_chord$consonance_dissonance,
+        change_2    = consonance_dissonance_2 - noisy_chord$consonance_dissonance_2,
         noisy_codi  = noisy_chord$consonance_dissonance,
         paused_codi = consonance_dissonance,
         clean_codi  = chord$consonance_dissonance,
@@ -67,6 +68,7 @@ scores = mami.codi_results %>% dplyr::rowwise() %>% dplyr::mutate(
 results = scores %>%
   dplyr::arrange(
     change,
+    change_2,
     paused_f
   )  %>%
   dplyr::mutate(
@@ -81,6 +83,7 @@ results %>% dplyr::select(
   paused_codi,
   clean_codi,
   change,
+  change_2,
 ) %>% print(n=Inf)
 
 chord$spectrum[[1]]$x

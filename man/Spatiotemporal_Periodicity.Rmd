@@ -1,14 +1,14 @@
 ```{r, echo=F, message=F, include=F}
-# devtools::load_all(".")
-# source('./man/code/plot.R')
-# source('./man/code/utils.R')
-# knitr::opts_chunk$set(
-#  collapse = TRUE,
-#  comment = "#>",
-#  fig.path = "man/figures/README-",
-#  warning = FALSE,
-#  message = FALSE
-# )
+devtools::load_all(".")
+source('./man/code/plot.R')
+source('./man/code/utils.R')
+knitr::opts_chunk$set(
+ collapse = TRUE,
+ comment = "#>",
+ fig.path = "man/figures/README-",
+ warning = FALSE,
+ message = FALSE
+)
 midi  = c(0, 4, 7) + 60
 num_harmonics = 3
 ```
@@ -89,10 +89,11 @@ knitr::kable(tibble::tibble(
   min_f_Hz = min(chord$frequencies[[1]]),
   max_T_s  = 1 / min_f_Hz,
   chord_s  = lcd * max_T_s,
+  chord_T_s = chord$chord_T_temporal_estimate,
   chord_Hz = 1 / chord_s,
   chord_m  = c_sound / chord_Hz,
   c_sound
-) %>% dplyr::select(lcd, chord_Sz, chord_Hz, c_sound, chord_m, chord_s, tol))
+) %>% dplyr::select(lcd, chord_Sz, chord_Hz, c_sound, chord_m, chord_s, chord_T_s, tol))
 ```
 
 ##### Partial Periods

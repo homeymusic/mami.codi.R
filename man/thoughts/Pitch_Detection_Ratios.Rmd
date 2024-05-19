@@ -1,0 +1,157 @@
+```{r, echo=F, message=F, include=F}
+devtools::load_all(".")
+source('./man/code/plot.R')
+source('./man/code/utils.R')
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  warning = FALSE,
+  message = FALSE
+)
+C4            = 60
+num_harmonics = 3
+noise         = 49.80323
+noisier       = 91.32639
+```
+
+```{r, echo=F, results='asis', message=F}
+chord = C4 %>% mami.codi(
+  verbose=T,
+  num_harmonics = num_harmonics
+)
+c_sound = chord$speed_of_sound
+
+chord_spectrum = chord$spectrum[[1]]
+
+noise_spectrum = tibble::tibble(
+  frequency = hrep::midi_to_freq(noise),
+  amplitude = 1
+) %>% as.list() %>%  hrep::sparse_fr_spectrum()
+
+noisy_chord_spectrum = do.call(
+  hrep::combine_sparse_spectra,
+  list(chord_spectrum, noise_spectrum)
+)
+
+noisy_chord = noisy_chord_spectrum %>% mami.codi(verbose = T)
+
+noisy_chord_spectrum = noisy_chord$spectrum[[1]]
+
+noisier_spectrum = tibble::tibble(
+  frequency = hrep::midi_to_freq(noisier),
+  amplitude = 1
+) %>% as.list() %>%  hrep::sparse_fr_spectrum()
+
+noisier_chord_spectrum = do.call(
+  hrep::combine_sparse_spectra,
+  list(noisy_chord_spectrum, noisier_spectrum)
+)
+
+noisier_chord = noisier_chord_spectrum %>% mami.codi(verbose = T)
+
+```
+
+* Fundamentals in MIDI: `r C4`\
+
+* Number of Harmonics: `r num_harmonics`
+
+* Frequencies: `r sprintf(chord$frequencies[[1]], fmt = '%#.1f')`\
+
+* Speed of Sound: `r sprintf(c_sound, fmt = '%#.1f')`
+
+* Wavelengths: `r sprintf(chord$wavelengths[[1]], fmt = '%#.1f')`\
+
+###### MaMi.CoDi Predictions
+```{r, echo=F, results='asis', message=F}
+knitr::kable(chord %>% dplyr::select('consonance_dissonance', 'major_minor', 'temporal_consonance', 'spatial_consonance'))
+```
+
+###### MaMi.CoDi Predictions 2
+```{r, echo=F, results='asis', message=F}
+knitr::kable(chord %>% dplyr::select('consonance_dissonance_2', 'major_minor_2', 'temporal_consonance_2', 'spatial_consonance_2'))
+```
+
+#### Temporal Periodicity
+```{r, echo=F, results='asis', message=F}
+knitr::kable(tibble::tibble(
+  clean_lcd      = chord$temporal_lcd,
+  noisy_lcd      = noisy_chord$temporal_lcd,
+  noisier_lcd    = noisier_chord$temporal_lcd,
+  clean_lcn      = chord$temporal_lcn,
+  noisy_lcn      = noisy_chord$temporal_lcn,
+  noisier_lcn    = noisier_chord$temporal_lcn
+))
+```
+
+##### Frequency Ratios Clean
+```{r, echo=F, results='asis', message=F}
+knitr::kable(chord$temporal_ratios[[1]] %>% 
+               dplyr::arrange(ratio) %>% 
+               dplyr::rename(
+                 tone_hz = tone,
+                 reference_tone_hz = reference_tone,
+               ))
+```
+
+##### Frequency Ratios Noisy
+```{r, echo=F, results='asis', message=F}
+knitr::kable(noisy_chord$temporal_ratios[[1]] %>% 
+               dplyr::arrange(ratio) %>% 
+               dplyr::rename(
+                 tone_hz = tone,
+                 reference_tone_hz = reference_tone,
+               ))
+```
+
+##### Frequency Ratios Noisier
+```{r, echo=F, results='asis', message=F}
+knitr::kable(noisier_chord$temporal_ratios[[1]] %>% 
+               dplyr::arrange(ratio) %>% 
+               dplyr::rename(
+                 tone_hz = tone,
+                 reference_tone_hz = reference_tone,
+               ))
+```
+
+#### Spatial Periodicity
+```{r, echo=F, results='asis', message=F}
+knitr::kable(tibble::tibble(
+  clean_lcd      = chord$spatial_lcd,
+  noisy_lcd      = noisy_chord$spatial_lcd,
+  noisier_lcd    = noisier_chord$spatial_lcd,
+  clean_lcn      = chord$spatial_lcn,
+  noisy_lcn      = noisy_chord$spatial_lcn,
+  noisier_lcn    = noisier_chord$spatial_lcn
+))
+```
+
+##### Wavelength Ratios Clean
+```{r, echo=F, results='asis', message=F}
+knitr::kable(chord$spatial_ratios[[1]] %>% 
+               dplyr::arrange(ratio) %>% 
+               dplyr::rename(
+                 tone_m = tone,
+                 reference_tone_m = reference_tone,
+               ))
+```
+
+##### Wavelength Ratios Noisy
+```{r, echo=F, results='asis', message=F}
+knitr::kable(noisy_chord$spatial_ratios[[1]] %>% 
+               dplyr::arrange(ratio) %>% 
+               dplyr::rename(
+                 tone_m = tone,
+                 reference_tone_m = reference_tone,
+               ))
+```
+
+##### Wavelength Ratios Noisier
+```{r, echo=F, results='asis', message=F}
+knitr::kable(noisier_chord$spatial_ratios[[1]] %>% 
+               dplyr::arrange(ratio) %>% 
+               dplyr::rename(
+                 tone_m = tone,
+                 reference_tone_m = reference_tone,
+               ))
+```
