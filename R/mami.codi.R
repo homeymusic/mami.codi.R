@@ -121,12 +121,6 @@ estimate_periodicities <- function(
     major_minor =
       .data$temporal_consonance - .data$spatial_consonance,
 
-    consonance_dissonance_2 =
-      .data$temporal_consonance_2 + .data$spatial_consonance_2,
-
-    major_minor_2 =
-      .data$temporal_consonance_2 - .data$spatial_consonance_2,
-
     spatial_tolerance,
     temporal_tolerance
 
@@ -139,11 +133,9 @@ estimate_periodicity <- function(x, tolerance, pitch) {
 
   tibble::tibble_row(
     lcd        = lcm(r$den),
-    dissonance = log2(.data$lcd),
-    consonance = flip(.data$dissonance),
-    lcn        = lcm(r$num),
-    dissonance_2 = log2(.data$lcn),
-    consonance_2 = flip(.data$dissonance_2),
+    gcn        = gcd(r$num),
+    consonance = gcn / lcd,
+    dissonance = flip(.data$consonance),
     ratios     = list(r)
   )
 
@@ -178,4 +170,5 @@ format_output <- function(x, metadata, verbose) {
   }
 }
 
+gcd <- function(x) Reduce(numbers::GCD, x)
 lcm <- function(x) Reduce(numbers::LCM, x)

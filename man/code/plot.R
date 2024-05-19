@@ -256,6 +256,45 @@ plot_semitone_codi <- function(chords, title='', include_line=T, sigma=0.2,
     ggplot2::labs(color = NULL) +
     theme_homey()
 }
+plot_semitone_codi_2 <- function(chords, title='', include_line=T, sigma=0.2,
+                               include_points=T,
+                               include_linear_regression = F, goal=NULL,
+                               black_vlines=c(),gray_vlines=c()) {
+  chords$smoothed.consonance_dissonance = smoothed(chords$semitone,
+                                                   chords$consonance_dissonance_z,
+                                                   sigma)
+
+  ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone,
+                                       y = .data$consonance_dissonance_z)) +
+    ggplot2::geom_vline(xintercept = black_vlines, color=colors_homey$highlight) +
+    ggplot2::geom_vline(xintercept = gray_vlines,color=colors_homey$highlight,linetype = 'dotted') +
+    { if (include_points)
+      ggplot2::geom_point(shape=21, stroke=NA, size=1,
+                          ggplot2::aes(fill=color_factor_homey(chords,'major_minor_2')))
+    } +
+    { if (include_linear_regression) ggplot2::stat_smooth(method=lm)} +
+    { if (include_line)
+      ggplot2::geom_line(data=chords,
+                         ggplot2::aes(x = semitone,
+                                      y = smoothed.consonance_dissonance,
+                                      color=color_factor_homey(chords,'major_minor_2'),
+                                      group=1), linewidth = 1)} +
+    {if (!is.null(goal))
+      ggplot2::geom_line(data=goal,
+                         ggplot2::aes(x = semitone,
+                                      y = consonance_dissonance,
+                                      color = 'behavioral'
+                         ), linewidth = 0.5)} +
+    ggplot2::scale_fill_manual(values=color_values_homey(), guide="none") +
+    ggplot2::scale_color_manual(values=color_values_homey()) +
+    ggplot2::ggtitle(title) +
+    ggplot2::scale_x_continuous(breaks = -15:15,
+                                minor_breaks = c()) +
+    ggplot2::ylab('Consonance (Z-Score)') +
+    ggplot2::xlab('Semitone') +
+    ggplot2::labs(color = NULL) +
+    theme_homey()
+}
 plot_semitone_mami <- function(chords, title='', include_line=T, sigma=0.2,
                                include_linear_regression=F,goal=NULL,abs=F,
                                black_vlines=c(),gray_vlines=c()) {

@@ -1,8 +1,8 @@
 source('./man/code/utils.R')
 # devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 
-spatial_tolerance  = 1e-01
-temporal_tolerance = 1e-01
+spatial_tolerance  = 0.025
+temporal_tolerance = 0.025
 tonic_midi = 60
 num_harmonics = 10
 amount_of_noise = 2
