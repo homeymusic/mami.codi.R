@@ -149,7 +149,7 @@ it easier to see how different the ratios for the two signals will be.
 
 | consonance_dissonance | major_minor | temporal_consonance | spatial_consonance |
 |----------------------:|------------:|--------------------:|-------------------:|
-|                   0.3 |         0.2 |                0.25 |               0.05 |
+|             0.3923174 |   0.2515388 |           0.3219281 |          0.0703893 |
 
 #### Temporal Periodicity
 

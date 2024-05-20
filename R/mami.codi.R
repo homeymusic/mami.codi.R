@@ -127,7 +127,7 @@ estimate_periodicity <- function(x, tolerance, pitch) {
   tibble::tibble_row(
     gcn        = gcd(r$num),
     lcd        = lcm(r$den),
-    consonance = log2(gcn / lcd + 1.0),
+    consonance = .data$gcn / .data$lcd,
     ratios     = list(r)
   )
 
