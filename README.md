@@ -159,11 +159,11 @@ it easier to see how different the ratios for the two signals will be.
 
 ##### Partial Periods
 
-![](man/figures/README-unnamed-chunk-12-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-13-1.png)<!-- -->
 
 ##### Chord Period
 
-![](man/figures/README-unnamed-chunk-13-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-14-1.png)<!-- -->
 
 ##### Frequency Ratios
 
@@ -187,11 +187,11 @@ it easier to see how different the ratios for the two signals will be.
 
 ##### Partial Wavelengths
 
-![](man/figures/README-unnamed-chunk-16-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-17-1.png)<!-- -->
 
 ##### Chord Wavelength
 
-![](man/figures/README-unnamed-chunk-17-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-18-1.png)<!-- -->
 
 ##### Wavelength Ratios
 
@@ -390,7 +390,7 @@ Description is below.
 
 | min_amplitude | spatial_tolerance | temporal_tolerance | smoothing_sigma |
 |:--------------|:------------------|:-------------------|----------------:|
-| 0             | 0                 | 0                  |           0.035 |
+| 0             | 7e-05             | 7e-05              |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-5-17.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-18.png)<!-- -->
@@ -401,14 +401,405 @@ Description is below.
 
 | min_amplitude | spatial_tolerance | temporal_tolerance | smoothing_sigma |
 |:--------------|:------------------|:-------------------|----------------:|
-| 0             | 0                 | 0                  |           0.035 |
+| 0             | 1e-05             | 1e-05              |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-5-19.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-20.png)<!-- -->
 
 ### TODO: run the in-depth tolerance searches again for M3, M6 and P8
 
-TODO: `{r, child=c('man/M3_M6_P8.Rmd')} TODO:`
+### Consonance peaks in dissonance troughs
+
+For the high-resolution dyads centered on M3, M6 and P8, the large-scale
+behavioral results and the MaMi.CoDi theoretical predictions both show
+dissonance troughs centered on the JT dyads.  
+
+MaMi.CoDi, though, predicts a local maximum consonance peak at the
+center of each dissonance trough.  
+
+Secondary maximums occur at the Pythagorean third and grave major sixth.
+Those secondary peaks are also surrounded by dissonance troughs. There
+are also tertiary troughs near the ET intervals.  
+
+### Theoretical consonance peak at P1 in octave-wide dissonance trough
+
+| multicolored_line_sigma | green_line_sigma | spatial_tolerance | temporal_tolerance |
+|------------------------:|-----------------:|:------------------|:-------------------|
+|                     0.2 |                2 | 0.05              | 0.05               |
+
+![](man/figures/README-unnamed-chunk-34-1.png)<!-- -->
+
+Performers of instruments with quantized semitones like keyboards and
+fretted strings–especially beginners and their audiences–are aware that
+the globally maximum consonant peak at the unison, P1, has dissonant
+neighbors on both sides, M7 and m2. Consonance increases with each
+semitone step out of the trough: downward from M7 to P4 below and upward
+from m2 to P5 above.  
+
+The green line in the plot above was generated using a smoothing sigma
+an order of magnitude broader than the default soothing sigma, 2.0
+versus 0.2. At the broader resolution, the green line highlights the
+dissonance trough and ignore the consonance peak at P1.
+
+That is, at the resolution of an octave, MaMi.CoDi predicts a global
+maximum consonance peak in the center of a smoothed dissonance trough.  
+
+At other resolutions, for example stringed instruments without frets,
+the nearest playable neighbors to P1 are not necessarily dissonant.
+
+In the harmonic study with the narrow resolution, above, the behavioral
+results shows dissonance troughs and MaMi.CoDi predicts consonance peaks
+in the center of those dissonance troughs.
+
+### MaMi.CoDi resolution correlates with dissonance troughs and consonance peaks
+
+As the tolerance value of the MaMi.CoDi model varies from very small to
+very large the consonance peaks expand their width until they overcome
+the dissonance troughs. See plot sets, below, for M3, M6 and P8.  
+
+MaMi.CoDi’s tolerance value is the only parameter in the model and
+indicates the resolution for turning irrational ratios into rational
+fractions. Those fractions are then used to estimate wavelength
+periodicity and frequency periodicity.  
+
+- Small tolerances give more accurate fractions which give longer
+  periods.
+- Large tolerances give less accurate fractions which give shorter
+  period estimates.
+
+#### M3 ~ Major Third
+
+Plot of M3 with MaMi.CoDi tolerance values varying from 1e-08 to 0.1:
+![M3 with a range of MaMi.CoDi tolerance
+values.](./man/tolerance_search_plots/M3.png)
+
+- JT: 5/4
+- ET: 2^(4/12)
+
+<!-- -->
+
+    #> # A tibble: 1 × 4
+    #>   just_M3_freq just_M3_midi M3_freq M3_midi
+    #>          <dbl>        <dbl>   <dbl>   <dbl>
+    #> 1         327.         63.9    330.      64
+
+##### Intervals near the major third ranked by consonance
+
+    #> # A tibble: 1,000 × 2
+    #>    semitone consonance_dissonance
+    #>       <dbl>                 <dbl>
+    #>  1     63.8                 0.251
+    #>  2     63.8                 0.251
+    #>  3     63.8                 0.251
+    #>  4     63.8                 0.251
+    #>  5     63.8                 0.251
+    #>  6     63.8                 0.251
+    #>  7     63.8                 0.251
+    #>  8     63.8                 0.251
+    #>  9     63.8                 0.251
+    #> 10     63.8                 0.251
+    #> # ℹ 990 more rows
+
+###### The JT M3 has the highest consonance
+
+    #> [1] 63.79715
+
+    #> # A tibble: 1 × 2
+    #>   semitone consonance_dissonance
+    #>      <dbl>                 <dbl>
+    #> 1     63.8                 0.251
+
+###### Frequency ratios of the JT M3
+
+    #>    index num den     ratio      tone reference_tone
+    #> 1      1   1   1  1.000000  261.6256       261.6256
+    #> 2      2   5   4  1.245244  325.7878       261.6256
+    #> 3      3   2   1  2.000000  523.2511       261.6256
+    #> 4      4   5   2  2.490489  651.5755       261.6256
+    #> 5      5   3   1  3.000000  784.8767       261.6256
+    #> 6      6  15   4  3.735733  977.3633       261.6256
+    #> 7      7   4   1  4.000000 1046.5023       261.6256
+    #> 8      8   5   1  4.980978 1303.1511       261.6256
+    #> 9      9   5   1  5.000000 1308.1278       261.6256
+    #> 10    10   6   1  6.000000 1569.7534       261.6256
+    #> 11    11  25   4  6.226222 1628.9388       261.6256
+    #> 12    12   7   1  7.000000 1831.3790       261.6256
+    #> 13    13  15   2  7.471466 1954.7266       261.6256
+    #> 14    14   8   1  8.000000 2093.0045       261.6256
+    #> 15    15  35   4  8.716711 2280.5144       261.6256
+    #> 16    16   9   1  9.000000 2354.6301       261.6256
+    #> 17    17  10   1  9.961955 2606.3021       261.6256
+    #> 18    18  10   1 10.000000 2616.2556       261.6256
+    #> 19    19  45   4 11.207200 2932.0899       261.6256
+    #> 20    20  25   2 12.452444 3257.8777       261.6256
+
+##### Intervals near the major third ranked by lowest consonance
+
+    #> # A tibble: 1,000 × 2
+    #>    semitone consonance_dissonance
+    #>       <dbl>                 <dbl>
+    #>  1     63.6               0.00198
+    #>  2     63.7               0.00278
+    #>  3     63.7               0.00278
+    #>  4     63.7               0.00278
+    #>  5     63.7               0.00278
+    #>  6     63.7               0.00278
+    #>  7     63.7               0.00278
+    #>  8     63.7               0.00278
+    #>  9     63.7               0.00278
+    #> 10     63.7               0.00278
+    #> # ℹ 990 more rows
+
+###### The lowest consonance
+
+    #> [1] 63.65
+
+    #> # A tibble: 1 × 2
+    #>   semitone consonance_dissonance
+    #>      <dbl>                 <dbl>
+    #> 1     63.6               0.00198
+
+###### The lowest consonance ratios
+
+    #>    index num den     ratio      tone reference_tone
+    #> 1      1   1   1  1.000000  261.6256       261.6256
+    #> 2      2   5   4  1.234705  323.0305       261.6256
+    #> 3      3   2   1  2.000000  523.2511       261.6256
+    #> 4      4   5   2  2.469410  646.0609       261.6256
+    #> 5      5   3   1  3.000000  784.8767       261.6256
+    #> 6      6  11   3  3.704116  969.0914       261.6256
+    #> 7      7   4   1  4.000000 1046.5023       261.6256
+    #> 8      8  44   9  4.938821 1292.1218       261.6256
+    #> 9      9   5   1  5.000000 1308.1278       261.6256
+    #> 10    10   6   1  6.000000 1569.7534       261.6256
+    #> 11    11  31   5  6.173526 1615.1523       261.6256
+    #> 12    12   7   1  7.000000 1831.3790       261.6256
+    #> 13    13  37   5  7.408231 1938.1827       261.6256
+    #> 14    14   8   1  8.000000 2093.0045       261.6256
+    #> 15    15  26   3  8.642937 2261.2132       261.6256
+    #> 16    16   9   1  9.000000 2354.6301       261.6256
+    #> 17    17  59   6  9.877642 2584.2436       261.6256
+    #> 18    18  10   1 10.000000 2616.2556       261.6256
+    #> 19    19  78   7 11.112347 2907.2741       261.6256
+    #> 20    20  37   3 12.347052 3230.3045       261.6256
+
+###### The Pythagorean third is the second highest consonance
+
+MIDI:
+
+    #> [1] 63.79765
+
+Cents:
+
+    #> [1] 379.7648
+
+Consonance:
+
+    #> # A tibble: 1 × 2
+    #>   semitone consonance_dissonance
+    #>      <dbl>                 <dbl>
+    #> 1     63.8                 0.251
+
+###### Frequency ratios of the second highest consonance
+
+    #>    index num den     ratio      tone reference_tone
+    #> 1      1   1   1  1.000000  261.6256       261.6256
+    #> 2      2   5   4  1.245280  325.7972       261.6256
+    #> 3      3   2   1  2.000000  523.2511       261.6256
+    #> 4      4   5   2  2.490561  651.5944       261.6256
+    #> 5      5   3   1  3.000000  784.8767       261.6256
+    #> 6      6  15   4  3.735841  977.3916       261.6256
+    #> 7      7   4   1  4.000000 1046.5023       261.6256
+    #> 8      8   5   1  4.981122 1303.1888       261.6256
+    #> 9      9   5   1  5.000000 1308.1278       261.6256
+    #> 10    10   6   1  6.000000 1569.7534       261.6256
+    #> 11    11  25   4  6.226402 1628.9860       261.6256
+    #> 12    12   7   1  7.000000 1831.3790       261.6256
+    #> 13    13  15   2  7.471683 1954.7832       261.6256
+    #> 14    14   8   1  8.000000 2093.0045       261.6256
+    #> 15    15  35   4  8.716963 2280.5804       261.6256
+    #> 16    16   9   1  9.000000 2354.6301       261.6256
+    #> 17    17  10   1  9.962243 2606.3776       261.6256
+    #> 18    18  10   1 10.000000 2616.2556       261.6256
+    #> 19    19  45   4 11.207524 2932.1748       261.6256
+    #> 20    20  25   2 12.452804 3257.9719       261.6256
+
+###### References for the Pythagorean third
+
+- “19/15 409.2443014 (good approximation of Pythagorean 3rd)”
+  - from [M3 in the Encyclopedia of Microtonal Music
+    Theory](http://www.tonalsoft.com/enc/m/major-3rd.aspx)
+- [Pythagorean ditone](https://en.wikipedia.org/wiki/Ditone)
+
+#### M6 ~ Major Sixth
+
+Plot of M6 with MaMi.CoDi tolerance values varying from 1e-08 to 0.1:
+![M6 with a range of MaMi.CoDi tolerance
+values.](./man/tolerance_search_plots/M6.png)
+
+- JT: 5/3
+- ET: 2^(9/12)
+
+<!-- -->
+
+    #> # A tibble: 1 × 4
+    #>   just_M6_freq just_M6_midi M6_freq M6_midi
+    #>          <dbl>        <dbl>   <dbl>   <dbl>
+    #> 1         436.         68.8     440      69
+
+##### Intervals near the major sixth ranked by consonance
+
+    #> # A tibble: 1,000 × 2
+    #>    semitone consonance_dissonance
+    #>       <dbl>                 <dbl>
+    #>  1     68.8                 0.335
+    #>  2     68.8                 0.335
+    #>  3     68.8                 0.335
+    #>  4     68.8                 0.335
+    #>  5     68.8                 0.335
+    #>  6     68.8                 0.335
+    #>  7     68.8                 0.335
+    #>  8     68.8                 0.335
+    #>  9     68.8                 0.335
+    #> 10     68.8                 0.335
+    #> # ℹ 990 more rows
+
+###### The JT M6 has the highest consonance
+
+    #> [1] 68.79164
+
+    #> # A tibble: 1 × 2
+    #>   semitone consonance_dissonance
+    #>      <dbl>                 <dbl>
+    #> 1     68.8                 0.335
+
+###### Frequency ratios of the JT M6
+
+    #>    index num den     ratio      tone reference_tone
+    #> 1      1   1   1  1.000000  261.6256       261.6256
+    #> 2      2   5   3  1.661673  434.7362       261.6256
+    #> 3      3   2   1  2.000000  523.2511       261.6256
+    #> 4      4   3   1  3.000000  784.8767       261.6256
+    #> 5      5  10   3  3.323347  869.4725       261.6256
+    #> 6      6   4   1  4.000000 1046.5023       261.6256
+    #> 7      7   5   1  4.985020 1304.2087       261.6256
+    #> 8      8   5   1  5.000000 1308.1278       261.6256
+    #> 9      9   6   1  6.000000 1569.7534       261.6256
+    #> 10    10  20   3  6.646694 1738.9450       261.6256
+    #> 11    11   7   1  7.000000 1831.3790       261.6256
+    #> 12    12   8   1  8.000000 2093.0045       261.6256
+    #> 13    13  25   3  8.308367 2173.6812       261.6256
+    #> 14    14   9   1  9.000000 2354.6301       261.6256
+    #> 15    15  10   1  9.970040 2608.4174       261.6256
+    #> 16    16  10   1 10.000000 2616.2556       261.6256
+    #> 17    17  35   3 11.631714 3043.1537       261.6256
+    #> 18    18  40   3 13.293387 3477.8899       261.6256
+    #> 19    19  15   1 14.955060 3912.6261       261.6256
+    #> 20    20  50   3 16.616734 4347.3623       261.6256
+
+##### Intervals near the major sixth ranked by lowest consonance
+
+    #> # A tibble: 1,000 × 2
+    #>    semitone consonance_dissonance
+    #>       <dbl>                 <dbl>
+    #>  1     68.7               0.00159
+    #>  2     68.7               0.00159
+    #>  3     68.7               0.00159
+    #>  4     68.7               0.00159
+    #>  5     68.7               0.00159
+    #>  6     68.7               0.00159
+    #>  7     68.7               0.00159
+    #>  8     68.7               0.00159
+    #>  9     68.7               0.00159
+    #> 10     68.7               0.00159
+    #> # ℹ 990 more rows
+
+###### The lowest consonance
+
+    #> [1] 68.71356
+
+    #> # A tibble: 1 × 2
+    #>   semitone consonance_dissonance
+    #>      <dbl>                 <dbl>
+    #> 1     68.7               0.00159
+
+###### The lowest consonance ratios
+
+    #>    index num den     ratio      tone reference_tone
+    #> 1      1   1   1  1.000000  261.6256       261.6256
+    #> 2      2   5   3  1.654196  432.7800       261.6256
+    #> 3      3   2   1  2.000000  523.2511       261.6256
+    #> 4      4   3   1  3.000000  784.8767       261.6256
+    #> 5      5  10   3  3.308392  865.5600       261.6256
+    #> 6      6   4   1  4.000000 1046.5023       261.6256
+    #> 7      7   5   1  4.962589 1298.3400       261.6256
+    #> 8      8   5   1  5.000000 1308.1278       261.6256
+    #> 9      9   6   1  6.000000 1569.7534       261.6256
+    #> 10    10  20   3  6.616785 1731.1200       261.6256
+    #> 11    11   7   1  7.000000 1831.3790       261.6256
+    #> 12    12   8   1  8.000000 2093.0045       261.6256
+    #> 13    13  33   4  8.270981 2163.9000       261.6256
+    #> 14    14   9   1  9.000000 2354.6301       261.6256
+    #> 15    15  89   9  9.925177 2596.6800       261.6256
+    #> 16    16  10   1 10.000000 2616.2556       261.6256
+    #> 17    17  58   5 11.579373 3029.4600       261.6256
+    #> 18    18  53   4 13.233569 3462.2401       261.6256
+    #> 19    19 104   7 14.887766 3895.0201       261.6256
+    #> 20    20  33   2 16.541962 4327.8000       261.6256
+
+###### The grave major sixth is the second highest consonance
+
+MIDI:
+
+    #> [1] 68.79214
+
+Cents:
+
+    #> [1] 879.2142
+
+Consonance:
+
+    #> # A tibble: 1 × 2
+    #>   semitone consonance_dissonance
+    #>      <dbl>                 <dbl>
+    #> 1     68.8                 0.335
+
+###### Frequency ratios of the second highest consonance
+
+    #>    index num den     ratio      tone reference_tone
+    #> 1      1   1   1  1.000000  261.6256       261.6256
+    #> 2      2   5   3  1.661721  434.7488       261.6256
+    #> 3      3   2   1  2.000000  523.2511       261.6256
+    #> 4      4   3   1  3.000000  784.8767       261.6256
+    #> 5      5  10   3  3.323443  869.4976       261.6256
+    #> 6      6   4   1  4.000000 1046.5023       261.6256
+    #> 7      7   5   1  4.985164 1304.2464       261.6256
+    #> 8      8   5   1  5.000000 1308.1278       261.6256
+    #> 9      9   6   1  6.000000 1569.7534       261.6256
+    #> 10    10  20   3  6.646885 1738.9952       261.6256
+    #> 11    11   7   1  7.000000 1831.3790       261.6256
+    #> 12    12   8   1  8.000000 2093.0045       261.6256
+    #> 13    13  25   3  8.308607 2173.7439       261.6256
+    #> 14    14   9   1  9.000000 2354.6301       261.6256
+    #> 15    15  10   1  9.970328 2608.4928       261.6256
+    #> 16    16  10   1 10.000000 2616.2556       261.6256
+    #> 17    17  35   3 11.632050 3043.2415       261.6256
+    #> 18    18  40   3 13.293771 3477.9903       261.6256
+    #> 19    19  15   1 14.955492 3912.7391       261.6256
+    #> 20    20  50   3 16.617214 4347.4879       261.6256
+
+###### References for the grave major sixth
+
+- [List of Pitch
+  Intervals](https://en.wikipedia.org/wiki/List_of_pitch_intervals)
+- [Grave major sixth on
+  C](https://en.m.wikipedia.org/wiki/File:Grave_major_sixth_on_C.png)
+
+#### P8 Octave
+
+Plot of P8 with MaMi.CoDi tolerance values varying from 1e-08 to 0.1:
+![P8 with a range of MaMi.CoDi tolerance
+values.](./man/tolerance_search_plots/P8.png)
 
 #### Notes on plots:
 

@@ -161,9 +161,15 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
   } else if (timbre=='Compressed') {
     spatial_tolerance  = 0.0064
     temporal_tolerance = 0.0064
-  } else if (timbre=='M3' || timbre=='M6' || timbre=='P8') {
+  } else if (timbre=='M3') {
     spatial_tolerance  = 5.0e-06
     temporal_tolerance = 5.0e-06
+  } else if (timbre=='M6') {
+    spatial_tolerance  = 7.3e-05
+    temporal_tolerance = 7.3e-05
+  } else if (timbre=='P8') {
+    spatial_tolerance  = 1.0e-05
+    temporal_tolerance = 1.0e-05
   }
 
   mami.codi.R::mami.codi(study_chord,

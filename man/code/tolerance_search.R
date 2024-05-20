@@ -1,15 +1,15 @@
 source('./trials.R')
 
-search_label = 'Compressed'
+search_label = 'P8'
 
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # Detailed
-  from_tol   = 5e-06
-  to_tol     = 6e-06
-  by_tol     = 1e-07
-  tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
+  # from_tol   = 7e-05
+  # to_tol     = 9e-05
+  # by_tol     = 1e-06
+  # tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
 
-  # tolerances   = c(1:9 %o% 10^(-6:-5))
+  tolerances   = c(1:9 %o% 10^(-6:-1))
 } else {
 
   # Detailed

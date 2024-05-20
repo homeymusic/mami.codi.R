@@ -299,8 +299,8 @@ p = params %>% purrr::map(\(p) {
 
 ### TODO: run the in-depth tolerance searches again for M3, M6 and P8
 
-TODO: ```{r, child=c('man/M3_M6_P8.Rmd')}
-TODO: ```
+```{r, child=c('man/M3_M6_P8.Rmd')}
+```
 
 #### Notes on plots:
 
