@@ -250,6 +250,8 @@ p = params %>% purrr::map(\(p) {
   
   chords <- dyads %>% dplyr::filter(timbre == p$t)
   chords$consonance_dissonance_z = z_scores(chords$consonance_dissonance)
+  chords$spatial_consonance_z = z_scores(chords$spatial_consonance)
+  chords$temporal_consonance_z = z_scores(chords$temporal_consonance)
   
   experiment.rds = paste0('./man/data/',
                           p$t,
@@ -283,12 +285,12 @@ p = params %>% purrr::map(\(p) {
     smoothing_sigma         = sigma
   )))
   print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),
-                           goal=experiment,sigma=sigma,
+                           goal=experiment,sigma=sigma,include_points=T,
                            black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")
   
   print(plot_semitone_spatial_temporal(chords, paste('Spatial and Temporal Consonance'),
-                                       goal=experiment,sigma=sigma,
+                                       goal=experiment,sigma=sigma,include_points=T,
                                        dashed_minor=(p$t=='Pure'),
                                        black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")
