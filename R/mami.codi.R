@@ -5,13 +5,13 @@
 #'
 #' @param x Chord to analyse specified in MIDI, coerced to
 #' hrep::sparse_fr_spectrum
+#' @param min_amplitude An optional minimum amplitude for deciding which signals to include
+#' @param spatial_tolerance An optional tolerance value for creating rational fractions for spatial signals
+#' @param temporal_tolerance An optional tolerance value for creating rational fractions for temporal signals
 #' @param metadata User-provided list of metadata that roundtrips with each call.
 #' helpful for analysis and plots
 #' @param verbose Determines the amount of data to return from chord evaluation
 #' TRUE is all and FALSE is just major-minor, consonance-dissonance, tolerance and metadata.
-#' @param min_amplitude An optional minimum amplitude for deciding which signals to include
-#' @param spatial_tolerance An optional tolerance value for creating rational fractions for spatial signals
-#' @param temporal_tolerance An optional tolerance value for creating rational fractions for temporal signals
 #' @param ... parameters for hrep::sparse_fr_spectrum
 #'
 #' @return Major-Minor and Consonance-Dissonance plus additional information
@@ -35,7 +35,7 @@ mami.codi <- function(
 
 }
 MIN_AMPLITUDE = 0.00
-TOLERANCE = 0.05
+TOLERANCE = 0.0725
 
 #' Parse Input
 #'
@@ -43,6 +43,7 @@ TOLERANCE = 0.05
 #'
 #'
 #' @param x Chord to analyse specified in MIDI, coerced to hrep::sparse_fr_spectrum
+#' @param ... parameters for hrep::sparse_fr_spectrum
 #'
 #' @rdname parse_input
 #' @export

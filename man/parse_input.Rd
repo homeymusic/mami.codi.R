@@ -14,6 +14,8 @@ parse_input(x, ...)
 }
 \arguments{
 \item{x}{Chord to analyse specified in MIDI, coerced to hrep::sparse_fr_spectrum}
+
+\item{...}{parameters for hrep::sparse_fr_spectrum}
 }
 \description{
 Parses the chord to analyse, coerced to hrep::sparse_fr_spectrum

@@ -2,7 +2,7 @@
 
 S3method(parse_input,default)
 S3method(parse_input,sparse_fr_spectrum)
-export(MIN_AMPLITUDE)
+export(mami.codi)
 export(parse_input)
 export(rational_fraction)
 export(ratios)
