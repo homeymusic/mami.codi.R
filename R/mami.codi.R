@@ -19,8 +19,6 @@
 #'
 #' @rdname mami.codi
 #' @export
-MIN_AMPLITUDE = 0.00
-TOLERANCE = 0.05
 mami.codi <- function(
     x,
     min_amplitude      = MIN_AMPLITUDE,
@@ -36,6 +34,8 @@ mami.codi <- function(
     format_output(metadata, verbose)
 
 }
+MIN_AMPLITUDE = 0.00
+TOLERANCE = 0.05
 
 #' Parse Input
 #'
