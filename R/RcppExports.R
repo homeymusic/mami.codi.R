@@ -2,12 +2,29 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #' rational_fraction
-NULL
-
+#'
+#' Stern-Brocot: find the highest fundamental freq
+#'
+#' @param x Number to convert to fraction
+#' @param tolerance Tolerance for converting
+#'
+#' @return A ratio of num / den
+#'
+#' @export
 rational_fraction <- function(x, tolerance) {
     .Call(`_mami_codi_R_rational_fraction`, x, tolerance)
 }
 
+#' ratios
+#'
+#' Finds ratios within a tolerance
+#'
+#' @param x Vector of numbers to find ratios
+#' @param tolerance Tolerance for ratio search
+#'
+#' @return A data frame of ratios and metadata
+#'
+#' @export
 ratios <- function(x, tolerance) {
     .Call(`_mami_codi_R_ratios`, x, tolerance)
 }
