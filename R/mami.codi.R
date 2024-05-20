@@ -19,6 +19,8 @@
 #'
 #' @rdname mami.codi
 #' @export
+MIN_AMPLITUDE = 0.00
+TOLERANCE = 0.05
 mami.codi <- function(
     x,
     min_amplitude      = MIN_AMPLITUDE,
@@ -29,37 +31,10 @@ mami.codi <- function(
     ...
 ) {
 
-  parse_input(x, ...)                                             %>%
-    compute_wavelengths(min_amplitude)                            %>%
-    estimate_periodicities(spatial_tolerance, temporal_tolerance) %>%
+  parse_input(x, ...)                                                        %>%
+    compute_consonance(min_amplitude, spatial_tolerance, temporal_tolerance) %>%
     format_output(metadata, verbose)
 
-}
-
-#' Default Minimum Amplitude
-#'
-#' Default minimum amplitude TODO: discover by comparison with large-scale behavioral results
-#'
-#' @return Minimum amplitude value
-#'
-#' @rdname default_min_amplitude
-#' @export
-MIN_AMPLITUDE = 0.00
-default_min_amplitude <- function() {
-  MIN_AMPLITUDE
-}
-
-#' Default Tolerance
-#'
-#' Default tolerance discovered by comparison with large-scale behavioral results
-#'
-#' @return Tolerance value
-#'
-#' @rdname default_tolerance
-#' @export
-TOLERANCE = 0.05
-default_tolerance <- function() {
-  TOLERANCE
 }
 
 parse_input <- function(x, ...) {
@@ -82,41 +57,27 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 
 }
 
-compute_wavelengths = function(x, min_amplitude) {
+compute_consonance = function(x, min_amplitude, spatial_tolerance, temporal_tolerance) {
 
-  f       = x$spectrum[[1]] %>% dplyr::filter(.data$y>min_amplitude) %>% hrep::freq()
+  f = x$spectrum[[1]] %>%
+    dplyr::filter(.data$y>min_amplitude) %>%
+    hrep::freq()
   c_sound = max(f) / max(1/f)
-  l       = c_sound / f
+  l = c_sound / f
 
   x %>% dplyr::mutate(
-    frequencies    = list(f),
-    wavelengths    = list(l),
-    speed_of_sound = c_sound,
-    min_amplitude
-  )
-
-}
-
-estimate_periodicities <- function(
-    x,
-    spatial_tolerance,
-    temporal_tolerance
-) {
-
-  x <- x %>% dplyr::mutate(
-    estimate_periodicity(x$wavelengths[[1]], spatial_tolerance) %>%
+    estimate_periodicity(l, spatial_tolerance) %>%
       dplyr::rename_with(~ paste0('spatial_',.)),
-
-    estimate_periodicity(x$frequencies[[1]], temporal_tolerance) %>%
+    estimate_periodicity(f, temporal_tolerance) %>%
       dplyr::rename_with(~ paste0('temporal_',.)),
-
     consonance_dissonance = .data$temporal_consonance + .data$spatial_consonance,
-
     major_minor           = .data$temporal_consonance - .data$spatial_consonance,
-
+    frequencies           = list(f),
+    wavelengths           = list(l),
+    speed_of_sound        = c_sound,
+    min_amplitude,
     spatial_tolerance,
     temporal_tolerance
-
   )
 
 }
