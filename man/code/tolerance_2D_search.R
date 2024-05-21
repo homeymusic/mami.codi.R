@@ -1,5 +1,5 @@
-search_label       = 'Harmonic'
-tolerances         = c(1:9 %o% 10^(-3:-2))
+search_label       = 'Compressed'
+tolerances         = c(1:9 %o% 10^(-2:0))
 temporal_tolerance = tolerances
 spatial_tolerance  = tolerances
 # temporal_tolerance = seq(from=0.005, to=0.007, by=0.0001)

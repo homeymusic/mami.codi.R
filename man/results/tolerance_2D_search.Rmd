@@ -6,7 +6,7 @@ always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'Harmonic'
+search_label = 'Compressed'
 ```
 
 # `r search_label`
@@ -154,7 +154,7 @@ plot_semitone_codi_grid(
   experiment, 
   gray_vlines  = params$gray_vlines[[1]],
   black_vlines = params$black_vlines[[1]],
-  include_points = F,
+  include_points = T,
   title=paste(search_label)
 )
 ```
