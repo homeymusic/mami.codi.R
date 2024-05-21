@@ -17,7 +17,7 @@ Octave Ratios:
 
     #> [1] 2
 
-max: 27.6585411 min: -0.579761
+max: 10.8582668 min: -1.9860337
 
 ## CoDi Wrap
 

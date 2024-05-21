@@ -106,7 +106,7 @@ estimate_periodicity <- function(x, tolerance, pitch) {
     lcm_num    = lcm(r$num),
     gcd_den    = gcd(r$den),
     lcm_whole  = .data$lcm_num / .data$gcd_den,
-    consonance = 1 / log2(.data$lcm_whole),
+    consonance = 50 - log2(.data$lcm_whole),
     ratios     = list(r)
   )
 }

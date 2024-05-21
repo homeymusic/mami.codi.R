@@ -1,4 +1,4 @@
-search_label       = 'Bonang'
+search_label       = 'Harmonic'
 tolerances         = c(1:9 %o% 10^(-3:-2))
 temporal_tolerance = tolerances
 spatial_tolerance  = tolerances
@@ -11,7 +11,8 @@ octave_ratio       = 2.0
 roll_off           = 3
 
 source('./utils.R')
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R',
+                         ref='lcm_as_dissonance')
 
 library(mami.codi.R)
 devtools::load_all(".")
