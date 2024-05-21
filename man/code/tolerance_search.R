@@ -1,6 +1,6 @@
 source('./trials.R')
 
-search_label = 'P8'
+search_label = 'Harmonic'
 
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # Detailed
@@ -13,9 +13,9 @@ if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
 } else {
 
   # Detailed
-  from_tol   = 0.0062
-  to_tol     = 0.0065
-  by_tol     = 0.00001
+  from_tol   = 0.06
+  to_tol     = 0.08
+  by_tol     = 0.001
   tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
 
   # Harmonic Best Results Range

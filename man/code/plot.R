@@ -674,21 +674,21 @@ plot_semitone_codi_raw <- function(theory_raw,
     ggplot2::ylab('Consonance-Dissonance Z-Score') +
     theme_homey()
 }
-plot_semitone_codi_2_smooth <- function(chords, title='', include_line=T,
+plot_semitone_codi_smooth <- function(chords, title='', include_line=T,
                                         sigma=0.2,sigma2=2.0,
                                         include_points=T,
                                         include_linear_regression = F, goal=NULL,
                                         black_vlines=c(),gray_vlines=c()) {
   chords$smoothed.consonance_dissonance = smoothed(chords$semitone,
-                                                   chords$consonance_dissonance_z,
+                                                   chords$consonance_dissonance,
                                                    sigma)
 
   chords$smoothed2.consonance_dissonance = smoothed(chords$semitone,
-                                                    chords$consonance_dissonance_z,
+                                                    chords$consonance_dissonance,
                                                     sigma2)
 
   ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone,
-                                       y = .data$consonance_dissonance_z)) +
+                                       y = .data$consonance_dissonance)) +
     ggplot2::geom_vline(xintercept = black_vlines, color=colors_homey$highlight) +
     ggplot2::geom_vline(xintercept = gray_vlines,color=colors_homey$highlight,linetype = 'dotted') +
     { if (include_points)
@@ -718,7 +718,7 @@ plot_semitone_codi_2_smooth <- function(chords, title='', include_line=T,
     ggplot2::ggtitle(title) +
     ggplot2::scale_x_continuous(breaks = -15:15,
                                 minor_breaks = c()) +
-    ggplot2::ylab('Consonance-Dissonance Z-Score') +
+    ggplot2::ylab('Consonance-Dissonance') +
     theme_homey()
 }
 

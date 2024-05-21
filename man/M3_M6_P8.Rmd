@@ -52,7 +52,6 @@ chords <- chords %>% dplyr::rowwise() %>% dplyr::mutate(
   octave_ratio  = metadata$octave_ratio,
   roll_off      = metadata$roll_off
 )
-chords$consonance_dissonance_z = z_scores(chords$consonance_dissonance)
 cat("  \n###", title, '\n')
 print(knitr::kable(tibble::tibble_row(
   multicolored_line_sigma  = 0.2,
@@ -60,7 +59,7 @@ print(knitr::kable(tibble::tibble_row(
   spatial_tolerance        = paste(round(chords$spatial_tolerance %>% unique, 5), collapse = ' '),
   temporal_tolerance       = paste(round(chords$temporal_tolerance %>% unique, 5), collapse = ' '),
 )))
-print(plot_semitone_codi_2_smooth(chords, title))
+print(plot_semitone_codi_smooth(chords, title))
 cat("  \n")
 
 ```
