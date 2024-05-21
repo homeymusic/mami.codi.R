@@ -22,8 +22,8 @@
 mami.codi <- function(
     x,
     min_amplitude      = MIN_AMPLITUDE,
-    spatial_tolerance  = TOLERANCE,
-    temporal_tolerance = TOLERANCE,
+    spatial_tolerance  = RATIO_TOLERANCE,
+    temporal_tolerance = RATIO_TOLERANCE,
     metadata           = NA,
     verbose            = FALSE,
     ...
@@ -35,7 +35,7 @@ mami.codi <- function(
 
 }
 MIN_AMPLITUDE = 0.00
-TOLERANCE = 0.0725
+RATIO_TOLERANCE = 0.0725
 
 #' Parse Input
 #'
@@ -105,7 +105,6 @@ estimate_periodicity <- function(x, tolerance, pitch) {
     consonance = .data$gcn / .data$lcd,
     ratios     = list(r)
   )
-
 }
 
 gcd <- function(x) Reduce(numbers::GCD, x)
