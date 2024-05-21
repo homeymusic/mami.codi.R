@@ -1,4 +1,4 @@
-search_label       = 'Compressed'
+search_label       = 'Harmonic'
 tolerances         = c(1:9 %o% 10^(-2:0))
 temporal_tolerance = tolerances
 spatial_tolerance  = tolerances
