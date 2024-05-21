@@ -419,6 +419,7 @@ plot_num_harmonics_deviation <- function(num_harmonics_deviation, title='') {
 }
 plot_semitone_codi_grid <- function(theory, experiment,
                                     black_vlines=c(), gray_vlines=c(),
+                                    include_points=T,
                                     title) {
   per_plot_labels = tidyr::expand_grid(
     temporal_tolerance  = theory$temporal_tolerance  %>% unique,
@@ -427,16 +428,13 @@ plot_semitone_codi_grid <- function(theory, experiment,
   per_plot_labels$label = per_plot_labels %>%
     purrr::pmap_vec(\(temporal_tolerance,spatial_tolerance) {
       tols = paste(
-        'f:', temporal_tolerance,
-        'λ:', spatial_tolerance
+        'time:', temporal_tolerance,
+        'space:', spatial_tolerance
       )
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=z_score)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
-    # ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
-    #                     ggplot2::aes(x = semitone, y = z_score,
-    #                                  fill=color_factor_homey(theory,'major_minor'))) +
     ggplot2::scale_fill_manual(values=color_values_homey(), guide="none") +
     ggplot2::geom_line(
       data=experiment,
@@ -447,8 +445,10 @@ plot_semitone_codi_grid <- function(theory, experiment,
       ggplot2::aes(x = semitone, y = smooth,
                    group=1,
                    color=color_factor_homey(theory,'major_minor'))) +
-    ggplot2::geom_point(shape=21, stroke=NA, size=1,
-                        ggplot2::aes(fill=color_factor_homey(theory,'major_minor'))) +
+    { if (include_points)
+      ggplot2::geom_point(shape=21, stroke=NA, size=1,
+                          ggplot2::aes(fill=color_factor_homey(theory,'major_minor')))
+    } +
     ggplot2::scale_color_manual(values=color_values_homey(), guide='none') +
     ggplot2::geom_text(data=per_plot_labels, ggplot2::aes(x=-Inf,y=-Inf,label=label,
                                                           vjust="inward",hjust="inward")) +

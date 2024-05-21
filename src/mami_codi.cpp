@@ -77,7 +77,6 @@ DataFrame ratios(NumericVector x,
   NumericVector nums(m);
   NumericVector dens(m);
   NumericVector ratios(m);
-  NumericVector reference_tones(m);
 
   for (int i = 0; i < m; ++i) {
     index[i]           = i+1;
@@ -85,7 +84,6 @@ DataFrame ratios(NumericVector x,
     fraction           = rational_fraction(ratios[i], tolerance);
     nums[i]            = fraction[0];
     dens[i]            = fraction[1];
-    reference_tones[i] = reference_tone;
   }
 
   return DataFrame::create(
@@ -94,6 +92,7 @@ DataFrame ratios(NumericVector x,
     _("den")                 = dens,
     _("ratio")               = ratios,
     _("tone")                = x,
-    _("reference_tone")      = reference_tone
+    _("reference_tone")      = reference_tone,
+    _("tolerance")           = tolerance
   );
 }

@@ -8,35 +8,47 @@ always_allow_html: true
 ```{r, echo=F, message=F, include=F}
 devtools::load_all(".")
 source('../code/plot.R')
-c(0) %>% mami.codi()
 ```
 
-```{r, echo=T}
-chord = c(60, 72) %>% mami.codi(verbose=T, num_harmonics=11, octave_ratio=2.0)
+```{r, echo=F, message=F, include=F}
+chord = c(60) %>% mami.codi(
+  spatial_tolerance = 0.1,
+  verbose=T, 
+  num_harmonics=10
+)
 ```
 
-```{r, echo=F}
-chord %>% dplyr::select(consonance_dissonance, major_minor)
+```{r, echo=F, message=F}
+chord %>% dplyr::select(
+  consonance_dissonance, 
+  major_minor
+)
 ```
 
-#### Frequency
+#### Temporal
 
-```{r, echo=F}
-chord$frequency_ratios[[1]] %>% dplyr::rename(freq=tone) %>% dplyr::arrange(freq)
+```{r, echo=F, message=F}
+chord %>% dplyr::select(
+  temporal_gcn,
+  temporal_lcd,
+  temporal_consonance
+)
 ```
 
-```{r, echo=F}
-sort(unique(chord$frequency_ratios[[1]]$den))
-lcm(chord$frequency_ratios[[1]]$den)
+```{r, echo=F, message=F}
+chord$temporal_ratios[[1]]
 ```
 
-#### Wavelength
- 
-```{r, echo=F}
-chord$wavelength_ratios[[1]] %>% dplyr::rename(wavelength=tone) %>% dplyr::arrange(wavelength)
+#### Spatial
+
+```{r, echo=F, message=F}
+chord %>% dplyr::select(
+  spatial_gcn,
+  spatial_lcd,
+  spatial_consonance
+)
 ```
 
-```{r, echo=F}
-sort(unique(chord$wavelength_ratios[[1]]$den))
-lcm(chord$wavelength_ratios[[1]]$den)
+```{r, echo=F, message=F}
+chord$spatial_ratios[[1]]
 ```

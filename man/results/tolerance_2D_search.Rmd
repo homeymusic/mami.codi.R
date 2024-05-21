@@ -6,7 +6,7 @@ always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'Harmonic'
+search_label = 'Bonang'
 ```
 
 # `r search_label`
@@ -70,18 +70,18 @@ theory <- theory %>% dplyr::rowwise() %>% dplyr::mutate(
   octave_ratio   = metadata$octave_ratio,
   semitone       = metadata$semitone,
   .before=1
-) %>% dplyr::group_by(frequency_tolerance, wavelength_tolerance)
+) %>% dplyr::group_by(temporal_tolerance, spatial_tolerance)
 ```
 
 Tolerances:
 ```{r, echo=F}
-freq_tols = theory$frequency_tolerance %>% unique
-freq_tols
+temp_tols = theory$temporal_tolerance %>% unique
+temp_tols
 ```
 
 ```{r, echo=F}
-wave_tols = theory$wavelength_tolerance %>% unique
-wave_tols
+space_tols = theory$spatial_tolerance %>% unique
+space_tols
 ```
 
 Number of Harmonics:
@@ -140,8 +140,8 @@ experiment <- experiment %>%
 ```
 
 ```{r, echo=F}
-cols = length(wave_tols)
-rows = length(freq_tols) 
+cols = length(space_tols)
+rows = length(temp_tols) 
 ```
 
 ## CoDi Wrap
@@ -154,6 +154,7 @@ plot_semitone_codi_grid(
   experiment, 
   gray_vlines  = params$gray_vlines[[1]],
   black_vlines = params$black_vlines[[1]],
+  include_points = F,
   title=paste(search_label)
 )
 ```

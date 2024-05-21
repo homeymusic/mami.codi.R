@@ -1,9 +1,12 @@
-search_label = 'Pure'
-tolerances   = c(c(1,5) %o% 10^(-2:-1))
-wavelength_tolerance = tolerances
-frequency_tolerance  = tolerances
+search_label       = 'Bonang'
+tolerances         = c(1:9 %o% 10^(-3:-2))
+temporal_tolerance = tolerances
+spatial_tolerance  = tolerances
+# temporal_tolerance = seq(from=0.005, to=0.007, by=0.0001)
+# spatial_tolerance  = seq(from=0.008, to=0.01,  by=0.0001)
+
 tonic_midi         = 60
-num_harmonics      = 5
+num_harmonics      = 10
 octave_ratio       = 2.0
 roll_off           = 3
 
@@ -12,14 +15,6 @@ devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 
 library(mami.codi.R)
 devtools::load_all(".")
-
-P8 <- c(tonic_midi,72) %>% mami.codi.R::mami.codi(verbose=T)
-if (P8$frequency_tolerance == mami.codi.R::default_tolerance('frequency','macro')) {
-  print("Seems to be the correct version mami.codi.R")
-} else {
-  stop("This is not the expected version of mami.codi.R")
-}
-
 
 if (search_label == 'Stretched') {
   octave_ratio  = 2.1
@@ -49,8 +44,8 @@ index = seq_along(intervals)
 
 grid = tidyr::expand_grid(
   index,
-  frequency_tolerance  = frequency_tolerance,
-  wavelength_tolerance = wavelength_tolerance
+  temporal_tolerance  = temporal_tolerance,
+  spatial_tolerance = spatial_tolerance
 )
 
 print(grid)
@@ -59,8 +54,8 @@ plan(multisession, workers=parallelly::availableCores())
 
 data = grid %>% furrr::future_pmap_dfr(\(
   index,
-  frequency_tolerance,
-  wavelength_tolerance
+  temporal_tolerance,
+  spatial_tolerance
 ) {
   if (search_label=='Bonang') {
     bass_f0 <- hrep::midi_to_freq(tonic_midi)
@@ -101,8 +96,8 @@ data = grid %>% furrr::future_pmap_dfr(\(
 
   mami.codi.R::mami.codi(
     chord,
-    frequency_tolerance  = frequency_tolerance,
-    wavelength_tolerance = wavelength_tolerance,
+    temporal_tolerance  = temporal_tolerance,
+    spatial_tolerance = spatial_tolerance,
     metadata       = list(
       octave_ratio   = octave_ratio,
       num_harmonics  = num_harmonics,
