@@ -1,4 +1,4 @@
-#' Major-Minor Consonance-Dissonance
+#' Major-Minor Consonance-Dissonance 2D Tolerance
 #'
 #' Provides an auditory model of music perception
 #'
