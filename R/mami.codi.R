@@ -100,15 +100,19 @@ estimate_periodicity <- function(x, tolerance, pitch) {
   r = ratios(x, tolerance)
 
   tibble::tibble_row(
-    gcn        = gcd(r$num),
-    lcd        = lcm(r$den),
-    consonance = .data$gcn / .data$lcd,
+    gcd_num    = gcd(r$num),
+    lcm_den    = lcm(r$den),
+    gcd_whole  = .data$gcd_num / .data$lcm_den,
+    lcm_num    = lcm(r$num),
+    gcd_den    = gcd(r$den),
+    lcm_whole  = .data$lcm_num / .data$gcd_den,
+    consonance = .data$gcd_whole,
     ratios     = list(r)
   )
 }
 
-gcd <- function(x) Reduce(numbers::GCD, x)
-lcm <- function(x) Reduce(numbers::LCM, x)
+gcd <- function(x) Reduce(gmp::gcd.bigz, x) %>% as.numeric()
+lcm <- function(x) Reduce(gmp::lcm.bigz, x) %>% as.numeric()
 
 format_output <- function(x, metadata, verbose) {
   x <- x %>% tibble::add_column(

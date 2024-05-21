@@ -21,6 +21,7 @@ Imports:
     tidyr,
     numbers,
     hrep,
+    gmp,
     Rcpp (>= 1.0.10)
 LinkingTo: Rcpp
 Remotes: homeymusic/hrep
