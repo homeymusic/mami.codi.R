@@ -111,8 +111,8 @@ estimate_periodicity <- function(x, tolerance, pitch) {
   )
 }
 
-gcd <- function(x) Reduce(gmp::gcd.bigz, x) %>% as.numeric()
-lcm <- function(x) Reduce(gmp::lcm.bigz, x) %>% as.numeric()
+gcd <- function(x) Reduce(numbers::GCD, x) %>% as.numeric()
+lcm <- function(x) Reduce(numbers::LCM, x) %>% as.numeric()
 
 format_output <- function(x, metadata, verbose) {
   x <- x %>% tibble::add_column(
