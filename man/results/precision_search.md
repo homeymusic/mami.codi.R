@@ -1,7 +1,7 @@
 Precision Search
 ================
 
-# Bonang
+# Harmonic
 
 Precisions:
 
@@ -17,7 +17,7 @@ Octave Ratios:
 
     #> [1] 2
 
-max: 30.7149843 min: -1.0010616
+max: 27.0155502 min: -0.6905887
 
 ## CoDi Wrap
 
