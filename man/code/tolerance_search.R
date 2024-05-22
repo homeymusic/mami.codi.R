@@ -1,4 +1,5 @@
-search_label = 'Pure'
+source('./trials.R')
+search_label = 'Stretched'
 
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # Detailed
@@ -30,7 +31,7 @@ if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   tolerances   = c(1:9 %o% 10^(-4:-1))
 }
 
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R',
+                         ref='gcd_errs')
 
-source('./trials.R')
 run_trials(search_label, tolerances)

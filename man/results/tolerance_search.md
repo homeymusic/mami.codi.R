@@ -1,7 +1,7 @@
 Tolerance Search
 ================
 
-# Pure
+# Stretched
 
 Tolerances:
 
@@ -11,13 +11,13 @@ Tolerances:
 
 Number of Harmonics:
 
-    #> [1] 1
+    #> [1] 10
 
 Octave Ratios:
 
-    #> [1] 2
+    #> [1] 2.1
 
-max: 22.2280171 min: -2.3412647
+max: 31.5067655 min: -2.3907179
 
 ## CoDi Wrap
 
