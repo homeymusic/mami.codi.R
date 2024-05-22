@@ -2,7 +2,7 @@ devtools::install_github('git@github.com:homeymusic/mami.codi.R',
                          ref='lcm_as_dissonance')
 source('./trials.R')
 
-search_label = 'Compressed'
+search_label = 'Harmonic'
 
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # Detailed

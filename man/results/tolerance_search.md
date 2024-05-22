@@ -1,7 +1,7 @@
 Tolerance Search
 ================
 
-# Compressed
+# Harmonic
 
 Tolerances:
 
@@ -15,9 +15,9 @@ Number of Harmonics:
 
 Octave Ratios:
 
-    #> [1] 1.9
+    #> [1] 2
 
-max: 31.5748721 min: -0.2894127
+max: 4.6378763 min: -3.2867308
 
 ## CoDi Wrap
 
