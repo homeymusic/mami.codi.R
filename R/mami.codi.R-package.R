@@ -7,7 +7,7 @@
 #' @importFrom rlang .data
 #' @importFrom dplyr mutate rename_with select
 #' @importFrom tidyr expand_grid
-#' @importFrom numbers LCM
+#' @importFrom gmp gcd.bigz lcm.bigz
 #' @importFrom hrep freq amp sparse_fr_spectrum
 #' @importFrom Rcpp evalCpp
 #' @importFrom furrr future_pmap_dfr

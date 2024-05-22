@@ -19,7 +19,6 @@ Imports:
     rlang,
     dplyr,
     tidyr,
-    numbers,
     hrep,
     gmp,
     Rcpp (>= 1.0.10)

@@ -1,4 +1,4 @@
-search_label = 'Pure'
+search_label = 'P8'
 
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # Detailed
@@ -11,20 +11,10 @@ if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
 } else {
 
   # Detailed
-  # from_tol   = 0.06
-  # to_tol     = 0.08
+  # from_tol   = 0.009
+  # to_tol     = 0.04
   # by_tol     = 0.001
   # tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
-
-  # Harmonic Best Results Range
-  # low:  0.072
-  # pick: 0.0725
-  # high: 0.073
-
-  # Bonang Best Results Range
-  # low:
-  # pick:
-  # high:
 
   # Orders of Magnitude
   tolerances   = c(1:9 %o% 10^(-4:-1))

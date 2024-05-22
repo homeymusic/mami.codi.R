@@ -35,7 +35,7 @@ mami.codi <- function(
 
 }
 MIN_AMPLITUDE = 0.00
-RATIO_TOLERANCE = 0.0725
+RATIO_TOLERANCE = 0.02
 
 #' Parse Input
 #'
@@ -80,6 +80,12 @@ compute_consonance = function(x, min_amplitude, spatial_tolerance, temporal_tole
   l = c_sound / f
 
   x %>% dplyr::mutate(
+    # TODO:
+    # this stuff just computes the fundamental frequency and the
+    # fundamental wavelength of the chord
+    #
+    # fundamental_frequency  = gcd(f)
+    # fundamental_wavelength = gcd(l)
     estimate_periodicity(l, spatial_tolerance) %>%
       dplyr::rename_with(~ paste0('spatial_',.)),
     estimate_periodicity(f, temporal_tolerance) %>%
