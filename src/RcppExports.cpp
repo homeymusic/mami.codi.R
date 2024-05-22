@@ -10,34 +10,34 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// rational_fraction
-NumericVector rational_fraction(const double x, const double tolerance);
-RcppExport SEXP _mami_codi_R_rational_fraction(SEXP xSEXP, SEXP toleranceSEXP) {
+// stern_brocot
+NumericVector stern_brocot(const double x, const double precision);
+RcppExport SEXP _mami_codi_R_stern_brocot(SEXP xSEXP, SEXP precisionSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const double >::type x(xSEXP);
-    Rcpp::traits::input_parameter< const double >::type tolerance(toleranceSEXP);
-    rcpp_result_gen = Rcpp::wrap(rational_fraction(x, tolerance));
+    Rcpp::traits::input_parameter< const double >::type precision(precisionSEXP);
+    rcpp_result_gen = Rcpp::wrap(stern_brocot(x, precision));
     return rcpp_result_gen;
 END_RCPP
 }
-// ratios
-DataFrame ratios(NumericVector x, const double tolerance);
-RcppExport SEXP _mami_codi_R_ratios(SEXP xSEXP, SEXP toleranceSEXP) {
+// rational_fractions
+DataFrame rational_fractions(NumericVector x, const double precision);
+RcppExport SEXP _mami_codi_R_rational_fractions(SEXP xSEXP, SEXP precisionSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< const double >::type tolerance(toleranceSEXP);
-    rcpp_result_gen = Rcpp::wrap(ratios(x, tolerance));
+    Rcpp::traits::input_parameter< const double >::type precision(precisionSEXP);
+    rcpp_result_gen = Rcpp::wrap(rational_fractions(x, precision));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_mami_codi_R_rational_fraction", (DL_FUNC) &_mami_codi_R_rational_fraction, 2},
-    {"_mami_codi_R_ratios", (DL_FUNC) &_mami_codi_R_ratios, 2},
+    {"_mami_codi_R_stern_brocot", (DL_FUNC) &_mami_codi_R_stern_brocot, 2},
+    {"_mami_codi_R_rational_fractions", (DL_FUNC) &_mami_codi_R_rational_fractions, 2},
     {NULL, NULL, 0}
 };
 

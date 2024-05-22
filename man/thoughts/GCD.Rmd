@@ -1,0 +1,60 @@
+---
+title: "Greatest Common Divisor"
+output:
+  github_document: default
+always_allow_html: true
+---
+```{r, echo=F, message=F, include=F}
+devtools::load_all(".")
+source('./man/code/plot.R')
+source('./man/code/utils.R')
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "../figures/GCD-"
+)
+knitr::opts_chunk$set(dev = 'svg')
+p = RATIONAL_FRACTION_PRECISION
+```
+
+## P1
+
+```{r, echo=F, message=F}
+P1 = c(60) %>% hrep::sparse_fr_spectrum(num_harmonics=10)
+f = P1 %>% hrep::freq()
+f
+```
+
+```{r, echo=T, message=F}
+f0 = gcd(f, p)$gcd
+f0
+```
+
+```{r, echo=T, message=F}
+f0 / min(f)
+```
+
+```{r, echo=T, message=F}
+gcd(f/min(f), p)
+```
+
+## M3
+
+```{r, echo=F, message=F}
+M3 = c(60, 64) %>% hrep::sparse_fr_spectrum(num_harmonics=10)
+f = M3 %>% hrep::freq()
+f
+```
+
+```{r, echo=T, message=F}
+f0 = gcd(f, p)$gcd
+f0
+```
+
+```{r, echo=T, message=F}
+f0 / min(f)
+```
+
+```{r, echo=T, message=F}
+gcd(f/min(f), p)
+```

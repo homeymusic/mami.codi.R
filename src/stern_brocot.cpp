@@ -3,22 +3,22 @@
 
 using namespace Rcpp;
 
-//' rational_fraction
+//' stern_brocot
 //'
-//' Stern-Brocot: find the highest fundamental freq
+//' Approximates a floating-point number to arbitrary precision.
 //'
-//' @param x Number to convert to fraction
-//' @param tolerance Tolerance for converting
+//' @param x Number to convert to rational fraction
+//' @param precision Binary search stops once the desired precision is reached
 //'
 //' @return A ratio of num / den
 //'
 //' @export
 // [[Rcpp::export]]
-NumericVector rational_fraction(const double x, const double tolerance) {
+NumericVector stern_brocot(const double x, const double precision) {
   double approximation;
 
-  const double valid_min = x - tolerance;
-  const double valid_max = x + tolerance;
+  const double valid_min = x - precision;
+  const double valid_max = x + precision;
 
   int left_num    = floor(x);
   int left_den    = 1;
@@ -30,7 +30,9 @@ NumericVector rational_fraction(const double x, const double tolerance) {
   approximation  = std::round(mediant_num / mediant_den);
 
   int sanity = 0;
-  while (((approximation < valid_min) || (valid_max < approximation)) && sanity < 1000) {
+  const int insane = 1000;
+  while (((approximation < valid_min) || (valid_max < approximation)) &&
+         sanity < insane) {
     double x0  = 2*x - approximation;
     if (approximation < valid_min) {
       left_num  = mediant_num;
@@ -54,45 +56,34 @@ NumericVector rational_fraction(const double x, const double tolerance) {
   return NumericVector::create(mediant_num, mediant_den);
 }
 
-//' ratios
+//' rational_fractions
 //'
-//' Finds ratios within a tolerance
+//' Approximates floating-point numbers to arbitrary precision.
 //'
-//' @param x Vector of numbers to find ratios
-//' @param tolerance Tolerance for ratio search
+//' @param x Vector of floating point numbers to approximate
+//' @param precision Precision for approximations
 //'
-//' @return A data frame of ratios and metadata
+//' @return A data frame of rational numbers and metadata
 //'
 //' @export
 // [[Rcpp::export]]
-DataFrame ratios(NumericVector x,
-                 const double tolerance) {
+DataFrame rational_fractions(NumericVector x, const double precision) {
 
   const int    m = x.size();
-  const double reference_tone = min(x);
 
-  NumericVector fraction(2);
-
-  NumericVector index(m);
   NumericVector nums(m);
   NumericVector dens(m);
-  NumericVector ratios(m);
 
   for (int i = 0; i < m; ++i) {
-    index[i]           = i+1;
-    ratios[i]          = x[i] / reference_tone;
-    fraction           = rational_fraction(ratios[i], tolerance);
-    nums[i]            = fraction[0];
-    dens[i]            = fraction[1];
+    const NumericVector fraction = stern_brocot(x[i], precision);
+    nums[i]  = fraction[0];
+    dens[i]  = fraction[1];
   }
 
   return DataFrame::create(
-    _("index")               = index,
     _("num")                 = nums,
     _("den")                 = dens,
-    _("ratio")               = ratios,
     _("tone")                = x,
-    _("reference_tone")      = reference_tone,
-    _("tolerance")           = tolerance
+    _("precision")           = precision
   );
 }

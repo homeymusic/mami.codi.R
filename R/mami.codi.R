@@ -6,12 +6,12 @@
 #' @param x Chord to analyse specified in MIDI, coerced to
 #' hrep::sparse_fr_spectrum
 #' @param min_amplitude An optional minimum amplitude for deciding which signals to include
-#' @param spatial_tolerance An optional tolerance value for creating rational fractions for spatial signals
-#' @param temporal_tolerance An optional tolerance value for creating rational fractions for temporal signals
+#' @param spatial_precision An optional precision value for creating rational fractions for spatial signals
+#' @param temporal_precision An optional precision value for creating rational fractions for temporal signals
 #' @param metadata User-provided list of metadata that roundtrips with each call.
 #' helpful for analysis and plots
 #' @param verbose Determines the amount of data to return from chord evaluation
-#' TRUE is all and FALSE is just major-minor, consonance-dissonance, tolerance and metadata.
+#' TRUE is all and FALSE is just major-minor, consonance-dissonance, precision and metadata.
 #' @param ... parameters for hrep::sparse_fr_spectrum
 #'
 #' @return Major-Minor and Consonance-Dissonance plus additional information
@@ -22,20 +22,20 @@
 mami.codi <- function(
     x,
     min_amplitude      = MIN_AMPLITUDE,
-    spatial_tolerance  = RATIO_TOLERANCE,
-    temporal_tolerance = RATIO_TOLERANCE,
+    spatial_precision  = RATIONAL_FRACTION_PRECISION,
+    temporal_precision = RATIONAL_FRACTION_PRECISION,
     metadata           = NA,
     verbose            = FALSE,
     ...
 ) {
 
   parse_input(x, ...)                                                        %>%
-    compute_consonance(min_amplitude, spatial_tolerance, temporal_tolerance) %>%
+    compute_consonance(min_amplitude, spatial_precision, temporal_precision) %>%
     format_output(metadata, verbose)
 
 }
 MIN_AMPLITUDE = 0.00
-RATIO_TOLERANCE = 0.02
+RATIONAL_FRACTION_PRECISION = 0.02
 
 #' Parse Input
 #'
@@ -71,54 +71,41 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 
 }
 
-compute_consonance = function(x, min_amplitude, spatial_tolerance, temporal_tolerance) {
+compute_consonance = function(x, min_amplitude, spatial_precision, temporal_precision) {
 
-  f = x$spectrum[[1]] %>%
-    dplyr::filter(.data$y>min_amplitude) %>%
-    hrep::freq()
+  f       = x$spectrum[[1]] %>% dplyr::filter(.data$y>min_amplitude) %>% hrep::freq()
   c_sound = max(f) / max(1/f)
-  l = c_sound / f
+  l       = c_sound / f
 
   x %>% dplyr::mutate(
-    # TODO:
-    # this stuff just computes the fundamental frequency and the
-    # fundamental wavelength of the chord
-    #
-    # fundamental_frequency  = gcd(f)
-    # fundamental_wavelength = gcd(l)
-    estimate_periodicity(l, spatial_tolerance) %>%
-      dplyr::rename_with(~ paste0('spatial_',.)),
-    estimate_periodicity(f, temporal_tolerance) %>%
-      dplyr::rename_with(~ paste0('temporal_',.)),
+    gcd(f/min(f), temporal_precision) %>% dplyr::rename_with(~ paste0('temporal_',.)),
+    temporal_consonance   = .data$temporal_gcd,
+    gcd(l/min(l), spatial_precision) %>% dplyr::rename_with(~ paste0('spatial_',.)),
+    spatial_consonance    = .data$spatial_gcd,
     consonance_dissonance = .data$temporal_consonance + .data$spatial_consonance,
     major_minor           = .data$temporal_consonance - .data$spatial_consonance,
     frequencies           = list(f),
     wavelengths           = list(l),
     speed_of_sound        = c_sound,
     min_amplitude,
-    spatial_tolerance,
-    temporal_tolerance
+    spatial_precision,
+    temporal_precision
   )
 
 }
 
-estimate_periodicity <- function(x, tolerance, pitch) {
-  r = ratios(x, tolerance)
-
+gcd <- function(x, precision) {
+  r = rational_fractions(x, precision)
   tibble::tibble_row(
-    gcd_num    = gcd(r$num),
-    lcm_den    = lcm(r$den),
-    gcd_whole  = .data$gcd_num / .data$lcm_den,
-    lcm_num    = lcm(r$num),
-    gcd_den    = gcd(r$den),
-    lcm_whole  = .data$lcm_num / .data$gcd_den,
-    consonance = .data$gcd_whole,
-    ratios     = list(r)
+    gcd_num = gcd_integers(r$num),
+    lcm_den = lcm_integers(r$den),
+    gcd     = gcd_num / lcm_den,
+    ratios  = list(r)
   )
 }
 
-gcd <- function(x) Reduce(gmp::gcd.bigz, x) %>% as.numeric()
-lcm <- function(x) Reduce(gmp::lcm.bigz, x) %>% as.numeric()
+gcd_integers <- function(x) Reduce(gmp::gcd.bigz, x) %>% as.numeric()
+lcm_integers <- function(x) Reduce(gmp::lcm.bigz, x) %>% as.numeric()
 
 format_output <- function(x, metadata, verbose) {
   x <- x %>% tibble::add_column(
@@ -131,8 +118,8 @@ format_output <- function(x, metadata, verbose) {
     x %>%
       dplyr::select('major_minor',
                     'consonance_dissonance',
-                    'spatial_tolerance',
-                    'temporal_tolerance',
+                    'spatial_precision',
+                    'temporal_precision',
                     'min_amplitude',
                     'metadata')
   }
