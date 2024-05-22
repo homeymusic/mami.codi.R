@@ -73,10 +73,8 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 
 compute_consonance = function(x, min_amplitude, spatial_precision, temporal_precision) {
 
-  freqs   = x$spectrum[[1]] %>% dplyr::filter(.data$y>min_amplitude) %>% hrep::freq()
-  l       = 100 - 100 * (log10( freqs / 165.4 + 0.88 ) / 2.1)
-  c_sound = max(l) / max(1/l)
-  f       = c_sound / l
+  f = x$spectrum[[1]] %>% dplyr::filter(.data$y>min_amplitude) %>% hrep::freq()
+  l = 100 - 100 * (log10( f / 165.4 + 0.88 ) / 2.1)
 
   x %>% dplyr::mutate(
     gcd(f/min(f), temporal_precision) %>% dplyr::rename_with(~ paste0('temporal_',.)),
