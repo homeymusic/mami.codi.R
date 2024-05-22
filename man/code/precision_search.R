@@ -11,16 +11,17 @@ if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
 } else {
 
   # Detailed
-  from_prec   = 0.1
-  to_prec     = 1.0
-  by_prec     = 0.01
+  from_prec   = 0.01
+  to_prec     = 0.04
+  by_prec     = 0.001
   precisions = seq(from=from_prec, to=to_prec, by=by_prec)
 
   # Orders of Magnitude
   # precisions   = c(1:9 %o% 10^(-4:-1))
 }
 
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R',
+                         ref='f0_fmin')
 
 source('./trials.R')
 run_trials(search_label, precisions)

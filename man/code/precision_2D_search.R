@@ -1,5 +1,5 @@
 search_label       = 'Compressed'
-precisions         = c(1:9 %o% 10^(-3:-2))
+precisions         = c(1:9 %o% 10^(-3:-1))
 temporal_precision = precisions
 spatial_precision  = precisions
 # temporal_precision = seq(from=0.005, to=0.007, by=0.0001)
@@ -11,7 +11,8 @@ octave_ratio       = 2.0
 roll_off           = 3
 
 source('./utils.R')
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R',
+                         ref='f0_fmin')
 
 library(mami.codi.R)
 devtools::load_all(".")
