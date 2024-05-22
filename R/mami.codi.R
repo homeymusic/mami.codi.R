@@ -95,12 +95,12 @@ compute_consonance = function(x, min_amplitude, spatial_precision, temporal_prec
 }
 
 gcd <- function(x, precision) {
-  r = rational_fractions(x, precision)
+  fractions = rational_fractions(x, precision)
   tibble::tibble_row(
-    gcd_num = gcd_integers(r$num),
-    lcm_den = lcm_integers(r$den),
-    gcd     = gcd_num / lcm_den,
-    ratios  = list(r)
+    gcd_num   = gcd_integers(fractions$num),
+    lcm_den   = lcm_integers(fractions$den),
+    gcd       = gcd_num / lcm_den,
+    fractions = list(fractions)
   )
 }
 

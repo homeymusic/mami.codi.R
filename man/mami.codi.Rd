@@ -7,8 +7,8 @@
 mami.codi(
   x,
   min_amplitude = MIN_AMPLITUDE,
-  spatial_tolerance = RATIO_TOLERANCE,
-  temporal_tolerance = RATIO_TOLERANCE,
+  spatial_precision = RATIONAL_FRACTION_PRECISION,
+  temporal_precision = RATIONAL_FRACTION_PRECISION,
   metadata = NA,
   verbose = FALSE,
   ...
@@ -20,15 +20,15 @@ hrep::sparse_fr_spectrum}
 
 \item{min_amplitude}{An optional minimum amplitude for deciding which signals to include}
 
-\item{spatial_tolerance}{An optional tolerance value for creating rational fractions for spatial signals}
+\item{spatial_precision}{An optional precision value for creating rational fractions for spatial signals}
 
-\item{temporal_tolerance}{An optional tolerance value for creating rational fractions for temporal signals}
+\item{temporal_precision}{An optional precision value for creating rational fractions for temporal signals}
 
 \item{metadata}{User-provided list of metadata that roundtrips with each call.
 helpful for analysis and plots}
 
 \item{verbose}{Determines the amount of data to return from chord evaluation
-TRUE is all and FALSE is just major-minor, consonance-dissonance, tolerance and metadata.}
+TRUE is all and FALSE is just major-minor, consonance-dissonance, precision and metadata.}
 
 \item{...}{parameters for hrep::sparse_fr_spectrum}
 }
