@@ -73,17 +73,20 @@ DataFrame rational_fractions(NumericVector x, const double precision) {
 
   NumericVector nums(m);
   NumericVector dens(m);
+  NumericVector approximations(m);
 
   for (int i = 0; i < m; ++i) {
     const NumericVector fraction = stern_brocot(x[i], precision);
-    nums[i]  = fraction[0];
-    dens[i]  = fraction[1];
+    nums[i]           = fraction[0];
+    dens[i]           = fraction[1];
+    approximations[i] = nums[i] / dens[i];
   }
 
   return DataFrame::create(
+    _("rational_number") = x,
     _("num")             = nums,
     _("den")             = dens,
-    _("rational_number") = x,
+    _("approximation")   = approximations,
     _("precision")       = precision
   );
 }
