@@ -1,4 +1,4 @@
-search_label = 'Harmonic'
+search_label = 'Stretched'
 
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # Detailed
@@ -11,16 +11,17 @@ if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
 } else {
 
   # Detailed
-  # from_prec   = 0.009
-  # to_prec     = 0.02
-  # by_prec     = 0.001
+  # from_prec   = 0.01
+  # to_prec     = 0.03
+  # by_prec     = 0.0001
   # precisions = seq(from=from_prec, to=to_prec, by=by_prec)
 
   # Orders of Magnitude
   precisions   = c(1:9 %o% 10^(-4:-1))
 }
 
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R',
+                         ref='cochlea')
 
 source('./trials.R')
 run_trials(search_label, precisions)
