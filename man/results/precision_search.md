@@ -1,7 +1,7 @@
 Precision Search
 ================
 
-# Stretched
+# Harmonic
 
 Precisions:
 
@@ -15,9 +15,9 @@ Number of Harmonics:
 
 Octave Ratios:
 
-    #> [1] 2.1
+    #> [1] 2
 
-max: 31.5753196 min: -2.0017059
+max: 27.6425637 min: -0.4836558
 
 ## CoDi Wrap
 
