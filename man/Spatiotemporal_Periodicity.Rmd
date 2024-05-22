@@ -84,7 +84,7 @@ knitr::kable(chord %>% dplyr::select('consonance_dissonance', 'major_minor', 'te
 ```{r, echo=F, results='asis', message=F}
 knitr::kable(tibble::tibble(
   tol      = chord$temporal_tolerance,
-  lcd      = chord$temporal_lcd,
+  lcd      = chord$temporal_lcm_den,
   chord_Sz = log2(lcd),
   min_f_Hz = min(chord$frequencies[[1]]),
   max_T_s  = 1 / min_f_Hz,
@@ -100,7 +100,7 @@ knitr::kable(tibble::tibble(
 ```{r, echo=F, results='asis', message=F}
 ratios = chord$temporal_ratios[[1]] %>% 
   dplyr::select(index, num, den, tone)
-lcd    = chord$temporal_lcd
+lcd    = chord$temporal_lcm_den
 plot_periodicity(ratios, lcd, 'frequency', relative = F)
 ```
 
@@ -124,7 +124,7 @@ knitr::kable(chord$temporal_ratios[[1]] %>%
 ```{r, echo=F, results='asis', message=F}
 knitr::kable(tibble::tibble(
   tol      = chord$spatial_tolerance,
-  lcd      = chord$spatial_lcd,
+  lcd      = chord$spatial_lcm_den,
   chord_Sz = log2(lcd),
   max_l_m  = max(chord$wavelengths[[1]]),
   chord_m  = lcd * max_l_m,
@@ -139,7 +139,7 @@ knitr::kable(tibble::tibble(
 ```{r, echo=F, results='asis', message=F}
 ratios = chord$spatial_ratios[[1]] %>%
   dplyr::select(index, num, den, tone)
-lcd    = chord$spatial_lcd
+lcd    = chord$spatial_lcm_den
 plot_periodicity(ratios, lcd, 'wavelength', c_sound = c_sound,relative = F)
 ```
 
