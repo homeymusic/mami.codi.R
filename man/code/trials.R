@@ -1,4 +1,4 @@
-run_trials <- function(search_label, tolerances) {
+run_trials <- function(search_label, precisions) {
   devtools::load_all(".")
   tonic_midi = 60
   source('./utils.R')
@@ -24,7 +24,7 @@ run_trials <- function(search_label, tolerances) {
   print(paste('num_harmonics:',num_harmonics))
   print(paste('roll_off:',roll_off))
 
-  rds = paste0('../data/tolerance_',
+  rds = paste0('../data/precision_',
                search_label,
                '.rds')
   prepare(rds)
@@ -38,7 +38,7 @@ run_trials <- function(search_label, tolerances) {
 
   grid = tidyr::expand_grid(
     interval,
-    tolerance = tolerances
+    precision = precisions
   )
 
   print(grid)
@@ -47,7 +47,7 @@ run_trials <- function(search_label, tolerances) {
 
   data = grid %>% furrr::future_pmap_dfr(\(
     interval,
-    tolerance
+    precision
   ) {
 
     if (search_label=='Bonang') {
@@ -86,8 +86,8 @@ run_trials <- function(search_label, tolerances) {
     }
     mami.codi.R::mami.codi(
       chord,
-      spatial_tolerance  = tolerance,
-      temporal_tolerance  = tolerance,
+      spatial_precision  = precision,
+      temporal_precision  = precision,
       metadata       = list(
         octave_ratio   = octave_ratio,
         num_harmonics  = num_harmonics,

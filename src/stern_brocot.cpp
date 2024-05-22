@@ -81,9 +81,9 @@ DataFrame rational_fractions(NumericVector x, const double precision) {
   }
 
   return DataFrame::create(
-    _("num")                 = nums,
-    _("den")                 = dens,
-    _("tone")                = x,
-    _("precision")           = precision
+    _("num")       = nums,
+    _("den")       = dens,
+    _("x")         = x,
+    _("precision") = precision
   );
 }

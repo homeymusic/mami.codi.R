@@ -358,11 +358,11 @@ plot_semitone_co <- function(chords, title='') {
     ggplot2::ggtitle(title) +
     theme_homey()
 }
-plot_semitone_tolerance <- function(chords, title='') {
+plot_semitone_precision <- function(chords, title='') {
   temporal_semitone =chords$semitone %>% min
   spatial_semitone =chords$semitone %>% max
   ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone,
-                                       y = .data$tolerance)) +
+                                       y = .data$precision)) +
     ggplot2::geom_point(color=colors_homey$neutral, size=0.5) +
     ggplot2::scale_x_continuous(breaks = seq(temporal_semitone,spatial_semitone),
                                 minor_breaks = c()) +
@@ -422,14 +422,14 @@ plot_semitone_codi_grid <- function(theory, experiment,
                                     include_points=T,
                                     title) {
   per_plot_labels = tidyr::expand_grid(
-    temporal_tolerance  = theory$temporal_tolerance  %>% unique,
-    spatial_tolerance = theory$spatial_tolerance %>% unique
+    temporal_precision  = theory$temporal_precision  %>% unique,
+    spatial_precision = theory$spatial_precision %>% unique
   )
   per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(temporal_tolerance,spatial_tolerance) {
+    purrr::pmap_vec(\(temporal_precision,spatial_precision) {
       tols = paste(
-        'time:', temporal_tolerance,
-        'space:', spatial_tolerance
+        'time:', temporal_precision,
+        'space:', spatial_precision
       )
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=z_score)) +
@@ -454,7 +454,7 @@ plot_semitone_codi_grid <- function(theory, experiment,
                                                           vjust="inward",hjust="inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_grid(temporal_tolerance ~ spatial_tolerance, scales = 'free_y') +
+    ggplot2::facet_grid(temporal_precision ~ spatial_precision, scales = 'free_y') +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()
@@ -464,11 +464,11 @@ plot_semitone_codi_wrap <- function(theory, experiment,
                                     title,ncols=12,
                                     include_points=T) {
   per_plot_labels = tidyr::expand_grid(
-    spatial_tolerance  = theory$spatial_tolerance  %>% unique
+    spatial_precision  = theory$spatial_precision  %>% unique
   )
   per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(spatial_tolerance) {
-      tols = paste0('   tolerance:', spatial_tolerance)
+    purrr::pmap_vec(\(spatial_precision) {
+      tols = paste0('   precision:', spatial_precision)
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
@@ -493,7 +493,7 @@ plot_semitone_codi_wrap <- function(theory, experiment,
                                     vjust="inward",hjust="inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_wrap(~spatial_tolerance,ncol=ncols,dir='v') +
+    ggplot2::facet_wrap(~spatial_precision,ncol=ncols,dir='v') +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()
@@ -502,11 +502,11 @@ plot_semitone_waveco_wrap <- function(theory, experiment,
                                       black_vlines=c(), gray_vlines=c(),
                                       title,ncols=12) {
   per_plot_labels = tidyr::expand_grid(
-    spatial_tolerance  = theory$spatial_tolerance  %>% unique
+    spatial_precision  = theory$spatial_precision  %>% unique
   )
   per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(spatial_tolerance) {
-      tols = paste0('   λ:', spatial_tolerance, ' f:', spatial_tolerance)
+    purrr::pmap_vec(\(spatial_precision) {
+      tols = paste0('   λ:', spatial_precision, ' f:', spatial_precision)
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
@@ -530,7 +530,7 @@ plot_semitone_waveco_wrap <- function(theory, experiment,
                                     vjust="inward",hjust="inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_wrap(~spatial_tolerance,ncol=ncols,dir='v') +
+    ggplot2::facet_wrap(~spatial_precision,ncol=ncols,dir='v') +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()
@@ -539,11 +539,11 @@ plot_semitone_freqco_wrap <- function(theory, experiment,
                                       black_vlines=c(), gray_vlines=c(),
                                       title,ncols=12) {
   per_plot_labels = tidyr::expand_grid(
-    spatial_tolerance  = theory$tolerance  %>% unique
+    spatial_precision  = theory$precision  %>% unique
   )
   per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(spatial_tolerance) {
-      tols = paste0('   λ:', spatial_tolerance, ' f:', spatial_tolerance)
+    purrr::pmap_vec(\(spatial_precision) {
+      tols = paste0('   λ:', spatial_precision, ' f:', spatial_precision)
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
@@ -567,7 +567,7 @@ plot_semitone_freqco_wrap <- function(theory, experiment,
                                     vjust="inward",hjust="inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_wrap(~spatial_tolerance,ncol=ncols,dir='v') +
+    ggplot2::facet_wrap(~spatial_precision,ncol=ncols,dir='v') +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()
@@ -576,11 +576,11 @@ plot_semitone_mami_wrap <- function(theory, experiment,
                                     black_vlines=c(), gray_vlines=c(),
                                     title,ncols=12) {
   per_plot_labels = tidyr::expand_grid(
-    tolerance  = theory$tolerance  %>% unique,
+    precision  = theory$precision  %>% unique,
   )
   per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(tolerance) {
-      tols = paste0('  ', tolerance)
+    purrr::pmap_vec(\(precision) {
+      tols = paste0('  ', precision)
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=major_minor)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
@@ -595,7 +595,7 @@ plot_semitone_mami_wrap <- function(theory, experiment,
                                     vjust="inward",hjust="inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_wrap(~tolerance,ncol=ncols,dir='v') +
+    ggplot2::facet_wrap(~precision,ncol=ncols,dir='v') +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()

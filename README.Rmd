@@ -61,7 +61,7 @@ observations shortly.\
 
 When we combine all the component parts of a chord together into a whole, 
 we can estimate the overall wavelength for the whole chord. A technique used in digital signal 
-processing and bricklaying is to estimate ratios (within an acceptable tolerance)
+processing and bricklaying is to estimate ratios (within an acceptable precision)
 between each of the parts and a selected reference part.
 The least common denominator (LCD) of those part ratios will be a measure of the periodicity 
 of the whole relative to the selected reference part.\
@@ -101,7 +101,7 @@ See the example of the major triad with 5 harmonics, below.
 ```{r, child=c('man/Spatiotemporal_Periodicity.Rmd')}
 ```
 
-### Finding the Tolerance Values
+### Finding the precision Values
 
 "One difficulty with distinguishing between place and temporal (or place-time) models of
 pitch is that spectral and temporal representations of a signal are mathematically equivalent:
@@ -119,16 +119,16 @@ suppressed, then temporal information is not necessary for pitch perception."\
 from "Revisiting place and temporal theories of pitch", Andrew J. Oxenham, 2014.\
 
 The MaMi.CoDi model, based on Stolzenburg (2015), has one one parameter: 
-tolerance. Tolerance is used by the Stern-Brocot algorithm to find tone
+precision. precision is used by the Stern-Brocot algorithm to find tone
 ratios as rational fractions that are then used to estimate the relative 
-periodicity of chords. Tolerance acts as the physiological limits mentioned by 
+periodicity of chords. precision acts as the physiological limits mentioned by 
 Oxenham, above.\
 
 Considering that the spatial and temporal signals had two different physiological
-origins, we searched a two-dimensional tolerance space in order to match model
+origins, we searched a two-dimensional precision space in order to match model
 predictions with the large-scale behavioral results. It turned out that the 
 values that best matched large-scale behavioral results were always the
-same for temporal and spatial tolerance. This might indicate that the physiological 
+same for temporal and spatial precision. This might indicate that the physiological 
 limitations are not specific to place signals or time signals separetely. But 
 instead the limitation is higher in the auditory system after the signals have
 been passed along.\
@@ -139,14 +139,14 @@ of higher-level perception or pattern recognition, where estimates of the period
 of a complex signal is made from components.\
 
 MaMi.CoDi uses the Stern-Brocot tree to find rational fractions for the ratios 
-within a given tolerance. How do we find the best tolerance values? For the 
-MaMi.CoDi model we ran thousands of computations with various tolerance values 
+within a given precision. How do we find the best precision values? For the 
+MaMi.CoDi model we ran thousands of computations with various precision values 
 and compared the predictions with results from six of the large-scale behavioral 
 experiments.\
 
 Because the spatial signal and the temporal signal have different origins
-we initially did a two-dimensional tolerance search. However the closest 
-fits to the behavioral data came from spatial and tolerance values being the 
+we initially did a two-dimensional precision search. However the closest 
+fits to the behavioral data came from spatial and precision values being the 
 same. Insofar as this model represents processing in the auditory cortex, it 
 would seem that estimating the cyclicity of the two signals happens higher up
 in the auditoray system after the spatial and temporal signals have been processed.\
@@ -280,8 +280,8 @@ p = params %>% purrr::map(\(p) {
   cat(description)
   print(knitr::kable(tibble::tibble_row(
     min_amplitude           = paste(round(chords$min_amplitude %>% unique, 2), collapse = ' '),
-    spatial_tolerance       = paste(round(chords$spatial_tolerance %>% unique, 5), collapse = ' '),
-    temporal_tolerance      = paste(round(chords$temporal_tolerance %>% unique, 5), collapse = ' '),
+    spatial_precision       = paste(round(chords$spatial_precision %>% unique, 5), collapse = ' '),
+    temporal_precision      = paste(round(chords$temporal_precision %>% unique, 5), collapse = ' '),
     smoothing_sigma         = sigma
   )))
   print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),
@@ -297,7 +297,7 @@ p = params %>% purrr::map(\(p) {
 })
 ```
 
-### TODO: run the in-depth tolerance searches again for M3, M6 and P8
+### TODO: run the in-depth precision searches again for M3, M6 and P8
 
 ```{r, child=c('man/M3_M6_P8.Rmd')}
 ```

@@ -56,8 +56,8 @@ cat("  \n###", title, '\n')
 print(knitr::kable(tibble::tibble_row(
   multicolored_line_sigma  = 0.2,
   green_line_sigma         = 2.0,
-  spatial_tolerance        = paste(round(chords$spatial_tolerance %>% unique, 5), collapse = ' '),
-  temporal_tolerance       = paste(round(chords$temporal_tolerance %>% unique, 5), collapse = ' '),
+  spatial_precision        = paste(round(chords$spatial_precision %>% unique, 5), collapse = ' '),
+  temporal_precision       = paste(round(chords$temporal_precision %>% unique, 5), collapse = ' '),
 )))
 print(plot_semitone_codi_smooth(chords, title))
 cat("  \n")
@@ -89,22 +89,22 @@ of those dissonance troughs.
 
 ### MaMi.CoDi resolution correlates with dissonance troughs and consonance peaks
 
-As the tolerance value of the MaMi.CoDi model varies from very small to very large
+As the precision value of the MaMi.CoDi model varies from very small to very large
 the consonance peaks expand their width until they overcome the dissonance troughs.
 See plot sets, below, for M3, M6 and P8.\
 
-MaMi.CoDi's tolerance value is the only parameter in the model and indicates
+MaMi.CoDi's precision value is the only parameter in the model and indicates
 the resolution for turning irrational ratios into rational fractions.
 Those fractions are then used to estimate wavelength periodicity and 
 frequency periodicity.\
 
-* Small tolerances give more accurate fractions which give longer periods.
-* Large tolerances give less accurate fractions which give shorter period estimates.
+* Small precisions give more accurate fractions which give longer periods.
+* Large precisions give less accurate fractions which give shorter period estimates.
 
 #### M3 ~ Major Third
 
-Plot of M3 with MaMi.CoDi tolerance values varying from 1e-08 to 0.1:
-![M3 with a range of MaMi.CoDi tolerance values.](./man/tolerance_search_plots/M3.png)
+Plot of M3 with MaMi.CoDi precision values varying from 1e-08 to 0.1:
+![M3 with a range of MaMi.CoDi precision values.](./man/precision_search_plots/M3.png)
 
 * JT: 5/4
 * ET: 2^(4/12)
@@ -212,8 +212,8 @@ P_M3$temporal_ratios[[1]]
 
 #### M6 ~ Major Sixth
 
-Plot of M6 with MaMi.CoDi tolerance values varying from 1e-08 to 0.1:
-![M6 with a range of MaMi.CoDi tolerance values.](./man/tolerance_search_plots/M6.png)
+Plot of M6 with MaMi.CoDi precision values varying from 1e-08 to 0.1:
+![M6 with a range of MaMi.CoDi precision values.](./man/precision_search_plots/M6.png)
 
 * JT: 5/3
 * ET: 2^(9/12)
@@ -318,5 +318,5 @@ G_M6$temporal_ratios[[1]]
 
 #### P8 Octave
 
-Plot of P8 with MaMi.CoDi tolerance values varying from 1e-08 to 0.1:
-![P8 with a range of MaMi.CoDi tolerance values.](./man/tolerance_search_plots/P8.png)
+Plot of P8 with MaMi.CoDi precision values varying from 1e-08 to 0.1:
+![P8 with a range of MaMi.CoDi precision values.](./man/precision_search_plots/P8.png)

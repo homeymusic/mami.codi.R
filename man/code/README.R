@@ -141,40 +141,40 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
   }
 
   if (timbre=='Pure') {
-    spatial_tolerance  = 0.02
-    temporal_tolerance = 0.02
+    spatial_precision  = 0.02
+    temporal_precision = 0.02
   } else if (timbre=='Bonang') {
-    spatial_tolerance  = 0.02
-    temporal_tolerance = 0.02
+    spatial_precision  = 0.02
+    temporal_precision = 0.02
   } else if (timbre=='5PartialsNo3') {
-    spatial_tolerance  = 0.02
-    temporal_tolerance = 0.02
+    spatial_precision  = 0.02
+    temporal_precision = 0.02
   } else if (timbre=='5Partials') {
-    spatial_tolerance  = 0.02
-    temporal_tolerance = 0.02
+    spatial_precision  = 0.02
+    temporal_precision = 0.02
   } else if (timbre=='Harmonic') {
-    spatial_tolerance  = 0.02
-    temporal_tolerance = 0.02
+    spatial_precision  = 0.02
+    temporal_precision = 0.02
   } else if (timbre=='Stretched') {
-    spatial_tolerance  = 0.02
-    temporal_tolerance = 0.02
+    spatial_precision  = 0.02
+    temporal_precision = 0.02
   } else if (timbre=='Compressed') {
-    spatial_tolerance  = 0.02
-    temporal_tolerance = 0.02
+    spatial_precision  = 0.02
+    temporal_precision = 0.02
   } else if (timbre=='M3') {
-    spatial_tolerance  = 5e-05
-    temporal_tolerance = 5e-05
+    spatial_precision  = 5e-05
+    temporal_precision = 5e-05
   } else if (timbre=='M6') {
-    spatial_tolerance  = 5e-05
-    temporal_tolerance = 5e-05
+    spatial_precision  = 5e-05
+    temporal_precision = 5e-05
   } else if (timbre=='P8') {
-    spatial_tolerance  = 5e-05
-    temporal_tolerance = 5e-05
+    spatial_precision  = 5e-05
+    temporal_precision = 5e-05
   }
 
   mami.codi.R::mami.codi(study_chord,
-                         spatial_tolerance=spatial_tolerance,
-                         temporal_tolerance=temporal_tolerance,
+                         spatial_precision=spatial_precision,
+                         temporal_precision=temporal_precision,
                          metadata = list(
                            num_harmonics = num_harmonics,
                            octave_ratio  = octave_ratio,

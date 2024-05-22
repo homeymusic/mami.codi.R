@@ -1,26 +1,26 @@
-search_label = 'P8'
+search_label = 'Harmonic'
 
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # Detailed
-  # from_tol   = 4e-05
-  # to_tol     = 6e-05
-  # by_tol     = 1e-06
-  # tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
+  # from_prec   = 4e-05
+  # to_prec     = 6e-05
+  # by_prec     = 1e-06
+  # precisions = seq(from=from_prec, to=to_prec, by=by_prec)
 
-  tolerances   = c(1:9 %o% 10^(-6:-1))
+  precisions   = c(1:9 %o% 10^(-6:-1))
 } else {
 
   # Detailed
-  # from_tol   = 0.009
-  # to_tol     = 0.04
-  # by_tol     = 0.001
-  # tolerances = seq(from=from_tol, to=to_tol, by=by_tol)
+  # from_prec   = 0.009
+  # to_prec     = 0.04
+  # by_prec     = 0.001
+  # precisions = seq(from=from_prec, to=to_prec, by=by_prec)
 
   # Orders of Magnitude
-  tolerances   = c(1:9 %o% 10^(-4:-1))
+  precisions   = c(1:9 %o% 10^(-4:-1))
 }
 
 devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 
 source('./trials.R')
-run_trials(search_label, tolerances)
+run_trials(search_label, precisions)

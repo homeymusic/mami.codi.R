@@ -1,12 +1,12 @@
 ---
-title: "Tolerance Search"
+title: "Precision Search"
 output:
   github_document: default
 always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'P8'
+search_label = 'Harmonic'
 ```
 
 # `r search_label`
@@ -18,7 +18,7 @@ source('../code/utils.R')
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "../figures/tolerance_search/"
+  fig.path = "../figures/precision_search/"
 )
 knitr::opts_chunk$set(dev = 'png')
 ```
@@ -61,7 +61,7 @@ experiment <- experiment %>% dplyr::mutate(
   consonance_dissonance = rating
 )
 
-theory.rds = paste0('../data/tolerance_',
+theory.rds = paste0('../data/precision_',
                     search_label,
                     '.rds')
 theory = readRDS(theory.rds)
@@ -74,7 +74,7 @@ theory <- theory %>% dplyr::rowwise() %>% dplyr::mutate(
   octave_ratio   = metadata$octave_ratio,
   semitone       = metadata$semitone,
   .before=1
-) %>% dplyr::group_by(spatial_tolerance)
+) %>% dplyr::group_by(spatial_precision)
 ```
 
 ```{r, echo=F, results='asis', message=F}
@@ -82,9 +82,9 @@ theory <- theory  %>% dplyr::filter(semitone > 0)
 experiment <- experiment  %>% dplyr::filter(semitone > 0)
 ```
 
-Tolerances:
+Precisions:
 ```{r, echo=F}
-tols = theory$spatial_tolerance %>% unique
+tols = theory$spatial_precision %>% unique
 tols
 ```
 
