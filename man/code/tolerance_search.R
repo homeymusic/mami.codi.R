@@ -1,4 +1,4 @@
-search_label = 'Harmonic'
+search_label = 'Pure'
 
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # Detailed
