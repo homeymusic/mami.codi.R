@@ -1,0 +1,46 @@
+---
+title: "Shaping Consonance"
+output:
+  github_document: default
+always_allow_html: true
+---
+```{r, echo=F, message=F, include=F}
+devtools::load_all(".")
+source('./man/code/plot.R')
+source('./man/code/utils.R')
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "../figures/GCD-"
+)
+knitr::opts_chunk$set(dev = 'svg')
+p = RATIONAL_FRACTION_PRECISION
+```
+
+```{r, include=F}
+readme_data = readRDS('./man/data/readme.rds')
+```
+
+```{r, include=F}
+chords <- readme_data %>% dplyr::rowwise() %>% dplyr::mutate(
+  type          = metadata$type,
+  num_harmonics = metadata$num_harmonics,
+  octave_ratio  = metadata$octave_ratio,
+  semitone      = metadata$semitone,
+  timbre        = metadata$timbre,
+  label         = round(metadata$semitone),
+  chord_max     = max(frequencies),
+  chord_min     = min(frequencies),
+  .before=1
+)
+chords <- chords %>% dplyr::filter(timbre == 'Harmonic')
+```
+
+```{r}
+chords$spatial_consonance = log2(chords$spatial_consonance+1)
+print(plot_semitone_spatial(chords, 'Spatial'))
+```
+```{r}
+chords$temporal_consonance = log2(chords$temporal_consonance+1)
+print(plot_semitone_temporal(chords, 'Temporal'))
+```

@@ -347,6 +347,78 @@ plot_semitone_spatial_temporal <- function(chords, title='', include_line=T, sig
     ggplot2::labs(color = NULL) +
     theme_homey()
 }
+plot_semitone_spatial <- function(chords, title='', include_line=T, sigma=0.2,
+                                           dashed_minor = F,include_points=T,
+                                           include_linear_regression = F, goal=NULL,
+                                           black_vlines=c(),gray_vlines=c()) {
+
+  chords$smoothed.spatial_consonance = smoothed(chords$semitone,
+                                                chords$spatial_consonance,
+                                                sigma)
+
+  linetype_for_minor = if (dashed_minor) {'dashed'} else {'solid'}
+
+  ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone)) +
+    ggplot2::geom_vline(xintercept = black_vlines, color=colors_homey$highlight) +
+    ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
+    { if (include_points)
+      ggplot2::geom_point(ggplot2::aes(y = .data$spatial_consonance),
+                          shape=21, stroke=NA, size=1,
+                          fill=colors_homey$minor)
+    } +
+    ggplot2::geom_line(ggplot2::aes(
+      y = .data$smoothed.spatial_consonance,
+      color = 'spatial'),
+      linewidth = 1,
+      linetype = linetype_for_minor) +
+    ggplot2::ggtitle(title) +
+    ggplot2::scale_x_continuous(breaks = 0:15,
+                                minor_breaks = c()) +
+    ggplot2::guides(col = ggplot2::guide_legend()) +
+    ggplot2::ylab('Spatial Consonance') +
+    ggplot2::xlab('Semitone') +
+    ggplot2::scale_color_manual(
+      values=space_time_colors(),
+      breaks=c('spatial', 'temporal', 'behavioral')) +
+    ggplot2::labs(color = NULL) +
+    theme_homey()
+}
+plot_semitone_temporal <- function(chords, title='', include_line=T, sigma=0.2,
+                                  dashed_minor = F,include_points=T,
+                                  include_linear_regression = F, goal=NULL,
+                                  black_vlines=c(),gray_vlines=c()) {
+
+  chords$smoothed.temporal_consonance = smoothed(chords$semitone,
+                                                chords$temporal_consonance,
+                                                sigma)
+
+  linetype_for_minor = if (dashed_minor) {'dashed'} else {'solid'}
+
+  ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone)) +
+    ggplot2::geom_vline(xintercept = black_vlines, color=colors_homey$highlight) +
+    ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
+    { if (include_points)
+      ggplot2::geom_point(ggplot2::aes(y = .data$temporal_consonance),
+                          shape=21, stroke=NA, size=1,
+                          fill=colors_homey$major)
+    } +
+    ggplot2::geom_line(ggplot2::aes(
+      y = .data$smoothed.temporal_consonance,
+      color = 'temporal'),
+      linewidth = 1,
+      linetype = linetype_for_minor) +
+    ggplot2::ggtitle(title) +
+    ggplot2::scale_x_continuous(breaks = 0:15,
+                                minor_breaks = c()) +
+    ggplot2::guides(col = ggplot2::guide_legend()) +
+    ggplot2::ylab('Temporal Consonance') +
+    ggplot2::xlab('Semitone') +
+    ggplot2::scale_color_manual(
+      values=space_time_colors(),
+      breaks=c('spatial', 'temporal', 'behavioral')) +
+    ggplot2::labs(color = NULL) +
+    theme_homey()
+}
 plot_semitone_co <- function(chords, title='') {
   temporal_semitone =chords$semitone %>% min
   spatial_semitone =chords$semitone %>% max
