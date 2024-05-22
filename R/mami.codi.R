@@ -85,7 +85,6 @@ compute_consonance = function(x, min_amplitude, spatial_precision, temporal_prec
     major_minor           = .data$temporal_consonance - .data$spatial_consonance,
     frequencies           = list(f),
     wavelengths           = list(l),
-    speed_of_sound        = c_sound,
     min_amplitude,
     spatial_precision,
     temporal_precision
