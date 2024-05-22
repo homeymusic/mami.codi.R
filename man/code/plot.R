@@ -296,10 +296,10 @@ plot_semitone_spatial_temporal <- function(chords, title='', include_line=T, sig
                                            black_vlines=c(),gray_vlines=c()) {
 
   chords$smoothed.temporal_consonance = smoothed(chords$semitone,
-                                                 chords$temporal_consonance_z,
+                                                 chords$temporal_consonance,
                                                  sigma)
   chords$smoothed.spatial_consonance = smoothed(chords$semitone,
-                                                chords$spatial_consonance_z,
+                                                chords$spatial_consonance,
                                                 sigma)
 
   mean_theoretical = mean(c(chords$smoothed.temporal_consonance,
@@ -311,12 +311,12 @@ plot_semitone_spatial_temporal <- function(chords, title='', include_line=T, sig
     ggplot2::geom_vline(xintercept = black_vlines, color=colors_homey$highlight) +
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
     { if (include_points)
-      ggplot2::geom_point(ggplot2::aes(y = .data$temporal_consonance_z),
+      ggplot2::geom_point(ggplot2::aes(y = .data$temporal_consonance),
                           shape=21, stroke=NA, size=1,
                           fill=colors_homey$major)
     } +
     { if (include_points)
-      ggplot2::geom_point(ggplot2::aes(y = .data$spatial_consonance_z),
+      ggplot2::geom_point(ggplot2::aes(y = .data$spatial_consonance),
                           shape=21, stroke=NA, size=1,
                           fill=colors_homey$minor)
     } +

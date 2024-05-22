@@ -140,7 +140,7 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
     )
   }
 
-  default_precision = 0.01
+  default_precision = 0.03
   if (timbre=='Pure') {
     spatial_precision  = default_precision
     temporal_precision = default_precision
