@@ -1,5 +1,10 @@
 search_label       = 'Compressed'
-precisions         = c(1:9 %o% 10^(-3:-2))
+# precisions         = c(1:9 %o% 10^(-3:-2))
+from_prec   = 0.0085
+to_prec     = 0.0102
+by_prec     = 0.0001
+precisions = seq(from=from_prec, to=to_prec, by=by_prec)
+
 temporal_precision = precisions
 spatial_precision  = precisions
 # temporal_precision = seq(from=0.005, to=0.007, by=0.0001)
