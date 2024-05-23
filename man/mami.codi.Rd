@@ -6,9 +6,8 @@
 \usage{
 mami.codi(
   x,
-  min_amplitude = MIN_AMPLITUDE,
-  spatial_precision = RATIONAL_FRACTION_PRECISION,
-  temporal_precision = RATIONAL_FRACTION_PRECISION,
+  minimum_amplitude = MINIMUM_AMPLITUDE,
+  precision = RATIONAL_FRACTION_PRECISION,
   metadata = NA,
   verbose = FALSE,
   ...
@@ -18,11 +17,9 @@ mami.codi(
 \item{x}{Chord to analyse specified in MIDI, coerced to
 hrep::sparse_fr_spectrum}
 
-\item{min_amplitude}{An optional minimum amplitude for deciding which signals to include}
+\item{minimum_amplitude}{An optional minimum amplitude for deciding which signals to include}
 
-\item{spatial_precision}{An optional precision value for creating rational fractions for spatial signals}
-
-\item{temporal_precision}{An optional precision value for creating rational fractions for temporal signals}
+\item{precision}{An optional precision value for creating rational fractions for spatial signals}
 
 \item{metadata}{User-provided list of metadata that roundtrips with each call.
 helpful for analysis and plots}

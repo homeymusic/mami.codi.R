@@ -33,7 +33,7 @@ mami.codi <- function(
 
 }
 MINIMUM_AMPLITUDE = 0.00
-RATIONAL_FRACTION_PRECISION = 0.02
+RATIONAL_FRACTION_PRECISION = 0.075
 
 #' Parse Input
 #'
@@ -100,7 +100,7 @@ gcd <- function(x, precision) {
   tibble::tibble_row(
     gcd_num   = gcd_integers(fractions$num),
     lcm_den   = lcm_integers(fractions$den),
-    gcd       = gcd_num / lcm_den,
+    gcd       = .data$gcd_num / .data$lcm_den,
     fractions = list(fractions)
   )
 }
