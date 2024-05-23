@@ -97,6 +97,7 @@ compute_consonance = function(x, minimum_amplitude, precision) {
 
 #' Greatest Common Divisor of Rational Numbers
 #'
+#'
 #' See equation 15 in "Non-Integer Arrays for Array Signal Processing"
 #' by Kulkarni and Vaidyanathan (2022)
 #'
