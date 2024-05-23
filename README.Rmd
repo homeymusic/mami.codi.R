@@ -179,8 +179,8 @@ dyads <- timbre_paper %>% dplyr::rowwise() %>% dplyr::mutate(
 params = list(
   list(h=1, o=2.0,t='Pure'),
   list(h=4, o=2.0,t='Bonang'),
-  list(h=5, o=2.0,t='5PartialsNo3'),
   list(h=5, o=2.0,t='5Partials'),
+  list(h=5, o=2.0,t='5PartialsNo3'),
   list(h=10,o=2.0,t='Harmonic'),
   list(h=10,o=2.1,t='Stretched'),
   list(h=10,o=1.9,t='Compressed'),
@@ -285,12 +285,12 @@ p = params %>% purrr::map(\(p) {
     smoothing_sigma         = sigma
   )))
   print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),
-                           goal=experiment,sigma=sigma,include_points=T,
+                           goal=experiment,sigma=sigma,include_points=F,
                            black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")
   
   print(plot_semitone_spatial_temporal(chords, paste('Spatial and Temporal Consonance'),
-                                       goal=NULL,sigma=sigma,include_points=T,
+                                       goal=NULL,sigma=sigma,include_points=F,
                                        dashed_minor=(p$t=='Pure'),
                                        black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")

@@ -140,13 +140,13 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
     )
   }
 
-  default_precision = 0.03
+  default_precision = 0.075
   if (timbre=='Pure') {
-    spatial_precision  = default_precision
-    temporal_precision = default_precision
+    spatial_precision  = default_precision / 2
+    temporal_precision = default_precision / 2
   } else if (timbre=='Bonang') {
-    spatial_precision  = default_precision
-    temporal_precision = default_precision
+    spatial_precision  = default_precision / 2
+    temporal_precision = default_precision / 2
   } else if (timbre=='5PartialsNo3') {
     spatial_precision  = default_precision
     temporal_precision = default_precision
@@ -157,11 +157,11 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
     spatial_precision  = default_precision
     temporal_precision = default_precision
   } else if (timbre=='Stretched') {
-    spatial_precision  = default_precision
-    temporal_precision = default_precision
+    spatial_precision  = default_precision / 2
+    temporal_precision = default_precision / 2
   } else if (timbre=='Compressed') {
-    spatial_precision  = default_precision
-    temporal_precision = default_precision
+    spatial_precision  = default_precision / 4
+    temporal_precision = default_precision / 4
   } else if (timbre=='M3') {
     spatial_precision  = 5e-05
     temporal_precision = 5e-05

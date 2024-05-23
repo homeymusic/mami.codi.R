@@ -168,7 +168,7 @@ major-minor versus the behavioral results are included in a plot below.
 
 | min_amplitude | spatial_precision | temporal_precision | smoothing_sigma |
 |:--------------|:------------------|:-------------------|----------------:|
-| 0             | 0.03              | 0.03               |             0.2 |
+| 0             | 0.0375            | 0.0375             |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-2.png)<!-- -->
@@ -183,24 +183,10 @@ be relatively higher than the behavioral results.
 
 | min_amplitude | spatial_precision | temporal_precision | smoothing_sigma |
 |:--------------|:------------------|:-------------------|----------------:|
-| 0             | 0.03              | 0.03               |             0.2 |
+| 0             | 0.0375            | 0.0375             |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-3.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-4.png)<!-- -->
-
-##### 5PartialsNo3 ~ Partials: 5
-
-For 5 harmonics with the 3rd partial deleted, behavioral results and
-theoretical predictions mostly agree. As expected, the m3 peak without
-the third partial is now lower than the m3 peak with all 5 harmonics
-while the M3 peak is slightly higher without the 3rd partial.
-
-| min_amplitude | spatial_precision | temporal_precision | smoothing_sigma |
-|:--------------|:------------------|:-------------------|----------------:|
-| 0             | 0.03              | 0.03               |             0.2 |
-
-![](man/figures/README-unnamed-chunk-4-5.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-6.png)<!-- -->
 
 ##### 5Partials ~ Partials: 5
 
@@ -211,7 +197,21 @@ peak.
 
 | min_amplitude | spatial_precision | temporal_precision | smoothing_sigma |
 |:--------------|:------------------|:-------------------|----------------:|
-| 0             | 0.03              | 0.03               |             0.2 |
+| 0             | 0.075             | 0.075              |             0.2 |
+
+![](man/figures/README-unnamed-chunk-4-5.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-4-6.png)<!-- -->
+
+##### 5PartialsNo3 ~ Partials: 5
+
+For 5 harmonics with the 3rd partial deleted, behavioral results and
+theoretical predictions mostly agree. As expected, the m3 peak without
+the third partial is now lower than the m3 peak with all 5 harmonics
+while the M3 peak is slightly higher without the 3rd partial.
+
+| min_amplitude | spatial_precision | temporal_precision | smoothing_sigma |
+|:--------------|:------------------|:-------------------|----------------:|
+| 0             | 0.075             | 0.075              |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-7.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-8.png)<!-- -->
@@ -222,7 +222,7 @@ For 10 harmonics, behavioral results and theoretical predictions agree.
 
 | min_amplitude | spatial_precision | temporal_precision | smoothing_sigma |
 |:--------------|:------------------|:-------------------|----------------:|
-| 0             | 0.03              | 0.03               |             0.2 |
+| 0             | 0.075             | 0.075              |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-9.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-10.png)<!-- -->
@@ -235,7 +235,7 @@ and m7 that do not exist in the behavioral results.
 
 | min_amplitude | spatial_precision | temporal_precision | smoothing_sigma |
 |:--------------|:------------------|:-------------------|----------------:|
-| 0             | 0.03              | 0.03               |             0.2 |
+| 0             | 0.0375            | 0.0375             |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-11.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-12.png)<!-- -->
@@ -247,7 +247,7 @@ with the theoretical peaks.
 
 | min_amplitude | spatial_precision | temporal_precision | smoothing_sigma |
 |:--------------|:------------------|:-------------------|----------------:|
-| 0             | 0.03              | 0.03               |             0.2 |
+| 0             | 0.01875           | 0.01875            |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-13.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-14.png)<!-- -->

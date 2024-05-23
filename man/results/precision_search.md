@@ -5,9 +5,8 @@ Precision Search
 
 Precisions:
 
-    #>  [1] 1e-04 2e-04 3e-04 4e-04 5e-04 6e-04 7e-04 8e-04 9e-04 1e-03 2e-03 3e-03
-    #> [13] 4e-03 5e-03 6e-03 7e-03 8e-03 9e-03 1e-02 2e-02 3e-02 4e-02 5e-02 6e-02
-    #> [25] 7e-02 8e-02 9e-02 1e-01 2e-01 3e-01 4e-01 5e-01 6e-01 7e-01 8e-01 9e-01
+    #>  [1] 0.030 0.031 0.032 0.033 0.034 0.035 0.036 0.037 0.038 0.039 0.040 0.041
+    #> [13] 0.042 0.043 0.044 0.045 0.046 0.047 0.048 0.049 0.050
 
 Number of Harmonics:
 
@@ -17,8 +16,14 @@ Octave Ratios:
 
     #> [1] 2
 
-max: 27.0155502 min: -0.6905887
+## CoDi
 
-## CoDi Wrap
+![](../figures/precision_search/CoDi-1.png)<!-- -->
 
-![](../figures/precision_search/trial-1.png)<!-- -->
+## Spatial
+
+![](../figures/precision_search/Spatial-1.png)<!-- -->
+
+## Temporal
+
+![](../figures/precision_search/Temporal-1.png)<!-- -->
