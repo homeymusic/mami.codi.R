@@ -19,7 +19,7 @@ hrep::sparse_fr_spectrum}
 
 \item{minimum_amplitude}{An optional minimum amplitude for deciding which signals to include}
 
-\item{precision}{An optional precision value for creating rational fractions for spatial signals}
+\item{precision}{An optional precision value for creating rational fractions}
 
 \item{metadata}{User-provided list of metadata that roundtrips with each call.
 helpful for analysis and plots}

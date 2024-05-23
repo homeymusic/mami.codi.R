@@ -6,7 +6,7 @@
 #' @param x Chord to analyse specified in MIDI, coerced to
 #' hrep::sparse_fr_spectrum
 #' @param minimum_amplitude An optional minimum amplitude for deciding which signals to include
-#' @param precision An optional precision value for creating rational fractions for spatial signals
+#' @param precision An optional precision value for creating rational fractions
 #' @param metadata User-provided list of metadata that roundtrips with each call.
 #' helpful for analysis and plots
 #' @param verbose Determines the amount of data to return from chord evaluation
@@ -32,7 +32,7 @@ mami.codi <- function(
     format_output(metadata, verbose)
 
 }
-MINIMUM_AMPLITUDE = 0.00
+MINIMUM_AMPLITUDE           = 0.00
 RATIONAL_FRACTION_PRECISION = 0.075
 
 #' Parse Input
@@ -77,10 +77,10 @@ compute_consonance = function(x, minimum_amplitude, precision) {
 
   x %>% dplyr::mutate(
 
-    gcd( f / min(f), precision) %>% dplyr::rename_with(~ paste0('temporal_',.)),
+    gcd( f / min(f), precision ) %>% dplyr::rename_with(~ paste0('temporal_',.)),
     temporal_consonance   = .data$temporal_gcd / 2,
 
-    gcd( l / min(l), precision) %>% dplyr::rename_with(~ paste0('spatial_',.)),
+    gcd( l / min(l), precision ) %>% dplyr::rename_with(~ paste0('spatial_',.)),
     spatial_consonance    = .data$spatial_gcd  / 2,
 
     consonance_dissonance = .data$temporal_consonance + .data$spatial_consonance,
@@ -95,6 +95,18 @@ compute_consonance = function(x, minimum_amplitude, precision) {
 
 }
 
+#' Greatest Common Divisor of Rational Numbers
+#'
+#' See equation 15 in "Non-Integer Arrays for Array Signal Processing"
+#' by Kulkarni and Vaidyanathan (2022)
+#'
+#' @param x Vector of rational numbers
+#' @param precision Precision value for creating rational fractions
+#'
+#' @return The greatest common divisor of the rational numbers
+#'
+#' @rdname gcd
+#' @export
 gcd <- function(x, precision) {
   fractions = rational_fractions(x, precision)
   tibble::tibble_row(
