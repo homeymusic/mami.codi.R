@@ -1,6 +1,6 @@
 source('./man/code/utils.R')
 
-precision  = mami.codi.R::default_precision() / 2
+precision  = mami.codi.R::default_precision() / 4
 tonic_midi = 60
 num_harmonics = 10
 amount_of_noise = 2
@@ -45,7 +45,8 @@ mami.codi_results = grid %>% purrr::pmap_dfr(\(
       pause_index
     ) %>%
     mami.codi.R::mami.codi(
-      metadata = list(
+      precision = precision,
+      metadata  = list(
         paused_index = pause_index
       ),
       verbose=T
@@ -54,7 +55,7 @@ mami.codi_results = grid %>% purrr::pmap_dfr(\(
 
 scores = mami.codi_results %>% dplyr::rowwise() %>% dplyr::mutate(
         paused_f    = noisy_chord_spectrum$x[metadata$paused_index],
-        change      = consonance_dissonance - noisy_chord$consonance_dissonance,
+        change      = noisy_chord$consonance_dissonance - consonance_dissonance,
         noisy_codi  = noisy_chord$consonance_dissonance,
         paused_codi = consonance_dissonance,
         clean_codi  = chord$consonance_dissonance,
