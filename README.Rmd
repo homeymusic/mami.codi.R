@@ -279,10 +279,8 @@ p = params %>% purrr::map(\(p) {
   cat("  \n#####", title, '\n')
   cat(description)
   print(knitr::kable(tibble::tibble_row(
-    min_amplitude           = paste(round(chords$min_amplitude %>% unique, 2), collapse = ' '),
-    spatial_precision       = paste(round(chords$spatial_precision %>% unique, 5), collapse = ' '),
-    temporal_precision      = paste(round(chords$temporal_precision %>% unique, 5), collapse = ' '),
-    smoothing_sigma         = sigma
+    precision       = paste(round(chords$precision %>% unique, 5), collapse = ' '),
+    smoothing_sigma = sigma
   )))
   print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),
                            goal=experiment,sigma=sigma,include_points=F,

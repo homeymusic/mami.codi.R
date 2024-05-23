@@ -166,9 +166,9 @@ the 15 semitones but the overall peak structure agrees with MaMi.CoDi
 predictions. For futher comparison, the theoretical predictions for
 major-minor versus the behavioral results are included in a plot below.
 
-| min_amplitude | spatial_precision | temporal_precision | smoothing_sigma |
-|:--------------|:------------------|:-------------------|----------------:|
-| 0             | 0.0375            | 0.0375             |             0.2 |
+| precision | smoothing_sigma |
+|:----------|----------------:|
+| 0.0375    |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-2.png)<!-- -->
@@ -181,9 +181,9 @@ predicts a dissonance trough with minor polarity at P4 that is not in
 the behavioral results. MaMi.CoDi predicts P5 to have minor polarity and
 be relatively higher than the behavioral results.
 
-| min_amplitude | spatial_precision | temporal_precision | smoothing_sigma |
-|:--------------|:------------------|:-------------------|----------------:|
-| 0             | 0.0375            | 0.0375             |             0.2 |
+| precision | smoothing_sigma |
+|:----------|----------------:|
+| 0.0375    |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-3.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-4.png)<!-- -->
@@ -195,9 +195,9 @@ For comparison with the study below (5 partils with the third partial
 deleted), notice that the m3 peak is only slightly lower than the M3
 peak.
 
-| min_amplitude | spatial_precision | temporal_precision | smoothing_sigma |
-|:--------------|:------------------|:-------------------|----------------:|
-| 0             | 0.075             | 0.075              |             0.2 |
+| precision | smoothing_sigma |
+|:----------|----------------:|
+| 0.075     |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-5.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-6.png)<!-- -->
@@ -209,9 +209,9 @@ theoretical predictions mostly agree. As expected, the m3 peak without
 the third partial is now lower than the m3 peak with all 5 harmonics
 while the M3 peak is slightly higher without the 3rd partial.
 
-| min_amplitude | spatial_precision | temporal_precision | smoothing_sigma |
-|:--------------|:------------------|:-------------------|----------------:|
-| 0             | 0.075             | 0.075              |             0.2 |
+| precision | smoothing_sigma |
+|:----------|----------------:|
+| 0.075     |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-7.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-8.png)<!-- -->
@@ -220,9 +220,9 @@ while the M3 peak is slightly higher without the 3rd partial.
 
 For 10 harmonics, behavioral results and theoretical predictions agree.
 
-| min_amplitude | spatial_precision | temporal_precision | smoothing_sigma |
-|:--------------|:------------------|:-------------------|----------------:|
-| 0             | 0.075             | 0.075              |             0.2 |
+| precision | smoothing_sigma |
+|:----------|----------------:|
+| 0.075     |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-9.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-10.png)<!-- -->
@@ -233,9 +233,9 @@ For stretched harmonics, behavioral results and theoretical predictions
 mostly agree. MaMi.Codi predicts peaks with minor polarity just above m3
 and m7 that do not exist in the behavioral results.
 
-| min_amplitude | spatial_precision | temporal_precision | smoothing_sigma |
-|:--------------|:------------------|:-------------------|----------------:|
-| 0             | 0.0375            | 0.0375             |             0.2 |
+| precision | smoothing_sigma |
+|:----------|----------------:|
+| 0.0375    |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-11.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-12.png)<!-- -->
@@ -245,9 +245,9 @@ and m7 that do not exist in the behavioral results.
 For compressed harmonics, the pronounced behavioral peaks mostly agree
 with the theoretical peaks.
 
-| min_amplitude | spatial_precision | temporal_precision | smoothing_sigma |
-|:--------------|:------------------|:-------------------|----------------:|
-| 0             | 0.01875           | 0.01875            |             0.2 |
+| precision | smoothing_sigma |
+|:----------|----------------:|
+| 0.01875   |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-13.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-14.png)<!-- -->
@@ -258,9 +258,9 @@ with the theoretical peaks.
 
 Description is below.
 
-| min_amplitude | spatial_precision | temporal_precision | smoothing_sigma |
-|:--------------|:------------------|:-------------------|----------------:|
-| 0             | 5e-05             | 5e-05              |           0.035 |
+| precision | smoothing_sigma |
+|:----------|----------------:|
+| 5e-05     |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-4-15.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-16.png)<!-- -->
@@ -269,9 +269,9 @@ Description is below.
 
 Description is below.
 
-| min_amplitude | spatial_precision | temporal_precision | smoothing_sigma |
-|:--------------|:------------------|:-------------------|----------------:|
-| 0             | 5e-05             | 5e-05              |           0.035 |
+| precision | smoothing_sigma |
+|:----------|----------------:|
+| 5e-05     |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-4-17.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-18.png)<!-- -->
@@ -280,9 +280,9 @@ Description is below.
 
 Description is below.
 
-| min_amplitude | spatial_precision | temporal_precision | smoothing_sigma |
-|:--------------|:------------------|:-------------------|----------------:|
-| 0             | 5e-05             | 5e-05              |           0.035 |
+| precision | smoothing_sigma |
+|:----------|----------------:|
+| 5e-05     |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-4-19.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-20.png)<!-- -->
