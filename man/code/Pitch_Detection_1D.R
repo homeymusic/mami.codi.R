@@ -1,7 +1,6 @@
 source('./man/code/utils.R')
-# devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 
-precision  = 0.075
+precision  = mami.codi.R::default_precision() / 2
 tonic_midi = 60
 num_harmonics = 10
 amount_of_noise = 2
