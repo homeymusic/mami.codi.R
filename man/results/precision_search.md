@@ -17,8 +17,14 @@ Octave Ratios:
 
     #> [1] 2
 
-max: 27.0155502 min: -0.6905887
+## CoDi
 
-## CoDi Wrap
+![](../figures/precision_search/CoDi-1.png)<!-- -->
 
-![](../figures/precision_search/trial-1.png)<!-- -->
+## Spatial
+
+![](../figures/precision_search/Spatial-1.png)<!-- -->
+
+## Temporal
+
+![](../figures/precision_search/Temporal-1.png)<!-- -->

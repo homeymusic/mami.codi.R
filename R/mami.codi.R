@@ -75,8 +75,8 @@ compute_consonance = function(x, min_amplitude, spatial_precision, temporal_prec
 
   f       = x$spectrum[[1]] %>% dplyr::filter(.data$y>min_amplitude) %>% hrep::freq()
   P       = 1 / f
-  c_sound = max(P) / max(1/P)
-  l       = c_sound / P
+  c_sound = max(1/P) / max(P)
+  l       = c_sound * P
 
   x %>% dplyr::mutate(
     gcd(P/min(P), temporal_precision) %>% dplyr::rename_with(~ paste0('temporal_',.)),

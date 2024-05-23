@@ -1,4 +1,4 @@
-search_label = 'Harmonic'
+search_label = 'Compressed'
 
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # Detailed
@@ -20,7 +20,8 @@ if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   precisions   = c(1:9 %o% 10^(-4:-1))
 }
 
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R',
+                         ref='periods')
 
 source('./trials.R')
 run_trials(search_label, precisions)

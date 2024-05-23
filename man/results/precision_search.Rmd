@@ -6,7 +6,7 @@ always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'Harmonic'
+search_label = 'Compressed'
 ```
 
 # `r search_label`
@@ -128,29 +128,69 @@ smoothed <- function(x,val,sigma=BEHAVIOURAL_SMOOTH_BROAD) {
 ```
 
 ```{r, echo=F}
+cols = 1
+rows = length(tols)
+```
+
+## CoDi
+
+```{r CoDi, fig.height=7*rows, fig.width=12*cols, echo=F}
+# height = 3 per row and width = 5 per column
+# so for grid of 4x12 it would be height=12 and width=60
 theory <- theory %>% 
   dplyr::mutate(
     z_score = z_scores(consonance_dissonance),
     smooth  = smoothed(semitone, .data$z_score, params$sigma)
   )
+
+plot_semitone_codi_wrap(
+  theory %>% dplyr::filter(semitone>1), 
+  experiment %>% dplyr::filter(semitone>1),
+  gray_vlines  = params$gray_vlines[[1]],
+  black_vlines = params$black_vlines[[1]],
+  title=paste(search_label),
+  ncols=cols,
+  include_points=F
+)
 ```
 
-max: `r max(theory$z_score)`
-min: `r min(theory$z_score)`
+## Spatial
 
-```{r, echo=F}
-cols = 1
-rows = length(tols)
-```
-
-## CoDi Wrap
-
-```{r trial, fig.height=7*rows, fig.width=12*cols, echo=F}
+```{r Spatial, fig.height=7*rows, fig.width=12*cols, echo=F}
 # height = 3 per row and width = 5 per column
 # so for grid of 4x12 it would be height=12 and width=60
+theory <- theory %>% 
+  dplyr::mutate(
+    z_score = z_scores(spatial_consonance),
+    smooth  = smoothed(semitone, .data$z_score, params$sigma)
+  )
+
+plot_semitone_waveco_wrap(
+  theory %>% dplyr::filter(semitone>1), 
+  experiment %>% dplyr::filter(semitone>1),
+  gray_vlines  = params$gray_vlines[[1]],
+  black_vlines = params$black_vlines[[1]],
+  title=paste(search_label),
+  ncols=cols,
+  include_points=F
+)
+```
+
+## Temporal
+
+```{r Temporal, fig.height=7*rows, fig.width=12*cols, echo=F}
+# height = 3 per row and width = 5 per column
+# so for grid of 4x12 it would be height=12 and width=60
+
+theory <- theory %>% 
+  dplyr::mutate(
+    z_score = z_scores(temporal_consonance),
+    smooth  = smoothed(semitone, .data$z_score, params$sigma)
+  )
+
 plot_semitone_codi_wrap(
-  theory, 
-  experiment,
+  theory %>% dplyr::filter(semitone>1), 
+  experiment %>% dplyr::filter(semitone>1),
   gray_vlines  = params$gray_vlines[[1]],
   black_vlines = params$black_vlines[[1]],
   title=paste(search_label),
