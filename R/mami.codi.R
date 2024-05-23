@@ -32,8 +32,26 @@ mami.codi <- function(
     format_output(metadata, verbose)
 
 }
-MINIMUM_AMPLITUDE           = 0.00
+
+#' Default Precision
+#'
+#' Default precision for converting floating point numbers to rational fractions
+#'
+#''
+#' @rdname default_precision
+#' @export
+default_precision <- function() { RATIONAL_FRACTION_PRECISION }
 RATIONAL_FRACTION_PRECISION = 0.075
+
+#' Default Minimum Amplitude
+#'
+#' Default minimum amplitude for deciding which tones are evaluated
+#'
+#''
+#' @rdname default_minimum_amplitude
+#' @export
+default_minimum_amplitude <- function() { MINIMUM_AMPLITUDE }
+MINIMUM_AMPLITUDE = 0.00
 
 #' Parse Input
 #'
