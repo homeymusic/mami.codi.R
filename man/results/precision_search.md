@@ -1,7 +1,7 @@
 Precision Search
 ================
 
-# Pure
+# Harmonic
 
 Precisions:
 
@@ -11,14 +11,20 @@ Precisions:
 
 Number of Harmonics:
 
-    #> [1] 1
+    #> [1] 10
 
 Octave Ratios:
 
     #> [1] 2
 
-max: 22.7632275 min: -2.3412647
+## CoDi
 
-## CoDi Wrap
+![](../figures/precision_search/CoDi-1.png)<!-- -->
 
-![](../figures/precision_search/trial-1.png)<!-- -->
+## Spatial
+
+![](../figures/precision_search/Spatial-1.png)<!-- -->
+
+## Temporal
+
+![](../figures/precision_search/Temporal-1.png)<!-- -->
