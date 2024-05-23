@@ -5,9 +5,8 @@
 #'
 #' @param x Chord to analyse specified in MIDI, coerced to
 #' hrep::sparse_fr_spectrum
-#' @param min_amplitude An optional minimum amplitude for deciding which signals to include
-#' @param spatial_precision An optional precision value for creating rational fractions for spatial signals
-#' @param temporal_precision An optional precision value for creating rational fractions for temporal signals
+#' @param minimum_amplitude An optional minimum amplitude for deciding which signals to include
+#' @param precision An optional precision value for creating rational fractions for spatial signals
 #' @param metadata User-provided list of metadata that roundtrips with each call.
 #' helpful for analysis and plots
 #' @param verbose Determines the amount of data to return from chord evaluation
@@ -21,20 +20,19 @@
 #' @export
 mami.codi <- function(
     x,
-    min_amplitude      = MIN_AMPLITUDE,
-    spatial_precision  = RATIONAL_FRACTION_PRECISION,
-    temporal_precision = RATIONAL_FRACTION_PRECISION,
-    metadata           = NA,
-    verbose            = FALSE,
+    minimum_amplitude = MINIMUM_AMPLITUDE,
+    precision         = RATIONAL_FRACTION_PRECISION,
+    metadata          = NA,
+    verbose           = FALSE,
     ...
 ) {
 
-  parse_input(x, ...)                                                        %>%
-    compute_consonance(min_amplitude, spatial_precision, temporal_precision) %>%
+  parse_input(x, ...)                            %>%
+    compute_consonance(minimum_amplitude, precision) %>%
     format_output(metadata, verbose)
 
 }
-MIN_AMPLITUDE = 0.00
+MINIMUM_AMPLITUDE = 0.00
 RATIONAL_FRACTION_PRECISION = 0.02
 
 #' Parse Input
@@ -71,25 +69,28 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 
 }
 
-compute_consonance = function(x, min_amplitude, spatial_precision, temporal_precision) {
+compute_consonance = function(x, minimum_amplitude, precision) {
 
-  f       = x$spectrum[[1]] %>% dplyr::filter(.data$y>min_amplitude) %>% hrep::freq()
+  f       = x$spectrum[[1]] %>% dplyr::filter(.data$y>minimum_amplitude) %>% hrep::freq()
   c_sound = max(f) / max(1/f)
   l       = c_sound / f
 
   x %>% dplyr::mutate(
-    gcd(f/min(f), temporal_precision) %>% dplyr::rename_with(~ paste0('temporal_',.)),
+
+    gcd( f / min(f), precision) %>% dplyr::rename_with(~ paste0('temporal_',.)),
     temporal_consonance   = .data$temporal_gcd / 2,
-    gcd(l/min(l), spatial_precision) %>% dplyr::rename_with(~ paste0('spatial_',.)),
+
+    gcd( l / min(l), precision) %>% dplyr::rename_with(~ paste0('spatial_',.)),
     spatial_consonance    = .data$spatial_gcd  / 2,
+
     consonance_dissonance = .data$temporal_consonance + .data$spatial_consonance,
     major_minor           = .data$temporal_consonance - .data$spatial_consonance,
+
     frequencies           = list(f),
     wavelengths           = list(l),
     speed_of_sound        = c_sound,
-    min_amplitude,
-    spatial_precision,
-    temporal_precision
+    minimum_amplitude,
+    precision
   )
 
 }
@@ -118,9 +119,6 @@ format_output <- function(x, metadata, verbose) {
     x %>%
       dplyr::select('major_minor',
                     'consonance_dissonance',
-                    'spatial_precision',
-                    'temporal_precision',
-                    'min_amplitude',
                     'metadata')
   }
 }

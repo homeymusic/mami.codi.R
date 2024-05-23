@@ -1,5 +1,6 @@
 source('./utils.R')
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R',
+                         ref='precision_1D')
 
 library(mami.codi.R)
 devtools::load_all(".")
@@ -142,40 +143,29 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
 
   default_precision = 0.075
   if (timbre=='Pure') {
-    spatial_precision  = default_precision / 2
-    temporal_precision = default_precision / 2
+    precision  = default_precision / 2
   } else if (timbre=='Bonang') {
-    spatial_precision  = default_precision / 2
-    temporal_precision = default_precision / 2
+    precision  = default_precision / 2
   } else if (timbre=='5PartialsNo3') {
-    spatial_precision  = default_precision
-    temporal_precision = default_precision
+    precision  = default_precision
   } else if (timbre=='5Partials') {
-    spatial_precision  = default_precision
-    temporal_precision = default_precision
+    precision  = default_precision
   } else if (timbre=='Harmonic') {
-    spatial_precision  = default_precision
-    temporal_precision = default_precision
+    precision  = default_precision
   } else if (timbre=='Stretched') {
-    spatial_precision  = default_precision / 2
-    temporal_precision = default_precision / 2
+    precision  = default_precision / 2
   } else if (timbre=='Compressed') {
-    spatial_precision  = default_precision / 4
-    temporal_precision = default_precision / 4
+    precision  = default_precision / 4
   } else if (timbre=='M3') {
-    spatial_precision  = 5e-05
-    temporal_precision = 5e-05
+    precision  = 5e-05
   } else if (timbre=='M6') {
-    spatial_precision  = 5e-05
-    temporal_precision = 5e-05
+    precision  = 5e-05
   } else if (timbre=='P8') {
-    spatial_precision  = 5e-05
-    temporal_precision = 5e-05
+    precision  = 5e-05
   }
 
   mami.codi.R::mami.codi(study_chord,
-                         spatial_precision=spatial_precision,
-                         temporal_precision=temporal_precision,
+                         precision=precision,
                          metadata = list(
                            num_harmonics = num_harmonics,
                            octave_ratio  = octave_ratio,
