@@ -178,10 +178,10 @@ dyads <- timbre_paper %>% dplyr::rowwise() %>% dplyr::mutate(
 ```{r, fig.height=8, fig.width=12, echo=F, results='asis', message=F}
 params = list(
   list(h=1, o=2.0,t='Pure'),
-  list(h=4, o=2.0,t='Bonang'),
+  list(h=10,o=2.0,t='Harmonic'),
   list(h=5, o=2.0,t='5Partials'),
   list(h=5, o=2.0,t='5PartialsNo3'),
-  list(h=10,o=2.0,t='Harmonic'),
+  list(h=4, o=2.0,t='Bonang'),
   list(h=10,o=2.1,t='Stretched'),
   list(h=10,o=1.9,t='Compressed'),
   list(h=10,o=2.0,t='M3'),

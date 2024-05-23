@@ -173,17 +173,13 @@ major-minor versus the behavioral results are included in a plot below.
 ![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-2.png)<!-- -->
 
-##### Bonang ~ Partials: 4
+##### Harmonic ~ Partials: 10
 
-For gamalan dyads with a harmonic bass pitch and bonang upper pitch,
-behavioral results and theoretical predictions mostly agree. MaMi.CoDi
-predicts a dissonance trough with minor polarity at P4 that is not in
-the behavioral results. MaMi.CoDi predicts P5 to have minor polarity and
-be relatively higher than the behavioral results.
+For 10 harmonics, behavioral results and theoretical predictions agree.
 
 | precision | smoothing_sigma |
 |:----------|----------------:|
-| 0.0375    |             0.2 |
+| 0.075     |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-3.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-4.png)<!-- -->
@@ -216,13 +212,17 @@ while the M3 peak is slightly higher without the 3rd partial.
 ![](man/figures/README-unnamed-chunk-4-7.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-8.png)<!-- -->
 
-##### Harmonic ~ Partials: 10
+##### Bonang ~ Partials: 4
 
-For 10 harmonics, behavioral results and theoretical predictions agree.
+For gamalan dyads with a harmonic bass pitch and bonang upper pitch,
+behavioral results and theoretical predictions mostly agree. MaMi.CoDi
+predicts a dissonance trough with minor polarity at P4 that is not in
+the behavioral results. MaMi.CoDi predicts P5 to have minor polarity and
+be relatively higher than the behavioral results.
 
 | precision | smoothing_sigma |
 |:----------|----------------:|
-| 0.075     |             0.2 |
+| 0.0375    |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-9.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-10.png)<!-- -->
