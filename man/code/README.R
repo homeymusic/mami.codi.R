@@ -143,7 +143,7 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
 
   default_precision = mami.codi.R::default_precision()
   if (timbre=='Pure') {
-    precision  = default_precision / 2
+    precision  = 0.032
   } else if (timbre=='Bonang') {
     precision  = 0.032
   } else if (timbre=='5PartialsNo3') {
@@ -153,9 +153,9 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
   } else if (timbre=='Harmonic') {
     precision  = default_precision
   } else if (timbre=='Stretched') {
-    precision  = default_precision / 2
+    precision  = 0.032
   } else if (timbre=='Compressed') {
-    precision  = default_precision / 2
+    precision  = 0.032
   } else if (timbre=='M3') {
     precision  = 5e-05
   } else if (timbre=='M6') {

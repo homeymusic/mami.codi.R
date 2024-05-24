@@ -1,4 +1,4 @@
-search_label = 'Pure'
+search_label = 'Compressed'
 
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # Detailed
@@ -11,9 +11,9 @@ if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
 } else {
 
   # Detailed
-  from_prec   = 0.02
-  to_prec     = 0.04
-  by_prec     = 0.001
+  from_prec   = 0.071
+  to_prec     = 0.072
+  by_prec     = 0.0001
   precisions = seq(from=from_prec, to=to_prec, by=by_prec)
 
   # Orders of Magnitude

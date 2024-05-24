@@ -41,7 +41,7 @@ mami.codi <- function(
 #' @rdname default_precision
 #' @export
 default_precision <- function() { RATIONAL_FRACTION_PRECISION }
-RATIONAL_FRACTION_PRECISION = 0.075
+RATIONAL_FRACTION_PRECISION = 0.072
 
 #' Default Minimum Amplitude
 #'

@@ -168,7 +168,7 @@ major-minor versus the behavioral results are included in a plot below.
 
 | precision | smoothing_sigma |
 |:----------|----------------:|
-| 0.0375    |             0.2 |
+| 0.032     |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-2.png)<!-- -->
@@ -222,7 +222,7 @@ be relatively higher than the behavioral results.
 
 | precision | smoothing_sigma |
 |:----------|----------------:|
-| 0.0375    |             0.2 |
+| 0.032     |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-9.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-10.png)<!-- -->
@@ -235,7 +235,7 @@ and m7 that do not exist in the behavioral results.
 
 | precision | smoothing_sigma |
 |:----------|----------------:|
-| 0.0375    |             0.2 |
+| 0.032     |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-11.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-12.png)<!-- -->
@@ -247,7 +247,7 @@ with the theoretical peaks.
 
 | precision | smoothing_sigma |
 |:----------|----------------:|
-| 0.01875   |             0.2 |
+| 0.032     |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-13.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-14.png)<!-- -->
