@@ -17,8 +17,8 @@ using namespace Rcpp;
 NumericVector stern_brocot(const double x, const double precision) {
   double approximation;
 
-  const double valid_min = x - precision;
-  const double valid_max = x + precision;
+  const double valid_min = pow(2.0, log(x) / log(2.0 + precision));
+  const double valid_max = pow(2.0, log(x) / log(2.0 - precision));
 
   int left_num    = floor(x);
   int left_den    = 1;
