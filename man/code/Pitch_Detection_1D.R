@@ -1,15 +1,27 @@
 source('./man/code/utils.R')
 
-precision  = mami.codi.R::default_precision() / 4
-tonic_midi = 60
-num_harmonics = 10
-amount_of_noise = 2
-num_tones= 2*amount_of_noise + num_harmonics
+precision       = mami.codi.R::default_precision()
+num_harmonics   = 10
+octave_ratio    = 1.9
+amount_of_noise = 0
+num_tones       = 2*amount_of_noise + num_harmonics
 
-chord = c(tonic_midi) %>% mami.codi(
+lo = hrep::sparse_fr_spectrum(60,
+                              num_harmonics=num_harmonics,
+                              octave_ratio=octave_ratio)
+
+hi = hrep::sparse_fr_spectrum(67.3,
+                              num_harmonics=num_harmonics,
+                              octave_ratio=octave_ratio)
+
+chord_spectrum = do.call(
+  hrep::combine_sparse_spectra,
+  list(lo, hi)
+)
+chord = chord_spectrum %>% mami.codi(
   precision  = precision,
-  num_harmonics      = num_harmonics, verbose = T)
-chord_spectrum = chord$spectrum[[1]]
+  verbose = T
+)
 
 noise_spectrum = tibble::tibble(
   frequency = hrep::midi_to_freq(c(
@@ -54,11 +66,11 @@ mami.codi_results = grid %>% purrr::pmap_dfr(\(
 }, .progress=TRUE)
 
 scores = mami.codi_results %>% dplyr::rowwise() %>% dplyr::mutate(
-        paused_f    = noisy_chord_spectrum$x[metadata$paused_index],
-        change      = noisy_chord$consonance_dissonance - consonance_dissonance,
-        noisy_codi  = noisy_chord$consonance_dissonance,
-        paused_codi = consonance_dissonance,
-        clean_codi  = chord$consonance_dissonance,
+  paused_f    = noisy_chord_spectrum$x[metadata$paused_index],
+  change      = noisy_chord$consonance_dissonance - consonance_dissonance,
+  noisy_codi  = noisy_chord$consonance_dissonance,
+  paused_codi = consonance_dissonance,
+  clean_codi  = chord$consonance_dissonance,
 )  %>% dplyr::ungroup()
 
 results = scores %>%
@@ -80,4 +92,5 @@ results %>% dplyr::select(
   change
 ) %>% print(n=Inf)
 
-chord$spectrum[[1]]$x
+lo$x
+hi$x

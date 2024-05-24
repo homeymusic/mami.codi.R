@@ -1,6 +1,14 @@
 Greatest Common Divisor
 ================
 
+## Generalized GCD Precision
+
+Maybe we evaluate stern brocot approximation with these limits:  
+
+valid_min = pow(2.0, log(freq_ratio) / log(1.89))  
+
+valid_max = pow(2.0, log(freq_ratio) / log(2.11))  
+
 ## P1
 
     #>  [1]  261.6256  523.2511  784.8767 1046.5023 1308.1278 1569.7534 1831.3790
@@ -9,20 +17,20 @@ Greatest Common Divisor
 ``` r
 f0 = gcd(f, p)$gcd
 f0
-#> [1] 0.01785714
+#> [1] 0.01666667
 ```
 
 ``` r
 f0 / min(f)
-#> [1] 6.825458e-05
+#> [1] 6.370427e-05
 ```
 
 ``` r
 gcd(f/min(f), p)
 #> # A tibble: 1 × 4
-#>   gcd_num lcm_den   gcd `list(r)`    
+#>   gcd_num lcm_den   gcd fractions    
 #>     <dbl>   <dbl> <dbl> <list>       
-#> 1       1       1     1 <df [10 × 4]>
+#> 1       1       1     1 <df [10 × 5]>
 ```
 
 ## M3
@@ -34,18 +42,18 @@ gcd(f/min(f), p)
 ``` r
 f0 = gcd(f, p)$gcd
 f0
-#> [1] 0.0002380952
+#> [1] 0.01666667
 ```
 
 ``` r
 f0 / min(f)
-#> [1] 9.100611e-07
+#> [1] 6.370427e-05
 ```
 
 ``` r
 gcd(f/min(f), p)
 #> # A tibble: 1 × 4
-#>   gcd_num lcm_den        gcd `list(r)`    
-#>     <dbl>   <dbl>      <dbl> <list>       
-#> 1       1  235620 0.00000424 <df [20 × 4]>
+#>   gcd_num lcm_den    gcd fractions    
+#>     <dbl>   <dbl>  <dbl> <list>       
+#> 1       1      84 0.0119 <df [20 × 5]>
 ```
