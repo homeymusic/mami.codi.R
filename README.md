@@ -49,16 +49,14 @@ When we combine all the component parts of a chord together into a
 whole, we can estimate the overall wavelength for the whole chord. A
 technique used in digital signal processing and bricklaying is to
 estimate ratios (within an acceptable precision) between each of the
-parts and a selected reference part. The least common denominator (LCD)
-of those part ratios will be a measure of the periodicity of the whole
-relative to the selected reference part.  
+parts and a selected reference part. The greatest common divisor (LCD)
+of those part ratios will be a measure of the periodicity of the
+whole.  
 
-The overall chord wavelength will be as long as or longer than the
-longest component wavelength of the chord. Chords with short wavelengths
-relative to the component wavelengths sound pleasant. And chords with
-long wavelengths relative to component wavelengthsound unpleasant.
-MaMi.CoDi uses this measure of relative wavelength to predict the
-perceived spatial consonance of a chord.  
+Chords with short wavelengths relative to the component wavelengths
+sound pleasant. And chords with long wavelengths relative to component
+wavelengths sound unpleasant. MaMi.CoDi uses this measure of relative
+wavelengths to predict the perceived spatial consonance of a chord.  
 
 Let us unfreeze time and start counting how often a hair cell moves due
 to a pure tone of our sounded chord. If we count the number of movements

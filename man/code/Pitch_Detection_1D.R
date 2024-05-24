@@ -10,7 +10,7 @@ lo = hrep::sparse_fr_spectrum(60,
                               num_harmonics=num_harmonics,
                               octave_ratio=octave_ratio)
 
-hi = hrep::sparse_fr_spectrum(67.3,
+hi = hrep::sparse_fr_spectrum(70.9,
                               num_harmonics=num_harmonics,
                               octave_ratio=octave_ratio)
 
