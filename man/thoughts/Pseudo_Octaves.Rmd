@@ -1,0 +1,50 @@
+---
+title: "Pseudo Octaves"
+output:
+  github_document: default
+always_allow_html: true
+---
+```{r, echo=F, message=F, include=F}
+devtools::load_all(".")
+source('./man/code/plot.R')
+source('./man/code/utils.R')
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "../figures/GCD-"
+)
+knitr::opts_chunk$set(dev = 'svg')
+p = RATIONAL_FRACTION_PRECISION
+```
+
+## Spatial -vs- Temporal
+
+```{r, echo=F, message=F}
+P1 = 60 %>% mami.codi(verbose=T, num_harmonics=10, octave_ratio=1.9)
+```
+
+```{r, echo=T, message=F}
+P1$frequencies[[1]]
+```
+
+```{r, echo=F, message=F}
+po = P1$frequencies[[1]] %>% pseudo_octaves()
+po
+```
+
+```{r, echo=F, message=F}
+po$pseudo_octave %>% most_common_pseudo_octave()
+```
+
+```{r, echo=T, message=F}
+P1$wavelengths[[1]]
+```
+
+```{r, echo=F, message=F}
+po = P1$wavelengths[[1]] %>% pseudo_octaves()
+po
+```
+
+```{r, echo=F, message=F}
+po$pseudo_octave %>% most_common_pseudo_octave()
+```

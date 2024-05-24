@@ -56,6 +56,108 @@ NumericVector stern_brocot(const double x, const double precision) {
   return NumericVector::create(mediant_num, mediant_den);
 }
 
+//' compute_pseudo_octave
+ //'
+ //' Find the highest fundamental freq
+ //'
+ //' @param fn freq to eval
+ //' @param f0 fundamental freq
+ //' @param n  harmonic number
+ //'
+ //' @return Calculated pseudo octave
+ //'
+ //' @export
+ // [[Rcpp::export]]
+ const double compute_pseudo_octave(const double fn, const double f0, const int n) {
+   if (n==1) {
+     return 1.0;
+   } else {
+     return std::round(1000000 * pow(2, log(fn / f0) / log(n))) / 1000000;
+   }
+ }
+
+//' pseudo_octaves
+//'
+//' Determine pseudo octave of all frequencies relative to lowest frequency
+//'
+//' @param x Chord frequencies
+//'
+//' @return A double of the best guess of the pseudo octave
+//'
+//' @export
+// [[Rcpp::export]]
+DataFrame pseudo_octaves(const NumericVector x) {
+  const int x_size   = x.size();
+  const double f_max = max(x);
+  NumericVector harmonic_number(x_size * x_size * x_size);
+  NumericVector evaluation_freq(x_size * x_size * x_size);
+  NumericVector reference_freq(x_size * x_size * x_size);
+  NumericVector reference_amp(x_size * x_size * x_size);
+  NumericVector pseudo_octave(x_size * x_size * x_size);
+  NumericVector highest_freq(x_size * x_size * x_size);
+
+  if (x_size <= 2) {
+    throw std::range_error("find_highest_fundamental requires more than 2 frequencies");
+    return R_NilValue;
+  }
+
+  int num_matches=0;
+
+  for (int eval_freq_index = 0; eval_freq_index < x_size; ++eval_freq_index) {
+    for (int ref_freq_index = 0; ref_freq_index < x_size; ++ref_freq_index) {
+      for (int harmonic_num = 2; harmonic_num <= x_size; ++harmonic_num) {
+        const double p_octave = compute_pseudo_octave(x[eval_freq_index], x[ref_freq_index], harmonic_num);
+        if (1.89 < p_octave && p_octave < 2.11) { // TODO: check with Sethares on limits of stretching and compressing
+          harmonic_number[num_matches] = harmonic_num;
+          evaluation_freq[num_matches] = x[eval_freq_index];
+          reference_freq[num_matches]  = x[ref_freq_index];
+          highest_freq[num_matches]    = f_max;
+          pseudo_octave[num_matches]   = p_octave;
+          num_matches++;
+        }
+      }
+    }
+  }
+
+  if (num_matches == 0) {
+    return DataFrame::create(
+      _("harmonic_number") = 1,
+      _("evaluation_freq") = f_max,
+      _("reference_freq")  = f_max,
+      _("pseudo_octave")   = 2.0,
+      _("highest_freq")    = f_max
+    );
+  } else {
+    return DataFrame::create(
+      _("harmonic_number") = harmonic_number[Rcpp::Range(0, num_matches-1)],
+      _("evaluation_freq") = evaluation_freq[Rcpp::Range(0, num_matches-1)],
+      _("reference_freq")  = reference_freq[Rcpp::Range(0, num_matches-1)],
+      _("pseudo_octave")   = pseudo_octave[Rcpp::Range(0, num_matches-1)],
+      _("highest_freq")    = highest_freq[Rcpp::Range(0, num_matches-1)]
+    );
+  }
+}
+
+//' most_common_pseudo_octave
+//'
+//' Approximates floating-point numbers to arbitrary precision.
+//'
+//' @param x Vector of floating point numbers to approximate
+//' @param precision Precision for approximations
+//'
+//' @return A data frame of rational numbers and metadata
+//'
+//' @export
+// [[Rcpp::export]]
+const double most_common_pseudo_octave(NumericVector pseudo_octaves) {
+   const IntegerVector counts = table(pseudo_octaves);
+    IntegerVector idx = seq_along(counts) - 1;
+    std::sort(idx.begin(), idx.end(), [&](int i, int j){return counts[i] > counts[j];});
+    CharacterVector names_of_count = counts.names();
+    names_of_count = names_of_count[idx];
+    return std::stod(std::string(names_of_count[0]));
+}
+
 //' rational_fractions
 //'
 //' Approximates floating-point numbers to arbitrary precision.
@@ -68,14 +170,16 @@ NumericVector stern_brocot(const double x, const double precision) {
 //' @export
 // [[Rcpp::export]]
 DataFrame rational_fractions(NumericVector x,
-                             const double precision,
-                             const double pseudo_octave) {
+                             const double precision) {
 
   const int     n = x.size();
   NumericVector nums(n);
   NumericVector dens(n);
   NumericVector pseudo_x(n);
   NumericVector approximations(n);
+
+  const DataFrame pseudo_octaves_df = pseudo_octaves(x);
+  const double pseudo_octave = most_common_pseudo_octave(pseudo_octaves_df["pseudo_octave"]);
 
   for (int i = 0; i < n; ++i) {
     pseudo_x[i]                  = pow(2.0, log(x[i]) / log(pseudo_octave));
@@ -94,45 +198,22 @@ DataFrame rational_fractions(NumericVector x,
     _("precision")              = precision
   );
 }
-//' pseudo_octave
+
+//' try_table
 //'
-//' Determine pseudo octave of all frequencies relative to lowest frequency
+//' Does this return what I thin it returns?
 //'
-//' @param x Chord frequencies
+//' @param x pseudo octaves list
 //'
-//' @return A data frame of frequencies and pseudo_octaves
+//' @return A pseudo_octave.
 //'
 //' @export
 // [[Rcpp::export]]
-DataFrame pseudo_octaves(const NumericVector x) {
+DataFrame try_table(const NumericVector x) {
+  const IntegerVector counts = table(x);
 
-  const double f0 = min(x);
-  const int num_harmonics = ceil(pow(2,log(max(x)/f0)/log(2))) + 1;
+  IntegerVector idx = seq_along(counts) - 1;
+  std::sort(idx.begin(), idx.end(), [&](int i, int j){return counts[i] > counts[j];});
 
-  NumericVector harmonics(num_harmonics);
-  NumericVector harmonics_min(num_harmonics);
-  NumericVector harmonics_max(num_harmonics);
-  for (int i=0; i<num_harmonics;i++) {
-    harmonics[i] = (i+1) * f0;
-    harmonics_min[i] = harmonics[i] * 0.8408964;
-    harmonics_max[i] = harmonics[i] * 1.189207;
-  }
-
-  NumericVector freq(num_harmonics*num_harmonics);
-  NumericVector pseudo_octave(num_harmonics*num_harmonics);
-  int num_matches=0;
-  for (int i=0; i<num_harmonics; i++) {
-    for (int j=0; j<x.size(); j++){
-      if ((harmonics_min[i] < x[j]) && (x[j] < harmonics_max[i])) {
-        freq[num_matches] = x[j];
-        pseudo_octave[num_matches] = std::round(1000000 * pow(x[j]/f0,1/(log(i+1)/log(2)))) / 1000000;
-        num_matches++;
-      }
-    }
-  }
-
-  return DataFrame::create(
-    _("freq") = freq[Rcpp::Range(0, num_matches-1)],
-    _("pseudo_octave") = pseudo_octave[Rcpp::Range(0, num_matches-1)]
-  );
+  return counts[idx];
 }
