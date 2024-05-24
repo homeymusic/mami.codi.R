@@ -27,7 +27,7 @@ mami.codi <- function(
     ...
 ) {
 
-  parse_input(x, ...)                            %>%
+  parse_input(x, ...)                                %>%
     compute_consonance(minimum_amplitude, precision) %>%
     format_output(metadata, verbose)
 
@@ -95,10 +95,12 @@ compute_consonance = function(x, minimum_amplitude, precision) {
 
   x %>% dplyr::mutate(
 
-    gcd( f / min(f), precision ) %>% dplyr::rename_with(~ paste0('temporal_',.)),
+    pseudo_octave         = compute_pseudo_octave(f),
+
+    gcd( f / min(f), precision, pseudo_octave ) %>% dplyr::rename_with(~ paste0('temporal_',.)),
     temporal_consonance   = .data$temporal_gcd / 2,
 
-    gcd( l / min(l), precision ) %>% dplyr::rename_with(~ paste0('spatial_',.)),
+    gcd( l / min(l), precision, pseudo_octave ) %>% dplyr::rename_with(~ paste0('spatial_',.)),
     spatial_consonance    = .data$spatial_gcd  / 2,
 
     consonance_dissonance = .data$temporal_consonance + .data$spatial_consonance,
@@ -111,6 +113,13 @@ compute_consonance = function(x, minimum_amplitude, precision) {
     precision
   )
 
+}
+
+compute_pseudo_octave = function(x) {
+  (x %>%
+     pseudo_octaves() %>%
+     dplyr::count(.data$pseudo_octave, sort=TRUE) %>%
+     dplyr::slice(1))$pseudo_octave
 }
 
 #' Greatest Common Divisor of Rational Numbers
@@ -126,8 +135,8 @@ compute_consonance = function(x, minimum_amplitude, precision) {
 #'
 #' @rdname gcd
 #' @export
-gcd <- function(x, precision) {
-  fractions = rational_fractions(x, precision)
+gcd <- function(x, precision, pseudo_octave) {
+  fractions = rational_fractions(x, precision, pseudo_octave)
   tibble::tibble_row(
     gcd_num   = gcd_integers(fractions$num),
     lcm_den   = lcm_integers(fractions$den),

@@ -25,7 +25,20 @@ stern_brocot <- function(x, precision) {
 #' @return A data frame of rational numbers and metadata
 #'
 #' @export
-rational_fractions <- function(x, precision) {
-    .Call(`_mami_codi_R_rational_fractions`, x, precision)
+rational_fractions <- function(x, precision, pseudo_octave) {
+    .Call(`_mami_codi_R_rational_fractions`, x, precision, pseudo_octave)
+}
+
+#' pseudo_octave
+#'
+#' Determine pseudo octave of all frequencies relative to lowest frequency
+#'
+#' @param x Chord frequencies
+#'
+#' @return A data frame of frequencies and pseudo_octaves
+#'
+#' @export
+pseudo_octaves <- function(x) {
+    .Call(`_mami_codi_R_pseudo_octaves`, x)
 }
 

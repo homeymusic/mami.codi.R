@@ -23,21 +23,34 @@ BEGIN_RCPP
 END_RCPP
 }
 // rational_fractions
-DataFrame rational_fractions(NumericVector x, const double precision);
-RcppExport SEXP _mami_codi_R_rational_fractions(SEXP xSEXP, SEXP precisionSEXP) {
+DataFrame rational_fractions(NumericVector x, const double precision, const double pseudo_octave);
+RcppExport SEXP _mami_codi_R_rational_fractions(SEXP xSEXP, SEXP precisionSEXP, SEXP pseudo_octaveSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
     Rcpp::traits::input_parameter< const double >::type precision(precisionSEXP);
-    rcpp_result_gen = Rcpp::wrap(rational_fractions(x, precision));
+    Rcpp::traits::input_parameter< const double >::type pseudo_octave(pseudo_octaveSEXP);
+    rcpp_result_gen = Rcpp::wrap(rational_fractions(x, precision, pseudo_octave));
+    return rcpp_result_gen;
+END_RCPP
+}
+// pseudo_octaves
+DataFrame pseudo_octaves(const NumericVector x);
+RcppExport SEXP _mami_codi_R_pseudo_octaves(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const NumericVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(pseudo_octaves(x));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
     {"_mami_codi_R_stern_brocot", (DL_FUNC) &_mami_codi_R_stern_brocot, 2},
-    {"_mami_codi_R_rational_fractions", (DL_FUNC) &_mami_codi_R_rational_fractions, 2},
+    {"_mami_codi_R_rational_fractions", (DL_FUNC) &_mami_codi_R_rational_fractions, 3},
+    {"_mami_codi_R_pseudo_octaves", (DL_FUNC) &_mami_codi_R_pseudo_octaves, 1},
     {NULL, NULL, 0}
 };
 
