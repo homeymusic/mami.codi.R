@@ -1,9 +1,7 @@
-search_label       = 'Compressed'
-precisions         = c(1:9 %o% 10^(-3:-2))
-temporal_precision = precisions
-spatial_precision  = precisions
-# temporal_precision = seq(from=0.005, to=0.007, by=0.0001)
-# spatial_precision  = seq(from=0.008, to=0.01,  by=0.0001)
+search_label = 'Compressed'
+precisions   = c(1:9 %o% 10^(-3:-2))
+precision    = precisions
+# precision = seq(from=0.005, to=0.007, by=0.0001)
 
 tonic_midi         = 60
 num_harmonics      = 10
@@ -44,8 +42,7 @@ index = seq_along(intervals)
 
 grid = tidyr::expand_grid(
   index,
-  temporal_precision  = temporal_precision,
-  spatial_precision = spatial_precision
+  precision  = precision
 )
 
 print(grid)
@@ -54,8 +51,7 @@ plan(multisession, workers=parallelly::availableCores())
 
 data = grid %>% furrr::future_pmap_dfr(\(
   index,
-  temporal_precision,
-  spatial_precision
+  precision
 ) {
   if (search_label=='Bonang') {
     bass_f0 <- hrep::midi_to_freq(tonic_midi)
@@ -96,8 +92,7 @@ data = grid %>% furrr::future_pmap_dfr(\(
 
   mami.codi.R::mami.codi(
     chord,
-    temporal_precision  = temporal_precision,
-    spatial_precision = spatial_precision,
+    precision  = precision,
     metadata       = list(
       octave_ratio   = octave_ratio,
       num_harmonics  = num_harmonics,

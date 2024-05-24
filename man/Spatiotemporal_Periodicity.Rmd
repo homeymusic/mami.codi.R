@@ -123,7 +123,7 @@ knitr::kable(chord$temporal_ratios[[1]] %>%
 #### Spatial Periodicity
 ```{r, echo=F, results='asis', message=F}
 knitr::kable(tibble::tibble(
-  tol      = chord$spatial_precision,
+  tol      = chord$precision,
   lcd      = chord$spatial_lcm_den,
   chord_Sz = log2(lcd),
   max_l_m  = max(chord$wavelengths[[1]]),

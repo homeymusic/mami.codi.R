@@ -56,8 +56,7 @@ cat("  \n###", title, '\n')
 print(knitr::kable(tibble::tibble_row(
   multicolored_line_sigma  = 0.2,
   green_line_sigma         = 2.0,
-  spatial_precision        = paste(round(chords$spatial_precision %>% unique, 5), collapse = ' '),
-  temporal_precision       = paste(round(chords$temporal_precision %>% unique, 5), collapse = ' '),
+  precision                = paste(round(chords$precision %>% unique, 5), collapse = ' '),
 )))
 print(plot_semitone_codi_smooth(chords, title))
 cat("  \n")

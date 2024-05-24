@@ -27,7 +27,7 @@ mami.codi <- function(
     ...
 ) {
 
-  parse_input(x, ...)                            %>%
+  parse_input(x, ...)                                %>%
     compute_consonance(minimum_amplitude, precision) %>%
     format_output(metadata, verbose)
 
@@ -131,7 +131,7 @@ gcd <- function(x, precision) {
   tibble::tibble_row(
     gcd_num   = gcd_integers(fractions$num),
     lcm_den   = lcm_integers(fractions$den),
-    gcd       = .data$gcd_num / .data$lcm_den,
+    gcd       = .data$gcd_num / log2(.data$lcm_den + 1),
     fractions = list(fractions)
   )
 }

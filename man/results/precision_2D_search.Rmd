@@ -70,18 +70,14 @@ theory <- theory %>% dplyr::rowwise() %>% dplyr::mutate(
   octave_ratio   = metadata$octave_ratio,
   semitone       = metadata$semitone,
   .before=1
-) %>% dplyr::group_by(temporal_precision, spatial_precision)
+) %>% dplyr::group_by(precision)
 ```
 
 precisions:
-```{r, echo=F}
-temp_tols = theory$temporal_precision %>% unique
-temp_tols
-```
 
 ```{r, echo=F}
-space_tols = theory$spatial_precision %>% unique
-space_tols
+tols = theory$precision %>% unique
+tols
 ```
 
 Number of Harmonics:
@@ -140,8 +136,8 @@ experiment <- experiment %>%
 ```
 
 ```{r, echo=F}
-cols = length(space_tols)
-rows = length(temp_tols) 
+cols = length(tols)
+rows = length(tols) 
 ```
 
 ## CoDi Wrap
