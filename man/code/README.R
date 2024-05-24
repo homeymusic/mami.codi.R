@@ -153,15 +153,15 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
   } else if (timbre=='Harmonic') {
     precision  = default_precision
   } else if (timbre=='Stretched') {
-    precision  = 0.032
+    precision  = default_precision
   } else if (timbre=='Compressed') {
-    precision  = 0.032
+    precision  = default_precision
   } else if (timbre=='M3') {
-    precision  = 5e-05
+    precision  = 5.4e-05
   } else if (timbre=='M6') {
-    precision  = 5e-05
+    precision  = 5.4e-05
   } else if (timbre=='P8') {
-    precision  = 5e-05
+    precision  = 5.4e-05
   }
 
   mami.codi.R::mami.codi(study_chord,

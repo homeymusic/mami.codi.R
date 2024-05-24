@@ -179,7 +179,7 @@ For 10 harmonics, behavioral results and theoretical predictions agree.
 
 | precision | smoothing_sigma |
 |:----------|----------------:|
-| 0.075     |             0.2 |
+| 0.072     |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-3.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-4.png)<!-- -->
@@ -193,7 +193,7 @@ peak.
 
 | precision | smoothing_sigma |
 |:----------|----------------:|
-| 0.075     |             0.2 |
+| 0.072     |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-5.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-6.png)<!-- -->
@@ -207,7 +207,7 @@ while the M3 peak is slightly higher without the 3rd partial.
 
 | precision | smoothing_sigma |
 |:----------|----------------:|
-| 0.075     |             0.2 |
+| 0.072     |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-7.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-8.png)<!-- -->
@@ -235,7 +235,7 @@ and m7 that do not exist in the behavioral results.
 
 | precision | smoothing_sigma |
 |:----------|----------------:|
-| 0.032     |             0.2 |
+| 0.072     |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-11.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-12.png)<!-- -->
@@ -247,7 +247,7 @@ with the theoretical peaks.
 
 | precision | smoothing_sigma |
 |:----------|----------------:|
-| 0.032     |             0.2 |
+| 0.072     |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-13.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-14.png)<!-- -->
