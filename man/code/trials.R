@@ -86,8 +86,7 @@ run_trials <- function(search_label, precisions) {
     }
     mami.codi.R::mami.codi(
       chord,
-      spatial_precision  = precision,
-      temporal_precision  = precision,
+      precision  = precision,
       metadata       = list(
         octave_ratio   = octave_ratio,
         num_harmonics  = num_harmonics,

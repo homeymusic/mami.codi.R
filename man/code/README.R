@@ -152,9 +152,9 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
   } else if (timbre=='Harmonic') {
     precision  = default_precision
   } else if (timbre=='Stretched') {
-    precision  = default_precision / 2
+    precision  = default_precision
   } else if (timbre=='Compressed') {
-    precision  = default_precision / 4
+    precision  = default_precision
   } else if (timbre=='M3') {
     precision  = 5e-05
   } else if (timbre=='M6') {

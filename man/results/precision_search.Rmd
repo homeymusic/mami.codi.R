@@ -6,7 +6,7 @@ always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'Harmonic'
+search_label = 'Compressed'
 ```
 
 # `r search_label`
@@ -74,17 +74,17 @@ theory <- theory %>% dplyr::rowwise() %>% dplyr::mutate(
   octave_ratio   = metadata$octave_ratio,
   semitone       = metadata$semitone,
   .before=1
-) %>% dplyr::group_by(spatial_precision)
+) %>% dplyr::group_by(precision)
 ```
 
 ```{r, echo=F, results='asis', message=F}
-theory <- theory  %>% dplyr::filter(semitone > 0)
-experiment <- experiment  %>% dplyr::filter(semitone > 0)
+theory <- theory
+experiment <- experiment
 ```
 
 Precisions:
 ```{r, echo=F}
-tols = theory$spatial_precision %>% unique
+tols = theory$precision %>% unique
 tols
 ```
 
@@ -144,8 +144,8 @@ theory <- theory %>%
   )
 
 plot_semitone_codi_wrap(
-  theory %>% dplyr::filter(semitone>1), 
-  experiment %>% dplyr::filter(semitone>1),
+  theory, 
+  experiment,
   gray_vlines  = params$gray_vlines[[1]],
   black_vlines = params$black_vlines[[1]],
   title=paste(search_label),
@@ -165,7 +165,7 @@ theory <- theory %>%
   )
 
 plot_semitone_spatial_wrap(
-  theory %>% dplyr::filter(semitone>1), 
+  theory, 
   gray_vlines  = params$gray_vlines[[1]],
   black_vlines = params$black_vlines[[1]],
   title=paste(search_label),
@@ -185,7 +185,7 @@ theory <- theory %>%
   )
 
 plot_semitone_temporal_wrap(
-  theory %>% dplyr::filter(semitone>1), 
+  theory, 
   gray_vlines  = params$gray_vlines[[1]],
   black_vlines = params$black_vlines[[1]],
   title=paste(search_label),
