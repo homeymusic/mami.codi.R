@@ -11,8 +11,8 @@ if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
 } else {
 
   # Detailed
-  from_prec   = 0.01
-  to_prec     = 0.11
+  from_prec   = 0.001
+  to_prec     = 0.12
   by_prec     = 0.01
   precisions = seq(from=from_prec, to=to_prec, by=by_prec)
 
