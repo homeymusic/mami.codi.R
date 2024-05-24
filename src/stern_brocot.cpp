@@ -96,9 +96,17 @@ DataFrame pseudo_octaves(const NumericVector x) {
   NumericVector pseudo_octave(x_size * x_size * x_size);
   NumericVector highest_freq(x_size * x_size * x_size);
 
+
+  const DataFrame default_pseudo_octave = DataFrame::create(
+    _("harmonic_number") = 1,
+    _("evaluation_freq") = f_max,
+    _("reference_freq")  = f_max,
+    _("pseudo_octave")   = 2.0,
+    _("highest_freq")    = f_max
+  );
+
   if (x_size <= 2) {
-    throw std::range_error("find_highest_fundamental requires more than 2 frequencies");
-    return R_NilValue;
+    return default_pseudo_octave;
   }
 
   int num_matches=0;
@@ -120,13 +128,7 @@ DataFrame pseudo_octaves(const NumericVector x) {
   }
 
   if (num_matches == 0) {
-    return DataFrame::create(
-      _("harmonic_number") = 1,
-      _("evaluation_freq") = f_max,
-      _("reference_freq")  = f_max,
-      _("pseudo_octave")   = 2.0,
-      _("highest_freq")    = f_max
-    );
+    return default_pseudo_octave;
   } else {
     return DataFrame::create(
       _("harmonic_number") = harmonic_number[Rcpp::Range(0, num_matches-1)],
@@ -192,6 +194,7 @@ DataFrame rational_fractions(NumericVector x,
   return DataFrame::create(
     _("rational_number")        = x,
     _("pseudo_rational_number") = pseudo_x,
+    _("pseudo_octave")          = pseudo_octave,
     _("num")                    = nums,
     _("den")                    = dens,
     _("approximation")          = approximations,
