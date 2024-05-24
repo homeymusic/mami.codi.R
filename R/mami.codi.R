@@ -116,10 +116,14 @@ compute_consonance = function(x, minimum_amplitude, precision) {
 }
 
 compute_pseudo_octave = function(x) {
-  (x %>%
-     pseudo_octaves() %>%
-     dplyr::count(.data$pseudo_octave, sort=TRUE) %>%
-     dplyr::slice(1))$pseudo_octave
+  if (length(x) <= 2) {
+    2
+  } else {
+    (x %>%
+       pseudo_octaves() %>%
+       dplyr::count(.data$pseudo_octave, sort=TRUE) %>%
+       dplyr::slice(1))$pseudo_octave
+  }
 }
 
 #' Greatest Common Divisor of Rational Numbers

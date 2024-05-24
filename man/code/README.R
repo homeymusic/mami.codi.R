@@ -1,5 +1,6 @@
 source('./utils.R')
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R',
+                         ref='pseudo_octave')
 
 library(mami.codi.R)
 devtools::load_all(".")
@@ -144,7 +145,7 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
   if (timbre=='Pure') {
     precision  = default_precision / 2
   } else if (timbre=='Bonang') {
-    precision  = default_precision / 2
+    precision  = 0.032
   } else if (timbre=='5PartialsNo3') {
     precision  = default_precision
   } else if (timbre=='5Partials') {
@@ -152,9 +153,9 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
   } else if (timbre=='Harmonic') {
     precision  = default_precision
   } else if (timbre=='Stretched') {
-    precision  = default_precision
+    precision  = default_precision / 2
   } else if (timbre=='Compressed') {
-    precision  = default_precision
+    precision  = default_precision / 2
   } else if (timbre=='M3') {
     precision  = 5e-05
   } else if (timbre=='M6') {
