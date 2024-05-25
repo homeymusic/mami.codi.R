@@ -96,10 +96,10 @@ compute_consonance = function(x, minimum_amplitude, precision) {
   x %>% dplyr::mutate(
 
     gcd( f / min(f), precision ) %>% dplyr::rename_with(~ paste0('temporal_',.)),
-    temporal_consonance   = 1 / .data$temporal_lcm_den,
+    temporal_consonance   = .data$temporal_gcd_num,
 
     gcd( l / min(l), precision ) %>% dplyr::rename_with(~ paste0('spatial_',.)),
-    spatial_consonance    = 1 / .data$spatial_lcm_den,
+    spatial_consonance    = .data$spatial_gcd_num,
 
     consonance_dissonance = .data$temporal_consonance + .data$spatial_consonance,
     major_minor           = .data$temporal_consonance - .data$spatial_consonance,
