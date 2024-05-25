@@ -57,18 +57,18 @@ NumericVector stern_brocot(const double x, const double precision) {
 }
 
 //' compute_pseudo_octave
- //'
- //' Find the highest fundamental freq
- //'
- //' @param fn freq to eval
- //' @param f0 fundamental freq
- //' @param n  harmonic number
- //'
- //' @return Calculated pseudo octave
- //'
- //' @export
- // [[Rcpp::export]]
- const double compute_pseudo_octave(const double fn, const double f0, const int n) {
+//'
+//' Find the highest fundamental freq
+//'
+//' @param fn freq to eval
+//' @param f0 fundamental freq
+//' @param n  harmonic number
+//'
+//' @return Calculated pseudo octave
+//'
+//' @export
+// [[Rcpp::export]]
+const double compute_pseudo_octave(const double fn, const double f0, const int n) {
    if (n==1) {
      return 1.0;
    } else {
@@ -160,7 +160,7 @@ const double most_common_pseudo_octave(NumericVector pseudo_octaves) {
     return std::stod(std::string(names_of_count[0]));
 }
 
-//' rational_fractions
+//' approximate_rational_fractions
 //'
 //' Approximates floating-point numbers to arbitrary precision.
 //'
@@ -171,8 +171,8 @@ const double most_common_pseudo_octave(NumericVector pseudo_octaves) {
 //'
 //' @export
 // [[Rcpp::export]]
-DataFrame rational_fractions(NumericVector x,
-                             const double precision) {
+DataFrame approximate_rational_fractions(NumericVector x,
+                                         const double precision) {
 
   const int     n = x.size();
   NumericVector nums(n);
@@ -200,23 +200,4 @@ DataFrame rational_fractions(NumericVector x,
     _("approximation")          = approximations,
     _("precision")              = precision
   );
-}
-
-//' try_table
-//'
-//' Does this return what I thin it returns?
-//'
-//' @param x pseudo octaves list
-//'
-//' @return A pseudo_octave.
-//'
-//' @export
-// [[Rcpp::export]]
-DataFrame try_table(const NumericVector x) {
-  const IntegerVector counts = table(x);
-
-  IntegerVector idx = seq_along(counts) - 1;
-  std::sort(idx.begin(), idx.end(), [&](int i, int j){return counts[i] > counts[j];});
-
-  return counts[idx];
 }

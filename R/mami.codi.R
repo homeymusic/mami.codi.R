@@ -96,11 +96,11 @@ compute_consonance = function(x, minimum_amplitude, precision) {
 
   x %>% dplyr::mutate(
 
-    gcd( f / min(f), precision ) %>% dplyr::rename_with(~ paste0('temporal_',.)),
-    temporal_consonance   = .data$temporal_gcd / 2,
+    agcd( f / min(f), precision ) %>% dplyr::rename_with(~ paste0('temporal_',.)),
+    temporal_consonance   = .data$temporal_agcd / 2,
 
-    gcd( l / min(l), precision ) %>% dplyr::rename_with(~ paste0('spatial_',.)),
-    spatial_consonance    = .data$spatial_gcd  / 2,
+    agcd( l / min(l), precision ) %>% dplyr::rename_with(~ paste0('spatial_',.)),
+    spatial_consonance    = .data$spatial_agcd  / 2,
 
     consonance_dissonance = .data$temporal_consonance + .data$spatial_consonance,
     major_minor           = .data$temporal_consonance - .data$spatial_consonance,
@@ -115,25 +115,35 @@ compute_consonance = function(x, minimum_amplitude, precision) {
 
 }
 
-#' Greatest Common Divisor of Rational Numbers
+#' Approximate Greatest Common Divisor
 #'
 #'
-#' See equation 15 in "Non-Integer Arrays for Array Signal Processing"
-#' by Kulkarni and Vaidyanathan (2022)
+#' "Non-Integer Arrays for Array Signal Processing"
+#' Kulkarni and Vaidyanathan (2022)
+#' Equation 15
+#'
+#' "A Practical Fundamental Frequency Extraction Algorithm
+#' for Motion Parameters Estimation of Moving Targets"
+#' Huang et al. (2014)
+#' III. EXTRACTION OF A FUNDAMENTAL FREQUENCY
+#' A. Extraction of the Initial Pitch Using the AGCD Method
+#'
+#' "An Efficient Technique for Modeling and Synthesis of Automotive Engine Sounds"
+#' Amman and Das (2001)
 #'
 #' @param x Vector of rational numbers
 #' @param precision Precision value for creating rational fractions
 #'
 #' @return The greatest common divisor of the rational numbers
 #'
-#' @rdname gcd
+#' @rdname agcd
 #' @export
-gcd <- function(x, precision) {
-  fractions = rational_fractions(x, precision)
+agcd <- function(x, precision) {
+  fractions = approximate_rational_fractions(x, precision)
   tibble::tibble_row(
-    gcd_num   = gcd_integers(fractions$num),
-    lcm_den   = lcm_integers(fractions$den),
-    gcd       = .data$gcd_num / .data$lcm_den,
+    agcd_num   = gcd_integers(fractions$num),
+    alcm_den   = lcm_integers(fractions$den),
+    agcd       = .data$agcd_num / .data$alcm_den,
     fractions = list(fractions)
   )
 }
