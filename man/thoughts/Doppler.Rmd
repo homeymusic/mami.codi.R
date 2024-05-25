@@ -1,0 +1,36 @@
+---
+title: "Doppler"
+output:
+  github_document: default
+always_allow_html: true
+---
+```{r, echo=F, message=F, include=F}
+devtools::load_all(".")
+source('./man/code/plot.R')
+source('./man/code/utils.R')
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "../figures/GCD-"
+)
+knitr::opts_chunk$set(dev = 'svg')
+p = RATIONAL_FRACTION_PRECISION
+```
+
+## Doppler Harmonics
+
+
+```{r, echo=F, message=F}
+P1 = c(60) %>% hrep::sparse_fr_spectrum(num_harmonics=10)
+f = P1 %>% hrep::freq()
+f
+```
+
+```{r, echo=T, message=F}
+# 100 km / hour
+f_doppler = f * (343 / (343-27.7778))
+f_doppler[2] / f_doppler[1]
+```
+```{r, echo=T, message=F}
+f_doppler[4] / f_doppler[1]
+```
