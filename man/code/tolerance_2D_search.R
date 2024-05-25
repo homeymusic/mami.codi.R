@@ -1,4 +1,4 @@
-search_label       = 'M3'
+search_label       = 'P8'
 tolerances         = c(1 %o% 10^(-6:0))
 temporal_tolerance = tolerances
 spatial_tolerance  = tolerances
