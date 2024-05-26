@@ -1,4 +1,4 @@
-#' Major-Minor Consonance-Dissonance
+#' Major-Minor Consonance-Dissonance AGCD
 #'
 #' Provides an auditory model of music perception
 #'
