@@ -6,7 +6,7 @@ always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'M3'
+search_label = 'P8'
 ```
 
 # `r search_label`
@@ -134,7 +134,7 @@ rows = length(tols)
 
 ## CoDi
 
-```{r CoDi, fig.height=7*rows, fig.width=12*cols, echo=F}
+```{r _CoDi, fig.height=7*rows, fig.width=12*cols, echo=F}
 # height = 3 per row and width = 5 per column
 # so for grid of 4x12 it would be height=12 and width=60
 theory <- theory %>% 
@@ -156,7 +156,7 @@ plot_semitone_codi_wrap(
 
 ## Spatial
 
-```{r Spatial, fig.height=7*rows, fig.width=12*cols, echo=F}
+```{r _Spatial, fig.height=7*rows, fig.width=12*cols, echo=F}
 # height = 3 per row and width = 5 per column
 # so for grid of 4x12 it would be height=12 and width=60
 theory <- theory %>% 
@@ -175,7 +175,7 @@ plot_semitone_spatial_wrap(
 
 ## Temporal
 
-```{r Temporal, fig.height=7*rows, fig.width=12*cols, echo=F}
+```{r _Temporal, fig.height=7*rows, fig.width=12*cols, echo=F}
 # height = 3 per row and width = 5 per column
 # so for grid of 4x12 it would be height=12 and width=60
 

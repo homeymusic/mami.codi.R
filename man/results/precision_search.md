@@ -1,13 +1,11 @@
 Precision Search
 ================
 
-# Harmonic
+# P8
 
 Precisions:
 
-    #>  [1] 0.001 0.002 0.003 0.004 0.005 0.006 0.007 0.008 0.009 0.010 0.020 0.030
-    #> [13] 0.040 0.050 0.060 0.070 0.080 0.090 0.100 0.200 0.300 0.400 0.500 0.600
-    #> [25] 0.700 0.800 0.900
+    #>  [1] 1e-10 1e-09 1e-08 1e-07 1e-06 1e-05 1e-04 1e-03 1e-02 1e-01 1e+00
 
 Number of Harmonics:
 
@@ -19,12 +17,12 @@ Octave Ratios:
 
 ## CoDi
 
-![](../figures/precision_search/CoDi-1.png)<!-- -->
+![](../figures/precision_search/_CoDi-1.png)<!-- -->
 
 ## Spatial
 
-![](../figures/precision_search/Spatial-1.png)<!-- -->
+![](../figures/precision_search/_Spatial-1.png)<!-- -->
 
 ## Temporal
 
-![](../figures/precision_search/Temporal-1.png)<!-- -->
+![](../figures/precision_search/_Temporal-1.png)<!-- -->
