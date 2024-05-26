@@ -84,7 +84,7 @@ values. However, for complex pitches that is not the case. The pattern
 of the two sets of components are different. See the example of the
 major triad with 5 harmonics, below.
 
-# `{r, child=c('man/Spatiotemporal_Periodicity.Rmd')} #`
+#### `{r, child=c('man/Spatiotemporal_Periodicity.Rmd')} ####`
 
 ### Finding the precision Values
 
@@ -166,7 +166,7 @@ major-minor versus the behavioral results are included in a plot below.
 
 | precision | smoothing_sigma |
 |:----------|----------------:|
-| 0.032     |             0.2 |
+| 0.025     |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-2.png)<!-- -->
@@ -177,7 +177,7 @@ For 10 harmonics, behavioral results and theoretical predictions agree.
 
 | precision | smoothing_sigma |
 |:----------|----------------:|
-| 0.072     |             0.2 |
+| 0.063     |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-3.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-4.png)<!-- -->
@@ -191,7 +191,7 @@ peak.
 
 | precision | smoothing_sigma |
 |:----------|----------------:|
-| 0.072     |             0.2 |
+| 0.063     |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-5.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-6.png)<!-- -->
@@ -205,7 +205,7 @@ while the M3 peak is slightly higher without the 3rd partial.
 
 | precision | smoothing_sigma |
 |:----------|----------------:|
-| 0.072     |             0.2 |
+| 0.063     |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-7.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-8.png)<!-- -->
@@ -220,7 +220,7 @@ be relatively higher than the behavioral results.
 
 | precision | smoothing_sigma |
 |:----------|----------------:|
-| 0.032     |             0.2 |
+| 0.063     |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-9.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-10.png)<!-- -->
@@ -233,7 +233,7 @@ and m7 that do not exist in the behavioral results.
 
 | precision | smoothing_sigma |
 |:----------|----------------:|
-| 0.072     |             0.2 |
+| 0.063     |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-11.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-12.png)<!-- -->
@@ -245,7 +245,7 @@ with the theoretical peaks.
 
 | precision | smoothing_sigma |
 |:----------|----------------:|
-| 0.072     |             0.2 |
+| 0.063     |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-13.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-14.png)<!-- -->
@@ -287,7 +287,7 @@ Description is below.
 
 ### TODO: run the in-depth precision searches again for M3, M6 and P8
 
-# `{r, child=c('man/M3_M6_P8.Rmd')} #`
+#### `{r, child=c('man/M3_M6_P8.Rmd')} ####`
 
 #### Notes on plots:
 

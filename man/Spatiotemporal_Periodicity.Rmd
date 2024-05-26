@@ -16,9 +16,9 @@ num_harmonics = 3
 ### Estimating Spatiotemporal Periodicity
 
 To estimate the periodicity of a chord, the MaMi.CoDi model uses a signal 
-processing technique. It finds ratios, within a given precision, 
+processing technique. It finds fractions, within a given precision, 
 for every tone in the chord (fundamental, harmonics, noise, etc.) relative to 
-a reference tone. The least common denominator of those ratios is a measure of the 
+a reference tone. The least common denominator of those fractions is a measure of the 
 cycle length, relative to the reference tone. Long relative cycles are predicted 
 to sound unpleasant and short relative cycles are predicted to sound pleasant. \
 
@@ -42,11 +42,11 @@ consonance-dissonance along one dimension and major-minor on the orthogonal dime
 
 Below, we estimate the periodicity of the C4, E4 and G4 major triad 
 with `r num_harmonics` harmonics per pitch. The MaMi.CoDi model is based on 
-ratios of tones - both frequency and wavelength ratios. The input to the model 
+fractions of tones - both frequency and wavelength fractions. The input to the model 
 is a sparse frequency spectrum. We convert frequencies to wavelengths by 
 dividing a speed of sound constant by the frequency.\
 
-For tone ratios, the value of the speed of sound constant does not impact the 
+For tone fractions, the value of the speed of sound constant does not impact the 
 mathematics. Ideally, we could choose any media for the speed of sound: 
 air, cochlear fluid, basilar membrane, etc. 
 
@@ -54,7 +54,7 @@ However, for calculations in a computer, the constant does make a difference bec
 of the way computers handle very small and very large numbers. So, we chose a 
 constant for each chord that ensures the wavelength and frequency values
 are in the same range. Choosing a constant that gives similar ranges for 
-frequencies and wavelengths makes it easier to see how different the ratios for the
+frequencies and wavelengths makes it easier to see how different the fractions for the
 two signals will be.
 
 ```{r, echo=F, results='asis', message=F}
@@ -83,8 +83,8 @@ knitr::kable(chord %>% dplyr::select('consonance_dissonance', 'major_minor', 'te
 #### Temporal Periodicity
 ```{r, echo=F, results='asis', message=F}
 knitr::kable(tibble::tibble(
-  tol      = chord$temporal_precision,
-  lcd      = chord$temporal_lcm_den,
+  tol      = chord$precision,
+  lcd      = chord$temporal_alcd,
   chord_Sz = log2(lcd),
   min_f_Hz = min(chord$frequencies[[1]]),
   max_T_s  = 1 / min_f_Hz,
@@ -98,33 +98,32 @@ knitr::kable(tibble::tibble(
 ##### Partial Periods
 
 ```{r, echo=F, results='asis', message=F}
-ratios = chord$temporal_ratios[[1]] %>% 
-  dplyr::select(num, den, tone)
-lcd    = chord$temporal_lcm_den
-plot_periodicity(ratios, lcd, 'frequency', relative = F)
+fractions = chord$temporal_fractions[[1]] %>% 
+  dplyr::select(num, den, rational_number)
+lcd    = chord$temporal_alcd
+plot_periodicity(fractions, lcd, 'frequency', relative = F)
 ```
 
 ##### Chord Period
 
 ```{r, echo=F, results='asis', message=F}
-plot_periodicity(ratios, lcd, 'frequency')
+plot_periodicity(fractions, lcd, 'frequency')
 ```
 
-##### Frequency Ratios
+##### Frequency fractions
 ```{r, echo=F, results='asis', message=F}
-knitr::kable(chord$temporal_ratios[[1]] %>% 
-               dplyr::arrange(ratio) %>% 
+knitr::kable(chord$temporal_fractions[[1]] %>% 
+               dplyr::arrange(fraction) %>% 
                dplyr::rename(
-                 tone_hz = tone,
-                 reference_tone_hz = reference_tone,
+                 tone_hz = rational_number
                ))
 ```
 
 #### Spatial Periodicity
 ```{r, echo=F, results='asis', message=F}
 knitr::kable(tibble::tibble(
-  tol      = chord$spatial_precision,
-  lcd      = chord$spatial_lcm_den,
+  tol      = chord$precision,
+  lcd      = chord$spatial_alcd,
   chord_Sz = log2(lcd),
   max_l_m  = max(chord$wavelengths[[1]]),
   chord_m  = lcd * max_l_m,
@@ -137,24 +136,23 @@ knitr::kable(tibble::tibble(
 ##### Partial Wavelengths
 
 ```{r, echo=F, results='asis', message=F}
-ratios = chord$spatial_ratios[[1]] %>%
-  dplyr::select(index, num, den, tone)
-lcd    = chord$spatial_lcm_den
-plot_periodicity(ratios, lcd, 'wavelength', c_sound = c_sound,relative = F)
+fractions = chord$spatial_fractions[[1]] %>%
+  dplyr::select(index, num, den, rational_number)
+lcd    = chord$spatial_alcd
+plot_periodicity(fractions, lcd, 'wavelength', c_sound = c_sound,relative = F)
 ```
 
 ##### Chord Wavelength
 
 ```{r, echo=F, results='asis', message=F}
-plot_periodicity(ratios, lcd, 'wavelength', c_sound = c_sound)
+plot_periodicity(fractions, lcd, 'wavelength', c_sound = c_sound)
 ```
 
-##### Wavelength Ratios
+##### Wavelength fractions
 ```{r, echo=F, results='asis', message=F}
-knitr::kable(chord$spatial_ratios[[1]] %>% 
+knitr::kable(chord$spatial_fractions[[1]] %>% 
                dplyr::arrange(ratio) %>% 
                dplyr::rename(
-                 tone_m = tone,
-                 reference_tone_m = reference_tone,
+                 tone_m = rational_number
                ))
 ```
