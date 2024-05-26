@@ -1,4 +1,4 @@
-search_label = 'M3'
+search_label = 'P8'
 
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # Detailed
@@ -7,17 +7,17 @@ if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # by_prec     = 1e-15
   # precisions = seq(from=from_prec, to=to_prec, by=by_prec)
 
-  precisions   = c(1 %o% 10^(-10:0))
+  precisions   = c(1:9 %o% 10^(-7:-1))
 } else {
 
   # Detailed
-  from_prec   = 0.071
-  to_prec     = 0.072
-  by_prec     = 0.0001
+  from_prec   = 0.01
+  to_prec     = 0.03
+  by_prec     = 0.001
   precisions = seq(from=from_prec, to=to_prec, by=by_prec)
 
   # Orders of Magnitude
-  # precisions   = c(1:9 %o% 10^(-3:-1))
+  # precisions   = c(1:9 %o% 10^(-2:-1))
 }
 
 devtools::install_github('git@github.com:homeymusic/mami.codi.R')
