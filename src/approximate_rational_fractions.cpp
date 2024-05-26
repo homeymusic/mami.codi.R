@@ -144,8 +144,7 @@ DataFrame pseudo_octaves(const NumericVector x) {
 //'
 //' Approximates floating-point numbers to arbitrary precision.
 //'
-//' @param x Vector of floating point numbers to approximate
-//' @param precision Precision for approximations
+//' @param pseudo_octaves List of candidate pseudo octaves
 //'
 //' @return A data frame of rational numbers and metadata
 //'

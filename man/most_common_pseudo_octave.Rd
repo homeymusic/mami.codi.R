@@ -7,9 +7,7 @@
 most_common_pseudo_octave(pseudo_octaves)
 }
 \arguments{
-\item{x}{Vector of floating point numbers to approximate}
-
-\item{precision}{Precision for approximations}
+\item{pseudo_octaves}{List of candidate pseudo octaves}
 }
 \value{
 A data frame of rational numbers and metadata

@@ -92,15 +92,11 @@ compute_consonance = function(x, minimum_amplitude, precision) {
   f       = x$spectrum[[1]] %>% dplyr::filter(.data$y>minimum_amplitude) %>% hrep::freq()
   c_sound = max(f) / max(1/f)
   l       = c_sound / f
-  # Oxenham (2013) p. 3
 
   x %>% dplyr::mutate(
 
-    agcd( f / min(f), precision ) %>% dplyr::rename_with(~ paste0('temporal_',.)),
-    temporal_consonance   = .data$temporal_agcd / 2,
-
-    agcd( l / min(l), precision ) %>% dplyr::rename_with(~ paste0('spatial_',.)),
-    spatial_consonance    = .data$spatial_agcd  / 2,
+    alcd( f / min(f), precision ) %>% dplyr::rename_with(~ paste0('temporal_',.)),
+    alcd( l / min(l), precision ) %>% dplyr::rename_with(~ paste0('spatial_',.)),
 
     consonance_dissonance = .data$temporal_consonance + .data$spatial_consonance,
     major_minor           = .data$temporal_consonance - .data$spatial_consonance,
@@ -115,12 +111,8 @@ compute_consonance = function(x, minimum_amplitude, precision) {
 
 }
 
-#' Approximate Greatest Common Divisor
+#' Approximate Least Common Denominator
 #'
-#'
-#' "Non-Integer Arrays for Array Signal Processing"
-#' Kulkarni and Vaidyanathan (2022)
-#' Equation 15
 #'
 #' "A Practical Fundamental Frequency Extraction Algorithm
 #' for Motion Parameters Estimation of Moving Targets"
@@ -136,19 +128,16 @@ compute_consonance = function(x, minimum_amplitude, precision) {
 #'
 #' @return The greatest common divisor of the rational numbers
 #'
-#' @rdname agcd
+#' @rdname alcd
 #' @export
-agcd <- function(x, precision) {
+alcd <- function(x, precision) {
   fractions = approximate_rational_fractions(x, precision)
   tibble::tibble_row(
-    agcd_num   = gcd_integers(fractions$num),
-    alcm_den   = lcm_integers(fractions$den),
-    agcd       = .data$agcd_num / .data$alcm_den,
-    fractions = list(fractions)
+    alcd       = lcm_integers(fractions$den),
+    consonance = 50 - log2(.data$alcd),
+    fractions  = list(fractions)
   )
 }
-
-gcd_integers <- function(x) Reduce(gmp::gcd.bigz, x) %>% as.numeric()
 lcm_integers <- function(x) Reduce(gmp::lcm.bigz, x) %>% as.numeric()
 
 format_output <- function(x, metadata, verbose) {

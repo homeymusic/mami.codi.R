@@ -2,7 +2,7 @@
 
 S3method(parse_input,default)
 S3method(parse_input,sparse_fr_spectrum)
-export(agcd)
+export(alcd)
 export(approximate_rational_fractions)
 export(compute_pseudo_octave)
 export(default_minimum_amplitude)
