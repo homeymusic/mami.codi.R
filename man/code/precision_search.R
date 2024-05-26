@@ -1,4 +1,4 @@
-search_label = 'Harmonic'
+search_label = 'M3'
 
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # Detailed
@@ -7,7 +7,7 @@ if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # by_prec     = 1e-06
   # precisions = seq(from=from_prec, to=to_prec, by=by_prec)
 
-  precisions   = c(1:9 %o% 10^(-6:-1))
+  precisions   = c(1 %o% 10^(-10:0))
 } else {
 
   # Detailed
