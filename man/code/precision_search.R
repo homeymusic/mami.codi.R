@@ -2,12 +2,12 @@ search_label = 'M3'
 
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # Detailed
-  from_prec   = 4e-05
-  to_prec     = 6e-05
-  by_prec     = 1e-06
-  precisions = seq(from=from_prec, to=to_prec, by=by_prec)
+  # from_prec   = 3e-14
+  # to_prec     = 5e-14
+  # by_prec     = 1e-15
+  # precisions = seq(from=from_prec, to=to_prec, by=by_prec)
 
-  # precisions   = c(1:9 %o% 10^(-6:-1))
+  precisions   = c(1 %o% 10^(-10:0))
 } else {
 
   # Detailed
