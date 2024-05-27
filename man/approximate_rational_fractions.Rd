@@ -4,12 +4,14 @@
 \alias{approximate_rational_fractions}
 \title{approximate_rational_fractions}
 \usage{
-approximate_rational_fractions(x, precision)
+approximate_rational_fractions(x, precision, deviation)
 }
 \arguments{
 \item{x}{Vector of floating point numbers to approximate}
 
-\item{precision}{Precision for approximations}
+\item{precision}{Precision for finding rational fractions}
+
+\item{deviation}{Deviation for estimating least common multiples}
 }
 \value{
 A data frame of rational numbers and metadata

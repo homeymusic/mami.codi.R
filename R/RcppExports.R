@@ -35,12 +35,13 @@ compute_pseudo_octave <- function(fn, f0, n) {
 #' Determine pseudo octave of all frequencies relative to lowest frequency
 #'
 #' @param x Chord frequencies
+#' @param deviation Deviation for estimating least common multiples
 #'
 #' @return A double of the best guess of the pseudo octave
 #'
 #' @export
-pseudo_octaves <- function(x) {
-    .Call(`_mami_codi_R_pseudo_octaves`, x)
+pseudo_octaves <- function(x, deviation) {
+    .Call(`_mami_codi_R_pseudo_octaves`, x, deviation)
 }
 
 #' most_common_pseudo_octave
@@ -61,12 +62,13 @@ most_common_pseudo_octave <- function(pseudo_octaves) {
 #' Approximates floating-point numbers to arbitrary precision.
 #'
 #' @param x Vector of floating point numbers to approximate
-#' @param precision Precision for approximations
+#' @param precision Precision for finding rational fractions
+#' @param deviation Deviation for estimating least common multiples
 #'
 #' @return A data frame of rational numbers and metadata
 #'
 #' @export
-approximate_rational_fractions <- function(x, precision) {
-    .Call(`_mami_codi_R_approximate_rational_fractions`, x, precision)
+approximate_rational_fractions <- function(x, precision, deviation) {
+    .Call(`_mami_codi_R_approximate_rational_fractions`, x, precision, deviation)
 }
 

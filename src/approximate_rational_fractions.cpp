@@ -81,12 +81,14 @@ const double compute_pseudo_octave(const double fn, const double f0, const int n
 //' Determine pseudo octave of all frequencies relative to lowest frequency
 //'
 //' @param x Chord frequencies
+//' @param deviation Deviation for estimating least common multiples
 //'
 //' @return A double of the best guess of the pseudo octave
 //'
 //' @export
 // [[Rcpp::export]]
-DataFrame pseudo_octaves(const NumericVector x) {
+DataFrame pseudo_octaves(const NumericVector x,
+                         const double deviation) {
   const int x_size   = x.size();
   const double f_max = max(x);
   NumericVector harmonic_number(x_size * x_size * x_size);
@@ -115,7 +117,7 @@ DataFrame pseudo_octaves(const NumericVector x) {
     for (int ref_freq_index = 0; ref_freq_index < x_size; ++ref_freq_index) {
       for (int harmonic_num = 2; harmonic_num <= x_size; ++harmonic_num) {
         const double p_octave = compute_pseudo_octave(x[eval_freq_index], x[ref_freq_index], harmonic_num);
-        if (1.89 < p_octave && p_octave < 2.11) { // TODO: check with Sethares on limits of stretching and compressing
+        if (2.0 - deviation < p_octave && p_octave < 2.0 + deviation) {
           harmonic_number[num_matches] = harmonic_num;
           evaluation_freq[num_matches] = x[eval_freq_index];
           reference_freq[num_matches]  = x[ref_freq_index];
@@ -164,14 +166,16 @@ const double most_common_pseudo_octave(NumericVector pseudo_octaves) {
 //' Approximates floating-point numbers to arbitrary precision.
 //'
 //' @param x Vector of floating point numbers to approximate
-//' @param precision Precision for approximations
+//' @param precision Precision for finding rational fractions
+//' @param deviation Deviation for estimating least common multiples
 //'
 //' @return A data frame of rational numbers and metadata
 //'
 //' @export
 // [[Rcpp::export]]
 DataFrame approximate_rational_fractions(NumericVector x,
-                                         const double precision) {
+                                         const double precision,
+                                         const double deviation) {
 
   const int     n = x.size();
   NumericVector nums(n);
@@ -179,7 +183,7 @@ DataFrame approximate_rational_fractions(NumericVector x,
   NumericVector pseudo_x(n);
   NumericVector approximations(n);
 
-  const DataFrame pseudo_octaves_df = pseudo_octaves(x);
+  const DataFrame pseudo_octaves_df = pseudo_octaves(x, deviation);
   const double pseudo_octave = most_common_pseudo_octave(pseudo_octaves_df["pseudo_octave"]);
 
   for (int i = 0; i < n; ++i) {

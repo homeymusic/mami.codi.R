@@ -6,8 +6,9 @@
 \usage{
 mami.codi(
   x,
-  minimum_amplitude = MINIMUM_AMPLITUDE,
+  amplitude = MINIMUM_AMPLITUDE,
   precision = RATIONAL_FRACTION_PRECISION,
+  deviation = APPROXIMATE_LCM_DEVIATION,
   metadata = NA,
   verbose = FALSE,
   ...
@@ -17,9 +18,11 @@ mami.codi(
 \item{x}{Chord to analyse specified in MIDI, coerced to
 hrep::sparse_fr_spectrum}
 
-\item{minimum_amplitude}{An optional minimum amplitude for deciding which signals to include}
+\item{amplitude}{An optional minimum amplitude for deciding which signals to include.}
 
-\item{precision}{An optional precision value for creating rational fractions}
+\item{precision}{An optional precision value for finding rational fractions.}
+
+\item{deviation}{An optional deviation value for approximating least common multiples.}
 
 \item{metadata}{User-provided list of metadata that roundtrips with each call.
 helpful for analysis and plots}

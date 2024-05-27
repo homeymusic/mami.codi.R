@@ -4,10 +4,12 @@
 \alias{pseudo_octaves}
 \title{pseudo_octaves}
 \usage{
-pseudo_octaves(x)
+pseudo_octaves(x, deviation)
 }
 \arguments{
 \item{x}{Chord frequencies}
+
+\item{deviation}{Deviation for estimating least common multiples}
 }
 \value{
 A double of the best guess of the pseudo octave

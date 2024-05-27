@@ -5,8 +5,9 @@
 #'
 #' @param x Chord to analyse specified in MIDI, coerced to
 #' hrep::sparse_fr_spectrum
-#' @param minimum_amplitude An optional minimum amplitude for deciding which signals to include
-#' @param precision An optional precision value for creating rational fractions
+#' @param amplitude An optional minimum amplitude for deciding which partials to include.
+#' @param precision An optional precision value for finding rational fractions.
+#' @param deviation An optional deviation value for approximating least common multiples.
 #' @param metadata User-provided list of metadata that roundtrips with each call.
 #' helpful for analysis and plots
 #' @param verbose Determines the amount of data to return from chord evaluation
@@ -20,37 +21,48 @@
 #' @export
 mami.codi <- function(
     x,
-    minimum_amplitude = MINIMUM_AMPLITUDE,
-    precision         = RATIONAL_FRACTION_PRECISION,
-    metadata          = NA,
-    verbose           = FALSE,
+    amplitude = MINIMUM_AMPLITUDE,
+    precision = RATIONAL_FRACTION_PRECISION,
+    deviation = APPROXIMATE_LCM_DEVIATION,
+    metadata  = NA,
+    verbose   = FALSE,
     ...
 ) {
 
-  parse_input(x, ...)                                %>%
-    compute_consonance(minimum_amplitude, precision) %>%
+  parse_input(x, ...)                                   %>%
+    compute_consonance(amplitude, precision, deviation) %>%
     format_output(metadata, verbose)
 
 }
 
-#' Default Precision
+#' Default Rational Fraction Precision
 #'
 #' Default precision for converting floating point numbers to rational fractions
 #'
 #''
-#' @rdname default_precision
+#' @rdname rational_fraction_precision
 #' @export
-default_precision <- function() { RATIONAL_FRACTION_PRECISION }
+rational_fraction_precision <- function() { RATIONAL_FRACTION_PRECISION }
 RATIONAL_FRACTION_PRECISION = 0.063
+
+#' Default Approximate Least Common Multiple Deviation
+#'
+#' Default deviation for approximating the Least Common Multiple (LCM)
+#'
+#''
+#' @rdname approximate_lcm_deviation
+#' @export
+approximate_lcm_deviation <- function() { APPROXIMATE_LCM_DEVIATION }
+APPROXIMATE_LCM_DEVIATION = 0.11
 
 #' Default Minimum Amplitude
 #'
 #' Default minimum amplitude for deciding which tones are evaluated
 #'
 #''
-#' @rdname default_minimum_amplitude
+#' @rdname minimum_amplitude
 #' @export
-default_minimum_amplitude <- function() { MINIMUM_AMPLITUDE }
+minimum_amplitude <- function() { MINIMUM_AMPLITUDE }
 MINIMUM_AMPLITUDE = 0.00
 
 #' Parse Input
@@ -87,16 +99,16 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 
 }
 
-compute_consonance = function(x, minimum_amplitude, precision) {
+compute_consonance = function(x, amplitude, precision, deviation) {
 
-  f       = x$spectrum[[1]] %>% dplyr::filter(.data$y>minimum_amplitude) %>% hrep::freq()
+  f       = x$spectrum[[1]] %>% dplyr::filter(.data$y>amplitude) %>% hrep::freq()
   c_sound = max(f) / max(1/f)
   l       = c_sound / f
 
   x %>% dplyr::mutate(
 
-    alcd( f / min(f), precision ) %>% dplyr::rename_with(~ paste0('temporal_',.)),
-    alcd( l / min(l), precision ) %>% dplyr::rename_with(~ paste0('spatial_',.)),
+    alcd(f / min(f), precision, deviation) %>% dplyr::rename_with(~ paste0('temporal_',.)),
+    alcd(l / min(l), precision, deviation) %>% dplyr::rename_with(~ paste0('spatial_',.)),
 
     consonance_dissonance = .data$temporal_consonance + .data$spatial_consonance,
     major_minor           = .data$temporal_consonance - .data$spatial_consonance,
@@ -104,8 +116,9 @@ compute_consonance = function(x, minimum_amplitude, precision) {
     frequencies           = list(f),
     wavelengths           = list(l),
     speed_of_sound        = c_sound,
-    minimum_amplitude,
-    precision
+    amplitude,
+    precision,
+    deviation
 
   )
 
@@ -124,14 +137,15 @@ compute_consonance = function(x, minimum_amplitude, precision) {
 #' Amman and Das (2001)
 #'
 #' @param x Vector of rational numbers
-#' @param precision Precision value for creating rational fractions
+#' @param precision Precision for creating rational fractions
+#' @param deviation Deviation for approximating least common multiples
 #'
-#' @return The greatest common divisor of the rational numbers
+#' @return The approximate least common denominator of the rational numbers
 #'
 #' @rdname alcd
 #' @export
-alcd <- function(x, precision) {
-  fractions = approximate_rational_fractions(x, precision)
+alcd <- function(x, precision, deviation) {
+  fractions = approximate_rational_fractions(x, precision, deviation)
   tibble::tibble_row(
     alcd       = lcm_integers(fractions$den),
     consonance = 50 - log2(.data$alcd),

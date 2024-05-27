@@ -4,15 +4,17 @@
 \alias{alcd}
 \title{Approximate Least Common Denominator}
 \usage{
-alcd(x, precision)
+alcd(x, precision, deviation)
 }
 \arguments{
 \item{x}{Vector of rational numbers}
 
-\item{precision}{Precision value for creating rational fractions}
+\item{precision}{Precision for creating rational fractions}
+
+\item{deviation}{Deviation for approximating least common multiples}
 }
 \value{
-The greatest common divisor of the rational numbers
+The approximate least common denominator of the rational numbers
 }
 \description{
 "A Practical Fundamental Frequency Extraction Algorithm
