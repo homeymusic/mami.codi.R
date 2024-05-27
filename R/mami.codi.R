@@ -1,6 +1,6 @@
 #' Major-Minor Consonance-Dissonance
 #'
-#' Provides an auditory model of music perception
+#' A spatiotemporal periodicity model of consonance perception.
 #'
 #'
 #' @param x Chord to analyse specified in MIDI, coerced to
@@ -8,14 +8,14 @@
 #' @param amplitude An optional minimum amplitude for deciding which partials to include.
 #' @param precision An optional precision value for finding rational fractions.
 #' @param deviation An optional deviation value for approximating least common multiples.
-#' @param metadata User-provided list of metadata that roundtrips with each call.
+#' @param metadata User-provided list of metadata that round trips with each call.
 #' helpful for analysis and plots
 #' @param verbose Determines the amount of data to return from chord evaluation
-#' TRUE is all and FALSE is just major-minor, consonance-dissonance, precision and metadata.
+#' TRUE is all and FALSE is just major-minor, consonance-dissonance and metadata.
 #' @param ... parameters for hrep::sparse_fr_spectrum
 #'
-#' @return Major-Minor and Consonance-Dissonance plus additional information
-#' if verbose=TRUE
+#' @return Major-Minor, Consonance-Dissonance and metadata plus additional
+#' information if verbose=TRUE
 #'
 #' @rdname mami.codi
 #' @export
@@ -34,36 +34,6 @@ mami.codi <- function(
     format_output(metadata, verbose)
 
 }
-
-#' Default Rational Fraction Precision
-#'
-#' Default precision for converting floating point numbers to rational fractions
-#'
-#''
-#' @rdname rational_fraction_precision
-#' @export
-rational_fraction_precision <- function() { RATIONAL_FRACTION_PRECISION }
-RATIONAL_FRACTION_PRECISION = 0.063
-
-#' Default Approximate Least Common Multiple Deviation
-#'
-#' Default deviation for approximating the Least Common Multiple (LCM)
-#'
-#''
-#' @rdname approximate_lcm_deviation
-#' @export
-approximate_lcm_deviation <- function() { APPROXIMATE_LCM_DEVIATION }
-APPROXIMATE_LCM_DEVIATION = 0.11
-
-#' Default Minimum Amplitude
-#'
-#' Default minimum amplitude for deciding which tones are evaluated
-#'
-#''
-#' @rdname minimum_amplitude
-#' @export
-minimum_amplitude <- function() { MINIMUM_AMPLITUDE }
-MINIMUM_AMPLITUDE = 0.00
 
 #' Parse Input
 #'
@@ -108,7 +78,10 @@ compute_consonance = function(x, amplitude, precision, deviation) {
   x %>% dplyr::mutate(
 
     alcd(f/min(f), precision, deviation) %>% dplyr::rename_with(~ paste0('temporal_',.)),
+    temporal_consonance = 50 - log2(.data$temporal_alcd),
+
     alcd(l/min(l), precision, deviation) %>% dplyr::rename_with(~ paste0('spatial_',.)),
+    spatial_consonance  = 50 - log2(.data$spatial_alcd),
 
     consonance_dissonance = .data$temporal_consonance + .data$spatial_consonance,
     major_minor           = .data$temporal_consonance - .data$spatial_consonance,
@@ -126,6 +99,7 @@ compute_consonance = function(x, amplitude, precision, deviation) {
 
 #' Approximate Least Common Denominator
 #'
+#' See the articles below for previous work on approximate GCD / LCM
 #'
 #' "Pitch extraction from corrupted harmonics of the power spectrum"
 #' II. APPROXIMATE GCD ALGORITHM
@@ -155,7 +129,6 @@ alcd <- function(x, precision, deviation) {
   fractions = approximate_rational_fractions(x, precision, deviation)
   tibble::tibble_row(
     alcd       = lcm_integers(fractions$den),
-    consonance = 50 - log2(.data$alcd),
     fractions  = list(fractions)
   )
 }
@@ -175,3 +148,35 @@ format_output <- function(x, metadata, verbose) {
                     'metadata')
   }
 }
+
+# Constants
+
+#' Default Rational Fraction Precision
+#'
+#' Default precision for converting floating point numbers to rational fractions
+#'
+#''
+#' @rdname rational_fraction_precision
+#' @export
+rational_fraction_precision <- function() { RATIONAL_FRACTION_PRECISION }
+RATIONAL_FRACTION_PRECISION = 0.063
+
+#' Default Approximate Least Common Multiple Deviation
+#'
+#' Default deviation for approximating the Least Common Multiple (LCM)
+#'
+#''
+#' @rdname approximate_lcm_deviation
+#' @export
+approximate_lcm_deviation <- function() { APPROXIMATE_LCM_DEVIATION }
+APPROXIMATE_LCM_DEVIATION = 0.11
+
+#' Default Minimum Amplitude
+#'
+#' Default minimum amplitude for deciding which tones are evaluated
+#'
+#''
+#' @rdname minimum_amplitude
+#' @export
+minimum_amplitude <- function() { MINIMUM_AMPLITUDE }
+MINIMUM_AMPLITUDE = 0.00
