@@ -293,6 +293,75 @@ p = params %>% purrr::map(\(p) {
 })
 ```
 
+### Manipulating amplitudes
+
+```{r, include=F}
+timbre_paper = readRDS('./man/data/roll_off_timbre_paper.rds')
+```
+
+```{r, include=F}
+dyads <- timbre_paper %>% dplyr::rowwise() %>% dplyr::mutate(
+  type          = metadata$type,
+  num_harmonics = metadata$num_harmonics,
+  octave_ratio  = metadata$octave_ratio,
+  semitone      = metadata$semitone,
+  roll_off      = metadata$roll_off,
+  label         = round(metadata$semitone),
+  .before=1
+)
+```
+
+```{r, include=F}
+params = list(
+  list(h=10,r=2),
+  list(h=10,r=7),
+  list(h=10,r=12)
+)
+```
+
+```{r, fig.height=8, fig.width=12, echo=F, results='asis', message=F}
+p = params %>% purrr::map(\(p) {
+  gray_vlines = c()
+  black_vlines = c()
+  title = paste(
+    'Harmonic ~',
+    'Roll Off:', p$r
+  )
+  
+  chords <- dyads %>% dplyr::filter(roll_off == p$r)
+  chords$consonance_dissonance_z = z_scores(chords$consonance_dissonance)
+  
+  experiment.csv = paste0('./man/data/',
+                          'roll_off_', p$r,
+                          '.csv')
+  
+  experiment = read.csv(experiment.csv) %>%
+    dplyr::rename(semitone=interval)
+  
+  experiment <- experiment %>% dplyr::mutate(
+    consonance_dissonance = rating
+  )
+  sigma = BEHAVIOURAL_SMOOTH_BROAD
+  cat("  \n#####", title, '\n')
+  print(knitr::kable(tibble::tibble_row(
+    precision       = paste(round(chords$precision %>% unique, 5), collapse = ' '),
+    amplitude       = paste(round(chords$amplitude %>% unique, 5), collapse = ' '),
+    smoothing_sigma = sigma
+  )))
+  print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),
+                           goal=experiment,sigma=sigma,include_points=T,
+                           black_vlines=black_vlines,gray_vlines=gray_vlines))
+  cat("  \n")
+  
+  print(plot_semitone_spatial_temporal(chords, paste('Spatial and Temporal Consonance'),
+                                       goal=NULL,sigma=sigma,include_points=T,
+                                       dashed_minor=F,
+                                       black_vlines=black_vlines,gray_vlines=gray_vlines))
+  cat("  \n")
+})
+```
+
+
 ### TODO: run the in-depth precision searches again for M3, M6 and P8
 
 #### ```{r, child=c('man/M3_M6_P8.Rmd')}

@@ -22,5 +22,5 @@ if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
 
 devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 
-source('./trials.R')
+source('./freq_trials.R')
 run_trials(search_label, precisions)

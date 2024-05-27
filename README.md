@@ -285,6 +285,35 @@ Description is below.
 ![](man/figures/README-unnamed-chunk-4-19.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-20.png)<!-- -->
 
+### Manipulating amplitudes
+
+##### Harmonic ~ Roll Off: 2
+
+| precision | amplitude | smoothing_sigma |
+|:----------|:----------|----------------:|
+| 0.063     | 0         |             0.2 |
+
+![](man/figures/README-unnamed-chunk-8-1.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-8-2.png)<!-- -->
+
+##### Harmonic ~ Roll Off: 7
+
+| precision | amplitude | smoothing_sigma |
+|:----------|:----------|----------------:|
+| 0.063     | 0         |             0.2 |
+
+![](man/figures/README-unnamed-chunk-8-3.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-8-4.png)<!-- -->
+
+##### Harmonic ~ Roll Off: 12
+
+| precision | amplitude | smoothing_sigma |
+|:----------|:----------|----------------:|
+| 0.063     | 0         |             0.2 |
+
+![](man/figures/README-unnamed-chunk-8-5.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-8-6.png)<!-- -->
+
 ### TODO: run the in-depth precision searches again for M3, M6 and P8
 
 #### `{r, child=c('man/M3_M6_P8.Rmd')} ####`
