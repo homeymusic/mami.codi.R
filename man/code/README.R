@@ -140,7 +140,7 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
     )
   }
 
-  default_precision = mami.codi.R::default_precision()
+  default_precision = mami.codi.R::rational_fraction_precision()
   if (timbre=='Pure') {
     precision  = 0.025
   } else if (timbre=='Bonang') {
