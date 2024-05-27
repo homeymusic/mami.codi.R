@@ -177,4 +177,4 @@ APPROXIMATE_LCM_DEVIATION = 0.11
 #' @rdname minimum_amplitude
 #' @export
 minimum_amplitude <- function() { MINIMUM_AMPLITUDE }
-MINIMUM_AMPLITUDE = 0.07
+MINIMUM_AMPLITUDE = 0.08
