@@ -17,13 +17,19 @@ alcd(x, precision, deviation)
 The approximate least common denominator of the rational numbers
 }
 \description{
+"Pitch extraction from corrupted harmonics of the power spectrum"
+II. APPROXIMATE GCD ALGORITHM
+APPENDIX B: APPROXIMATE GCD ALGORITHM
+Sreenivas and Rao (1978)
+}
+\details{
+"An Efficient Technique for Modeling and Synthesis of Automotive Engine Sounds"
+IV. EXTRACTION OF DETERMINISTIC COMPONENTS USING AN SDFT
+Amman and Das (2001)
+
 "A Practical Fundamental Frequency Extraction Algorithm
 for Motion Parameters Estimation of Moving Targets"
 Huang et al. (2014)
 III. EXTRACTION OF A FUNDAMENTAL FREQUENCY
 A. Extraction of the Initial Pitch Using the AGCD Method
-}
-\details{
-"An Efficient Technique for Modeling and Synthesis of Automotive Engine Sounds"
-Amman and Das (2001)
 }

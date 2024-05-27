@@ -72,11 +72,12 @@ const double compute_pseudo_octave(const double fn, const double f0, const int n
    if (n==1) {
      return 1.0;
    } else {
-     return std::round(1000000 * pow(2, log(fn / f0) / log(n))) / 1000000;
+     const int r = 1000000;
+     return std::round(r * pow(2, log(fn / f0) / log(n))) / r;
    }
  }
 
-//' pseudo_octaves
+//' approximate_harmonics
 //'
 //' Determine pseudo octave of all frequencies relative to lowest frequency
 //'
@@ -87,7 +88,7 @@ const double compute_pseudo_octave(const double fn, const double f0, const int n
 //'
 //' @export
 // [[Rcpp::export]]
-DataFrame pseudo_octaves(const NumericVector x,
+DataFrame approximate_harmonics(const NumericVector x,
                          const double deviation) {
   const int x_size   = x.size();
   const double f_max = max(x);
@@ -142,18 +143,18 @@ DataFrame pseudo_octaves(const NumericVector x,
   }
 }
 
-//' most_common_pseudo_octave
+//' pseudo_octave
 //'
-//' Approximates floating-point numbers to arbitrary precision.
+//' Finds the pseudo octave from approximate harmonics.
 //'
-//' @param pseudo_octaves List of candidate pseudo octaves
+//' @param approximate_harmonics List of candidate pseudo octaves
 //'
 //' @return A data frame of rational numbers and metadata
 //'
 //' @export
 // [[Rcpp::export]]
-const double most_common_pseudo_octave(NumericVector pseudo_octaves) {
-   const IntegerVector counts = table(pseudo_octaves);
+const double pseudo_octave(NumericVector approximate_harmonics) {
+   const IntegerVector counts = table(approximate_harmonics);
     IntegerVector idx = seq_along(counts) - 1;
     std::sort(idx.begin(), idx.end(), [&](int i, int j){return counts[i] > counts[j];});
     CharacterVector names_of_count = counts.names();
@@ -183,11 +184,11 @@ DataFrame approximate_rational_fractions(NumericVector x,
   NumericVector pseudo_x(n);
   NumericVector approximations(n);
 
-  const DataFrame pseudo_octaves_df = pseudo_octaves(x, deviation);
-  const double pseudo_octave = most_common_pseudo_octave(pseudo_octaves_df["pseudo_octave"]);
+  const DataFrame approximate_harmonics_df = approximate_harmonics(x, deviation);
+  const double pseudo_octave_double = pseudo_octave(approximate_harmonics_df["pseudo_octave"]);
 
   for (int i = 0; i < n; ++i) {
-    pseudo_x[i]                  = pow(2.0, log(x[i]) / log(pseudo_octave));
+    pseudo_x[i]                  = pow(2.0, log(x[i]) / log(pseudo_octave_double));
     const NumericVector fraction = stern_brocot(pseudo_x[i], precision);
     nums[i]                      = fraction[0];
     dens[i]                      = fraction[1];
@@ -197,7 +198,7 @@ DataFrame approximate_rational_fractions(NumericVector x,
   return DataFrame::create(
     _("rational_number")        = x,
     _("pseudo_rational_number") = pseudo_x,
-    _("pseudo_octave")          = pseudo_octave,
+    _("pseudo_octave")          = pseudo_octave_double,
     _("num")                    = nums,
     _("den")                    = dens,
     _("approximation")          = approximations,

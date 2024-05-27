@@ -107,8 +107,8 @@ compute_consonance = function(x, amplitude, precision, deviation) {
 
   x %>% dplyr::mutate(
 
-    alcd(f / min(f), precision, deviation) %>% dplyr::rename_with(~ paste0('temporal_',.)),
-    alcd(l / min(l), precision, deviation) %>% dplyr::rename_with(~ paste0('spatial_',.)),
+    alcd(f/min(f), precision, deviation) %>% dplyr::rename_with(~ paste0('temporal_',.)),
+    alcd(l/min(l), precision, deviation) %>% dplyr::rename_with(~ paste0('spatial_',.)),
 
     consonance_dissonance = .data$temporal_consonance + .data$spatial_consonance,
     major_minor           = .data$temporal_consonance - .data$spatial_consonance,
@@ -127,14 +127,21 @@ compute_consonance = function(x, amplitude, precision, deviation) {
 #' Approximate Least Common Denominator
 #'
 #'
+#' "Pitch extraction from corrupted harmonics of the power spectrum"
+#' II. APPROXIMATE GCD ALGORITHM
+#' APPENDIX B: APPROXIMATE GCD ALGORITHM
+#' Sreenivas and Rao (1978)
+#'
+#' "An Efficient Technique for Modeling and Synthesis of Automotive Engine Sounds"
+#' IV. EXTRACTION OF DETERMINISTIC COMPONENTS USING AN SDFT
+#' Amman and Das (2001)
+#'
 #' "A Practical Fundamental Frequency Extraction Algorithm
 #' for Motion Parameters Estimation of Moving Targets"
 #' Huang et al. (2014)
 #' III. EXTRACTION OF A FUNDAMENTAL FREQUENCY
 #' A. Extraction of the Initial Pitch Using the AGCD Method
 #'
-#' "An Efficient Technique for Modeling and Synthesis of Automotive Engine Sounds"
-#' Amman and Das (2001)
 #'
 #' @param x Vector of rational numbers
 #' @param precision Precision for creating rational fractions
