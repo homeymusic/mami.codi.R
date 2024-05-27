@@ -145,14 +145,13 @@ compute_consonance = function(x, amplitude, precision, deviation) {
 #' @rdname alcd
 #' @export
 alcd <- function(x, precision, deviation) {
-  fractions = approximate_rational_fractions(x, precision, deviation)
+  fractions = approximate_rational_fractions(x, precision)
   tibble::tibble_row(
-    alcd       = lcm_integers(fractions$den),
+    alcd       = alcm(fractions$den, deviation),
     consonance = 50 - log2(.data$alcd),
     fractions  = list(fractions)
   )
 }
-lcm_integers <- function(x) Reduce(gmp::lcm.bigz, x) %>% as.numeric()
 
 format_output <- function(x, metadata, verbose) {
   x <- x %>% tibble::add_column(

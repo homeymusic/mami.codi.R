@@ -4,7 +4,7 @@
 \alias{approximate_rational_fractions}
 \title{approximate_rational_fractions}
 \usage{
-approximate_rational_fractions(x, precision, deviation)
+approximate_rational_fractions(x, precision)
 }
 \arguments{
 \item{x}{Vector of floating point numbers to approximate}
