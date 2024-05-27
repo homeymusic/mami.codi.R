@@ -1,4 +1,4 @@
-run_trials <- function(search_label, precisions) {
+run_trials <- function(search_label, amplitudes) {
   devtools::load_all(".")
   tonic_midi = 60
   source('./utils.R')
@@ -31,16 +31,15 @@ run_trials <- function(search_label, precisions) {
                           '.csv')
 
   experiment = read.csv(experiment.csv) %>%
-    dplyr::rename(semitone=interval)
+    dplyr::rename(
+      consonance_dissonance = rating,
+      semitone              = interval
+    )
 
-  experiment <- experiment %>% dplyr::mutate(
-    consonance_dissonance = rating
-  )
-
-  interval = tonic_midi + experiment$semitone
+  intervals = tonic_midi + experiment$semitone
 
   grid = tidyr::expand_grid(
-    interval,
+    interval  = intervals,
     amplitude = amplitudes
   )
 
@@ -50,7 +49,7 @@ run_trials <- function(search_label, precisions) {
 
   data = grid %>% furrr::future_pmap_dfr(\(
     interval,
-    precision
+    amplitude
   ) {
 
     chord = hrep::sparse_fr_spectrum(c(tonic_midi, interval),
