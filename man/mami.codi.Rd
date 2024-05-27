@@ -18,7 +18,7 @@ mami.codi(
 \item{x}{Chord to analyse specified in MIDI, coerced to
 hrep::sparse_fr_spectrum}
 
-\item{amplitude}{An optional minimum amplitude for deciding which signals to include.}
+\item{amplitude}{An optional minimum amplitude for deciding which partials to include.}
 
 \item{precision}{An optional precision value for finding rational fractions.}
 
