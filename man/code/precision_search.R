@@ -1,13 +1,13 @@
-search_label = 'Stretched'
+search_label = 'P8'
 
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # Detailed
-  # from_prec   = 3e-14
-  # to_prec     = 5e-14
-  # by_prec     = 1e-15
-  # precisions = seq(from=from_prec, to=to_prec, by=by_prec)
+  from_prec   = 0.07
+  to_prec     = 0.09
+  by_prec     = 0.001
+  precisions = sort(c(seq(from=from_prec, to=to_prec, by=by_prec), 1 / (4*pi)))
 
-  precisions   = c(1:9 %o% 10^(-7:-1))
+  # precisions   = c(1:9 %o% 10^(-7:-1))
 } else {
 
   # Detailed

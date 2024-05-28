@@ -157,7 +157,7 @@ format_output <- function(x, metadata, verbose) {
 #' @rdname rational_fraction_precision
 #' @export
 rational_fraction_precision <- function() { RATIONAL_FRACTION_PRECISION }
-RATIONAL_FRACTION_PRECISION = 0.063
+RATIONAL_FRACTION_PRECISION = 1 / (4 * pi)
 
 #' Default Approximate Least Common Multiple Deviation
 #'
