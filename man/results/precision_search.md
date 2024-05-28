@@ -1,7 +1,7 @@
 Precision Search
 ================
 
-# Bonang
+# 5Partials
 
 Precisions:
 
@@ -10,7 +10,7 @@ Precisions:
 
 Number of Harmonics:
 
-    #> [1] 10
+    #> [1] 5
 
 Octave Ratios:
 

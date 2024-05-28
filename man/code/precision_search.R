@@ -1,4 +1,4 @@
-search_label = 'Pure'
+search_label = '5Partials'
 
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # Detailed
