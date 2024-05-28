@@ -153,7 +153,26 @@ format_output <- function(x, metadata, verbose) {
 #'
 #' Default precision for converting floating point numbers to rational fractions
 #'
-#''
+#' See 6 "Aspects of Gabor analysis on locally compact abelian groups"
+#' Karlheinz Grochenig (1998)
+#' 6.3 Uncertainty Principles and Lieb's inequalities
+#' Equation (6.3.1)
+#'
+#' "There are various formulations of this statement [CP84, DS89, Fef83, Pri83],
+#' some of which generalize to LCA groups [PS88, Smi]."
+#'
+#' CP84  M. G. Cowling and J. F. Price. Bandwidth versus time concentration:
+#' the Heisenberg-Pauli-Weyl inequality. SIAM J. Math., 15:151 - 165, 1984.
+#'
+#' DS89 D. L. Donoho and P. B. Stark. Uncertainty principles and signal recovery.
+#' SIAM J. Appl. Math., 49:906 - 931, 1989.
+#'
+#' Fef83 C.L. Fefferman. The uncertainty principle. Bull. Amer. Math. Soc.
+#' (N.S.), 9(2), 1983.
+#'
+#' Pri83 J. F. Price. Inequalities and local uncertainty principles.
+#' J. Math. Phys., 24:1711 - 1714, 1983.
+#'
 #' @rdname rational_fraction_precision
 #' @export
 rational_fraction_precision <- function() { RATIONAL_FRACTION_PRECISION }
