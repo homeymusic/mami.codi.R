@@ -322,7 +322,13 @@ params = list(
 ```{r, fig.height=8, fig.width=12, echo=F, results='asis', message=F}
 p = params %>% purrr::map(\(p) {
   gray_vlines = c()
-  black_vlines = c()
+  if (p$r == 2) {
+    black_vlines = c(3,4,5,7,8,9,12)
+  } else if (p$r == 7) {
+    black_vlines = c(4,5,6,7,9,12)
+  } else if (p$r == 12) {
+    black_vlines = c(3,4,5,7,8,9,12)
+  }
   title = paste(
     'Harmonic ~',
     'Roll Off:', p$r
@@ -345,7 +351,7 @@ p = params %>% purrr::map(\(p) {
   cat("  \n#####", title, '\n')
   print(knitr::kable(tibble::tibble_row(
     precision       = paste(round(chords$precision %>% unique, 5), collapse = ' '),
-    amplitude       = paste(round(chords$amplitude %>% unique, 5), collapse = ' '),
+    min_amplitude       = paste(round(chords$amplitude %>% unique, 5), collapse = ' '),
     smoothing_sigma = sigma
   )))
   print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),

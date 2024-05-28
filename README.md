@@ -289,27 +289,27 @@ Description is below.
 
 ##### Harmonic ~ Roll Off: 12
 
-| precision | amplitude | smoothing_sigma |
-|:----------|:----------|----------------:|
-| 0.063     | 0.07      |             0.2 |
+| precision | min_amplitude | smoothing_sigma |
+|:----------|:--------------|----------------:|
+| 0.063     | 0.03          |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-8-1.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-8-2.png)<!-- -->
 
 ##### Harmonic ~ Roll Off: 7
 
-| precision | amplitude | smoothing_sigma |
-|:----------|:----------|----------------:|
-| 0.063     | 0.07      |             0.2 |
+| precision | min_amplitude | smoothing_sigma |
+|:----------|:--------------|----------------:|
+| 0.063     | 0.07          |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-8-3.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-8-4.png)<!-- -->
 
 ##### Harmonic ~ Roll Off: 2
 
-| precision | amplitude | smoothing_sigma |
-|:----------|:----------|----------------:|
-| 0.063     | 0.07      |             0.2 |
+| precision | min_amplitude | smoothing_sigma |
+|:----------|:--------------|----------------:|
+| 0.063     | 0             |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-8-5.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-8-6.png)<!-- -->

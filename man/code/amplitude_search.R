@@ -1,13 +1,14 @@
 search_label = 'Rolloff12'
 
-# Detailed
-from_amp   = 0.01
-to_amp     = 0.9
-by_amp     = 0.01
-amplitudes = c(0,seq(from=from_amp, to=to_amp, by=by_amp))
+if (search_label == 'Rolloff2') {
+  roll_off = 2
+} else if (search_label == 'Rolloff7') {
+  roll_off = 7
+} else if (search_label == 'Rolloff12') {
+  roll_off = 12
+}
 
-# Orders of Magnitude
-# amplitudes   = c(0,c(1 %o% 10^(-3:-1)))
+amplitudes = c(hrep::amp(hrep::sparse_fr_spectrum(60, num_harmonics=10, roll_off_dB = roll_off))[-1],0)
 
 devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 
