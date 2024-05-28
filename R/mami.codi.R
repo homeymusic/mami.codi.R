@@ -133,8 +133,8 @@ lcm_integers <- function(x) Reduce(gmp::lcm.bigz, x) %>% as.numeric()
 rotate <- function(x) {
 
   rotated = (R_PI_4 %*% matrix(c(
-    x$temporal_consonance,
-    x$spatial_consonance
+    x$spatial_consonance,
+    x$temporal_consonance
   ))) %>% as.vector %>% zapsmall
 
   x %>% dplyr::mutate(
