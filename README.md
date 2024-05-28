@@ -302,7 +302,7 @@ Description is below.
 
 | precision | min_amplitude | smoothing_sigma |
 |:----------|:--------------|----------------:|
-| 0.063     | 0.03          |             0.2 |
+| 0.07958   | 0.013         |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-8-1.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-8-2.png)<!-- -->
@@ -311,7 +311,7 @@ Description is below.
 
 | precision | min_amplitude | smoothing_sigma |
 |:----------|:--------------|----------------:|
-| 0.063     | 0.07          |             0.2 |
+| 0.07958   | 0.08          |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-8-3.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-8-4.png)<!-- -->
@@ -320,7 +320,7 @@ Description is below.
 
 | precision | min_amplitude | smoothing_sigma |
 |:----------|:--------------|----------------:|
-| 0.063     | 0             |             0.2 |
+| 0.07958   | 0             |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-8-5.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-8-6.png)<!-- -->
