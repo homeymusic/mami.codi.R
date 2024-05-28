@@ -31,6 +31,7 @@ mami.codi <- function(
 
   parse_input(x, ...)                                   %>%
     compute_consonance(amplitude, precision, deviation) %>%
+    rotate()                                           %>%
     format_output(metadata, verbose)
 
 }
@@ -80,9 +81,6 @@ compute_consonance = function(x, amplitude, precision, deviation) {
     alcd(f/min(f), precision, deviation) %>% dplyr::rename_with(~ paste0('temporal_',.)),
     alcd(l/min(l), precision, deviation) %>% dplyr::rename_with(~ paste0('spatial_',.)),
 
-    consonance_dissonance = .data$temporal_consonance + .data$spatial_consonance,
-    major_minor           = .data$temporal_consonance - .data$spatial_consonance,
-
     frequencies           = list(f),
     wavelengths           = list(l),
     speed_of_sound        = c_sound,
@@ -131,6 +129,28 @@ alcd <- function(x, precision, deviation) {
   )
 }
 lcm_integers <- function(x) Reduce(gmp::lcm.bigz, x) %>% as.numeric()
+
+rotate <- function(x) {
+
+  rotated = (R_PI_4 %*% matrix(c(
+    x$temporal_consonance,
+    x$spatial_consonance
+  ))) %>% as.vector %>% zapsmall
+
+  x %>% dplyr::mutate(
+    consonance_dissonance = rotated[1],
+    major_minor           = rotated[2],
+    .before=1
+  )
+
+}
+
+PI_4 = pi / 4
+
+R_PI_4 = matrix(c(
+  cos(PI_4), sin(PI_4),
+  -sin(PI_4), cos(PI_4)
+), nrow = 2, ncol = 2, byrow = TRUE)
 
 format_output <- function(x, metadata, verbose) {
   x <- x %>% tibble::add_column(
