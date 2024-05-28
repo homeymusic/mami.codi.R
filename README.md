@@ -177,7 +177,7 @@ For 10 harmonics, behavioral results and theoretical predictions agree.
 
 | precision | smoothing_sigma |
 |:----------|----------------:|
-| 0.063     |             0.2 |
+| 0.07958   |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-3.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-4.png)<!-- -->
@@ -191,7 +191,7 @@ peak.
 
 | precision | smoothing_sigma |
 |:----------|----------------:|
-| 0.063     |             0.2 |
+| 0.07958   |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-5.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-6.png)<!-- -->
@@ -205,7 +205,7 @@ while the M3 peak is slightly higher without the 3rd partial.
 
 | precision | smoothing_sigma |
 |:----------|----------------:|
-| 0.063     |             0.2 |
+| 0.07958   |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-7.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-8.png)<!-- -->
@@ -220,7 +220,7 @@ be relatively higher than the behavioral results.
 
 | precision | smoothing_sigma |
 |:----------|----------------:|
-| 0.063     |             0.2 |
+| 0.07958   |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-9.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-10.png)<!-- -->
@@ -233,7 +233,7 @@ and m7 that do not exist in the behavioral results.
 
 | precision | smoothing_sigma |
 |:----------|----------------:|
-| 0.063     |             0.2 |
+| 0.07958   |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-11.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-12.png)<!-- -->
@@ -245,7 +245,7 @@ with the theoretical peaks.
 
 | precision | smoothing_sigma |
 |:----------|----------------:|
-| 0.063     |             0.2 |
+| 0.07958   |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-13.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-14.png)<!-- -->
@@ -258,7 +258,7 @@ Description is below.
 
 | precision | smoothing_sigma |
 |:----------|----------------:|
-| 5e-05     |           0.035 |
+| 0.07958   |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-4-15.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-16.png)<!-- -->
@@ -269,7 +269,7 @@ Description is below.
 
 | precision | smoothing_sigma |
 |:----------|----------------:|
-| 5e-05     |           0.035 |
+| 0.07958   |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-4-17.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-18.png)<!-- -->
@@ -280,10 +280,21 @@ Description is below.
 
 | precision | smoothing_sigma |
 |:----------|----------------:|
-| 5e-05     |           0.035 |
+| 0.07958   |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-4-19.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-20.png)<!-- -->
+
+##### P8Zoomed ~ Partials: 10
+
+Description is below.
+
+| precision | smoothing_sigma |
+|:----------|----------------:|
+| 8e-04     |           0.035 |
+
+![](man/figures/README-unnamed-chunk-4-21.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-4-22.png)<!-- -->
 
 ### Manipulating amplitudes
 

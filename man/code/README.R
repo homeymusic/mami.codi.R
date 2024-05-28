@@ -89,11 +89,19 @@ grid_P8 = tidyr::expand_grid(
   timbre = 'P8'
 )
 
+experiment.rds = '../data/P8Zoomed.rds'
+grid_P8_zoomed = tidyr::expand_grid(
+  interval = readRDS(experiment.rds)$profile$interval,
+  num_harmonics=10,
+  octave_ratio=2.0,
+  timbre = 'P8Zoomed'
+)
+
 grid = dplyr::bind_rows(grid_1,
                         grid_Bonang,
                         grid_5,grid_5PartialsNo3,
                         grid_10,grid_10_stretched,grid_10_compressed,
-                        grid_M3,grid_M6,grid_P8
+                        grid_M3,grid_M6,grid_P8,grid_P8_zoomed
                         )
 
 
@@ -156,11 +164,13 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
   } else if (timbre=='Compressed') {
     precision  = default_precision
   } else if (timbre=='M3') {
-    precision  = 5e-05
+    precision  = default_precision
   } else if (timbre=='M6') {
-    precision  = 5e-05
+    precision  = default_precision
   } else if (timbre=='P8') {
-    precision  = 5e-05
+    precision  = default_precision
+  } else if (timbre=='P8Zoomed') {
+    precision  = default_precision / 100
   }
 
   mami.codi.R::mami.codi(study_chord,
