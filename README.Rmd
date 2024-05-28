@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 
 ## How MaMi.CoDi Works
 
-### Sums and Differences Edition
+### Rotation Edition
 
 ### The Basilar Membrane
 
