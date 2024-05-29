@@ -173,6 +173,11 @@ format_output <- function(x, metadata, verbose) {
 #' Pri83 J. F. Price. Inequalities and local uncertainty principles.
 #' J. Math. Phys., 24:1711 - 1714, 1983.
 #'
+#' PS88 J.F. Price and A. Sitaram. Local uncertainty inequalities for locally
+#' compact groups. Trans. Amer. Math. Soc., 308(1):105- 114, 1988
+#'
+#' Smi
+#'
 #' @rdname rational_fraction_precision
 #' @export
 rational_fraction_precision <- function() { RATIONAL_FRACTION_PRECISION }

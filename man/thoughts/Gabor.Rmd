@@ -1,0 +1,58 @@
+---
+title: "Gabor"
+output:
+  github_document: default
+always_allow_html: true
+---
+```{r, echo=F, message=F, include=F}
+devtools::load_all(".")
+source('./man/code/plot.R')
+source('./man/code/utils.R')
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "../figures/GCD-"
+)
+knitr::opts_chunk$set(dev = 'svg')
+p = RATIONAL_FRACTION_PRECISION
+```
+
+"sub specie aeternitatis" p 431\
+
+The above makes me think of the contrast between the infinity of Fourier versus 
+me with my ruler in one hand, stopwatch in the other and a tally counter around
+my neck.\
+
+The conventional language is a blocker for me. When time is frozen and we measure
+the wavelength in the cochlea that is a purely spatial observation. But the convention
+is to call that a frequency measured in Hz, which is 1/s. But time is frozen. There
+are no seconds? What gives?\
+
+Can we abandon the label of time-frequency domain and replace it with space-time
+domain?\
+
+But this can be a problem too:\
+```{r, echo=F, message=F}
+tibble::tibble(
+  space  = c('spatial length', 'wavelength', 'count in space', 'wavenumber'),
+  time   = c('temporal length', 'period', 'count in time', 'frequency')
+)
+```
+
+
+```{r, echo=F, message=F}
+P1 = hrep::sparse_fr_spectrum(60, num_harmonics=10)
+f  = P1 %>% hrep::freq()
+tibble::tibble_row(
+  f1 = min(f),
+  f2 = max(f),
+  tau_s = alcd(f/f1, 0.08, 0.11)$alcd / f1, # period of the chord
+  data_count = (f2 - f1) * tau_s
+)
+```
+Gabor's model starts with the orthogonal sine and cosine functions. And uses
+the set of those 2 coefficients to create a data set of size 2(f2-f1)tau.\
+
+MaMi.CoDi starts with the wavelength (row of hair cells, bank of reeds)
+and frequency (phase-locking, oscillograph) signals to create a data set of 
+size 2(f2-f1)tau.
