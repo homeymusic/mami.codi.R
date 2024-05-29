@@ -23,13 +23,29 @@ The above makes me think of the contrast between the infinity of Fourier versus
 me with my ruler in one hand, stopwatch in the other and a tally counter around
 my neck.\
 
+"We know that any instrument, or combination of instruments, cannot obtain more 
+than at most 2(f2 — f1)tau independent data from the area (f2 — f1)tau in the 
+diagram. But instead of rigorously independent data, which can be obtained in 
+general only by calculation from the instrument readings, it will be more 
+convenient for the moment to consider "practically" independent data, which can 
+be obtained by direct readings." -Gabor\
+
+
+"Decay time x Tuning width = Number of the order one."\
+
+For MaMi.CoDi:\
+
+Wavelength ratio precision x Frequency ratio precision  = Number of the order one\
+
+One observation happens in a "characteristic rectangle" in the space-time diagram.
+
 The conventional language is a blocker for me. When time is frozen and we measure
 the wavelength in the cochlea that is a purely spatial observation. But the convention
-is to call that a frequency measured in Hz, which is 1/s. But time is frozen. There
+is to label that a frequency measured in Hz, which is 1/s. But time is frozen. There
 are no seconds? What gives?\
 
-Can we abandon the label of time-frequency domain and replace it with space-time
-domain?\
+It should be a spatial length measured in meters. Can we abandon the label of 
+time-frequency domain and replace it with space-time domain?\
 
 But this can be a problem too:\
 ```{r, echo=F, message=F}
