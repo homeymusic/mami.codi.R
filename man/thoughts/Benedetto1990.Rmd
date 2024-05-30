@@ -1,0 +1,72 @@
+---
+title: "Benedetto"
+output:
+  github_document: default
+always_allow_html: true
+---
+```{r, echo=F, message=F, include=F}
+devtools::load_all(".")
+source('./man/code/plot.R')
+source('./man/code/utils.R')
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "../figures/GCD-"
+)
+knitr::opts_chunk$set(dev = 'svg')
+p = RATIONAL_FRACTION_PRECISION
+```
+
+```{r, echo=F, message=F}
+A0_10_harmonics = hrep::sparse_fr_spectrum(21, num_harmonics=10)
+analogy = tibble::tibble_row(
+  A0_10_harmonics_f = A0_10_harmonics %>% hrep::freq(),
+  A0_10_harmonics_max_f = max(A0_10_harmonics_f),
+  A0_10_harmonics_min_f = min(A0_10_harmonics_f),
+)
+analogy
+```
+```{r, echo=F, message=F}
+A0   = hrep::sparse_fr_spectrum(21, num_harmonics=1)
+analogy = tibble::tibble_row(
+  A0_f = A0 %>% hrep::freq(),
+  A0_T = 1 / A0_f,
+  Wiener_T = 1 / 30
+)
+analogy
+```
+```{r, echo=F, message=F}
+period = analogy$A0_T
+t=seq(0,period,0.001)
+y=sin(2*pi*analogy$A0_f*t)
+l2_norm_y = sqrt(sum((period*y)^2))
+plot(t,y,type="l", xlab="time", ylab="amplitude", main=paste("A0 ~ L2:", format(round(l2_norm_y, 2), nsmall = 2)))
+```
+
+```{r, echo=F, message=F}
+plot.frequency.spectrum <- function(X.k, xlimits=c(0,length(X.k))) {
+  plot.data  <- cbind(0:(length(X.k)-1), Mod(X.k))
+
+
+  plot(plot.data, t="h", lwd=2, main="", 
+       xlab="Frequency (Hz)", ylab="Strength", 
+       xlim=xlimits, ylim=c(0,max(Mod(plot.data[,2]))))
+}
+y_fft=fft(y)
+l2_norm_y_fft = sqrt(sum(((analogy$A0_f+1-analogy$A0_f)*Re(y_fft))^2))
+par(mfrow = c(2, 1))
+plot.frequency.spectrum(y_fft)
+```
+```{r, echo=F, message=F}
+period = analogy$Wiener_T
+t=seq(0,period,0.001)
+y=sin(2*pi*analogy$A0_f*t)
+l2_norm_y = sqrt(sum(period*y^2))
+plot(t,y,type="l", xlab="time", ylab="amplitude", main=paste("Wiener's Partial A0 ~ L2:", format(round(l2_norm_y, 2), nsmall = 2)))
+```
+```{r, echo=F, message=F}
+y_fft=fft(y)
+l2_norm_y_fft = sqrt(sum(((analogy$A0_f+1-analogy$A0_f)*Re(y_fft))^2))
+par(mfrow = c(2, 1))
+plot.frequency.spectrum(y_fft)
+```
