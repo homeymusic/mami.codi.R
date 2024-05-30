@@ -71,12 +71,12 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 
 #' About the speed of sound
 #'
-#' We are dealing with ratios so the speed of sound constant will disappear.
-#' We could estimate the speed of sound in:
+#' We are dealing with ratios. Mathematically the speed of sound constant will
+#' disappear. We could estimate the speed of sound in:
 #' * room temperature air at sea level (343 m/s)
 #' * the fluid of the inner ear (1,522 m/s, ocean water at room temperature)
 #' * the basilar membrane (1,640 m/s, human cartilage)
-#' And no matter which one we pick we would get the same mathematical results.
+#' No matter which one we pick we would get the same mathematical results.
 #'
 #' However, this is a computational model so we cannot avoid thinking about:
 #' * normalizing the values of the spatial and temporal signals
@@ -88,16 +88,16 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 #' 6,222.540 Hz. In room temperature air, the wavelength would 0.551 meters.
 #'
 #' When we find rational fractions based on those two sets of values in the
-#' Stern-Brocot tree we will have to be thoughtful about the precision value.
+#' Stern-Brocot tree, we would have to be thoughtful about the precision value.
 #'
-#' So, to workaround being thoughtful about those numbers, we pick a speed of
+#' To workaround being thoughtful about the Stern-Brocot tree, we pick a speed of
 #' sound that is computationally friendly:
 #'
 #' c_sound = max(f) / max(1/f)
 #'
 #' For Eb5 with 10 harmonics, our speed of sound would be
 #'
-#' max(Eb5) / max(1/f) -> 1,627,975 m / s
+#' max(Eb5_f) / max(1/Eb5_f) -> 1,627,975 m / s
 #'
 #' That is a fast material. The advantage, though, is that our wavelength and
 #' frequency numbers will be in the same range.
@@ -106,13 +106,12 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 #' Eb5_l = 6222.5396 3111.2698 2074.1799 1555.6349 1244.5079 1037.0899  888.9342  777.8175  691.3933  622.2540
 #'
 #' An emergent benefit of this approach is that from a quick scan of the numbers
-#' we can see that the two vectors are not identical. Between the two vectors of
-#' 20 numbers, 6 of them are different:
+#' we can see that the two vectors are not identical, 6 of them are different:
 #'
 #' 1866.762 2489.016 3733.524 4355.778 4978.032 5600.286
 #'
 #' Even with a very high precision conversion between wavelengths and frequencies,
-#' the two periodicity estimates for the same set of waves will be differeent.
+#' the two periodicity estimates for the same set of waves will be different.
 #' This is our first glimpse at Gabor's uncertainty principle.
 #'
 #' see:
