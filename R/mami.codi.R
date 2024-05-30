@@ -72,11 +72,11 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 #' About the speed of sound
 #'
 #' We are dealing with ratios so the speed of sound constant will disappear.
-#' We could choose the speed of sound in:
+#' We could estimate the speed of sound in:
 #' * room temperature air at sea level (343 m/s)
-#' * the fluid of the inner ear (~1,522 m/s, ocean water at room temperature)
-#' * the basilar membrane (~1,640 m/s, human cartilage)
-#' And we would get the same mathematical results.
+#' * the fluid of the inner ear (1,522 m/s, ocean water at room temperature)
+#' * the basilar membrane (1,640 m/s, human cartilage)
+#' And no matter which one we pick we would get the same mathematical results.
 #'
 #' However, this is a computational model so we cannot avoid thinking about:
 #' * normalizing the values of the spatial and temporal signals
@@ -85,13 +85,13 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 #' If we choose any of the physical values listed above our wavelength numbers,
 #' computed from c_sound / f will be orders of magnitude smaller than our
 #' frequency numbers. For example, the 10th harmonic of Eb5 has a frequency of
-#' 6,222.540 Hz. In room temperature air, the wavelength is 0.551 meters.
+#' 6,222.540 Hz. In room temperature air, the wavelength would 0.551 meters.
 #'
-#' When we find rational fractions based on those values in the Stern-Brocot
-#' tree we will have to be thoughtful about the precision value.
+#' When we find rational fractions based on those two sets of values in the
+#' Stern-Brocot tree we will have to be thoughtful about the precision value.
 #'
-#' So, to workaround these issues, we pick a speed of sound that is
-#' computationally friendly:
+#' So, to workaround being thoughtful about those numbers, we pick a speed of
+#' sound that is computationally friendly:
 #'
 #' c_sound = max(f) / max(1/f)
 #'
@@ -99,17 +99,21 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 #'
 #' max(Eb5) / max(1/f) -> 1,627,975 m / s
 #'
-#' That is a fast material. The advantage is that our wavelength and frequency
-#' numbers are in the same range.
+#' That is a fast material. The advantage, though, is that our wavelength and
+#' frequency numbers will be in the same range.
 #'
 #' Eb5_f = 622.254 1244.508 1866.762 2489.016 3111.270 3733.524 4355.778 4978.032 5600.286 6222.540
 #' Eb5_l = 6222.5396 3111.2698 2074.1799 1555.6349 1244.5079 1037.0899  888.9342  777.8175  691.3933  622.2540
 #'
 #' An emergent benefit of this approach is that from a quick scan of the numbers
-#' we can see that the two vectors are not identical. Even with a very high
-#' precision conversion between wavelengths and frequencies, the two periodicity
-#' estimates for the same set of waves will not be the same. This is our first
-#' glimpse at Gabor's uncertainty principle.
+#' we can see that the two vectors are not identical. Between the two vectors of
+#' 20 numbers, 6 of them are different:
+#'
+#' 1866.762 2489.016 3733.524 4355.778 4978.032 5600.286
+#'
+#' Even with a very high precision conversion between wavelengths and frequencies,
+#' the two periodicity estimates for the same set of waves will be differeent.
+#' This is our first glimpse at Gabor's uncertainty principle.
 #'
 #' see:
 #' https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6662181/#:~:text=The%20speed%20of%20sound%20in,%2Fs)%20for%20image%20reconstruction.
@@ -117,8 +121,6 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 #' https://www.engineeringtoolbox.com/sound-speed-water-d_598.html
 #' https://www.engineeringtoolbox.com/air-speed-sound-d_603.html
 #' https://en.wikipedia.org/wiki/Floating-point_arithmetic
-#'
-#'
 compute_consonance = function(x, amplitude, precision, deviation) {
 
   f       = x$spectrum[[1]] %>% dplyr::filter(.data$y>amplitude) %>% hrep::freq()
