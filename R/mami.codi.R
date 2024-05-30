@@ -204,7 +204,18 @@ format_output <- function(x, metadata, verbose) {
 #'
 #' Default precision for converting floating point numbers to rational fractions
 #'
-#' See 6 "Aspects of Gabor analysis on locally compact abelian groups"
+#' See Heisenberg's uncertainty paper, translated into English by John Archibald
+#' Wheeler and Hubert Zurek, in Quantum Theory and Measurement, Wheeler and Zurek,
+#' eds. (Princeton: Princeton Univ. Press, 1983), pp. 62-84.
+#'
+#' See Gabor, "Theory of Communication" 1946.
+#'
+#' See "Uncertainty Principle Inequalities and Spectrum Estimation"
+#' in "Recent Advances in Fourier Analysis and Its Applications"
+#' Benedetto (1989)
+#' 5. Spectrum Estimation and the Viener-Vintner Theorem
+#'
+#' "Aspects of Gabor analysis on locally compact abelian groups"
 #' Karlheinz Grochenig (1998)
 #' 6.3 Uncertainty Principles and Lieb's inequalities
 #' Equation (6.3.1)
@@ -227,12 +238,11 @@ format_output <- function(x, metadata, verbose) {
 #' PS88 J.F. Price and A. Sitaram. Local uncertainty inequalities for locally
 #' compact groups. Trans. Amer. Math. Soc., 308(1):105- 114, 1988
 #'
-#' Smi
 #'
 #' @rdname rational_fraction_precision
 #' @export
 rational_fraction_precision <- function() { RATIONAL_FRACTION_PRECISION }
-RATIONAL_FRACTION_PRECISION = 1 / (4 * pi)
+RATIONAL_FRACTION_PRECISION = sqrt(1 / (16 * pi ^ 2))
 
 #' Default Approximate Least Common Multiple Deviation
 #'
