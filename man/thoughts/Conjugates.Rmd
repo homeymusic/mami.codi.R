@@ -1,0 +1,48 @@
+---
+title: "Conjugates"
+output:
+  github_document: default
+always_allow_html: true
+---
+```{r, echo=F, message=F, include=F}
+devtools::load_all(".")
+source('./man/code/plot.R')
+source('./man/code/utils.R')
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "../figures/conjugates-"
+)
+knitr::opts_chunk$set(dev = 'svg')
+p = RATIONAL_FRACTION_PRECISION
+```
+
+```{r, echo=F, message=F}
+f = (0:12 + 60) %>% hrep::sparse_fr_spectrum(num_harmonics=100) %>% hrep::freq()
+c_sound = max(f) / max(1/f)
+l = c_sound / f
+plot(l,f)
+```
+
+```{r, echo=F, message=F}
+f = (0:12 + 60) %>% hrep::sparse_fr_spectrum(num_harmonics=100) %>% hrep::freq()
+c_sound = max(f) / max(1/f)
+l = c_sound / f
+plot(l,log(l))
+```
+
+```{r, echo=F, message=F}
+period = 3
+t=seq(0,period,0.001)
+y_sin=sin(2*pi*t)
+plot(t,y_sin,type="l", xlab="time", ylab="amplitude")
+```
+
+```{r, echo=F, message=F}
+y_cos=cos(2*pi*t)
+plot(t,y_cos,type="l", xlab="time", ylab="amplitude")
+```
+
+```{r, echo=F, message=F}
+plot(y_sin,y_cos,type="l", xlab="time", ylab="amplitude")
+```

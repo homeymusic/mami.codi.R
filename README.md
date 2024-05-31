@@ -166,7 +166,7 @@ major-minor versus the behavioral results are included in a plot below.
 
 | precision | smoothing_sigma |
 |:----------|----------------:|
-| 0.025     |             0.2 |
+| 0.07958   |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-2.png)<!-- -->
@@ -291,7 +291,7 @@ Description is below.
 
 | precision | smoothing_sigma |
 |:----------|----------------:|
-| 8e-04     |           0.035 |
+| 0.07958   |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-4-21.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-22.png)<!-- -->

@@ -148,33 +148,7 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
     )
   }
 
-  default_precision = mami.codi.R::rational_fraction_precision()
-  if (timbre=='Pure') {
-    precision  = 0.025
-  } else if (timbre=='Bonang') {
-    precision  = default_precision
-  } else if (timbre=='5PartialsNo3') {
-    precision  = default_precision
-  } else if (timbre=='5Partials') {
-    precision  = default_precision
-  } else if (timbre=='Harmonic') {
-    precision  = default_precision
-  } else if (timbre=='Stretched') {
-    precision  = default_precision
-  } else if (timbre=='Compressed') {
-    precision  = default_precision
-  } else if (timbre=='M3') {
-    precision  = default_precision
-  } else if (timbre=='M6') {
-    precision  = default_precision
-  } else if (timbre=='P8') {
-    precision  = default_precision
-  } else if (timbre=='P8Zoomed') {
-    precision  = default_precision / 100
-  }
-
   mami.codi.R::mami.codi(study_chord,
-                         precision=precision,
                          metadata = list(
                            num_harmonics = num_harmonics,
                            octave_ratio  = octave_ratio,

@@ -82,7 +82,7 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 #' * normalizing the values of the spatial and temporal signals
 #' * floating-point arithmetic
 #'
-#' If we choose any of the physical values listed above our wavelength numbers,
+#' If we choose any of the physical values listed above, our wavelength numbers
 #' computed from c_sound / f will be orders of magnitude smaller than our
 #' frequency numbers. For example, the 10th harmonic of Eb5 has a frequency of
 #' 6,222.540 Hz. In room temperature air, the wavelength would 0.551 meters.
@@ -106,13 +106,11 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 #' Eb5_l = 6222.5396 3111.2698 2074.1799 1555.6349 1244.5079 1037.0899  888.9342  777.8175  691.3933  622.2540
 #'
 #' An emergent benefit of this approach is that from a quick scan of the numbers
-#' we can see that the two vectors are not identical, 6 of them are different:
-#'
-#' 1866.762 2489.016 3733.524 4355.778 4978.032 5600.286
+#' we can see that the two vectors are not identical.
 #'
 #' Even with a very high precision conversion between wavelengths and frequencies,
 #' the two periodicity estimates for the same set of waves will be different.
-#' This is our first glimpse at Gabor's uncertainty principle.
+#' This is our first glimpse at the Heisenberg-Gabor uncertainty principle.
 #'
 #' see:
 #' https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6662181/#:~:text=The%20speed%20of%20sound%20in,%2Fs)%20for%20image%20reconstruction.

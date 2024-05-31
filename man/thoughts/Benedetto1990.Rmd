@@ -19,8 +19,8 @@ p = RATIONAL_FRACTION_PRECISION
 
 ```{r, echo=F, message=F}
 A0_10_harmonics = hrep::sparse_fr_spectrum(21, num_harmonics=10)
+A0_10_harmonics_f = A0_10_harmonics %>% hrep::freq()
 analogy = tibble::tibble_row(
-  A0_10_harmonics_f = A0_10_harmonics %>% hrep::freq(),
   A0_10_harmonics_max_f = max(A0_10_harmonics_f),
   A0_10_harmonics_min_f = min(A0_10_harmonics_f),
 )

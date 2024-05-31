@@ -11,7 +11,7 @@ source('./man/code/utils.R')
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "../figures/GCD-"
+  fig.path = "../figures/gabor-"
 )
 knitr::opts_chunk$set(dev = 'svg')
 p = RATIONAL_FRACTION_PRECISION
