@@ -91,18 +91,35 @@ wIV %>% hrep::play_wav(player = '/usr/bin/afplay')
 wV  %>% hrep::play_wav(player = '/usr/bin/afplay')
 wI  %>% hrep::play_wav(player = '/usr/bin/afplay')
 
-
 P1 = hrep::sparse_fr_spectrum(60, num_harmonics=1)
 w  = P1 %>% hrep::wave(length_sec = 1 / (P1 %>% hrep::freq()))
 plot(w)
 ```
 
+
 ```{r, echo=F, message=F}
-tibble::tibble(
-  z  =  hrep::sparse_fr_spectrum(60, num_harmonics=10) %>% hrep::freq(),
-  k  =  0:(length(z)-1),
-  ff = -2*pi * 1i * k/length(z)
+# TODO: calculate the period of the chord
+P1_wave = hrep::sparse_fr_spectrum(0, num_harmonics=10) %>% 
+  hrep::wave(length_sec = 1, sample_rate=1e03)
+plot(P1_wave)
+```
+```{r, echo=F, message=F}
+P1_tibble = tibble::as.tibble(P1_wave)
+n    = length(P1_tibble$time)
+fft = tibble::tibble(
+  z   =  P1_tibble$displacement,
+  k   =  0:(n-1),
+  # if I am reading Gabor correctly then k / n is f in 1.1
+  # which is xi = n / P in Wikipedia which is the frequency
+  # are you kidding me? f is frequency and not a function?
+  # Ugh. That was a pain.
+  s_t = -2*pi * 1i * k / n, 
+  S_f = vapply(1:n, function(h) sum(z * exp(s_t*(h-1))), complex(1))
 )
+plot(fft$S_f)
+```
+
+```{r, echo=F, message=F}
 fft0 <- function(z, inverse=FALSE) {
   n <- length(z)
   if(n == 0) return(z)
