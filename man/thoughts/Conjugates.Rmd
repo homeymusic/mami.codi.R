@@ -18,31 +18,30 @@ p = RATIONAL_FRACTION_PRECISION
 ```
 
 ```{r, echo=F, message=F}
-f = (0:12 + 60) %>% hrep::sparse_fr_spectrum(num_harmonics=100) %>% hrep::freq()
-c_sound = max(f) / max(1/f)
-l = c_sound / f
-plot(l,f)
-```
-
-```{r, echo=F, message=F}
-f = (0:12 + 60) %>% hrep::sparse_fr_spectrum(num_harmonics=100) %>% hrep::freq()
-c_sound = max(f) / max(1/f)
-l = c_sound / f
-plot(l,log(l))
-```
-
-```{r, echo=F, message=F}
 period = 3
-t=seq(0,period,0.001)
-y_sin=sin(2*pi*t)
-plot(t,y_sin,type="l", xlab="time", ylab="amplitude")
+t=seq(0,2*pi*period,0.01)
+y_sin=sin(t)
+plot(t,y_sin,type="l")
 ```
 
 ```{r, echo=F, message=F}
-y_cos=cos(2*pi*t)
-plot(t,y_cos,type="l", xlab="time", ylab="amplitude")
+y_cos=cos(t)
+plot(t,y_cos,type="l")
 ```
 
 ```{r, echo=F, message=F}
-plot(y_sin,y_cos,type="l", xlab="time", ylab="amplitude")
+plot(y_sin,y_cos,type="l",asp=1)
+```
+
+```{r, echo=F, message=F}
+z=exp(1) ^ (sqrt(-1+0i)*t)
+plot(t,Re(z),type="l")
+```
+
+```{r, echo=F, message=F}
+plot(t,Im(z),type="l")
+```
+
+```{r, echo=F, message=F}
+plot(z,type="l",asp=1)
 ```

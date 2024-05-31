@@ -10,3 +10,5 @@ Conjugates
 ![](../figures/conjugates-unnamed-chunk-5-1.svg)<!-- -->
 
 ![](../figures/conjugates-unnamed-chunk-6-1.svg)<!-- -->
+
+![](../figures/conjugates-unnamed-chunk-7-1.svg)<!-- -->

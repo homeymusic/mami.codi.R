@@ -22,6 +22,9 @@ For MaMi.CoDi:
 Wavelength ratio precision x Frequency ratio precision = Number of the
 order one  
 
+One observation happens in a “characteristic rectangle” in the
+space-time diagram.
+
 The conventional language is a blocker for me. When time is frozen and
 we measure the wavelength in the cochlea that is a purely spatial
 observation. But the convention is to label that a frequency measured in
@@ -53,3 +56,25 @@ uses the set of those 2 coefficients to create a data set of size
 MaMi.CoDi starts with the wavelength (row of hair cells, bank of reeds)
 and frequency (phase-locking, oscillograph) signals to create a data set
 of size 2(f2-f1)tau.
+
+## 2.1 Time and Frequency
+
+### Equation 1.1
+
+![](../figures/gabor-unnamed-chunk-4-1.svg)<!-- -->
+
+    #> # A tibble: 10 × 3
+    #>        z     k ff          
+    #>    <dbl> <int> <cpl>       
+    #>  1  262.     0 0+0.0000000i
+    #>  2  523.     1 0-0.6283185i
+    #>  3  785.     2 0-1.2566371i
+    #>  4 1047.     3 0-1.8849556i
+    #>  5 1308.     4 0-2.5132741i
+    #>  6 1570.     5 0-3.1415927i
+    #>  7 1831.     6 0-3.7699112i
+    #>  8 2093.     7 0-4.3982297i
+    #>  9 2355.     8 0-5.0265482i
+    #> 10 2616.     9 0-5.6548668i
+
+![](../figures/gabor-unnamed-chunk-6-1.svg)<!-- -->
