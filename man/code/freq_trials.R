@@ -1,5 +1,4 @@
 run_trials <- function(search_label, precisions) {
-  devtools::load_all(".")
   tonic_midi = 60
   source('./utils.R')
 
