@@ -20,8 +20,8 @@ p = RATIONAL_FRACTION_PRECISION
 For MaMi.CoDi:
 
 ```{r, echo=F, message=F}
-L2_norm_f = sqrt(2) # at least for M3 and M6 zoomed in
-precision = ((L2_norm_f ^ 2) / 2) * ( 1 / (4 * pi))
+L2_f = 1
+precision = L2_f / (4 * pi)
 precision
 ```
 
