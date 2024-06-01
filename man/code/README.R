@@ -94,7 +94,7 @@ grid = dplyr::bind_rows(grid_1,
                         grid_Bonang,
                         grid_5,grid_5PartialsNo3,
                         grid_10,grid_10_stretched,grid_10_compressed,
-                        grid_M3,grid_M6,grid_P8,grid_P8_zoomed
+                        grid_M3,grid_M6,grid_P8
                         )
 
 
