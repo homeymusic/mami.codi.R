@@ -1,4 +1,4 @@
-search_label = 'M3'
+search_label = 'P8'
 devtools::install_github('git@github.com:homeymusic/mami.codi.R',
                          ref='upside_down_Sz')
 devtools::load_all(".")
