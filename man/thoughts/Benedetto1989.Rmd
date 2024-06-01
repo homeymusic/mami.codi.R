@@ -17,22 +17,11 @@ knitr::opts_chunk$set(dev = 'svg')
 p = RATIONAL_FRACTION_PRECISION
 ```
 
+For MaMi.CoDi:
+
 ```{r, echo=F, message=F}
-L2_f^2 <= 4*pi*variance_time*variance_freq
-
-variance = 1 / (4*pi)
-
-L2_f^2 <= 4*pi*variance*variance
-
-L2_f^2 / 4*pi  <= 2*variance
-
-L2_f^2 / 8*pi  <= variance
-
-L2_f=1
-variance = L2_f^2 / (8*pi)
-
-L2_f_squared=2
-
-variance = (L2_f_squared/2) / (4*pi)
-
+L2_norm_f = sqrt(2) # at least for M3 and M6 zoomed in
+precision = ((L2_norm_f ^ 2) / 2) * ( 1 / (4 * pi))
+precision
 ```
+

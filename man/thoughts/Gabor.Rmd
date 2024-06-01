@@ -19,17 +19,20 @@ p = RATIONAL_FRACTION_PRECISION
 
 The dimensions of Heisenberg's Uncertainty Principle (HUP) are a purely spatial 
 dimension, position (s) measured in meters, and a spatio-temporal mass dimension, 
-momentum (p) measured in kg * m / s.\
+momentum (p) measured in kg * m / s. One dimension includes time, the other does
+not.\
 
 The dimensions of Gabor's application of HUP to signal analysis are a temporal 
 dimension, time of the signal (t) measured in seconds, and another temporal 
-dimension, frequency of the signal (f), measured in 1 / seconds.\
+dimension, frequency of the signal (f), measured in 1 / seconds. Both dimensions 
+include time.\
 
 The dimensions of MaMi.CoDis application of HUP to signal analysis are a  
 spatial dimension, wavelength (l) measured in meters, and a temporal 
-dimension, frequency (f) measured in 1 / seconds.\
+dimension, frequency (f) measured in 1 / seconds.  One dimension includes time, 
+the other does not.\
 
-Do sound waves have mass? [Sound Waves Carry Mass](https://physics.aps.org/articles/v12/23)\
+Do sound waves have mass? See [Sound Waves Carry Mass](https://physics.aps.org/articles/v12/23) and [Phonons](https://en.wikipedia.org/wiki/Phonon)\
 
 "sub specie aeternitatis" p 431\
 
