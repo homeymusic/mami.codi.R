@@ -1,0 +1,38 @@
+---
+title: "Benedetto 1989 from Recent Advances in Fourier Analysis and Its Applications"
+output:
+  github_document: default
+always_allow_html: true
+---
+```{r, echo=F, message=F, include=F}
+devtools::load_all(".")
+source('./man/code/plot.R')
+source('./man/code/utils.R')
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "../figures/GCD-"
+)
+knitr::opts_chunk$set(dev = 'svg')
+p = RATIONAL_FRACTION_PRECISION
+```
+
+```{r, echo=F, message=F}
+L2_f^2 <= 4*pi*variance_time*variance_freq
+
+variance = 1 / (4*pi)
+
+L2_f^2 <= 4*pi*variance*variance
+
+L2_f^2 / 4*pi  <= 2*variance
+
+L2_f^2 / 8*pi  <= variance
+
+L2_f=1
+variance = L2_f^2 / (8*pi)
+
+L2_f_squared=2
+
+variance = (L2_f_squared/2) / (4*pi)
+
+```

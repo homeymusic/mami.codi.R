@@ -1,6 +1,23 @@
 Gabor
 ================
 
+The dimensions of Heisenberg’s Uncertainty Principle (HUP) are a purely
+spatial dimension, position (s) measured in meters, and a
+spatio-temporal mass dimension, momentum (p) measured in kg \* m / s.  
+
+The dimensions of Gabor’s application of HUP to signal analysis are a
+temporal dimension, time of the signal (t) measured in seconds, and
+another temporal dimension, frequency of the signal (f), measured in 1 /
+seconds.  
+
+The dimensions of MaMi.CoDis application of HUP to signal analysis are
+a  
+spatial dimension, wavelength (l) measured in meters, and a temporal
+dimension, frequency (f) measured in 1 / seconds.  
+
+Do sound waves have mass? [Sound Waves Carry
+Mass](https://physics.aps.org/articles/v12/23)  
+
 “sub specie aeternitatis” p 431  
 
 The above makes me think of the contrast between the infinity of Fourier
@@ -63,18 +80,15 @@ of size 2(f2-f1)tau.
 
 ![](../figures/gabor-unnamed-chunk-4-1.svg)<!-- -->
 
-    #> # A tibble: 10 × 4
-    #>        z     k ff           fft                
-    #>    <dbl> <int> <cpl>        <cpl>              
-    #>  1  262.     0 0+0.0000000i 14389.406+   0.000i
-    #>  2  523.     1 0-0.6283185i -1308.128+4026.003i
-    #>  3  785.     2 0-1.2566371i -1308.128+1800.483i
-    #>  4 1047.     3 0-1.8849556i -1308.128+ 950.410i
-    #>  5 1308.     4 0-2.5132741i -1308.128+ 425.036i
-    #>  6 1570.     5 0-3.1415927i -1308.128+   0.000i
-    #>  7 1831.     6 0-3.7699112i -1308.128- 425.036i
-    #>  8 2093.     7 0-4.3982297i -1308.128- 950.410i
-    #>  9 2355.     8 0-5.0265482i -1308.128-1800.483i
-    #> 10 2616.     9 0-5.6548668i -1308.128-4026.003i
+![](../figures/gabor-unnamed-chunk-5-1.svg)<!-- -->
 
-![](../figures/gabor-unnamed-chunk-7-1.svg)<!-- -->
+    #> Warning: `as.tibble()` was deprecated in tibble 2.0.0.
+    #> ℹ Please use `as_tibble()` instead.
+    #> ℹ The signature and semantics have changed, see `?as_tibble`.
+    #> This warning is displayed once every 8 hours.
+    #> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+    #> generated.
+
+![](../figures/gabor-unnamed-chunk-6-1.svg)<!-- -->
+
+![](../figures/gabor-unnamed-chunk-8-1.svg)<!-- -->

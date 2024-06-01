@@ -17,6 +17,20 @@ knitr::opts_chunk$set(dev = 'svg')
 p = RATIONAL_FRACTION_PRECISION
 ```
 
+The dimensions of Heisenberg's Uncertainty Principle (HUP) are a purely spatial 
+dimension, position (s) measured in meters, and a spatio-temporal mass dimension, 
+momentum (p) measured in kg * m / s.\
+
+The dimensions of Gabor's application of HUP to signal analysis are a temporal 
+dimension, time of the signal (t) measured in seconds, and another temporal 
+dimension, frequency of the signal (f), measured in 1 / seconds.\
+
+The dimensions of MaMi.CoDis application of HUP to signal analysis are a  
+spatial dimension, wavelength (l) measured in meters, and a temporal 
+dimension, frequency (f) measured in 1 / seconds.\
+
+Do sound waves have mass? [Sound Waves Carry Mass](https://physics.aps.org/articles/v12/23)\
+
 "sub specie aeternitatis" p 431\
 
 The above makes me think of the contrast between the infinity of Fourier versus 
@@ -113,6 +127,8 @@ fft = tibble::tibble(
   # which is xi = n / P in Wikipedia which is the frequency
   # are you kidding me? f is frequency and not a function?
   # Ugh. That was a pain.
+  # so n = P which is the period. when we integrate over n
+  # we are sweeping all the freqs.
   s_t = -2*pi * 1i * k / n, 
   S_f = vapply(1:n, function(h) sum(z * exp(s_t*(h-1))), complex(1))
 )

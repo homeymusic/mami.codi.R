@@ -1,0 +1,92 @@
+---
+title: "L2 Norm"
+output:
+  github_document: default
+always_allow_html: true
+---
+```{r, echo=F, message=F, include=F}
+devtools::load_all(".")
+source('./man/code/plot.R')
+source('./man/code/utils.R')
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "../figures/conjugates-"
+)
+knitr::opts_chunk$set(dev = 'svg')
+p = RATIONAL_FRACTION_PRECISION
+```
+
+```{r, echo=F, message=F}
+tibble::tibble_row(
+  1 / (4*pi),
+  1 / sqrt(16*pi^2),
+  d_t = sqrt(pi/2),
+  d_f = 1/sqrt(2*pi),
+  d_t * d_f
+)
+```
+
+```{r, echo=F, message=F}
+ratio_norms <- function(chord) {
+  f = chord$frequencies[[1]] %>% unique()
+  r_f = f / min(f)
+  l = chord$wavelengths[[1]] %>% unique()
+  r_l = l / min(l)
+  r_f_l = cbind(r_f, r_l)
+  f_inv = cbind(f, 1/f)
+  r_f_inv = cbind(r_f, 1/r_f)
+  tibble::tibble_row(
+    L2_f   = r_f %>% norm(type='2'),
+    L2_l   = r_l %>% norm(type='2'),
+    L2_f_l = r_f_l %>% norm(type='2'),
+    L2_f_inv  = f_inv %>% norm(type='2'),
+    L2_r_f_inv  = r_f_inv %>% norm(type='2'),
+    UP     = L2_f_l / sqrt(16 * pi ^ 2),
+    UP_c_num = (L2_f_l / sqrt(16 * pi ^ 2)) * chord$speed_of_sound[[1]],
+    UP_c_den = (L2_f_l / sqrt(16 * pi ^ 2)) / chord$speed_of_sound[[1]]
+  )
+}
+```
+
+## P1 1 Harmonic
+
+```{r, echo=F, message=F}
+chord = c(60) %>% mami.codi(num_harmonics=1, verbose=T)
+ratio_norms(chord)
+```
+
+## P1 10 Harmonics
+
+```{r, echo=F, message=F}
+chord = c(60) %>% mami.codi(num_harmonics=10, verbose=T)
+ratio_norms(chord)
+```
+
+## P8 1 Harmonic
+
+```{r, echo=F, message=F}
+chord = c(60, 72) %>% mami.codi(num_harmonics=1, verbose=T)
+ratio_norms(chord)
+```
+
+## P8 10 Harmonics
+
+```{r, echo=F, message=F}
+chord = c(60, 72) %>% mami.codi(num_harmonics=10, verbose=T)
+ratio_norms(chord)
+```
+
+## M3 1 Harmonic
+
+```{r, echo=F, message=F}
+chord = c(64, 72) %>% mami.codi(num_harmonics=1, verbose=T)
+ratio_norms(chord)
+```
+
+## M3 10 Harmonics
+
+```{r, echo=F, message=F}
+chord = c(64, 72) %>% mami.codi(num_harmonics=10, verbose=T)
+ratio_norms(chord)
+```

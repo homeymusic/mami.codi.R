@@ -240,7 +240,7 @@ format_output <- function(x, metadata, verbose) {
 #' @rdname rational_fraction_precision
 #' @export
 rational_fraction_precision <- function() { RATIONAL_FRACTION_PRECISION }
-RATIONAL_FRACTION_PRECISION = sqrt(1 / (16 * pi ^ 2))
+RATIONAL_FRACTION_PRECISION = 1 / (4 * pi)
 
 #' Default Approximate Least Common Multiple Deviation
 #'
