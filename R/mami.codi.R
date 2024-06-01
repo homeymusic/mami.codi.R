@@ -130,7 +130,7 @@ compute_consonance = function(x, amplitude, precision, deviation) {
     alcd(l/min(l), precision, deviation) %>% dplyr::rename_with(~ paste0('spatial_',.)),
 
     consonance_dissonance = 1 / (1 + .data$temporal_dissonance + .data$spatial_dissonance),
-    major_minor           = 1 / (1 + .data$temporal_dissonance - .data$spatial_dissonance),
+    major_minor           = .data$spatial_dissonance - .data$temporal_dissonance,
 
     frequencies           = list(f),
     wavelengths           = list(l),
