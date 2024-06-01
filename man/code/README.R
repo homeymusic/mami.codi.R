@@ -90,14 +90,6 @@ grid_P8 = tidyr::expand_grid(
   timbre = 'P8'
 )
 
-experiment.rds = '../data/P8Zoomed.rds'
-grid_P8_zoomed = tidyr::expand_grid(
-  interval = readRDS(experiment.rds)$profile$interval,
-  num_harmonics=10,
-  octave_ratio=2.0,
-  timbre = 'P8Zoomed'
-)
-
 grid = dplyr::bind_rows(grid_1,
                         grid_Bonang,
                         grid_5,grid_5PartialsNo3,

@@ -168,8 +168,7 @@ major-minor versus the behavioral results are included in a plot below.
 |:----------|----------------:|
 | 0.07958   |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-2.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->
 
 ##### Harmonic ~ Partials: 10
 
@@ -179,8 +178,7 @@ For 10 harmonics, behavioral results and theoretical predictions agree.
 |:----------|----------------:|
 | 0.07958   |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-3.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-4.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-2.png)<!-- -->
 
 ##### 5Partials ~ Partials: 5
 
@@ -193,8 +191,7 @@ peak.
 |:----------|----------------:|
 | 0.07958   |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-5.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-6.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-3.png)<!-- -->
 
 ##### 5PartialsNo3 ~ Partials: 5
 
@@ -207,8 +204,7 @@ while the M3 peak is slightly higher without the 3rd partial.
 |:----------|----------------:|
 | 0.07958   |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-7.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-8.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-4.png)<!-- -->
 
 ##### Bonang ~ Partials: 4
 
@@ -222,8 +218,7 @@ be relatively higher than the behavioral results.
 |:----------|----------------:|
 | 0.07958   |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-9.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-10.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-5.png)<!-- -->
 
 ##### Stretched ~ Partials: 10
 
@@ -235,8 +230,7 @@ and m7 that do not exist in the behavioral results.
 |:----------|----------------:|
 | 0.07958   |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-11.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-12.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-6.png)<!-- -->
 
 ##### Compressed ~ Partials: 10
 
@@ -247,8 +241,7 @@ with the theoretical peaks.
 |:----------|----------------:|
 | 0.07958   |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-13.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-14.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-7.png)<!-- -->
 
 #### Dyads spanning 1 quarter tone
 
@@ -260,8 +253,7 @@ Description is below.
 |:----------|----------------:|
 | 0.07958   |           0.035 |
 
-![](man/figures/README-unnamed-chunk-4-15.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-16.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-8.png)<!-- -->
 
 ##### M6 ~ Partials: 10
 
@@ -271,8 +263,7 @@ Description is below.
 |:----------|----------------:|
 | 0.07958   |           0.035 |
 
-![](man/figures/README-unnamed-chunk-4-17.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-18.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-9.png)<!-- -->
 
 ##### P8 ~ Partials: 10
 
@@ -282,19 +273,7 @@ Description is below.
 |:----------|----------------:|
 | 0.07958   |           0.035 |
 
-![](man/figures/README-unnamed-chunk-4-19.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-20.png)<!-- -->
-
-##### P8Zoomed ~ Partials: 10
-
-Description is below.
-
-| precision | smoothing_sigma |
-|:----------|----------------:|
-| 0.07958   |           0.035 |
-
-![](man/figures/README-unnamed-chunk-4-21.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-22.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-10.png)<!-- -->
 
 ### Manipulating amplitudes
 
@@ -305,25 +284,20 @@ Description is below.
 | 0.07958   | 0.013         |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-8-1.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-8-2.png)<!-- -->
-
-##### Harmonic ~ Roll Off: 7
+\##### Harmonic ~ Roll Off: 7
 
 | precision | min_amplitude | smoothing_sigma |
 |:----------|:--------------|----------------:|
 | 0.07958   | 0.08          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-8-3.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-8-4.png)<!-- -->
-
-##### Harmonic ~ Roll Off: 2
+![](man/figures/README-unnamed-chunk-8-2.png)<!-- -->  
+\##### Harmonic ~ Roll Off: 2
 
 | precision | min_amplitude | smoothing_sigma |
 |:----------|:--------------|----------------:|
 | 0.07958   | 0             |             0.2 |
 
-![](man/figures/README-unnamed-chunk-8-5.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-8-6.png)<!-- -->
+![](man/figures/README-unnamed-chunk-8-3.png)<!-- -->
 
 ### TODO: run the in-depth precision searches again for M3, M6 and P8
 
