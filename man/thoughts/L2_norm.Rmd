@@ -18,6 +18,17 @@ p = RATIONAL_FRACTION_PRECISION
 ```
 
 ```{r, echo=F, message=F}
+L2_f = 1 
+variance = L2_f / (4 * pi)
+variance
+```
+
+```{r, echo=F, message=F}
+std_dev = sqrt(variance)
+std_dev
+```
+
+```{r, echo=F, message=F}
 tibble::tibble_row(
   1 / (4*pi),
   1 / sqrt(16*pi^2),

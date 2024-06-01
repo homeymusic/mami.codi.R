@@ -25,3 +25,7 @@ precision = L2_f / (4 * pi)
 precision
 ```
 
+It feel right now like equation 5.1.4 is the place to start.\
+
+c is precision ranging from 0 to 1?\
+
