@@ -1,0 +1,47 @@
+---
+title: "Fundamentals"
+output:
+  github_document: default
+always_allow_html: true
+---
+```{r, echo=F, message=F, include=F}
+devtools::load_all(".")
+source('./man/code/plot.R')
+source('./man/code/utils.R')
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "../figures/GCD-"
+)
+knitr::opts_chunk$set(dev = 'svg')
+p = RATIONAL_FRACTION_PRECISION
+```
+
+## Fundamentals
+
+```{r, echo=F, message=F}
+P1 = mami.codi(60, num_harmonics = 1, verbose=T)
+tibble::tibble_row(
+  P1$fundamental_frequency,
+  P1$frequencies[[1]] %>% min,
+  P1$frequency_alcd
+)
+```
+
+```{r, echo=F, message=F}
+P8 = mami.codi(c(60,72), num_harmonics = 1, verbose=T)
+tibble::tibble_row(
+  P8$fundamental_frequency,
+  P8$frequencies[[1]] %>% min,
+  P8$frequency_alcd
+)
+```
+
+```{r, echo=F, message=F}
+M3 = mami.codi(c(60, 64), num_harmonics = 1, verbose=T)
+tibble::tibble_row(
+  M3$fundamental_frequency,
+  M3$frequencies[[1]] %>% min,
+  M3$frequency_alcd
+)
+```
