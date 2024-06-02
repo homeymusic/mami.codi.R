@@ -126,8 +126,11 @@ compute_consonance = function(x, amplitude, precision, deviation) {
 
   x %>% dplyr::mutate(
 
-    alcd(f/min(f), precision, deviation) %>% dplyr::rename_with(~ paste0('temporal_',.)),
-    alcd(l/min(l), precision, deviation) %>% dplyr::rename_with(~ paste0('spatial_',.)),
+    alcd(f/min(f), precision, deviation, 'temporal'),
+    period     = .data$temporal_alcd / min(f),
+
+    alcd(l/min(l), precision, deviation, 'spatial'),
+    wavenumber = .data$spatial_alcd / min(l),
 
     consonance_dissonance = .data$temporal_consonance + .data$spatial_consonance,
     major_minor           = .data$temporal_consonance - .data$spatial_consonance,
@@ -166,18 +169,19 @@ compute_consonance = function(x, amplitude, precision, deviation) {
 #' @param x Vector of rational numbers
 #' @param precision Precision for creating rational fractions
 #' @param deviation Deviation for approximating least common multiples
+#' @param label A custom label for the output usually 'spatial' or 'temporal'
 #'
 #' @return The approximate least common denominator of the rational numbers
 #'
 #' @rdname alcd
 #' @export
-alcd <- function(x, precision, deviation) {
+alcd <- function(x, precision, deviation, label) {
   fractions = approximate_rational_fractions(x, precision, deviation)
   tibble::tibble_row(
     alcd       = lcm_integers(fractions$den),
     consonance = 50 - log2(.data$alcd),
     fractions  = list(fractions)
-  )
+  ) %>% dplyr::rename_with(~ paste0(label, '_' , .))
 }
 lcm_integers <- function(x) Reduce(gmp::lcm.bigz, x) %>% as.numeric()
 
