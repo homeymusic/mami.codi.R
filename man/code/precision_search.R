@@ -1,7 +1,7 @@
-search_label = 'P8'
+search_label = 'Bonang'
 
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
-  # Detailed
+  # # Detailed
   from_prec   = 0.07
   to_prec     = 0.09
   by_prec     = 0.001
@@ -20,7 +20,8 @@ if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   precisions   = sort(c(0.063, 1:9 %o% 10^(-2:-1)))
 }
 
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R',
+                         ref='no_ratios')
 
 source('./freq_trials.R')
 run_trials(search_label, precisions)

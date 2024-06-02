@@ -175,7 +175,8 @@ alcd <- function(x, precision, deviation) {
   fractions = approximate_rational_fractions(x, precision, deviation)
   tibble::tibble_row(
     alcd       = lcm_integers(fractions$den),
-    consonance = 50 - log2(.data$alcd),
+    the_thing  = .data$alcd / min(x),
+    consonance = 50 - log2(.data$the_thing),
     fractions  = list(fractions)
   )
 }
