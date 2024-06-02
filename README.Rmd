@@ -184,8 +184,7 @@ params = list(
   list(h=10,o=1.9,t='Compressed'),
   list(h=10,o=2.0,t='M3'),
   list(h=10,o=2.0,t='M6'),
-  list(h=10,o=2.0,t='P8'),
-  list(h=10,o=2.0,t='P8Zoomed')
+  list(h=10,o=2.0,t='P8')
 )
 
 BEHAVIOURAL_SMOOTH_BROAD  <- 0.2
@@ -236,11 +235,6 @@ p = params %>% purrr::map(\(p) {
     description = '  Description is below.'
     sigma = BEHAVIOURAL_SMOOTH_NARROW
   } else if (p$t == 'P8') {
-    gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 2/1)-60)
-    black_vlines  = c(11.94, 12.08)
-    description = '  Description is below.'
-    sigma = BEHAVIOURAL_SMOOTH_NARROW
-  } else if (p$t == 'P8Zoomed') {
     gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 2/1)-60)
     black_vlines  = c(11.94, 12.08)
     description = '  Description is below.'

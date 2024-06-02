@@ -220,7 +220,7 @@ be relatively higher than the behavioral results.
 
 | precision | smoothing_sigma |
 |:----------|----------------:|
-| 0.07958   |             0.2 |
+| 0.03      |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-9.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-10.png)<!-- -->
@@ -284,17 +284,6 @@ Description is below.
 
 ![](man/figures/README-unnamed-chunk-4-19.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-20.png)<!-- -->
-
-##### P8Zoomed ~ Partials: 10
-
-Description is below.
-
-| precision | smoothing_sigma |
-|:----------|----------------:|
-| 0.07958   |           0.035 |
-
-![](man/figures/README-unnamed-chunk-4-21.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-22.png)<!-- -->
 
 ### Manipulating amplitudes
 

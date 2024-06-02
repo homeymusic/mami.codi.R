@@ -12,6 +12,7 @@ prepare(output.rds)
 
 experiment.rds = '../data/Pure.rds'
 grid_1 = tidyr::expand_grid(
+  precision = mami.codi.R::rational_fraction_precision(),
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=1,
   octave_ratio=2.0,
@@ -20,6 +21,7 @@ grid_1 = tidyr::expand_grid(
 
 experiment.rds = '../data/Bonang.rds'
 grid_Bonang = tidyr::expand_grid(
+  precision = 0.03,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=4,
   octave_ratio=2,
@@ -28,6 +30,7 @@ grid_Bonang = tidyr::expand_grid(
 
 experiment.rds = '../data/5Partials.rds'
 grid_5 = tidyr::expand_grid(
+  precision = mami.codi.R::rational_fraction_precision(),
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=5,
   octave_ratio=2.0,
@@ -36,6 +39,7 @@ grid_5 = tidyr::expand_grid(
 
 experiment.rds = '../data/5PartialsNo3.rds'
 grid_5PartialsNo3 = tidyr::expand_grid(
+  precision = mami.codi.R::rational_fraction_precision(),
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=5,
   octave_ratio=2.0,
@@ -44,6 +48,7 @@ grid_5PartialsNo3 = tidyr::expand_grid(
 
 experiment.rds = '../data/Harmonic.rds'
 grid_10 = tidyr::expand_grid(
+  precision = mami.codi.R::rational_fraction_precision(),
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
   octave_ratio=2.0,
@@ -52,6 +57,7 @@ grid_10 = tidyr::expand_grid(
 
 experiment.rds = '../data/Stretched.rds'
 grid_10_stretched = tidyr::expand_grid(
+  precision = mami.codi.R::rational_fraction_precision(),
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics = 10,
   octave_ratio = 2.1,
@@ -60,6 +66,7 @@ grid_10_stretched = tidyr::expand_grid(
 
 experiment.rds = '../data/Compressed.rds'
 grid_10_compressed = tidyr::expand_grid(
+  precision = mami.codi.R::rational_fraction_precision(),
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
   octave_ratio=1.9,
@@ -68,6 +75,7 @@ grid_10_compressed = tidyr::expand_grid(
 
 experiment.rds = '../data/M3.rds'
 grid_M3 = tidyr::expand_grid(
+  precision = mami.codi.R::rational_fraction_precision(),
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
   octave_ratio=2.0,
@@ -76,6 +84,7 @@ grid_M3 = tidyr::expand_grid(
 
 experiment.rds = '../data/M6.rds'
 grid_M6 = tidyr::expand_grid(
+  precision = mami.codi.R::rational_fraction_precision(),
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
   octave_ratio=2.0,
@@ -84,31 +93,25 @@ grid_M6 = tidyr::expand_grid(
 
 experiment.rds = '../data/P8.rds'
 grid_P8 = tidyr::expand_grid(
+  precision = mami.codi.R::rational_fraction_precision(),
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
   octave_ratio=2.0,
   timbre = 'P8'
 )
 
-experiment.rds = '../data/P8Zoomed.rds'
-grid_P8_zoomed = tidyr::expand_grid(
-  interval = readRDS(experiment.rds)$profile$interval,
-  num_harmonics=10,
-  octave_ratio=2.0,
-  timbre = 'P8Zoomed'
-)
-
 grid = dplyr::bind_rows(grid_1,
                         grid_Bonang,
                         grid_5,grid_5PartialsNo3,
                         grid_10,grid_10_stretched,grid_10_compressed,
-                        grid_M3,grid_M6,grid_P8,grid_P8_zoomed
+                        grid_M3,grid_M6,grid_P8
                         )
 
 
 plan(multisession, workers=parallelly::availableCores())
 
 output = grid %>% furrr::future_pmap_dfr(\(interval,
+                                           precision,
                                            num_harmonics,
                                            octave_ratio,
                                            timbre) {
@@ -150,6 +153,7 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
   }
 
   mami.codi.R::mami.codi(study_chord,
+                         precision = precision,
                          metadata = list(
                            num_harmonics = num_harmonics,
                            octave_ratio  = octave_ratio,

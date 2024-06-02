@@ -1,4 +1,4 @@
-search_label = 'P8'
+search_label = 'Bonang'
 
 if (search_label == 'M3' || search_label == 'M6' || search_label == 'P8') {
   # Detailed
