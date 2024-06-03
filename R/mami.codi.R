@@ -127,7 +127,7 @@ compute_consonance = function(x, amplitude, precision, deviation) {
   x %>% dplyr::mutate(
 
     alcd(f/min(f), precision, deviation, 'temporal'),
-    alcd(l/min(l), precision, deviation, 'spatial'),
+    alcd(max(l)/l, precision, deviation, 'spatial'),
 
     consonance_dissonance = .data$temporal_consonance + .data$spatial_consonance,
     major_minor           = .data$temporal_consonance - .data$spatial_consonance,
