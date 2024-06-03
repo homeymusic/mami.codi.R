@@ -1,7 +1,7 @@
 Precision Search
 ================
 
-# M3
+# Harmonic
 
 Precisions:
 
