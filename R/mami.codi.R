@@ -129,7 +129,12 @@ compute_consonance = function(x, amplitude, precision, deviation) {
     alcd(f/min(f), precision, deviation, 'temporal'),
     alcd(l/min(l), precision, deviation, 'spatial'),
 
+
+    # TODO: change these misleading labels
+    # these are both fundamental frequencies
+    # this one is from phase locking:
     temporal_frequency    = min(f) / .data$temporal_alcd,
+    # this one is from space based hair cells:
     spatial_frequency     = 1 / (.data$spatial_alcd * (max(l) / c_sound)),
 
     temporal_consonance   = log2(.data$temporal_frequency),
