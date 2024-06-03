@@ -17,31 +17,137 @@ knitr::opts_chunk$set(dev = 'svg')
 p = RATIONAL_FRACTION_PRECISION
 ```
 
-## Fundamentals
+## P1 Pure
+### P1 Pure Frequencies
 
 ```{r, echo=F, message=F}
 P1 = mami.codi(60, num_harmonics = 1, verbose=T)
 tibble::tibble_row(
-  P1$fundamental_frequency,
-  P1$frequencies[[1]] %>% min,
-  P1$frequency_alcd
+  f0 = P1$fundamental_frequency,
+  T0 = P1$temporal_period,
+  alcd = P1$frequency_alcd
 )
 ```
 
+### P1 Pure Wavelengths
+
 ```{r, echo=F, message=F}
-P8 = mami.codi(c(60,72), num_harmonics = 1, verbose=T)
 tibble::tibble_row(
-  P8$fundamental_frequency,
-  P8$frequencies[[1]] %>% min,
-  P8$frequency_alcd
+  l0 = P1$fundamental_wavelength,
+  T0 = P1$spatial_period,
+  alcd = P1$wavelength_alcd
 )
 ```
 
+## P1
+### P1 Frequencies
+
 ```{r, echo=F, message=F}
-M3 = mami.codi(c(60, 64), num_harmonics = 1, verbose=T)
+P1 = mami.codi(60, num_harmonics = 10, verbose=T)
 tibble::tibble_row(
-  M3$fundamental_frequency,
-  M3$frequencies[[1]] %>% min,
-  M3$frequency_alcd
+  f0 = P1$fundamental_frequency,
+  T0 = P1$temporal_period,
+  alcd = P1$frequency_alcd
+)
+```
+
+### P1 Wavelengths
+
+```{r, echo=F, message=F}
+tibble::tibble_row(
+  l0 = P1$fundamental_wavelength,
+  T0 = P1$spatial_period,
+  alcd = P1$wavelength_alcd
+)
+```
+
+## P8
+### P8 Frequencies
+
+```{r, echo=F, message=F}
+P8 = mami.codi(c(60,72), num_harmonics = 10, verbose=T)
+tibble::tibble_row(
+  f0 = P8$fundamental_frequency,
+  T0 = P8$temporal_period,
+  alcd = P8$frequency_alcd
+)
+```
+
+### P8 Wavelengths
+
+```{r, echo=F, message=F}
+tibble::tibble_row(
+  l0 = P8$fundamental_wavelength,
+  T0 = P8$spatial_period,
+  alcd = P8$wavelength_alcd
+)
+```
+
+## M3
+
+### M3 Frequencies
+
+```{r, echo=F, message=F}
+M3 = mami.codi(c(60, 64), num_harmonics = 10, verbose=T)
+tibble::tibble_row(
+  f0 = M3$fundamental_frequency,
+  T0 = M3$temporal_period,
+  alcd = M3$frequency_alcd
+)
+```
+
+### M3 Wavelengths
+
+```{r, echo=F, message=F}
+tibble::tibble_row(
+  l0 = M3$fundamental_wavelength,
+  T0 = M3$spatial_period,
+  alcd = M3$wavelength_alcd
+)
+```
+
+## m3
+
+### m3 Frequencies
+
+```{r, echo=F, message=F}
+m3 = mami.codi(c(60, 63), num_harmonics = 10, verbose=T)
+tibble::tibble_row(
+  f0 = m3$fundamental_frequency,
+  T0 = m3$temporal_period,
+  alcd = m3$frequency_alcd
+)
+```
+
+### m3 Wavelengths
+
+```{r, echo=F, message=F}
+tibble::tibble_row(
+  l0 = m3$fundamental_wavelength,
+  T0 = m3$spatial_period,
+  alcd = m3$wavelength_alcd
+)
+```
+
+## m2
+
+### m2 Frequencies
+
+```{r, echo=F, message=F}
+m2 = mami.codi(c(60, 61), num_harmonics = 10, verbose=T)
+tibble::tibble_row(
+  f0 = m2$fundamental_frequency,
+  T0 = m2$temporal_period,
+  alcd = m2$frequency_alcd
+)
+```
+
+### m2 Wavelengths
+
+```{r, echo=F, message=F}
+tibble::tibble_row(
+  l0 = m2$fundamental_wavelength,
+  T0 = m2$spatial_period,
+  alcd = m2$wavelength_alcd
 )
 ```

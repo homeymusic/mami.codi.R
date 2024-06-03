@@ -128,12 +128,16 @@ compute_consonance = function(x, amplitude, precision, deviation) {
 
     alcd(f/min(f), precision, deviation, 'frequency'),
     fundamental_frequency  = min(f) / .data$frequency_alcd,
+    temporal_period        = 1 / .data$fundamental_frequency,
+    temporal_consonance    = 1 / .data$temporal_period,
 
-    alcd(l/min(l), precision, deviation, 'wavelength'),
-    fundamental_wavelength = min(l) / .data$wavelength_alcd,
+    alcd(max(l)/l, precision, deviation, 'wavelength'),
+    fundamental_wavelength = max(l) * .data$wavelength_alcd,
+    spatial_period         = .data$fundamental_wavelength / c_sound,
+    spatial_consonance     = 1 / spatial_period,
 
-    consonance_dissonance  = .data$fundamental_frequency + .data$fundamental_wavelength,
-    major_minor            = .data$fundamental_frequency - .data$fundamental_wavelength,
+    consonance_dissonance  = .data$temporal_consonance + .data$spatial_consonance,
+    major_minor            = .data$temporal_consonance - .data$spatial_consonance,
 
     frequencies            = list(f),
     wavelengths            = list(l),
