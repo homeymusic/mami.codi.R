@@ -132,8 +132,8 @@ compute_consonance = function(x, amplitude, precision, deviation) {
     temporal_frequency    = min(f) / .data$temporal_alcd,
     spatial_frequency     = 1 / (.data$spatial_alcd * (max(l) / c_sound)),
 
-    temporal_consonance   = .data$temporal_frequency,
-    spatial_consonance    = .data$spatial_frequency,
+    temporal_consonance   = log2(.data$temporal_frequency),
+    spatial_consonance    = log2(.data$spatial_frequency),
 
     consonance_dissonance = .data$temporal_consonance + .data$spatial_consonance,
     major_minor           = .data$temporal_consonance - .data$spatial_consonance,
