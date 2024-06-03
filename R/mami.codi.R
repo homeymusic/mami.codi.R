@@ -176,7 +176,7 @@ alcd <- function(x, precision, deviation, label) {
   fractions = approximate_rational_fractions(x, precision, deviation)
   tibble::tibble_row(
     alcd       = lcm_integers(fractions$den),
-    consonance = 50 - log2(.data$alcd),
+    consonance = 1 / .data$alcd,
     fractions  = list(fractions)
   ) %>% dplyr::rename_with(~ paste0(label, '_' , .))
 }
