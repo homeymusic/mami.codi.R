@@ -1,0 +1,75 @@
+---
+title: "Physics"
+output:
+  github_document: default
+always_allow_html: true
+---
+```{r, echo=F, message=F, include=F}
+devtools::load_all(".")
+source('./man/code/plot.R')
+source('./man/code/utils.R')
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "../figures/Physics-"
+)
+knitr::opts_chunk$set(dev = 'png')
+```
+
+## Fundamentals
+
+### P1 Pure
+
+```{r, echo=F, message=F}
+c(60) %>% mami.codi(verbose=T, num_harmonics=1) %>% 
+  dplyr::select(temporal_alcd, spatial_alcd, temporal_period, spatial_period) %>%
+  dplyr::mutate(diff = .data$spatial_period - .data$temporal_period)
+```
+
+### P1
+
+```{r, echo=F, message=F}
+c(60) %>% mami.codi(verbose=T, num_harmonics=10) %>% 
+  dplyr::select(temporal_alcd, spatial_alcd, temporal_period, spatial_period) %>%
+  dplyr::mutate(diff = .data$spatial_period - .data$temporal_period)
+```
+
+### m3
+
+```{r, echo=F, message=F}
+c(60, 63) %>% mami.codi(verbose=T, num_harmonics=10) %>% 
+  dplyr::select(temporal_alcd, spatial_alcd, temporal_period, spatial_period) %>%
+  dplyr::mutate(diff = .data$spatial_period - .data$temporal_period)
+```
+
+### mT
+
+```{r, echo=F, message=F}
+c(60, 63, 67) %>% mami.codi(verbose=T, num_harmonics=10) %>% 
+  dplyr::select(temporal_alcd, spatial_alcd, temporal_period, spatial_period) %>%
+  dplyr::mutate(diff = .data$spatial_period - .data$temporal_period)
+```
+
+### M3
+
+```{r, echo=F, message=F}
+c(60, 64) %>% mami.codi(verbose=T, num_harmonics=10) %>% 
+  dplyr::select(temporal_alcd, spatial_alcd, temporal_period, spatial_period) %>%
+  dplyr::mutate(diff = .data$spatial_period - .data$temporal_period)
+```
+
+### MT
+
+```{r, echo=F, message=F}
+c(60, 64, 67) %>% mami.codi(verbose=T, num_harmonics=10) %>% 
+  dplyr::select(temporal_alcd, spatial_alcd, temporal_period, spatial_period) %>%
+  dplyr::mutate(diff = .data$spatial_period - .data$temporal_period)
+```
+
+### P8
+
+```{r, echo=F, message=F}
+c(60, 72) %>% mami.codi(verbose=T, num_harmonics=10) %>% 
+  dplyr::select(temporal_alcd, spatial_alcd, temporal_period, spatial_period) %>%
+  dplyr::mutate(diff = .data$spatial_period - .data$temporal_period)
+```
