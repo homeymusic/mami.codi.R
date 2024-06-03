@@ -11,8 +11,7 @@ precisions   = sort(c(1:9 %o% 10^(-2:-1),
                       mami.codi.R::rational_fraction_precision()))
 
 
-devtools::install_github('git@github.com:homeymusic/mami.codi.R',
-                         ref='upward')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 
 source('./freq_trials.R')
 run_trials(search_label, precisions)
