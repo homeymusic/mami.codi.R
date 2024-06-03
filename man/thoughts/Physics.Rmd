@@ -26,7 +26,39 @@ c(60) %>% mami.codi(verbose=T, num_harmonics=1) %>%
   dplyr::mutate(diff = .data$spatial_frequency - .data$temporal_frequency)
 ```
 
-### P1
+### P1 2 Harmonics
+
+```{r, echo=F, message=F}
+c(60) %>% mami.codi(verbose=T, num_harmonics=2) %>% 
+  dplyr::select(temporal_alcd, spatial_alcd, temporal_frequency, spatial_frequency) %>%
+  dplyr::mutate(diff = .data$spatial_frequency - .data$temporal_frequency)
+```
+
+### P1 3 Harmonics
+
+```{r, echo=F, message=F}
+c(60) %>% mami.codi(verbose=T, num_harmonics=3) %>% 
+  dplyr::select(temporal_alcd, spatial_alcd, temporal_frequency, spatial_frequency) %>%
+  dplyr::mutate(diff = .data$spatial_frequency - .data$temporal_frequency)
+```
+
+### P1 4 Harmonics
+
+```{r, echo=F, message=F}
+c(60) %>% mami.codi(verbose=T, num_harmonics=4) %>% 
+  dplyr::select(temporal_alcd, spatial_alcd, temporal_frequency, spatial_frequency) %>%
+  dplyr::mutate(diff = .data$spatial_frequency - .data$temporal_frequency)
+```
+
+### P1 5 Harmonics
+
+```{r, echo=F, message=F}
+c(60) %>% mami.codi(verbose=T, num_harmonics=5) %>% 
+  dplyr::select(temporal_alcd, spatial_alcd, temporal_frequency, spatial_frequency) %>%
+  dplyr::mutate(diff = .data$spatial_frequency - .data$temporal_frequency)
+```
+
+### P1 10 Harmonics
 
 ```{r, echo=F, message=F}
 c(60) %>% mami.codi(verbose=T, num_harmonics=10) %>% 

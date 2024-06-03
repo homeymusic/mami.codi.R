@@ -1,4 +1,4 @@
-search_label = 'M3'
+search_label = 'Harmonic'
 
 # Detailed
 # from_prec   = 0.01
