@@ -22,54 +22,54 @@ knitr::opts_chunk$set(dev = 'png')
 
 ```{r, echo=F, message=F}
 c(60) %>% mami.codi(verbose=T, num_harmonics=1) %>% 
-  dplyr::select(temporal_alcd, spatial_alcd, temporal_period, spatial_period) %>%
-  dplyr::mutate(diff = .data$spatial_period - .data$temporal_period)
+  dplyr::select(temporal_alcd, spatial_alcd, temporal_frequency, spatial_frequency) %>%
+  dplyr::mutate(diff = .data$spatial_frequency - .data$temporal_frequency)
 ```
 
 ### P1
 
 ```{r, echo=F, message=F}
 c(60) %>% mami.codi(verbose=T, num_harmonics=10) %>% 
-  dplyr::select(temporal_alcd, spatial_alcd, temporal_period, spatial_period) %>%
-  dplyr::mutate(diff = .data$spatial_period - .data$temporal_period)
+  dplyr::select(temporal_alcd, spatial_alcd, temporal_frequency, spatial_frequency) %>%
+  dplyr::mutate(diff = .data$spatial_frequency - .data$temporal_frequency)
 ```
 
 ### m3
 
 ```{r, echo=F, message=F}
 c(60, 63) %>% mami.codi(verbose=T, num_harmonics=10) %>% 
-  dplyr::select(temporal_alcd, spatial_alcd, temporal_period, spatial_period) %>%
-  dplyr::mutate(diff = .data$spatial_period - .data$temporal_period)
+  dplyr::select(temporal_alcd, spatial_alcd, temporal_frequency, spatial_frequency) %>%
+  dplyr::mutate(diff = .data$spatial_frequency - .data$temporal_frequency)
 ```
 
 ### mT
 
 ```{r, echo=F, message=F}
 c(60, 63, 67) %>% mami.codi(verbose=T, num_harmonics=10) %>% 
-  dplyr::select(temporal_alcd, spatial_alcd, temporal_period, spatial_period) %>%
-  dplyr::mutate(diff = .data$spatial_period - .data$temporal_period)
+  dplyr::select(temporal_alcd, spatial_alcd, temporal_frequency, spatial_frequency) %>%
+  dplyr::mutate(diff = .data$spatial_frequency - .data$temporal_frequency)
 ```
 
 ### M3
 
 ```{r, echo=F, message=F}
 c(60, 64) %>% mami.codi(verbose=T, num_harmonics=10) %>% 
-  dplyr::select(temporal_alcd, spatial_alcd, temporal_period, spatial_period) %>%
-  dplyr::mutate(diff = .data$spatial_period - .data$temporal_period)
+  dplyr::select(temporal_alcd, spatial_alcd, temporal_frequency, spatial_frequency) %>%
+  dplyr::mutate(diff = .data$spatial_frequency - .data$temporal_frequency)
 ```
 
 ### MT
 
 ```{r, echo=F, message=F}
 c(60, 64, 67) %>% mami.codi(verbose=T, num_harmonics=10) %>% 
-  dplyr::select(temporal_alcd, spatial_alcd, temporal_period, spatial_period) %>%
-  dplyr::mutate(diff = .data$spatial_period - .data$temporal_period)
+  dplyr::select(temporal_alcd, spatial_alcd, temporal_frequency, spatial_frequency) %>%
+  dplyr::mutate(diff = .data$spatial_frequency - .data$temporal_frequency)
 ```
 
 ### P8
 
 ```{r, echo=F, message=F}
 c(60, 72) %>% mami.codi(verbose=T, num_harmonics=10) %>% 
-  dplyr::select(temporal_alcd, spatial_alcd, temporal_period, spatial_period) %>%
-  dplyr::mutate(diff = .data$spatial_period - .data$temporal_period)
+  dplyr::select(temporal_alcd, spatial_alcd, temporal_frequency, spatial_frequency) %>%
+  dplyr::mutate(diff = .data$spatial_frequency - .data$temporal_frequency)
 ```

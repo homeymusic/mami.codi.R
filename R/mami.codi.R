@@ -129,8 +129,11 @@ compute_consonance = function(x, amplitude, precision, deviation) {
     alcd(f/min(f), precision, deviation, 'temporal'),
     alcd(l/min(l), precision, deviation, 'spatial'),
 
-    temporal_period = .data$temporal_alcd / min(f),
-    spatial_period  = .data$spatial_alcd * (max(l) / c_sound),
+    temporal_frequency    = min(f) / .data$temporal_alcd,
+    spatial_frequency     = 1 / (.data$spatial_alcd * (max(l) / c_sound)),
+
+    temporal_consonance   = .data$temporal_frequency,
+    spatial_consonance    = .data$spatial_frequency,
 
     consonance_dissonance = .data$temporal_consonance + .data$spatial_consonance,
     major_minor           = .data$temporal_consonance - .data$spatial_consonance,
@@ -179,7 +182,6 @@ alcd <- function(x, precision, deviation, label) {
   fractions = approximate_rational_fractions(x, precision, deviation)
   tibble::tibble_row(
     alcd       = lcm_integers(fractions$den),
-    consonance = 1 / .data$alcd,
     fractions  = list(fractions)
   ) %>% dplyr::rename_with(~ paste0(label, '_' , .))
 }
