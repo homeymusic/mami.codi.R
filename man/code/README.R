@@ -32,7 +32,7 @@ grid_Bonang = tidyr::expand_grid(
 
 experiment.rds = '../data/5Partials.rds'
 grid_5 = tidyr::expand_grid(
-  temporal_variance = temporal_variance,
+  temporal_variance = 0.07,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=5,
   octave_ratio=2.0,
@@ -41,7 +41,7 @@ grid_5 = tidyr::expand_grid(
 
 experiment.rds = '../data/5PartialsNo3.rds'
 grid_5PartialsNo3 = tidyr::expand_grid(
-  temporal_variance = temporal_variance,
+  temporal_variance = 0.06,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=5,
   octave_ratio=2.0,
@@ -104,7 +104,7 @@ grid_P8 = tidyr::expand_grid(
 
 experiment.rds = '../data/P8Zoomed.rds'
 grid_P8_zoomed = tidyr::expand_grid(
-  temporal_variance = default_variance()/32,
+  temporal_variance = 5e-05,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
   octave_ratio=2.0,

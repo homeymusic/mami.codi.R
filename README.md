@@ -193,7 +193,7 @@ lower than the M3 peak.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
-| 0.07958           | 0.07958          |             0.2 |
+| 0.07              | 0.09047          |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-5.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-6.png)<!-- -->
@@ -208,7 +208,7 @@ the 3rd partial.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
-| 0.07958           | 0.07958          |             0.2 |
+| 0.06              | 0.10554          |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-7.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-8.png)<!-- -->
@@ -295,7 +295,7 @@ peaks mostly agree with the theoretical peaks.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
-| 0.00249           | 2.54648          |           0.035 |
+| 5e-05             | 126.65148        |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-4-21.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-22.png)<!-- -->
