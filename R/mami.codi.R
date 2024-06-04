@@ -6,7 +6,8 @@
 #' @param x Chord to analyse specified in MIDI, coerced to
 #' hrep::sparse_fr_spectrum
 #' @param amplitude An optional minimum amplitude for deciding which partials to include.
-#' @param variance An optional variance value for finding rational fractions.
+#' @param temporal_variance An optional temporal variance value for finding rational fractions.
+#' @param spatial_variance  An optional spatial variance value for finding rational fractions.
 #' @param deviation An optional deviation value for approximating least common multiples.
 #' @param metadata User-provided list of metadata that round trips with each call.
 #' helpful for analysis and plots
@@ -22,15 +23,20 @@
 mami.codi <- function(
     x,
     amplitude = MINIMUM_AMPLITUDE,
-    variance = RATIONAL_FRACTION_PRECISION,
+    temporal_variance = DEFAULT_VARIANCE,
+    spatial_variance = DEFAULT_VARIANCE,
     deviation = APPROXIMATE_LCM_DEVIATION,
     metadata  = NA,
     verbose   = FALSE,
     ...
 ) {
 
-  parse_input(x, ...)                                   %>%
-    compute_consonance(amplitude, variance, deviation) %>%
+  parse_input(x, ...)                      %>%
+    compute_consonance(
+      amplitude,
+      temporal_variance, spatial_variance,
+      deviation
+    )                                      %>%
     format_output(metadata, verbose)
 
 }
@@ -118,7 +124,9 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 #' https://www.engineeringtoolbox.com/sound-speed-water-d_598.html
 #' https://www.engineeringtoolbox.com/air-speed-sound-d_603.html
 #' https://en.wikipedia.org/wiki/Floating-point_arithmetic
-compute_consonance = function(x, amplitude, variance, deviation) {
+compute_consonance = function(x, amplitude,
+                              temporal_variance, spatial_variance,
+                              deviation) {
 
   f       = x$spectrum[[1]] %>% dplyr::filter(.data$y>amplitude) %>% hrep::freq()
   c_sound = max(f) / max(1/f)
@@ -126,8 +134,8 @@ compute_consonance = function(x, amplitude, variance, deviation) {
 
   x %>% dplyr::mutate(
 
-    alcd(f/min(f), variance, deviation, 'temporal'),
-    alcd(l/min(l), variance, deviation, 'spatial'),
+    alcd(f/min(f), temporal_variance, deviation, 'temporal'),
+    alcd(l/min(l), spatial_variance,  deviation, 'spatial'),
 
     temporal_consonance   = 50 - log2(.data$temporal_alcd),
     spatial_consonance    = 50 - log2(.data$spatial_alcd),
@@ -141,7 +149,8 @@ compute_consonance = function(x, amplitude, variance, deviation) {
     wavelengths           = list(l),
     speed_of_sound        = c_sound,
     amplitude,
-    variance,
+    temporal_variance,
+    spatial_variance,
     deviation
 
   )
@@ -242,10 +251,10 @@ format_output <- function(x, metadata, verbose) {
 #' compact groups. Trans. Amer. Math. Soc., 308(1):105- 114, 1988
 #'
 #'
-#' @rdname rational_fraction_variance
+#' @rdname default_variance
 #' @export
-rational_fraction_variance <- function() { RATIONAL_FRACTION_PRECISION }
-RATIONAL_FRACTION_PRECISION = 1 / (4 * pi)
+default_variance <- function() { DEFAULT_VARIANCE }
+DEFAULT_VARIANCE = 1 / (4 * pi)
 
 #' Default Approximate Least Common Multiple Deviation
 #'

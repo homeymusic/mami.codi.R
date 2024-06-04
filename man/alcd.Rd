@@ -4,7 +4,7 @@
 \alias{alcd}
 \title{Approximate Least Common Denominator}
 \usage{
-alcd(x, variance, deviation)
+alcd(x, variance, deviation, label)
 }
 \arguments{
 \item{x}{Vector of rational numbers}
@@ -12,17 +12,21 @@ alcd(x, variance, deviation)
 \item{variance}{Precision for creating rational fractions}
 
 \item{deviation}{Deviation for approximating least common multiples}
+
+\item{label}{A custom label for the output usually 'spatial' or 'temporal'}
 }
 \value{
 The approximate least common denominator of the rational numbers
 }
 \description{
+See the articles below for previous work on approximate GCD / LCM
+}
+\details{
 "Pitch extraction from corrupted harmonics of the power spectrum"
 II. APPROXIMATE GCD ALGORITHM
 APPENDIX B: APPROXIMATE GCD ALGORITHM
 Sreenivas and Rao (1978)
-}
-\details{
+
 "An Efficient Technique for Modeling and Synthesis of Automotive Engine Sounds"
 IV. EXTRACTION OF DETERMINISTIC COMPONENTS USING AN SDFT
 Amman and Das (2001)

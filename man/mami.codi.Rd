@@ -7,7 +7,8 @@
 mami.codi(
   x,
   amplitude = MINIMUM_AMPLITUDE,
-  variance = RATIONAL_FRACTION_PRECISION,
+  temporal_variance = DEFAULT_VARIANCE,
+  spatial_variance = DEFAULT_VARIANCE,
   deviation = APPROXIMATE_LCM_DEVIATION,
   metadata = NA,
   verbose = FALSE,
@@ -20,22 +21,24 @@ hrep::sparse_fr_spectrum}
 
 \item{amplitude}{An optional minimum amplitude for deciding which partials to include.}
 
-\item{variance}{An optional variance value for finding rational fractions.}
+\item{temporal_variance}{An optional temporal variance value for finding rational fractions.}
+
+\item{spatial_variance}{An optional spatial variance value for finding rational fractions.}
 
 \item{deviation}{An optional deviation value for approximating least common multiples.}
 
-\item{metadata}{User-provided list of metadata that roundtrips with each call.
+\item{metadata}{User-provided list of metadata that round trips with each call.
 helpful for analysis and plots}
 
 \item{verbose}{Determines the amount of data to return from chord evaluation
-TRUE is all and FALSE is just major-minor, consonance-dissonance, variance and metadata.}
+TRUE is all and FALSE is just major-minor, consonance-dissonance and metadata.}
 
 \item{...}{parameters for hrep::sparse_fr_spectrum}
 }
 \value{
-Major-Minor and Consonance-Dissonance plus additional information
-if verbose=TRUE
+Major-Minor, Consonance-Dissonance and metadata plus additional
+information if verbose=TRUE
 }
 \description{
-Provides an auditory model of music perception
+A spatiotemporal periodicity model of consonance perception.
 }
