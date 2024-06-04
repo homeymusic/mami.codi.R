@@ -1,17 +1,18 @@
-search_label = 'P8'
+search_label = 'Pure'
 
 devtools::install_github('git@github.com:homeymusic/mami.codi.R',
                          ref='heisenberg')
 
 # Detailed
-# from_prec   = 0.01
-# to_prec     = 0.03
-# by_prec     = 0.001
-# variances = seq(from=from_prec, to=to_prec, by=by_prec)
+from_prec   = 0.02
+to_prec     = 0.04
+by_prec     = 0.001
+variances = sort(c(seq(from=from_prec, to=to_prec, by=by_prec),
+              mami.codi.R::default_variance()/2))
 
 # Orders of Magnitude
-variances   = sort(c(1:9 %o% 10^(-5:1),
-                      mami.codi.R::default_variance()))
+# variances   = sort(c(1:9 %o% 10^(-2:-1),
+#                       mami.codi.R::default_variance()))
 
 
 source('./freq_trials.R')

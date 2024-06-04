@@ -87,7 +87,6 @@ run_trials <- function(search_label, variances) {
     mami.codi.R::mami.codi(
       chord,
       temporal_variance  = variance,
-      spatial_variance   = (1/(16*pi^2)) / variance,
       metadata       = list(
         octave_ratio   = octave_ratio,
         num_harmonics  = num_harmonics,

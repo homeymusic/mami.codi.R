@@ -6,7 +6,7 @@ always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'P8'
+search_label = 'Pure'
 ```
 
 # `r search_label`
@@ -82,12 +82,17 @@ theory <- theory
 experiment <- experiment
 ```
 
-Precisions:
+Temporal Variances:
 ```{r, echo=F}
 tols = theory$temporal_variance %>% unique
 tols
 ```
 
+Spatial Variances:
+```{r, echo=F}
+tols = theory$spatial_variance %>% unique
+tols
+```
 Number of Harmonics:
 ```{r, echo=F}
 theory$num_harmonics %>% unique
