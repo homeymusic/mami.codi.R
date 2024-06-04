@@ -125,8 +125,11 @@ compute_consonance = function(x, amplitude, precision, deviation) {
   l       = c_sound / f
   L2_norm  = cbind(f, l) %>% norm('2')
 
-  f_ratios = f / L2_norm
-  l_ratios = l / L2_norm
+  f_normalized = f / L2_norm
+  l_normalized = l / L2_norm
+
+  f_ratios = f_normalized / min(f_normalized)
+  l_ratios = l_normalized / min(l_normalized)
 
   x %>% dplyr::mutate(
 
