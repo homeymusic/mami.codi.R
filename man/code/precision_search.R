@@ -1,4 +1,7 @@
-search_label = 'Bonang'
+search_label = 'P8'
+
+devtools::install_github('git@github.com:homeymusic/mami.codi.R',
+                         ref='heisenberg')
 
 # Detailed
 # from_prec   = 0.01
@@ -7,11 +10,9 @@ search_label = 'Bonang'
 # variances = seq(from=from_prec, to=to_prec, by=by_prec)
 
 # Orders of Magnitude
-variances   = sort(c(1:9 %o% 10^(-2:-1),
-                      mami.codi.R::rational_fraction_variance()))
+variances   = sort(c(1:9 %o% 10^(-5:1),
+                      mami.codi.R::default_variance()))
 
-
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 
 source('./freq_trials.R')
 run_trials(search_label, variances)

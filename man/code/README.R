@@ -1,5 +1,6 @@
 source('./utils.R')
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R',
+                         ref='heisenberg')
 
 library(mami.codi.R)
 devtools::load_all(".")
@@ -9,11 +10,14 @@ tonic_midi = 60
 output.rds = '../data/readme.rds'
 prepare(output.rds)
 
-variance = mami.codi.R::rational_fraction_variance()
+temporal_variance = mami.codi.R::default_variance()
+spatial_variance  = temporal_variance
+heisenberg = (1/(16*pi^2))
 
 experiment.rds = '../data/Pure.rds'
 grid_1 = tidyr::expand_grid(
-  variance = variance / 2,
+  temporal_variance = temporal_variance / 2,
+  spatial_variance  = heisenberg / (temporal_variance / 2),
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=1,
   octave_ratio=2.0,
@@ -22,7 +26,8 @@ grid_1 = tidyr::expand_grid(
 
 experiment.rds = '../data/Bonang.rds'
 grid_Bonang = tidyr::expand_grid(
-  variance = variance,
+  temporal_variance = temporal_variance / 2,
+  spatial_variance  = heisenberg / (temporal_variance / 2),
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=4,
   octave_ratio=2,
@@ -31,7 +36,8 @@ grid_Bonang = tidyr::expand_grid(
 
 experiment.rds = '../data/5Partials.rds'
 grid_5 = tidyr::expand_grid(
-  variance = variance,
+  temporal_variance = temporal_variance,
+  spatial_variance = spatial_variance,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=5,
   octave_ratio=2.0,
@@ -40,7 +46,8 @@ grid_5 = tidyr::expand_grid(
 
 experiment.rds = '../data/5PartialsNo3.rds'
 grid_5PartialsNo3 = tidyr::expand_grid(
-  variance = variance,
+  temporal_variance = temporal_variance,
+  spatial_variance = spatial_variance,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=5,
   octave_ratio=2.0,
@@ -49,7 +56,8 @@ grid_5PartialsNo3 = tidyr::expand_grid(
 
 experiment.rds = '../data/Harmonic.rds'
 grid_10 = tidyr::expand_grid(
-  variance = variance,
+  temporal_variance = temporal_variance,
+  spatial_variance = spatial_variance,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
   octave_ratio=2.0,
@@ -58,7 +66,8 @@ grid_10 = tidyr::expand_grid(
 
 experiment.rds = '../data/Stretched.rds'
 grid_10_stretched = tidyr::expand_grid(
-  variance = variance,
+  temporal_variance = temporal_variance,
+  spatial_variance = spatial_variance,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics = 10,
   octave_ratio = 2.1,
@@ -67,7 +76,8 @@ grid_10_stretched = tidyr::expand_grid(
 
 experiment.rds = '../data/Compressed.rds'
 grid_10_compressed = tidyr::expand_grid(
-  variance = variance,
+  temporal_variance = temporal_variance,
+  spatial_variance = spatial_variance,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
   octave_ratio=1.9,
@@ -76,7 +86,8 @@ grid_10_compressed = tidyr::expand_grid(
 
 experiment.rds = '../data/M3.rds'
 grid_M3 = tidyr::expand_grid(
-  variance = variance,
+  temporal_variance = temporal_variance,
+  spatial_variance = spatial_variance,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
   octave_ratio=2.0,
@@ -85,7 +96,8 @@ grid_M3 = tidyr::expand_grid(
 
 experiment.rds = '../data/M6.rds'
 grid_M6 = tidyr::expand_grid(
-  variance = variance,
+  temporal_variance = temporal_variance,
+  spatial_variance = spatial_variance,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
   octave_ratio=2.0,
@@ -94,7 +106,8 @@ grid_M6 = tidyr::expand_grid(
 
 experiment.rds = '../data/P8.rds'
 grid_P8 = tidyr::expand_grid(
-  variance = variance,
+  temporal_variance = temporal_variance,
+  spatial_variance = spatial_variance,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
   octave_ratio=2.0,
@@ -103,7 +116,8 @@ grid_P8 = tidyr::expand_grid(
 
 experiment.rds = '../data/P8Zoomed.rds'
 grid_P8_zoomed = tidyr::expand_grid(
-  variance = 5e-05,
+  temporal_variance = default_variance()/32,
+  spatial_variance  = heisenberg / (temporal_variance / 32),
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
   octave_ratio=2.0,
@@ -120,7 +134,9 @@ grid = dplyr::bind_rows(grid_1,
 
 plan(multisession, workers=parallelly::availableCores())
 
-output = grid %>% furrr::future_pmap_dfr(\(interval,
+output = grid %>% furrr::future_pmap_dfr(\(temporal_variance,
+                                           spatial_variance,
+                                           interval,
                                            num_harmonics,
                                            octave_ratio,
                                            timbre) {
@@ -162,6 +178,8 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
   }
 
   mami.codi.R::mami.codi(study_chord,
+                         temporal_variance,
+                         spatial_variance,
                          metadata = list(
                            num_harmonics = num_harmonics,
                            octave_ratio  = octave_ratio,

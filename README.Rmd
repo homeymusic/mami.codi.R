@@ -283,8 +283,9 @@ p = params %>% purrr::map(\(p) {
   cat("  \n#####", title, '\n')
   cat(description)
   print(knitr::kable(tibble::tibble_row(
-    variance       = paste(round(chords$variance %>% unique, 5), collapse = ' '),
-    smoothing_sigma = sigma
+    temporal_variance = paste(round(chords$temporal_variance %>% unique, 5), collapse = ' '),
+    spatial_variance  = paste(round(chords$spatial_variance %>% unique, 5), collapse = ' '),
+    smoothing_sigma   = sigma
   )))
   print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),
                            goal=experiment,sigma=sigma,include_points=T,
@@ -356,7 +357,8 @@ p = params %>% purrr::map(\(p) {
   sigma = BEHAVIOURAL_SMOOTH_BROAD
   cat("  \n#####", title, '\n')
   print(knitr::kable(tibble::tibble_row(
-    variance       = paste(round(chords$variance %>% unique, 5), collapse = ' '),
+    temporal_variance = paste(round(chords$temporal_variance %>% unique, 5), collapse = ' '),
+    spatial_variance  = paste(round(chords$spatial_variance %>% unique, 5), collapse = ' '),
     min_amplitude       = paste(round(chords$amplitude %>% unique, 5), collapse = ' '),
     smoothing_sigma = sigma
   )))
@@ -373,8 +375,6 @@ p = params %>% purrr::map(\(p) {
 })
 ```
 
-
-### TODO: run the in-depth variance searches again for M3, M6 and P8
 
 #### ```{r, child=c('man/M3_M6_P8.Rmd')}
 #### ```

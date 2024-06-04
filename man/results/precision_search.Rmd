@@ -6,7 +6,7 @@ always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'Bonang'
+search_label = 'P8'
 ```
 
 # `r search_label`
@@ -74,7 +74,7 @@ theory <- theory %>% dplyr::rowwise() %>% dplyr::mutate(
   octave_ratio   = metadata$octave_ratio,
   semitone       = metadata$semitone,
   .before=1
-) %>% dplyr::group_by(variance)
+) %>% dplyr::group_by(temporal_variance)
 ```
 
 ```{r, echo=F, results='asis', message=F}
@@ -84,7 +84,7 @@ experiment <- experiment
 
 Precisions:
 ```{r, echo=F}
-tols = theory$variance %>% unique
+tols = theory$temporal_variance %>% unique
 tols
 ```
 
