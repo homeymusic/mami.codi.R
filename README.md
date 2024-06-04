@@ -157,13 +157,12 @@ Jacoby.
 
 ##### Pure ~ Partials: 1
 
-\[1\] “Pure” For pure tones, the behavioral results and the theoretical
-predictions mostly agree. Only P5 and P8 have pronounced two-sided
-peaks. The behavioral results show subtle variations in consonance
-height across the 15 semitones but the overall peak structure agrees
-with MaMi.CoDi predictions. For futher comparison, the theoretical
-predictions for major-minor versus the behavioral results are included
-in a plot below.
+For pure tones, the behavioral results and the theoretical predictions
+mostly agree. Only P5 and P8 have pronounced two-sided peaks. The
+behavioral results show subtle variations in consonance height across
+the 15 semitones but the overall peak structure agrees with MaMi.CoDi
+predictions. For futher comparison, the theoretical predictions for
+major-minor versus the behavioral results are included in a plot below.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
@@ -174,8 +173,7 @@ in a plot below.
 
 ##### Harmonic ~ Partials: 10
 
-\[1\] “Harmonic” For 10 harmonics, behavioral results and theoretical
-predictions agree.
+For 10 harmonics, behavioral results and theoretical predictions agree.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
@@ -186,10 +184,10 @@ predictions agree.
 
 ##### 5Partials ~ Partials: 5
 
-\[1\] “5Partials” For 5 harmonics, behavioral results and theoretical
-predictions agree. For comparison with the study below (5 partils with
-the third partial deleted), notice that the m3 peak is only slightly
-lower than the M3 peak.
+For 5 harmonics, behavioral results and theoretical predictions agree.
+For comparison with the study below (5 partils with the third partial
+deleted), notice that the m3 peak is only slightly lower than the M3
+peak.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
@@ -200,11 +198,10 @@ lower than the M3 peak.
 
 ##### 5PartialsNo3 ~ Partials: 5
 
-\[1\] “5PartialsNo3” For 5 harmonics with the 3rd partial deleted,
-behavioral results and theoretical predictions mostly agree. As
-expected, the m3 peak without the third partial is now lower than the m3
-peak with all 5 harmonics while the M3 peak is slightly higher without
-the 3rd partial.
+For 5 harmonics with the 3rd partial deleted, behavioral results and
+theoretical predictions mostly agree. As expected, the m3 peak without
+the third partial is now lower than the m3 peak with all 5 harmonics
+while the M3 peak is slightly higher without the 3rd partial.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
@@ -215,11 +212,11 @@ the 3rd partial.
 
 ##### Bonang ~ Partials: 4
 
-\[1\] “Bonang” For gamalan dyads with a harmonic bass pitch and bonang
-upper pitch, behavioral results and theoretical predictions mostly
-agree. MaMi.CoDi predicts a dissonance trough with minor polarity at P4
-that is not in the behavioral results. MaMi.CoDi predicts P5 to have
-minor polarity and be relatively higher than the behavioral results.
+For gamalan dyads with a harmonic bass pitch and bonang upper pitch,
+behavioral results and theoretical predictions mostly agree. MaMi.CoDi
+predicts a dissonance trough with minor polarity at P4 that is not in
+the behavioral results. MaMi.CoDi predicts P5 to have minor polarity and
+be relatively higher than the behavioral results.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
@@ -230,10 +227,9 @@ minor polarity and be relatively higher than the behavioral results.
 
 ##### Stretched ~ Partials: 10
 
-\[1\] “Stretched” For stretched harmonics, behavioral results and
-theoretical predictions mostly agree. MaMi.Codi predicts peaks with
-minor polarity just above m3 and m7 that do not exist in the behavioral
-results.
+For stretched harmonics, behavioral results and theoretical predictions
+mostly agree. MaMi.Codi predicts peaks with minor polarity just above m3
+and m7 that do not exist in the behavioral results.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
@@ -244,8 +240,8 @@ results.
 
 ##### Compressed ~ Partials: 10
 
-\[1\] “Compressed” For compressed harmonics, the pronounced behavioral
-peaks mostly agree with the theoretical peaks.
+For compressed harmonics, the pronounced behavioral peaks mostly agree
+with the theoretical peaks.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
@@ -258,7 +254,7 @@ peaks mostly agree with the theoretical peaks.
 
 ##### M3 ~ Partials: 10
 
-\[1\] “M3” Description is below.
+Description is below.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
@@ -269,7 +265,7 @@ peaks mostly agree with the theoretical peaks.
 
 ##### M6 ~ Partials: 10
 
-\[1\] “M6” Description is below.
+Description is below.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
@@ -280,7 +276,7 @@ peaks mostly agree with the theoretical peaks.
 
 ##### P8 ~ Partials: 10
 
-\[1\] “P8” Description is below.
+Description is below.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
@@ -291,7 +287,7 @@ peaks mostly agree with the theoretical peaks.
 
 ##### P8Zoomed ~ Partials: 10
 
-\[1\] “P8Zoomed” Description is below.
+Description is below.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
@@ -304,8 +300,6 @@ peaks mostly agree with the theoretical peaks.
 
 ##### Harmonic ~ Roll Off: 12
 
-NULL
-
 | temporal_variance | spatial_variance | min_amplitude | smoothing_sigma |
 |:------------------|:-----------------|:--------------|----------------:|
 | 0.07958           | 0.07958          | 0.013         |             0.2 |
@@ -315,8 +309,6 @@ NULL
 
 ##### Harmonic ~ Roll Off: 7
 
-NULL
-
 | temporal_variance | spatial_variance | min_amplitude | smoothing_sigma |
 |:------------------|:-----------------|:--------------|----------------:|
 | 0.07958           | 0.07958          | 0.08          |             0.2 |
@@ -325,8 +317,6 @@ NULL
 ![](man/figures/README-unnamed-chunk-8-4.png)<!-- -->
 
 ##### Harmonic ~ Roll Off: 2
-
-NULL
 
 | temporal_variance | spatial_variance | min_amplitude | smoothing_sigma |
 |:------------------|:-----------------|:--------------|----------------:|

@@ -254,6 +254,7 @@ p = params %>% purrr::map(\(p) {
   
   chords <- dyads %>% dplyr::filter(timbre == p$t)
   chords$consonance_dissonance_z = z_scores(chords$consonance_dissonance)
+  chords$major_minor_z = z_scores(chords$major_minor)
   chords$spatial_consonance_z = z_scores(chords$spatial_consonance)
   chords$temporal_consonance_z = z_scores(chords$temporal_consonance)
   
@@ -281,7 +282,6 @@ p = params %>% purrr::map(\(p) {
     cat('  \n#### Dyads spanning 1 quarter tone\n')
   }
   cat("  \n#####", title, '\n')
-  print(p$t)
   cat(description)
   print(knitr::kable(tibble::tibble_row(
     temporal_variance = paste(round(chords$temporal_variance %>% unique, 5), collapse = ' '),
@@ -297,6 +297,7 @@ p = params %>% purrr::map(\(p) {
                                        goal=NULL,sigma=sigma,include_points=T,
                                        black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")
+
 })
 ```
 
@@ -356,7 +357,6 @@ p = params %>% purrr::map(\(p) {
   )
   sigma = BEHAVIOURAL_SMOOTH_BROAD
   cat("  \n#####", title, '\n')
-  print(p$t)
   print(knitr::kable(tibble::tibble_row(
     temporal_variance = paste(round(chords$temporal_variance %>% unique, 5), collapse = ' '),
     spatial_variance  = paste(round(chords$spatial_variance %>% unique, 5), collapse = ' '),
