@@ -1,4 +1,4 @@
-search_label = 'P8'
+search_label = 'M3'
 
 # Detailed
 # from_prec   = 0.01

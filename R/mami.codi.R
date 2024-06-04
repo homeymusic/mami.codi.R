@@ -129,15 +129,14 @@ compute_consonance = function(x, amplitude, precision, deviation) {
     alcd(f/min(f), precision, deviation, 'temporal'),
     alcd(l/min(l), precision, deviation, 'spatial'),
 
-    temporal_consonance   = log2(1+1/.data$temporal_alcd)/2,
-    spatial_consonance    = log2(1+1/.data$spatial_alcd)/2,
+    temporal_consonance   = 50 - log2(.data$temporal_alcd),
+    spatial_consonance    = 50 - log2(.data$spatial_alcd),
 
     consonance_dissonance = .data$temporal_consonance + .data$spatial_consonance,
     major_minor           = .data$temporal_consonance - .data$spatial_consonance,
 
     f0_from_temporal      = min(f) / .data$temporal_alcd,
     f0_from_spatial       = 1 / (.data$spatial_alcd * (max(l) / c_sound)),
-
     frequencies           = list(f),
     wavelengths           = list(l),
     speed_of_sound        = c_sound,
