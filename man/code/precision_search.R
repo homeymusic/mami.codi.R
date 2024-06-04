@@ -1,4 +1,4 @@
-search_label = 'Harmonic'
+search_label = 'P8'
 
 devtools::install_github('git@github.com:homeymusic/mami.codi.R',
                          ref='L2_norm')
