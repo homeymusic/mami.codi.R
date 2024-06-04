@@ -1,4 +1,7 @@
-search_label = 'P8'
+search_label = 'Harmonic'
+
+devtools::install_github('git@github.com:homeymusic/mami.codi.R',
+                         ref='L2_norm')
 
 # Detailed
 # from_prec   = 0.01
@@ -7,11 +10,9 @@ search_label = 'P8'
 # precisions = seq(from=from_prec, to=to_prec, by=by_prec)
 
 # Orders of Magnitude
-precisions   = sort(c(1:9 %o% 10^(-4:-1),
+precisions   = sort(c(1:9 %o% 10^(-2:-1),
                       mami.codi.R::rational_fraction_precision()))
 
-
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 
 source('./freq_trials.R')
 run_trials(search_label, precisions)
