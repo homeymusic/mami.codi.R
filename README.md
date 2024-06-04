@@ -118,10 +118,10 @@ physiological origins, we searched a two-dimensional variance space in
 order to match model predictions with the large-scale behavioral
 results. It turned out that the values that best matched large-scale
 behavioral results were always the same for temporal and spatial
-variance. This might indicate that the physiological limitations are
-not specific to place signals or time signals separetely. But instead
-the limitation is higher in the auditory system after the signals have
-been passed along.  
+variance. This might indicate that the physiological limitations are not
+specific to place signals or time signals separetely. But instead the
+limitation is higher in the auditory system after the signals have been
+passed along.  
 
 That is to say, the limits that creates differences between temporal and
 spatial signals might not be frequency selectivity or phase locking but
@@ -129,10 +129,10 @@ instead a limit of higher-level perception or pattern recognition, where
 estimates of the period of a complex signal is made from components.  
 
 MaMi.CoDi uses the Stern-Brocot tree to find rational fractions for the
-ratios within a given variance. How do we find the best variance
-values? For the MaMi.CoDi model we ran thousands of computations with
-various variance values and compared the predictions with results from
-six of the large-scale behavioral experiments.  
+ratios within a given variance. How do we find the best variance values?
+For the MaMi.CoDi model we ran thousands of computations with various
+variance values and compared the predictions with results from six of
+the large-scale behavioral experiments.  
 
 Because the spatial signal and the temporal signal have different
 origins we initially did a two-dimensional variance search. However the
@@ -164,9 +164,9 @@ the 15 semitones but the overall peak structure agrees with MaMi.CoDi
 predictions. For futher comparison, the theoretical predictions for
 major-minor versus the behavioral results are included in a plot below.
 
-| variance | smoothing_sigma |
-|:----------|----------------:|
-| 0.07958   |             0.2 |
+| smoothing_sigma |
+|----------------:|
+|             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-2.png)<!-- -->
@@ -175,9 +175,9 @@ major-minor versus the behavioral results are included in a plot below.
 
 For 10 harmonics, behavioral results and theoretical predictions agree.
 
-| variance | smoothing_sigma |
-|:----------|----------------:|
-| 0.07958   |             0.2 |
+| smoothing_sigma |
+|----------------:|
+|             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-3.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-4.png)<!-- -->
@@ -189,9 +189,9 @@ For comparison with the study below (5 partils with the third partial
 deleted), notice that the m3 peak is only slightly lower than the M3
 peak.
 
-| variance | smoothing_sigma |
-|:----------|----------------:|
-| 0.07958   |             0.2 |
+| smoothing_sigma |
+|----------------:|
+|             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-5.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-6.png)<!-- -->
@@ -203,9 +203,9 @@ theoretical predictions mostly agree. As expected, the m3 peak without
 the third partial is now lower than the m3 peak with all 5 harmonics
 while the M3 peak is slightly higher without the 3rd partial.
 
-| variance | smoothing_sigma |
-|:----------|----------------:|
-| 0.07958   |             0.2 |
+| smoothing_sigma |
+|----------------:|
+|             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-7.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-8.png)<!-- -->
@@ -218,9 +218,9 @@ predicts a dissonance trough with minor polarity at P4 that is not in
 the behavioral results. MaMi.CoDi predicts P5 to have minor polarity and
 be relatively higher than the behavioral results.
 
-| variance | smoothing_sigma |
-|:----------|----------------:|
-| 0.07958   |             0.2 |
+| smoothing_sigma |
+|----------------:|
+|             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-9.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-10.png)<!-- -->
@@ -231,9 +231,9 @@ For stretched harmonics, behavioral results and theoretical predictions
 mostly agree. MaMi.Codi predicts peaks with minor polarity just above m3
 and m7 that do not exist in the behavioral results.
 
-| variance | smoothing_sigma |
-|:----------|----------------:|
-| 0.07958   |             0.2 |
+| smoothing_sigma |
+|----------------:|
+|             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-11.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-12.png)<!-- -->
@@ -243,9 +243,9 @@ and m7 that do not exist in the behavioral results.
 For compressed harmonics, the pronounced behavioral peaks mostly agree
 with the theoretical peaks.
 
-| variance | smoothing_sigma |
-|:----------|----------------:|
-| 0.07958   |             0.2 |
+| smoothing_sigma |
+|----------------:|
+|             0.2 |
 
 ![](man/figures/README-unnamed-chunk-4-13.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-14.png)<!-- -->
@@ -256,9 +256,9 @@ with the theoretical peaks.
 
 Description is below.
 
-| variance | smoothing_sigma |
-|:----------|----------------:|
-| 0.07958   |           0.035 |
+| smoothing_sigma |
+|----------------:|
+|           0.035 |
 
 ![](man/figures/README-unnamed-chunk-4-15.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-16.png)<!-- -->
@@ -267,9 +267,9 @@ Description is below.
 
 Description is below.
 
-| variance | smoothing_sigma |
-|:----------|----------------:|
-| 0.07958   |           0.035 |
+| smoothing_sigma |
+|----------------:|
+|           0.035 |
 
 ![](man/figures/README-unnamed-chunk-4-17.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-18.png)<!-- -->
@@ -278,9 +278,9 @@ Description is below.
 
 Description is below.
 
-| variance | smoothing_sigma |
-|:----------|----------------:|
-| 0.07958   |           0.035 |
+| smoothing_sigma |
+|----------------:|
+|           0.035 |
 
 ![](man/figures/README-unnamed-chunk-4-19.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-20.png)<!-- -->
@@ -289,9 +289,9 @@ Description is below.
 
 Description is below.
 
-| variance | smoothing_sigma |
-|:----------|----------------:|
-| 0.07958   |           0.035 |
+| smoothing_sigma |
+|----------------:|
+|           0.035 |
 
 ![](man/figures/README-unnamed-chunk-4-21.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-4-22.png)<!-- -->
@@ -300,32 +300,30 @@ Description is below.
 
 ##### Harmonic ~ Roll Off: 12
 
-| variance | min_amplitude | smoothing_sigma |
-|:----------|:--------------|----------------:|
-| 0.07958   | 0.013         |             0.2 |
+| min_amplitude | smoothing_sigma |
+|:--------------|----------------:|
+| 0.013         |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-8-1.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-8-2.png)<!-- -->
 
 ##### Harmonic ~ Roll Off: 7
 
-| variance | min_amplitude | smoothing_sigma |
-|:----------|:--------------|----------------:|
-| 0.07958   | 0.08          |             0.2 |
+| min_amplitude | smoothing_sigma |
+|:--------------|----------------:|
+| 0.08          |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-8-3.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-8-4.png)<!-- -->
 
 ##### Harmonic ~ Roll Off: 2
 
-| variance | min_amplitude | smoothing_sigma |
-|:----------|:--------------|----------------:|
-| 0.07958   | 0             |             0.2 |
+| min_amplitude | smoothing_sigma |
+|:--------------|----------------:|
+| 0             |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-8-5.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-8-6.png)<!-- -->
-
-### TODO: run the in-depth variance searches again for M3, M6 and P8
 
 #### `{r, child=c('man/M3_M6_P8.Rmd')} ####`
 
