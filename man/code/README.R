@@ -14,7 +14,7 @@ temporal_variance = mami.codi.R::default_variance()
 
 experiment.rds = '../data/Pure.rds'
 grid_1 = tidyr::expand_grid(
-  temporal_variance = 1/30,
+  temporal_variance = 0.2,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=1,
   octave_ratio=2.0,
@@ -122,7 +122,6 @@ grid = dplyr::bind_rows(grid_1,
 plan(multisession, workers=parallelly::availableCores())
 
 output = grid %>% furrr::future_pmap_dfr(\(temporal_variance,
-                                           spatial_variance,
                                            interval,
                                            num_harmonics,
                                            octave_ratio,
@@ -165,7 +164,7 @@ output = grid %>% furrr::future_pmap_dfr(\(temporal_variance,
   }
 
   mami.codi.R::mami.codi(study_chord,
-                         temporal_variance,
+                         temporal_variance=temporal_variance,
                          metadata = list(
                            num_harmonics = num_harmonics,
                            octave_ratio  = octave_ratio,

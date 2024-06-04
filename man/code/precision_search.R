@@ -4,11 +4,11 @@ devtools::install_github('git@github.com:homeymusic/mami.codi.R',
                          ref='heisenberg')
 
 # Detailed
-from_prec   = 0.02
-to_prec     = 0.04
-by_prec     = 0.001
+from_prec   = 0.1
+to_prec     = 0.3
+by_prec     = 0.01
 variances = sort(c(seq(from=from_prec, to=to_prec, by=by_prec),
-              mami.codi.R::default_variance()/2))
+              mami.codi.R::default_variance()*2))
 
 # Orders of Magnitude
 # variances   = sort(c(1:9 %o% 10^(-2:-1),
