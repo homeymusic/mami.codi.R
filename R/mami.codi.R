@@ -22,19 +22,22 @@
 #' @export
 mami.codi <- function(
     x,
-    amplitude = MINIMUM_AMPLITUDE,
-    temporal_variance = DEFAULT_VARIANCE,
-    spatial_variance = DEFAULT_VARIANCE,
-    deviation = APPROXIMATE_LCM_DEVIATION,
-    metadata  = NA,
-    verbose   = FALSE,
+    amplitude         = MINIMUM_AMPLITUDE,
+    temporal_variance = NA,
+    spatial_variance  = NA,
+    deviation         = APPROXIMATE_LCM_DEVIATION,
+    metadata          = NA,
+    verbose            = FALSE,
     ...
 ) {
 
   parse_input(x, ...)                      %>%
+    parse_variances(
+      temporal_variance,
+      spatial_variance
+    )                                      %>%
     compute_consonance(
       amplitude,
-      temporal_variance, spatial_variance,
       deviation
     )                                      %>%
     format_output(metadata, verbose)
@@ -70,7 +73,25 @@ parse_input.default <- function(x, ...) {
 parse_input.sparse_fr_spectrum <- function(x, ...) {
 
   tibble::tibble_row(
-    spectrum    = list(x)
+    spectrum = list(x)
+  )
+
+}
+
+parse_variances <- function(x, temporal_variance, spatial_variance) {
+
+  if (is.na(temporal_variance) && is.na(spatial_variance)) {
+    temporal_variance = sqrt(HEISENBERG)
+    spatial_variance  = sqrt(HEISENBERG)
+  } else if (is.na(spatial_variance)) {
+    spatial_variance  = HEISENBERG / temporal_variance
+  } else if (is.na(temporal_variance)) {
+    temporal_variance = HEISENBERG / spatial_variance
+  }
+
+  x %>% dplyr::mutate(
+    temporal_variance,
+    spatial_variance
   )
 
 }
@@ -125,7 +146,6 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 #' https://www.engineeringtoolbox.com/air-speed-sound-d_603.html
 #' https://en.wikipedia.org/wiki/Floating-point_arithmetic
 compute_consonance = function(x, amplitude,
-                              temporal_variance, spatial_variance,
                               deviation) {
 
   f       = x$spectrum[[1]] %>% dplyr::filter(.data$y>amplitude) %>% hrep::freq()
@@ -254,7 +274,8 @@ format_output <- function(x, metadata, verbose) {
 #' @rdname default_variance
 #' @export
 default_variance <- function() { DEFAULT_VARIANCE }
-DEFAULT_VARIANCE = 1 / (4 * pi)
+HEISENBERG = 1 / (16 * pi ^2)
+DEFAULT_VARIANCE = sqrt(HEISENBERG)
 
 #' Default Approximate Least Common Multiple Deviation
 #'
