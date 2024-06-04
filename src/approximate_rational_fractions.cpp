@@ -5,20 +5,20 @@ using namespace Rcpp;
 
 //' stern_brocot
 //'
-//' Approximates a floating-point number to arbitrary precision.
+//' Approximates a floating-point number to arbitrary variance.
 //'
 //' @param x Number to convert to rational fraction
-//' @param precision Binary search stops once the desired precision is reached
+//' @param variance Binary search stops once the desired variance is reached
 //'
 //' @return A ratio of num / den
 //'
 //' @export
 // [[Rcpp::export]]
-NumericVector stern_brocot(const double x, const double precision) {
+NumericVector stern_brocot(const double x, const double variance) {
   double approximation;
 
-  const double valid_min = x - precision;
-  const double valid_max = x + precision;
+  const double valid_min = x - variance;
+  const double valid_max = x + variance;
 
   int left_num    = floor(x);
   int left_den    = 1;
@@ -164,10 +164,10 @@ const double pseudo_octave(NumericVector approximate_harmonics) {
 
 //' approximate_rational_fractions
 //'
-//' Approximates floating-point numbers to arbitrary precision.
+//' Approximates floating-point numbers to arbitrary variance.
 //'
 //' @param x Vector of floating point numbers to approximate
-//' @param precision Precision for finding rational fractions
+//' @param variance Precision for finding rational fractions
 //' @param deviation Deviation for estimating least common multiples
 //'
 //' @return A data frame of rational numbers and metadata
@@ -175,7 +175,7 @@ const double pseudo_octave(NumericVector approximate_harmonics) {
 //' @export
 // [[Rcpp::export]]
 DataFrame approximate_rational_fractions(NumericVector x,
-                                         const double precision,
+                                         const double variance,
                                          const double deviation) {
 
   const int     n = x.size();
@@ -189,7 +189,7 @@ DataFrame approximate_rational_fractions(NumericVector x,
 
   for (int i = 0; i < n; ++i) {
     pseudo_x[i]                  = pow(2.0, log(x[i]) / log(pseudo_octave_double));
-    const NumericVector fraction = stern_brocot(pseudo_x[i], precision);
+    const NumericVector fraction = stern_brocot(pseudo_x[i], variance);
     nums[i]                      = fraction[0];
     dens[i]                      = fraction[1];
     approximations[i]            = nums[i] / dens[i];
@@ -202,6 +202,6 @@ DataFrame approximate_rational_fractions(NumericVector x,
     _("num")                    = nums,
     _("den")                    = dens,
     _("approximation")          = approximations,
-    _("precision")              = precision
+    _("variance")              = variance
   );
 }

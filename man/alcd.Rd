@@ -4,12 +4,12 @@
 \alias{alcd}
 \title{Approximate Least Common Denominator}
 \usage{
-alcd(x, precision, deviation)
+alcd(x, variance, deviation)
 }
 \arguments{
 \item{x}{Vector of rational numbers}
 
-\item{precision}{Precision for creating rational fractions}
+\item{variance}{Precision for creating rational fractions}
 
 \item{deviation}{Deviation for approximating least common multiples}
 }

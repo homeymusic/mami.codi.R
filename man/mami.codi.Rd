@@ -7,7 +7,7 @@
 mami.codi(
   x,
   amplitude = MINIMUM_AMPLITUDE,
-  precision = RATIONAL_FRACTION_PRECISION,
+  variance = RATIONAL_FRACTION_PRECISION,
   deviation = APPROXIMATE_LCM_DEVIATION,
   metadata = NA,
   verbose = FALSE,
@@ -20,7 +20,7 @@ hrep::sparse_fr_spectrum}
 
 \item{amplitude}{An optional minimum amplitude for deciding which partials to include.}
 
-\item{precision}{An optional precision value for finding rational fractions.}
+\item{variance}{An optional variance value for finding rational fractions.}
 
 \item{deviation}{An optional deviation value for approximating least common multiples.}
 
@@ -28,7 +28,7 @@ hrep::sparse_fr_spectrum}
 helpful for analysis and plots}
 
 \item{verbose}{Determines the amount of data to return from chord evaluation
-TRUE is all and FALSE is just major-minor, consonance-dissonance, precision and metadata.}
+TRUE is all and FALSE is just major-minor, consonance-dissonance, variance and metadata.}
 
 \item{...}{parameters for hrep::sparse_fr_spectrum}
 }

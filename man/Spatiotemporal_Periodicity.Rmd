@@ -16,7 +16,7 @@ num_harmonics = 3
 ### Estimating Spatiotemporal Periodicity
 
 To estimate the periodicity of a chord, the MaMi.CoDi model uses a signal 
-processing technique. It finds fractions, within a given precision, 
+processing technique. It finds fractions, within a given variance, 
 for every tone in the chord (fundamental, harmonics, noise, etc.) relative to 
 a reference tone. The least common denominator of those fractions is a measure of the 
 cycle length, relative to the reference tone. Long relative cycles are predicted 
@@ -83,7 +83,7 @@ knitr::kable(chord %>% dplyr::select('consonance_dissonance', 'major_minor', 'te
 #### Temporal Periodicity
 ```{r, echo=F, results='asis', message=F}
 knitr::kable(tibble::tibble(
-  tol      = chord$precision,
+  tol      = chord$variance,
   lcd      = chord$temporal_alcd,
   chord_Sz = log2(lcd),
   min_f_Hz = min(chord$frequencies[[1]]),
@@ -122,7 +122,7 @@ knitr::kable(chord$temporal_fractions[[1]] %>%
 #### Spatial Periodicity
 ```{r, echo=F, results='asis', message=F}
 knitr::kable(tibble::tibble(
-  tol      = chord$precision,
+  tol      = chord$variance,
   lcd      = chord$spatial_alcd,
   chord_Sz = log2(lcd),
   max_l_m  = max(chord$wavelengths[[1]]),

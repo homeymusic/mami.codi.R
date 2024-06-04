@@ -36,7 +36,7 @@ readings.” -Gabor
 
 For MaMi.CoDi:  
 
-Wavelength ratio precision x Frequency ratio precision = Number of the
+Wavelength ratio variance x Frequency ratio variance = Number of the
 order one  
 
 One observation happens in a “characteristic rectangle” in the

@@ -3,16 +3,16 @@
 
 #' stern_brocot
 #'
-#' Approximates a floating-point number to arbitrary precision.
+#' Approximates a floating-point number to arbitrary variance.
 #'
 #' @param x Number to convert to rational fraction
-#' @param precision Binary search stops once the desired precision is reached
+#' @param variance Binary search stops once the desired variance is reached
 #'
 #' @return A ratio of num / den
 #'
 #' @export
-stern_brocot <- function(x, precision) {
-    .Call(`_mami_codi_R_stern_brocot`, x, precision)
+stern_brocot <- function(x, variance) {
+    .Call(`_mami_codi_R_stern_brocot`, x, variance)
 }
 
 #' compute_pseudo_octave
@@ -59,16 +59,16 @@ pseudo_octave <- function(approximate_harmonics) {
 
 #' approximate_rational_fractions
 #'
-#' Approximates floating-point numbers to arbitrary precision.
+#' Approximates floating-point numbers to arbitrary variance.
 #'
 #' @param x Vector of floating point numbers to approximate
-#' @param precision Precision for finding rational fractions
+#' @param variance Precision for finding rational fractions
 #' @param deviation Deviation for estimating least common multiples
 #'
 #' @return A data frame of rational numbers and metadata
 #'
 #' @export
-approximate_rational_fractions <- function(x, precision, deviation) {
-    .Call(`_mami_codi_R_approximate_rational_fractions`, x, precision, deviation)
+approximate_rational_fractions <- function(x, variance, deviation) {
+    .Call(`_mami_codi_R_approximate_rational_fractions`, x, variance, deviation)
 }
 

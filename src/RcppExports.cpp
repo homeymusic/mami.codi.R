@@ -11,14 +11,14 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // stern_brocot
-NumericVector stern_brocot(const double x, const double precision);
-RcppExport SEXP _mami_codi_R_stern_brocot(SEXP xSEXP, SEXP precisionSEXP) {
+NumericVector stern_brocot(const double x, const double variance);
+RcppExport SEXP _mami_codi_R_stern_brocot(SEXP xSEXP, SEXP varianceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const double >::type x(xSEXP);
-    Rcpp::traits::input_parameter< const double >::type precision(precisionSEXP);
-    rcpp_result_gen = Rcpp::wrap(stern_brocot(x, precision));
+    Rcpp::traits::input_parameter< const double >::type variance(varianceSEXP);
+    rcpp_result_gen = Rcpp::wrap(stern_brocot(x, variance));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -59,15 +59,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // approximate_rational_fractions
-DataFrame approximate_rational_fractions(NumericVector x, const double precision, const double deviation);
-RcppExport SEXP _mami_codi_R_approximate_rational_fractions(SEXP xSEXP, SEXP precisionSEXP, SEXP deviationSEXP) {
+DataFrame approximate_rational_fractions(NumericVector x, const double variance, const double deviation);
+RcppExport SEXP _mami_codi_R_approximate_rational_fractions(SEXP xSEXP, SEXP varianceSEXP, SEXP deviationSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< const double >::type precision(precisionSEXP);
+    Rcpp::traits::input_parameter< const double >::type variance(varianceSEXP);
     Rcpp::traits::input_parameter< const double >::type deviation(deviationSEXP);
-    rcpp_result_gen = Rcpp::wrap(approximate_rational_fractions(x, precision, deviation));
+    rcpp_result_gen = Rcpp::wrap(approximate_rational_fractions(x, variance, deviation));
     return rcpp_result_gen;
 END_RCPP
 }

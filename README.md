@@ -48,7 +48,7 @@ wavelengths (m). We will come back to temporal observations shortly.
 When we combine all the component parts of a chord together into a
 whole, we can estimate the overall wavelength for the whole chord. A
 technique used in digital signal processing and bricklaying is to
-estimate ratios (within an acceptable precision) between each of the
+estimate ratios (within an acceptable variance) between each of the
 parts and a selected reference part. The greatest common divisor (LCD)
 of those part ratios will be a measure of the periodicity of the
 whole.  
@@ -86,7 +86,7 @@ major triad with 5 harmonics, below.
 
 #### `{r, child=c('man/Spatiotemporal_Periodicity.Rmd')} ####`
 
-### Finding the precision Values
+### Finding the variance Values
 
 “One difficulty with distinguishing between place and temporal (or
 place-time) models of pitch is that spectral and temporal
@@ -108,17 +108,17 @@ from “Revisiting place and temporal theories of pitch”, Andrew J.
 Oxenham, 2014.  
 
 The MaMi.CoDi model, based on Stolzenburg (2015), has one one parameter:
-precision. precision is used by the Stern-Brocot algorithm to find tone
+variance. variance is used by the Stern-Brocot algorithm to find tone
 ratios as rational fractions that are then used to estimate the relative
-periodicity of chords. precision acts as the physiological limits
+periodicity of chords. variance acts as the physiological limits
 mentioned by Oxenham, above.  
 
 Considering that the spatial and temporal signals had two different
-physiological origins, we searched a two-dimensional precision space in
+physiological origins, we searched a two-dimensional variance space in
 order to match model predictions with the large-scale behavioral
 results. It turned out that the values that best matched large-scale
 behavioral results were always the same for temporal and spatial
-precision. This might indicate that the physiological limitations are
+variance. This might indicate that the physiological limitations are
 not specific to place signals or time signals separetely. But instead
 the limitation is higher in the auditory system after the signals have
 been passed along.  
@@ -129,14 +129,14 @@ instead a limit of higher-level perception or pattern recognition, where
 estimates of the period of a complex signal is made from components.  
 
 MaMi.CoDi uses the Stern-Brocot tree to find rational fractions for the
-ratios within a given precision. How do we find the best precision
+ratios within a given variance. How do we find the best variance
 values? For the MaMi.CoDi model we ran thousands of computations with
-various precision values and compared the predictions with results from
+various variance values and compared the predictions with results from
 six of the large-scale behavioral experiments.  
 
 Because the spatial signal and the temporal signal have different
-origins we initially did a two-dimensional precision search. However the
-closest fits to the behavioral data came from spatial and precision
+origins we initially did a two-dimensional variance search. However the
+closest fits to the behavioral data came from spatial and variance
 values being the same. Insofar as this model represents processing in
 the auditory cortex, it would seem that estimating the cyclicity of the
 two signals happens higher up in the auditoray system after the spatial
@@ -164,7 +164,7 @@ the 15 semitones but the overall peak structure agrees with MaMi.CoDi
 predictions. For futher comparison, the theoretical predictions for
 major-minor versus the behavioral results are included in a plot below.
 
-| precision | smoothing_sigma |
+| variance | smoothing_sigma |
 |:----------|----------------:|
 | 0.07958   |             0.2 |
 
@@ -175,7 +175,7 @@ major-minor versus the behavioral results are included in a plot below.
 
 For 10 harmonics, behavioral results and theoretical predictions agree.
 
-| precision | smoothing_sigma |
+| variance | smoothing_sigma |
 |:----------|----------------:|
 | 0.07958   |             0.2 |
 
@@ -189,7 +189,7 @@ For comparison with the study below (5 partils with the third partial
 deleted), notice that the m3 peak is only slightly lower than the M3
 peak.
 
-| precision | smoothing_sigma |
+| variance | smoothing_sigma |
 |:----------|----------------:|
 | 0.07958   |             0.2 |
 
@@ -203,7 +203,7 @@ theoretical predictions mostly agree. As expected, the m3 peak without
 the third partial is now lower than the m3 peak with all 5 harmonics
 while the M3 peak is slightly higher without the 3rd partial.
 
-| precision | smoothing_sigma |
+| variance | smoothing_sigma |
 |:----------|----------------:|
 | 0.07958   |             0.2 |
 
@@ -218,7 +218,7 @@ predicts a dissonance trough with minor polarity at P4 that is not in
 the behavioral results. MaMi.CoDi predicts P5 to have minor polarity and
 be relatively higher than the behavioral results.
 
-| precision | smoothing_sigma |
+| variance | smoothing_sigma |
 |:----------|----------------:|
 | 0.07958   |             0.2 |
 
@@ -231,7 +231,7 @@ For stretched harmonics, behavioral results and theoretical predictions
 mostly agree. MaMi.Codi predicts peaks with minor polarity just above m3
 and m7 that do not exist in the behavioral results.
 
-| precision | smoothing_sigma |
+| variance | smoothing_sigma |
 |:----------|----------------:|
 | 0.07958   |             0.2 |
 
@@ -243,7 +243,7 @@ and m7 that do not exist in the behavioral results.
 For compressed harmonics, the pronounced behavioral peaks mostly agree
 with the theoretical peaks.
 
-| precision | smoothing_sigma |
+| variance | smoothing_sigma |
 |:----------|----------------:|
 | 0.07958   |             0.2 |
 
@@ -256,7 +256,7 @@ with the theoretical peaks.
 
 Description is below.
 
-| precision | smoothing_sigma |
+| variance | smoothing_sigma |
 |:----------|----------------:|
 | 0.07958   |           0.035 |
 
@@ -267,7 +267,7 @@ Description is below.
 
 Description is below.
 
-| precision | smoothing_sigma |
+| variance | smoothing_sigma |
 |:----------|----------------:|
 | 0.07958   |           0.035 |
 
@@ -278,7 +278,7 @@ Description is below.
 
 Description is below.
 
-| precision | smoothing_sigma |
+| variance | smoothing_sigma |
 |:----------|----------------:|
 | 0.07958   |           0.035 |
 
@@ -289,7 +289,7 @@ Description is below.
 
 Description is below.
 
-| precision | smoothing_sigma |
+| variance | smoothing_sigma |
 |:----------|----------------:|
 | 0.07958   |           0.035 |
 
@@ -300,7 +300,7 @@ Description is below.
 
 ##### Harmonic ~ Roll Off: 12
 
-| precision | min_amplitude | smoothing_sigma |
+| variance | min_amplitude | smoothing_sigma |
 |:----------|:--------------|----------------:|
 | 0.07958   | 0.013         |             0.2 |
 
@@ -309,7 +309,7 @@ Description is below.
 
 ##### Harmonic ~ Roll Off: 7
 
-| precision | min_amplitude | smoothing_sigma |
+| variance | min_amplitude | smoothing_sigma |
 |:----------|:--------------|----------------:|
 | 0.07958   | 0.08          |             0.2 |
 
@@ -318,14 +318,14 @@ Description is below.
 
 ##### Harmonic ~ Roll Off: 2
 
-| precision | min_amplitude | smoothing_sigma |
+| variance | min_amplitude | smoothing_sigma |
 |:----------|:--------------|----------------:|
 | 0.07958   | 0             |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-8-5.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-8-6.png)<!-- -->
 
-### TODO: run the in-depth precision searches again for M3, M6 and P8
+### TODO: run the in-depth variance searches again for M3, M6 and P8
 
 #### `{r, child=c('man/M3_M6_P8.Rmd')} ####`
 

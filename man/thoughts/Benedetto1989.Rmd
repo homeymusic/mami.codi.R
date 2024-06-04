@@ -21,11 +21,11 @@ For MaMi.CoDi:
 
 ```{r, echo=F, message=F}
 L2_f = 1
-precision = L2_f / (4 * pi)
-precision
+variance = L2_f / (4 * pi)
+variance
 ```
 
 It feel right now like equation 5.1.4 is the place to start.\
 
-c is precision ranging from 0 to 1?\
+c is variance ranging from 0 to 1?\
 

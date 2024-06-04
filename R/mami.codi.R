@@ -6,7 +6,7 @@
 #' @param x Chord to analyse specified in MIDI, coerced to
 #' hrep::sparse_fr_spectrum
 #' @param amplitude An optional minimum amplitude for deciding which partials to include.
-#' @param precision An optional precision value for finding rational fractions.
+#' @param variance An optional variance value for finding rational fractions.
 #' @param deviation An optional deviation value for approximating least common multiples.
 #' @param metadata User-provided list of metadata that round trips with each call.
 #' helpful for analysis and plots
@@ -22,7 +22,7 @@
 mami.codi <- function(
     x,
     amplitude = MINIMUM_AMPLITUDE,
-    precision = RATIONAL_FRACTION_PRECISION,
+    variance = RATIONAL_FRACTION_PRECISION,
     deviation = APPROXIMATE_LCM_DEVIATION,
     metadata  = NA,
     verbose   = FALSE,
@@ -30,7 +30,7 @@ mami.codi <- function(
 ) {
 
   parse_input(x, ...)                                   %>%
-    compute_consonance(amplitude, precision, deviation) %>%
+    compute_consonance(amplitude, variance, deviation) %>%
     format_output(metadata, verbose)
 
 }
@@ -88,7 +88,7 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 #' 6,222.540 Hz. In room temperature air, the wavelength would 0.551 meters.
 #'
 #' When we find rational fractions based on those two sets of values in the
-#' Stern-Brocot tree, we would have to be thoughtful about the precision value.
+#' Stern-Brocot tree, we would have to be thoughtful about the variance value.
 #'
 #' To workaround being thoughtful about the Stern-Brocot tree, we pick a speed of
 #' sound that is computationally friendly:
@@ -108,7 +108,7 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 #' An emergent benefit of this approach is that from a quick scan of the numbers
 #' we can see that the two vectors are not identical.
 #'
-#' Even with a very high precision conversion between wavelengths and frequencies,
+#' Even with a very high variance conversion between wavelengths and frequencies,
 #' the two periodicity estimates for the same set of waves will be different.
 #' This is our first glimpse at the Heisenberg-Gabor uncertainty principle.
 #'
@@ -118,7 +118,7 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 #' https://www.engineeringtoolbox.com/sound-speed-water-d_598.html
 #' https://www.engineeringtoolbox.com/air-speed-sound-d_603.html
 #' https://en.wikipedia.org/wiki/Floating-point_arithmetic
-compute_consonance = function(x, amplitude, precision, deviation) {
+compute_consonance = function(x, amplitude, variance, deviation) {
 
   f       = x$spectrum[[1]] %>% dplyr::filter(.data$y>amplitude) %>% hrep::freq()
   c_sound = max(f) / max(1/f)
@@ -126,8 +126,8 @@ compute_consonance = function(x, amplitude, precision, deviation) {
 
   x %>% dplyr::mutate(
 
-    alcd(f/min(f), precision, deviation, 'temporal'),
-    alcd(l/min(l), precision, deviation, 'spatial'),
+    alcd(f/min(f), variance, deviation, 'temporal'),
+    alcd(l/min(l), variance, deviation, 'spatial'),
 
     temporal_consonance   = 50 - log2(.data$temporal_alcd),
     spatial_consonance    = 50 - log2(.data$spatial_alcd),
@@ -141,7 +141,7 @@ compute_consonance = function(x, amplitude, precision, deviation) {
     wavelengths           = list(l),
     speed_of_sound        = c_sound,
     amplitude,
-    precision,
+    variance,
     deviation
 
   )
@@ -169,7 +169,7 @@ compute_consonance = function(x, amplitude, precision, deviation) {
 #'
 #'
 #' @param x Vector of rational numbers
-#' @param precision Precision for creating rational fractions
+#' @param variance Precision for creating rational fractions
 #' @param deviation Deviation for approximating least common multiples
 #' @param label A custom label for the output usually 'spatial' or 'temporal'
 #'
@@ -177,8 +177,8 @@ compute_consonance = function(x, amplitude, precision, deviation) {
 #'
 #' @rdname alcd
 #' @export
-alcd <- function(x, precision, deviation, label) {
-  fractions = approximate_rational_fractions(x, precision, deviation)
+alcd <- function(x, variance, deviation, label) {
+  fractions = approximate_rational_fractions(x, variance, deviation)
   tibble::tibble_row(
     alcd       = lcm_integers(fractions$den),
     fractions  = list(fractions)
@@ -205,7 +205,7 @@ format_output <- function(x, metadata, verbose) {
 
 #' Default Rational Fraction Precision
 #'
-#' Default precision for converting floating point numbers to rational fractions
+#' Default variance for converting floating point numbers to rational fractions
 #'
 #' See Heisenberg's uncertainty paper, translated into English by John Archibald
 #' Wheeler and Hubert Zurek, in Quantum Theory and Measurement, Wheeler and Zurek,
@@ -242,9 +242,9 @@ format_output <- function(x, metadata, verbose) {
 #' compact groups. Trans. Amer. Math. Soc., 308(1):105- 114, 1988
 #'
 #'
-#' @rdname rational_fraction_precision
+#' @rdname rational_fraction_variance
 #' @export
-rational_fraction_precision <- function() { RATIONAL_FRACTION_PRECISION }
+rational_fraction_variance <- function() { RATIONAL_FRACTION_PRECISION }
 RATIONAL_FRACTION_PRECISION = 1 / (4 * pi)
 
 #' Default Approximate Least Common Multiple Deviation

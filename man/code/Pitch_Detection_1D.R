@@ -1,6 +1,6 @@
 source('./man/code/utils.R')
 
-precision       = mami.codi.R::default_precision()
+variance       = mami.codi.R::default_variance()
 num_harmonics   = 10
 octave_ratio    = 1.9
 amount_of_noise = 0
@@ -19,7 +19,7 @@ chord_spectrum = do.call(
   list(lo, hi)
 )
 chord = chord_spectrum %>% mami.codi(
-  precision  = precision,
+  variance  = variance,
   verbose = T
 )
 
@@ -37,7 +37,7 @@ noisy_chord_spectrum = do.call(
 )
 
 noisy_chord = noisy_chord_spectrum %>% mami.codi(
-  precision  = precision,
+  variance  = variance,
   verbose = T)
 
 pause_frequency = function(spectrum, pause_index) {
@@ -57,7 +57,7 @@ mami.codi_results = grid %>% purrr::pmap_dfr(\(
       pause_index
     ) %>%
     mami.codi.R::mami.codi(
-      precision = precision,
+      variance = variance,
       metadata  = list(
         paused_index = pause_index
       ),

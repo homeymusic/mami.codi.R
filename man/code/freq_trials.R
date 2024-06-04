@@ -1,4 +1,4 @@
-run_trials <- function(search_label, precisions) {
+run_trials <- function(search_label, variances) {
   devtools::load_all(".")
   tonic_midi = 60
   source('./utils.R')
@@ -24,7 +24,7 @@ run_trials <- function(search_label, precisions) {
   print(paste('num_harmonics:',num_harmonics))
   print(paste('roll_off:',roll_off))
 
-  rds = paste0('../data/precision_',
+  rds = paste0('../data/variance_',
                search_label,
                '.rds')
   prepare(rds)
@@ -38,7 +38,7 @@ run_trials <- function(search_label, precisions) {
 
   grid = tidyr::expand_grid(
     interval,
-    precision = precisions
+    variance = variances
   )
 
   print(grid)
@@ -47,7 +47,7 @@ run_trials <- function(search_label, precisions) {
 
   data = grid %>% furrr::future_pmap_dfr(\(
     interval,
-    precision
+    variance
   ) {
 
     if (search_label=='Bonang') {
@@ -86,7 +86,7 @@ run_trials <- function(search_label, precisions) {
     }
     mami.codi.R::mami.codi(
       chord,
-      precision  = precision,
+      variance  = variance,
       metadata       = list(
         octave_ratio   = octave_ratio,
         num_harmonics  = num_harmonics,

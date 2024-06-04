@@ -94,7 +94,7 @@ theory$roll_off_dB %>% unique
 
 Precisions:
 ```{r, echo=F}
-theory$precision %>% unique
+theory$variance %>% unique
 ```
 
 

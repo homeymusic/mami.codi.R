@@ -4,16 +4,16 @@
 \alias{stern_brocot}
 \title{stern_brocot}
 \usage{
-stern_brocot(x, precision)
+stern_brocot(x, variance)
 }
 \arguments{
 \item{x}{Number to convert to rational fraction}
 
-\item{precision}{Binary search stops once the desired precision is reached}
+\item{variance}{Binary search stops once the desired variance is reached}
 }
 \value{
 A ratio of num / den
 }
 \description{
-Approximates a floating-point number to arbitrary precision.
+Approximates a floating-point number to arbitrary variance.
 }
