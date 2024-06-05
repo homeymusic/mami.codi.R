@@ -52,10 +52,98 @@ P8 = grid_P8 %>% purrr::pmap_dfr(\(temporal_variance,
 }, .progress=TRUE)
 ```
 ```{r, echo=F, message=F}
-P8$spatial_fractions
+dens = (P8 %>% tidyr::unnest(spatial_fractions) %>% dplyr::select(den))[[1]]
+breaks=seq(min(dens)-0.5, max(dens)+0.5, by=1) 
 ```
 
+```{r, echo=F, message=F}
+hist(dens, breaks=breaks)
+```
 
 ## M6
+
+```{r, echo=F, message=F}
+experiment.rds = './man/data/M6.rds'
+grid_M6 = tidyr::expand_grid(
+  temporal_variance = temporal_variance,
+  interval = readRDS(experiment.rds)$profile$interval,
+  num_harmonics=10,
+  octave_ratio=2.0,
+  timbre = 'M6'
+)
+M6 = grid_M6 %>% purrr::pmap_dfr(\(temporal_variance,
+                              interval,
+                              num_harmonics,
+                              octave_ratio,
+                              timbre) {
+  
+  study_chord = c(tonic_midi, interval + tonic_midi) %>% hrep::sparse_fr_spectrum(
+    num_harmonics = num_harmonics,
+    octave_ratio  = octave_ratio,
+    roll_off_dB   = 3.0
+  )
+  mami.codi.R::mami.codi(study_chord,
+                         temporal_variance=temporal_variance,
+                         metadata = list(
+                           num_harmonics = num_harmonics,
+                           octave_ratio  = octave_ratio,
+                           semitone      = interval,
+                           timbre        = timbre
+                         ),
+                         verbose=TRUE)
+  
+}, .progress=TRUE)
+```
+
+```{r, echo=F, message=F}
+dens = (M6 %>% tidyr::unnest(spatial_fractions) %>% dplyr::select(den))[[1]]
+u = dens %>% unique()
+breaks=seq(min(dens)-0.5, max(dens)+0.5, by=1) 
+```
+
+```{r, echo=F, message=F}
+hist(dens, breaks = breaks)
+```
+
 ## M3
 
+```{r, echo=F, message=F}
+experiment.rds = './man/data/M3.rds'
+grid_M3 = tidyr::expand_grid(
+  temporal_variance = temporal_variance,
+  interval = readRDS(experiment.rds)$profile$interval,
+  num_harmonics=10,
+  octave_ratio=2.0,
+  timbre = 'M3'
+)
+M3 = grid_M3 %>% purrr::pmap_dfr(\(temporal_variance,
+                              interval,
+                              num_harmonics,
+                              octave_ratio,
+                              timbre) {
+  
+  study_chord = c(tonic_midi, interval + tonic_midi) %>% hrep::sparse_fr_spectrum(
+    num_harmonics = num_harmonics,
+    octave_ratio  = octave_ratio,
+    roll_off_dB   = 3.0
+  )
+  mami.codi.R::mami.codi(study_chord,
+                         temporal_variance=temporal_variance,
+                         metadata = list(
+                           num_harmonics = num_harmonics,
+                           octave_ratio  = octave_ratio,
+                           semitone      = interval,
+                           timbre        = timbre
+                         ),
+                         verbose=TRUE)
+  
+}, .progress=TRUE)
+```
+```{r, echo=F, message=F}
+dens = (M3 %>% tidyr::unnest(spatial_fractions) %>% dplyr::select(den))[[1]]
+u = dens %>% unique()
+breaks=seq(min(dens)-0.5, max(dens)+0.5, by=1) 
+```
+```{r, echo=F, message=F}
+hist(dens, breaks=breaks)
+```
