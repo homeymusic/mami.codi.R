@@ -20,7 +20,8 @@ knitr::opts_chunk$set(dev = 'png')
 
 Find a wave
 ```{r, echo=F, message=F}
-x = 3 / 2
+x = 
+  +/ 2
 v = 1 / (4 * pi)
 start = x - v
 stop  = x + v
