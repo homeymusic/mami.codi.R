@@ -183,6 +183,7 @@ DataFrame approximate_rational_fractions(NumericVector x,
   NumericVector dens(n);
   NumericVector pseudo_x(n);
   NumericVector approximations(n);
+  NumericVector errors(n);
 
   const DataFrame approximate_harmonics_df = approximate_harmonics(x, deviation);
   const double pseudo_octave_double = pseudo_octave(approximate_harmonics_df["pseudo_octave"]);
@@ -193,6 +194,7 @@ DataFrame approximate_rational_fractions(NumericVector x,
     nums[i]                      = fraction[0];
     dens[i]                      = fraction[1];
     approximations[i]            = nums[i] / dens[i];
+    errors[i]                    = approximations[i] - pseudo_x[i];
   }
 
   return DataFrame::create(
@@ -202,6 +204,7 @@ DataFrame approximate_rational_fractions(NumericVector x,
     _("num")                    = nums,
     _("den")                    = dens,
     _("approximation")          = approximations,
-    _("variance")              = variance
+    _("error")                  = errors,
+    _("variance")               = variance
   );
 }

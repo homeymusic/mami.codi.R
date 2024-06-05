@@ -15,14 +15,60 @@ knitr::opts_chunk$set(
 )
 knitr::opts_chunk$set(dev = 'png')
 ```
+```{r, echo=F, message=F}
+temporal_variance = default_variance() / (2*pi)
+```
 
-## f0 and l0
+
+```{r, echo=F, message=F}
+mami_codi_harmonics <- function(h) mami.codi(c(60), verbose=T, num_harmonics = h,
+                                             temporal_variance = temporal_variance)
+P1 = 1:20  %>% purrr::map_dfr(mami_codi_harmonics)
+```
+
+## Tight Temporal, Loose Spatial
+
+Temporal variance: `r P1$temporal_variance %>% unique()`\
+Spatial  variance: `r P1$spatial_variance %>% unique()`
 
 ### P1
 
 ```{r, echo=F, message=F}
-mami_codi_harmonics <- function(h) mami.codi(c(60), verbose=T, num_harmonics = h)
+P1 %>% dplyr::select(f0,l0)
+```
+
+### P4
+
+```{r, echo=F, message=F}
+mami_codi_harmonics <- function(h) mami.codi(c(60,65), verbose=T, num_harmonics = h,
+                                             temporal_variance = temporal_variance)
 1:20  %>% purrr::map_dfr(mami_codi_harmonics) %>% 
+  dplyr::select(f0,l0)
+```
+
+### P5
+
+```{r, echo=F, message=F}
+mami_codi_harmonics <- function(h) mami.codi(c(60,67), verbose=T, num_harmonics = h,
+                                             temporal_variance = temporal_variance)
+1:20  %>% purrr::map_dfr(mami_codi_harmonics) %>% 
+  dplyr::select(f0,l0)
+```
+
+```{r, echo=F, message=F}
+mami_codi_harmonics <- function(h) mami.codi(c(60), verbose=T, num_harmonics = h)
+P1 = 1:20  %>% purrr::map_dfr(mami_codi_harmonics)
+```
+
+## Even Steven
+
+Temporal variance: `r P1$temporal_variance %>% unique()`\
+Spatial  variance: `r P1$spatial_variance %>% unique()`
+
+### P1
+
+```{r, echo=F, message=F}
+P1 %>% 
   dplyr::select(f0,l0)
 ```
 

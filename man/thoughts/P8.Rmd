@@ -1,0 +1,61 @@
+---
+title: "P8"
+output:
+  github_document: default
+always_allow_html: true
+---
+```{r, echo=F, message=F, include=F}
+devtools::load_all(".")
+source('./man/code/plot.R')
+source('./man/code/utils.R')
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "../figures/f0-l0-"
+)
+knitr::opts_chunk$set(dev = 'png')
+tonic_midi = 60
+temporal_variance = mami.codi.R::default_variance()
+```
+
+## P8
+```{r, echo=F, message=F}
+experiment.rds = './man/data/P8.rds'
+grid_P8 = tidyr::expand_grid(
+  temporal_variance = temporal_variance,
+  interval = readRDS(experiment.rds)$profile$interval,
+  num_harmonics=10,
+  octave_ratio=2.0,
+  timbre = 'P8'
+)
+P8 = grid_P8 %>% purrr::pmap_dfr(\(temporal_variance,
+                              interval,
+                              num_harmonics,
+                              octave_ratio,
+                              timbre) {
+  
+  study_chord = c(tonic_midi, interval + tonic_midi) %>% hrep::sparse_fr_spectrum(
+    num_harmonics = num_harmonics,
+    octave_ratio  = octave_ratio,
+    roll_off_dB   = 3.0
+  )
+  mami.codi.R::mami.codi(study_chord,
+                         temporal_variance=temporal_variance,
+                         metadata = list(
+                           num_harmonics = num_harmonics,
+                           octave_ratio  = octave_ratio,
+                           semitone      = interval,
+                           timbre        = timbre
+                         ),
+                         verbose=TRUE)
+  
+}, .progress=TRUE)
+```
+```{r, echo=F, message=F}
+P8$spatial_fractions
+```
+
+
+## M6
+## M3
+
