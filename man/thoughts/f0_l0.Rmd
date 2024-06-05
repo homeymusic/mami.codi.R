@@ -1,0 +1,43 @@
+---
+title: "f0 and l0"
+output:
+  github_document: default
+always_allow_html: true
+---
+```{r, echo=F, message=F, include=F}
+devtools::load_all(".")
+source('./man/code/plot.R')
+source('./man/code/utils.R')
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "../figures/f0-l0-"
+)
+knitr::opts_chunk$set(dev = 'png')
+```
+
+## f0 and l0
+
+### P1
+
+```{r, echo=F, message=F}
+mami_codi_harmonics <- function(h) mami.codi(c(60), verbose=T, num_harmonics = h)
+1:20  %>% purrr::map_dfr(mami_codi_harmonics) %>% 
+  dplyr::select(f0,l0)
+```
+
+### P4
+
+```{r, echo=F, message=F}
+mami_codi_harmonics <- function(h) mami.codi(c(60,65), verbose=T, num_harmonics = h)
+1:20  %>% purrr::map_dfr(mami_codi_harmonics) %>% 
+  dplyr::select(f0,l0)
+```
+
+### P5
+
+```{r, echo=F, message=F}
+mami_codi_harmonics <- function(h) mami.codi(c(60,67), verbose=T, num_harmonics = h)
+1:20  %>% purrr::map_dfr(mami_codi_harmonics) %>% 
+  dplyr::select(f0,l0)
+```

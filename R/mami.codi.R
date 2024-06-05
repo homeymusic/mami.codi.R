@@ -163,15 +163,15 @@ compute_consonance = function(x, amplitude,
     consonance_dissonance = .data$temporal_consonance + .data$spatial_consonance,
     major_minor           = .data$temporal_consonance - .data$spatial_consonance,
 
-    f0_from_temporal      = min(f) / .data$temporal_alcd,
-    l0_from_spatial       = min(l) / .data$spatial_alcd,
     frequencies           = list(f),
     wavelengths           = list(l),
     speed_of_sound        = c_sound,
     amplitude,
     temporal_variance,
     spatial_variance,
-    deviation
+    deviation,
+    f0                    = min(f) / .data$temporal_alcd,
+    l0                    = min(l) / .data$spatial_alcd
 
   )
 
