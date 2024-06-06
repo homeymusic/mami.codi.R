@@ -104,13 +104,17 @@ knitr::kable(tibble::tibble(
 temporal_fractions = chord$temporal_fractions[[1]] %>%
   dplyr::mutate(
     index = dplyr::row_number(),
-    tone = min(chord$frequencies[[1]]) * chord$temporal_fractions[[1]]$pseudo_rational_number
+    tone = min(chord$frequencies[[1]]) * chord$temporal_fractions[[1]]$pseudo_rational_number,
+    freq = tone,
+    midi = hrep::freq_to_midi(freq)
   ) %>% 
   dplyr::select(
     index, 
     num, 
     den,
-    tone
+    tone,
+    freq,
+    midi
   )
 lcd = chord$temporal_alcd
 plot_periodicity(temporal_fractions, lcd, 'frequency', relative = F)
@@ -149,13 +153,17 @@ knitr::kable(tibble::tibble(
 spatial_fractions = chord$spatial_fractions[[1]] %>%
   dplyr::mutate(
     index = dplyr::row_number(),
-    tone = min(chord$wavelengths[[1]]) * chord$spatial_fractions[[1]]$pseudo_rational_number
+    tone = min(chord$wavelengths[[1]]) * chord$spatial_fractions[[1]]$pseudo_rational_number,
+    freq = c_sound / tone,
+    midi = hrep::freq_to_midi(freq)
   ) %>% 
   dplyr::select(
     index, 
     num, 
     den,
-    tone
+    tone,
+    freq,
+    midi
   )
 lcd    = chord$spatial_alcd
 plot_periodicity(spatial_fractions, lcd, 'wavelength', c_sound = c_sound,relative = F)
