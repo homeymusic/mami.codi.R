@@ -46,16 +46,11 @@ fractions of tones - both frequency and wavelength fractions. The input to the m
 is a sparse frequency spectrum. We convert frequencies to wavelengths by 
 dividing a speed of sound constant by the frequency.\
 
-For tone fractions, the value of the speed of sound constant does not impact the 
-mathematics. Ideally, we could choose any media for the speed of sound: 
-air, cochlear fluid, basilar membrane, etc. 
+For tone ratios, the value of the speed of sound constant does not impact the 
+mathematics. We could choose any media for the speed of sound: 
+room temperature air at sea level, cochlear fluid, the basilar membrane, etc. 
 
-However, for calculations in a computer, the constant does make a difference because 
-of the way computers handle very small and very large numbers. So, we chose a 
-constant for each chord that ensures the wavelength and frequency values
-are in the same range. Choosing a constant that gives similar ranges for 
-frequencies and wavelengths makes it easier to see how different the fractions for the
-two signals will be.
+We chose the speed of sound in room temperature air.
 
 ```{r, echo=F, results='asis', message=F}
 chord = midi %>% mami.codi(
