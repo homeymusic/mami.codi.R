@@ -54,7 +54,7 @@ that is available for estimating the periodicity.\
 We start with the duration of 1.3s. How many periods will each partial have in 
 that time frame?\
 
-```{r, echo=F, results='asis', message=F}
+```{r, echo=F, message=F}
 MT = c(60,64,67) %>% mami.codi(verbose=T, num_harmonics=1)
 duration = 1.3
 cycles = tibble::tibble(

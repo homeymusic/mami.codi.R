@@ -86,12 +86,13 @@ run_trials <- function(search_label, variances) {
     }
     mami.codi.R::mami.codi(
       chord,
-      temporal_variance  = variance,
-      metadata       = list(
-        octave_ratio   = octave_ratio,
-        num_harmonics  = num_harmonics,
-        roll_off_dB    = roll_off,
-        semitone       = interval - tonic_midi
+      temporal_variance = variance,
+      spatial_variance  = variance,
+      metadata          = list(
+        octave_ratio    = octave_ratio,
+        num_harmonics   = num_harmonics,
+        roll_off_dB     = roll_off,
+        semitone        = interval - tonic_midi
       ),
       verbose=T
     )

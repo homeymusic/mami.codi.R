@@ -1,6 +1,7 @@
-search_label = 'Pure'
+search_label = 'P8'
 
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R',
+                         ref='duration')
 
 # Detailed
 # from_prec   = 0.08
