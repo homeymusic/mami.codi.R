@@ -10,7 +10,7 @@ knitr::opts_chunk$set(
  message = FALSE
 )
 midi  = c(0, 4, 7) + 60
-num_harmonics = 3
+num_harmonics = 10
 ```
 
 ### Estimating Spatiotemporal Periodicity
@@ -128,6 +128,7 @@ plot_periodicity(temporal_fractions, lcd, 'frequency')
 
 ##### Frequency fractions
 ```{r, echo=F, results='asis', message=F}
+temporal_fractions$pseudo_rational_number = chord$temporal_fractions[[1]]$pseudo_rational_number
 knitr::kable(temporal_fractions %>% 
                dplyr::rename(
                  tone_hz = tone
@@ -177,6 +178,7 @@ plot_periodicity(spatial_fractions, lcd, 'wavelength', c_sound = c_sound)
 
 ##### Wavelength fractions
 ```{r, echo=F, results='asis', message=F}
+spatial_fractions$pseudo_rational_number = chord$spatial_fractions[[1]]$pseudo_rational_number
 knitr::kable(spatial_fractions %>% 
                dplyr::rename(
                  tone_m = tone
