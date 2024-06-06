@@ -9,8 +9,6 @@ knitr::opts_chunk$set(
  warning = FALSE,
  message = FALSE
 )
-midi  = c(0, 4, 7) + 60
-num_harmonics = 10
 ```
 
 ## Estimating Spatiotemporal Periodicity
@@ -49,19 +47,42 @@ that is available for estimating the periodicity.\
 #### 500 ms ~ Major Third with 10 Harmonics
 
 ![](./long_temporal_duration.png "500 ms ~ Major Third with 10 Harmonics")
+
 ### Modeling with Duration
 
 We start with the duration of 1.3s. How many periods will each partial have in 
 that time frame?\
 
 ```{r, echo=F, message=F}
-MT = c(60,64,67) %>% mami.codi(verbose=T, num_harmonics=1)
+MT = c(60,64,67) %>% mami.codi(verbose=T, num_harmonics=10)
 duration = 1.3
 cycles = tibble::tibble(
   T_MT = 1 / MT$frequencies[[1]],
   T_count = duration / T_MT,
   T_count_ratios = T_count / T_count[1]
 )
-cycles$T_count_ratios %>% 
-  approximate_rational_fractions(default_variance(), approximate_lcm_deviation())
+sb = cycles$T_count_ratios %>% 
+  approximate_rational_fractions(default_variance() / 10, approximate_lcm_deviation())
+knitr::kable(
+  sb
+)
 ```
+dens: `r sb$den %>% unique() %>% sort()`\
+LCD: `r lcm_integers(sb$den)`
+```{r, echo=F, message=F}
+
+MT = c(60,64,67) %>% mami.codi(verbose=T, num_harmonics=10)
+duration = 1.3
+cycles = tibble::tibble(
+  T_MT = 1 / MT$frequencies[[1]],
+  T_count = floor(duration / T_MT),
+  T_count_ratios = T_count / T_count[1]
+)
+sb = cycles$T_count_ratios %>% 
+  approximate_rational_fractions(default_variance() / 10, approximate_lcm_deviation())
+knitr::kable(
+  sb
+)
+```
+dens: `r sb$den %>% unique() %>% sort()`\
+LCD: `r lcm_integers(sb$den)`
