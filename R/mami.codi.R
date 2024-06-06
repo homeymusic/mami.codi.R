@@ -169,9 +169,7 @@ compute_consonance = function(x, amplitude,
     amplitude,
     temporal_variance,
     spatial_variance,
-    deviation,
-    f0                    = min(f) / .data$temporal_alcd,
-    l0                    = min(l) * .data$spatial_alcd
+    deviation
 
   )
 
