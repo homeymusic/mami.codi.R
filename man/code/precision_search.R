@@ -1,7 +1,6 @@
 search_label = 'Pure'
 
-devtools::install_github('git@github.com:homeymusic/mami.codi.R',
-                         ref='speed_of_sound')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 
 # Detailed
 # from_prec   = 0.08
