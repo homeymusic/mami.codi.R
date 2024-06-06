@@ -1,17 +1,17 @@
-search_label = 'Harmonic'
+search_label = 'Pure'
 
 devtools::install_github('git@github.com:homeymusic/mami.codi.R',
                          ref='speed_of_sound')
 
 # Detailed
-# from_prec   = 0.06
-# to_prec     = 0.08
+# from_prec   = 0.08
+# to_prec     = 0.1
 # by_prec     = 0.001
 # variances = sort(c(seq(from=from_prec, to=to_prec, by=by_prec),
 #               mami.codi.R::default_variance()))
 
 # Orders of Magnitude
-variances   = sort(c(1:9 %o% 10^(-5:1),
+variances   = sort(c(1:9 %o% 10^(-2:-1),
                       mami.codi.R::default_variance()))
 
 

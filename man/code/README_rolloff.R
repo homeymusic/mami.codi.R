@@ -44,6 +44,7 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
   }
 
   mami.codi.R::mami.codi(c(tonic_midi,intervals[index]),
+                         temporal_variance = 0.1,
                          amplitude = amplitude,
                          num_harmonics=num_harmonics,
                          octave_ratio=octave_ratio,

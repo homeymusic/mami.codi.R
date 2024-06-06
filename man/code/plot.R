@@ -816,7 +816,7 @@ plot_periodicity <- function(ratios, lcd, dimension,
     if (dimension=='wavelength') {
       if (relative) {
         ratio_to_max = (num / den) / (max_num / max_den)
-        brick_count  = lcd / ratio_to_max
+        brick_count  = floor(lcd / ratio_to_max)
         brick_width  = max_tone * ratio_to_max
       } else {
         brick_width = tone
@@ -824,8 +824,8 @@ plot_periodicity <- function(ratios, lcd, dimension,
       }
     } else if (dimension=='frequency') {
       if (relative) {
-        brick_width = (den / num) / min_tone
-        brick_count = lcd * (num / den)
+        brick_width = 1 / tone
+        brick_count = floor(lcd * (num / den))
       } else {
         brick_width = 1 / tone
         brick_count = 1

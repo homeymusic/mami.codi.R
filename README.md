@@ -139,10 +139,9 @@ be.
 - Frequencies: 261.6, 329.6, 392.0, 523.3, 659.3, 784.0, 784.9, 988.9,
   1176.0  
 
-- Speed of Sound: 307668.1
+- Speed of Sound: 346.0
 
-- Wavelengths: 1176.0, 933.4, 784.9, 588.0, 466.7, 392.4, 392.0, 311.1,
-  261.6  
+- Wavelengths: 1.3, 1.0, 0.9, 0.7, 0.5, 0.4, 0.4, 0.3, 0.3  
 
 ###### MaMi.CoDi Predictions
 
@@ -152,9 +151,9 @@ be.
 
 #### Temporal Periodicity
 
-| lcd | chord_Sz | chord_Hz |  c_sound |  chord_m |   chord_s |
-|----:|---------:|---------:|---------:|---------:|----------:|
-|  12 | 3.584963 | 21.80213 | 307668.1 | 14111.84 | 0.0458671 |
+| lcd | chord_Sz | chord_Hz | c_sound |  chord_m |   chord_s |
+|----:|---------:|---------:|--------:|---------:|----------:|
+|  12 | 3.584963 | 21.80213 |     346 | 15.87001 | 0.0458671 |
 
 ##### Partial Periods
 
@@ -166,23 +165,23 @@ be.
 
 ##### Frequency fractions
 
-| index | num | den |   tone_hz |
-|------:|----:|----:|----------:|
-|     1 |   1 |   1 |  261.6256 |
-|     2 |   4 |   3 |  329.6276 |
-|     3 |   3 |   2 |  391.9954 |
-|     4 |   2 |   1 |  523.2511 |
-|     5 |   5 |   2 |  659.2551 |
-|     6 |   3 |   1 |  783.9909 |
-|     7 |   3 |   1 |  784.8767 |
-|     8 |  15 |   4 |  988.8827 |
-|     9 |   9 |   2 | 1175.9863 |
+| index | num | den |   tone_hz |      freq |     midi |
+|------:|----:|----:|----------:|----------:|---------:|
+|     1 |   1 |   1 |  261.6256 |  261.6256 | 60.00000 |
+|     2 |   4 |   3 |  329.6276 |  329.6276 | 64.00000 |
+|     3 |   3 |   2 |  391.9954 |  391.9954 | 67.00000 |
+|     4 |   2 |   1 |  523.2511 |  523.2511 | 72.00000 |
+|     5 |   5 |   2 |  659.2551 |  659.2551 | 76.00000 |
+|     6 |   3 |   1 |  783.9909 |  783.9909 | 79.00000 |
+|     7 |   3 |   1 |  784.8767 |  784.8767 | 79.01955 |
+|     8 |  15 |   4 |  988.8827 |  988.8827 | 83.01955 |
+|     9 |   9 |   2 | 1175.9863 | 1175.9863 | 86.01955 |
 
 #### Spatial Periodicity
 
-| lcd | chord_Sz | chord_Hz |  c_sound |  chord_m |  chord_s |
-|----:|---------:|---------:|---------:|---------:|---------:|
-|   4 |        2 | 65.40639 | 307668.1 | 4703.945 | 0.015289 |
+| lcd | chord_Sz | chord_Hz | c_sound |  chord_m |  chord_s |
+|----:|---------:|---------:|--------:|---------:|---------:|
+|   4 |        2 | 65.40639 |     346 | 5.290003 | 0.015289 |
 
 ##### Partial Wavelengths
 
@@ -194,17 +193,17 @@ be.
 
 ##### Wavelength fractions
 
-| index | num | den |    tone_m |
-|------:|----:|----:|----------:|
-|     1 |   9 |   2 | 1175.9863 |
-|     2 |   7 |   2 |  933.3810 |
-|     3 |   3 |   1 |  784.8767 |
-|     4 |   9 |   4 |  587.9932 |
-|     5 |   7 |   4 |  466.6905 |
-|     6 |   3 |   2 |  392.4383 |
-|     7 |   3 |   2 |  391.9954 |
-|     8 |   5 |   4 |  311.1270 |
-|     9 |   1 |   1 |  261.6256 |
+| index | num | den |    tone_m |      freq |     midi |
+|------:|----:|----:|----------:|----------:|---------:|
+|     1 |   9 |   2 | 1.3225007 |  261.6256 | 60.00000 |
+|     2 |   7 |   2 | 1.0496695 |  329.6276 | 64.00000 |
+|     3 |   3 |   1 | 0.8826633 |  391.9954 | 67.00000 |
+|     4 |   9 |   4 | 0.6612504 |  523.2511 | 72.00000 |
+|     5 |   7 |   4 | 0.5248348 |  659.2551 | 76.00000 |
+|     6 |   3 |   2 | 0.4413317 |  783.9909 | 79.00000 |
+|     7 |   3 |   2 | 0.4408336 |  784.8767 | 79.01955 |
+|     8 |   5 |   4 | 0.3498898 |  988.8827 | 83.01955 |
+|     9 |   1 |   1 | 0.2942211 | 1175.9863 | 86.01955 |
 
 ### Finding the variance Values
 
@@ -286,7 +285,7 @@ major-minor versus the behavioral results are included in a plot below.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
-| 0.2               | 0.03166          |             0.2 |
+| 0.3               | 0.02111          |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-2.png)<!-- -->
@@ -297,7 +296,7 @@ For 10 harmonics, behavioral results and theoretical predictions agree.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
-| 0.07958           | 0.07958          |             0.2 |
+| 0.1               | 0.06333          |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-3.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-4.png)<!-- -->
@@ -353,7 +352,7 @@ and m7 that do not exist in the behavioral results.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
-| 0.07958           | 0.07958          |             0.2 |
+| 0.07              | 0.09047          |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-11.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-12.png)<!-- -->
@@ -365,7 +364,7 @@ with the theoretical peaks.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
-| 0.07958           | 0.07958          |             0.2 |
+| 0.07              | 0.09047          |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-13.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-14.png)<!-- -->
@@ -411,7 +410,7 @@ Description is below.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
-| 5e-05             | 126.65148        |           0.035 |
+| 800               | 1e-05            |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-5-21.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-22.png)<!-- -->
@@ -422,7 +421,7 @@ Description is below.
 
 | temporal_variance | spatial_variance | min_amplitude | smoothing_sigma |
 |:------------------|:-----------------|:--------------|----------------:|
-| 0.07958           | 0.07958          | 0.013         |             0.2 |
+| 0.1               | 0.06333          | 0.013         |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-9-1.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-9-2.png)<!-- -->
@@ -431,7 +430,7 @@ Description is below.
 
 | temporal_variance | spatial_variance | min_amplitude | smoothing_sigma |
 |:------------------|:-----------------|:--------------|----------------:|
-| 0.07958           | 0.07958          | 0.08          |             0.2 |
+| 0.1               | 0.06333          | 0.08          |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-9-3.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-9-4.png)<!-- -->
@@ -440,7 +439,7 @@ Description is below.
 
 | temporal_variance | spatial_variance | min_amplitude | smoothing_sigma |
 |:------------------|:-----------------|:--------------|----------------:|
-| 0.07958           | 0.07958          | 0             |             0.2 |
+| 0.1               | 0.06333          | 0             |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-9-5.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-9-6.png)<!-- -->
