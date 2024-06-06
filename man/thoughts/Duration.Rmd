@@ -1,0 +1,51 @@
+```{r, echo=F, message=F, include=F}
+devtools::load_all(".")
+source('./man/code/plot.R')
+source('./man/code/utils.R')
+knitr::opts_chunk$set(
+ collapse = TRUE,
+ comment = "#>",
+ fig.path = "man/figures/README-",
+ warning = FALSE,
+ message = FALSE
+)
+midi  = c(0, 4, 7) + 60
+num_harmonics = 10
+```
+
+## Estimating Spatiotemporal Periodicity
+
+How long is the chord played? For the timbre study it was 1.3s per dyad.\
+
+How does duration impact the two signals?\
+
+### Spatial Signal
+
+For the spatial signal, if the played duration is as long or longer than one 
+period of the longest wavelength then all the information is available. For
+example, C4's fundamental frequency is 262 Hz, the wavelength in air is 1.3m,
+and the period is 3.8 ms. If the chord duration is 3.8ms or greater then the 
+expected hair cells in the cochlea will be displaced and the pattern matching
+(ALCD) part of the auditory system will have all the spatial information its ever
+going to get about the chord. See Wiener's original analogy for the uncertainty principle.\
+
+#### Wavelengths ~ Major Third with 10 Harmonics
+
+![](./spatial_duration.png "Wavelengths ~ Major Third with 10 Harmonics")
+
+### Temporal Signal
+
+For the temporal signal, the longer the chord is played, the more information
+that is available for estimating the periodicity.\
+
+#### 12.5 ms ~ Major Third with 10 Harmonics
+
+![](./short_temporal_duration.png "12.5 ms ~ Major Third with 10 Harmonics")
+
+#### 50 ms ~ Major Third with 10 Harmonics
+
+![](./default_temporal_duration.png "50 ms ~ Major Third with 10 Harmonics")
+
+#### 500 ms ~ Major Third with 10 Harmonics
+
+![](./long_temporal_duration.png "500 ms ~ Major Third with 10 Harmonics")

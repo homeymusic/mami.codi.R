@@ -10,7 +10,7 @@ knitr::opts_chunk$set(
  message = FALSE
 )
 midi  = c(0, 4, 7) + 60
-num_harmonics = 3
+num_harmonics = 10
 ```
 
 ### Estimating Spatiotemporal Periodicity
