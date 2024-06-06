@@ -133,13 +133,16 @@ parse_variances <- function(x, temporal_variance, spatial_variance) {
 compute_consonance = function(x, amplitude,
                               deviation) {
 
-  f       = x$spectrum[[1]] %>% dplyr::filter(.data$y>amplitude) %>% hrep::freq()
-  c_sound = 346
-  l       = c_sound / f
+  f        = x$spectrum[[1]] %>% dplyr::filter(.data$y>amplitude) %>% hrep::freq()
+  P        = 1 / f
+  duration = 1.3
+  P_count  = duration / P
+  c_sound  = 346
+  l        = c_sound / f
 
   x %>% dplyr::mutate(
 
-    alcd(f/min(f), temporal_variance, deviation, 'temporal'),
+    alcd(P_count/min(P_count), temporal_variance, deviation, 'temporal'),
     alcd(l/min(l), spatial_variance,  deviation, 'spatial'),
 
     temporal_consonance   = 50 - log2(.data$temporal_alcd),
@@ -150,7 +153,10 @@ compute_consonance = function(x, amplitude,
 
     frequencies           = list(f),
     wavelengths           = list(l),
+    periods               = list(P),
+    period_counts         = list(P_count),
     speed_of_sound        = c_sound,
+    duration,
     amplitude,
     temporal_variance,
     spatial_variance,
