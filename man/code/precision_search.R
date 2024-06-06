@@ -1,4 +1,4 @@
-search_label = 'P8'
+search_label = 'Bonang'
 
 devtools::install_github('git@github.com:homeymusic/mami.codi.R',
                          ref='duration')
