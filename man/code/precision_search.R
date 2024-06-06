@@ -1,6 +1,7 @@
-search_label = 'P8'
+search_label = 'Harmonic'
 
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R',
+                         ref='speed_of_sound')
 
 # Detailed
 # from_prec   = 0.06
