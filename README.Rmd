@@ -96,8 +96,8 @@ the spatial and temporal signals would have the same values. However, for comple
 pitches that is not the case. The pattern of the two sets of components are different.
 See the example of the major triad with 5 harmonics, below.
 
-#### ```{r, child=c('man/Spatiotemporal_Periodicity.Rmd')}
-#### ```
+```{r, child=c('man/Spatiotemporal_Periodicity.Rmd')}
+```
 
 ### Finding the variance Values
 

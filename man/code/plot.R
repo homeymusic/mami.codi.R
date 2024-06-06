@@ -788,6 +788,7 @@ plot_semitone_codi_smooth <- function(chords, title='', include_line=T,
 plot_periodicity <- function(ratios, lcd, dimension,
                              c_sound = NULL,
                              relative = T) {
+
   if (dimension=='wavelength') {
     fill_color   = colors_homey$minor
     border_color = colors_homey$minor_dark

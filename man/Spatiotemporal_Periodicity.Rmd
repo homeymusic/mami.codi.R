@@ -77,13 +77,16 @@ c_sound = chord$speed_of_sound
 
 ###### MaMi.CoDi Predictions
 ```{r, echo=F, results='asis', message=F}
-knitr::kable(chord %>% dplyr::select('consonance_dissonance', 'major_minor', 'temporal_consonance', 'spatial_consonance'))
+knitr::kable(chord %>% dplyr::select(
+  'consonance_dissonance', 
+  'major_minor', 
+  'temporal_consonance', 
+  'spatial_consonance'))
 ```
 
 #### Temporal Periodicity
 ```{r, echo=F, results='asis', message=F}
 knitr::kable(tibble::tibble(
-  tol      = chord$variance,
   lcd      = chord$temporal_alcd,
   chord_Sz = log2(lcd),
   min_f_Hz = min(chord$frequencies[[1]]),
@@ -92,37 +95,44 @@ knitr::kable(tibble::tibble(
   chord_Hz = 1 / chord_s,
   chord_m  = c_sound / chord_Hz,
   c_sound
-) %>% dplyr::select(lcd, chord_Sz, chord_Hz, c_sound, chord_m, chord_s, tol))
+) %>% dplyr::select(lcd, chord_Sz, chord_Hz, c_sound, chord_m, chord_s))
 ```
 
 ##### Partial Periods
 
 ```{r, echo=F, results='asis', message=F}
-fractions = chord$temporal_fractions[[1]] %>% 
-  dplyr::select(num, den, rational_number)
-lcd    = chord$temporal_alcd
-plot_periodicity(fractions, lcd, 'frequency', relative = F)
+temporal_fractions = chord$temporal_fractions[[1]] %>%
+  dplyr::mutate(
+    index = dplyr::row_number(),
+    tone = min(chord$frequencies[[1]]) * chord$temporal_fractions[[1]]$pseudo_rational_number
+  ) %>% 
+  dplyr::select(
+    index, 
+    num, 
+    den,
+    tone
+  )
+lcd = chord$temporal_alcd
+plot_periodicity(temporal_fractions, lcd, 'frequency', relative = F)
 ```
 
 ##### Chord Period
 
 ```{r, echo=F, results='asis', message=F}
-plot_periodicity(fractions, lcd, 'frequency')
+plot_periodicity(temporal_fractions, lcd, 'frequency')
 ```
 
 ##### Frequency fractions
 ```{r, echo=F, results='asis', message=F}
-knitr::kable(chord$temporal_fractions[[1]] %>% 
-               dplyr::arrange(fraction) %>% 
+knitr::kable(temporal_fractions %>% 
                dplyr::rename(
-                 tone_hz = rational_number
+                 tone_hz = tone
                ))
 ```
 
 #### Spatial Periodicity
 ```{r, echo=F, results='asis', message=F}
 knitr::kable(tibble::tibble(
-  tol      = chord$variance,
   lcd      = chord$spatial_alcd,
   chord_Sz = log2(lcd),
   max_l_m  = max(chord$wavelengths[[1]]),
@@ -130,29 +140,37 @@ knitr::kable(tibble::tibble(
   chord_Hz = c_sound / chord_m,
   chord_s  = 1 / chord_Hz,
   c_sound
-) %>% dplyr::select(lcd, chord_Sz, chord_Hz, c_sound, chord_m, chord_s, tol))
+) %>% dplyr::select(lcd, chord_Sz, chord_Hz, c_sound, chord_m, chord_s))
 ```
 
 ##### Partial Wavelengths
 
 ```{r, echo=F, results='asis', message=F}
-fractions = chord$spatial_fractions[[1]] %>%
-  dplyr::select(index, num, den, rational_number)
+spatial_fractions = chord$spatial_fractions[[1]] %>%
+  dplyr::mutate(
+    index = dplyr::row_number(),
+    tone = min(chord$wavelengths[[1]]) * chord$spatial_fractions[[1]]$pseudo_rational_number
+  ) %>% 
+  dplyr::select(
+    index, 
+    num, 
+    den,
+    tone
+  )
 lcd    = chord$spatial_alcd
-plot_periodicity(fractions, lcd, 'wavelength', c_sound = c_sound,relative = F)
+plot_periodicity(spatial_fractions, lcd, 'wavelength', c_sound = c_sound,relative = F)
 ```
 
 ##### Chord Wavelength
 
 ```{r, echo=F, results='asis', message=F}
-plot_periodicity(fractions, lcd, 'wavelength', c_sound = c_sound)
+plot_periodicity(spatial_fractions, lcd, 'wavelength', c_sound = c_sound)
 ```
 
 ##### Wavelength fractions
 ```{r, echo=F, results='asis', message=F}
-knitr::kable(chord$spatial_fractions[[1]] %>% 
-               dplyr::arrange(ratio) %>% 
+knitr::kable(spatial_fractions %>% 
                dplyr::rename(
-                 tone_m = rational_number
+                 tone_m = tone
                ))
 ```

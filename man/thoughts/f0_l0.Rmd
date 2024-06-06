@@ -34,7 +34,12 @@ Spatial  variance: `r P1$spatial_variance %>% unique()`
 ### P1
 
 ```{r, echo=F, message=F}
-P1 %>% dplyr::select(f0,l0)
+P1 %>% 
+  dplyr::mutate(
+    T_f = 1 / f0, 
+    T_l = l0 / speed_of_sound
+    ) %>%
+  dplyr::select(f0,l0,T_f,T_l)
 ```
 
 ### P4
@@ -43,7 +48,11 @@ P1 %>% dplyr::select(f0,l0)
 mami_codi_harmonics <- function(h) mami.codi(c(60,65), verbose=T, num_harmonics = h,
                                              temporal_variance = temporal_variance)
 1:20  %>% purrr::map_dfr(mami_codi_harmonics) %>% 
-  dplyr::select(f0,l0)
+  dplyr::mutate(
+    T_f = 1 / f0, 
+    T_l = l0 / speed_of_sound
+    ) %>%
+  dplyr::select(f0,l0,T_f,T_l)
 ```
 
 ### P5
@@ -52,7 +61,11 @@ mami_codi_harmonics <- function(h) mami.codi(c(60,65), verbose=T, num_harmonics 
 mami_codi_harmonics <- function(h) mami.codi(c(60,67), verbose=T, num_harmonics = h,
                                              temporal_variance = temporal_variance)
 1:20  %>% purrr::map_dfr(mami_codi_harmonics) %>% 
-  dplyr::select(f0,l0)
+  dplyr::mutate(
+    T_f = 1 / f0, 
+    T_l = l0 / speed_of_sound
+    ) %>%
+  dplyr::select(f0,l0,T_f,T_l)
 ```
 
 ```{r, echo=F, message=F}
@@ -69,7 +82,11 @@ Spatial  variance: `r P1$spatial_variance %>% unique()`
 
 ```{r, echo=F, message=F}
 P1 %>% 
-  dplyr::select(f0,l0)
+  dplyr::mutate(
+    T_f = 1 / f0, 
+    T_l = l0 / speed_of_sound
+    ) %>%
+  dplyr::select(f0,l0,T_f,T_l)
 ```
 
 ### P4
@@ -77,7 +94,11 @@ P1 %>%
 ```{r, echo=F, message=F}
 mami_codi_harmonics <- function(h) mami.codi(c(60,65), verbose=T, num_harmonics = h)
 1:20  %>% purrr::map_dfr(mami_codi_harmonics) %>% 
-  dplyr::select(f0,l0)
+  dplyr::mutate(
+    T_f = 1 / f0, 
+    T_l = l0 / speed_of_sound
+    ) %>%
+  dplyr::select(f0,l0,T_f,T_l)
 ```
 
 ### P5
@@ -85,5 +106,9 @@ mami_codi_harmonics <- function(h) mami.codi(c(60,65), verbose=T, num_harmonics 
 ```{r, echo=F, message=F}
 mami_codi_harmonics <- function(h) mami.codi(c(60,67), verbose=T, num_harmonics = h)
 1:20  %>% purrr::map_dfr(mami_codi_harmonics) %>% 
-  dplyr::select(f0,l0)
+  dplyr::mutate(
+    T_f = 1 / f0, 
+    T_l = l0 / speed_of_sound
+    ) %>%
+  dplyr::select(f0,l0,T_f,T_l)
 ```

@@ -84,7 +84,127 @@ values. However, for complex pitches that is not the case. The pattern
 of the two sets of components are different. See the example of the
 major triad with 5 harmonics, below.
 
-#### `{r, child=c('man/Spatiotemporal_Periodicity.Rmd')} ####`
+### Estimating Spatiotemporal Periodicity
+
+To estimate the periodicity of a chord, the MaMi.CoDi model uses a
+signal processing technique. It finds fractions, within a given
+variance, for every tone in the chord (fundamental, harmonics, noise,
+etc.) relative to a reference tone. The least common denominator of
+those fractions is a measure of the cycle length, relative to the
+reference tone. Long relative cycles are predicted to sound unpleasant
+and short relative cycles are predicted to sound pleasant.  
+
+MaMi.CoDi creates two estimates of the chord’s period: a temporal
+estimate and a spatial estimate.  
+
+For the temporal (i.e. phase-locking or frequency) estimate the
+reference tone is the smallest frequency. Small frequencies are low
+tones and are detected by the inner ear hair cells closest to the apex
+of the cochlea, which is the end furthest from the source of the wave.  
+
+For the spatial (i.e. rate-place or wavelength) estimate, the reference
+tone is the smallest wavelength. Small wavelengths are high tones and
+are detected by the inner ear hair cells closest to the base of the
+cochlea, which is the end closest to the middle ear, the source of the
+wave.  
+
+MaMi.CoDi combines the two cycle estimates into a two-dimensional space
+with consonance-dissonance along one dimension and major-minor on the
+orthogonal dimension.
+
+#### Example Chord: Major Triad
+
+Below, we estimate the periodicity of the C4, E4 and G4 major triad with
+3 harmonics per pitch. The MaMi.CoDi model is based on fractions of
+tones - both frequency and wavelength fractions. The input to the model
+is a sparse frequency spectrum. We convert frequencies to wavelengths by
+dividing a speed of sound constant by the frequency.  
+
+For tone fractions, the value of the speed of sound constant does not
+impact the mathematics. Ideally, we could choose any media for the speed
+of sound: air, cochlear fluid, basilar membrane, etc.
+
+However, for calculations in a computer, the constant does make a
+difference because of the way computers handle very small and very large
+numbers. So, we chose a constant for each chord that ensures the
+wavelength and frequency values are in the same range. Choosing a
+constant that gives similar ranges for frequencies and wavelengths makes
+it easier to see how different the fractions for the two signals will
+be.
+
+- Fundamentals in MIDI: 60, 64, 67  
+
+- Number of Harmonics: 3
+
+- Frequencies: 261.6, 329.6, 392.0, 523.3, 659.3, 784.0, 784.9, 988.9,
+  1176.0  
+
+- Speed of Sound: 307668.1
+
+- Wavelengths: 1176.0, 933.4, 784.9, 588.0, 466.7, 392.4, 392.0, 311.1,
+  261.6  
+
+###### MaMi.CoDi Predictions
+
+| consonance_dissonance | major_minor | temporal_consonance | spatial_consonance |
+|----------------------:|------------:|--------------------:|-------------------:|
+|              94.41504 |   -1.584963 |            46.41504 |                 48 |
+
+#### Temporal Periodicity
+
+| lcd | chord_Sz | chord_Hz |  c_sound |  chord_m |   chord_s |
+|----:|---------:|---------:|---------:|---------:|----------:|
+|  12 | 3.584963 | 21.80213 | 307668.1 | 14111.84 | 0.0458671 |
+
+##### Partial Periods
+
+![](man/figures/README-unnamed-chunk-16-1.png)<!-- -->
+
+##### Chord Period
+
+![](man/figures/README-unnamed-chunk-17-1.png)<!-- -->
+
+##### Frequency fractions
+
+| index | num | den |   tone_hz |
+|------:|----:|----:|----------:|
+|     1 |   1 |   1 |  261.6256 |
+|     2 |   4 |   3 |  329.6276 |
+|     3 |   3 |   2 |  391.9954 |
+|     4 |   2 |   1 |  523.2511 |
+|     5 |   5 |   2 |  659.2551 |
+|     6 |   3 |   1 |  783.9909 |
+|     7 |   3 |   1 |  784.8767 |
+|     8 |  15 |   4 |  988.8827 |
+|     9 |   9 |   2 | 1175.9863 |
+
+#### Spatial Periodicity
+
+| lcd | chord_Sz | chord_Hz |  c_sound |  chord_m |  chord_s |
+|----:|---------:|---------:|---------:|---------:|---------:|
+|   4 |        2 | 65.40639 | 307668.1 | 4703.945 | 0.015289 |
+
+##### Partial Wavelengths
+
+![](man/figures/README-unnamed-chunk-20-1.png)<!-- -->
+
+##### Chord Wavelength
+
+![](man/figures/README-unnamed-chunk-21-1.png)<!-- -->
+
+##### Wavelength fractions
+
+| index | num | den |    tone_m |
+|------:|----:|----:|----------:|
+|     1 |   9 |   2 | 1175.9863 |
+|     2 |   7 |   2 |  933.3810 |
+|     3 |   3 |   1 |  784.8767 |
+|     4 |   9 |   4 |  587.9932 |
+|     5 |   7 |   4 |  466.6905 |
+|     6 |   3 |   2 |  392.4383 |
+|     7 |   3 |   2 |  391.9954 |
+|     8 |   5 |   4 |  311.1270 |
+|     9 |   1 |   1 |  261.6256 |
 
 ### Finding the variance Values
 
@@ -168,8 +288,8 @@ major-minor versus the behavioral results are included in a plot below.
 |:------------------|:-----------------|----------------:|
 | 0.2               | 0.03166          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-2.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-2.png)<!-- -->
 
 ##### Harmonic ~ Partials: 10
 
@@ -179,8 +299,8 @@ For 10 harmonics, behavioral results and theoretical predictions agree.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-3.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-4.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-3.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-4.png)<!-- -->
 
 ##### 5Partials ~ Partials: 5
 
@@ -193,8 +313,8 @@ peak.
 |:------------------|:-----------------|----------------:|
 | 0.07              | 0.09047          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-5.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-6.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-5.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-6.png)<!-- -->
 
 ##### 5PartialsNo3 ~ Partials: 5
 
@@ -207,8 +327,8 @@ while the M3 peak is slightly higher without the 3rd partial.
 |:------------------|:-----------------|----------------:|
 | 0.06              | 0.10554          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-7.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-8.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-7.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-8.png)<!-- -->
 
 ##### Bonang ~ Partials: 4
 
@@ -222,8 +342,8 @@ be relatively higher than the behavioral results.
 |:------------------|:-----------------|----------------:|
 | 0.03979           | 0.15915          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-9.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-10.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-9.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-10.png)<!-- -->
 
 ##### Stretched ~ Partials: 10
 
@@ -235,8 +355,8 @@ and m7 that do not exist in the behavioral results.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-11.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-12.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-11.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-12.png)<!-- -->
 
 ##### Compressed ~ Partials: 10
 
@@ -247,8 +367,8 @@ with the theoretical peaks.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-13.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-14.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-13.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-14.png)<!-- -->
 
 #### Dyads spanning 1 quarter tone
 
@@ -260,8 +380,8 @@ Description is below.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |           0.035 |
 
-![](man/figures/README-unnamed-chunk-4-15.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-16.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-15.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-16.png)<!-- -->
 
 ##### M6 ~ Partials: 10
 
@@ -271,8 +391,8 @@ Description is below.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |           0.035 |
 
-![](man/figures/README-unnamed-chunk-4-17.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-18.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-17.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-18.png)<!-- -->
 
 ##### P8 ~ Partials: 10
 
@@ -282,8 +402,8 @@ Description is below.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |           0.035 |
 
-![](man/figures/README-unnamed-chunk-4-19.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-20.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-19.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-20.png)<!-- -->
 
 ##### P8Zoomed ~ Partials: 10
 
@@ -293,8 +413,8 @@ Description is below.
 |:------------------|:-----------------|----------------:|
 | 5e-05             | 126.65148        |           0.035 |
 
-![](man/figures/README-unnamed-chunk-4-21.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-22.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-21.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-22.png)<!-- -->
 
 ### Manipulating amplitudes
 
@@ -304,8 +424,8 @@ Description is below.
 |:------------------|:-----------------|:--------------|----------------:|
 | 0.07958           | 0.07958          | 0.013         |             0.2 |
 
-![](man/figures/README-unnamed-chunk-8-1.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-8-2.png)<!-- -->
+![](man/figures/README-unnamed-chunk-9-1.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-9-2.png)<!-- -->
 
 ##### Harmonic ~ Roll Off: 7
 
@@ -313,8 +433,8 @@ Description is below.
 |:------------------|:-----------------|:--------------|----------------:|
 | 0.07958           | 0.07958          | 0.08          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-8-3.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-8-4.png)<!-- -->
+![](man/figures/README-unnamed-chunk-9-3.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-9-4.png)<!-- -->
 
 ##### Harmonic ~ Roll Off: 2
 
@@ -322,8 +442,8 @@ Description is below.
 |:------------------|:-----------------|:--------------|----------------:|
 | 0.07958           | 0.07958          | 0             |             0.2 |
 
-![](man/figures/README-unnamed-chunk-8-5.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-8-6.png)<!-- -->
+![](man/figures/README-unnamed-chunk-9-5.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-9-6.png)<!-- -->
 
 #### `{r, child=c('man/M3_M6_P8.Rmd')} ####`
 
