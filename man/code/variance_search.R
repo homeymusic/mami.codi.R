@@ -1,8 +1,7 @@
 search_label = 'P8'
 heisenberg   = T
 
-devtools::install_github('git@github.com:homeymusic/mami.codi.R',
-                         ref='squares')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 
 # Detailed
 # from_prec   = 0.09
