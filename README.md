@@ -146,7 +146,7 @@ We chose the speed of sound in room temperature air.
 
 | consonance_dissonance | major_minor | temporal_consonance | spatial_consonance |
 |----------------------:|------------:|--------------------:|-------------------:|
-|              90.50815 |    2.321928 |            46.41504 |           44.09311 |
+|             0.0138889 |          48 |           0.0833333 |          0.0166667 |
 
 #### Temporal Periodicity
 
@@ -268,7 +268,7 @@ from “Revisiting place and temporal theories of pitch”, Andrew J.
 Oxenham, 2014.  
 
 The MaMi.CoDi model, based on Stolzenburg (2015), has one one parameter:
-variance. variance is used by the Stern-Brocot algorithm to find tone
+variance. Variance is used by the Stern-Brocot algorithm to find tone
 ratios as rational fractions that are then used to estimate the relative
 periodicity of chords. variance acts as the physiological limits
 mentioned by Oxenham, above.  
