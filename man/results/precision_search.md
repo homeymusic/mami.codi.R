@@ -1,7 +1,7 @@
 Precision Search
 ================
 
-# Pure
+# Bonang
 
 Temporal Variances:
 
@@ -19,7 +19,7 @@ Spatial Variances:
 
 Number of Harmonics:
 
-    #> [1] 1
+    #> [1] 10
 
 Octave Ratios:
 
