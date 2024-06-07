@@ -1,5 +1,5 @@
-search_label = '5PartialsNo3'
-heisenberg   = F
+search_label = 'P8'
+heisenberg   = T
 
 devtools::install_github('git@github.com:homeymusic/mami.codi.R',
                          ref='squares')
