@@ -1,7 +1,7 @@
 Variance Search
 ================
 
-# M6
+# 5PartialsNo3
 
 Temporal Variances:
 
