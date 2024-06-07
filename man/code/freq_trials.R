@@ -20,6 +20,7 @@ run_trials <- function(search_label, variances, heisenberg) {
   }
 
   print(search_label)
+  print(paste('heisenberg:',heisenberg))
   print(paste('octave_ratio:',octave_ratio))
   print(paste('num_harmonics:',num_harmonics))
   print(paste('roll_off:',roll_off))

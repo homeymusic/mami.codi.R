@@ -1,4 +1,4 @@
-search_label = 'Bonang'
+search_label = 'Pure'
 heisenberg   = T
 
 devtools::install_github('git@github.com:homeymusic/mami.codi.R')
@@ -13,7 +13,6 @@ devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 # Orders of Magnitude
 variances   = sort(c(1:9 %o% 10^(-2:-1),
                       mami.codi.R::default_variance()))
-
 
 source('./freq_trials.R')
 run_trials(search_label, variances, heisenberg)
