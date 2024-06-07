@@ -146,7 +146,7 @@ We chose the speed of sound in room temperature air.
 
 | consonance_dissonance | major_minor | temporal_consonance | spatial_consonance |
 |----------------------:|------------:|--------------------:|-------------------:|
-|             0.1620765 |   0.1016251 |           0.2702382 |          0.1686131 |
+|             0.4388513 |   0.1016251 |           0.2702382 |          0.1686131 |
 
 #### Temporal Periodicity
 
@@ -380,7 +380,7 @@ be relatively higher than the behavioral results.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
-| 0.07958           | 0.07958          |             0.2 |
+| 0.03979           | 0.03979          |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-9.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-10.png)<!-- -->

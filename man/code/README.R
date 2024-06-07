@@ -23,8 +23,8 @@ grid_1 = tidyr::expand_grid(
 
 experiment.rds = '../data/Bonang.rds'
 grid_Bonang = tidyr::expand_grid(
-  temporal_variance = default_variance,
-  spatial_variance  = default_variance,
+  temporal_variance = default_variance / 2,
+  spatial_variance  = default_variance / 2,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=4,
   octave_ratio=2,
