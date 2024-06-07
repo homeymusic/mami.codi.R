@@ -142,8 +142,8 @@ compute_consonance = function(x, amplitude,
     alcd(f/min(f), temporal_variance, deviation, 'temporal'),
     alcd(l/min(l), spatial_variance,  deviation, 'spatial'),
 
-    temporal_consonance   = 1 / .data$temporal_alcd,
-    spatial_consonance    = 1 / .data$spatial_alcd,
+    temporal_consonance   = 1 / log2(1+.data$temporal_alcd),
+    spatial_consonance    = 1 / log2(1+.data$spatial_alcd),
 
     consonance_dissonance = .data$temporal_consonance + .data$spatial_consonance,
 
