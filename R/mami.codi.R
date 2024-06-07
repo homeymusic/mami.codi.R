@@ -147,7 +147,7 @@ compute_consonance = function(x, amplitude,
 
     consonance_dissonance = 100 - log2(.data$temporal_alcd + .data$spatial_alcd),
 
-    major_minor           = log2(.data$temporal_alcd - .data$spatial_alcd),
+    major_minor           = .data$spatial_alcd - .data$temporal_alcd,
 
     frequencies           = list(f),
     wavelengths           = list(l),
