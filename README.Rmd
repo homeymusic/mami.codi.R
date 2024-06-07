@@ -117,7 +117,7 @@ suppressed, then temporal information is not necessary for pitch perception."\
 from "Revisiting place and temporal theories of pitch", Andrew J. Oxenham, 2014.\
 
 The MaMi.CoDi model, based on Stolzenburg (2015), has one one parameter: 
-variance. variance is used by the Stern-Brocot algorithm to find tone
+variance. Variance is used by the Stern-Brocot algorithm to find tone
 ratios as rational fractions that are then used to estimate the relative 
 periodicity of chords. variance acts as the physiological limits mentioned by 
 Oxenham, above.\
