@@ -1,12 +1,12 @@
 ---
-title: "Precision Search"
+title: "Variance Search"
 output:
   github_document: default
 always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'Bonang'
+search_label = 'Harmonic'
 ```
 
 # `r search_label`

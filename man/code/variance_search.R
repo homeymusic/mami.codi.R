@@ -1,4 +1,4 @@
-search_label = 'Bonang'
+search_label = 'Harmonic'
 heisenberg   = T
 
 devtools::install_github('git@github.com:homeymusic/mami.codi.R',
