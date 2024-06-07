@@ -1,7 +1,8 @@
-search_label = 'Pure'
+search_label = 'Bonang'
 heisenberg   = T
 
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R',
+                         ref='squares')
 
 # Detailed
 # from_prec   = 0.08
