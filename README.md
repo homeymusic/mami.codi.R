@@ -146,7 +146,7 @@ We chose the speed of sound in room temperature air.
 
 | consonance_dissonance | major_minor | temporal_consonance | spatial_consonance |
 |----------------------:|------------:|--------------------:|-------------------:|
-|                   0.1 |   0.0666667 |           0.0833333 |          0.0166667 |
+|             0.4388513 |   0.1016251 |           0.2702382 |          0.1686131 |
 
 #### Temporal Periodicity
 
