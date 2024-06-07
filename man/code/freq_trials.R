@@ -1,4 +1,4 @@
-run_trials <- function(search_label, variances) {
+run_trials <- function(search_label, variances, heisenberg) {
   devtools::load_all(".")
   tonic_midi = 60
   source('./utils.R')
@@ -84,9 +84,11 @@ run_trials <- function(search_label, variances) {
                                        octave_ratio  = octave_ratio
       )
     }
+
     mami.codi.R::mami.codi(
       chord,
       temporal_variance  = variance,
+      spatial_variance   = if (heisenberg) NA else variance,
       metadata       = list(
         octave_ratio   = octave_ratio,
         num_harmonics  = num_harmonics,

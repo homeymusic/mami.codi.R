@@ -49,7 +49,7 @@ grid_5PartialsNo3 = tidyr::expand_grid(
 
 experiment.rds = '../data/Harmonic.rds'
 grid_10 = tidyr::expand_grid(
-  temporal_variance = 0.1,
+  temporal_variance = temporal_variance,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
   octave_ratio=2.0,

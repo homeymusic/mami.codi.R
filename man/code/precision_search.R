@@ -1,4 +1,5 @@
 search_label = 'Pure'
+heisenberg   = T
 
 devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 
@@ -15,4 +16,4 @@ variances   = sort(c(1:9 %o% 10^(-2:-1),
 
 
 source('./freq_trials.R')
-run_trials(search_label, variances)
+run_trials(search_label, variances, heisenberg)
