@@ -1,7 +1,7 @@
 Variance Search
 ================
 
-# Bonang
+# 5PartialsNo3
 
 Temporal Variances:
 

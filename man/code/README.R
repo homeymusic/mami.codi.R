@@ -13,7 +13,7 @@ default_variance = mami.codi.R::default_variance()
 
 experiment.rds = '../data/Pure.rds'
 grid_1 = tidyr::expand_grid(
-  temporal_variance = default_variance * 2,
+  temporal_variance = 0.2,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=1,
   octave_ratio=2.0,
@@ -31,7 +31,7 @@ grid_Bonang = tidyr::expand_grid(
 
 experiment.rds = '../data/5Partials.rds'
 grid_5 = tidyr::expand_grid(
-  temporal_variance = default_variance,
+  temporal_variance = 0.07,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=5,
   octave_ratio=2.0,
@@ -40,7 +40,7 @@ grid_5 = tidyr::expand_grid(
 
 experiment.rds = '../data/5PartialsNo3.rds'
 grid_5PartialsNo3 = tidyr::expand_grid(
-  temporal_variance = default_variance,
+  temporal_variance = 0.06,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=5,
   octave_ratio=2.0,
@@ -49,7 +49,7 @@ grid_5PartialsNo3 = tidyr::expand_grid(
 
 experiment.rds = '../data/Harmonic.rds'
 grid_10 = tidyr::expand_grid(
-  temporal_variance = default_variance,
+  temporal_variance = 0.1,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
   octave_ratio=2.0,
@@ -58,7 +58,7 @@ grid_10 = tidyr::expand_grid(
 
 experiment.rds = '../data/Stretched.rds'
 grid_10_stretched = tidyr::expand_grid(
-  temporal_variance = default_variance,
+  temporal_variance = 0.1,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics = 10,
   octave_ratio = 2.1,
@@ -67,7 +67,7 @@ grid_10_stretched = tidyr::expand_grid(
 
 experiment.rds = '../data/Compressed.rds'
 grid_10_compressed = tidyr::expand_grid(
-  temporal_variance = default_variance,
+  temporal_variance = 0.1,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
   octave_ratio=1.9,

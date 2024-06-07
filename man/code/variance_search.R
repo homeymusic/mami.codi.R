@@ -1,4 +1,4 @@
-search_label = 'Pure'
+search_label = '5PartialsNo3'
 heisenberg   = T
 
 devtools::install_github('git@github.com:homeymusic/mami.codi.R')
