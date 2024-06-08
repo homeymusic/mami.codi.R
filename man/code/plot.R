@@ -261,11 +261,11 @@ plot_semitone_mami <- function(chords, title='', include_line=T, sigma=0.2,
                                include_linear_regression = F, goal=NULL,
                                black_vlines=c(),gray_vlines=c()) {
   chords$smoothed.major_minor = smoothed(chords$semitone,
-                                         chords$major_minor_z,
+                                         chords$major_minor,
                                          sigma)
 
   ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone,
-                                       y = .data$major_minor_z)) +
+                                       y = .data$major_minor)) +
     ggplot2::geom_vline(xintercept = black_vlines, color=colors_homey$highlight) +
     ggplot2::geom_vline(xintercept = gray_vlines,color=colors_homey$highlight,linetype = 'dotted') +
     { if (include_points)

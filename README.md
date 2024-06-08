@@ -136,7 +136,7 @@ We chose the speed of sound in room temperature air.
   1960.0, 1977.8, 2093.0, 2307.4, 2352.0, 2354.6, 2616.3, 2637.0,
   2744.0, 2966.6, 3136.0, 3296.3, 3528.0, 3920.0  
 
-- Speed of Sound: 346.0
+- Speed of Sound: 343.0
 
 - Wavelengths: 1.3, 1.0, 0.9, 0.7, 0.5, 0.4, 0.4, 0.3, 0.3, 0.3, 0.3,
   0.3, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1,
@@ -152,7 +152,7 @@ We chose the speed of sound in room temperature air.
 
 | lcd | chord_Sz | chord_Hz | c_sound |  chord_m |   chord_s |
 |----:|---------:|---------:|--------:|---------:|----------:|
-|  12 | 3.584963 | 21.80213 |     346 | 15.87001 | 0.0458671 |
+|  12 | 3.584963 | 21.80213 |     343 | 15.73241 | 0.0458671 |
 
 ##### Partial Periods
 
@@ -201,7 +201,7 @@ We chose the speed of sound in room temperature air.
 
 | lcd | chord_Sz | chord_Hz | c_sound |  chord_m |   chord_s |
 |----:|---------:|---------:|--------:|---------:|----------:|
-|  60 | 5.906891 | 4.360426 |     346 | 79.35004 | 0.2293354 |
+|  60 | 5.906891 | 4.360426 |     343 | 78.66204 | 0.2293354 |
 
 ##### Partial Wavelengths
 
@@ -215,36 +215,36 @@ We chose the speed of sound in room temperature air.
 
 | index | num | den |    tone_m |      freq |      midi | pseudo_rational_number |
 |------:|----:|----:|----------:|----------:|----------:|-----------------------:|
-|     1 |  15 |   1 | 1.3225007 |  261.6256 |  60.00000 |              14.983071 |
-|     2 |  71 |   6 | 1.0496695 |  329.6276 |  64.00000 |              11.892071 |
-|     3 |  10 |   1 | 0.8826633 |  391.9954 |  67.00000 |              10.000000 |
-|     4 |  15 |   2 | 0.6612504 |  523.2511 |  72.00000 |               7.491535 |
-|     5 |   6 |   1 | 0.5248348 |  659.2551 |  76.00000 |               5.946035 |
-|     6 |   5 |   1 | 0.4413317 |  783.9909 |  79.00000 |               5.000000 |
-|     7 |   5 |   1 | 0.4408336 |  784.8767 |  79.01955 |               4.994357 |
-|     8 |   4 |   1 | 0.3498898 |  988.8827 |  83.01955 |               3.964024 |
-|     9 |  11 |   3 | 0.3306252 | 1046.5023 |  84.00000 |               3.745768 |
-|    10 |  10 |   3 | 0.2942211 | 1175.9863 |  86.01955 |               3.333333 |
-|    11 |   3 |   1 | 0.2645001 | 1308.1278 |  87.86314 |               2.996614 |
-|    12 |   3 |   1 | 0.2624174 | 1318.5102 |  88.00000 |               2.973018 |
-|    13 |   5 |   2 | 0.2206658 | 1567.9817 |  91.00000 |               2.500000 |
-|    14 |   5 |   2 | 0.2204168 | 1569.7534 |  91.01955 |               2.497178 |
-|    15 |   7 |   3 | 0.2099339 | 1648.1378 |  91.86314 |               2.378414 |
-|    16 |  11 |   5 | 0.1889287 | 1831.3790 |  93.68826 |               2.140439 |
-|    17 |   2 |   1 | 0.1765327 | 1959.9772 |  94.86314 |               2.000000 |
-|    18 |   2 |   1 | 0.1749449 | 1977.7653 |  95.01955 |               1.982012 |
-|    19 |   9 |   5 | 0.1653126 | 2093.0045 |  96.00000 |               1.872884 |
-|    20 |   5 |   3 | 0.1499528 | 2307.3929 |  97.68826 |               1.698867 |
-|    21 |   5 |   3 | 0.1471106 | 2351.9726 |  98.01955 |               1.666667 |
-|    22 |   5 |   3 | 0.1469445 | 2354.6301 |  98.03910 |               1.664786 |
-|    23 |   3 |   2 | 0.1322501 | 2616.2556 |  99.86314 |               1.498307 |
-|    24 |   3 |   2 | 0.1312087 | 2637.0205 | 100.00000 |               1.486509 |
-|    25 |   3 |   2 | 0.1260948 | 2743.9680 | 100.68826 |               1.428571 |
-|    26 |   4 |   3 | 0.1166299 | 2966.6480 | 102.03910 |               1.321341 |
-|    27 |   5 |   4 | 0.1103329 | 3135.9635 | 103.00000 |               1.250000 |
-|    28 |   5 |   4 | 0.1049670 | 3296.2755 | 103.86314 |               1.189207 |
-|    29 |   7 |   6 | 0.0980737 | 3527.9589 | 105.03910 |               1.111111 |
-|    30 |   1 |   1 | 0.0882663 | 3919.9543 | 106.86314 |               1.000000 |
+|     1 |  15 |   1 | 1.3110340 |  261.6256 |  60.00000 |              14.983071 |
+|     2 |  71 |   6 | 1.0405683 |  329.6276 |  64.00000 |              11.892071 |
+|     3 |  10 |   1 | 0.8750102 |  391.9954 |  67.00000 |              10.000000 |
+|     4 |  15 |   2 | 0.6555170 |  523.2511 |  72.00000 |               7.491535 |
+|     5 |   6 |   1 | 0.5202842 |  659.2551 |  76.00000 |               5.946035 |
+|     6 |   5 |   1 | 0.4375051 |  783.9909 |  79.00000 |               5.000000 |
+|     7 |   5 |   1 | 0.4370113 |  784.8767 |  79.01955 |               4.994357 |
+|     8 |   4 |   1 | 0.3468561 |  988.8827 |  83.01955 |               3.964024 |
+|     9 |  11 |   3 | 0.3277585 | 1046.5023 |  84.00000 |               3.745768 |
+|    10 |  10 |   3 | 0.2916701 | 1175.9863 |  86.01955 |               3.333333 |
+|    11 |   3 |   1 | 0.2622068 | 1308.1278 |  87.86314 |               2.996614 |
+|    12 |   3 |   1 | 0.2601421 | 1318.5102 |  88.00000 |               2.973018 |
+|    13 |   5 |   2 | 0.2187525 | 1567.9817 |  91.00000 |               2.500000 |
+|    14 |   5 |   2 | 0.2185057 | 1569.7534 |  91.01955 |               2.497178 |
+|    15 |   7 |   3 | 0.2081137 | 1648.1378 |  91.86314 |               2.378414 |
+|    16 |  11 |   5 | 0.1872906 | 1831.3790 |  93.68826 |               2.140439 |
+|    17 |   2 |   1 | 0.1750020 | 1959.9772 |  94.86314 |               2.000000 |
+|    18 |   2 |   1 | 0.1734281 | 1977.7653 |  95.01955 |               1.982012 |
+|    19 |   9 |   5 | 0.1638792 | 2093.0045 |  96.00000 |               1.872884 |
+|    20 |   5 |   3 | 0.1486526 | 2307.3929 |  97.68826 |               1.698867 |
+|    21 |   5 |   3 | 0.1458350 | 2351.9726 |  98.01955 |               1.666667 |
+|    22 |   5 |   3 | 0.1456704 | 2354.6301 |  98.03910 |               1.664786 |
+|    23 |   3 |   2 | 0.1311034 | 2616.2556 |  99.86314 |               1.498307 |
+|    24 |   3 |   2 | 0.1300710 | 2637.0205 | 100.00000 |               1.486509 |
+|    25 |   3 |   2 | 0.1250015 | 2743.9680 | 100.68826 |               1.428571 |
+|    26 |   4 |   3 | 0.1156187 | 2966.6480 | 102.03910 |               1.321341 |
+|    27 |   5 |   4 | 0.1093763 | 3135.9635 | 103.00000 |               1.250000 |
+|    28 |   5 |   4 | 0.1040568 | 3296.2755 | 103.86314 |               1.189207 |
+|    29 |   7 |   6 | 0.0972234 | 3527.9589 | 105.03910 |               1.111111 |
+|    30 |   1 |   1 | 0.0875010 | 3919.9543 | 106.86314 |               1.000000 |
 
 ### Finding the variance Values
 
@@ -329,7 +329,8 @@ major-minor versus the behavioral results are included in a plot below.
 | 0.2               | 0.03166          |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-2.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-2.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-3.png)<!-- -->
 
 ##### Harmonic ~ Partials: 10
 
@@ -339,8 +340,9 @@ For 10 harmonics, behavioral results and theoretical predictions agree.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-5-3.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-4.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-4.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-5.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-6.png)<!-- -->
 
 ##### 5Partials ~ Partials: 5
 
@@ -353,8 +355,9 @@ peak.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-5-5.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-6.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-7.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-8.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-9.png)<!-- -->
 
 ##### 5PartialsNo3 ~ Partials: 5
 
@@ -367,8 +370,9 @@ while the M3 peak is slightly higher without the 3rd partial.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-5-7.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-8.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-10.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-11.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-12.png)<!-- -->
 
 ##### Bonang ~ Partials: 4
 
@@ -382,8 +386,9 @@ be relatively higher than the behavioral results.
 |:------------------|:-----------------|----------------:|
 | 0.03979           | 0.15915          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-5-9.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-10.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-13.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-14.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-15.png)<!-- -->
 
 ##### Stretched ~ Partials: 10
 
@@ -395,8 +400,9 @@ and m7 that do not exist in the behavioral results.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-5-11.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-12.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-16.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-17.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-18.png)<!-- -->
 
 ##### Compressed ~ Partials: 10
 
@@ -407,8 +413,9 @@ with the theoretical peaks.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-5-13.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-14.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-19.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-20.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-21.png)<!-- -->
 
 #### Dyads spanning 1 quarter tone
 
@@ -420,8 +427,9 @@ Description is below.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |           0.035 |
 
-![](man/figures/README-unnamed-chunk-5-15.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-16.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-22.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-23.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-24.png)<!-- -->
 
 ##### M6 ~ Partials: 10
 
@@ -431,8 +439,9 @@ Description is below.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |           0.035 |
 
-![](man/figures/README-unnamed-chunk-5-17.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-18.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-25.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-26.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-27.png)<!-- -->
 
 ##### P8 ~ Partials: 10
 
@@ -442,19 +451,22 @@ Description is below.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |           0.035 |
 
-![](man/figures/README-unnamed-chunk-5-19.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-20.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-28.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-29.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-30.png)<!-- -->
 
 ##### P8Zoomed ~ Partials: 10
 
-Description is below.
+There are 3,500 inner hair cells along the basilar membrane. 1 / 3,500
+is 0.00029.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
-| 0.07958           | 0.07958          |           0.035 |
+| 22.16401          | 0.00029          |           0.035 |
 
-![](man/figures/README-unnamed-chunk-5-21.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-22.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-31.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-32.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-33.png)<!-- -->
 
 ### Manipulating amplitudes
 

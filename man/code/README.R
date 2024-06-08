@@ -103,7 +103,7 @@ grid_P8 = tidyr::expand_grid(
 
 experiment.rds = '../data/P8Zoomed.rds'
 grid_P8_zoomed = tidyr::expand_grid(
-  temporal_variance = default_variance,
+  temporal_variance = HEISENBERG / (1/3500),
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
   octave_ratio=2.0,

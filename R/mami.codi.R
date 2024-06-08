@@ -134,7 +134,7 @@ compute_consonance = function(x, amplitude,
                               deviation) {
 
   f       = x$spectrum[[1]] %>% dplyr::filter(.data$y>amplitude) %>% hrep::freq()
-  c_sound = 346
+  c_sound = 343 # m/s
   l       = c_sound / f
 
   x %>% dplyr::mutate(
