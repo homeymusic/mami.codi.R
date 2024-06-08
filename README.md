@@ -337,7 +337,7 @@ For 10 harmonics, behavioral results and theoretical predictions agree.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
-| 0.1               | 0.06333          |             0.2 |
+| 0.07958           | 0.07958          |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-3.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-4.png)<!-- -->
@@ -351,7 +351,7 @@ peak.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
-| 0.07              | 0.09047          |             0.2 |
+| 0.07958           | 0.07958          |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-5.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-6.png)<!-- -->
@@ -365,7 +365,7 @@ while the M3 peak is slightly higher without the 3rd partial.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
-| 0.06              | 0.10554          |             0.2 |
+| 0.07958           | 0.07958          |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-7.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-8.png)<!-- -->
@@ -393,7 +393,7 @@ and m7 that do not exist in the behavioral results.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
-| 0.1               | 0.06333          |             0.2 |
+| 0.07958           | 0.07958          |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-11.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-12.png)<!-- -->
@@ -405,7 +405,7 @@ with the theoretical peaks.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
-| 0.1               | 0.06333          |             0.2 |
+| 0.07958           | 0.07958          |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-13.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-14.png)<!-- -->
@@ -462,7 +462,7 @@ Description is below.
 
 | temporal_variance | spatial_variance | min_amplitude | smoothing_sigma |
 |:------------------|:-----------------|:--------------|----------------:|
-| 0.1               | 0.06333          | 0.013         |             0.2 |
+| 0.07958           | 0.07958          | 0.013         |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-9-1.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-9-2.png)<!-- -->
@@ -471,7 +471,7 @@ Description is below.
 
 | temporal_variance | spatial_variance | min_amplitude | smoothing_sigma |
 |:------------------|:-----------------|:--------------|----------------:|
-| 0.1               | 0.06333          | 0.08          |             0.2 |
+| 0.07958           | 0.07958          | 0.08          |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-9-3.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-9-4.png)<!-- -->
@@ -480,7 +480,7 @@ Description is below.
 
 | temporal_variance | spatial_variance | min_amplitude | smoothing_sigma |
 |:------------------|:-----------------|:--------------|----------------:|
-| 0.1               | 0.06333          | 0             |             0.2 |
+| 0.07958           | 0.07958          | 0             |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-9-5.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-9-6.png)<!-- -->
