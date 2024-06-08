@@ -40,6 +40,7 @@ mami.codi <- function(
       amplitude,
       deviation
     )                                      %>%
+    rotate()                               %>%
     format_output(metadata, verbose)
 
 }
@@ -142,12 +143,8 @@ compute_consonance = function(x, amplitude,
     alcd(f/min(f), temporal_variance, deviation, 'temporal'),
     alcd(l/min(l), spatial_variance,  deviation, 'spatial'),
 
-    temporal_consonance   = 50 - log2(.data$temporal_alcd),
-    spatial_consonance    = 50 - log2(.data$spatial_alcd),
-
-    consonance_dissonance = .data$temporal_consonance + .data$spatial_consonance,
-
-    major_minor           = .data$temporal_consonance - .data$spatial_consonance,
+    temporal_consonance   = 100 / sqrt(2) - log2(.data$temporal_alcd),
+    spatial_consonance    = 100 / sqrt(2)  - log2(.data$spatial_alcd),
 
     frequencies           = list(f),
     wavelengths           = list(l),
@@ -160,6 +157,27 @@ compute_consonance = function(x, amplitude,
   )
 
 }
+
+rotate <- function(x) {
+
+  rotated = (R_PI_4 %*% matrix(c(
+    x$spatial_consonance,
+    x$temporal_consonance
+  ))) %>% as.vector %>% zapsmall
+
+  x %>% dplyr::mutate(
+    consonance_dissonance = rotated[1],
+    major_minor           = rotated[2],
+    .before=1
+  )
+
+}
+PI_4 = pi / 4
+
+R_PI_4 = matrix(c(
+  cos(PI_4), sin(PI_4),
+  -sin(PI_4), cos(PI_4)
+), nrow = 2, ncol = 2, byrow = TRUE)
 
 #' Approximate Least Common Denominator
 #'
