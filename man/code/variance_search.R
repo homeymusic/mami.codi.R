@@ -1,5 +1,5 @@
-search_label = '5PartialsNo3'
-heisenberg   = T
+search_label = 'Harmonic'
+heisenberg   = F
 
 devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 
