@@ -145,7 +145,7 @@ compute_consonance = function(x, amplitude,
     temporal_consonance   = 50 - log2(.data$temporal_alcd),
     spatial_consonance    = 50 - log2(.data$spatial_alcd),
 
-    consonance_dissonance = .data$temporal_consonance + .data$spatial_consonance,
+    consonance_dissonance = .data$temporal_consonance * .data$spatial_consonance,
 
     major_minor           = .data$temporal_consonance - .data$spatial_consonance,
 
