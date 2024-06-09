@@ -1,7 +1,8 @@
-search_label = 'Pure'
-heisenberg   = T
+search_label = 'Harmonic'
+heisenberg   = F
 
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R',
+                         ref='gcd_lcm')
 
 # Detailed
 # from_prec   = 0.1
