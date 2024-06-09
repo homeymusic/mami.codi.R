@@ -842,8 +842,8 @@ plot_periodicity <- function(ratios, lcd, dimension,
     course_of_bricks
   })
   if (dimension=='wavelength') {
-    xlab = bquote('Wavelength'~(km))
-    scaled_label = scales::label_number(scale = 1e-03)
+    xlab = bquote('Wavelength'~(m))
+    scaled_label = scales::label_number(scale = 1e+00)
   } else if (dimension=='frequency') {
     xlab = bquote('Period'~(ms))
     scaled_label = scales::label_number(scale = 1e03)
