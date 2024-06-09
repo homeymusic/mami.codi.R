@@ -38,10 +38,10 @@ to the middle ear, the source of the wave. \
 MaMi.CoDi combines the two cycle estimates into a two-dimensional space with 
 consonance-dissonance along one dimension and major-minor on the orthogonal dimension.
 
-#### Example Chord: Major Triad
+#### Example Dyad: Major Third
 
-Below, we estimate the periodicity of the C4, E4 and G4 major triad 
-with `r num_harmonics` harmonics per pitch. The MaMi.CoDi model is based on 
+Below, we estimate the periodicity of the C4, E4 major third 
+with 1, 10 and 20 harmonics per pitch. The MaMi.CoDi model is based on 
 fractions of tones - both frequency and wavelength fractions. The input to the model 
 is a sparse frequency spectrum. We convert frequencies to wavelengths by 
 dividing a speed of sound constant by the frequency.\
@@ -51,6 +51,8 @@ mathematics. We could choose any media for the speed of sound:
 room temperature air at sea level, cochlear fluid, the basilar membrane, etc. 
 
 We chose the speed of sound in room temperature air.
+
+#### 1 Harmonic
 
 ```{r, echo=F, results='asis', message=F}
 chord = midi %>% mami.codi(
@@ -64,11 +66,17 @@ c_sound = chord$speed_of_sound
 
 * Number of Harmonics: `r num_harmonics`
 
-* Frequencies: `r sprintf(chord$frequencies[[1]], fmt = '%#.1f')`\
+* Frequencies: `r sprintf(chord$frequencies[[1]], fmt = '%#.3f')`\
 
-* Speed of Sound: `r sprintf(c_sound, fmt = '%#.1f')`
+* Wavelengths: `r sprintf(chord$wavelengths[[1]], fmt = '%#.3f')`\
 
-* Wavelengths: `r sprintf(chord$wavelengths[[1]], fmt = '%#.1f')`\
+* Speed of Sound: `r sprintf(c_sound, fmt = '%#.3f')`
+
+* f0: `r sprintf(chord$f0, fmt = '%#.3f')`
+
+* l0: `r sprintf(chord$l0, fmt = '%#.3f')`
+
+* Quantum Speed of Sound: `r sprintf(chord$l0 * chord$f0, fmt = '%#.3f')`
 
 ###### MaMi.CoDi Predictions
 ```{r, echo=F, results='asis', message=F}
@@ -83,7 +91,7 @@ knitr::kable(chord %>% dplyr::select(
 ```{r, echo=F, results='asis', message=F}
 knitr::kable(tibble::tibble(
   lcd      = chord$temporal_alcd,
-  chord_Sz = log2(lcd),
+  chord_Sz = chord$temporal_Sz,
   min_f_Hz = min(chord$frequencies[[1]]),
   max_T_s  = 1 / min_f_Hz,
   chord_s  = lcd * max_T_s,
@@ -134,7 +142,7 @@ knitr::kable(temporal_fractions %>%
 ```{r, echo=F, results='asis', message=F}
 knitr::kable(tibble::tibble(
   lcd      = chord$spatial_alcd,
-  chord_Sz = log2(lcd),
+  chord_Sz = chord$spatial_Sz,
   max_l_m  = max(chord$wavelengths[[1]]),
   chord_m  = lcd * max_l_m,
   chord_Hz = c_sound / chord_m,
@@ -181,8 +189,7 @@ knitr::kable(spatial_fractions %>%
 ```
 
 
-
-
+#### 10 Harmonics
 
 ```{r, echo=F, results='asis', message=F}
 num_harmonics = 10
@@ -197,11 +204,17 @@ c_sound = chord$speed_of_sound
 
 * Number of Harmonics: `r num_harmonics`
 
-* Frequencies: `r sprintf(chord$frequencies[[1]], fmt = '%#.1f')`\
+* Frequencies: `r sprintf(chord$frequencies[[1]], fmt = '%#.3f')`\
 
-* Speed of Sound: `r sprintf(c_sound, fmt = '%#.1f')`
+* Wavelengths: `r sprintf(chord$wavelengths[[1]], fmt = '%#.3f')`\
 
-* Wavelengths: `r sprintf(chord$wavelengths[[1]], fmt = '%#.1f')`\
+* Speed of Sound: `r sprintf(c_sound, fmt = '%#.3f')`
+
+* f0: `r sprintf(chord$f0, fmt = '%#.3f')`
+
+* l0: `r sprintf(chord$l0, fmt = '%#.3f')`
+
+* Quantum Speed of Sound: `r sprintf(chord$l0 * chord$f0, fmt = '%#.3f')`
 
 ###### MaMi.CoDi Predictions
 ```{r, echo=F, results='asis', message=F}
@@ -216,7 +229,7 @@ knitr::kable(chord %>% dplyr::select(
 ```{r, echo=F, results='asis', message=F}
 knitr::kable(tibble::tibble(
   lcd      = chord$temporal_alcd,
-  chord_Sz = log2(lcd),
+  chord_Sz = chord$temporal_Sz,
   min_f_Hz = min(chord$frequencies[[1]]),
   max_T_s  = 1 / min_f_Hz,
   chord_s  = lcd * max_T_s,
@@ -267,12 +280,150 @@ knitr::kable(temporal_fractions %>%
 ```{r, echo=F, results='asis', message=F}
 knitr::kable(tibble::tibble(
   lcd      = chord$spatial_alcd,
-  chord_Sz = log2(lcd),
+  chord_Sz = chord$spatial_Sz,
   max_l_m  = max(chord$wavelengths[[1]]),
   chord_m  = lcd * max_l_m,
   chord_Hz = c_sound / chord_m,
   chord_s  = 1 / chord_Hz,
+  c_sound,
+) %>% dplyr::select(lcd, chord_Sz, chord_Hz, c_sound, chord_m, chord_s))
+```
+
+##### Partial Wavelengths
+
+```{r, echo=F, results='asis', message=F}
+spatial_fractions = chord$spatial_fractions[[1]] %>%
+  dplyr::mutate(
+    index = dplyr::row_number(),
+    tone = min(chord$wavelengths[[1]]) * chord$spatial_fractions[[1]]$pseudo_rational_number,
+    freq = c_sound / tone,
+    midi = hrep::freq_to_midi(freq)
+  ) %>% 
+  dplyr::select(
+    index, 
+    num, 
+    den,
+    tone,
+    freq,
+    midi
+  )
+lcd    = chord$spatial_alcd
+plot_periodicity(spatial_fractions, lcd, 'wavelength', c_sound = c_sound,relative = F)
+```
+
+##### Chord Wavelength
+
+```{r, echo=F, results='asis', message=F}
+plot_periodicity(spatial_fractions, lcd, 'wavelength', c_sound = c_sound)
+```
+
+##### Wavelength fractions
+```{r, echo=F, results='asis', message=F}
+spatial_fractions$pseudo_rational_number = chord$spatial_fractions[[1]]$pseudo_rational_number
+knitr::kable(spatial_fractions %>% 
+               dplyr::rename(
+                 tone_m = tone
+               ))
+```
+
+
+#### 20 Harmonics
+
+```{r, echo=F, results='asis', message=F}
+num_harmonics = 20
+chord = midi %>% mami.codi(
+  verbose=T,
+  num_harmonics = num_harmonics
+)
+c_sound = chord$speed_of_sound
+```
+
+* Fundamentals in MIDI: `r midi`\
+
+* Number of Harmonics: `r num_harmonics`
+
+* Frequencies: `r sprintf(chord$frequencies[[1]], fmt = '%#.3f')`\
+
+* Wavelengths: `r sprintf(chord$wavelengths[[1]], fmt = '%#.3f')`\
+
+* Speed of Sound: `r sprintf(c_sound, fmt = '%#.3f')`
+
+* f0: `r sprintf(chord$f0, fmt = '%#.3f')`
+
+* l0: `r sprintf(chord$l0, fmt = '%#.3f')`
+
+* Quantum Speed of Sound: `r sprintf(chord$l0 * chord$f0, fmt = '%#.3f')`
+
+###### MaMi.CoDi Predictions
+```{r, echo=F, results='asis', message=F}
+knitr::kable(chord %>% dplyr::select(
+  'consonance_dissonance', 
+  'major_minor', 
+  'temporal_consonance', 
+  'spatial_consonance'))
+```
+
+#### Temporal Periodicity
+```{r, echo=F, results='asis', message=F}
+knitr::kable(tibble::tibble(
+  lcd      = chord$temporal_alcd,
+  chord_Sz = chord$temporal_Sz,
+  min_f_Hz = min(chord$frequencies[[1]]),
+  max_T_s  = 1 / min_f_Hz,
+  chord_s  = lcd * max_T_s,
+  chord_Hz = 1 / chord_s,
+  chord_m  = c_sound / chord_Hz,
   c_sound
+) %>% dplyr::select(lcd, chord_Sz, chord_Hz, c_sound, chord_m, chord_s))
+```
+
+##### Partial Periods
+
+```{r, echo=F, results='asis', message=F}
+temporal_fractions = chord$temporal_fractions[[1]] %>%
+  dplyr::mutate(
+    index = dplyr::row_number(),
+    tone = min(chord$frequencies[[1]]) * chord$temporal_fractions[[1]]$pseudo_rational_number,
+    freq = tone,
+    midi = hrep::freq_to_midi(freq)
+  ) %>% 
+  dplyr::select(
+    index, 
+    num, 
+    den,
+    tone,
+    freq,
+    midi
+  )
+lcd = chord$temporal_alcd
+plot_periodicity(temporal_fractions, lcd, 'frequency', relative = F)
+```
+
+##### Chord Period
+
+```{r, echo=F, results='asis', message=F}
+plot_periodicity(temporal_fractions, lcd, 'frequency')
+```
+
+##### Frequency fractions
+```{r, echo=F, results='asis', message=F}
+temporal_fractions$pseudo_rational_number = chord$temporal_fractions[[1]]$pseudo_rational_number
+knitr::kable(temporal_fractions %>% 
+               dplyr::rename(
+                 tone_hz = tone
+               ))
+```
+
+#### Spatial Periodicity
+```{r, echo=F, results='asis', message=F}
+knitr::kable(tibble::tibble(
+  lcd      = chord$spatial_alcd,
+  chord_Sz = chord$spatial_Sz,
+  max_l_m  = max(chord$wavelengths[[1]]),
+  chord_m  = lcd * max_l_m,
+  chord_Hz = c_sound / chord_m,
+  chord_s  = 1 / chord_Hz,
+  c_sound,
 ) %>% dplyr::select(lcd, chord_Sz, chord_Hz, c_sound, chord_m, chord_s))
 ```
 
