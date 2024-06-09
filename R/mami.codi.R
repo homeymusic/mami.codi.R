@@ -139,11 +139,11 @@ compute_consonance = function(x, amplitude,
 
   x %>% dplyr::mutate(
 
-    alcd(f/min(f), temporal_variance, deviation, 'temporal'),
-    alcd(l/min(l), spatial_variance,  deviation, 'spatial'),
+    alcd(f, temporal_variance, deviation, 'temporal'),
+    alcd(l, spatial_variance,  deviation, 'spatial'),
 
-    temporal_consonance   = 50 - log2(.data$temporal_alcd),
-    spatial_consonance    = 50 - log2(.data$spatial_alcd),
+    temporal_consonance   = 50 - log2(.data$temporal_alcd / .data$temporal_agcn),
+    spatial_consonance    = 50 - log2(.data$spatial_alcd / .data$spatial_agcn),
 
     consonance_dissonance = .data$temporal_consonance + .data$spatial_consonance,
 
@@ -197,10 +197,12 @@ compute_consonance = function(x, amplitude,
 alcd <- function(x, variance, deviation, label) {
   fractions = approximate_rational_fractions(x, variance, deviation)
   tibble::tibble_row(
+    agcn       = gcd_integers(fractions$num),
     alcd       = lcm_integers(fractions$den),
     fractions  = list(fractions)
   ) %>% dplyr::rename_with(~ paste0(label, '_' , .))
 }
+gcd_integers <- function(x) Reduce(gmp::gcd.bigz, x) %>% as.numeric()
 lcm_integers <- function(x) Reduce(gmp::lcm.bigz, x) %>% as.numeric()
 
 format_output <- function(x, metadata, verbose) {
