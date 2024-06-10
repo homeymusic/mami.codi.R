@@ -217,6 +217,46 @@ plot_cofreq.cowave <- function(chords, title, chords_to_label=NULL,
     #            max(c(chords$temporal_consonance,chords$spatial_consonance)))) +
     {if (minimal) theme_homey_minimal(aspect.ratio=aspect.ratio) else theme_homey(aspect.ratio=aspect.ratio)}
 }
+plot_error_hist <- function(errors, signal, variance, title='') {
+  px = pretty(errors)
+  err = tibble::tibble(
+    errors = errors
+  )
+  ggplot2::ggplot(err, ggplot2::aes(errors)) +
+    ggplot2::geom_histogram(
+      fill = colors_homey[signal]
+    ) +
+    ggplot2::scale_x_continuous(
+      breaks = px,
+      limits = range(px)
+    ) +
+    ggplot2::geom_vline(
+      xintercept = c(-variance, variance),
+      color=colors_homey$highlight,
+      linetype = 'dotted'
+    ) +
+    ggplot2::annotate(
+      x=-variance,
+      y=+Inf,
+      label=round(-variance,5),
+      vjust=2,
+      geom='label',
+      fill=colors_homey$neutral,
+      color=colors_homey$background
+    ) +
+    ggplot2::annotate(
+      x=variance,
+      y=+Inf,
+      label=round(variance,5),
+      vjust=2,
+      geom='label',
+      fill=colors_homey$neutral,
+      color=colors_homey$background
+    ) +
+    ggplot2::ggtitle(title) +
+    theme_homey()
+}
+
 plot_semitone_codi <- function(chords, title='', include_line=T, sigma=0.2,
                                include_points=T,
                                include_linear_regression = F, goal=NULL,

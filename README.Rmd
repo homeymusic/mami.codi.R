@@ -96,8 +96,8 @@ the spatial and temporal signals would have the same values. However, for comple
 pitches that is not the case. The pattern of the two sets of components are different.
 See the example of the major triad with 5 harmonics, below.
 
-```{r, child=c('man/Spatiotemporal_Periodicity.Rmd')}
-```
+# ```{r, child=c('man/Spatiotemporal_Periodicity.Rmd')}
+# ```
 
 ### Finding the variance Values
 
@@ -284,9 +284,11 @@ p = params %>% purrr::map(\(p) {
   }
   cat("  \n#####", title, '\n')
   cat(description)
+  t_v = chords$temporal_variance %>% unique() %>% max()
+  s_v = chords$spatial_variance %>% unique() %>% max()
   print(knitr::kable(tibble::tibble_row(
-    temporal_variance = paste(round(chords$temporal_variance %>% unique, 5), collapse = ' '),
-    spatial_variance  = paste(round(chords$spatial_variance %>% unique, 5), collapse = ' '),
+    temporal_variance = paste(round(t_v, 5), collapse = ' '),
+    spatial_variance  = paste(round(s_v, 5), collapse = ' '),
     smoothing_sigma   = sigma
   )))
   print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),
@@ -304,9 +306,14 @@ p = params %>% purrr::map(\(p) {
                            black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")
   
-  errors = (chords %>% tidyr::unnest(spatial_fractions))$error
-  print(hist(errors))
+  errors = (chords %>% tidyr::unnest(temporal_fractions))$error
+  print(plot_error_hist(errors, 'major', t_v, 'Temporal Errors'))
   cat("  \n")
+
+  errors = (chords %>% tidyr::unnest(spatial_fractions))$error
+  print(plot_error_hist(errors, 'minor', s_v, 'Spatial Errors'))
+  cat("  \n")
+
 })
 ```
 
