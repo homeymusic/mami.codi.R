@@ -4,14 +4,14 @@
 \alias{alcd}
 \title{Approximate Least Common Denominator}
 \usage{
-alcd(x, variance, deviation, label)
+alcd(x, variance, octave_deviation, label)
 }
 \arguments{
 \item{x}{Vector of rational numbers}
 
 \item{variance}{Precision for creating rational fractions}
 
-\item{deviation}{Deviation for approximating least common multiples}
+\item{octave_deviation}{Deviation for approximating least common multiples}
 
 \item{label}{A custom label for the output usually 'spatial' or 'temporal'}
 }

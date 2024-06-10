@@ -7,9 +7,9 @@
 mami.codi(
   x,
   amplitude = MINIMUM_AMPLITUDE,
-  temporal_variance = DEFAULT_VARIANCE,
-  spatial_variance = DEFAULT_VARIANCE,
-  deviation = APPROXIMATE_LCM_DEVIATION,
+  temporal_variance = NA,
+  spatial_variance = NA,
+  deviation = OCTAVE_DEVIATION,
   metadata = NA,
   verbose = FALSE,
   ...

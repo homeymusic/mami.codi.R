@@ -25,7 +25,7 @@ mami.codi <- function(
     amplitude         = MINIMUM_AMPLITUDE,
     temporal_variance = NA,
     spatial_variance  = NA,
-    deviation         = APPROXIMATE_LCM_DEVIATION,
+    deviation         = OCTAVE_DEVIATION,
     metadata          = NA,
     verbose            = FALSE,
     ...
@@ -130,17 +130,16 @@ parse_variances <- function(x, temporal_variance, spatial_variance) {
 #' https://www.engineeringtoolbox.com/sound-speed-water-d_598.html
 #' https://www.engineeringtoolbox.com/air-speed-sound-d_603.html
 #' https://en.wikipedia.org/wiki/Floating-point_arithmetic
-compute_consonance = function(x, amplitude,
-                              deviation) {
+compute_consonance = function(x, minimum_amplitude, octave_deviation) {
 
-  f       = x$spectrum[[1]] %>% dplyr::filter(.data$y>amplitude) %>% hrep::freq()
+  f       = x$spectrum[[1]] %>% dplyr::filter(.data$y>minimum_amplitude) %>% hrep::freq()
   c_sound = 343 # m/s
   l       = c_sound / f
 
   x %>% dplyr::mutate(
 
-    alcd(f/min(f), temporal_variance, deviation, 'temporal'),
-    alcd(l/min(l), spatial_variance,  deviation, 'spatial'),
+    alcd(f/min(f), temporal_variance, octave_deviation, 'temporal'),
+    alcd(l/min(l), spatial_variance,  octave_deviation, 'spatial'),
 
     f0                    = min(f) / .data$temporal_alcd,
     l0                    = max(l) * .data$spatial_alcd,
@@ -156,10 +155,10 @@ compute_consonance = function(x, amplitude,
     temporal_Sz           = log2(.data$temporal_alcd),
     spatial_Sz            = log2(.data$spatial_alcd),
     speed_of_sound        = c_sound,
-    amplitude,
+    minimum_amplitude,
     temporal_variance,
     spatial_variance,
-    deviation
+    octave_deviation
 
   )
 
@@ -187,15 +186,15 @@ compute_consonance = function(x, amplitude,
 #'
 #' @param x Vector of rational numbers
 #' @param variance Precision for creating rational fractions
-#' @param deviation Deviation for approximating least common multiples
+#' @param octave_deviation Deviation for approximating least common multiples
 #' @param label A custom label for the output usually 'spatial' or 'temporal'
 #'
 #' @return The approximate least common denominator of the rational numbers
 #'
 #' @rdname alcd
 #' @export
-alcd <- function(x, variance, deviation, label) {
-  fractions = approximate_rational_fractions(x, variance, deviation)
+alcd <- function(x, variance, octave_deviation, label) {
+  fractions = approximate_rational_fractions(x, variance, octave_deviation)
   tibble::tibble_row(
     alcd       = lcm_integers(fractions$den),
     fractions  = list(fractions)
@@ -267,13 +266,13 @@ DEFAULT_VARIANCE = sqrt(HEISENBERG)
 
 #' Default Approximate Least Common Multiple Deviation
 #'
-#' Default deviation for approximating the Least Common Multiple (LCM)
+#' Default octave_deviation for approximating the Least Common Multiple (LCM)
 #'
 #''
-#' @rdname approximate_lcm_deviation
+#' @rdname octave_deviation
 #' @export
-approximate_lcm_deviation <- function() { APPROXIMATE_LCM_DEVIATION }
-APPROXIMATE_LCM_DEVIATION = 0.11
+octave_deviation <- function() { OCTAVE_DEVIATION }
+OCTAVE_DEVIATION = 0.11
 
 #' Default Minimum Amplitude
 #'
