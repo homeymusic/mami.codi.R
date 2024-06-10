@@ -9,7 +9,7 @@ tonic_midi = 60
 output.rds = '../data/readme.rds'
 prepare(output.rds)
 
-default_variance = mami.codi.R::default_variance()
+default_variance = 0.079
 
 experiment.rds = '../data/Pure.rds'
 grid_1 = tidyr::expand_grid(

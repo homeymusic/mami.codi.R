@@ -46,3 +46,7 @@ Octave Ratios:
 ## Temporal
 
 ![](../figures/variance_search/_Temporal-1.png)<!-- -->
+
+## Spatiotemporal
+
+![](../figures/variance_search/_Spatiotemporal-1.png)<!-- -->
