@@ -4,7 +4,10 @@ heisenberg   = F
 err = devtools::install_github('git@github.com:homeymusic/mami.codi.R',
                                ref='gcd_lcm')
 
-print(err)
+print(paste("github:", err))
+if (is.na(err)) {
+  stop('problem wit github')
+}
 
 # Detailed
 # from_prec   = 0.1
@@ -14,7 +17,7 @@ print(err)
 #               mami.codi.R::default_variance()))
 
 # Orders of Magnitude
-variances   = sort(c(1:9 %o% 10^(-2:-1),
+variances   = sort(c(1:9 %o% 10^(-5:-2),
                       mami.codi.R::default_variance()))
 
 source('./freq_trials.R')
