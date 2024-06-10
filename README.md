@@ -84,7 +84,371 @@ values. However, for complex pitches that is not the case. The pattern
 of the two sets of components are different. See the example of the
 major triad with 5 harmonics, below.
 
-# `{r, child=c('man/Spatiotemporal_Periodicity.Rmd')} #`
+### Estimating Spatiotemporal Periodicity
+
+To estimate the periodicity of a chord, the MaMi.CoDi model uses a
+signal processing technique. It finds fractions, within a given
+variance, for every tone in the chord (fundamental, harmonics, noise,
+etc.) relative to a reference tone. The least common denominator of
+those fractions is a measure of the cycle length, relative to the
+reference tone. Long relative cycles are predicted to sound unpleasant
+and short relative cycles are predicted to sound pleasant.  
+
+MaMi.CoDi creates two estimates of the chord’s period: a temporal
+estimate and a spatial estimate.  
+
+For the temporal (i.e. phase-locking or frequency) estimate the
+reference tone is the smallest frequency. Small frequencies are low
+tones and are detected by the inner ear hair cells closest to the apex
+of the cochlea, which is the end furthest from the source of the wave.  
+
+For the spatial (i.e. rate-place or wavelength) estimate, the reference
+tone is the smallest wavelength. Small wavelengths are high tones and
+are detected by the inner ear hair cells closest to the base of the
+cochlea, which is the end closest to the middle ear, the source of the
+wave.  
+
+MaMi.CoDi combines the two cycle estimates into a two-dimensional space
+with consonance-dissonance along one dimension and major-minor on the
+orthogonal dimension.
+
+#### Example Dyad: Major Third
+
+Below, we estimate the periodicity of the C4, E4 major third with 1, 10
+and 20 harmonics per pitch. The MaMi.CoDi model is based on fractions of
+tones - both frequency and wavelength fractions. The input to the model
+is a sparse frequency spectrum. We convert frequencies to wavelengths by
+dividing a speed of sound constant by the frequency.  
+
+For tone ratios, the value of the speed of sound constant does not
+impact the mathematics. We could choose any media for the speed of
+sound: room temperature air at sea level, cochlear fluid, the basilar
+membrane, etc.
+
+We chose the speed of sound in room temperature air.
+
+#### 1 Harmonic
+
+- Fundamentals in MIDI: 60, 64  
+
+- Number of Harmonics: 1
+
+- Frequencies: 261.626, 329.628  
+
+- Wavelengths: 1.311, 1.041  
+
+- Speed of Sound: 343.000
+
+- f0: 87.209
+
+- l0: 3.933
+
+- Quantum Speed of Sound: 343.000
+
+###### MaMi.CoDi Predictions
+
+| consonance_dissonance | major_minor | temporal_consonance | spatial_consonance |
+|----------------------:|------------:|--------------------:|-------------------:|
+|              96.83007 |           0 |            48.41504 |           48.41504 |
+
+#### Temporal Periodicity
+
+| lcd | chord_Sz | chord_Hz | c_sound |  chord_m |   chord_s |
+|----:|---------:|---------:|--------:|---------:|----------:|
+|   3 | 1.584963 | 87.20852 |     343 | 3.933102 | 0.0114668 |
+
+##### Partial Periods
+
+![](man/figures/README-unnamed-chunk-16-1.png)<!-- -->
+
+##### Chord Period
+
+![](man/figures/README-unnamed-chunk-17-1.png)<!-- -->
+
+##### Frequency fractions
+
+| index | num | den |  tone_hz |     freq | midi | pseudo_rational_number |
+|------:|----:|----:|---------:|---------:|-----:|-----------------------:|
+|     1 |   1 |   1 | 261.6256 | 261.6256 |   60 |               1.000000 |
+|     2 |   4 |   3 | 329.6276 | 329.6276 |   64 |               1.259921 |
+
+#### Spatial Periodicity
+
+| lcd | chord_Sz | chord_Hz | c_sound |  chord_m |   chord_s |
+|----:|---------:|---------:|--------:|---------:|----------:|
+|   3 | 1.584963 | 87.20852 |     343 | 3.933102 | 0.0114668 |
+
+##### Partial Wavelengths
+
+![](man/figures/README-unnamed-chunk-20-1.png)<!-- -->
+
+##### Chord Wavelength
+
+![](man/figures/README-unnamed-chunk-21-1.png)<!-- -->
+
+##### Wavelength fractions
+
+| index | num | den |   tone_m |     freq | midi | pseudo_rational_number |
+|------:|----:|----:|---------:|---------:|-----:|-----------------------:|
+|     1 |   4 |   3 | 1.311034 | 261.6256 |   60 |               1.259921 |
+|     2 |   1 |   1 | 1.040568 | 329.6276 |   64 |               1.000000 |
+
+#### 10 Harmonics
+
+- Fundamentals in MIDI: 60, 64  
+
+- Number of Harmonics: 10
+
+- Frequencies: 261.626, 329.628, 523.251, 659.255, 784.877, 988.883,
+  1046.502, 1308.128, 1318.510, 1569.753, 1648.138, 1831.379, 1977.765,
+  2093.005, 2307.393, 2354.630, 2616.256, 2637.020, 2966.648, 3296.276  
+
+- Wavelengths: 1.311, 1.041, 0.656, 0.520, 0.437, 0.347, 0.328, 0.262,
+  0.260, 0.219, 0.208, 0.187, 0.173, 0.164, 0.149, 0.146, 0.131, 0.130,
+  0.116, 0.104  
+
+- Speed of Sound: 343.000
+
+- f0: 21.802
+
+- l0: 78.662
+
+- Quantum Speed of Sound: 1715.000
+
+###### MaMi.CoDi Predictions
+
+| consonance_dissonance | major_minor | temporal_consonance | spatial_consonance |
+|----------------------:|------------:|--------------------:|-------------------:|
+|              90.50815 |    2.321928 |            46.41504 |           44.09311 |
+
+#### Temporal Periodicity
+
+| lcd | chord_Sz | chord_Hz | c_sound |  chord_m |   chord_s |
+|----:|---------:|---------:|--------:|---------:|----------:|
+|  12 | 3.584963 | 21.80213 |     343 | 15.73241 | 0.0458671 |
+
+##### Partial Periods
+
+![](man/figures/README-unnamed-chunk-26-1.png)<!-- -->
+
+##### Chord Period
+
+![](man/figures/README-unnamed-chunk-27-1.png)<!-- -->
+
+##### Frequency fractions
+
+| index | num | den |   tone_hz |      freq |      midi | pseudo_rational_number |
+|------:|----:|----:|----------:|----------:|----------:|-----------------------:|
+|     1 |   1 |   1 |  261.6256 |  261.6256 |  60.00000 |               1.000000 |
+|     2 |   4 |   3 |  329.6276 |  329.6276 |  64.00000 |               1.259921 |
+|     3 |   2 |   1 |  523.2511 |  523.2511 |  72.00000 |               2.000000 |
+|     4 |   5 |   2 |  659.2551 |  659.2551 |  76.00000 |               2.519842 |
+|     5 |   3 |   1 |  784.8767 |  784.8767 |  79.01955 |               3.000000 |
+|     6 |  15 |   4 |  988.8827 |  988.8827 |  83.01955 |               3.779763 |
+|     7 |   4 |   1 | 1046.5023 | 1046.5023 |  84.00000 |               4.000000 |
+|     8 |   5 |   1 | 1308.1278 | 1308.1278 |  87.86314 |               5.000000 |
+|     9 |   5 |   1 | 1318.5102 | 1318.5102 |  88.00000 |               5.039684 |
+|    10 |   6 |   1 | 1569.7534 | 1569.7534 |  91.01955 |               6.000000 |
+|    11 |  19 |   3 | 1648.1378 | 1648.1378 |  91.86314 |               6.299605 |
+|    12 |   7 |   1 | 1831.3790 | 1831.3790 |  93.68826 |               7.000000 |
+|    13 |  15 |   2 | 1977.7653 | 1977.7653 |  95.01955 |               7.559526 |
+|    14 |   8 |   1 | 2093.0045 | 2093.0045 |  96.00000 |               8.000000 |
+|    15 |  35 |   4 | 2307.3929 | 2307.3929 |  97.68826 |               8.819447 |
+|    16 |   9 |   1 | 2354.6301 | 2354.6301 |  98.03910 |               9.000000 |
+|    17 |  10 |   1 | 2616.2556 | 2616.2556 |  99.86314 |              10.000000 |
+|    18 |  10 |   1 | 2637.0205 | 2637.0205 | 100.00000 |              10.079368 |
+|    19 |  34 |   3 | 2966.6480 | 2966.6480 | 102.03910 |              11.339289 |
+|    20 |  38 |   3 | 3296.2755 | 3296.2755 | 103.86314 |              12.599210 |
+
+#### Spatial Periodicity
+
+| lcd | chord_Sz | chord_Hz | c_sound |  chord_m |   chord_s |
+|----:|---------:|---------:|--------:|---------:|----------:|
+|  60 | 5.906891 | 4.360426 |     343 | 78.66204 | 0.2293354 |
+
+##### Partial Wavelengths
+
+![](man/figures/README-unnamed-chunk-30-1.png)<!-- -->
+
+##### Chord Wavelength
+
+![](man/figures/README-unnamed-chunk-31-1.png)<!-- -->
+
+##### Wavelength fractions
+
+| index | num | den |    tone_m |      freq |      midi | pseudo_rational_number |
+|------:|----:|----:|----------:|----------:|----------:|-----------------------:|
+|     1 |  38 |   3 | 1.3110340 |  261.6256 |  60.00000 |              12.599210 |
+|     2 |  10 |   1 | 1.0405683 |  329.6276 |  64.00000 |              10.000000 |
+|     3 |  19 |   3 | 0.6555170 |  523.2511 |  72.00000 |               6.299605 |
+|     4 |   5 |   1 | 0.5202842 |  659.2551 |  76.00000 |               5.000000 |
+|     5 |  17 |   4 | 0.4370113 |  784.8767 |  79.01955 |               4.199737 |
+|     6 |  10 |   3 | 0.3468561 |  988.8827 |  83.01955 |               3.333333 |
+|     7 |  16 |   5 | 0.3277585 | 1046.5023 |  84.00000 |               3.149803 |
+|     8 |   5 |   2 | 0.2622068 | 1308.1278 |  87.86314 |               2.519842 |
+|     9 |   5 |   2 | 0.2601421 | 1318.5102 |  88.00000 |               2.500000 |
+|    10 |  13 |   6 | 0.2185057 | 1569.7534 |  91.01955 |               2.099868 |
+|    11 |   2 |   1 | 0.2081137 | 1648.1378 |  91.86314 |               2.000000 |
+|    12 |   7 |   4 | 0.1872906 | 1831.3790 |  93.68826 |               1.799887 |
+|    13 |   5 |   3 | 0.1734281 | 1977.7653 |  95.01955 |               1.666667 |
+|    14 |   3 |   2 | 0.1638792 | 2093.0045 |  96.00000 |               1.574901 |
+|    15 |   3 |   2 | 0.1486526 | 2307.3929 |  97.68826 |               1.428571 |
+|    16 |   4 |   3 | 0.1456704 | 2354.6301 |  98.03910 |               1.399912 |
+|    17 |   4 |   3 | 0.1311034 | 2616.2556 |  99.86314 |               1.259921 |
+|    18 |   5 |   4 | 0.1300710 | 2637.0205 | 100.00000 |               1.250000 |
+|    19 |   7 |   6 | 0.1156187 | 2966.6480 | 102.03910 |               1.111111 |
+|    20 |   1 |   1 | 0.1040568 | 3296.2755 | 103.86314 |               1.000000 |
+
+#### 20 Harmonics
+
+- Fundamentals in MIDI: 60, 64  
+
+- Number of Harmonics: 20
+
+- Frequencies: 261.626, 329.628, 523.251, 659.255, 784.877, 988.883,
+  1046.502, 1308.128, 1318.510, 1569.753, 1648.138, 1831.379, 1977.765,
+  2093.005, 2307.393, 2354.630, 2616.256, 2637.020, 2877.881, 2966.648,
+  3139.507, 3296.276, 3401.132, 3625.903, 3662.758, 3924.383, 3955.531,
+  4186.009, 4285.158, 4447.635, 4614.786, 4709.260, 4944.413, 4970.886,
+  5232.511, 5274.041, 5603.668, 5933.296, 6262.924, 6592.551  
+
+- Wavelengths: 1.311, 1.041, 0.656, 0.520, 0.437, 0.347, 0.328, 0.262,
+  0.260, 0.219, 0.208, 0.187, 0.173, 0.164, 0.149, 0.146, 0.131, 0.130,
+  0.119, 0.116, 0.109, 0.104, 0.101, 0.095, 0.094, 0.087, 0.087, 0.082,
+  0.080, 0.077, 0.074, 0.073, 0.069, 0.069, 0.066, 0.065, 0.061, 0.058,
+  0.055, 0.052  
+
+- Speed of Sound: 343.000
+
+- f0: 4.360
+
+- l0: 78.662
+
+- Quantum Speed of Sound: 343.000
+
+###### MaMi.CoDi Predictions
+
+| consonance_dissonance | major_minor | temporal_consonance | spatial_consonance |
+|----------------------:|------------:|--------------------:|-------------------:|
+|              88.18622 |           0 |            44.09311 |           44.09311 |
+
+#### Temporal Periodicity
+
+| lcd | chord_Sz | chord_Hz | c_sound |  chord_m |   chord_s |
+|----:|---------:|---------:|--------:|---------:|----------:|
+|  60 | 5.906891 | 4.360426 |     343 | 78.66204 | 0.2293354 |
+
+##### Partial Periods
+
+![](man/figures/README-unnamed-chunk-36-1.png)<!-- -->
+
+##### Chord Period
+
+![](man/figures/README-unnamed-chunk-37-1.png)<!-- -->
+
+##### Frequency fractions
+
+| index | num | den |   tone_hz |      freq |      midi | pseudo_rational_number |
+|------:|----:|----:|----------:|----------:|----------:|-----------------------:|
+|     1 |   1 |   1 |  261.6256 |  261.6256 |  60.00000 |               1.000000 |
+|     2 |   4 |   3 |  329.6276 |  329.6276 |  64.00000 |               1.259921 |
+|     3 |   2 |   1 |  523.2511 |  523.2511 |  72.00000 |               2.000000 |
+|     4 |   5 |   2 |  659.2551 |  659.2551 |  76.00000 |               2.519842 |
+|     5 |   3 |   1 |  784.8767 |  784.8767 |  79.01955 |               3.000000 |
+|     6 |  15 |   4 |  988.8827 |  988.8827 |  83.01955 |               3.779763 |
+|     7 |   4 |   1 | 1046.5023 | 1046.5023 |  84.00000 |               4.000000 |
+|     8 |   5 |   1 | 1308.1278 | 1308.1278 |  87.86314 |               5.000000 |
+|     9 |   5 |   1 | 1318.5102 | 1318.5102 |  88.00000 |               5.039684 |
+|    10 |   6 |   1 | 1569.7534 | 1569.7534 |  91.01955 |               6.000000 |
+|    11 |  19 |   3 | 1648.1378 | 1648.1378 |  91.86314 |               6.299605 |
+|    12 |   7 |   1 | 1831.3790 | 1831.3790 |  93.68826 |               7.000000 |
+|    13 |  15 |   2 | 1977.7653 | 1977.7653 |  95.01955 |               7.559526 |
+|    14 |   8 |   1 | 2093.0045 | 2093.0045 |  96.00000 |               8.000000 |
+|    15 |  35 |   4 | 2307.3929 | 2307.3929 |  97.68826 |               8.819447 |
+|    16 |   9 |   1 | 2354.6301 | 2354.6301 |  98.03910 |               9.000000 |
+|    17 |  10 |   1 | 2616.2556 | 2616.2556 |  99.86314 |              10.000000 |
+|    18 |  10 |   1 | 2637.0205 | 2637.0205 | 100.00000 |              10.079368 |
+|    19 |  11 |   1 | 2877.8811 | 2877.8811 | 101.51318 |              11.000000 |
+|    20 |  34 |   3 | 2966.6480 | 2966.6480 | 102.03910 |              11.339289 |
+|    21 |  12 |   1 | 3139.5068 | 3139.5068 | 103.01955 |              12.000000 |
+|    22 |  38 |   3 | 3296.2755 | 3296.2755 | 103.86314 |              12.599210 |
+|    23 |  13 |   1 | 3401.1324 | 3401.1324 | 104.40528 |              13.000000 |
+|    24 |  69 |   5 | 3625.9030 | 3625.9030 | 105.51318 |              13.859131 |
+|    25 |  14 |   1 | 3662.7579 | 3662.7579 | 105.68826 |              14.000000 |
+|    26 |  15 |   1 | 3924.3834 | 3924.3834 | 106.88269 |              15.000000 |
+|    27 |  91 |   6 | 3955.5307 | 3955.5307 | 107.01955 |              15.119053 |
+|    28 |  16 |   1 | 4186.0090 | 4186.0090 | 108.00000 |              16.000000 |
+|    29 |  49 |   3 | 4285.1583 | 4285.1583 | 108.40528 |              16.378974 |
+|    30 |  17 |   1 | 4447.6346 | 4447.6346 | 109.04955 |              17.000000 |
+|    31 |  53 |   3 | 4614.7858 | 4614.7858 | 109.68826 |              17.638895 |
+|    32 |  18 |   1 | 4709.2602 | 4709.2602 | 110.03910 |              18.000000 |
+|    33 | 113 |   6 | 4944.4133 | 4944.4133 | 110.88269 |              18.898816 |
+|    34 |  19 |   1 | 4970.8857 | 4970.8857 | 110.97513 |              19.000000 |
+|    35 |  20 |   1 | 5232.5113 | 5232.5113 | 111.86314 |              20.000000 |
+|    36 | 101 |   5 | 5274.0409 | 5274.0409 | 112.00000 |              20.158737 |
+|    37 | 107 |   5 | 5603.6684 | 5603.6684 | 113.04955 |              21.418658 |
+|    38 |  68 |   3 | 5933.2960 | 5933.2960 | 114.03910 |              22.678579 |
+|    39 |  24 |   1 | 6262.9235 | 6262.9235 | 114.97513 |              23.938500 |
+|    40 | 101 |   4 | 6592.5511 | 6592.5511 | 115.86314 |              25.198421 |
+
+#### Spatial Periodicity
+
+| lcd | chord_Sz | chord_Hz | c_sound |  chord_m |   chord_s |
+|----:|---------:|---------:|--------:|---------:|----------:|
+|  60 | 5.906891 | 4.360426 |     343 | 78.66204 | 0.2293354 |
+
+##### Partial Wavelengths
+
+![](man/figures/README-unnamed-chunk-40-1.png)<!-- -->
+
+##### Chord Wavelength
+
+![](man/figures/README-unnamed-chunk-41-1.png)<!-- -->
+
+##### Wavelength fractions
+
+| index | num | den |    tone_m |      freq |      midi | pseudo_rational_number |
+|------:|----:|----:|----------:|----------:|----------:|-----------------------:|
+|     1 | 101 |   4 | 1.3110340 |  261.6256 |  60.00000 |              25.198421 |
+|     2 |  20 |   1 | 1.0405683 |  329.6276 |  64.00000 |              20.000000 |
+|     3 |  38 |   3 | 0.6555170 |  523.2511 |  72.00000 |              12.599210 |
+|     4 |  10 |   1 | 0.5202842 |  659.2551 |  76.00000 |              10.000000 |
+|     5 |  25 |   3 | 0.4370113 |  784.8767 |  79.01955 |               8.399474 |
+|     6 |  20 |   3 | 0.3468561 |  988.8827 |  83.01955 |               6.666667 |
+|     7 |  19 |   3 | 0.3277585 | 1046.5023 |  84.00000 |               6.299605 |
+|     8 |   5 |   1 | 0.2622068 | 1308.1278 |  87.86314 |               5.039684 |
+|     9 |   5 |   1 | 0.2601421 | 1318.5102 |  88.00000 |               5.000000 |
+|    10 |  17 |   4 | 0.2185057 | 1569.7534 |  91.01955 |               4.199737 |
+|    11 |   4 |   1 | 0.2081137 | 1648.1378 |  91.86314 |               4.000000 |
+|    12 |  11 |   3 | 0.1872906 | 1831.3790 |  93.68826 |               3.599774 |
+|    13 |  10 |   3 | 0.1734281 | 1977.7653 |  95.01955 |               3.333333 |
+|    14 |  16 |   5 | 0.1638792 | 2093.0045 |  96.00000 |               3.149803 |
+|    15 |  14 |   5 | 0.1486526 | 2307.3929 |  97.68826 |               2.857143 |
+|    16 |  11 |   4 | 0.1456704 | 2354.6301 |  98.03910 |               2.799825 |
+|    17 |   5 |   2 | 0.1311034 | 2616.2556 |  99.86314 |               2.519842 |
+|    18 |   5 |   2 | 0.1300710 | 2637.0205 | 100.00000 |               2.500000 |
+|    19 |   7 |   3 | 0.1191849 | 2877.8811 | 101.51318 |               2.290766 |
+|    20 |   9 |   4 | 0.1156187 | 2966.6480 | 102.03910 |               2.222222 |
+|    21 |  13 |   6 | 0.1092528 | 3139.5068 | 103.01955 |               2.099868 |
+|    22 |   2 |   1 | 0.1040568 | 3296.2755 | 103.86314 |               2.000000 |
+|    23 |   2 |   1 | 0.1008488 | 3401.1324 | 104.40528 |               1.938340 |
+|    24 |   7 |   4 | 0.0945971 | 3625.9030 | 105.51318 |               1.818182 |
+|    25 |   7 |   4 | 0.0936453 | 3662.7579 | 105.68826 |               1.799887 |
+|    26 |   5 |   3 | 0.0874023 | 3924.3834 | 106.88269 |               1.679895 |
+|    27 |   5 |   3 | 0.0867140 | 3955.5307 | 107.01955 |               1.666667 |
+|    28 |   3 |   2 | 0.0819396 | 4186.0090 | 108.00000 |               1.574901 |
+|    29 |   3 |   2 | 0.0800437 | 4285.1583 | 108.40528 |               1.538461 |
+|    30 |   3 |   2 | 0.0771196 | 4447.6346 | 109.04955 |               1.482260 |
+|    31 |   3 |   2 | 0.0743263 | 4614.7858 | 109.68826 |               1.428571 |
+|    32 |   4 |   3 | 0.0728352 | 4709.2602 | 110.03910 |               1.399912 |
+|    33 |   4 |   3 | 0.0693712 | 4944.4133 | 110.88269 |               1.333333 |
+|    34 |   4 |   3 | 0.0690018 | 4970.8857 | 110.97513 |               1.326233 |
+|    35 |   4 |   3 | 0.0655517 | 5232.5113 | 111.86314 |               1.259921 |
+|    36 |   5 |   4 | 0.0650355 | 5274.0409 | 112.00000 |               1.250000 |
+|    37 |   5 |   4 | 0.0612099 | 5603.6684 | 113.04955 |               1.176471 |
+|    38 |   7 |   6 | 0.0578094 | 5933.2960 | 114.03910 |               1.111111 |
+|    39 |   1 |   1 | 0.0547668 | 6262.9235 | 114.97513 |               1.052632 |
+|    40 |   1 |   1 | 0.0520284 | 6592.5511 | 115.86314 |               1.000000 |
 
 ### Finding the variance Values
 
@@ -168,11 +532,11 @@ major-minor versus the behavioral results are included in a plot below.
 |:------------------|:-----------------|----------------:|
 | 0.2               | 0.03166          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-2.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-3.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-4.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-5.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-2.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-3.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-4.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-5.png)<!-- -->
 
 ##### Harmonic ~ Partials: 10
 
@@ -182,11 +546,11 @@ For 10 harmonics, behavioral results and theoretical predictions agree.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-6.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-7.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-8.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-9.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-10.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-6.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-7.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-8.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-9.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-10.png)<!-- -->
 
 ##### 5Partials ~ Partials: 5
 
@@ -199,11 +563,11 @@ peak.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-11.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-12.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-13.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-14.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-15.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-11.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-12.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-13.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-14.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-15.png)<!-- -->
 
 ##### 5PartialsNo3 ~ Partials: 5
 
@@ -216,11 +580,11 @@ while the M3 peak is slightly higher without the 3rd partial.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-16.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-17.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-18.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-19.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-20.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-16.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-17.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-18.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-19.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-20.png)<!-- -->
 
 ##### Bonang ~ Partials: 4
 
@@ -234,11 +598,11 @@ be relatively higher than the behavioral results.
 |:------------------|:-----------------|----------------:|
 | 0.03979           | 0.15915          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-21.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-22.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-23.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-24.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-25.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-21.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-22.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-23.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-24.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-25.png)<!-- -->
 
 ##### Stretched ~ Partials: 10
 
@@ -250,11 +614,11 @@ and m7 that do not exist in the behavioral results.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-26.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-27.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-28.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-29.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-30.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-26.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-27.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-28.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-29.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-30.png)<!-- -->
 
 ##### Compressed ~ Partials: 10
 
@@ -265,11 +629,11 @@ with the theoretical peaks.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-4-31.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-32.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-33.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-34.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-35.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-31.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-32.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-33.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-34.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-35.png)<!-- -->
 
 #### Dyads spanning 1 quarter tone
 
@@ -281,11 +645,11 @@ Description is below.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |           0.035 |
 
-![](man/figures/README-unnamed-chunk-4-36.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-37.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-38.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-39.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-40.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-36.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-37.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-38.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-39.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-40.png)<!-- -->
 
 ##### M6 ~ Partials: 10
 
@@ -295,11 +659,11 @@ Description is below.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |           0.035 |
 
-![](man/figures/README-unnamed-chunk-4-41.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-42.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-43.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-44.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-45.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-41.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-42.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-43.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-44.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-45.png)<!-- -->
 
 ##### P8 ~ Partials: 10
 
@@ -309,11 +673,11 @@ Description is below.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |           0.035 |
 
-![](man/figures/README-unnamed-chunk-4-46.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-47.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-48.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-49.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-50.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-46.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-47.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-48.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-49.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-50.png)<!-- -->
 
 ##### P8Zoomed ~ Partials: 10
 
@@ -324,11 +688,11 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 |:------------------|:-----------------|----------------:|
 | 126.65148         | 5e-05            |           0.035 |
 
-![](man/figures/README-unnamed-chunk-4-51.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-52.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-53.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-54.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-4-55.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-51.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-52.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-53.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-54.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-55.png)<!-- -->
 
 ### Manipulating amplitudes
 
@@ -338,8 +702,8 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 |:------------------|:-----------------|:--------------|----------------:|
 | 0.07958           | 0.07958          | 0.013         |             0.2 |
 
-![](man/figures/README-unnamed-chunk-8-1.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-8-2.png)<!-- -->
+![](man/figures/README-unnamed-chunk-9-1.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-9-2.png)<!-- -->
 
 ##### Harmonic ~ Roll Off: 7
 
@@ -347,8 +711,8 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 |:------------------|:-----------------|:--------------|----------------:|
 | 0.07958           | 0.07958          | 0.08          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-8-3.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-8-4.png)<!-- -->
+![](man/figures/README-unnamed-chunk-9-3.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-9-4.png)<!-- -->
 
 ##### Harmonic ~ Roll Off: 2
 
@@ -356,8 +720,8 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 |:------------------|:-----------------|:--------------|----------------:|
 | 0.07958           | 0.07958          | 0             |             0.2 |
 
-![](man/figures/README-unnamed-chunk-8-5.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-8-6.png)<!-- -->
+![](man/figures/README-unnamed-chunk-9-5.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-9-6.png)<!-- -->
 
 #### Notes on plots:
 
