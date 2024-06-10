@@ -1,10 +1,10 @@
 search_label = 'Bonang'
-heisenberg   = T
+heisenberg   = F
 
 devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 
 # Detailed
-from_prec   = 0.03
+from_prec   = 0.07
 to_prec     = 0.08
 by_prec     = 0.001
 variances = sort(c(seq(from=from_prec, to=to_prec, by=by_prec),
