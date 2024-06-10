@@ -534,7 +534,25 @@ major-minor versus the behavioral results are included in a plot below.
 
 ![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-2.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-3.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-3.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-4.png)<!-- -->\$breaks \[1\]
+-0.035 -0.030 -0.025 -0.020 -0.015 -0.010 -0.005 0.000 0.005 0.010
+\[11\] 0.015 0.020 0.025 0.030 0.035
+
+\$counts \[1\] 24 76 69 66 69 68 1071 64 70 69 80 98 130 45
+
+\$density \[1\] 2.401201 7.603802 6.903452 6.603302 6.903452 6.803402
+\[7\] 107.153577 6.403202 7.003502 6.903452 8.004002 9.804902 \[13\]
+13.006503 4.502251
+
+\$mids \[1\] -0.0325 -0.0275 -0.0225 -0.0175 -0.0125 -0.0075 -0.0025
+0.0025 0.0075 \[10\] 0.0125 0.0175 0.0225 0.0275 0.0325
+
+\$xname \[1\] “errors”
+
+\$equidist \[1\] TRUE
+
+attr(,“class”) \[1\] “histogram”
 
 ##### Harmonic ~ Partials: 10
 
@@ -544,9 +562,28 @@ For 10 harmonics, behavioral results and theoretical predictions agree.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-5-4.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-5.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-6.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-6.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-7.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-8.png)<!-- -->\$breaks \[1\]
+-0.08 -0.07 -0.06 -0.05 -0.04 -0.03 -0.02 -0.01 0.00 0.01 0.02 0.03
+\[13\] 0.04 0.05 0.06 0.07 0.08
+
+\$counts \[1\] 647 701 733 640 608 517 586 3361 5722 557 500 606 645
+1750 753 \[16\] 1664
+
+\$density \[1\] 3.236618 3.506753 3.666833 3.201601 3.041521 2.586293
+2.931466 \[8\] 16.813407 28.624312 2.786393 2.501251 3.031516 3.226613
+8.754377 \[15\] 3.766883 8.324162
+
+\$mids \[1\] -0.075 -0.065 -0.055 -0.045 -0.035 -0.025 -0.015 -0.005
+0.005 0.015 \[11\] 0.025 0.035 0.045 0.055 0.065 0.075
+
+\$xname \[1\] “errors”
+
+\$equidist \[1\] TRUE
+
+attr(,“class”) \[1\] “histogram”
 
 ##### 5Partials ~ Partials: 5
 
@@ -559,9 +596,28 @@ peak.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-5-7.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-8.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-9.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-9.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-10.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-11.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-12.png)<!-- -->\$breaks \[1\]
+-0.08 -0.07 -0.06 -0.05 -0.04 -0.03 -0.02 -0.01 0.00 0.01 0.02 0.03
+\[13\] 0.04 0.05 0.06 0.07 0.08
+
+\$counts \[1\] 335 363 379 327 310 267 298 1821 3716 268 240 294 308 368
+370 \[16\] 331
+
+\$density \[1\] 3.351676 3.631816 3.791896 3.271636 3.101551 2.671336
+2.981491 \[8\] 18.219110 37.178589 2.681341 2.401201 2.941471 3.081541
+3.681841 \[15\] 3.701851 3.311656
+
+\$mids \[1\] -0.075 -0.065 -0.055 -0.045 -0.035 -0.025 -0.015 -0.005
+0.005 0.015 \[11\] 0.025 0.035 0.045 0.055 0.065 0.075
+
+\$xname \[1\] “errors”
+
+\$equidist \[1\] TRUE
+
+attr(,“class”) \[1\] “histogram”
 
 ##### 5PartialsNo3 ~ Partials: 5
 
@@ -574,9 +630,28 @@ while the M3 peak is slightly higher without the 3rd partial.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-5-10.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-11.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-12.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-13.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-14.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-15.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-16.png)<!-- -->\$breaks \[1\]
+-0.08 -0.07 -0.06 -0.05 -0.04 -0.03 -0.02 -0.01 0.00 0.01 0.02 0.03
+\[13\] 0.04 0.05 0.06 0.07 0.08
+
+\$counts \[1\] 261 280 293 257 242 214 237 1638 2794 222 197 240 250 302
+300 \[16\] 269
+
+\$density \[1\] 3.264132 3.501751 3.664332 3.214107 3.026513 2.676338
+2.963982 \[8\] 20.485243 34.942471 2.776388 2.463732 3.001501 3.126563
+3.776888 \[15\] 3.751876 3.364182
+
+\$mids \[1\] -0.075 -0.065 -0.055 -0.045 -0.035 -0.025 -0.015 -0.005
+0.005 0.015 \[11\] 0.025 0.035 0.045 0.055 0.065 0.075
+
+\$xname \[1\] “errors”
+
+\$equidist \[1\] TRUE
+
+attr(,“class”) \[1\] “histogram”
 
 ##### Bonang ~ Partials: 4
 
@@ -590,9 +665,28 @@ be relatively higher than the behavioral results.
 |:------------------|:-----------------|----------------:|
 | 0.03979           | 0.15915          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-5-13.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-14.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-15.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-17.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-18.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-19.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-20.png)<!-- -->\$breaks \[1\]
+-0.16 -0.14 -0.12 -0.10 -0.08 -0.06 -0.04 -0.02 0.00 0.02 0.04 0.06
+\[13\] 0.08 0.10 0.12 0.14 0.16
+
+\$counts \[1\] 234 1220 242 281 1238 245 248 1375 255 231 232 1079 424
+231 237 \[16\] 227
+
+\$density \[1\] 1.462683 7.625953 1.512689 1.756470 7.738467 1.531441
+1.550194 8.594824 \[9\] 1.593949 1.443930 1.450181 6.744593 2.650331
+1.443930 1.481435 1.418927
+
+\$mids \[1\] -0.15 -0.13 -0.11 -0.09 -0.07 -0.05 -0.03 -0.01 0.01 0.03
+0.05 0.07 \[13\] 0.09 0.11 0.13 0.15
+
+\$xname \[1\] “errors”
+
+\$equidist \[1\] TRUE
+
+attr(,“class”) \[1\] “histogram”
 
 ##### Stretched ~ Partials: 10
 
@@ -604,9 +698,28 @@ and m7 that do not exist in the behavioral results.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-5-16.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-17.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-18.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-21.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-22.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-23.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-24.png)<!-- -->\$breaks \[1\]
+-0.08 -0.07 -0.06 -0.05 -0.04 -0.03 -0.02 -0.01 0.00 0.01 0.02 0.03
+\[13\] 0.04 0.05 0.06 0.07 0.08
+
+\$counts \[1\] 644 701 720 609 601 511 587 5651 3427 557 498 608 671
+1753 757 \[16\] 1695
+
+\$density \[1\] 3.221611 3.506753 3.601801 3.046523 3.006503 2.556278
+2.936468 \[8\] 28.269135 17.143572 2.786393 2.491246 3.041521 3.356678
+8.769385 \[15\] 3.786893 8.479240
+
+\$mids \[1\] -0.075 -0.065 -0.055 -0.045 -0.035 -0.025 -0.015 -0.005
+0.005 0.015 \[11\] 0.025 0.035 0.045 0.055 0.065 0.075
+
+\$xname \[1\] “errors”
+
+\$equidist \[1\] TRUE
+
+attr(,“class”) \[1\] “histogram”
 
 ##### Compressed ~ Partials: 10
 
@@ -617,9 +730,28 @@ with the theoretical peaks.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-5-19.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-20.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-21.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-25.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-26.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-27.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-28.png)<!-- -->\$breaks \[1\]
+-0.08 -0.07 -0.06 -0.05 -0.04 -0.03 -0.02 -0.01 0.00 0.01 0.02 0.03
+\[13\] 0.04 0.05 0.06 0.07 0.08
+
+\$counts \[1\] 653 708 713 627 612 517 585 5783 3302 564 496 604 640
+1766 742 \[16\] 1678
+
+\$density \[1\] 3.266633 3.541771 3.566783 3.136568 3.061531 2.586293
+2.926463 \[8\] 28.929465 16.518259 2.821411 2.481241 3.021511 3.201601
+8.834417 \[15\] 3.711856 8.394197
+
+\$mids \[1\] -0.075 -0.065 -0.055 -0.045 -0.035 -0.025 -0.015 -0.005
+0.005 0.015 \[11\] 0.025 0.035 0.045 0.055 0.065 0.075
+
+\$xname \[1\] “errors”
+
+\$equidist \[1\] TRUE
+
+attr(,“class”) \[1\] “histogram”
 
 #### Dyads spanning 1 quarter tone
 
@@ -631,9 +763,27 @@ Description is below.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |           0.035 |
 
-![](man/figures/README-unnamed-chunk-5-22.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-23.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-24.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-29.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-30.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-31.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-32.png)<!-- -->\$breaks \[1\]
+-0.08 -0.07 -0.06 -0.05 -0.04 -0.03 -0.02 -0.01 0.00 0.01 0.02 0.03
+\[13\] 0.04 0.05 0.06 0.07 0.08
+
+\$counts \[1\] 639 797 756 679 451 420 406 3188 5764 680 408 449 537
+1801 980 \[16\] 2045
+
+\$density \[1\] 3.195 3.985 3.780 3.395 2.255 2.100 2.030 15.940 28.820
+3.400 \[11\] 2.040 2.245 2.685 9.005 4.900 10.225
+
+\$mids \[1\] -0.075 -0.065 -0.055 -0.045 -0.035 -0.025 -0.015 -0.005
+0.005 0.015 \[11\] 0.025 0.035 0.045 0.055 0.065 0.075
+
+\$xname \[1\] “errors”
+
+\$equidist \[1\] TRUE
+
+attr(,“class”) \[1\] “histogram”
 
 ##### M6 ~ Partials: 10
 
@@ -643,9 +793,27 @@ Description is below.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |           0.035 |
 
-![](man/figures/README-unnamed-chunk-5-25.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-26.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-27.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-33.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-34.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-35.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-36.png)<!-- -->\$breaks \[1\]
+-0.08 -0.07 -0.06 -0.05 -0.04 -0.03 -0.02 -0.01 0.00 0.01 0.02 0.03
+\[13\] 0.04 0.05 0.06 0.07 0.08
+
+\$counts \[1\] 762 832 796 825 723 733 732 3433 5715 565 356 415 414
+1586 569 \[16\] 1544
+
+\$density \[1\] 3.810 4.160 3.980 4.125 3.615 3.665 3.660 17.165 28.575
+2.825 \[11\] 1.780 2.075 2.070 7.930 2.845 7.720
+
+\$mids \[1\] -0.075 -0.065 -0.055 -0.045 -0.035 -0.025 -0.015 -0.005
+0.005 0.015 \[11\] 0.025 0.035 0.045 0.055 0.065 0.075
+
+\$xname \[1\] “errors”
+
+\$equidist \[1\] TRUE
+
+attr(,“class”) \[1\] “histogram”
 
 ##### P8 ~ Partials: 10
 
@@ -655,9 +823,27 @@ Description is below.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |           0.035 |
 
-![](man/figures/README-unnamed-chunk-5-28.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-29.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-30.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-37.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-38.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-39.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-40.png)<!-- -->\$breaks \[1\]
+-0.08 -0.07 -0.06 -0.05 -0.04 -0.03 -0.02 -0.01 0.00 0.01 0.02 0.03
+\[13\] 0.04 0.05 0.06 0.07 0.08
+
+\$counts \[1\] 530 559 623 571 605 676 709 3621 6058 888 833 639 568
+1535 328 \[16\] 1257
+
+\$density \[1\] 2.650 2.795 3.115 2.855 3.025 3.380 3.545 18.105 30.290
+4.440 \[11\] 4.165 3.195 2.840 7.675 1.640 6.285
+
+\$mids \[1\] -0.075 -0.065 -0.055 -0.045 -0.035 -0.025 -0.015 -0.005
+0.005 0.015 \[11\] 0.025 0.035 0.045 0.055 0.065 0.075
+
+\$xname \[1\] “errors”
+
+\$equidist \[1\] TRUE
+
+attr(,“class”) \[1\] “histogram”
 
 ##### P8Zoomed ~ Partials: 10
 
@@ -668,9 +854,28 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 |:------------------|:-----------------|----------------:|
 | 126.65148         | 5e-05            |           0.035 |
 
-![](man/figures/README-unnamed-chunk-5-31.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-32.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-33.png)<!-- -->
+![](man/figures/README-unnamed-chunk-5-41.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-42.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-43.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-5-44.png)<!-- -->\$breaks \[1\]
+-9e-05 -8e-05 -7e-05 -6e-05 -5e-05 -4e-05 -3e-05 -2e-05 -1e-05 0e+00
+\[11\] 1e-05 2e-05 3e-05 4e-05 5e-05 6e-05 7e-05 8e-05 9e-05
+
+\$counts \[1\] 4 5 1 3 1351 1021 887 895 3859 7815 836 923 978 1409 3
+\[16\] 1 5 4
+
+\$density \[1\] 20 25 5 15 6755 5105 4435 4475 19295 39075 4180 4615
+\[13\] 4890 7045 15 5 25 20
+
+\$mids \[1\] -8.5e-05 -7.5e-05 -6.5e-05 -5.5e-05 -4.5e-05 -3.5e-05
+-2.5e-05 -1.5e-05 \[9\] -5.0e-06 5.0e-06 1.5e-05 2.5e-05 3.5e-05 4.5e-05
+5.5e-05 6.5e-05 \[17\] 7.5e-05 8.5e-05
+
+\$xname \[1\] “errors”
+
+\$equidist \[1\] TRUE
+
+attr(,“class”) \[1\] “histogram”
 
 ### Manipulating amplitudes
 
