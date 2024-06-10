@@ -661,12 +661,12 @@ Description is below.
 
 ##### P8Zoomed ~ Partials: 10
 
-There are 3,500 inner hair cells along the basilar membrane. 1 / 3,500
-is 0.00029.
+Due to the Heisenberg uncertainty principle, focusing on one signal
+(spatial) is akin to shutting off the other (temporal).
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
-| 22.16401          | 0.00029          |           0.035 |
+| 126.65148         | 5e-05            |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-5-31.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-32.png)<!-- -->  
@@ -700,8 +700,6 @@ is 0.00029.
 
 ![](man/figures/README-unnamed-chunk-9-5.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-9-6.png)<!-- -->
-
-#### `{r, child=c('man/M3_M6_P8.Rmd')} ####`
 
 #### Notes on plots:
 
