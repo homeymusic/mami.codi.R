@@ -38,6 +38,26 @@ $$\sigma_{\lambda}^{2} \sigma_{f}^{2} = \frac{1}{16\pi^{2}}$$
 The Stern-Brocot approximation is 0 outside $\sigma^{2}$ which satisfies
 the exponential decay constraint and so we can presume equality.
 
+#### Consonance Perception
+
+Spatial Consonance
+
+$$C_{\lambda} = 50- \log_{2}\left({\tt ALCD}\left(r_{\lambda 1},..., r_{\lambda N}\right)\right)$$
+Temporal Consonance
+
+$$C_{f} = 50 - \log_{2}\left({\tt ALCD}\left(r_{f 1},..., r_{f N}\right)\right)$$
+
+Total Consonance
+
+$$C_{\lambda f} = C_{\lambda} + C_{f}$$
+
+Pure tone will have a total consonance $C_{\lambda f}$ of 100.
+
+Major-Minor
+
+$$M_{\lambda f} = C_{f} - C_{\lambda}$$ Neutral chords will have a
+major-minor value $M_{\lambda f}$ of 0.
+
 ### The Basilar Membrane
 
 When a chord is sounded, pressure waves travel through the air. Those
