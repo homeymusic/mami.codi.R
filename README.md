@@ -8,6 +8,9 @@ MaMi.CoDi: A Spatiotemporal Periodicity Model of Consonance Perception
 #### Traveling Wave
 
 $$s_{i}(x, t) = \sin \left( \frac{2\pi x}{\lambda_{i}} - 2 \pi f_{i} t \right)$$
+$N$ is the number of partials in the entire chord.
+
+$$i=1...N$$
 
 #### Fundamental Wavelength
 
