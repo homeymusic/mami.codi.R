@@ -133,15 +133,16 @@ parse_variances <- function(x, temporal_variance, spatial_variance) {
 compute_consonance = function(x, minimum_amplitude, octave_deviation) {
 
   f       = x$spectrum[[1]] %>% dplyr::filter(.data$y>minimum_amplitude) %>% hrep::freq()
+  P       = 1 / f
   c_sound = 343 # m/s
   l       = c_sound / f
 
   x %>% dplyr::mutate(
 
-    alcd(f/min(f), temporal_variance, octave_deviation, 'temporal'),
+    alcd(P/min(P), temporal_variance, octave_deviation, 'temporal'),
     alcd(l/min(l), spatial_variance,  octave_deviation, 'spatial'),
 
-    f0                    = min(f) / .data$temporal_alcd,
+    P0                    = max(P) / .data$temporal_alcd,
     l0                    = max(l) * .data$spatial_alcd,
 
     temporal_consonance   = 50 - log2(.data$temporal_alcd),
