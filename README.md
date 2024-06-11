@@ -5,10 +5,10 @@ MaMi.CoDi: A Spatiotemporal Periodicity Model of Consonance Perception
 
 ### The Math
 
-#### Traveling Wave
+#### Traveling Waves
 
 $$s_{i}(x, t) = \sin \left( \frac{2\pi x}{\lambda_{i}} - 2 \pi f_{i} t \right)$$
-$N$ is the number of partials in the entire chord.
+$N$ is the number of traveling waves in the chord.
 
 $$i=1...N$$
 
@@ -33,7 +33,7 @@ $${\tt GCD}(c_{i}, d_{i}) = 1$$
 
 #### Heisenberg Uncertainty
 
-$$\sigma_{\lambda}^{2} \sigma_{f}^{2} \ge \frac{1}{16\pi^{2}}$$
+$$\sigma_{\lambda}^{2} \sigma_{f}^{2} = \frac{1}{16\pi^{2}}$$
 
 The Stern-Brocot approximation is 0 outside $\sigma^{2}$ which satisfies
 the exponential decay constraint and so we can presume equality.
