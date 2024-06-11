@@ -7,24 +7,26 @@ MaMi.CoDi: A Spatiotemporal Periodicity Model of Consonance Perception
 
 #### Traveling Wave
 
-$$\sin \left( \frac{2\pi x}{\lambda_{i}} - 2 \pi f_{i} t \right)$$
+$$s_{i}(x, t) = \sin \left( \frac{2\pi x}{\lambda_{i}} - 2 \pi f_{i} t \right)$$
 
 #### Fundamental Wavelength
 
-$$\lambda_{0} = \lambda_{max} {\tt LCD}\left(r_{\lambda 1},..., r_{\lambda N}\right)$$
+$$\lambda_{0} = \lambda_{max} {\tt ALCD}\left(r_{\lambda 1},..., r_{\lambda N}\right)$$
 
 Wavelength Ratios
 
-$$r_{\lambda i} = \frac{\lambda_{i}}{\lambda_{min}} \pm \sigma_{\lambda}^{2} = \frac{a_{i}}{b_{i}} \\
-{\tt GCD}(a_{i}, b_{i}) = 1$$
+$$r_{\lambda i} = \frac{\lambda_{i}}{\lambda_{min}} \pm \sigma_{\lambda}^{2} = \frac{a_{i}}{b_{i}}$$
+
+$${\tt GCD}(a_{i}, b_{i}) = 1$$
 
 #### Fundamental Frequency
 
-$$f_{0} = f_{min} / {\tt LCD}\left(r_{f 1},..., r_{f N}\right)$$
+$$f_{0} = f_{min} / {\tt ALCD}\left(r_{f 1},..., r_{f N}\right)$$
 Frequency Ratios
 
-$$r_{f i} = \frac{f_{i}}{f_{min}} \pm \sigma_{f}^{2} = \frac{c_{i}}{d_{i}} \\
-{\tt GCD}(c_{i}, d_{i}) = 1$$
+$$r_{f i} = \frac{f_{i}}{f_{min}} \pm \sigma_{f}^{2} = \frac{c_{i}}{d_{i}}$$
+
+$${\tt GCD}(c_{i}, d_{i}) = 1$$
 
 #### Heisenberg Uncertainty
 
