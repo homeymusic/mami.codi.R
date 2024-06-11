@@ -21,37 +21,40 @@ knitr::opts_chunk$set(
 
 ### The Math
 
-#### Traveling Waves
+#### Traveling Waves in the Chord
 
 $$s_{i}(x, t) = \sin \left( \frac{2\pi x}{\lambda_{i}} - 2 \pi f_{i} t \right)$$
-$N$ is the number of traveling waves in the chord.
 
 $$i=1 \cdots N$$
+
+$N$ is the number of traveling waves in the chord.
 
 #### Fundamental Wavelength
 
 $$\lambda_{0} = \hat{\lambda_{0}} | \psi_{\lambda} \rangle$$
-
-$$\hat{\lambda_{0}} = \lambda_{max} { ALCD}\left({SB}\left(\right) \right)$$
 
 $$|\psi_{\lambda}\rangle = 
 \left(
 \frac{\lambda_{min}}{\lambda_{min}} \pm \sigma_{\lambda}^{2}, 
 \frac{\lambda_{i}}{\lambda_{min}} \pm \sigma_{\lambda}^{2},
 \cdots, 
-\frac{\lambda_{N}}{\lambda_{min}} \pm \sigma_{\lambda}^{2}\right) = 
-\left(
+\frac{\lambda_{N}}{\lambda_{min}} \pm \sigma_{\lambda}^{2}\right)
+$$
+
+$$\hat{\lambda_{0}} = \lambda_{max} { ALCD}\left({SB}\left(\right) \right)$$
+
+$$SB(x) = \left(
 1, 
 \frac{a_{i}}{b_{i}}, 
 \cdots,
-\frac{a_{N}}{b_{N}}\right)
-$$
+\frac{a_{N}}{b_{N}}\right)$$
 
 $${ GCD}(a_{i}, b_{i}) = 1$$
 
-$ALCD()$ is an approximate least common denominator.\
 
-$GCD()$ is the greatest common divisor.\
+$ALCD()$ is approximate least common denominator.\
+
+$GCD()$ is greatest common divisor.\
 
 #### Fundamental Frequency
 
