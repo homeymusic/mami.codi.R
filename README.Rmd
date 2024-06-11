@@ -26,29 +26,50 @@ knitr::opts_chunk$set(
 $$s_{i}(x, t) = \sin \left( \frac{2\pi x}{\lambda_{i}} - 2 \pi f_{i} t \right)$$
 $N$ is the number of traveling waves in the chord.
 
-$$i=1...N$$
+$$i=1 \cdots N$$
 
 #### Fundamental Wavelength
 
-$$\lambda_{0} = \lambda_{max} { ALCD}\left(r_{\lambda 1},..., r_{\lambda N}\right)$$
-$ALCD()$ is an approximate least common denominator.\
+$$\lambda_{0} = \hat{\lambda_{0}} | \psi_{\lambda} \rangle$$
 
-#### Wavelength Ratios\
+$$\hat{\lambda_{0}} = \lambda_{max} { ALCD}\left({SB}\left(\right) \right)$$
 
-$$r_{\lambda i} = \frac{\lambda_{i}}{\lambda_{min}} \pm \sigma_{\lambda}^{2} = \frac{a_{i}}{b_{i}}$$
+$$|\psi_{\lambda}\rangle = 
+\left(
+\frac{\lambda_{min}}{\lambda_{min}} \pm \sigma_{\lambda}^{2}, 
+\frac{\lambda_{i}}{\lambda_{min}} \pm \sigma_{\lambda}^{2},
+\cdots, 
+\frac{\lambda_{N}}{\lambda_{min}} \pm \sigma_{\lambda}^{2}\right) = 
+\left(
+1, 
+\frac{a_{i}}{b_{i}}, 
+\cdots,
+\frac{a_{N}}{b_{N}}\right)
+$$
 
 $${ GCD}(a_{i}, b_{i}) = 1$$
+
+$ALCD()$ is an approximate least common denominator.\
+
 $GCD()$ is the greatest common divisor.\
 
 #### Fundamental Frequency
 
-$$f_{0} = f_{min} / { ALCD}\left(r_{f 1},..., r_{f N}\right)$$
-Frequency Ratios
+$$f_{0} = f_{max} / { ALCD}\left(\psi_{\lambda} \right)$$
 
-$$r_{f i} = \frac{f_{i}}{f_{min}} \pm \sigma_{f}^{2} = \frac{c_{i}}{d_{i}}$$
-
-
-$${GCD}(c_{i}, d_{i}) = 1$$
+$$\psi_{f} = 
+\left(
+\frac{f_{min}}{f_{min}} \pm \sigma_{f}^{2}, 
+\frac{f_{i}}{f_{min}} \pm \sigma_{f}^{2},
+\cdots, 
+\frac{f_{N}}{f_{min}} \pm \sigma_{f}^{2}\right) = 
+\left(
+1, 
+\frac{c_{i}}{d_{i}}, 
+\cdots,
+\frac{c_{N}}{d_{N}}\right)
+$$
+$${ GCD}(c_{i}, d_{i}) = 1$$
 
 #### Heisenberg Uncertainty
 
@@ -59,23 +80,23 @@ exponential decay constraint and so we can presume equality.
 
 #### Consonance Perception
 
-Spatial Consonance
+Spatial Dissonance
 
-$$C_{\lambda} = 50- \log_{2}\left({ ALCD}\left(r_{\lambda 1},..., r_{\lambda N}\right)\right)$$
-Temporal Consonance
+$$D_{\lambda} = \log_{2} \left({ ALCD}\left(\psi_{\lambda}\right)\right)$$
 
-$$C_{f} = 50 - \log_{2}\left({ ALCD}\left(r_{f 1},..., r_{f N}\right)\right)$$
 
-Total Consonance
+Temporal Dissonance
 
-$$C_{\lambda f} = C_{\lambda} + C_{f}$$
+$$D_{f} = \log_{2} \left({ ALCD}\left(\psi_{f}\right)\right)$$
 
-Pure tone will have a total consonance $C_{\lambda f}$ of 100.
+Total Dissonance
+
+$$D_{\lambda f} = D_{\lambda} + D_{f}$$
 
 Major-Minor
 
-$$M_{\lambda f} = C_{f} - C_{\lambda}$$
-Neutral chords will have a major-minor value $M_{\lambda f}$ of 0.
+$$M_{\lambda f} = C_{\lambda} - C_{f}$$
+Major chords will have positive $M_{\lambda f}$, minor chords negative and neutral chords 0.
 
 ### The Basilar Membrane
 
