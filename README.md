@@ -14,22 +14,23 @@ $$i=1...N$$
 
 #### Fundamental Wavelength
 
-$$\lambda_{0} = \lambda_{max} {\tt ALCD}\left(r_{\lambda 1},..., r_{\lambda N}\right)$$
+$$\lambda_{0} = \lambda_{max} { ALCD}\left(r_{\lambda 1},..., r_{\lambda N}\right)$$
+$ALCD()$ is an approximate least common denominator.  
 
-Wavelength Ratios
+#### Wavelength Ratios 
 
 $$r_{\lambda i} = \frac{\lambda_{i}}{\lambda_{min}} \pm \sigma_{\lambda}^{2} = \frac{a_{i}}{b_{i}}$$
 
-$${\tt GCD}(a_{i}, b_{i}) = 1$$
+$${ GCD}(a_{i}, b_{i}) = 1$$ $GCD()$ is the greatest common divisor.  
 
 #### Fundamental Frequency
 
-$$f_{0} = f_{min} / {\tt ALCD}\left(r_{f 1},..., r_{f N}\right)$$
-Frequency Ratios
+$$f_{0} = f_{min} / { ALCD}\left(r_{f 1},..., r_{f N}\right)$$ Frequency
+Ratios
 
 $$r_{f i} = \frac{f_{i}}{f_{min}} \pm \sigma_{f}^{2} = \frac{c_{i}}{d_{i}}$$
 
-$${\tt GCD}(c_{i}, d_{i}) = 1$$
+$${GCD}(c_{i}, d_{i}) = 1$$
 
 #### Heisenberg Uncertainty
 
@@ -43,10 +44,10 @@ equality.
 
 Spatial Consonance
 
-$$C_{\lambda} = 50- \log_{2}\left({\tt ALCD}\left(r_{\lambda 1},..., r_{\lambda N}\right)\right)$$
+$$C_{\lambda} = 50- \log_{2}\left({ ALCD}\left(r_{\lambda 1},..., r_{\lambda N}\right)\right)$$
 Temporal Consonance
 
-$$C_{f} = 50 - \log_{2}\left({\tt ALCD}\left(r_{f 1},..., r_{f N}\right)\right)$$
+$$C_{f} = 50 - \log_{2}\left({ ALCD}\left(r_{f 1},..., r_{f N}\right)\right)$$
 
 Total Consonance
 
