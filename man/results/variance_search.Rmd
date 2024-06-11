@@ -159,45 +159,6 @@ plot_semitone_codi_wrap(
 )
 ```
 
-## Spatial
-
-```{r _Spatial, fig.height=7*rows, fig.width=12*cols, echo=F}
-# height = 3 per row and width = 5 per column
-# so for grid of 4x12 it would be height=12 and width=60
-theory <- theory %>% 
-  dplyr::mutate(
-    smooth  = smoothed(semitone, spatial_consonance, params$sigma)
-  )
-
-plot_semitone_spatial_wrap(
-  theory, 
-  gray_vlines  = params$gray_vlines[[1]],
-  black_vlines = params$black_vlines[[1]],
-  title=paste(search_label),
-  ncols=cols
-)
-```
-
-## Temporal
-
-```{r _Temporal, fig.height=7*rows, fig.width=12*cols, echo=F}
-# height = 3 per row and width = 5 per column
-# so for grid of 4x12 it would be height=12 and width=60
-
-theory <- theory %>% 
-  dplyr::mutate(
-    smooth  = smoothed(semitone, temporal_consonance, params$sigma)
-  )
-
-plot_semitone_temporal_wrap(
-  theory, 
-  gray_vlines  = params$gray_vlines[[1]],
-  black_vlines = params$black_vlines[[1]],
-  title=paste(search_label),
-  ncols=cols
-)
-```
-
 ## Spatiotemporal
 
 ```{r _Spatiotemporal, fig.height=7*rows, fig.width=12*cols, echo=F}

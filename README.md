@@ -530,7 +530,7 @@ major-minor versus the behavioral results are included in a plot below.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
-| 0.079             | 0.08016          |             0.2 |
+| 0.2               | 0.03166          |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-2.png)<!-- -->  
@@ -544,7 +544,7 @@ For 10 harmonics, behavioral results and theoretical predictions agree.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
-| 0.079             | 0.08016          |             0.2 |
+| 0.07858           | 0.08059          |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-6.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-7.png)<!-- -->  
@@ -561,7 +561,7 @@ peak.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
-| 0.079             | 0.08016          |             0.2 |
+| 0.07858           | 0.08059          |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-11.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-12.png)<!-- -->  
@@ -578,7 +578,7 @@ while the M3 peak is slightly higher without the 3rd partial.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
-| 0.079             | 0.08016          |             0.2 |
+| 0.07858           | 0.08059          |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-16.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-17.png)<!-- -->  
@@ -596,7 +596,7 @@ be relatively higher than the behavioral results.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
-| 0.079             | 0.08016          |             0.2 |
+| 0.07858           | 0.08059          |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-21.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-22.png)<!-- -->  
@@ -612,7 +612,7 @@ and m7 that do not exist in the behavioral results.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
-| 0.079             | 0.08016          |             0.2 |
+| 0.07858           | 0.08059          |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-26.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-27.png)<!-- -->  
@@ -627,7 +627,7 @@ with the theoretical peaks.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
-| 0.079             | 0.08016          |             0.2 |
+| 0.07858           | 0.08059          |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-5-31.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-32.png)<!-- -->  
@@ -643,7 +643,7 @@ Description is below.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
-| 0.079             | 0.08016          |           0.035 |
+| 0.07858           | 0.08059          |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-5-36.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-37.png)<!-- -->  
@@ -657,7 +657,7 @@ Description is below.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
-| 0.079             | 0.08016          |           0.035 |
+| 0.07858           | 0.08059          |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-5-41.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-42.png)<!-- -->  
@@ -671,7 +671,7 @@ Description is below.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
-| 0.079             | 0.08016          |           0.035 |
+| 0.07858           | 0.08059          |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-5-46.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-5-47.png)<!-- -->  

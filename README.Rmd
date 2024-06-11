@@ -221,7 +221,7 @@ p = params %>% purrr::map(\(p) {
     description = '  For compressed harmonics, the pronounced behavioral peaks mostly agree with the theoretical peaks.'
     sigma = BEHAVIOURAL_SMOOTH_BROAD
   } else if (p$t == 'Bonang') {
-    black_vlines = c(2.60, 4.80, 11.98)
+    black_vlines = c(2.60, 4.80, 12.0)
     gray_vlines  = c(7.2, 9.6)
     description = "  For gamalan dyads with a harmonic bass pitch and bonang upper pitch, behavioral results and theoretical predictions mostly agree. MaMi.CoDi predicts a dissonance trough with minor polarity at P4 that is not in the behavioral results.  MaMi.CoDi predicts P5 to have minor polarity and be relatively higher than the behavioral results."
     sigma = BEHAVIOURAL_SMOOTH_BROAD

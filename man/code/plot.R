@@ -691,6 +691,9 @@ plot_semitone_spatial_temporal_wrap <- function(theory,
     ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
                         fill=colors_homey$major,
                         ggplot2::aes(x = semitone, y = temporal_consonance)) +
+    ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
+                        fill=colors_homey$minor,
+                        ggplot2::aes(x = semitone, y = spatial_consonance)) +
     ggplot2::geom_line(
       color=colors_homey$major,
       data=theory,

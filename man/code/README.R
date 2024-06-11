@@ -9,10 +9,10 @@ tonic_midi = 60
 output.rds = '../data/readme.rds'
 prepare(output.rds)
 
-default_variance = trunc(mami.codi.R::default_variance()*1e03)/1e03
+default_variance = mami.codi.R::default_variance() - 0.001
 experiment.rds = '../data/Pure.rds'
 grid_1 = tidyr::expand_grid(
-  temporal_variance = default_variance,
+  temporal_variance = 0.2,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=1,
   octave_ratio=2.0,
