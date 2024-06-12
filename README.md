@@ -15,7 +15,7 @@ $N$ is the number of traveling waves in the chord.
 
 #### Fundamental Wavelength
 
-$$\lambda_{0} = \hat{\lambda_{0}} | \psi_{\lambda} \rangle$$
+$$\lambda_{0} = \hat{\lambda}_{0} | \psi_{\lambda} \rangle$$
 
 $$|\psi_{\lambda}\rangle = 
 \left(
@@ -25,7 +25,7 @@ $$|\psi_{\lambda}\rangle =
 \frac{\lambda_{N}}{\lambda_{min}} \pm \sigma_{\lambda}^{2}\right)
 $$
 
-$$\hat{\lambda_{0}} = \lambda_{max} { ALCD}\left({SB}\left(\right) \right)$$
+$$\hat{\lambda}_{0} = \lambda_{max} { ALCD}\left({SB}\left(\right) \right)$$
 
 $$SB(x) = \left(
 1, 
@@ -38,6 +38,8 @@ $${ GCD}(a_{i}, b_{i}) = 1$$
 $ALCD()$ is approximate least common denominator.  
 
 $GCD()$ is greatest common divisor.  
+
+$SB()$ is Stern-Brocot.  
 
 #### Fundamental Frequency
 
