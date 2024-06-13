@@ -144,8 +144,8 @@ compute_consonance = function(x, minimum_amplitude, octave_deviation) {
     f0                    = min(f) / .data$temporal_alcd,
     l0                    = max(l) * .data$spatial_alcd,
 
-    temporal_consonance   = 50 - log2(.data$temporal_alcd),
-    spatial_consonance    = 50 - log2(.data$spatial_alcd),
+    temporal_consonance   = (50 - log2(.data$temporal_alcd))^2,
+    spatial_consonance    = (50 - log2(.data$spatial_alcd))^2,
 
     consonance_dissonance = .data$temporal_consonance + .data$spatial_consonance,
     major_minor           = .data$temporal_consonance - .data$spatial_consonance,
