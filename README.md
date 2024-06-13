@@ -216,11 +216,11 @@ We chose the speed of sound in room temperature air.
 
 ##### Partial Periods
 
-![](man/figures/README-unnamed-chunk-16-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-17-1.png)<!-- -->
 
 ##### Chord Period
 
-![](man/figures/README-unnamed-chunk-17-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-18-1.png)<!-- -->
 
 ##### Frequency fractions
 
@@ -237,11 +237,11 @@ We chose the speed of sound in room temperature air.
 
 ##### Partial Wavelengths
 
-![](man/figures/README-unnamed-chunk-20-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-21-1.png)<!-- -->
 
 ##### Chord Wavelength
 
-![](man/figures/README-unnamed-chunk-21-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-22-1.png)<!-- -->
 
 ##### Wavelength fractions
 
@@ -286,11 +286,11 @@ We chose the speed of sound in room temperature air.
 
 ##### Partial Periods
 
-![](man/figures/README-unnamed-chunk-26-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-27-1.png)<!-- -->
 
 ##### Chord Period
 
-![](man/figures/README-unnamed-chunk-27-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-28-1.png)<!-- -->
 
 ##### Frequency fractions
 
@@ -325,11 +325,11 @@ We chose the speed of sound in room temperature air.
 
 ##### Partial Wavelengths
 
-![](man/figures/README-unnamed-chunk-30-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-31-1.png)<!-- -->
 
 ##### Chord Wavelength
 
-![](man/figures/README-unnamed-chunk-31-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-32-1.png)<!-- -->
 
 ##### Wavelength fractions
 
@@ -397,11 +397,11 @@ We chose the speed of sound in room temperature air.
 
 ##### Partial Periods
 
-![](man/figures/README-unnamed-chunk-36-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-37-1.png)<!-- -->
 
 ##### Chord Period
 
-![](man/figures/README-unnamed-chunk-37-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-38-1.png)<!-- -->
 
 ##### Frequency fractions
 
@@ -456,11 +456,11 @@ We chose the speed of sound in room temperature air.
 
 ##### Partial Wavelengths
 
-![](man/figures/README-unnamed-chunk-40-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-41-1.png)<!-- -->
 
 ##### Chord Wavelength
 
-![](man/figures/README-unnamed-chunk-41-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-42-1.png)<!-- -->
 
 ##### Wavelength fractions
 
@@ -563,6 +563,14 @@ the auditory cortex, it would seem that estimating the cyclicity of the
 two signals happens higher up in the auditoray system after the spatial
 and temporal signals have been processed.  
 
+### Histogram of Stern-Brocot Approximation versus Actual
+
+## Stern Brocot Curve
+
+Number of Samples: 1,000,000  
+
+![](man/figures/SternBrocotCurve-unnamed-chunk-78-1.png)<!-- -->
+
 ## Theoretical predictions compared to large-scale behavioral results
 
 The large-scale behavioral data in the plots below are from [Timbral
@@ -589,11 +597,11 @@ major-minor versus the behavioral results are included in a plot below.
 |:------------------|:-----------------|----------------:|
 | 0.2               | 0.03166          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-2.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-3.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-4.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-5.png)<!-- -->
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-1.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-2.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-3.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-4.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-5.png)<!-- -->
 
 ##### Harmonic ~ Partials: 10
 
@@ -603,11 +611,11 @@ For 10 harmonics, behavioral results and theoretical predictions agree.
 |:------------------|:-----------------|----------------:|
 | 0.07858           | 0.08059          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-5-6.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-7.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-8.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-9.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-10.png)<!-- -->
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-6.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-7.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-8.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-9.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-10.png)<!-- -->
 
 ##### 5Partials ~ Partials: 5
 
@@ -620,11 +628,11 @@ peak.
 |:------------------|:-----------------|----------------:|
 | 0.07858           | 0.08059          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-5-11.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-12.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-13.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-14.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-15.png)<!-- -->
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-11.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-12.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-13.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-14.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-15.png)<!-- -->
 
 ##### 5PartialsNo3 ~ Partials: 5
 
@@ -637,11 +645,11 @@ while the M3 peak is slightly higher without the 3rd partial.
 |:------------------|:-----------------|----------------:|
 | 0.07858           | 0.08059          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-5-16.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-17.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-18.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-19.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-20.png)<!-- -->
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-16.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-17.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-18.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-19.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-20.png)<!-- -->
 
 ##### Bonang ~ Partials: 4
 
@@ -655,11 +663,11 @@ be relatively higher than the behavioral results.
 |:------------------|:-----------------|----------------:|
 | 0.07858           | 0.08059          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-5-21.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-22.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-23.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-24.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-25.png)<!-- -->
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-21.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-22.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-23.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-24.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-25.png)<!-- -->
 
 ##### Stretched ~ Partials: 10
 
@@ -671,11 +679,11 @@ and m7 that do not exist in the behavioral results.
 |:------------------|:-----------------|----------------:|
 | 0.07858           | 0.08059          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-5-26.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-27.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-28.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-29.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-30.png)<!-- -->
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-26.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-27.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-28.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-29.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-30.png)<!-- -->
 
 ##### Compressed ~ Partials: 10
 
@@ -686,11 +694,11 @@ with the theoretical peaks.
 |:------------------|:-----------------|----------------:|
 | 0.07858           | 0.08059          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-5-31.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-32.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-33.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-34.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-35.png)<!-- -->
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-31.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-32.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-33.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-34.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-35.png)<!-- -->
 
 #### Dyads spanning 1 quarter tone
 
@@ -702,11 +710,11 @@ Description is below.
 |:------------------|:-----------------|----------------:|
 | 0.07858           | 0.08059          |           0.035 |
 
-![](man/figures/README-unnamed-chunk-5-36.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-37.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-38.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-39.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-40.png)<!-- -->
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-36.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-37.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-38.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-39.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-40.png)<!-- -->
 
 ##### M6 ~ Partials: 10
 
@@ -716,11 +724,11 @@ Description is below.
 |:------------------|:-----------------|----------------:|
 | 0.07858           | 0.08059          |           0.035 |
 
-![](man/figures/README-unnamed-chunk-5-41.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-42.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-43.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-44.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-45.png)<!-- -->
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-41.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-42.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-43.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-44.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-45.png)<!-- -->
 
 ##### P8 ~ Partials: 10
 
@@ -730,11 +738,11 @@ Description is below.
 |:------------------|:-----------------|----------------:|
 | 0.07858           | 0.08059          |           0.035 |
 
-![](man/figures/README-unnamed-chunk-5-46.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-47.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-48.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-49.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-50.png)<!-- -->
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-46.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-47.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-48.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-49.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-50.png)<!-- -->
 
 ##### P8Zoomed ~ Partials: 10
 
@@ -745,11 +753,11 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 |:------------------|:-----------------|----------------:|
 | 126.65148         | 5e-05            |           0.035 |
 
-![](man/figures/README-unnamed-chunk-5-51.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-52.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-53.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-54.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-5-55.png)<!-- -->
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-51.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-52.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-53.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-54.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-6-55.png)<!-- -->
 
 ### Manipulating amplitudes
 
@@ -759,8 +767,8 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 |:------------------|:-----------------|:--------------|----------------:|
 | 0.07958           | 0.07958          | 0.013         |             0.2 |
 
-![](man/figures/README-unnamed-chunk-9-1.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-9-2.png)<!-- -->
+![](man/figures/SternBrocotCurve-unnamed-chunk-10-1.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-10-2.png)<!-- -->
 
 ##### Harmonic ~ Roll Off: 7
 
@@ -768,8 +776,8 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 |:------------------|:-----------------|:--------------|----------------:|
 | 0.07958           | 0.07958          | 0.08          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-9-3.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-9-4.png)<!-- -->
+![](man/figures/SternBrocotCurve-unnamed-chunk-10-3.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-10-4.png)<!-- -->
 
 ##### Harmonic ~ Roll Off: 2
 
@@ -777,8 +785,8 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 |:------------------|:-----------------|:--------------|----------------:|
 | 0.07958           | 0.07958          | 0             |             0.2 |
 
-![](man/figures/README-unnamed-chunk-9-5.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-9-6.png)<!-- -->
+![](man/figures/SternBrocotCurve-unnamed-chunk-10-5.png)<!-- -->  
+![](man/figures/SternBrocotCurve-unnamed-chunk-10-6.png)<!-- -->
 
 #### Notes on plots:
 

@@ -217,14 +217,15 @@ plot_cofreq.cowave <- function(chords, title, chords_to_label=NULL,
     #            max(c(chords$temporal_consonance,chords$spatial_consonance)))) +
     {if (minimal) theme_homey_minimal(aspect.ratio=aspect.ratio) else theme_homey(aspect.ratio=aspect.ratio)}
 }
-plot_error_hist <- function(errors, signal, variance, title='') {
+plot_error_hist <- function(errors, bins=21, signal, variance, title='') {
   px = pretty(errors)
   err = tibble::tibble(
     errors = errors
   )
   ggplot2::ggplot(err, ggplot2::aes(errors)) +
     ggplot2::geom_histogram(
-      fill = colors_homey[signal]
+      fill = colors_homey[signal],
+      bins = bins
     ) +
     ggplot2::scale_x_continuous(
       breaks = px,

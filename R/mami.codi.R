@@ -101,7 +101,7 @@ parse_variances <- function(x, temporal_variance, spatial_variance) {
 #' * room temperature air at sea level (343 m/s)
 #' * the fluid of the inner ear (1,522 m/s, ocean water at room temperature)
 #' * the basilar membrane (1,640 m/s, human cartilage)
-#' No matter which one we pick we would get the same consonance results.
+#' No matter which one we pick we will get the same consonance results.
 #'
 #' For giggles, though, consider a speed of sound that normalizes the range of
 #' the two signals:
@@ -132,7 +132,7 @@ parse_variances <- function(x, temporal_variance, spatial_variance) {
 #'
 #' Many of the wavelength ratios will look familiar to those who know their
 #' just intoned music intervals. However, the familiar ratios are not for the
-#' expected dyads.
+#' familiar intervals
 #' For example, 5/4 is the major third ratio of the high fundamental frequency
 #' relative to the low fundamental frequency. However, 5/4 above is
 #' the ratio of the 8th harmonic's wavelength relative to the 10th harmonic's
@@ -141,12 +141,12 @@ parse_variances <- function(x, temporal_variance, spatial_variance) {
 #'
 #' The two cycle estimates for the same set of harmonics are different.
 #' Because the wavelength values were precisely calculated from the frequency
-#' values, the disparity in the two estimates isn't the result of a lack of
-#' precision from the hair cells of the basilar membrane or the
-#' phase-locking speed of the auditory neurons.
+#' values, our model indicates that the disparity in the two estimates isn't the
+#' result of a lack of precision from the hair cell locations of the basilar
+#' membrane or the phase-locking speed of the auditory neurons.
 #'
-#' Instead, the difference in cycle estimates seems be a more fundamental
-#' uncertainty that is built into the conjugate relationship between frequencies
+#' Instead, the difference in cycle estimates seems be a fundamental uncertainty
+#' that is built into the conjugate relationship between frequencies
 #' and wavelengths. See Gabor 1946.
 #'
 #' see:

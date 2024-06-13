@@ -1,0 +1,31 @@
+```{r, echo=F, message=F, include=F}
+devtools::load_all(".")
+source('./man/code/plot.R')
+source('./man/code/utils.R')
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/SternBrocotCurve-",
+  warning = FALSE,
+  message = FALSE
+)
+```
+
+## Stern Brocot Curve
+
+```{r, echo=F, message=F}
+fractions = readRDS('./man/data/stern_brocot.rds')
+```
+
+Number of Samples: `r fractions %>% nrow() %>% format(big.mark=',',scientific=F,trim=T)` \
+
+```{r, echo=F, message=F}
+print(plot_error_hist(fractions$error,
+                      bins=21,
+                      'fundamental', 
+                      default_variance(),
+                      'Stern-Brocot Curve'))
+cat("  \n")
+
+
+```

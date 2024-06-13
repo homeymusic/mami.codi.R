@@ -207,6 +207,12 @@ same. Insofar as this model represents processing in the auditory cortex, it
 would seem that estimating the cyclicity of the two signals happens higher up
 in the auditoray system after the spatial and temporal signals have been processed.\
 
+
+### Histogram of Stern-Brocot Approximation versus Actual
+
+```{r, child=c('man/SternBrocotCurve.Rmd')}
+```
+
 ## Theoretical predictions compared to large-scale behavioral results
 
 The large-scale behavioral data in the plots below are from [Timbral effects on consonance disentangle psychoacoustic mechanisms and suggest perceptual origins for musical scales](https://www.nature.com/articles/s41467-024-45812-z) by Raja Marjieh, Peter M. C. Harrison, Harin Lee, Fotini Deligiannaki & Nori Jacoby.
@@ -365,11 +371,11 @@ p = params %>% purrr::map(\(p) {
   cat("  \n")
   
   errors = (chords %>% tidyr::unnest(temporal_fractions))$error
-  print(plot_error_hist(errors, 'major', t_v, 'Temporal Variance'))
+  print(plot_error_hist(errors, bins=21, 'major', t_v, 'Temporal Variance'))
   cat("  \n")
-
+                      
   errors = (chords %>% tidyr::unnest(spatial_fractions))$error
-  print(plot_error_hist(errors, 'minor', s_v, 'Spatial Variance'))
+  print(plot_error_hist(errors,  bins=21, 'minor', s_v, 'Spatial Variance'))
   cat("  \n")
 
 })
