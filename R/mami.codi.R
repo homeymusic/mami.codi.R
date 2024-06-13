@@ -96,27 +96,26 @@ parse_variances <- function(x, temporal_variance, spatial_variance) {
 
 }
 
-#' About the speed of sound
-#'
-#' We are dealing with ratios. The speed of sound constant will
-#' disappear. We could estimate the speed of sound as:
+#' We are dealing with frequency and wavelength ratios. The speed of sound
+#' constant will disappear. We could estimate the speed of sound as:
 #' * room temperature air at sea level (343 m/s)
 #' * the fluid of the inner ear (1,522 m/s, ocean water at room temperature)
 #' * the basilar membrane (1,640 m/s, human cartilage)
 #' No matter which one we pick we would get the same consonance results.
 #'
-#' Consider a speed of sound that is normalized between the two signals:
+#' For giggles, though, consider a speed of sound that normalizes the range of
+#' the two signals:
 #'
-#' c_sound = max(f) / max(1/f)
+#' c_sound = max(f) * min(f)
 #'
 #' For a pitch with a 100Hz fundamental and 10 harmonics, our speed of sound would be:
 #'
-#' c_sound = 1000 / 0.01 -> 1e+05
+#' c_sound = 1000 * 100 -> 1e+05
 #'
-#' That is a fast material. The advantage, though, is that our wavelength and
-#' frequency numbers have the same range.
+#' That is a fast material. The advantage, though, for our analysis is that our
+#' wavelength and frequency numbers have the same range.
 #'
-#' frequencies: 100  200    300    400    500    600    700    800    900    1000
+#' frequencies: 100 200 300 400 500 600 700 800 900 1000
 #' fractions f/f_min: 1/1 2/1 3/1 4/1 5/1 6/1 7/1 8/1 9/1 10/1
 #' LCD: 1
 #'
@@ -132,22 +131,23 @@ parse_variances <- function(x, temporal_variance, spatial_variance) {
 #' 1 cycle for frequencies but 12 cycles for wavelengths.
 #'
 #' Many of the wavelength ratios will look familiar to those who know their
-#' music intervals. However, the familiar ratios are not for the expected dyads.
-#' For example, 5/4 is not the major third ratio of the high fundamental frequency
-#' relative to the low fundamental frequency. 5/4 is the ratio of the 8th
-#' harmonic's wavelength relative to the 10th harmonic's wavelength. And the ratio
-#' isn't just an approximation: 125 / 100 is precisely 5 / 4.
+#' just intoned music intervals. However, the familiar ratios are not for the
+#' expected dyads.
+#' For example, 5/4 is the major third ratio of the high fundamental frequency
+#' relative to the low fundamental frequency. However, 5/4 above is
+#' the ratio of the 8th harmonic's wavelength relative to the 10th harmonic's
+#' wavelength. And the ratio isn't just an approximation:
+#' 125.00 / 100.00 is precisely 5 / 4.
 #'
 #' The two cycle estimates for the same set of harmonics are different.
 #' Because the wavelength values were precisely calculated from the frequency
 #' values, the disparity in the two estimates isn't the result of a lack of
-#' precision of the wavelength or the frequency values from the precise
-#' locations of the hair cells of the basilar membrane or the phase-locking
-#' speed of the auditory neurons.
+#' precision from the hair cells of the basilar membrane or the
+#' phase-locking speed of the auditory neurons.
 #'
 #' Instead, the difference in cycle estimates seems be a more fundamental
 #' uncertainty that is built into the conjugate relationship between frequencies
-#' and wavelengths.
+#' and wavelengths. See Gabor 1946.
 #'
 #' see:
 #' https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6662181/#:~:text=The%20speed%20of%20sound%20in,%2Fs)%20for%20image%20reconstruction.
