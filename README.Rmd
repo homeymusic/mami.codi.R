@@ -1,5 +1,5 @@
 ---
-title: "MaMi.CoDi: A Spatiotemporal Periodicity Model of Consonance Perception"
+title: "MaMi.CoDi: A Quantum Model of Consonance Perception at the Heisenberg Uncertainty Limit"
 output:
   github_document: default
 ---

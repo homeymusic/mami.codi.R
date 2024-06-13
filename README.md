@@ -1,4 +1,5 @@
-MaMi.CoDi: A Spatiotemporal Periodicity Model of Consonance Perception
+MaMi.CoDi: A Quantum Model of Consonance Perception at the Heisenberg
+Uncertainty Limit
 ================
 
 ## How MaMi.CoDi Works
