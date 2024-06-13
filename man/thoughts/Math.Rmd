@@ -1,5 +1,7 @@
 ---
-title: "The Math"
+title: "Math"
+output:
+  github_document: default
 ---
 
 ### The Math
