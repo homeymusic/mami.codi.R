@@ -1,0 +1,13 @@
+### The Math
+
+#### Real Traveling Wave
+
+$$\psi(x,t) = \sin \left( \frac{2\pi x}{\lambda_{0}} - 2 \pi f_{0} t \right)$$
+
+#### Comples Traveling Wave
+
+$$\psi(x,t) = e ^ {-i\left( 2 \pi f_{0} t - \frac{2\pi x}{\lambda_{0}} \right)}$$
+
+$N$ is the number of traveling waves in the chord.
+
+$$i=1...N$$
