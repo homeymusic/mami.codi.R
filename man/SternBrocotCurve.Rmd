@@ -11,13 +11,10 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Stern Brocot Curve
-
 ```{r, echo=F, message=F}
 fractions = readRDS('./man/data/stern_brocot.rds')
 ```
 
-Number of Samples: `r fractions %>% nrow() %>% format(big.mark=',',scientific=F,trim=T)` \
 
 ```{r, echo=F, message=F}
 print(plot_error_hist(fractions$error,
@@ -26,6 +23,6 @@ print(plot_error_hist(fractions$error,
                       default_variance(),
                       'Stern-Brocot Curve'))
 cat("  \n")
-
-
 ```
+Number of Samples: `r fractions %>% nrow() %>% format(big.mark=',',scientific=F,trim=T)` \
+A peak in a well? \
