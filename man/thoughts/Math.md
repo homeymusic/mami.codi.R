@@ -47,7 +47,7 @@ specific fundamental value.
 $$\psi(\pmb{\omega})=\frac{1}{\sqrt{2 \pi}} \int e^{i \pmb{k} \pmb{\omega}}\phi(\pmb{k})dk$$
 
 $$\phi(\pmb{k})=\frac{1}{\sqrt{2 \pi}} \int e^{-i \pmb{k} \pmb{\omega}}\psi(\pmb{\omega})d \omega $$
-$\omega$ and $k$ are vectors.
+$\pmb{\omega}$ and $\pmb{k}$ are vectors.
 
 #### Now Make $\psi$ and $\phi$ work
 
