@@ -7,13 +7,13 @@
 compute_consonance(x, minimum_amplitude, octave_deviation)
 }
 \description{
-We are dealing with ratios. Mathematically the speed of sound constant will
-disappear. We could estimate the speed of sound in:
+We are dealing with ratios. The speed of sound constant will
+disappear. We could estimate the speed of sound as:
 \itemize{
 \item room temperature air at sea level (343 m/s)
 \item the fluid of the inner ear (1,522 m/s, ocean water at room temperature)
 \item the basilar membrane (1,640 m/s, human cartilage)
-No matter which one we pick we would get the same mathematical results.
+No matter which one we pick we would get the same consonance results.
 }
 }
 \details{
@@ -21,15 +21,15 @@ Consider a speed of sound that is normalized between the two signals:
 
 c_sound = max(f) / max(1/f)
 
-For Eb5 with 10 harmonics, our speed of sound would be
+For a chord = 100Hz pitch with 10 harmonics, our speed of sound would be
 
-max(Eb5_f) / max(1/Eb5_f) -> 1,627,975 m / s
+max(chord) / max(1/chord) -> 1e+05
 
 That is a fast material. The advantage, though, is that our wavelength and
 frequency numbers will be in the same range.
 
-Eb5_f = 622.254 1244.508 1866.762 2489.016 3111.270 3733.524 4355.778 4978.032 5600.286 6222.540
-Eb5_l = 6222.5396 3111.2698 2074.1799 1555.6349 1244.5079 1037.0899  888.9342  777.8175  691.3933  622.2540
+frequencies: 100  200    300    400    500    600    700    800    900    1000
+wavelengths: 100  111.11 125.00 142.85 166.66 200.00 250.00 333.33 500.00 1000
 
 We can see that the two vectors are not identical.
 

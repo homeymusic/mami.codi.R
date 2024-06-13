@@ -98,38 +98,63 @@ parse_variances <- function(x, temporal_variance, spatial_variance) {
 
 #' About the speed of sound
 #'
-#' We are dealing with ratios. Mathematically the speed of sound constant will
-#' disappear. We could estimate the speed of sound in:
+#' We are dealing with ratios. The speed of sound constant will
+#' disappear. We could estimate the speed of sound as:
 #' * room temperature air at sea level (343 m/s)
 #' * the fluid of the inner ear (1,522 m/s, ocean water at room temperature)
 #' * the basilar membrane (1,640 m/s, human cartilage)
-#' No matter which one we pick we would get the same mathematical results.
+#' No matter which one we pick we would get the same consonance results.
 #'
 #' Consider a speed of sound that is normalized between the two signals:
 #'
 #' c_sound = max(f) / max(1/f)
 #'
-#' For Eb5 with 10 harmonics, our speed of sound would be
+#' For a pitch with a 100Hz fundamental and 10 harmonics, our speed of sound would be:
 #'
-#' max(Eb5_f) / max(1/Eb5_f) -> 1,627,975 m / s
+#' c_sound = 1000 / 0.01 -> 1e+05
 #'
 #' That is a fast material. The advantage, though, is that our wavelength and
-#' frequency numbers will be in the same range.
+#' frequency numbers have the same range.
 #'
-#' Eb5_f = 622.254 1244.508 1866.762 2489.016 3111.270 3733.524 4355.778 4978.032 5600.286 6222.540
-#' Eb5_l = 6222.5396 3111.2698 2074.1799 1555.6349 1244.5079 1037.0899  888.9342  777.8175  691.3933  622.2540
+#' frequencies: 100  200    300    400    500    600    700    800    900    1000
+#' fractions f/f_min: 1/1 2/1 3/1 4/1 5/1 6/1 7/1 8/1 9/1 10/1
+#' LCD: 1
 #'
-#' We can see that the two vectors are not identical.
+#' wavelengths = l = c_sound / f
+#' wavelengths: 100 111.11 125.00 142.85 166.66 200.00 250.00 333.33 500.00 1000
+#' fractions l/l_min: 1/1 7/6 5/4 3/2 5/3 2/1 5/2 10/3 5/1 10/1
+#' LCD: 12
 #'
-#' The two periodicity estimates for the same set of waves will be different.
-#' This is our first glimpse at the Heisenberg-Gabor uncertainty principle.
+#' The frequency and wavelength vectors have the same range 100 to 1,000 but
+#' only 4 of the same values: 100, 200, 500 and 1,000. The other 6 values are
+#' different. And so the pattern recognition machinery of the auditory system,
+#' which we approximate with the LCD, will perceive different cycle lengths:
+#' 1 cycle for frequencies but 12 cycles for wavelengths.
+#'
+#' Many of the wavelength ratios will look familiar to those who know their
+#' music intervals. However, the familiar ratios are not for the expected dyads.
+#' For example, 5/4 is not the major third ratio of the high fundamental frequency
+#' relative to the low fundamental frequency. 5/4 is the ratio of the 8th
+#' harmonic's wavelength relative to the 10th harmonic's wavelength. And the ratio
+#' isn't just an approximation: 125 / 100 is precisely 5 / 4.
+#'
+#' The two cycle estimates for the same set of harmonics are different.
+#' Because the wavelength values were precisely calculated from the frequency
+#' values, the disparity in the two estimates isn't the result of a lack of
+#' precision of the wavelength or the frequency values from the precise
+#' locations of the hair cells of the basilar membrane or the phase-locking
+#' speed of the auditory neurons.
+#'
+#' Instead, the difference in cycle estimates seems be a more fundamental
+#' uncertainty that is built into the conjugate relationship between frequencies
+#' and wavelengths.
 #'
 #' see:
 #' https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6662181/#:~:text=The%20speed%20of%20sound%20in,%2Fs)%20for%20image%20reconstruction.
 #' https://itis.swiss/virtual-population/tissue-properties/database/acoustic-properties/speed-of-sound/
 #' https://www.engineeringtoolbox.com/sound-speed-water-d_598.html
 #' https://www.engineeringtoolbox.com/air-speed-sound-d_603.html
-#' https://en.wikipedia.org/wiki/Floating-point_arithmetic
+#'
 compute_consonance = function(x, minimum_amplitude, octave_deviation) {
 
   f       = x$spectrum[[1]] %>% dplyr::filter(.data$y>minimum_amplitude) %>% hrep::freq()
@@ -269,9 +294,9 @@ DEFAULT_VARIANCE = sqrt(HEISENBERG)
 #' Default octave_deviation for approximating the Least Common Multiple (LCM)
 #'
 #''
-#' @rdname octave_deviation
+#' @rdname default_octave_deviation
 #' @export
-octave_deviation <- function() { OCTAVE_DEVIATION }
+default_octave_deviation <- function() { OCTAVE_DEVIATION }
 OCTAVE_DEVIATION = 0.11
 
 #' Default Minimum Amplitude
@@ -279,7 +304,7 @@ OCTAVE_DEVIATION = 0.11
 #' Default minimum amplitude for deciding which tones are evaluated
 #'
 #''
-#' @rdname minimum_amplitude
+#' @rdname default_octave_deviation
 #' @export
-minimum_amplitude <- function() { MINIMUM_AMPLITUDE }
+default_octave_deviation <- function() { MINIMUM_AMPLITUDE }
 MINIMUM_AMPLITUDE = 0.07
