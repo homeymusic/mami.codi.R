@@ -13,6 +13,20 @@ within a given variance using the Stern-Brocot tree.
 Number of Samples: 1,000,000  
 A peak in a well?  
 
+#### Fourier Transform
+
+$$\psi(\pmb{\omega})=\frac{1}{\sqrt{2 \pi}} \int e^{i \pmb{k} \pmb{\omega}}\phi(\pmb{k})d^N k$$
+
+$$\phi(\pmb{k})=\frac{1}{\sqrt{2 \pi}} \int e^{-i \pmb{k} \pmb{\omega}}\psi(\pmb{\omega})d^N \omega $$
+
+$\pmb{\omega}$ and $\pmb{k}$ are vectors of length $N$.
+
+#### Now Make $\psi$ and $\phi$ work
+
+$\psi$ is temporal, the probability of the fundamental frequency.  
+
+$\phi$ is spatial, the probability of the fundamental wavelength.  
+
 #### Real Traveling Wave
 
 $$\psi(x,t) = \sin \left( \frac{2\pi x}{\lambda_{0}} - 2 \pi f_{0} t \right)$$
@@ -41,16 +55,3 @@ So what are they in our model?
 $f_{0}(f_{i \dots N})$ and $\lambda_{0}(\lambda_{i \dots N})$ are
 probabilities that a set of frequencies or wavelengths will have a
 specific fundamental value.  
-
-#### Fourier Transform
-
-$$\psi(\pmb{\omega})=\frac{1}{\sqrt{2 \pi}} \int e^{i \pmb{k} \pmb{\omega}}\phi(\pmb{k})dk$$
-
-$$\phi(\pmb{k})=\frac{1}{\sqrt{2 \pi}} \int e^{-i \pmb{k} \pmb{\omega}}\psi(\pmb{\omega})d \omega $$
-$\pmb{\omega}$ and $\pmb{k}$ are vectors.
-
-#### Now Make $\psi$ and $\phi$ work
-
-$\psi$ is temporal, the probability of the fundamental frequency.  
-
-$\phi$ is spatial, the probability of the fundamental wavelength.  

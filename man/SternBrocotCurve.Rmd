@@ -1,3 +1,9 @@
+---
+title: "Stern-Brocot"
+output:
+  github_document: default
+---
+
 ```{r, echo=F, message=F, include=F}
 devtools::load_all(".")
 source('./man/code/plot.R')
