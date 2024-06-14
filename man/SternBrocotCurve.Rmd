@@ -22,68 +22,72 @@ bins=21
 variance = 5e-05
 path = paste0('./man/data/stern_brocot_',variance,'.rds')
 fractions = readRDS(path)
+errors = fractions$error[fractions$error>=-variance][fractions$error<=variance]
 ```
 
 ```{r, echo=F, message=F}
-print(plot_error_hist(fractions$error,
+print(plot_error_hist(errors,
                       bins=bins,
                       'fundamental', 
                       variance,
                       'Stern-Brocot Curve'))
 cat("  \n")
 ```
-Number of Samples: `r fractions %>% nrow() %>% format(big.mark=',',scientific=F,trim=T)` \
+Number of Samples: `r errors %>% length() %>% format(big.mark=',',scientific=F,trim=T)` \
 Number of Bins: `r bins` \
 
 ```{r, echo=F, message=F}
 variance = default_variance()^2
 path = paste0('./man/data/stern_brocot_',variance,'.rds')
 fractions = readRDS(path)
+errors = fractions$error[fractions$error>=-variance][fractions$error<=variance]
 ```
 
 ```{r, echo=F, message=F}
-print(plot_error_hist(fractions$error,
+print(plot_error_hist(errors,
                       bins=bins,
                       'fundamental', 
                       variance,
                       'Stern-Brocot Curve'))
 cat("  \n")
 ```
-Number of Samples: `r fractions %>% nrow() %>% format(big.mark=',',scientific=F,trim=T)` \
+Number of Samples: `r errors %>% length() %>% format(big.mark=',',scientific=F,trim=T)` \
 Number of Bins: `r bins` \
 
 ```{r, echo=F, message=F}
 variance = 0.05
 path = paste0('./man/data/stern_brocot_',variance,'.rds')
 fractions = readRDS(path)
+errors = fractions$error[fractions$error>=-variance][fractions$error<=variance]
 ```
 
 ```{r, echo=F, message=F}
-print(plot_error_hist(fractions$error,
+print(plot_error_hist(errors,
                       bins=bins,
                       'fundamental', 
                       variance,
                       'Stern-Brocot Curve'))
 cat("  \n")
 ```
-Number of Samples: `r fractions %>% nrow() %>% format(big.mark=',',scientific=F,trim=T)` \
+Number of Samples: `r errors %>% length() %>% format(big.mark=',',scientific=F,trim=T)` \
 Number of Bins: `r bins` \
 
 ```{r, echo=F, message=F}
 variance = default_variance()
 path = paste0('./man/data/stern_brocot_',variance,'.rds')
 fractions = readRDS(path)
+errors = fractions$error[fractions$error>=-variance][fractions$error<=variance]
 ```
 
 ```{r, echo=F, message=F}
-print(plot_error_hist(fractions$error,
+print(plot_error_hist(errors,
                       bins=bins,
                       'fundamental', 
                       variance,
                       'Stern-Brocot Curve'))
 cat("  \n")
 ```
-Number of Samples: `r fractions %>% nrow() %>% format(big.mark=',',scientific=F,trim=T)` \
+Number of Samples: `r errors %>% length() %>% format(big.mark=',',scientific=F,trim=T)` \
 Number of Bins: `r bins` \
 A peak in a well? \
 
@@ -92,17 +96,18 @@ A peak in a well? \
 variance = 0.1
 path = paste0('./man/data/stern_brocot_',variance,'.rds')
 fractions = readRDS(path)
+errors = fractions$error[fractions$error>=-variance][fractions$error<=variance]
 ```
 
 ```{r, echo=F, message=F}
-print(plot_error_hist(fractions$error,
+print(plot_error_hist(errors,
                       bins=bins,
                       'fundamental', 
                       variance,
                       'Stern-Brocot Curve'))
 cat("  \n")
 ```
-Number of Samples: `r fractions %>% nrow() %>% format(big.mark=',',scientific=F,trim=T)` \
+Number of Samples: `r errors %>% length() %>% format(big.mark=',',scientific=F,trim=T)` \
 Number of Bins: `r bins` \
 
 ```{r, echo=F, message=F}
@@ -112,12 +117,12 @@ fractions = readRDS(path)
 ```
 
 ```{r, echo=F, message=F}
-print(plot_error_hist(fractions$error,
+print(plot_error_hist(errors,
                       bins=bins,
                       'fundamental', 
                       variance,
                       'Stern-Brocot Curve'))
 cat("  \n")
 ```
-Number of Samples: `r fractions %>% nrow() %>% format(big.mark=',',scientific=F,trim=T)` \
+Number of Samples: `r errors %>% length() %>% format(big.mark=',',scientific=F,trim=T)` \
 Number of Bins: `r bins` \
