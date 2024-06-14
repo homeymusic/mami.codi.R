@@ -11,7 +11,36 @@ within a given variance using the Stern-Brocot tree.
 
 ![](man/figures/SternBrocotCurve-unnamed-chunk-5-1.png)<!-- -->  
 Number of Samples: 1,000,000  
+Number of Bins: 21  
+
+![](man/figures/SternBrocotCurve-unnamed-chunk-7-1.png)<!-- -->  
+Number of Samples: 1,000,000  
+Number of Bins: 21  
+
+![](man/figures/SternBrocotCurve-unnamed-chunk-9-1.png)<!-- -->  
+Number of Samples: 1,000,000  
+Number of Bins: 21  
+
+![](man/figures/SternBrocotCurve-unnamed-chunk-11-1.png)<!-- -->  
+Number of Samples: 1,000,000  
+Number of Bins: 21  
 A peak in a well?  
+
+![](man/figures/SternBrocotCurve-unnamed-chunk-13-1.png)<!-- -->  
+Number of Samples: 1,000,000  
+Number of Bins: 21  
+
+![](man/figures/SternBrocotCurve-unnamed-chunk-15-1.png)<!-- -->  
+Number of Samples: 1,000,000  
+Number of Bins: 21  
+
+#### Free Wave Packets
+
+$$\psi(x,t)= e^{-i \left(\pmb{\omega}}t - \pmb{k}x)$$
+
+$$\phi(\pmb{k})=\frac{1}{\sqrt{2 \pi}} \int e^{-i \pmb{k} \pmb{\omega}}\psi(\pmb{\omega})d^N \omega $$
+
+$\pmb{\omega}$ and $\pmb{k}$ are vectors of length $N$.
 
 #### Fourier Transform
 
