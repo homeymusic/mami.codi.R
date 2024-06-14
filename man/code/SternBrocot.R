@@ -3,13 +3,16 @@ devtools::load_all(".")
 source('./utils.R')
 
 samples = 1000000
+variance = 5e-05
+print(paste('samples:',samples))
+print(paste('variance:',variance))
 rationals = seq(from=1/samples, to=1, by=1/samples)
 plan(multisession, workers=parallelly::availableCores())
 fractions = rationals %>%
   furrr::future_map(\(r) {
-    approximate_rational_fractions(r, variance=default_variance(), deviation=default_octave_deviation())
+    approximate_rational_fractions(r, variance=variance, deviation=default_octave_deviation())
   }, .progress=TRUE, .options = furrr::furrr_options(seed = T)) %>%
   purrr::list_rbind()
 
-rds = paste0('../data/stern_brocot.rds')
+rds = paste0('../data/stern_brocot_',variance,'.rds')
 saveRDS(fractions,rds)

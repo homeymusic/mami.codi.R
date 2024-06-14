@@ -15,20 +15,109 @@ knitr::opts_chunk$set(
   warning = FALSE,
   message = FALSE
 )
+bins=21
 ```
 
 ```{r, echo=F, message=F}
-fractions = readRDS('./man/data/stern_brocot.rds')
+variance = 5e-05
+path = paste0('./man/data/stern_brocot_',variance,'.rds')
+fractions = readRDS(path)
 ```
-
 
 ```{r, echo=F, message=F}
 print(plot_error_hist(fractions$error,
-                      bins=21,
+                      bins=bins,
                       'fundamental', 
-                      default_variance(),
+                      variance,
                       'Stern-Brocot Curve'))
 cat("  \n")
 ```
 Number of Samples: `r fractions %>% nrow() %>% format(big.mark=',',scientific=F,trim=T)` \
+Number of Bins: `r bins` \
+
+```{r, echo=F, message=F}
+variance = default_variance()^2
+path = paste0('./man/data/stern_brocot_',variance,'.rds')
+fractions = readRDS(path)
+```
+
+```{r, echo=F, message=F}
+print(plot_error_hist(fractions$error,
+                      bins=bins,
+                      'fundamental', 
+                      variance,
+                      'Stern-Brocot Curve'))
+cat("  \n")
+```
+Number of Samples: `r fractions %>% nrow() %>% format(big.mark=',',scientific=F,trim=T)` \
+Number of Bins: `r bins` \
+
+```{r, echo=F, message=F}
+variance = 0.05
+path = paste0('./man/data/stern_brocot_',variance,'.rds')
+fractions = readRDS(path)
+```
+
+```{r, echo=F, message=F}
+print(plot_error_hist(fractions$error,
+                      bins=bins,
+                      'fundamental', 
+                      variance,
+                      'Stern-Brocot Curve'))
+cat("  \n")
+```
+Number of Samples: `r fractions %>% nrow() %>% format(big.mark=',',scientific=F,trim=T)` \
+Number of Bins: `r bins` \
+
+```{r, echo=F, message=F}
+variance = default_variance()
+path = paste0('./man/data/stern_brocot_',variance,'.rds')
+fractions = readRDS(path)
+```
+
+```{r, echo=F, message=F}
+print(plot_error_hist(fractions$error,
+                      bins=bins,
+                      'fundamental', 
+                      variance,
+                      'Stern-Brocot Curve'))
+cat("  \n")
+```
+Number of Samples: `r fractions %>% nrow() %>% format(big.mark=',',scientific=F,trim=T)` \
+Number of Bins: `r bins` \
 A peak in a well? \
+
+
+```{r, echo=F, message=F}
+variance = 0.1
+path = paste0('./man/data/stern_brocot_',variance,'.rds')
+fractions = readRDS(path)
+```
+
+```{r, echo=F, message=F}
+print(plot_error_hist(fractions$error,
+                      bins=bins,
+                      'fundamental', 
+                      variance,
+                      'Stern-Brocot Curve'))
+cat("  \n")
+```
+Number of Samples: `r fractions %>% nrow() %>% format(big.mark=',',scientific=F,trim=T)` \
+Number of Bins: `r bins` \
+
+```{r, echo=F, message=F}
+variance = 0.5
+path = paste0('./man/data/stern_brocot_',variance,'.rds')
+fractions = readRDS(path)
+```
+
+```{r, echo=F, message=F}
+print(plot_error_hist(fractions$error,
+                      bins=bins,
+                      'fundamental', 
+                      variance,
+                      'Stern-Brocot Curve'))
+cat("  \n")
+```
+Number of Samples: `r fractions %>% nrow() %>% format(big.mark=',',scientific=F,trim=T)` \
+Number of Bins: `r bins` \

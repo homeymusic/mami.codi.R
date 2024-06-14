@@ -210,8 +210,22 @@ in the auditoray system after the spatial and temporal signals have been process
 
 ### Histogram of Stern-Brocot Approximation versus Actual
 
-```{r, child=c('man/SternBrocotCurve.Rmd')}
+```{r, echo=F, message=F}
+variance = default_variance()
+path = paste0('./man/data/stern_brocot_',variance,'.rds')
+fractions = readRDS(path)
 ```
+
+```{r, echo=F, message=F}
+print(plot_error_hist(fractions$error,
+                      bins=21,
+                      'fundamental', 
+                      variance,
+                      'Stern-Brocot Curve'))
+cat("  \n")
+```
+Number of Samples: `r fractions %>% nrow() %>% format(big.mark=',',scientific=F,trim=T)` \
+A peak in a well? \
 
 ## Theoretical predictions compared to large-scale behavioral results
 
