@@ -1,0 +1,78 @@
+---
+title: "Fourier Transform"
+output:
+  github_document: default
+always_allow_html: true
+---
+```{r, echo=F, message=F, include=F}
+devtools::load_all(".")
+source('./man/code/plot.R')
+source('./man/code/utils.R')
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "../figures/GCD-"
+)
+knitr::opts_chunk$set(dev = 'svg')
+```
+
+```{r, echo=T, message=F, include=F}
+fft_slow <- function(z, inverse=FALSE) {
+  n <- length(z)
+  if(n == 0) return(z)
+  k <- 0:(n-1)
+  ff <- (if(inverse) 1 else -1) * 2*pi * 1i * k/n
+  vapply(k, function(h) sum(z * exp(ff*(h))), complex(1))
+}
+```
+
+```{r, echo=T, message=F}
+f = c(1, 2-1i, -1i, -1+2i)
+fft_slow(f)
+```
+
+```{r, echo=T, message=F, include=F}
+fft_wk <- function(w, k, inverse=FALSE) {
+  N  = length(w)
+  if (N == 0) return(w)
+  n  = 0:(N-1)
+  dw = (if(inverse) 1 else -1) * 1i * n / N
+  (1 / sqrt(2 * pi)) * vapply(n, function(h) sum(exp(dw*(h)*k*w)), complex(1))
+}
+```
+
+```{r, echo=T, message=F}
+c_sound = 343
+chord = tibble::tibble(
+  f = 100*1:10,
+  w = 2 * pi * f,
+  l = c_sound / f,
+  k = (2 * pi) / l
+)
+chord
+```
+
+```{r, echo=T, message=F}
+fft_wk(chord$w, chord$k, inverse=F)
+```
+
+```{r, echo=T, message=F}
+fft_wk(chord$w, chord$k, inverse=T)
+```
+
+```{r, echo=T, message=F}
+k   = chord$k
+x   = chord$w
+N   = x %>% length()
+n   = 0:(N-1)
+ff  = x * exp(-1i * x * k * (n / N))
+Mod((1 / sqrt(2*pi)) * sum(ff))
+```
+```{r, echo=T, message=F}
+c_sound = 1
+f   = 1:10
+l   = c_sound / f
+N   = f %>% length()
+n   = 0:(N-1)
+exp(1i * f * l[10] * 2 * pi) %>% sum()
+```

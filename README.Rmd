@@ -17,7 +17,27 @@ knitr::opts_chunk$set(
 )
 ```
 
-## How MaMi.CoDi Works
+## Quantum Consonance Perception
+
+### Temporal
+
+$$\psi(\omega, t) = \int \phi(k) e^{-i \left( \omega t - k x \right) } dk$$
+
+### Spatial
+
+$$\phi(k, t) = \int \psi(\omega, t) e^{-i \left( k x \right) } d\omega$$
+
+### Uncertainty
+
+The model is quantized and the uncertainty is introduced when converting wavlength 
+and frequency ratios to rational fractions using the Stern-Brocot tree with 
+variance $\sigma^2$.
+
+$$\Delta \omega \Delta k \ge \frac{1} {2}$$
+
+$${\sigma_f}^2 {\sigma_\lambda}^2 \ge \frac{1} {16 \pi^2}$$
+
+## How MaMi.CoDi is Implemented
 
 ### The Math
 

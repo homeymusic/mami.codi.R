@@ -1,8 +1,24 @@
----
-title: "Math"
----
+## The Math
 
-### The Math
+### Quantum Consonance Perception
+
+#### Temporal
+
+$$\psi(\omega, t) = \int \phi(k) e^{-i \left( \omega t - k x \right) } dk$$
+
+#### Spatial
+
+$$\phi(k, t) = \int \psi(\omega, t) e^{-i \left( k x \right) } d\omega$$
+
+#### Uncertainty
+
+The model is quantized and the uncertainty is introduced when converting wavlength 
+and frequency ratios to rational fractions using the Stern-Brocot tree with 
+variance $\sigma^2$.
+
+$$\Delta \omega \Delta k \ge \frac{1} {2}$$
+
+$${\sigma_f}^2 {\sigma_\lambda}^2 \ge \frac{1} {16 \pi^2}$$
 
 #### The Fundamentals
 
@@ -20,6 +36,49 @@ title: "Math"
     * Wavelength and frequency ??? (ratios, fundamentals, values?) are conjugates.
     * The variances of the wavelength and frequency variance are governed by 
     the generalized uncertainty principle.
+    
+    
+#### The Wave Equation
+
+$$\psi(x,t) = e^{ i \left(\omega t - k x \right)}$$
+
+#### de Broglie Waves
+
+$$\psi(x,t) = e^{ - \left( i / \hbar \right) \left(E t - p x \right)}$$
+
+$$\omega = E / \hbar$$
+
+$$E = p^2 / 2 m$$
+
+$$\psi(x,t) = e^{ -i \left(\omega t - p x / \hbar \right)}$$
+
+$$k = p / \hbar$$
+
+$$\psi(x,t) = e^{ -i \left(\omega t - k x \right)}$$
+
+#### Free Wave Packets
+
+$$\psi(x,t) = \int \phi(p) e^{-\left(i/\hbar \right) \left( E t - p x \right) } dp$$
+
+$$\psi(x,t) = \int \phi(\hbar k) e^{-\left(i/\hbar \right) \left( \omega \hbar t - k \hbar x \right) } dp$$
+
+$$\psi(x,t) = \int \phi(\hbar k) e^{-i \left( \omega t - k x \right) } dk\hbar$$
+
+
+
+#### Time
+
+Once the chord is sounded and present in the cochlea, if we freeze time we still
+have a wavelength detector. Hair cells in the neighborhood of the wavelength 
+might be in vraious positions depending on the phase of the wave when we freeze
+time but the sensors still gives us all the information.\
+
+In frozen time, though, the frequency sensor does us no good. It doesn't have
+any information to share with us.\
+
+See J.L. Basdevant Lectures 5.1.3 Stationary States and Eq. 5.8.
+
+
 
 #### Stern Brocot
 
