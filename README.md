@@ -482,7 +482,20 @@ Description is below.
 ![](man/figures/README-unnamed-chunk-11-49.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-11-50.png)<!-- -->
 
-##### P8Zoomed ~ Partials: 10
+##### P8ZoomedTemporal ~ Partials: 10
+
+Due to the Heisenberg uncertainty principle, focusing on one signal
+(temporal) is akin to shutting off the other (spatial).
+
+| temporal_variance | spatial_variance | smoothing_sigma |
+|:------------------|:-----------------|----------------:|
+| 5e-05             | 126.65148        |           0.035 |
+
+![](man/figures/README-unnamed-chunk-11-51.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-52.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-53.png)<!-- -->
+
+##### P8ZoomedSpatial ~ Partials: 10
 
 Due to the Heisenberg uncertainty principle, focusing on one signal
 (spatial) is akin to shutting off the other (temporal).
@@ -491,11 +504,9 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 |:------------------|:-----------------|----------------:|
 | 126.65148         | 5e-05            |           0.035 |
 
-![](man/figures/README-unnamed-chunk-11-51.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-11-52.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-11-53.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-11-54.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-11-55.png)<!-- -->
+![](man/figures/README-unnamed-chunk-11-55.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-56.png)<!-- -->
 
 ### Manipulating amplitudes
 

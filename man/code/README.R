@@ -1,5 +1,5 @@
 source('./utils.R')
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+# devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 
 library(mami.codi.R)
 devtools::load_all(".")
@@ -100,20 +100,30 @@ grid_P8 = tidyr::expand_grid(
   timbre = 'P8'
 )
 
-experiment.rds = '../data/P8Zoomed.rds'
-grid_P8_zoomed = tidyr::expand_grid(
+experiment.rds = '../data/P8ZoomedTemporal.rds'
+grid_P8_zoomed_temporal = tidyr::expand_grid(
+  temporal_variance = 5e-05,
+  interval = readRDS(experiment.rds)$profile$interval,
+  num_harmonics=10,
+  octave_ratio=2.0,
+  timbre = 'P8ZoomedTemporal'
+)
+
+experiment.rds = '../data/P8ZoomedSpatial.rds'
+grid_P8_zoomed_spatial = tidyr::expand_grid(
   temporal_variance = HEISENBERG / 5e-05,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
   octave_ratio=2.0,
-  timbre = 'P8Zoomed'
+  timbre = 'P8ZoomedSpatial'
 )
 
 grid = dplyr::bind_rows(grid_1,
                         grid_Bonang,
                         grid_5,grid_5PartialsNo3,
                         grid_10,grid_10_stretched,grid_10_compressed,
-                        grid_M3,grid_M6,grid_P8,grid_P8_zoomed
+                        grid_M3,grid_M6,grid_P8,
+                        grid_P8_zoomed_temporal,grid_P8_zoomed_spatial
                         )
 
 

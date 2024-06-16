@@ -387,7 +387,8 @@ params = list(
   list(h=10,o=2.0,t='M3'),
   list(h=10,o=2.0,t='M6'),
   list(h=10,o=2.0,t='P8'),
-  list(h=10,o=2.0,t='P8Zoomed')
+  list(h=10,o=2.0,t='P8ZoomedTemporal'),
+  list(h=10,o=2.0,t='P8ZoomedSpatial')
 )
 
 BEHAVIOURAL_SMOOTH_BROAD  <- 0.2
@@ -442,7 +443,13 @@ p = params %>% purrr::map(\(p) {
     black_vlines  = c(11.94, 12.08)
     description = '  Description is below.'
     sigma = BEHAVIOURAL_SMOOTH_NARROW
-  } else if (p$t == 'P8Zoomed') {
+  } else if (p$t == 'P8ZoomedTemporal') {
+    gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 2/1)-60)
+    black_vlines  = c(11.94, 12.08)
+    description = '  Due to the Heisenberg uncertainty principle, focusing on 
+    one signal (temporal) is akin to shutting off the other (spatial).'
+    sigma = BEHAVIOURAL_SMOOTH_NARROW
+  } else if (p$t == 'P8ZoomedSpatial') {
     gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 2/1)-60)
     black_vlines  = c(11.94, 12.08)
     description = '  Due to the Heisenberg uncertainty principle, focusing on 
@@ -493,27 +500,36 @@ p = params %>% purrr::map(\(p) {
     spatial_variance  = paste(round(s_v, 5), collapse = ' '),
     smoothing_sigma   = sigma
   )))
-  print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),
-                           goal=experiment,sigma=sigma,include_points=T,
-                           black_vlines=black_vlines,gray_vlines=gray_vlines))
-  cat("  \n")
+  
+  if (p$t == 'P8ZoomedTemporal') {
+  } else if (p$t == 'P8ZoomedSpatial') {
+  } else {
+    print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),
+                             goal=experiment,sigma=sigma,include_points=T,
+                             black_vlines=black_vlines,gray_vlines=gray_vlines))
+    cat("  \n")
+  }
   
   print(plot_semitone_spatial_temporal(chords, paste('Spatial and Temporal Consonance'),
                                        goal=NULL,sigma=sigma,include_points=T,
                                        black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")
 
-  print(plot_semitone_mami(chords, paste('Major-Minor'),
-                           goal=NULL,sigma=sigma,include_points=T,
-                           black_vlines=black_vlines,gray_vlines=gray_vlines))
-  cat("  \n")
+  if (p$t == 'P8ZoomedTemporal') {
+  } else if (p$t == 'P8ZoomedSpatial') {
+  } else {
+    print(plot_semitone_mami(chords, paste('Major-Minor'),
+                             goal=NULL,sigma=sigma,include_points=T,
+                             black_vlines=black_vlines,gray_vlines=gray_vlines))
+    cat("  \n")
+  }
   
-  errors = (chords %>% tidyr::unnest(temporal_fractions))$error
-  print(plot_error_hist(errors, bins=21, 'major', t_v, 'Temporal Variance'))
+  error = (chords %>% tidyr::unnest(temporal_fractions))$error
+  print(plot_error_hist(error, bins=21, 'major', t_v, 'Temporal Variance'))
   cat("  \n")
                       
-  errors = (chords %>% tidyr::unnest(spatial_fractions))$error
-  print(plot_error_hist(errors,  bins=21, 'minor', s_v, 'Spatial Variance'))
+  error = (chords %>% tidyr::unnest(spatial_fractions))$error
+  print(plot_error_hist(error,  bins=21, 'minor', s_v, 'Spatial Variance'))
   cat("  \n")
 
 })
