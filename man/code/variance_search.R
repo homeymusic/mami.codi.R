@@ -1,7 +1,7 @@
 search_label = 'Compressed'
 heisenberg   = T
 
-# devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 
 # Detailed
 # from_prec   = 0.05
