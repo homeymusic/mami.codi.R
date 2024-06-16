@@ -40,8 +40,8 @@ $${\sigma_f}^2 {\sigma_\lambda}^2 \ge \frac{1} {16 \pi^2}$$
 #### Some Thoughts on Uncertainty
 
 Uncertainty in our model is not the time duration and frequency uncertainty of 
-Wiener or Gabor. It is space (wavelength) and frequency uncertainty closer to 
-the original ideas of Heisenberg and de Broglie.\
+Gabor (or Wiener's famous quantum music analogy). It is space (wavelength) and 
+frequency uncertainty, closer to the original ideas of Heisenberg and de Broglie.\
 
 $$\lambda=\frac{h}{p}$$
 $$f=\frac{E}{h}$$
