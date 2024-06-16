@@ -193,10 +193,10 @@ compute_consonance = function(x, minimum_amplitude, octave_deviation) {
 ma_mi = function(temporal_consonance, spatial_consonance,
                    temporal_variance, spatial_variance) {
 
-  if (temporal_variance <= spatial_variance) {
-    temporal_consonance - spatial_consonance
-  } else {
+  if (temporal_variance < spatial_variance) {
     spatial_consonance - temporal_consonance
+  } else {
+    temporal_consonance - spatial_consonance
   }
 
 }
