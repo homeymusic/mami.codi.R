@@ -29,9 +29,11 @@ uncertainty of Gabor (or Wiener’s famous quantum music analogy). It is
 space (wavelength) and frequency uncertainty, closer to the original
 ideas of Heisenberg and de Broglie.  
 
-$$\lambda=\frac{h}{p}$$ $$f=\frac{E}{h}$$
+$$\lambda=\frac{h}{p}$$
 
-Consider a $100$Hz wave with $3$ harmonics:
+$$f=\frac{E}{h}$$
+
+Consider a $100$ Hz wave with $3$ harmonics:
 
 $f_i=100.00, 200.00, 300.00$ Hz  
 

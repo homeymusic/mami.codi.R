@@ -44,6 +44,7 @@ Gabor (or Wiener's famous quantum music analogy). It is space (wavelength) and
 frequency uncertainty, closer to the original ideas of Heisenberg and de Broglie.\
 
 $$\lambda=\frac{h}{p}$$
+
 $$f=\frac{E}{h}$$
 
 ```{r, echo=F, message=F}
@@ -53,7 +54,7 @@ f = 1:num_harmonics * f0
 f_formatted = sprintf(f, fmt = '%#.2f')
 ```
 
-Consider a $`r f0`$Hz wave with $`r num_harmonics`$ harmonics:
+Consider a $`r f0`$ Hz wave with $`r num_harmonics`$ harmonics:
 
 $f_i=`r f_formatted`$ Hz\
 
