@@ -1,9 +1,9 @@
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+# devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 devtools::load_all(".")
 source('./utils.R')
 
 samples = 1000000
-variance = 5e-05
+variance = 1000
 print(paste('samples:',samples))
 print(paste('variance:',variance))
 rationals = seq(from=1/samples, to=1, by=1/samples)
