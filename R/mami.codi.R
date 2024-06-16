@@ -163,8 +163,8 @@ compute_consonance = function(x, minimum_amplitude, octave_deviation) {
 
   x %>% dplyr::mutate(
 
-    alcd(f/min(f), temporal_variance, octave_deviation, 'temporal'),
-    alcd(l/min(l), spatial_variance,  octave_deviation, 'spatial'),
+    alcd(f/min(f), .data$temporal_variance, octave_deviation, 'temporal'),
+    alcd(l/min(l), .data$spatial_variance,  octave_deviation, 'spatial'),
 
     f0                    = min(f) / .data$temporal_alcd,
     l0                    = max(l) * .data$spatial_alcd,
@@ -173,7 +173,8 @@ compute_consonance = function(x, minimum_amplitude, octave_deviation) {
     spatial_consonance    = 50 - log2(.data$spatial_alcd),
 
     consonance_dissonance = .data$temporal_consonance + .data$spatial_consonance,
-    major_minor           = .data$temporal_consonance - .data$spatial_consonance,
+    major_minor           = ma_mi(.data$temporal_consonance, .data$spatial_consonance,
+                                  .data$temporal_variance, .data$spatial_variance),
 
     frequencies           = list(f),
     wavelengths           = list(l),
@@ -186,6 +187,17 @@ compute_consonance = function(x, minimum_amplitude, octave_deviation) {
     octave_deviation
 
   )
+
+}
+
+ma_mi = function(temporal_consonance, spatial_consonance,
+                   temporal_variance, spatial_variance) {
+
+  if (temporal_variance <= spatial_variance) {
+    temporal_consonance - spatial_consonance
+  } else {
+    spatial_consonance - temporal_consonance
+  }
 
 }
 
