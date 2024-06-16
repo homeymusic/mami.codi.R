@@ -22,6 +22,10 @@ $$\Delta \omega \Delta k \ge \frac{1} {2}$$
 
 $${\sigma_f}^2 {\sigma_\lambda}^2 \ge \frac{1} {16 \pi^2}$$
 
+This is not the time duration and frequency uncertainty of Wiener or
+Gabor. This is space and frequency uncertainty closer to the original
+ideas of Heisenberg and de Broglie.  
+
 ## How MaMi.CoDi is Implemented
 
 ### The Math
