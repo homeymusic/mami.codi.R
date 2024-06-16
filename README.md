@@ -857,7 +857,9 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 
 ![](man/figures/README-unnamed-chunk-12-51.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-12-52.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-53.png)<!-- -->
+![](man/figures/README-unnamed-chunk-12-53.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-54.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-55.png)<!-- -->
 
 ##### P8ZoomedSpatial ~ Partials: 10
 
@@ -868,9 +870,11 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 |:------------------|:-----------------|----------------:|
 | 126.65148         | 5e-05            |           0.035 |
 
-![](man/figures/README-unnamed-chunk-12-54.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-55.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-56.png)<!-- -->
+![](man/figures/README-unnamed-chunk-12-56.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-57.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-58.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-59.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-60.png)<!-- -->
 
 ### Manipulating amplitudes
 

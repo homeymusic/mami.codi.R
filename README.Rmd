@@ -501,37 +501,29 @@ p = params %>% purrr::map(\(p) {
     smoothing_sigma   = sigma
   )))
   
-  if (p$t == 'P8ZoomedTemporal') {
-  } else if (p$t == 'P8ZoomedSpatial') {
-  } else {
-    print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),
-                             goal=experiment,sigma=sigma,include_points=T,
-                             black_vlines=black_vlines,gray_vlines=gray_vlines))
-    cat("  \n")
-  }
+  print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),
+                           goal=experiment,sigma=sigma,include_points=T,
+                           black_vlines=black_vlines,gray_vlines=gray_vlines))
+  cat("  \n")
   
   print(plot_semitone_spatial_temporal(chords, paste('Spatial and Temporal Consonance'),
                                        goal=NULL,sigma=sigma,include_points=T,
                                        black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")
-
-  if (p$t == 'P8ZoomedTemporal') {
-  } else if (p$t == 'P8ZoomedSpatial') {
-  } else {
-    print(plot_semitone_mami(chords, paste('Major-Minor'),
-                             goal=NULL,sigma=sigma,include_points=T,
-                             black_vlines=black_vlines,gray_vlines=gray_vlines))
-    cat("  \n")
-  }
+  
+  print(plot_semitone_mami(chords, paste('Major-Minor'),
+                           goal=NULL,sigma=sigma,include_points=T,
+                           black_vlines=black_vlines,gray_vlines=gray_vlines))
+  cat("  \n")
   
   error = (chords %>% tidyr::unnest(temporal_fractions))$error
   print(plot_error_hist(error, bins=21, 'major', t_v, 'Temporal Variance'))
   cat("  \n")
-                      
+  
   error = (chords %>% tidyr::unnest(spatial_fractions))$error
   print(plot_error_hist(error,  bins=21, 'minor', s_v, 'Spatial Variance'))
   cat("  \n")
-
+  
 })
 ```
 
