@@ -29,7 +29,7 @@ $$\phi(k, t) = \int \psi(\omega, t) e^{-i \left( k x \right) } d\omega$$
 
 ### Uncertainty
 
-The model is quantized and the uncertainty is introduced when converting wavlength 
+The model is quantized and the uncertainty is introduced when converting wavelength 
 and frequency ratios to rational fractions using the Stern-Brocot tree with 
 variance $\sigma^2$.
 
@@ -37,9 +37,91 @@ $$\Delta \omega \Delta k \ge \frac{1} {2}$$
 
 $${\sigma_f}^2 {\sigma_\lambda}^2 \ge \frac{1} {16 \pi^2}$$
 
-This is not the time duration and frequency uncertainty of Wiener or Gabor. This
-is space and frequency uncertainty closer to the original ideas of Heisenberg and
-de Broglie.\
+#### Some Thoughts on Uncertainty
+
+Uncertainty in our model is not the time duration and frequency uncertainty of 
+Wiener or Gabor. It is space (wavelength) and frequency uncertainty closer to 
+the original ideas of Heisenberg and de Broglie.\
+
+$$\lambda=\frac{h}{p}$$
+$$f=\frac{E}{h}$$
+
+```{r, echo=F, message=F}
+f0 = 100
+num_harmonics = 3
+f = 1:num_harmonics * f0
+f_formatted = sprintf(f, fmt = '%#.2f')
+```
+
+Consider a $`r f0`$Hz wave with $`r num_harmonics`$ harmonics:
+
+$f_i=`r f_formatted`$ Hz\
+
+If we put those waves for an infinitely long time in a medium with a wave speed of
+
+```{r, echo=F, message=F}
+c_medium = max(f) * min(f)
+l=c_medium/f
+l_formatted = sprintf(l, fmt = '%#.2f')
+```
+
+$c = max(f) * min(f) = `r c_medium`$
+
+Then the range of values for the wavelengths $\lambda = \frac{c}{f}$ will be the 
+same as the range for the frequencies:
+
+$\lambda_i=`r l_formatted`$ m\
+
+We will calculate the overall period of the combined wave twice. We will find 
+the frequency and wavelength ratios as rational numbers at the Heisenberg 
+limit and then compute the least common denominator (LCD) for each. With the LCD 
+we will find the overall period. But a quick glance at the normalized wavelength and 
+frequency values, above, will show us that we are headed for a problem: the 
+denominators of those ratios will not be the same (even with complete precision) 
+and ultimately we will have two different values for the overall period.
+
+Frequency Ratios
+
+```{r, echo=F, message=F, results='asis'}
+f_ratios = (f / min(f)) %>% sort()
+l_ratios = (l / min(l)) %>% sort()
+f_rational = approximate_rational_fractions(f_ratios, default_variance(), default_octave_deviation())
+print(knitr::kable(f_rational %>% dplyr::select(num, den)))
+```
+
+Wavelength Ratios
+
+```{r, echo=F, message=F, results='asis'}
+l_rational = approximate_rational_fractions(l_ratios, default_variance(), default_octave_deviation())
+print(knitr::kable(l_rational %>% dplyr::select(num, den)))
+```
+
+And the period(s) is (are?):
+
+```{r, echo=F, message=F, results='asis'}
+results = tibble::tibble(
+  frequency_lcd  = lcm_integers(f_rational$den),
+  f_whole        = min(f) / frequency_lcd,
+  T_from_f       = 1 / f_whole,
+  wavelength_lcd = lcm_integers(l_rational$den),
+  l_whole        = max(l) * wavelength_lcd,
+  T_from_l       = l_whole / c_medium
+)
+T_from_f = results$T_from_f
+T_from_l = results$T_from_l
+print(knitr::kable(
+  results  
+))
+```
+
+From the frequency perspective, the period of the whole wave is $`r T_from_f`$ s.\
+
+From the wavelength (space) perspective, the period of the whole wave is $`r T_from_l`$ s.\
+
+The periods disagree. The disagreement is not due to a lack of precision in the 
+sensors or the time duration that the waves were in the medium or even the rational 
+fraction approximation ($3/2$ is precisely $150/100$). The disagreement seems 
+to be a fundamental uncertainty.\
 
 ## How MaMi.CoDi is Implemented
 
@@ -178,8 +260,8 @@ the spatial and temporal signals would have the same values. However, for comple
 pitches that is not the case. The pattern of the two sets of components are different.
 See the example of the major triad with 5 harmonics, below.
 
-```{r, child=c('man/Spatiotemporal_Periodicity.Rmd')}
-```
+# ```{r, child=c('man/Spatiotemporal_Periodicity.Rmd')}
+# ```
 
 ### Finding the variance Values
 
@@ -247,9 +329,26 @@ print(plot_error_hist(fractions$error,
                       variance,
                       'Stern-Brocot Curve'))
 cat("  \n")
+
 ```
 Number of Samples: `r fractions %>% nrow() %>% format(big.mark=',',scientific=F,trim=T)` \
 A peak in a well? \
+
+The Stern-Brocot curve is a repeatable, deterministic curve of where rational 
+fractions exist or do not exist within a given variance.\
+
+However, we assert that the value is 0 outside $\sigma^{2}$ and the area of the 
+curve equals one so that we can treat it like a Gaussian probability density 
+function.\ 
+
+When I see the shape of this curve of rational numbers at the Heisenberg limit
+I can't help but think about the double-slit experiment and chance versus 
+determinism, in general.\
+
+Perhaps things are quantized but not probabilistic?\
+
+Maybe God does not play dice with the universe. Whatever game He plays,
+He keeps score with rational fractions at the Heisenberg limit.\
 
 ## Theoretical predictions compared to large-scale behavioral results
 
