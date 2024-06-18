@@ -12,7 +12,7 @@ prepare(output.rds)
 default_variance = mami.codi.R::default_variance()
 experiment.rds = '../data/Pure.rds'
 grid_1 = tidyr::expand_grid(
-  temporal_variance = 0.2,
+  temporal_variance = 0.03,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=1,
   octave_ratio=2.0,

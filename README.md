@@ -718,7 +718,7 @@ major-minor versus the behavioral results are included in a plot below.
 
 | temporal_variance | spatial_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
-| 0.2               | 0.03166          |             0.2 |
+| 0.03              | 0.21109          |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-12-1.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-12-2.png)<!-- -->  
