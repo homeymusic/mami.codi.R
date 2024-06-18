@@ -6,9 +6,13 @@ Uncertainty Limit
 
 ### Temporal
 
+A fourier transform from wavenumber to angular frequency.
+
 $$\psi(\omega, t) = \int \phi(k) e^{-i \left( \omega t - k x \right) } dk$$
 
 ### Spatial
+
+A fourier transform from angular frequency to wavenumber.
 
 $$\phi(k, t) = \int \psi(\omega, t) e^{-i \left( k x \right) } d\omega$$
 
@@ -31,9 +35,9 @@ uncertainty $\Delta t \Delta f \simeq 1$ of Gabor or Wiener’s famous
 quantum physics and music analogy. If in Gabor (1946) Fig. 1.4 (b) the
 bank of reeds measured wavelengths in a stationary state at $t=0$
 instead of frequencies then his 2D model would be akin to ours. Our
-model is frequency and wavelength (space) uncertainty
-$\Delta f \Delta \lambda$, closer to the original quantum ideas of
-Einstein and de Broglie $\Delta x \Delta p$.  
+model is frequency and wavelength  
+uncertainty $\Delta f \Delta \lambda$, closer to the original quantum
+ideas of Einstein and de Broglie.  
 
 $$\lambda=\frac{2 \pi}{k}=\frac{h}{p}$$
 
@@ -687,8 +691,8 @@ versus determinism, in general.
 
 Perhaps things are quantized but not probabilistic?  
 
-Maybe God does not play dice with the universe. Whatever game He plays,
-He keeps score with rational fractions at the Heisenberg limit.  
+Maybe God does not play dice with the universe. Whatever the game, God
+keeps score with rational fractions at the Heisenberg limit.  
 
 ## Theoretical predictions compared to large-scale behavioral results
 
