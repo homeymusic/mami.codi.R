@@ -15,7 +15,12 @@ knitr::opts_chunk$set(
   warning = FALSE,
   message = FALSE
 )
-bins=21
+remove_floating_point_mistakes <- function(errors, variance) {
+  errors = errors[errors>=-variance]
+  errors[errors<=variance]
+}
+
+bins=1001
 ```
 
 ```{r, echo=F, message=F}
@@ -25,9 +30,13 @@ fractions = readRDS(path)
 errors = fractions$error
 ```
 
+## U-Shaped
+
 Variance: `r variance`
 
+
 ```{r, echo=F, message=F}
+errors = remove_floating_point_mistakes(errors, variance)
 print(plot_error_hist(errors,
                       bins=bins,
                       'fundamental', 
@@ -45,9 +54,13 @@ fractions = readRDS(path)
 errors = fractions$error
 ```
 
+
+## U-Shaped
+
 Variance: `r variance`
 
 ```{r, echo=F, message=F}
+errors = remove_floating_point_mistakes(errors, variance)
 print(plot_error_hist(errors,
                       bins=bins,
                       'fundamental', 
@@ -65,9 +78,12 @@ fractions = readRDS(path)
 errors = fractions$error
 ```
 
-Variance: `r variance`
+## U-Shaped
+
+Variance: `r variance` 
 
 ```{r, echo=F, message=F}
+errors = remove_floating_point_mistakes(errors, variance)
 print(plot_error_hist(errors,
                       bins=bins,
                       'fundamental', 
@@ -85,9 +101,12 @@ fractions = readRDS(path)
 errors = fractions$error
 ```
 
+## Bimodal
+
 Variance: `r variance`
 
 ```{r, echo=F, message=F}
+errors = remove_floating_point_mistakes(errors, variance)
 print(plot_error_hist(errors,
                       bins=bins,
                       'fundamental', 
@@ -107,9 +126,12 @@ fractions = readRDS(path)
 errors = fractions$error
 ```
 
+## Bimodal
+
 Variance: `r variance`
 
 ```{r, echo=F, message=F}
+errors = remove_floating_point_mistakes(errors, variance)
 print(plot_error_hist(errors,
                       bins=bins,
                       'fundamental', 
@@ -124,11 +146,15 @@ Number of Bins: `r bins` \
 variance = 0.5
 path = paste0('./man/data/stern_brocot_',variance,'.rds')
 fractions = readRDS(path)
+errors = fractions$error
 ```
+
+## Uniform
 
 Variance: `r variance`
 
 ```{r, echo=F, message=F}
+errors = remove_floating_point_mistakes(errors, variance)
 print(plot_error_hist(errors,
                       bins=bins,
                       'fundamental', 
@@ -143,68 +169,15 @@ Number of Bins: `r bins` \
 variance = 1
 path = paste0('./man/data/stern_brocot_',variance,'.rds')
 fractions = readRDS(path)
+errors = fractions$error
 ```
+
+## Uniform
 
 Variance: `r variance`
 
 ```{r, echo=F, message=F}
-print(plot_error_hist(errors,
-                      bins=bins,
-                      'fundamental', 
-                      variance,
-                      'Stern-Brocot Curve'))
-cat("  \n")
-```
-Number of Samples: `r errors %>% length() %>% format(big.mark=',',scientific=F,trim=T)` \
-Number of Bins: `r bins` \
-
-```{r, echo=F, message=F}
-variance = 10
-path = paste0('./man/data/stern_brocot_',variance,'.rds')
-fractions = readRDS(path)
-```
-
-Variance: `r variance`
-
-```{r, echo=F, message=F}
-print(plot_error_hist(errors,
-                      bins=bins,
-                      'fundamental', 
-                      variance,
-                      'Stern-Brocot Curve'))
-cat("  \n")
-```
-Number of Samples: `r errors %>% length() %>% format(big.mark=',',scientific=F,trim=T)` \
-Number of Bins: `r bins` \
-
-```{r, echo=F, message=F}
-variance = 100
-path = paste0('./man/data/stern_brocot_',variance,'.rds')
-fractions = readRDS(path)
-```
-
-Variance: `r variance`
-
-```{r, echo=F, message=F}
-print(plot_error_hist(errors,
-                      bins=bins,
-                      'fundamental', 
-                      variance,
-                      'Stern-Brocot Curve'))
-cat("  \n")
-```
-Number of Samples: `r errors %>% length() %>% format(big.mark=',',scientific=F,trim=T)` \
-Number of Bins: `r bins` \
-
-```{r, echo=F, message=F}
-variance = 1000
-path = paste0('./man/data/stern_brocot_',variance,'.rds')
-fractions = readRDS(path)
-```
-
-Variance: `r variance`
-
-```{r, echo=F, message=F}
+errors = remove_floating_point_mistakes(errors, variance)
 print(plot_error_hist(errors,
                       bins=bins,
                       'fundamental', 
