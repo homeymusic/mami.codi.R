@@ -517,12 +517,15 @@ p = params %>% purrr::map(\(p) {
                            black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")
   
-  error = (chords %>% tidyr::unnest(temporal_fractions))$error
-  print(plot_error_hist(error, bins=21, 'major', t_v, 'Temporal Variance'))
+  temporal_error = (chords %>% tidyr::unnest(temporal_fractions))$error
+  print(plot_error_hist(temporal_error, bins=21, 'major', t_v, 'Temporal Variance'))
   cat("  \n")
   
-  error = (chords %>% tidyr::unnest(spatial_fractions))$error
-  print(plot_error_hist(error,  bins=21, 'minor', s_v, 'Spatial Variance'))
+  spatial_error = (chords %>% tidyr::unnest(spatial_fractions))$error
+  print(plot_error_hist(spatial_error,  bins=21, 'minor', s_v, 'Spatial Variance'))
+  cat("  \n")
+  
+  print(plot(temporal_error, spatial_error))
   cat("  \n")
   
 })

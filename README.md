@@ -704,7 +704,8 @@ major-minor versus the behavioral results are included in a plot below.
 ![](man/figures/README-unnamed-chunk-12-2.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-12-3.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-12-4.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-5.png)<!-- -->
+![](man/figures/README-unnamed-chunk-12-5.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-6.png)<!-- -->NULL
 
 ##### Harmonic ~ Partials: 10
 
@@ -714,11 +715,12 @@ For 10 harmonics, behavioral results and theoretical predictions agree.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-12-6.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-12-7.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-12-8.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-12-9.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-10.png)<!-- -->
+![](man/figures/README-unnamed-chunk-12-10.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-11.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-12.png)<!-- -->NULL
 
 ##### 5Partials ~ Partials: 5
 
@@ -731,11 +733,12 @@ peak.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-12-11.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-12.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-12-13.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-12-14.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-15.png)<!-- -->
+![](man/figures/README-unnamed-chunk-12-15.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-16.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-17.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-18.png)<!-- -->NULL
 
 ##### 5PartialsNo3 ~ Partials: 5
 
@@ -748,11 +751,12 @@ while the M3 peak is slightly higher without the 3rd partial.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-12-16.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-17.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-18.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-12-19.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-20.png)<!-- -->
+![](man/figures/README-unnamed-chunk-12-20.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-21.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-22.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-23.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-24.png)<!-- -->NULL
 
 ##### Bonang ~ Partials: 4
 
@@ -766,11 +770,12 @@ be relatively higher than the behavioral results.
 |:------------------|:-----------------|----------------:|
 | 0.03979           | 0.15915          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-12-21.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-22.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-23.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-24.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-25.png)<!-- -->
+![](man/figures/README-unnamed-chunk-12-25.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-26.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-27.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-28.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-29.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-30.png)<!-- -->NULL
 
 ##### Stretched ~ Partials: 10
 
@@ -782,11 +787,12 @@ and m7 that do not exist in the behavioral results.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-12-26.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-27.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-28.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-29.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-30.png)<!-- -->
+![](man/figures/README-unnamed-chunk-12-31.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-32.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-33.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-34.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-35.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-36.png)<!-- -->NULL
 
 ##### Compressed ~ Partials: 10
 
@@ -797,11 +803,12 @@ with the theoretical peaks.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-12-31.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-32.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-33.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-34.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-35.png)<!-- -->
+![](man/figures/README-unnamed-chunk-12-37.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-38.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-39.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-40.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-41.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-42.png)<!-- -->NULL
 
 #### Dyads spanning 1 quarter tone
 
@@ -813,11 +820,12 @@ Description is below.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |           0.035 |
 
-![](man/figures/README-unnamed-chunk-12-36.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-37.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-38.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-39.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-40.png)<!-- -->
+![](man/figures/README-unnamed-chunk-12-43.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-44.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-45.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-46.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-47.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-48.png)<!-- -->NULL
 
 ##### M6 ~ Partials: 10
 
@@ -827,11 +835,12 @@ Description is below.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |           0.035 |
 
-![](man/figures/README-unnamed-chunk-12-41.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-42.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-43.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-44.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-45.png)<!-- -->
+![](man/figures/README-unnamed-chunk-12-49.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-50.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-51.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-52.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-53.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-54.png)<!-- -->NULL
 
 ##### P8 ~ Partials: 10
 
@@ -841,11 +850,12 @@ Description is below.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |           0.035 |
 
-![](man/figures/README-unnamed-chunk-12-46.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-47.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-48.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-49.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-50.png)<!-- -->
+![](man/figures/README-unnamed-chunk-12-55.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-56.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-57.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-58.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-59.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-60.png)<!-- -->NULL
 
 ##### P8ZoomedTemporal ~ Partials: 10
 
@@ -856,11 +866,12 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 |:------------------|:-----------------|----------------:|
 | 5e-05             | 126.65148        |           0.035 |
 
-![](man/figures/README-unnamed-chunk-12-51.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-52.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-53.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-54.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-55.png)<!-- -->
+![](man/figures/README-unnamed-chunk-12-61.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-62.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-63.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-64.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-65.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-66.png)<!-- -->NULL
 
 ##### P8ZoomedSpatial ~ Partials: 10
 
@@ -871,11 +882,12 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 |:------------------|:-----------------|----------------:|
 | 126.65148         | 5e-05            |           0.035 |
 
-![](man/figures/README-unnamed-chunk-12-56.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-57.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-58.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-59.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-60.png)<!-- -->
+![](man/figures/README-unnamed-chunk-12-67.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-68.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-69.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-70.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-71.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-12-72.png)<!-- -->NULL
 
 ### Manipulating amplitudes
 
