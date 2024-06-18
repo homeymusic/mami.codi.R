@@ -4,13 +4,13 @@ Uncertainty Limit
 
 ## Quantum Consonance Perception
 
-### Temporal
+### Angular Frequency
 
 A fourier transform from wavenumber to angular frequency.
 
 $$\psi(\omega, t) = \int \phi(k) e^{-i \left( \omega t - k x \right) } dk$$
 
-### Spatial
+### Wavenumber
 
 A fourier transform from angular frequency to wavenumber.
 
