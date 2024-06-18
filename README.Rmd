@@ -15,6 +15,10 @@ knitr::opts_chunk$set(
   warning = FALSE, 
   message = FALSE
 )
+remove_floating_point_mistakes <- function(errors, variance) {
+  errors = errors[errors>=-variance]
+  errors[errors<=variance]
+}
 ```
 
 ## Quantum Consonance Perception
@@ -29,9 +33,9 @@ $$\phi(k, t) = \int \psi(\omega, t) e^{-i \left( k x \right) } d\omega$$
 
 ### Uncertainty
 
-The model is quantized and the uncertainty is introduced when converting wavelength 
-and frequency ratios to rational fractions using the Stern-Brocot tree with 
-variance $\sigma^2$.
+The model is quantized and the uncertainty is introduced when transforming 
+wavelength and frequency ratios to rational fractions using the Stern-Brocot 
+tree with variance $\sigma^2$.
 
 $$\Delta \omega \Delta k \ge \frac{1} {2}$$
 
@@ -47,6 +51,8 @@ $$\lambda=\frac{h}{p}$$
 
 $$f=\frac{E}{h}$$
 
+#### Computing the Fundamental Wavelength and Frequency of a Chord
+
 ```{r, echo=F, message=F}
 f0 = 100
 num_harmonics = 3
@@ -58,7 +64,7 @@ Consider a $`r f0`$ Hz wave with $`r num_harmonics`$ harmonics:
 
 $f_i=`r f_formatted`$ Hz\
 
-If we put those waves for an infinitely long time in a medium with a wave speed of
+If we put those waves in a medium with a wave speed of
 
 ```{r, echo=F, message=F}
 c_medium = max(f) * min(f)
@@ -68,18 +74,19 @@ l_formatted = sprintf(l, fmt = '%#.2f')
 
 $c = max(f) * min(f) = `r c_medium`$
 
-Then the range of values for the wavelengths $\lambda = \frac{c}{f}$ will be the 
-same as the range for the frequencies:
+for an infinitely long time then the range of values for the wavelengths 
+$\lambda = \frac{c}{f}$ will be the same as the range for the frequencies:
 
 $\lambda_i=`r l_formatted`$ m\
 
-We will calculate the overall period of the combined wave twice. We will find 
-the frequency and wavelength ratios as rational numbers at the Heisenberg 
-limit and then compute the least common denominator (LCD) for each. With the LCD 
-we will find the overall period. But a quick glance at the normalized wavelength and 
-frequency values, above, will show us that we are headed for a problem: the 
-denominators of those ratios will not be the same (even with complete precision) 
-and ultimately we will have two different values for the overall period.
+We will calculate the overall period of the combined wave twice using a traditional
+signal processing technique. We will find the frequency and wavelength ratios as 
+rational numbers at the Heisenberg limit and then compute the least common 
+denominator (LCD) for each. With the LCD we will find the overall period. But a 
+quick glance at the normalized wavelength and frequency values, above, will show 
+us that we are headed for a problem: the denominators of those ratios will not 
+be the same (even with complete precision) and ultimately we will have two 
+different values for the overall period.\
 
 Frequency Ratios
 
@@ -518,14 +525,13 @@ p = params %>% purrr::map(\(p) {
   cat("  \n")
   
   temporal_error = (chords %>% tidyr::unnest(temporal_fractions))$error
+  temporal_error = remove_floating_point_mistakes(temporal_error, t_v)
   print(plot_error_hist(temporal_error, bins=21, 'major', t_v, 'Temporal Variance'))
   cat("  \n")
   
   spatial_error = (chords %>% tidyr::unnest(spatial_fractions))$error
+  spatial_error = remove_floating_point_mistakes(spatial_error, s_v)
   print(plot_error_hist(spatial_error,  bins=21, 'minor', s_v, 'Spatial Variance'))
-  cat("  \n")
-  
-  print(plot(temporal_error, spatial_error))
   cat("  \n")
   
 })
