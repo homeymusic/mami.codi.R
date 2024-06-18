@@ -656,7 +656,7 @@ and temporal signals have been processed.
 ![](man/figures/README-unnamed-chunk-9-1.png)<!-- -->  
 Number of Samples: 1,000,000  
 
-[Additional Stern-Brocot Plots](.\thoughts\SternBrocotCurve.md)
+[Additional Stern-Brocot Plots](man\thoughts\SternBrocotCurve.md)
 
 The Stern-Brocot curve is a repeatable, deterministic curve of where
 rational fractions exist or do not exist within a given variance.  
