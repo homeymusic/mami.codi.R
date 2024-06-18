@@ -30,9 +30,9 @@ physics and music analogy). It is frequency and wavelength (space)
 uncertainty $\Delta f \Delta \lambda$, closer to the original ideas of
 Heisenberg and de Broglie $\Delta x \Delta p$.  
 
-$$\lambda=\frac{h}{p}$$
+$$\lambda=\frac{2 \pi}{k}=\frac{h}{p}$$
 
-$$f=\frac{E}{h}$$
+$$f=\frac{\omega}{2 \pi}=\frac{E}{h}$$
 
 #### Computing the Fundamental Wavelength and Frequency of a Chord
 
