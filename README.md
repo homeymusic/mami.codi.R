@@ -651,18 +651,19 @@ the auditory cortex, it would seem that estimating the cyclicity of the
 two signals happens higher up in the auditoray system after the spatial
 and temporal signals have been processed.  
 
-### Histogram of Stern-Brocot Approximation versus Actual
+### Difference between Stern-Brocot Rational Fraction Approximation and Floating Point Value
 
 ![](man/figures/README-unnamed-chunk-9-1.png)<!-- -->  
 Number of Samples: 1,000,000  
-A peak in a well?  
+
+[Additional Stern-Brocot Plots](.\thoughts\SternBrocotCurve.md)
 
 The Stern-Brocot curve is a repeatable, deterministic curve of where
 rational fractions exist or do not exist within a given variance.  
 
-However, we assert that the value is 0 outside $\sigma^{2}$ and the area
-of the curve equals one so that we can treat it like a Gaussian
-probability density function. 
+However, the value is 0 outside $\pm \sigma^{2}$ and the area of the
+curve equals one so that we can use it like a probability density
+function. 
 
 When I see the shape of this curve of rational numbers at the Heisenberg
 limit I can’t help but think about the double-slit experiment and chance
