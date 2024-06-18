@@ -33,9 +33,10 @@ $$\phi(k, t) = \int \psi(\omega, t) e^{-i \left( k x \right) } d\omega$$
 
 ### Uncertainty
 
-The model is quantized and the uncertainty is introduced when transforming 
+The model is quantized and uncertainty introduced when transforming 
 wavelength and frequency ratios to rational fractions using the Stern-Brocot 
-tree with variance $\sigma^2$.
+tree with variance $\sigma^2$. In our model, the more we know about the 
+wavelength of a wave, the less we know about its frequency.
 
 $$\Delta \omega \Delta k \ge \frac{1} {2}$$
 
@@ -44,15 +45,18 @@ $${\sigma_f}^2 {\sigma_\lambda}^2 \ge \frac{1} {16 \pi^2}$$
 #### Some Thoughts on Uncertainty
 
 Uncertainty in our model is not the time duration and frequency uncertainty 
-$\Delta t \Delta f$ of Gabor (or Wiener's famous quantum physics and music analogy). 
-It is frequency and wavelength (space) uncertainty $\Delta f \Delta \lambda$, 
-closer to the original quantum ideas of Einstein and de Broglie $\Delta x \Delta p$.\
+$\Delta t \Delta f \simeq 1$ of Gabor or Wiener's famous quantum physics and 
+music analogy. If in Gabor (1946) Fig. 1.4 (b) the bank of reeds measured 
+wavelengths in a stationary state at $t=0$ instead of frequencies then his 2D 
+model would be akin to ours. Our model is frequency and wavelength (space) 
+uncertainty $\Delta f \Delta \lambda$, closer to the original quantum ideas of 
+Einstein and de Broglie $\Delta x \Delta p$.\
 
 $$\lambda=\frac{2 \pi}{k}=\frac{h}{p}$$
 
 $$f=\frac{\omega}{2 \pi}=\frac{E}{h}$$
 
-#### Computing the Fundamental Wavelength and Frequency of a Chord
+#### Computing Fundamental Wavelength and Fundamental Frequency of a Chord
 
 ```{r, echo=F, message=F}
 f0 = 100
@@ -80,14 +84,16 @@ $\lambda = \frac{c}{f}$ will be the same as the range for the frequencies:
 
 $\lambda_i=`r l_formatted`$ m\
 
-We will calculate the overall period of the combined wave twice using a traditional
-signal processing technique. We will find the frequency and wavelength ratios as 
-rational numbers at the Heisenberg limit and then compute the least common 
-denominator (LCD) for each. With the LCD we will find the overall period. But a 
-quick glance at the normalized wavelength and frequency values, above, will show 
-us that we are headed for a problem: the denominators of those ratios will not 
-be the same (even with complete precision) and ultimately we will have two 
-different values for the overall period.\
+Lets calculate the overall cycle of the whole wave with harmonics twice, using 
+a traditional signal processing technique. We will find the frequency and 
+wavelength ratios as rational fractions using the Stern-Brocot tree with variances
+at the Heisenberg limit and then compute the least common denominator (LCD) for 
+each. Using the LCD we will find the overall cycle. \
+
+But a quick glance at the normalized wavelength and frequency values, above, will 
+show us that we are headed for a disagreement: the denominators of those ratios 
+will not be the same (even with complete precision) and ultimately we will have 
+two different values for the overall cycle.\
 
 Frequency Ratios
 
@@ -130,7 +136,10 @@ From the wavelength (space) perspective, the period of the whole wave is $`r T_f
 The periods disagree. The disagreement is not due to a lack of precision in the 
 sensors or the time duration that the waves were in the medium or even the rational 
 fraction approximation ($3/2$ is precisely $150/100$). The disagreement seems 
-to be a fundamental uncertainty.\
+to be a fundamental difference in the way the pattern would be perceived between
+wavelength and frequency sensors. This disagreement at the level of pattern 
+recognition of the combined wave is not the same as the uncertainty between 
+the wavelength and frequency of each partial in the wave, above.\
 
 ## How MaMi.CoDi is Implemented
 

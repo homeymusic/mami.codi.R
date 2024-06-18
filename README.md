@@ -14,9 +14,11 @@ $$\phi(k, t) = \int \psi(\omega, t) e^{-i \left( k x \right) } d\omega$$
 
 ### Uncertainty
 
-The model is quantized and the uncertainty is introduced when
-transforming wavelength and frequency ratios to rational fractions using
-the Stern-Brocot tree with variance $\sigma^2$.
+The model is quantized and uncertainty introduced when transforming
+wavelength and frequency ratios to rational fractions using the
+Stern-Brocot tree with variance $\sigma^2$. In our model, the more we
+know about the wavelength of a wave, the less we know about its
+frequency.
 
 $$\Delta \omega \Delta k \ge \frac{1} {2}$$
 
@@ -25,16 +27,19 @@ $${\sigma_f}^2 {\sigma_\lambda}^2 \ge \frac{1} {16 \pi^2}$$
 #### Some Thoughts on Uncertainty
 
 Uncertainty in our model is not the time duration and frequency
-uncertainty $\Delta t \Delta f$ of Gabor (or Wiener’s famous quantum
-physics and music analogy). It is frequency and wavelength (space)
-uncertainty $\Delta f \Delta \lambda$, closer to the original ideas of
-Heisenberg and de Broglie $\Delta x \Delta p$.  
+uncertainty $\Delta t \Delta f \simeq 1$ of Gabor or Wiener’s famous
+quantum physics and music analogy. If in Gabor (1946) Fig. 1.4 (b) the
+bank of reeds measured wavelengths in a stationary state at $t=0$
+instead of frequencies then his 2D model would be akin to ours. Our
+model is frequency and wavelength (space) uncertainty
+$\Delta f \Delta \lambda$, closer to the original quantum ideas of
+Einstein and de Broglie $\Delta x \Delta p$.  
 
 $$\lambda=\frac{2 \pi}{k}=\frac{h}{p}$$
 
 $$f=\frac{\omega}{2 \pi}=\frac{E}{h}$$
 
-#### Computing the Fundamental Wavelength and Frequency of a Chord
+#### Computing Fundamental Wavelength and Fundamental Frequency of a Chord
 
 Consider a $100$ Hz wave with $3$ harmonics:
 
@@ -50,15 +55,18 @@ frequencies:
 
 $\lambda_i=300.00, 150.00, 100.00$ m  
 
-We will calculate the overall period of the combined wave twice using a
-traditional signal processing technique. We will find the frequency and
-wavelength ratios as rational numbers at the Heisenberg limit and then
-compute the least common denominator (LCD) for each. With the LCD we
-will find the overall period. But a quick glance at the normalized
-wavelength and frequency values, above, will show us that we are headed
-for a problem: the denominators of those ratios will not be the same
-(even with complete precision) and ultimately we will have two different
-values for the overall period.  
+Lets calculate the overall cycle of the whole wave with harmonics twice,
+using a traditional signal processing technique. We will find the
+frequency and wavelength ratios as rational fractions using the
+Stern-Brocot tree with variances at the Heisenberg limit and then
+compute the least common denominator (LCD) for each. Using the LCD we
+will find the overall cycle.  
+
+But a quick glance at the normalized wavelength and frequency values,
+above, will show us that we are headed for a disagreement: the
+denominators of those ratios will not be the same (even with complete
+precision) and ultimately we will have two different values for the
+overall cycle.  
 
 Frequency Ratios
 
@@ -91,7 +99,11 @@ $0.02$ s.
 The periods disagree. The disagreement is not due to a lack of precision
 in the sensors or the time duration that the waves were in the medium or
 even the rational fraction approximation ($3/2$ is precisely $150/100$).
-The disagreement seems to be a fundamental uncertainty.  
+The disagreement seems to be a fundamental difference in the way the
+pattern would be perceived between wavelength and frequency sensors.
+This disagreement at the level of pattern recognition of the combined
+wave is not the same as the uncertainty between the wavelength and
+frequency of each partial in the wave, above.  
 
 ## How MaMi.CoDi is Implemented
 
@@ -342,112 +354,6 @@ We chose the speed of sound in room temperature air.
 |     1 |   4 |   3 | 1.311034 | 261.6256 |   60 |               1.259921 |
 |     2 |   1 |   1 | 1.040568 | 329.6276 |   64 |               1.000000 |
 
-#### 10 Harmonics
-
-- Fundamentals in MIDI: 60, 64  
-
-- Number of Harmonics: 10
-
-- Frequencies: 261.626, 329.628, 523.251, 659.255, 784.877, 988.883,
-  1046.502, 1308.128, 1318.510, 1569.753, 1648.138, 1831.379, 1977.765,
-  2093.005, 2307.393, 2354.630, 2616.256, 2637.020, 2966.648, 3296.276  
-
-- Wavelengths: 1.311, 1.041, 0.656, 0.520, 0.437, 0.347, 0.328, 0.262,
-  0.260, 0.219, 0.208, 0.187, 0.173, 0.164, 0.149, 0.146, 0.131, 0.130,
-  0.116, 0.104  
-
-- Speed of Sound: 343.000
-
-- f0: 21.802
-
-- l0: 78.662
-
-- Quantum Speed of Sound: 1715.000
-
-###### MaMi.CoDi Predictions
-
-| consonance_dissonance | major_minor | temporal_consonance | spatial_consonance |
-|----------------------:|------------:|--------------------:|-------------------:|
-|              90.50815 |    2.321928 |            46.41504 |           44.09311 |
-
-#### Temporal Periodicity
-
-| lcd | chord_Sz | chord_Hz | c_sound |  chord_m |   chord_s |
-|----:|---------:|---------:|--------:|---------:|----------:|
-|  12 | 3.584963 | 21.80213 |     343 | 15.73241 | 0.0458671 |
-
-##### Partial Periods
-
-![](man/figures/README-unnamed-chunk-38-1.png)<!-- -->
-
-##### Chord Period
-
-![](man/figures/README-unnamed-chunk-39-1.png)<!-- -->
-
-##### Frequency fractions
-
-| index | num | den |   tone_hz |      freq |      midi | pseudo_rational_number |
-|------:|----:|----:|----------:|----------:|----------:|-----------------------:|
-|     1 |   1 |   1 |  261.6256 |  261.6256 |  60.00000 |               1.000000 |
-|     2 |   4 |   3 |  329.6276 |  329.6276 |  64.00000 |               1.259921 |
-|     3 |   2 |   1 |  523.2511 |  523.2511 |  72.00000 |               2.000000 |
-|     4 |   5 |   2 |  659.2551 |  659.2551 |  76.00000 |               2.519842 |
-|     5 |   3 |   1 |  784.8767 |  784.8767 |  79.01955 |               3.000000 |
-|     6 |  15 |   4 |  988.8827 |  988.8827 |  83.01955 |               3.779763 |
-|     7 |   4 |   1 | 1046.5023 | 1046.5023 |  84.00000 |               4.000000 |
-|     8 |   5 |   1 | 1308.1278 | 1308.1278 |  87.86314 |               5.000000 |
-|     9 |   5 |   1 | 1318.5102 | 1318.5102 |  88.00000 |               5.039684 |
-|    10 |   6 |   1 | 1569.7534 | 1569.7534 |  91.01955 |               6.000000 |
-|    11 |  19 |   3 | 1648.1378 | 1648.1378 |  91.86314 |               6.299605 |
-|    12 |   7 |   1 | 1831.3790 | 1831.3790 |  93.68826 |               7.000000 |
-|    13 |  15 |   2 | 1977.7653 | 1977.7653 |  95.01955 |               7.559526 |
-|    14 |   8 |   1 | 2093.0045 | 2093.0045 |  96.00000 |               8.000000 |
-|    15 |  35 |   4 | 2307.3929 | 2307.3929 |  97.68826 |               8.819447 |
-|    16 |   9 |   1 | 2354.6301 | 2354.6301 |  98.03910 |               9.000000 |
-|    17 |  10 |   1 | 2616.2556 | 2616.2556 |  99.86314 |              10.000000 |
-|    18 |  10 |   1 | 2637.0205 | 2637.0205 | 100.00000 |              10.079368 |
-|    19 |  34 |   3 | 2966.6480 | 2966.6480 | 102.03910 |              11.339289 |
-|    20 |  38 |   3 | 3296.2755 | 3296.2755 | 103.86314 |              12.599210 |
-
-#### Spatial Periodicity
-
-| lcd | chord_Sz | chord_Hz | c_sound |  chord_m |   chord_s |
-|----:|---------:|---------:|--------:|---------:|----------:|
-|  60 | 5.906891 | 4.360426 |     343 | 78.66204 | 0.2293354 |
-
-##### Partial Wavelengths
-
-![](man/figures/README-unnamed-chunk-42-1.png)<!-- -->
-
-##### Chord Wavelength
-
-![](man/figures/README-unnamed-chunk-43-1.png)<!-- -->
-
-##### Wavelength fractions
-
-| index | num | den |    tone_m |      freq |      midi | pseudo_rational_number |
-|------:|----:|----:|----------:|----------:|----------:|-----------------------:|
-|     1 |  38 |   3 | 1.3110340 |  261.6256 |  60.00000 |              12.599210 |
-|     2 |  10 |   1 | 1.0405683 |  329.6276 |  64.00000 |              10.000000 |
-|     3 |  19 |   3 | 0.6555170 |  523.2511 |  72.00000 |               6.299605 |
-|     4 |   5 |   1 | 0.5202842 |  659.2551 |  76.00000 |               5.000000 |
-|     5 |  17 |   4 | 0.4370113 |  784.8767 |  79.01955 |               4.199737 |
-|     6 |  10 |   3 | 0.3468561 |  988.8827 |  83.01955 |               3.333333 |
-|     7 |  16 |   5 | 0.3277585 | 1046.5023 |  84.00000 |               3.149803 |
-|     8 |   5 |   2 | 0.2622068 | 1308.1278 |  87.86314 |               2.519842 |
-|     9 |   5 |   2 | 0.2601421 | 1318.5102 |  88.00000 |               2.500000 |
-|    10 |  13 |   6 | 0.2185057 | 1569.7534 |  91.01955 |               2.099868 |
-|    11 |   2 |   1 | 0.2081137 | 1648.1378 |  91.86314 |               2.000000 |
-|    12 |   7 |   4 | 0.1872906 | 1831.3790 |  93.68826 |               1.799887 |
-|    13 |   5 |   3 | 0.1734281 | 1977.7653 |  95.01955 |               1.666667 |
-|    14 |   3 |   2 | 0.1638792 | 2093.0045 |  96.00000 |               1.574901 |
-|    15 |   3 |   2 | 0.1486526 | 2307.3929 |  97.68826 |               1.428571 |
-|    16 |   4 |   3 | 0.1456704 | 2354.6301 |  98.03910 |               1.399912 |
-|    17 |   4 |   3 | 0.1311034 | 2616.2556 |  99.86314 |               1.259921 |
-|    18 |   5 |   4 | 0.1300710 | 2637.0205 | 100.00000 |               1.250000 |
-|    19 |   7 |   6 | 0.1156187 | 2966.6480 | 102.03910 |               1.111111 |
-|    20 |   1 |   1 | 0.1040568 | 3296.2755 | 103.86314 |               1.000000 |
-
 #### 20 Harmonics
 
 - Fundamentals in MIDI: 60, 64  
@@ -489,11 +395,11 @@ We chose the speed of sound in room temperature air.
 
 ##### Partial Periods
 
-![](man/figures/README-unnamed-chunk-48-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-38-1.png)<!-- -->
 
 ##### Chord Period
 
-![](man/figures/README-unnamed-chunk-49-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-39-1.png)<!-- -->
 
 ##### Frequency fractions
 
@@ -548,11 +454,11 @@ We chose the speed of sound in room temperature air.
 
 ##### Partial Wavelengths
 
-![](man/figures/README-unnamed-chunk-52-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-42-1.png)<!-- -->
 
 ##### Chord Wavelength
 
-![](man/figures/README-unnamed-chunk-53-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-43-1.png)<!-- -->
 
 ##### Wavelength fractions
 
@@ -598,6 +504,112 @@ We chose the speed of sound in room temperature air.
 |    38 |   7 |   6 | 0.0578094 | 5933.2960 | 114.03910 |               1.111111 |
 |    39 |   1 |   1 | 0.0547668 | 6262.9235 | 114.97513 |               1.052632 |
 |    40 |   1 |   1 | 0.0520284 | 6592.5511 | 115.86314 |               1.000000 |
+
+#### 10 Harmonics
+
+- Fundamentals in MIDI: 60, 64  
+
+- Number of Harmonics: 10
+
+- Frequencies: 261.626, 329.628, 523.251, 659.255, 784.877, 988.883,
+  1046.502, 1308.128, 1318.510, 1569.753, 1648.138, 1831.379, 1977.765,
+  2093.005, 2307.393, 2354.630, 2616.256, 2637.020, 2966.648, 3296.276  
+
+- Wavelengths: 1.311, 1.041, 0.656, 0.520, 0.437, 0.347, 0.328, 0.262,
+  0.260, 0.219, 0.208, 0.187, 0.173, 0.164, 0.149, 0.146, 0.131, 0.130,
+  0.116, 0.104  
+
+- Speed of Sound: 343.000
+
+- f0: 21.802
+
+- l0: 78.662
+
+- Quantum Speed of Sound: 1715.000
+
+###### MaMi.CoDi Predictions
+
+| consonance_dissonance | major_minor | temporal_consonance | spatial_consonance |
+|----------------------:|------------:|--------------------:|-------------------:|
+|              90.50815 |    2.321928 |            46.41504 |           44.09311 |
+
+#### Temporal Periodicity
+
+| lcd | chord_Sz | chord_Hz | c_sound |  chord_m |   chord_s |
+|----:|---------:|---------:|--------:|---------:|----------:|
+|  12 | 3.584963 | 21.80213 |     343 | 15.73241 | 0.0458671 |
+
+##### Partial Periods
+
+![](man/figures/README-unnamed-chunk-48-1.png)<!-- -->
+
+##### Chord Period
+
+![](man/figures/README-unnamed-chunk-49-1.png)<!-- -->
+
+##### Frequency fractions
+
+| index | num | den |   tone_hz |      freq |      midi | pseudo_rational_number |
+|------:|----:|----:|----------:|----------:|----------:|-----------------------:|
+|     1 |   1 |   1 |  261.6256 |  261.6256 |  60.00000 |               1.000000 |
+|     2 |   4 |   3 |  329.6276 |  329.6276 |  64.00000 |               1.259921 |
+|     3 |   2 |   1 |  523.2511 |  523.2511 |  72.00000 |               2.000000 |
+|     4 |   5 |   2 |  659.2551 |  659.2551 |  76.00000 |               2.519842 |
+|     5 |   3 |   1 |  784.8767 |  784.8767 |  79.01955 |               3.000000 |
+|     6 |  15 |   4 |  988.8827 |  988.8827 |  83.01955 |               3.779763 |
+|     7 |   4 |   1 | 1046.5023 | 1046.5023 |  84.00000 |               4.000000 |
+|     8 |   5 |   1 | 1308.1278 | 1308.1278 |  87.86314 |               5.000000 |
+|     9 |   5 |   1 | 1318.5102 | 1318.5102 |  88.00000 |               5.039684 |
+|    10 |   6 |   1 | 1569.7534 | 1569.7534 |  91.01955 |               6.000000 |
+|    11 |  19 |   3 | 1648.1378 | 1648.1378 |  91.86314 |               6.299605 |
+|    12 |   7 |   1 | 1831.3790 | 1831.3790 |  93.68826 |               7.000000 |
+|    13 |  15 |   2 | 1977.7653 | 1977.7653 |  95.01955 |               7.559526 |
+|    14 |   8 |   1 | 2093.0045 | 2093.0045 |  96.00000 |               8.000000 |
+|    15 |  35 |   4 | 2307.3929 | 2307.3929 |  97.68826 |               8.819447 |
+|    16 |   9 |   1 | 2354.6301 | 2354.6301 |  98.03910 |               9.000000 |
+|    17 |  10 |   1 | 2616.2556 | 2616.2556 |  99.86314 |              10.000000 |
+|    18 |  10 |   1 | 2637.0205 | 2637.0205 | 100.00000 |              10.079368 |
+|    19 |  34 |   3 | 2966.6480 | 2966.6480 | 102.03910 |              11.339289 |
+|    20 |  38 |   3 | 3296.2755 | 3296.2755 | 103.86314 |              12.599210 |
+
+#### Spatial Periodicity
+
+| lcd | chord_Sz | chord_Hz | c_sound |  chord_m |   chord_s |
+|----:|---------:|---------:|--------:|---------:|----------:|
+|  60 | 5.906891 | 4.360426 |     343 | 78.66204 | 0.2293354 |
+
+##### Partial Wavelengths
+
+![](man/figures/README-unnamed-chunk-52-1.png)<!-- -->
+
+##### Chord Wavelength
+
+![](man/figures/README-unnamed-chunk-53-1.png)<!-- -->
+
+##### Wavelength fractions
+
+| index | num | den |    tone_m |      freq |      midi | pseudo_rational_number |
+|------:|----:|----:|----------:|----------:|----------:|-----------------------:|
+|     1 |  38 |   3 | 1.3110340 |  261.6256 |  60.00000 |              12.599210 |
+|     2 |  10 |   1 | 1.0405683 |  329.6276 |  64.00000 |              10.000000 |
+|     3 |  19 |   3 | 0.6555170 |  523.2511 |  72.00000 |               6.299605 |
+|     4 |   5 |   1 | 0.5202842 |  659.2551 |  76.00000 |               5.000000 |
+|     5 |  17 |   4 | 0.4370113 |  784.8767 |  79.01955 |               4.199737 |
+|     6 |  10 |   3 | 0.3468561 |  988.8827 |  83.01955 |               3.333333 |
+|     7 |  16 |   5 | 0.3277585 | 1046.5023 |  84.00000 |               3.149803 |
+|     8 |   5 |   2 | 0.2622068 | 1308.1278 |  87.86314 |               2.519842 |
+|     9 |   5 |   2 | 0.2601421 | 1318.5102 |  88.00000 |               2.500000 |
+|    10 |  13 |   6 | 0.2185057 | 1569.7534 |  91.01955 |               2.099868 |
+|    11 |   2 |   1 | 0.2081137 | 1648.1378 |  91.86314 |               2.000000 |
+|    12 |   7 |   4 | 0.1872906 | 1831.3790 |  93.68826 |               1.799887 |
+|    13 |   5 |   3 | 0.1734281 | 1977.7653 |  95.01955 |               1.666667 |
+|    14 |   3 |   2 | 0.1638792 | 2093.0045 |  96.00000 |               1.574901 |
+|    15 |   3 |   2 | 0.1486526 | 2307.3929 |  97.68826 |               1.428571 |
+|    16 |   4 |   3 | 0.1456704 | 2354.6301 |  98.03910 |               1.399912 |
+|    17 |   4 |   3 | 0.1311034 | 2616.2556 |  99.86314 |               1.259921 |
+|    18 |   5 |   4 | 0.1300710 | 2637.0205 | 100.00000 |               1.250000 |
+|    19 |   7 |   6 | 0.1156187 | 2966.6480 | 102.03910 |               1.111111 |
+|    20 |   1 |   1 | 0.1040568 | 3296.2755 | 103.86314 |               1.000000 |
 
 ### Finding the variance Values
 

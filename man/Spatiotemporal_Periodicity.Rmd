@@ -189,10 +189,10 @@ knitr::kable(spatial_fractions %>%
 ```
 
 
-#### 10 Harmonics
+#### 20 Harmonics
 
 ```{r, echo=F, results='asis', message=F}
-num_harmonics = 10
+num_harmonics = 20
 chord = midi %>% mami.codi(
   verbose=T,
   num_harmonics = num_harmonics
@@ -326,11 +326,10 @@ knitr::kable(spatial_fractions %>%
                ))
 ```
 
-
-#### 20 Harmonics
+#### 10 Harmonics
 
 ```{r, echo=F, results='asis', message=F}
-num_harmonics = 20
+num_harmonics = 10
 chord = midi %>% mami.codi(
   verbose=T,
   num_harmonics = num_harmonics
