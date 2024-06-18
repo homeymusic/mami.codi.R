@@ -651,12 +651,12 @@ the auditory cortex, it would seem that estimating the cyclicity of the
 two signals happens higher up in the auditoray system after the spatial
 and temporal signals have been processed.  
 
-### Difference between Stern-Brocot Rational Fraction Approximation and Floating Point Value
+### Difference between Stern-Brocot Rational Fraction Approximations and Floating Point Values
 
 ![](man/figures/README-unnamed-chunk-9-1.png)<!-- -->  
 Number of Samples: 1,000,000  
 
-[Additional Stern-Brocot Plots](man\thoughts\SternBrocotCurve.md)
+[Additional Stern-Brocot Plots](/man/thoughts/SternBrocotCurve.md)
 
 The Stern-Brocot curve is a repeatable, deterministic curve of where
 rational fractions exist or do not exist within a given variance.  

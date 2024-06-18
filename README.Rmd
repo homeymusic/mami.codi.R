@@ -334,7 +334,7 @@ cat("  \n")
 ```
 Number of Samples: `r fractions %>% nrow() %>% format(big.mark=',',scientific=F,trim=T)` \
 
-[Additional Stern-Brocot Plots](man\thoughts\SternBrocotCurve.md)
+[Additional Stern-Brocot Plots](/man/thoughts/SternBrocotCurve.md)
 
 The Stern-Brocot curve is a repeatable, deterministic curve of where rational 
 fractions exist or do not exist within a given variance.\
