@@ -3,7 +3,7 @@ devtools::load_all(".")
 source('./utils.R')
 
 samples = 1000000
-variance = 1
+variance = 0.4
 print(paste('samples:',samples))
 print(paste('variance:',variance))
 rationals = seq(from=1/samples, to=1, by=1/samples)

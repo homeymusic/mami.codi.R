@@ -24,16 +24,15 @@ bins=1001
 ```
 
 ```{r, echo=F, message=F}
-variance = 5e-05
+variance = 1
 path = paste0('./man/data/stern_brocot_',variance,'.rds')
 fractions = readRDS(path)
 errors = fractions$error
 ```
 
-## U-Shaped
+## Uniform
 
 Variance: `r variance`
-
 
 ```{r, echo=F, message=F}
 errors = remove_floating_point_mistakes(errors, variance)
@@ -47,15 +46,138 @@ cat("  \n")
 Number of Samples: `r errors %>% length() %>% format(big.mark=',',scientific=F,trim=T)` \
 Number of Bins: `r bins` \
 
+
 ```{r, echo=F, message=F}
-variance = default_variance()^2
+variance = 0.5
 path = paste0('./man/data/stern_brocot_',variance,'.rds')
 fractions = readRDS(path)
 errors = fractions$error
 ```
 
+## Uniform
 
-## U-Shaped
+Variance: `r variance`
+
+```{r, echo=F, message=F}
+errors = remove_floating_point_mistakes(errors, variance)
+print(plot_error_hist(errors,
+                      bins=bins,
+                      'fundamental', 
+                      variance,
+                      'Stern-Brocot Curve'))
+cat("  \n")
+```
+Number of Samples: `r errors %>% length() %>% format(big.mark=',',scientific=F,trim=T)` \
+Number of Bins: `r bins` \
+
+
+
+```{r, echo=F, message=F}
+variance = 0.4
+path = paste0('./man/data/stern_brocot_',variance,'.rds')
+fractions = readRDS(path)
+errors = fractions$error
+```
+
+## Unimodal
+
+Variance: `r variance`
+
+```{r, echo=F, message=F}
+errors = remove_floating_point_mistakes(errors, variance)
+print(plot_error_hist(errors,
+                      bins=bins,
+                      'fundamental', 
+                      variance,
+                      'Stern-Brocot Curve'))
+cat("  \n")
+```
+Number of Samples: `r errors %>% length() %>% format(big.mark=',',scientific=F,trim=T)` \
+Number of Bins: `r bins` \
+
+
+```{r, echo=F, message=F}
+variance = 0.3
+path = paste0('./man/data/stern_brocot_',variance,'.rds')
+fractions = readRDS(path)
+errors = fractions$error
+```
+
+## Unimodal
+
+Variance: `r variance`
+
+```{r, echo=F, message=F}
+errors = remove_floating_point_mistakes(errors, variance)
+print(plot_error_hist(errors,
+                      bins=bins,
+                      'fundamental', 
+                      variance,
+                      'Stern-Brocot Curve'))
+cat("  \n")
+```
+Number of Samples: `r errors %>% length() %>% format(big.mark=',',scientific=F,trim=T)` \
+Number of Bins: `r bins` \
+
+
+
+```{r, echo=F, message=F}
+variance = 0.2
+path = paste0('./man/data/stern_brocot_',variance,'.rds')
+fractions = readRDS(path)
+errors = fractions$error
+```
+
+## Bimodal
+
+Variance: `r variance`
+
+```{r, echo=F, message=F}
+errors = remove_floating_point_mistakes(errors, variance)
+print(plot_error_hist(errors,
+                      bins=bins,
+                      'fundamental', 
+                      variance,
+                      'Stern-Brocot Curve'))
+cat("  \n")
+```
+Number of Samples: `r errors %>% length() %>% format(big.mark=',',scientific=F,trim=T)` \
+Number of Bins: `r bins` \
+
+
+```{r, echo=F, message=F}
+variance = 0.1
+path = paste0('./man/data/stern_brocot_',variance,'.rds')
+fractions = readRDS(path)
+errors = fractions$error
+```
+
+## Bimodal
+
+Variance: `r variance`
+
+```{r, echo=F, message=F}
+errors = remove_floating_point_mistakes(errors, variance)
+print(plot_error_hist(errors,
+                      bins=bins,
+                      'fundamental', 
+                      variance,
+                      'Stern-Brocot Curve'))
+cat("  \n")
+```
+Number of Samples: `r errors %>% length() %>% format(big.mark=',',scientific=F,trim=T)` \
+Number of Bins: `r bins` \
+
+
+
+```{r, echo=F, message=F}
+variance = default_variance()
+path = paste0('./man/data/stern_brocot_',variance,'.rds')
+fractions = readRDS(path)
+errors = fractions$error
+```
+
+## Multimodal
 
 Variance: `r variance`
 
@@ -94,39 +216,16 @@ cat("  \n")
 Number of Samples: `r errors %>% length() %>% format(big.mark=',',scientific=F,trim=T)` \
 Number of Bins: `r bins` \
 
+
 ```{r, echo=F, message=F}
-variance = default_variance()
+variance = default_variance()^2
 path = paste0('./man/data/stern_brocot_',variance,'.rds')
 fractions = readRDS(path)
 errors = fractions$error
 ```
 
-## Bimodal
 
-Variance: `r variance`
-
-```{r, echo=F, message=F}
-errors = remove_floating_point_mistakes(errors, variance)
-print(plot_error_hist(errors,
-                      bins=bins,
-                      'fundamental', 
-                      variance,
-                      'Stern-Brocot Curve'))
-cat("  \n")
-```
-Number of Samples: `r errors %>% length() %>% format(big.mark=',',scientific=F,trim=T)` \
-Number of Bins: `r bins` \
-A peak in a well? \
-
-
-```{r, echo=F, message=F}
-variance = 0.1
-path = paste0('./man/data/stern_brocot_',variance,'.rds')
-fractions = readRDS(path)
-errors = fractions$error
-```
-
-## Bimodal
+## U-Shaped
 
 Variance: `r variance`
 
@@ -143,15 +242,16 @@ Number of Samples: `r errors %>% length() %>% format(big.mark=',',scientific=F,t
 Number of Bins: `r bins` \
 
 ```{r, echo=F, message=F}
-variance = 0.5
+variance = 5e-05
 path = paste0('./man/data/stern_brocot_',variance,'.rds')
 fractions = readRDS(path)
 errors = fractions$error
 ```
 
-## Uniform
+## U-Shaped
 
 Variance: `r variance`
+
 
 ```{r, echo=F, message=F}
 errors = remove_floating_point_mistakes(errors, variance)
@@ -165,25 +265,3 @@ cat("  \n")
 Number of Samples: `r errors %>% length() %>% format(big.mark=',',scientific=F,trim=T)` \
 Number of Bins: `r bins` \
 
-```{r, echo=F, message=F}
-variance = 1
-path = paste0('./man/data/stern_brocot_',variance,'.rds')
-fractions = readRDS(path)
-errors = fractions$error
-```
-
-## Uniform
-
-Variance: `r variance`
-
-```{r, echo=F, message=F}
-errors = remove_floating_point_mistakes(errors, variance)
-print(plot_error_hist(errors,
-                      bins=bins,
-                      'fundamental', 
-                      variance,
-                      'Stern-Brocot Curve'))
-cat("  \n")
-```
-Number of Samples: `r errors %>% length() %>% format(big.mark=',',scientific=F,trim=T)` \
-Number of Bins: `r bins` \
