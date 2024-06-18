@@ -25,9 +25,10 @@ $${\sigma_f}^2 {\sigma_\lambda}^2 \ge \frac{1} {16 \pi^2}$$
 #### Some Thoughts on Uncertainty
 
 Uncertainty in our model is not the time duration and frequency
-uncertainty of Gabor (or Wiener’s famous quantum music analogy). It is
-space (wavelength) and frequency uncertainty, closer to the original
-ideas of Heisenberg and de Broglie.  
+uncertainty $\Delta t \Delta f$ of Gabor (or Wiener’s famous quantum
+physics and music analogy). It is frequency and wavelength (space)
+uncertainty $\Delta f \Delta \lambda$, closer to the original ideas of
+Heisenberg and de Broglie $\Delta x \Delta p$.  
 
 $$\lambda=\frac{h}{p}$$
 
@@ -94,7 +95,7 @@ The disagreement seems to be a fundamental uncertainty.
 
 ## How MaMi.CoDi is Implemented
 
-### The Math
+\### The Math
 
 #### Traveling Waves
 
