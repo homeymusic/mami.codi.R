@@ -40,11 +40,31 @@ $$\phi(k, t) = \int \psi(\omega, t) e^{-i \left( k x \right) } d\omega$$
 The model is quantized and uncertainty introduced when transforming 
 wavelength and frequency ratios to rational fractions using the Stern-Brocot 
 tree with variance $\sigma^2$. In our model, the more we know about the 
-wavelength of a wave, the less we know about its frequency.
+wavelength of a wave, the less we know about its frequency. \
 
-$$\Delta \omega \Delta k \ge \frac{1} {2}$$
+$$\lambda=\frac{2 \pi}{k}$$
+
+$$f=\frac{\omega}{2 \pi}$$
 
 $${\sigma_f}^2 {\sigma_\lambda}^2 \ge \frac{1} {16 \pi^2}$$
+
+The uncertainty equality holds if the underlying function is normalized to 1, like a 
+probability distribution.\
+
+Following Stolzenberg, our model uses the Stern-Brocot tree to approximate 
+rational fractions within a given variance. In that sense the values are zero
+outside the variance and the probability of finding an approximation is 100%.
+So we will assume the equality condition is met, so that:\
+
+$${\sigma_f}^2 {\sigma_\lambda}^2 = \frac{1} {16 \pi^2}$$
+
+When wavelength and frequency variance are the same:\
+
+$${\sigma_f}^2 = {\sigma_\lambda}^2$$
+
+Then we have: \
+
+$$\sigma^2 = \sqrt{\frac{1} {16 \pi^2}} = \frac{1}{4 \pi} \approx 0.08$$
 
 #### Some Thoughts on Uncertainty
 
