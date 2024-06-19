@@ -41,11 +41,11 @@ met, so that:
 
 $${\sigma_f}^2 {\sigma_\lambda}^2 = \frac{1} {16 \pi^2}$$
 
-When wavelength and frequency uncertainty are the same:  
+When wavelength and frequency variance are the same:  
 
-$${\sigma_f}^2 = {\sigma_\lambda}^2$$
+$$\sigma^2 = {\sigma_f}^2 = {\sigma_\lambda}^2$$
 
-Then we have:  
+We have:  
 
 $$\sigma^2 = \sqrt{\frac{1} {16 \pi^2}} = \frac{1}{4 \pi} \approx 0.08$$
 
