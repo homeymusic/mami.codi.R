@@ -95,7 +95,7 @@ See plot sets, below, for M3, M6 and P8.\
 
 MaMi.CoDi's variance value is the only parameter in the model and indicates
 the resolution for turning irrational ratios into rational fractions.
-Those fractions are then used to estimate wavelength periodicity and 
+Those fractions are then used to estimate period periodicity and 
 frequency periodicity.\
 
 * Small variances give more accurate fractions which give longer periods.

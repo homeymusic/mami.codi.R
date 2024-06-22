@@ -1,5 +1,5 @@
 ---
-title: "MaMi.CoDi: A Quantum Model of Consonance Perception at the Heisenberg Uncertainty Limit"
+title: "MaMi.CoDi: A Quantized Model of Consonance Perception at the Classical Uncertainty Limit"
 output:
   github_document: default
 ---
@@ -38,9 +38,9 @@ $$\phi(k, t) = \int \psi(\omega, t) e^{-i \left( k x \right) } d\omega$$
 ### Uncertainty
 
 The model is quantized and uncertainty introduced when transforming 
-wavelength and frequency ratios to rational fractions using the Stern-Brocot 
+period and frequency ratios to rational fractions using the Stern-Brocot 
 tree with variance $\sigma^2$. In our model, the more we know about the 
-wavelength of a wave, the less we know about its frequency. \
+period of a wave, the less we know about its frequency. \
 
 $$\lambda=\frac{2 \pi}{k}$$
 
@@ -58,7 +58,7 @@ So we will assume the equality condition is met, so that:\
 
 $${\sigma_f}^2 {\sigma_\lambda}^2 = \frac{1} {16 \pi^2}$$
 
-When wavelength and frequency variance are the same:\
+When period and frequency variance are the same:\
 
 $$\sigma^2 = {\sigma_f}^2 = {\sigma_\lambda}^2$$
 
@@ -72,7 +72,7 @@ Uncertainty in our model is not the time duration and frequency uncertainty
 $\Delta t \Delta f \simeq 1$ of Gabor or Wiener's famous quantum physics and 
 music analogy. If in Gabor (1946) Fig. 1.4 (b) the bank of reeds measured 
 periods in a stationary state at $t=0$ instead of frequencies then his 2D 
-model would be akin to ours. Our model is frequency and wavelength  
+model would be akin to ours. Our model is frequency and period  
 uncertainty $\Delta f \Delta \lambda$, closer to the original quantum ideas of 
 Einstein and de Broglie.\
 
@@ -110,11 +110,11 @@ $\lambda_i=`r l_formatted`$ m\
 
 Lets calculate the overall cycle of the whole wave with harmonics twice, using 
 a traditional signal processing technique. We will find the frequency and 
-wavelength ratios as rational fractions using the Stern-Brocot tree with variances
+period ratios as rational fractions using the Stern-Brocot tree with variances
 at the Heisenberg limit and then compute the least common denominator (LCD) for 
 each. Using the LCD we will find the overall cycle. \
 
-But a quick glance at the normalized wavelength and frequency values, above, will 
+But a quick glance at the normalized period and frequency values, above, will 
 show us that we are headed for a disagreement: the denominators of those ratios 
 will not be the same (even with complete precision) and ultimately we will have 
 two different values for the overall cycle.\
@@ -142,8 +142,8 @@ results = tibble::tibble(
   frequency_lcd  = lcm_integers(f_rational$den),
   f_whole        = min(f) / frequency_lcd,
   T_from_f       = 1 / f_whole,
-  wavelength_lcd = lcm_integers(l_rational$den),
-  l_whole        = max(l) * wavelength_lcd,
+  period_lcd = lcm_integers(l_rational$den),
+  l_whole        = max(l) * period_lcd,
   T_from_l       = l_whole / c_medium
 )
 T_from_f = results$T_from_f
@@ -155,15 +155,15 @@ print(knitr::kable(
 
 From the frequency perspective, the period of the whole wave is $`r T_from_f`$ s.\
 
-From the wavelength (space) perspective, the period of the whole wave is $`r T_from_l`$ s.\
+From the period (space) perspective, the period of the whole wave is $`r T_from_l`$ s.\
 
 The periods disagree. The disagreement is not due to a lack of precision in the 
 sensors or the time duration that the waves were in the medium or even the rational 
 fraction approximation ($3/2$ is precisely $150/100$). The disagreement seems 
 to be a fundamental difference in the way the pattern would be perceived between
-wavelength and frequency sensors. This disagreement at the level of pattern 
+period and frequency sensors. This disagreement at the level of pattern 
 recognition of the combined wave is not the same as the uncertainty between 
-the wavelength and frequency of each partial in the wave, above.\
+the period and frequency of each partial in the wave, above.\
 
 ## How MaMi.CoDi is Implemented
 
@@ -238,7 +238,7 @@ Human basilar membranes are around 33 mm long. Thousands of evenly-spaced hair
 cells are arranged in a line on the basilar membrane. The hair cells transduce
 mechanical vibrations into electrical activity that is sent along the auditory 
 nerve to the central auditory system. When a sound wave travels along the basilar 
-membrane, the hair cells positioned near the wavelength of that sound will send 
+membrane, the hair cells positioned near the period of that sound will send 
 electrical activity along the auditory nerve.\
 
 The fundamental tone of middle C is over a meter long
@@ -247,13 +247,13 @@ How can the hair cells positioned along the basilar membrane detect periods that
 longer than the entire basilar membrane?\
 
 The traveling sound waves shorten as they travel around the spiral
-cochlea. Middle C's fundamental wavelength of 1.31 meters in air shrinks to 
+cochlea. Middle C's fundamental period of 1.31 meters in air shrinks to 
 26 mm along the basilar membrane. So, when the fundamental tone of middle C is 
 sounded, the hair cells positioned 26 mm (81%) from the base of the cochlea
 send electrical activity along the auditory nerve.\
 
 When a musical chord comprised of many fundamental tones and harmonics is sounded,
-the hair cells at each shortened wavelength position send signals along 
+the hair cells at each shortened period position send signals along 
 the auditory nerve. This period or rate-place arrangement of hair cell positions and 
 periods of tones is known as tonotopy.\
 
@@ -266,7 +266,7 @@ period observation about periods (m). We will come back to frequency
 observations shortly.\
 
 When we combine all the component parts of a chord together into a whole, 
-we can estimate the overall wavelength for the whole chord. A technique used in digital signal 
+we can estimate the overall period for the whole chord. A technique used in digital signal 
 processing and bricklaying is to estimate ratios (within an acceptable variance)
 between each of the parts and a selected reference part.
 The greatest common divisor (LCD) of those part ratios will be a measure of the periodicity 
@@ -297,13 +297,13 @@ the period consonance from the frequency consonance to create a major-minor pola
 prediction. Positive values will sound major, negative values minor and values 
 around zero will sound neutral.\
 
-Because wavelength and frequency are inverse of each other one might imagine that 
+Because period and frequency are inverse of each other one might imagine that 
 the period and frequency signals would have the same values. However, for complex 
 pitches that is not the case. The pattern of the two sets of components are different.
 See the example of the major triad with 5 harmonics, below.
 
-```{r, child=c('man/Spatiofrequency_Periodicity.Rmd')}
-```
+# ```{r, child=c('man/Spatiofrequency_Periodicity.Rmd')}
+# ```
 
 ### Finding the variance Values
 

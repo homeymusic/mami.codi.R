@@ -54,7 +54,7 @@ $\pmb{\omega}$ and $\pmb{k}$ are vectors of length $N$.
 
 $\psi$ is frequency, the probability of the fundamental frequency.  
 
-$\phi$ is period, the probability of the fundamental wavelength.  
+$\phi$ is period, the probability of the fundamental period.  
 
 #### Real Traveling Wave
 

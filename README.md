@@ -1,4 +1,4 @@
-MaMi.CoDi: A Quantum Model of Consonance Perception at the Heisenberg
+MaMi.CoDi: A Quantized Model of Consonance Perception at the Classical
 Uncertainty Limit
 ================
 
@@ -19,10 +19,9 @@ $$\phi(k, t) = \int \psi(\omega, t) e^{-i \left( k x \right) } d\omega$$
 ### Uncertainty
 
 The model is quantized and uncertainty introduced when transforming
-wavelength and frequency ratios to rational fractions using the
-Stern-Brocot tree with variance $\sigma^2$. In our model, the more we
-know about the wavelength of a wave, the less we know about its
-frequency.  
+period and frequency ratios to rational fractions using the Stern-Brocot
+tree with variance $\sigma^2$. In our model, the more we know about the
+period of a wave, the less we know about its frequency.  
 
 $$\lambda=\frac{2 \pi}{k}$$
 
@@ -41,7 +40,7 @@ met, so that:
 
 $${\sigma_f}^2 {\sigma_\lambda}^2 = \frac{1} {16 \pi^2}$$
 
-When wavelength and frequency variance are the same:  
+When period and frequency variance are the same:  
 
 $$\sigma^2 = {\sigma_f}^2 = {\sigma_\lambda}^2$$
 
@@ -54,9 +53,9 @@ $$\sigma^2 = \sqrt{\frac{1} {16 \pi^2}} = \frac{1}{4 \pi} \approx 0.08$$
 Uncertainty in our model is not the time duration and frequency
 uncertainty $\Delta t \Delta f \simeq 1$ of Gabor or Wiener’s famous
 quantum physics and music analogy. If in Gabor (1946) Fig. 1.4 (b) the
-bank of reeds measured periods in a stationary state at $t=0$
-instead of frequencies then his 2D model would be akin to ours. Our
-model is frequency and wavelength  
+bank of reeds measured periods in a stationary state at $t=0$ instead of
+frequencies then his 2D model would be akin to ours. Our model is
+frequency and period  
 uncertainty $\Delta f \Delta \lambda$, closer to the original quantum
 ideas of Einstein and de Broglie.  
 
@@ -82,16 +81,15 @@ $\lambda_i=300.00, 150.00, 100.00$ m
 
 Lets calculate the overall cycle of the whole wave with harmonics twice,
 using a traditional signal processing technique. We will find the
-frequency and wavelength ratios as rational fractions using the
-Stern-Brocot tree with variances at the Heisenberg limit and then
-compute the least common denominator (LCD) for each. Using the LCD we
-will find the overall cycle.  
-
-But a quick glance at the normalized wavelength and frequency values,
-above, will show us that we are headed for a disagreement: the
-denominators of those ratios will not be the same (even with complete
-precision) and ultimately we will have two different values for the
+frequency and period ratios as rational fractions using the Stern-Brocot
+tree with variances at the Heisenberg limit and then compute the least
+common denominator (LCD) for each. Using the LCD we will find the
 overall cycle.  
+
+But a quick glance at the normalized period and frequency values, above,
+will show us that we are headed for a disagreement: the denominators of
+those ratios will not be the same (even with complete precision) and
+ultimately we will have two different values for the overall cycle.  
 
 Frequency Ratios
 
@@ -111,24 +109,24 @@ Wavelength Ratios
 
 And the period(s) is (are?):
 
-| frequency_lcd | f_whole | T_from_f | wavelength_lcd | l_whole | T_from_l |
-|--------------:|--------:|---------:|---------------:|--------:|---------:|
-|             1 |     100 |     0.01 |              2 |     600 |     0.02 |
+| frequency_lcd | f_whole | T_from_f | period_lcd | l_whole | T_from_l |
+|--------------:|--------:|---------:|-----------:|--------:|---------:|
+|             1 |     100 |     0.01 |          2 |     600 |     0.02 |
 
 From the frequency perspective, the period of the whole wave is $0.01$
 s.  
 
-From the wavelength (space) perspective, the period of the whole wave is
+From the period (space) perspective, the period of the whole wave is
 $0.02$ s.  
 
 The periods disagree. The disagreement is not due to a lack of precision
 in the sensors or the time duration that the waves were in the medium or
 even the rational fraction approximation ($3/2$ is precisely $150/100$).
 The disagreement seems to be a fundamental difference in the way the
-pattern would be perceived between wavelength and frequency sensors.
-This disagreement at the level of pattern recognition of the combined
-wave is not the same as the uncertainty between the wavelength and
-frequency of each partial in the wave, above.  
+pattern would be perceived between period and frequency sensors. This
+disagreement at the level of pattern recognition of the combined wave is
+not the same as the uncertainty between the period and frequency of each
+partial in the wave, above.  
 
 ## How MaMi.CoDi is Implemented
 
@@ -204,8 +202,8 @@ evenly-spaced hair cells are arranged in a line on the basilar membrane.
 The hair cells transduce mechanical vibrations into electrical activity
 that is sent along the auditory nerve to the central auditory system.
 When a sound wave travels along the basilar membrane, the hair cells
-positioned near the wavelength of that sound will send electrical
-activity along the auditory nerve.  
+positioned near the period of that sound will send electrical activity
+along the auditory nerve.  
 
 The fundamental tone of middle C is over a meter long in room
 temperature air at sea level. But the basilar membrane is only 33mm
@@ -213,13 +211,13 @@ long. How can the hair cells positioned along the basilar membrane
 detect periods that are longer than the entire basilar membrane?  
 
 The traveling sound waves shorten as they travel around the spiral
-cochlea. Middle C’s fundamental wavelength of 1.31 meters in air shrinks
-to 26 mm along the basilar membrane. So, when the fundamental tone of
+cochlea. Middle C’s fundamental period of 1.31 meters in air shrinks to
+26 mm along the basilar membrane. So, when the fundamental tone of
 middle C is sounded, the hair cells positioned 26 mm (81%) from the base
 of the cochlea send electrical activity along the auditory nerve.  
 
 When a musical chord comprised of many fundamental tones and harmonics
-is sounded, the hair cells at each shortened wavelength position send
+is sounded, the hair cells at each shortened period position send
 signals along the auditory nerve. This period or rate-place arrangement
 of hair cell positions and periods of tones is known as tonotopy.  
 
@@ -228,21 +226,21 @@ of hair cell positions and periods of tones is known as tonotopy.
 If we play a chord, freeze time and observe which hair cells are
 displaced, what are we observing? Are we observing frequencies? Periods?
 No. Time is frozen. Frequency (1/s) and period (s) are frequency
-observations. We are making a purely period observation about
-periods (m). We will come back to frequency observations shortly.  
+observations. We are making a purely period observation about periods
+(m). We will come back to frequency observations shortly.  
 
 When we combine all the component parts of a chord together into a
-whole, we can estimate the overall wavelength for the whole chord. A
+whole, we can estimate the overall period for the whole chord. A
 technique used in digital signal processing and bricklaying is to
 estimate ratios (within an acceptable variance) between each of the
 parts and a selected reference part. The greatest common divisor (LCD)
 of those part ratios will be a measure of the periodicity of the
 whole.  
 
-Chords with short periods relative to the component periods
-sound pleasant. And chords with long periods relative to component
-periods sound unpleasant. MaMi.CoDi uses this measure of relative
-periods to predict the perceived period consonance of a chord.  
+Chords with short periods relative to the component periods sound
+pleasant. And chords with long periods relative to component periods
+sound unpleasant. MaMi.CoDi uses this measure of relative periods to
+predict the perceived period consonance of a chord.  
 
 Let us unfreeze time and start counting how often a hair cell moves due
 to a pure tone of our sounded chord. If we count the number of movements
@@ -264,377 +262,13 @@ period consonance from the frequency consonance to create a major-minor
 polarity prediction. Positive values will sound major, negative values
 minor and values around zero will sound neutral.  
 
-Because wavelength and frequency are inverse of each other one might
-imagine that the period and frequency signals would have the same
-values. However, for complex pitches that is not the case. The pattern
-of the two sets of components are different. See the example of the
-major triad with 5 harmonics, below.
-
-### Estimating Spatiofrequency Periodicity
-
-To estimate the periodicity of a chord, the MaMi.CoDi model uses a
-signal processing technique. It finds fractions, within a given
-variance, for every tone in the chord (fundamental, harmonics, noise,
-etc.) relative to a reference tone. The least common denominator of
-those fractions is a measure of the cycle length, relative to the
-reference tone. Long relative cycles are predicted to sound unpleasant
-and short relative cycles are predicted to sound pleasant.  
-
-MaMi.CoDi creates two estimates of the chord’s period: a frequency
-estimate and a period estimate.  
-
-For the frequency (i.e. phase-locking or frequency) estimate the
-reference tone is the smallest frequency. Small frequencies are low
-tones and are detected by the inner ear hair cells closest to the apex
-of the cochlea, which is the end furthest from the source of the wave.  
-
-For the period (i.e. rate-place or wavelength) estimate, the reference
-tone is the smallest wavelength. Small periods are high tones and
-are detected by the inner ear hair cells closest to the base of the
-cochlea, which is the end closest to the middle ear, the source of the
-wave.  
-
-MaMi.CoDi combines the two cycle estimates into a two-dimensional space
-with consonance-dissonance along one dimension and major-minor on the
-orthogonal dimension.
-
-#### Example Dyad: Major Third
-
-Below, we estimate the periodicity of the C4, E4 major third with 1, 10
-and 20 harmonics per pitch. The MaMi.CoDi model is based on fractions of
-tones - both frequency and wavelength fractions. The input to the model
-is a sparse frequency spectrum. We convert frequencies to periods by
-dividing a speed of sound constant by the frequency.  
-
-For tone ratios, the value of the speed of sound constant does not
-impact the mathematics. We could choose any media for the speed of
-sound: room temperature air at sea level, cochlear fluid, the basilar
-membrane, etc.
-
-We chose the speed of sound in room temperature air.
-
-#### 1 Harmonic
-
-- Fundamentals in MIDI: 60, 64  
-
-- Number of Harmonics: 1
-
-- Frequencies: 261.626, 329.628  
-
-- Wavelengths: 0.004, 0.003  
-
-- Speed of Sound: 1.000
-
-- f0: 87.209
-
-- l0: 0.011
-
-- Quantum Speed of Sound: 1.000
-
-###### MaMi.CoDi Predictions
-
-| consonance_dissonance | major_minor | frequency_consonance | period_consonance |
-|----------------------:|------------:|--------------------:|-------------------:|
-|              96.83007 |           0 |            48.41504 |           48.41504 |
-
-#### Temporal Periodicity
-
-| lcd | chord_Sz | chord_Hz | c_sound |   chord_m |   chord_s |
-|----:|---------:|---------:|--------:|----------:|----------:|
-|   3 | 1.584963 | 87.20852 |       1 | 0.0114668 | 0.0114668 |
-
-##### Partial Periods
-
-![](man/figures/README-unnamed-chunk-28-1.png)<!-- -->
-
-##### Chord Period
-
-![](man/figures/README-unnamed-chunk-29-1.png)<!-- -->
-
-##### Frequency fractions
-
-| index | num | den |  tone_hz |     freq | midi | pseudo_rational_number |
-|------:|----:|----:|---------:|---------:|-----:|-----------------------:|
-|     1 |   1 |   1 | 261.6256 | 261.6256 |   60 |               1.000000 |
-|     2 |   4 |   3 | 329.6276 | 329.6276 |   64 |               1.259921 |
-
-#### Spatial Periodicity
-
-| lcd | chord_Sz | chord_Hz | c_sound |   chord_m |   chord_s |
-|----:|---------:|---------:|--------:|----------:|----------:|
-|   3 | 1.584963 | 87.20852 |       1 | 0.0114668 | 0.0114668 |
-
-##### Partial Wavelengths
-
-![](man/figures/README-unnamed-chunk-32-1.png)<!-- -->
-
-##### Chord Wavelength
-
-![](man/figures/README-unnamed-chunk-33-1.png)<!-- -->
-
-##### Wavelength fractions
-
-| index | num | den |    tone_m |     freq | midi | pseudo_rational_number |
-|------:|----:|----:|----------:|---------:|-----:|-----------------------:|
-|     1 |   4 |   3 | 0.0038223 | 261.6256 |   60 |               1.259921 |
-|     2 |   1 |   1 | 0.0030337 | 329.6276 |   64 |               1.000000 |
-
-#### 20 Harmonics
-
-- Fundamentals in MIDI: 60, 64  
-
-- Number of Harmonics: 20
-
-- Frequencies: 261.626, 329.628, 523.251, 659.255, 784.877, 988.883,
-  1046.502, 1308.128, 1318.510, 1569.753, 1648.138, 1831.379, 1977.765,
-  2093.005, 2307.393, 2354.630, 2616.256, 2637.020, 2877.881, 2966.648,
-  3139.507, 3296.276, 3401.132, 3625.903, 3662.758, 3924.383, 3955.531,
-  4186.009, 4285.158, 4447.635, 4614.786, 4709.260, 4944.413, 4970.886,
-  5232.511, 5274.041, 5603.668, 5933.296, 6262.924, 6592.551  
-
-- Wavelengths: 0.004, 0.003, 0.002, 0.002, 0.001, 0.001, 0.001, 0.001,
-  0.001, 0.001, 0.001, 0.001, 0.001, 0.000, 0.000, 0.000, 0.000, 0.000,
-  0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000,
-  0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000,
-  0.000, 0.000  
-
-- Speed of Sound: 1.000
-
-- f0: 4.360
-
-- l0: 0.229
-
-- Quantum Speed of Sound: 1.000
-
-###### MaMi.CoDi Predictions
-
-| consonance_dissonance | major_minor | frequency_consonance | period_consonance |
-|----------------------:|------------:|--------------------:|-------------------:|
-|              88.18622 |           0 |            44.09311 |           44.09311 |
-
-#### Temporal Periodicity
-
-| lcd | chord_Sz | chord_Hz | c_sound |   chord_m |   chord_s |
-|----:|---------:|---------:|--------:|----------:|----------:|
-|  60 | 5.906891 | 4.360426 |       1 | 0.2293354 | 0.2293354 |
-
-##### Partial Periods
-
-![](man/figures/README-unnamed-chunk-38-1.png)<!-- -->
-
-##### Chord Period
-
-![](man/figures/README-unnamed-chunk-39-1.png)<!-- -->
-
-##### Frequency fractions
-
-| index | num | den |   tone_hz |      freq |      midi | pseudo_rational_number |
-|------:|----:|----:|----------:|----------:|----------:|-----------------------:|
-|     1 |   1 |   1 |  261.6256 |  261.6256 |  60.00000 |               1.000000 |
-|     2 |   4 |   3 |  329.6276 |  329.6276 |  64.00000 |               1.259921 |
-|     3 |   2 |   1 |  523.2511 |  523.2511 |  72.00000 |               2.000000 |
-|     4 |   5 |   2 |  659.2551 |  659.2551 |  76.00000 |               2.519842 |
-|     5 |   3 |   1 |  784.8767 |  784.8767 |  79.01955 |               3.000000 |
-|     6 |  15 |   4 |  988.8827 |  988.8827 |  83.01955 |               3.779763 |
-|     7 |   4 |   1 | 1046.5023 | 1046.5023 |  84.00000 |               4.000000 |
-|     8 |   5 |   1 | 1308.1278 | 1308.1278 |  87.86314 |               5.000000 |
-|     9 |   5 |   1 | 1318.5102 | 1318.5102 |  88.00000 |               5.039684 |
-|    10 |   6 |   1 | 1569.7534 | 1569.7534 |  91.01955 |               6.000000 |
-|    11 |  19 |   3 | 1648.1378 | 1648.1378 |  91.86314 |               6.299605 |
-|    12 |   7 |   1 | 1831.3790 | 1831.3790 |  93.68826 |               7.000000 |
-|    13 |  15 |   2 | 1977.7653 | 1977.7653 |  95.01955 |               7.559526 |
-|    14 |   8 |   1 | 2093.0045 | 2093.0045 |  96.00000 |               8.000000 |
-|    15 |  35 |   4 | 2307.3929 | 2307.3929 |  97.68826 |               8.819447 |
-|    16 |   9 |   1 | 2354.6301 | 2354.6301 |  98.03910 |               9.000000 |
-|    17 |  10 |   1 | 2616.2556 | 2616.2556 |  99.86314 |              10.000000 |
-|    18 |  10 |   1 | 2637.0205 | 2637.0205 | 100.00000 |              10.079368 |
-|    19 |  11 |   1 | 2877.8811 | 2877.8811 | 101.51318 |              11.000000 |
-|    20 |  34 |   3 | 2966.6480 | 2966.6480 | 102.03910 |              11.339289 |
-|    21 |  12 |   1 | 3139.5068 | 3139.5068 | 103.01955 |              12.000000 |
-|    22 |  38 |   3 | 3296.2755 | 3296.2755 | 103.86314 |              12.599210 |
-|    23 |  13 |   1 | 3401.1324 | 3401.1324 | 104.40528 |              13.000000 |
-|    24 |  69 |   5 | 3625.9030 | 3625.9030 | 105.51318 |              13.859131 |
-|    25 |  14 |   1 | 3662.7579 | 3662.7579 | 105.68826 |              14.000000 |
-|    26 |  15 |   1 | 3924.3834 | 3924.3834 | 106.88269 |              15.000000 |
-|    27 |  91 |   6 | 3955.5307 | 3955.5307 | 107.01955 |              15.119053 |
-|    28 |  16 |   1 | 4186.0090 | 4186.0090 | 108.00000 |              16.000000 |
-|    29 |  49 |   3 | 4285.1583 | 4285.1583 | 108.40528 |              16.378974 |
-|    30 |  17 |   1 | 4447.6346 | 4447.6346 | 109.04955 |              17.000000 |
-|    31 |  53 |   3 | 4614.7858 | 4614.7858 | 109.68826 |              17.638895 |
-|    32 |  18 |   1 | 4709.2602 | 4709.2602 | 110.03910 |              18.000000 |
-|    33 | 113 |   6 | 4944.4133 | 4944.4133 | 110.88269 |              18.898816 |
-|    34 |  19 |   1 | 4970.8857 | 4970.8857 | 110.97513 |              19.000000 |
-|    35 |  20 |   1 | 5232.5113 | 5232.5113 | 111.86314 |              20.000000 |
-|    36 | 101 |   5 | 5274.0409 | 5274.0409 | 112.00000 |              20.158737 |
-|    37 | 107 |   5 | 5603.6684 | 5603.6684 | 113.04955 |              21.418658 |
-|    38 |  68 |   3 | 5933.2960 | 5933.2960 | 114.03910 |              22.678579 |
-|    39 |  24 |   1 | 6262.9235 | 6262.9235 | 114.97513 |              23.938500 |
-|    40 | 101 |   4 | 6592.5511 | 6592.5511 | 115.86314 |              25.198421 |
-
-#### Spatial Periodicity
-
-| lcd | chord_Sz | chord_Hz | c_sound |   chord_m |   chord_s |
-|----:|---------:|---------:|--------:|----------:|----------:|
-|  60 | 5.906891 | 4.360426 |       1 | 0.2293354 | 0.2293354 |
-
-##### Partial Wavelengths
-
-![](man/figures/README-unnamed-chunk-42-1.png)<!-- -->
-
-##### Chord Wavelength
-
-![](man/figures/README-unnamed-chunk-43-1.png)<!-- -->
-
-##### Wavelength fractions
-
-| index | num | den |    tone_m |      freq |      midi | pseudo_rational_number |
-|------:|----:|----:|----------:|----------:|----------:|-----------------------:|
-|     1 | 101 |   4 | 0.0038223 |  261.6256 |  60.00000 |              25.198421 |
-|     2 |  20 |   1 | 0.0030337 |  329.6276 |  64.00000 |              20.000000 |
-|     3 |  38 |   3 | 0.0019111 |  523.2511 |  72.00000 |              12.599210 |
-|     4 |  10 |   1 | 0.0015169 |  659.2551 |  76.00000 |              10.000000 |
-|     5 |  25 |   3 | 0.0012741 |  784.8767 |  79.01955 |               8.399474 |
-|     6 |  20 |   3 | 0.0010112 |  988.8827 |  83.01955 |               6.666667 |
-|     7 |  19 |   3 | 0.0009556 | 1046.5023 |  84.00000 |               6.299605 |
-|     8 |   5 |   1 | 0.0007645 | 1308.1278 |  87.86314 |               5.039684 |
-|     9 |   5 |   1 | 0.0007584 | 1318.5102 |  88.00000 |               5.000000 |
-|    10 |  17 |   4 | 0.0006370 | 1569.7534 |  91.01955 |               4.199737 |
-|    11 |   4 |   1 | 0.0006067 | 1648.1378 |  91.86314 |               4.000000 |
-|    12 |  11 |   3 | 0.0005460 | 1831.3790 |  93.68826 |               3.599774 |
-|    13 |  10 |   3 | 0.0005056 | 1977.7653 |  95.01955 |               3.333333 |
-|    14 |  16 |   5 | 0.0004778 | 2093.0045 |  96.00000 |               3.149803 |
-|    15 |  14 |   5 | 0.0004334 | 2307.3929 |  97.68826 |               2.857143 |
-|    16 |  11 |   4 | 0.0004247 | 2354.6301 |  98.03910 |               2.799825 |
-|    17 |   5 |   2 | 0.0003822 | 2616.2556 |  99.86314 |               2.519842 |
-|    18 |   5 |   2 | 0.0003792 | 2637.0205 | 100.00000 |               2.500000 |
-|    19 |   7 |   3 | 0.0003475 | 2877.8811 | 101.51318 |               2.290766 |
-|    20 |   9 |   4 | 0.0003371 | 2966.6480 | 102.03910 |               2.222222 |
-|    21 |  13 |   6 | 0.0003185 | 3139.5068 | 103.01955 |               2.099868 |
-|    22 |   2 |   1 | 0.0003034 | 3296.2755 | 103.86314 |               2.000000 |
-|    23 |   2 |   1 | 0.0002940 | 3401.1324 | 104.40528 |               1.938340 |
-|    24 |   7 |   4 | 0.0002758 | 3625.9030 | 105.51318 |               1.818182 |
-|    25 |   7 |   4 | 0.0002730 | 3662.7579 | 105.68826 |               1.799887 |
-|    26 |   5 |   3 | 0.0002548 | 3924.3834 | 106.88269 |               1.679895 |
-|    27 |   5 |   3 | 0.0002528 | 3955.5307 | 107.01955 |               1.666667 |
-|    28 |   3 |   2 | 0.0002389 | 4186.0090 | 108.00000 |               1.574901 |
-|    29 |   3 |   2 | 0.0002334 | 4285.1583 | 108.40528 |               1.538461 |
-|    30 |   3 |   2 | 0.0002248 | 4447.6346 | 109.04955 |               1.482260 |
-|    31 |   3 |   2 | 0.0002167 | 4614.7858 | 109.68826 |               1.428571 |
-|    32 |   4 |   3 | 0.0002123 | 4709.2602 | 110.03910 |               1.399912 |
-|    33 |   4 |   3 | 0.0002022 | 4944.4133 | 110.88269 |               1.333333 |
-|    34 |   4 |   3 | 0.0002012 | 4970.8857 | 110.97513 |               1.326233 |
-|    35 |   4 |   3 | 0.0001911 | 5232.5113 | 111.86314 |               1.259921 |
-|    36 |   5 |   4 | 0.0001896 | 5274.0409 | 112.00000 |               1.250000 |
-|    37 |   5 |   4 | 0.0001785 | 5603.6684 | 113.04955 |               1.176471 |
-|    38 |   7 |   6 | 0.0001685 | 5933.2960 | 114.03910 |               1.111111 |
-|    39 |   1 |   1 | 0.0001597 | 6262.9235 | 114.97513 |               1.052632 |
-|    40 |   1 |   1 | 0.0001517 | 6592.5511 | 115.86314 |               1.000000 |
-
-#### 10 Harmonics
-
-- Fundamentals in MIDI: 60, 64  
-
-- Number of Harmonics: 10
-
-- Frequencies: 261.626, 329.628, 523.251, 659.255, 784.877, 988.883,
-  1046.502, 1308.128, 1318.510, 1569.753, 1648.138, 1831.379, 1977.765,
-  2093.005, 2307.393, 2354.630, 2616.256, 2637.020, 2966.648, 3296.276  
-
-- Wavelengths: 0.004, 0.003, 0.002, 0.002, 0.001, 0.001, 0.001, 0.001,
-  0.001, 0.001, 0.001, 0.001, 0.001, 0.000, 0.000, 0.000, 0.000, 0.000,
-  0.000, 0.000  
-
-- Speed of Sound: 1.000
-
-- f0: 21.802
-
-- l0: 0.229
-
-- Quantum Speed of Sound: 5.000
-
-###### MaMi.CoDi Predictions
-
-| consonance_dissonance | major_minor | frequency_consonance | period_consonance |
-|----------------------:|------------:|--------------------:|-------------------:|
-|              90.50815 |    2.321928 |            46.41504 |           44.09311 |
-
-#### Temporal Periodicity
-
-| lcd | chord_Sz | chord_Hz | c_sound |   chord_m |   chord_s |
-|----:|---------:|---------:|--------:|----------:|----------:|
-|  12 | 3.584963 | 21.80213 |       1 | 0.0458671 | 0.0458671 |
-
-##### Partial Periods
-
-![](man/figures/README-unnamed-chunk-48-1.png)<!-- -->
-
-##### Chord Period
-
-![](man/figures/README-unnamed-chunk-49-1.png)<!-- -->
-
-##### Frequency fractions
-
-| index | num | den |   tone_hz |      freq |      midi | pseudo_rational_number |
-|------:|----:|----:|----------:|----------:|----------:|-----------------------:|
-|     1 |   1 |   1 |  261.6256 |  261.6256 |  60.00000 |               1.000000 |
-|     2 |   4 |   3 |  329.6276 |  329.6276 |  64.00000 |               1.259921 |
-|     3 |   2 |   1 |  523.2511 |  523.2511 |  72.00000 |               2.000000 |
-|     4 |   5 |   2 |  659.2551 |  659.2551 |  76.00000 |               2.519842 |
-|     5 |   3 |   1 |  784.8767 |  784.8767 |  79.01955 |               3.000000 |
-|     6 |  15 |   4 |  988.8827 |  988.8827 |  83.01955 |               3.779763 |
-|     7 |   4 |   1 | 1046.5023 | 1046.5023 |  84.00000 |               4.000000 |
-|     8 |   5 |   1 | 1308.1278 | 1308.1278 |  87.86314 |               5.000000 |
-|     9 |   5 |   1 | 1318.5102 | 1318.5102 |  88.00000 |               5.039684 |
-|    10 |   6 |   1 | 1569.7534 | 1569.7534 |  91.01955 |               6.000000 |
-|    11 |  19 |   3 | 1648.1378 | 1648.1378 |  91.86314 |               6.299605 |
-|    12 |   7 |   1 | 1831.3790 | 1831.3790 |  93.68826 |               7.000000 |
-|    13 |  15 |   2 | 1977.7653 | 1977.7653 |  95.01955 |               7.559526 |
-|    14 |   8 |   1 | 2093.0045 | 2093.0045 |  96.00000 |               8.000000 |
-|    15 |  35 |   4 | 2307.3929 | 2307.3929 |  97.68826 |               8.819447 |
-|    16 |   9 |   1 | 2354.6301 | 2354.6301 |  98.03910 |               9.000000 |
-|    17 |  10 |   1 | 2616.2556 | 2616.2556 |  99.86314 |              10.000000 |
-|    18 |  10 |   1 | 2637.0205 | 2637.0205 | 100.00000 |              10.079368 |
-|    19 |  34 |   3 | 2966.6480 | 2966.6480 | 102.03910 |              11.339289 |
-|    20 |  38 |   3 | 3296.2755 | 3296.2755 | 103.86314 |              12.599210 |
-
-#### Spatial Periodicity
-
-| lcd | chord_Sz | chord_Hz | c_sound |   chord_m |   chord_s |
-|----:|---------:|---------:|--------:|----------:|----------:|
-|  60 | 5.906891 | 4.360426 |       1 | 0.2293354 | 0.2293354 |
-
-##### Partial Wavelengths
-
-![](man/figures/README-unnamed-chunk-52-1.png)<!-- -->
-
-##### Chord Wavelength
-
-![](man/figures/README-unnamed-chunk-53-1.png)<!-- -->
-
-##### Wavelength fractions
-
-| index | num | den |    tone_m |      freq |      midi | pseudo_rational_number |
-|------:|----:|----:|----------:|----------:|----------:|-----------------------:|
-|     1 |  38 |   3 | 0.0038223 |  261.6256 |  60.00000 |              12.599210 |
-|     2 |  10 |   1 | 0.0030337 |  329.6276 |  64.00000 |              10.000000 |
-|     3 |  19 |   3 | 0.0019111 |  523.2511 |  72.00000 |               6.299605 |
-|     4 |   5 |   1 | 0.0015169 |  659.2551 |  76.00000 |               5.000000 |
-|     5 |  17 |   4 | 0.0012741 |  784.8767 |  79.01955 |               4.199737 |
-|     6 |  10 |   3 | 0.0010112 |  988.8827 |  83.01955 |               3.333333 |
-|     7 |  16 |   5 | 0.0009556 | 1046.5023 |  84.00000 |               3.149803 |
-|     8 |   5 |   2 | 0.0007645 | 1308.1278 |  87.86314 |               2.519842 |
-|     9 |   5 |   2 | 0.0007584 | 1318.5102 |  88.00000 |               2.500000 |
-|    10 |  13 |   6 | 0.0006370 | 1569.7534 |  91.01955 |               2.099868 |
-|    11 |   2 |   1 | 0.0006067 | 1648.1378 |  91.86314 |               2.000000 |
-|    12 |   7 |   4 | 0.0005460 | 1831.3790 |  93.68826 |               1.799887 |
-|    13 |   5 |   3 | 0.0005056 | 1977.7653 |  95.01955 |               1.666667 |
-|    14 |   3 |   2 | 0.0004778 | 2093.0045 |  96.00000 |               1.574901 |
-|    15 |   3 |   2 | 0.0004334 | 2307.3929 |  97.68826 |               1.428571 |
-|    16 |   4 |   3 | 0.0004247 | 2354.6301 |  98.03910 |               1.399912 |
-|    17 |   4 |   3 | 0.0003822 | 2616.2556 |  99.86314 |               1.259921 |
-|    18 |   5 |   4 | 0.0003792 | 2637.0205 | 100.00000 |               1.250000 |
-|    19 |   7 |   6 | 0.0003371 | 2966.6480 | 102.03910 |               1.111111 |
-|    20 |   1 |   1 | 0.0003034 | 3296.2755 | 103.86314 |               1.000000 |
+Because period and frequency are inverse of each other one might imagine
+that the period and frequency signals would have the same values.
+However, for complex pitches that is not the case. The pattern of the
+two sets of components are different. See the example of the major triad
+with 5 harmonics, below.
+
+# `{r, child=c('man/Spatiofrequency_Periodicity.Rmd')} #`
 
 ### Finding the variance Values
 
@@ -673,10 +307,11 @@ specific to place signals or time signals separetely. But instead the
 limitation is higher in the auditory system after the signals have been
 passed along.  
 
-That is to say, the limits that creates differences between frequency and
-period signals might not be frequency selectivity or phase locking but
-instead a limit of higher-level perception or pattern recognition, where
-estimates of the period of a complex signal is made from components.  
+That is to say, the limits that creates differences between frequency
+and period signals might not be frequency selectivity or phase locking
+but instead a limit of higher-level perception or pattern recognition,
+where estimates of the period of a complex signal is made from
+components.  
 
 MaMi.CoDi uses the Stern-Brocot tree to find rational fractions for the
 ratios within a given variance. How do we find the best variance values?
@@ -686,15 +321,15 @@ the large-scale behavioral experiments.
 
 Because the period signal and the frequency signal have different
 origins we initially did a two-dimensional variance search. However the
-closest fits to the behavioral data came from period and variance
-values being the same. Insofar as this model represents processing in
-the auditory cortex, it would seem that estimating the cyclicity of the
-two signals happens higher up in the auditoray system after the period
-and frequency signals have been processed.  
+closest fits to the behavioral data came from period and variance values
+being the same. Insofar as this model represents processing in the
+auditory cortex, it would seem that estimating the cyclicity of the two
+signals happens higher up in the auditoray system after the period and
+frequency signals have been processed.  
 
 ### Difference between Stern-Brocot Rational Fraction Approximations and Floating Point Values
 
-![](man/figures/README-unnamed-chunk-9-1.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-8-1.png)<!-- -->  
 Number of Samples: 1,000,000  
 
 [Additional Stern-Brocot Plots](/man/thoughts/SternBrocotCurve.md)
@@ -738,28 +373,28 @@ predictions. For futher comparison, the theoretical predictions for
 major-minor versus the behavioral results are included in a plot below.
 
 | frequency_variance | period_variance | smoothing_sigma |
-|:------------------|:-----------------|----------------:|
-| 0.03              | 0.21109          |             0.2 |
+|:-------------------|:----------------|----------------:|
+| 0.03               | 0.21109         |             0.2 |
 
-![](man/figures/README-unnamed-chunk-12-1.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-2.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-3.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-4.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-5.png)<!-- -->
+![](man/figures/README-unnamed-chunk-11-1.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-2.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-3.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-4.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-5.png)<!-- -->
 
 ##### Harmonic ~ Partials: 10
 
 For 10 harmonics, behavioral results and theoretical predictions agree.
 
 | frequency_variance | period_variance | smoothing_sigma |
-|:------------------|:-----------------|----------------:|
-| 0.07958           | 0.07958          |             0.2 |
+|:-------------------|:----------------|----------------:|
+| 0.07958            | 0.07958         |             0.2 |
 
-![](man/figures/README-unnamed-chunk-12-6.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-7.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-8.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-9.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-10.png)<!-- -->
+![](man/figures/README-unnamed-chunk-11-6.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-7.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-8.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-9.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-10.png)<!-- -->
 
 ##### 5Partials ~ Partials: 5
 
@@ -769,14 +404,14 @@ deleted), notice that the m3 peak is only slightly lower than the M3
 peak.
 
 | frequency_variance | period_variance | smoothing_sigma |
-|:------------------|:-----------------|----------------:|
-| 0.07958           | 0.07958          |             0.2 |
+|:-------------------|:----------------|----------------:|
+| 0.07958            | 0.07958         |             0.2 |
 
-![](man/figures/README-unnamed-chunk-12-11.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-12.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-13.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-14.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-15.png)<!-- -->
+![](man/figures/README-unnamed-chunk-11-11.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-12.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-13.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-14.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-15.png)<!-- -->
 
 ##### 5PartialsNo3 ~ Partials: 5
 
@@ -786,14 +421,14 @@ the third partial is now lower than the m3 peak with all 5 harmonics
 while the M3 peak is slightly higher without the 3rd partial.
 
 | frequency_variance | period_variance | smoothing_sigma |
-|:------------------|:-----------------|----------------:|
-| 0.07958           | 0.07958          |             0.2 |
+|:-------------------|:----------------|----------------:|
+| 0.07958            | 0.07958         |             0.2 |
 
-![](man/figures/README-unnamed-chunk-12-16.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-17.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-18.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-19.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-20.png)<!-- -->
+![](man/figures/README-unnamed-chunk-11-16.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-17.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-18.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-19.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-20.png)<!-- -->
 
 ##### Bonang ~ Partials: 4
 
@@ -804,14 +439,14 @@ the behavioral results. MaMi.CoDi predicts P5 to have minor polarity and
 be relatively higher than the behavioral results.
 
 | frequency_variance | period_variance | smoothing_sigma |
-|:------------------|:-----------------|----------------:|
-| 0.03979           | 0.15915          |             0.2 |
+|:-------------------|:----------------|----------------:|
+| 0.03979            | 0.15915         |             0.2 |
 
-![](man/figures/README-unnamed-chunk-12-21.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-22.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-23.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-24.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-25.png)<!-- -->
+![](man/figures/README-unnamed-chunk-11-21.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-22.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-23.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-24.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-25.png)<!-- -->
 
 ##### Stretched ~ Partials: 10
 
@@ -820,14 +455,14 @@ mostly agree. MaMi.Codi predicts peaks with minor polarity just above m3
 and m7 that do not exist in the behavioral results.
 
 | frequency_variance | period_variance | smoothing_sigma |
-|:------------------|:-----------------|----------------:|
-| 0.07958           | 0.07958          |             0.2 |
+|:-------------------|:----------------|----------------:|
+| 0.07958            | 0.07958         |             0.2 |
 
-![](man/figures/README-unnamed-chunk-12-26.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-27.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-28.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-29.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-30.png)<!-- -->
+![](man/figures/README-unnamed-chunk-11-26.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-27.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-28.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-29.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-30.png)<!-- -->
 
 ##### Compressed ~ Partials: 10
 
@@ -835,14 +470,14 @@ For compressed harmonics, the pronounced behavioral peaks mostly agree
 with the theoretical peaks.
 
 | frequency_variance | period_variance | smoothing_sigma |
-|:------------------|:-----------------|----------------:|
-| 0.07958           | 0.07958          |             0.2 |
+|:-------------------|:----------------|----------------:|
+| 0.07958            | 0.07958         |             0.2 |
 
-![](man/figures/README-unnamed-chunk-12-31.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-32.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-33.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-34.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-35.png)<!-- -->
+![](man/figures/README-unnamed-chunk-11-31.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-32.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-33.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-34.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-35.png)<!-- -->
 
 #### Dyads spanning 1 quarter tone
 
@@ -851,42 +486,42 @@ with the theoretical peaks.
 Description is below.
 
 | frequency_variance | period_variance | smoothing_sigma |
-|:------------------|:-----------------|----------------:|
-| 0.07958           | 0.07958          |           0.035 |
+|:-------------------|:----------------|----------------:|
+| 0.07958            | 0.07958         |           0.035 |
 
-![](man/figures/README-unnamed-chunk-12-36.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-37.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-38.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-39.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-40.png)<!-- -->
+![](man/figures/README-unnamed-chunk-11-36.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-37.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-38.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-39.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-40.png)<!-- -->
 
 ##### M6 ~ Partials: 10
 
 Description is below.
 
 | frequency_variance | period_variance | smoothing_sigma |
-|:------------------|:-----------------|----------------:|
-| 0.07958           | 0.07958          |           0.035 |
+|:-------------------|:----------------|----------------:|
+| 0.07958            | 0.07958         |           0.035 |
 
-![](man/figures/README-unnamed-chunk-12-41.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-42.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-43.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-44.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-45.png)<!-- -->
+![](man/figures/README-unnamed-chunk-11-41.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-42.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-43.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-44.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-45.png)<!-- -->
 
 ##### P8 ~ Partials: 10
 
 Description is below.
 
 | frequency_variance | period_variance | smoothing_sigma |
-|:------------------|:-----------------|----------------:|
-| 0.07958           | 0.07958          |           0.035 |
+|:-------------------|:----------------|----------------:|
+| 0.07958            | 0.07958         |           0.035 |
 
-![](man/figures/README-unnamed-chunk-12-46.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-47.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-48.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-49.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-50.png)<!-- -->
+![](man/figures/README-unnamed-chunk-11-46.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-47.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-48.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-49.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-50.png)<!-- -->
 
 ##### P8ZoomedTemporal ~ Partials: 10
 
@@ -894,14 +529,14 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 (frequency) is akin to shutting off the other (period).
 
 | frequency_variance | period_variance | smoothing_sigma |
-|:------------------|:-----------------|----------------:|
-| 5e-05             | 126.65148        |           0.035 |
+|:-------------------|:----------------|----------------:|
+| 5e-05              | 126.65148       |           0.035 |
 
-![](man/figures/README-unnamed-chunk-12-51.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-52.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-53.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-54.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-55.png)<!-- -->
+![](man/figures/README-unnamed-chunk-11-51.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-52.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-53.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-54.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-55.png)<!-- -->
 
 ##### P8ZoomedSpatial ~ Partials: 10
 
@@ -909,43 +544,43 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 (period) is akin to shutting off the other (frequency).
 
 | frequency_variance | period_variance | smoothing_sigma |
-|:------------------|:-----------------|----------------:|
-| 126.65148         | 5e-05            |           0.035 |
+|:-------------------|:----------------|----------------:|
+| 126.65148          | 5e-05           |           0.035 |
 
-![](man/figures/README-unnamed-chunk-12-56.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-57.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-58.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-59.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-60.png)<!-- -->
+![](man/figures/README-unnamed-chunk-11-56.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-57.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-58.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-59.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-11-60.png)<!-- -->
 
 ### Manipulating amplitudes
 
 ##### Harmonic ~ Roll Off: 12
 
 | frequency_variance | period_variance | min_amplitude | smoothing_sigma |
-|:------------------|:-----------------|:--------------|----------------:|
-| 0.07958           | 0.07958          | 0.013         |             0.2 |
+|:-------------------|:----------------|:--------------|----------------:|
+| 0.07958            | 0.07958         | 0.013         |             0.2 |
 
-![](man/figures/README-unnamed-chunk-16-1.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-16-2.png)<!-- -->
+![](man/figures/README-unnamed-chunk-15-1.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-15-2.png)<!-- -->
 
 ##### Harmonic ~ Roll Off: 7
 
 | frequency_variance | period_variance | min_amplitude | smoothing_sigma |
-|:------------------|:-----------------|:--------------|----------------:|
-| 0.07958           | 0.07958          | 0.08          |             0.2 |
+|:-------------------|:----------------|:--------------|----------------:|
+| 0.07958            | 0.07958         | 0.08          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-16-3.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-16-4.png)<!-- -->
+![](man/figures/README-unnamed-chunk-15-3.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-15-4.png)<!-- -->
 
 ##### Harmonic ~ Roll Off: 2
 
 | frequency_variance | period_variance | min_amplitude | smoothing_sigma |
-|:------------------|:-----------------|:--------------|----------------:|
-| 0.07958           | 0.07958          | 0             |             0.2 |
+|:-------------------|:----------------|:--------------|----------------:|
+| 0.07958            | 0.07958         | 0             |             0.2 |
 
-![](man/figures/README-unnamed-chunk-16-5.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-16-6.png)<!-- -->
+![](man/figures/README-unnamed-chunk-15-5.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-15-6.png)<!-- -->
 
 #### Notes on plots:
 

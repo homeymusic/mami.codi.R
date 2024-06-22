@@ -1,6 +1,6 @@
 #' Major-Minor Consonance-Dissonance
 #'
-#' A quantum model of consonance perception at the Gabor uncertainty limit.
+#' A Quantized Model of Consonance Perception at the Classical Uncertainty Limit
 #'
 #'
 #' @param x Chord to analyse specified in MIDI, coerced to
@@ -22,11 +22,11 @@
 #' @export
 mami.codi <- function(
     x,
-    amplitude         = MINIMUM_AMPLITUDE,
+    amplitude          = MINIMUM_AMPLITUDE,
     frequency_variance = NA,
-    period_variance  = NA,
-    deviation         = OCTAVE_DEVIATION,
-    metadata          = NA,
+    period_variance    = NA,
+    deviation          = OCTAVE_DEVIATION,
+    metadata           = NA,
     verbose            = FALSE,
     ...
 ) {
@@ -82,9 +82,9 @@ parse_variances <- function(x, frequency_variance, period_variance) {
 
   if (is.na(frequency_variance) && is.na(period_variance)) {
     frequency_variance = sqrt(HEISENBERG)
-    period_variance  = sqrt(HEISENBERG)
+    period_variance    = sqrt(HEISENBERG)
   } else if (is.na(period_variance)) {
-    period_variance  = HEISENBERG / frequency_variance
+    period_variance    = HEISENBERG / frequency_variance
   } else if (is.na(frequency_variance)) {
     frequency_variance = HEISENBERG / period_variance
   }
@@ -96,7 +96,7 @@ parse_variances <- function(x, frequency_variance, period_variance) {
 
 }
 
-#' We are dealing with frequency and wavelength ratios. The speed of sound
+#' We are dealing with frequency and period ratios. The speed of sound
 #' constant will disappear. We could estimate the speed of sound as:
 #' * room temperature air at sea level (343 m/s)
 #' * the fluid of the inner ear (1,522 m/s, ocean water at room temperature)
@@ -113,7 +113,7 @@ parse_variances <- function(x, frequency_variance, period_variance) {
 #' c_sound = 1000 * 100 -> 1e+05
 #'
 #' That is a fast material. The advantage, though, for our analysis is that our
-#' wavelength and frequency numbers have the same range.
+#' period and frequency numbers have the same range.
 #'
 #' frequencies: 100 200 300 400 500 600 700 800 900 1000
 #' fractions f/f_min: 1/1 2/1 3/1 4/1 5/1 6/1 7/1 8/1 9/1 10/1
@@ -124,23 +124,23 @@ parse_variances <- function(x, frequency_variance, period_variance) {
 #' fractions l/l_min: 1/1 7/6 5/4 3/2 5/3 2/1 5/2 10/3 5/1 10/1
 #' LCD: 12
 #'
-#' The frequency and wavelength vectors have the same range 100 to 1,000 but
+#' The frequency and period vectors have the same range 100 to 1,000 but
 #' only 4 of the same values: 100, 200, 500 and 1,000. The other 6 values are
 #' different. And so the pattern recognition machinery of the auditory system,
 #' which we approximate with the LCD, will perceive different cycle lengths:
 #' 1 cycle for frequencies but 12 cycles for periods.
 #'
-#' Many of the wavelength ratios will look familiar to those who know their
+#' Many of the period ratios will look familiar to those who know their
 #' just intoned music intervals. However, the familiar ratios are not for the
 #' familiar intervals
 #' For example, 5/4 is the major third ratio of the high fundamental frequency
 #' relative to the low fundamental frequency. However, 5/4 above is
-#' the ratio of the 8th harmonic's wavelength relative to the 10th harmonic's
-#' wavelength. And the ratio isn't just an approximation:
+#' the ratio of the 8th harmonic's period relative to the 10th harmonic's
+#' period. And the ratio isn't just an approximation:
 #' 125.00 / 100.00 is precisely 5 / 4.
 #'
 #' The two cycle estimates for the same set of harmonics are different.
-#' Because the wavelength values were precisely calculated from the frequency
+#' Because the period values were precisely calculated from the frequency
 #' values, our model indicates that the disparity in the two estimates isn't the
 #' result of a lack of precision from the hair cell locations of the basilar
 #' membrane or the phase-locking speed of the auditory neurons.

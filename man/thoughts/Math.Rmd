@@ -34,7 +34,7 @@ $${\sigma_f}^2 {\sigma_\lambda}^2 \ge \frac{1} {16 \pi^2}$$
         * Wavelength ratios
         * Frequency ratios
     * Wavelength and frequency ??? (ratios, fundamentals, values?) are conjugates.
-    * The variances of the wavelength and frequency variance are governed by 
+    * The variances of the period and frequency variance are governed by 
     the generalized uncertainty principle.
     
     
@@ -69,7 +69,7 @@ $$\psi(x,t) = \int \phi(\hbar k) e^{-i \left( \omega t - k x \right) } dk\hbar$$
 #### Time
 
 Once the chord is sounded and present in the cochlea, if we freeze time we still
-have a wavelength detector. Hair cells in the neighborhood of the wavelength 
+have a period detector. Hair cells in the neighborhood of the period 
 might be in vraious positions depending on the phase of the wave when we freeze
 time but the sensors still gives us all the information.\
 
@@ -111,7 +111,7 @@ $\pmb{\omega}$ and $\pmb{k}$ are vectors of length $N$.
 
 $\psi$ is frequency, the probability of the fundamental frequency.\
 
-$\phi$ is period, the probability of the fundamental wavelength.\
+$\phi$ is period, the probability of the fundamental period.\
 
 
 

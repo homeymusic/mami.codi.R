@@ -30,8 +30,8 @@ smallest frequency. Small frequencies are low tones and are detected by the inne
 ear hair cells closest to the apex of the cochlea, which is the end furthest from
 the source of the wave.\
 
-For the period (i.e. rate-place or wavelength) estimate, the reference tone is the 
-smallest wavelength. Small periods are high tones and are detected by the 
+For the period (i.e. rate-place or period) estimate, the reference tone is the 
+smallest period. Small periods are high tones and are detected by the 
 inner ear hair cells closest to the base of the cochlea, which is the end closest 
 to the middle ear, the source of the wave. \
 
@@ -42,7 +42,7 @@ consonance-dissonance along one dimension and major-minor on the orthogonal dime
 
 Below, we estimate the periodicity of the C4, E4 major third 
 with 1, 10 and 20 harmonics per pitch. The MaMi.CoDi model is based on 
-fractions of tones - both frequency and wavelength fractions. The input to the model 
+fractions of tones - both frequency and period fractions. The input to the model 
 is a sparse frequency spectrum. We convert frequencies to periods by 
 dividing a speed of sound constant by the frequency.\
 
@@ -170,13 +170,13 @@ period_fractions = chord$period_fractions[[1]] %>%
     midi
   )
 lcd    = chord$period_alcd
-plot_periodicity(period_fractions, lcd, 'wavelength', c_sound = c_sound,relative = F)
+plot_periodicity(period_fractions, lcd, 'period', c_sound = c_sound,relative = F)
 ```
 
 ##### Chord Wavelength
 
 ```{r, echo=F, results='asis', message=F}
-plot_periodicity(period_fractions, lcd, 'wavelength', c_sound = c_sound)
+plot_periodicity(period_fractions, lcd, 'period', c_sound = c_sound)
 ```
 
 ##### Wavelength fractions
@@ -308,13 +308,13 @@ period_fractions = chord$period_fractions[[1]] %>%
     midi
   )
 lcd    = chord$period_alcd
-plot_periodicity(period_fractions, lcd, 'wavelength', c_sound = c_sound,relative = F)
+plot_periodicity(period_fractions, lcd, 'period', c_sound = c_sound,relative = F)
 ```
 
 ##### Chord Wavelength
 
 ```{r, echo=F, results='asis', message=F}
-plot_periodicity(period_fractions, lcd, 'wavelength', c_sound = c_sound)
+plot_periodicity(period_fractions, lcd, 'period', c_sound = c_sound)
 ```
 
 ##### Wavelength fractions
@@ -445,13 +445,13 @@ period_fractions = chord$period_fractions[[1]] %>%
     midi
   )
 lcd    = chord$period_alcd
-plot_periodicity(period_fractions, lcd, 'wavelength', c_sound = c_sound,relative = F)
+plot_periodicity(period_fractions, lcd, 'period', c_sound = c_sound,relative = F)
 ```
 
 ##### Chord Wavelength
 
 ```{r, echo=F, results='asis', message=F}
-plot_periodicity(period_fractions, lcd, 'wavelength', c_sound = c_sound)
+plot_periodicity(period_fractions, lcd, 'period', c_sound = c_sound)
 ```
 
 ##### Wavelength fractions

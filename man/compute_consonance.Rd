@@ -25,7 +25,7 @@ For a chord = 100Hz pitch with 10 harmonics, our speed of sound would be
 
 max(chord) / max(1/chord) -> 1e+05
 
-That is a fast material. The advantage, though, is that our wavelength and
+That is a fast material. The advantage, though, is that our period and
 frequency numbers will be in the same range.
 
 frequencies: 100  200    300    400    500    600    700    800    900    1000

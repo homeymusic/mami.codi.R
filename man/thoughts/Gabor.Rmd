@@ -28,7 +28,7 @@ dimension, frequency of the signal (f), measured in 1 / seconds. Both dimensions
 include time.\
 
 The dimensions of MaMi.CoDis application of HUP to signal analysis are a  
-period dimension, wavelength (l) measured in meters, and a frequency 
+period dimension, period (l) measured in meters, and a frequency 
 dimension, frequency (f) measured in 1 / seconds.  One dimension includes time, 
 the other does not.\
 
@@ -57,7 +57,7 @@ Wavelength ratio variance x Frequency ratio variance  = Number of the order one\
 One observation happens in a "characteristic rectangle" in the space-time diagram.
 
 The conventional language is a blocker for me. When time is frozen and we measure
-the wavelength in the cochlea that is a purely period observation. But the convention
+the period in the cochlea that is a purely period observation. But the convention
 is to label that a frequency measured in Hz, which is 1/s. But time is frozen. There
 are no seconds? What gives?\
 
@@ -67,7 +67,7 @@ time-frequency domain and replace it with space-time domain?\
 But this can be a problem too:\
 ```{r, echo=F, message=F}
 tibble::tibble(
-  space  = c('period length', 'wavelength', 'count in space', 'wavenumber'),
+  space  = c('period length', 'period', 'count in space', 'wavenumber'),
   time   = c('frequency length', 'period', 'count in time', 'frequency')
 )
 ```
@@ -86,7 +86,7 @@ tibble::tibble_row(
 Gabor's model starts with the orthogonal sine and cosine functions. And uses
 the set of those 2 coefficients to create a data set of size 2(f2-f1)tau.\
 
-MaMi.CoDi starts with the wavelength (row of hair cells, bank of reeds)
+MaMi.CoDi starts with the period (row of hair cells, bank of reeds)
 and frequency (phase-locking, oscillograph) signals to create a data set of 
 size 2(f2-f1)tau.
 

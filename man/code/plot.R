@@ -866,7 +866,7 @@ plot_periodicity <- function(ratios, lcd, dimension,
                              c_sound = NULL,
                              relative = T) {
 
-  if (dimension=='wavelength') {
+  if (dimension=='period') {
     fill_color   = colors_homey$minor
     border_color = colors_homey$minor_dark
     max_tone = ratios$tone %>% max()
@@ -890,7 +890,7 @@ plot_periodicity <- function(ratios, lcd, dimension,
       ymin = numeric(),
       ymax = numeric()
     )
-    if (dimension=='wavelength') {
+    if (dimension=='period') {
       if (relative) {
         ratio_to_max = (num / den) / (max_num / max_den)
         brick_count  = floor(lcd / ratio_to_max)
@@ -918,7 +918,7 @@ plot_periodicity <- function(ratios, lcd, dimension,
     }
     course_of_bricks
   })
-  if (dimension=='wavelength') {
+  if (dimension=='period') {
     xlab = bquote('Wavelength'~(m))
     scaled_label = scales::label_number(scale = 1e+00)
   } else if (dimension=='frequency') {
