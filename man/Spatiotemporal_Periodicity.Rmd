@@ -74,9 +74,9 @@ c_sound = chord$speed_of_sound
 
 * f0: `r sprintf(chord$f0, fmt = '%#.3f')`
 
-* l0: `r sprintf(chord$l0, fmt = '%#.3f')`
+* P0: `r sprintf(chord$P0, fmt = '%#.3f')`
 
-* Quantum Speed of Sound: `r sprintf(chord$l0 * chord$f0, fmt = '%#.3f')`
+* Quantum Speed of Sound: `r sprintf(chord$P0 * chord$f0, fmt = '%#.3f')`
 
 ###### MaMi.CoDi Predictions
 ```{r, echo=F, results='asis', message=F}
@@ -212,9 +212,9 @@ c_sound = chord$speed_of_sound
 
 * f0: `r sprintf(chord$f0, fmt = '%#.3f')`
 
-* l0: `r sprintf(chord$l0, fmt = '%#.3f')`
+* P0: `r sprintf(chord$P0, fmt = '%#.3f')`
 
-* Quantum Speed of Sound: `r sprintf(chord$l0 * chord$f0, fmt = '%#.3f')`
+* Quantum Speed of Sound: `r sprintf(chord$P0 * chord$f0, fmt = '%#.3f')`
 
 ###### MaMi.CoDi Predictions
 ```{r, echo=F, results='asis', message=F}
@@ -349,9 +349,9 @@ c_sound = chord$speed_of_sound
 
 * f0: `r sprintf(chord$f0, fmt = '%#.3f')`
 
-* l0: `r sprintf(chord$l0, fmt = '%#.3f')`
+* P0: `r sprintf(chord$P0, fmt = '%#.3f')`
 
-* Quantum Speed of Sound: `r sprintf(chord$l0 * chord$f0, fmt = '%#.3f')`
+* Quantum Speed of Sound: `r sprintf(chord$P0 * chord$f0, fmt = '%#.3f')`
 
 ###### MaMi.CoDi Predictions
 ```{r, echo=F, results='asis', message=F}
@@ -370,10 +370,8 @@ knitr::kable(tibble::tibble(
   min_f_Hz = min(chord$frequencies[[1]]),
   max_T_s  = 1 / min_f_Hz,
   chord_s  = lcd * max_T_s,
-  chord_Hz = 1 / chord_s,
-  chord_m  = c_sound / chord_Hz,
-  c_sound
-) %>% dplyr::select(lcd, chord_Sz, chord_Hz, c_sound, chord_m, chord_s))
+  chord_Hz = 1 / chord_s
+) %>% dplyr::select(lcd, chord_Sz, chord_Hz, c_sound, chord_s))
 ```
 
 ##### Partial Periods
@@ -417,13 +415,8 @@ knitr::kable(frequency_fractions %>%
 ```{r, echo=F, results='asis', message=F}
 knitr::kable(tibble::tibble(
   lcd      = chord$period_alcd,
-  chord_Sz = chord$period_Sz,
-  max_l_m  = max(chord$periods[[1]]),
-  chord_m  = lcd * max_l_m,
-  chord_Hz = c_sound / chord_m,
-  chord_s  = 1 / chord_Hz,
-  c_sound,
-) %>% dplyr::select(lcd, chord_Sz, chord_Hz, c_sound, chord_m, chord_s))
+  chord_Sz = chord$period_Sz
+) %>% dplyr::select(lcd, chord_Sz))
 ```
 
 ##### Partial Wavelengths
