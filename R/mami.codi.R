@@ -1,6 +1,6 @@
 #' Major-Minor Consonance-Dissonance
 #'
-#' A spatiotemporal periodicity model of consonance perception.
+#' A quantum model of consonance perception at the Gabor uncertainty limit.
 #'
 #'
 #' @param x Chord to analyse specified in MIDI, coerced to
@@ -158,7 +158,7 @@ parse_variances <- function(x, temporal_variance, spatial_variance) {
 compute_consonance = function(x, minimum_amplitude, octave_deviation) {
 
   f       = x$spectrum[[1]] %>% dplyr::filter(.data$y>minimum_amplitude) %>% hrep::freq()
-  c_sound = 343 # m/s
+  c_sound = 1 # m/s
   l       = c_sound / f
 
   x %>% dplyr::mutate(
