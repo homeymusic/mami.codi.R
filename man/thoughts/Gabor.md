@@ -2,17 +2,17 @@ Gabor
 ================
 
 The dimensions of Heisenberg’s Uncertainty Principle (HUP) are a purely
-spatial dimension, position (s) measured in meters, and a
-spatio-temporal mass dimension, momentum (p) measured in kg \* m / s.  
+period dimension, position (s) measured in meters, and a
+spatio-frequency mass dimension, momentum (p) measured in kg \* m / s.  
 
 The dimensions of Gabor’s application of HUP to signal analysis are a
-temporal dimension, time of the signal (t) measured in seconds, and
-another temporal dimension, frequency of the signal (f), measured in 1 /
+frequency dimension, time of the signal (t) measured in seconds, and
+another frequency dimension, frequency of the signal (f), measured in 1 /
 seconds.  
 
 The dimensions of MaMi.CoDis application of HUP to signal analysis are
 a  
-spatial dimension, wavelength (l) measured in meters, and a temporal
+period dimension, wavelength (l) measured in meters, and a frequency
 dimension, frequency (f) measured in 1 / seconds.  
 
 Do sound waves have mass? [Sound Waves Carry
@@ -43,12 +43,12 @@ One observation happens in a “characteristic rectangle” in the
 space-time diagram.
 
 The conventional language is a blocker for me. When time is frozen and
-we measure the wavelength in the cochlea that is a purely spatial
+we measure the wavelength in the cochlea that is a purely period
 observation. But the convention is to label that a frequency measured in
 Hz, which is 1/s. But time is frozen. There are no seconds? What
 gives?  
 
-It should be a spatial length measured in meters. Can we abandon the
+It should be a period length measured in meters. Can we abandon the
 label of time-frequency domain and replace it with space-time domain?  
 
 But this can be a problem too:  
@@ -56,7 +56,7 @@ But this can be a problem too:
     #> # A tibble: 4 × 2
     #>   space          time           
     #>   <chr>          <chr>          
-    #> 1 spatial length temporal length
+    #> 1 period length frequency length
     #> 2 wavelength     period         
     #> 3 count in space count in time  
     #> 4 wavenumber     frequency

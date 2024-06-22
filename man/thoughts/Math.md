@@ -52,9 +52,9 @@ $\pmb{\omega}$ and $\pmb{k}$ are vectors of length $N$.
 
 #### Now Make $\psi$ and $\phi$ work
 
-$\psi$ is temporal, the probability of the fundamental frequency.  
+$\psi$ is frequency, the probability of the fundamental frequency.  
 
-$\phi$ is spatial, the probability of the fundamental wavelength.  
+$\phi$ is period, the probability of the fundamental wavelength.  
 
 #### Real Traveling Wave
 
@@ -82,5 +82,5 @@ satisfies the uncertainty principle.
 So what are they in our model?  
 
 $f_{0}(f_{i \dots N})$ and $\lambda_{0}(\lambda_{i \dots N})$ are
-probabilities that a set of frequencies or wavelengths will have a
+probabilities that a set of frequencies or periods will have a
 specific fundamental value.  

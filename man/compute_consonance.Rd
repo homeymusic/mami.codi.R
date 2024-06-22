@@ -29,7 +29,7 @@ That is a fast material. The advantage, though, is that our wavelength and
 frequency numbers will be in the same range.
 
 frequencies: 100  200    300    400    500    600    700    800    900    1000
-wavelengths: 100  111.11 125.00 142.85 166.66 200.00 250.00 333.33 500.00 1000
+periods: 100  111.11 125.00 142.85 166.66 200.00 250.00 333.33 500.00 1000
 
 We can see that the two vectors are not identical.
 

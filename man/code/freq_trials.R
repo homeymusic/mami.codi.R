@@ -88,8 +88,8 @@ run_trials <- function(search_label, variances, heisenberg) {
 
     mami.codi.R::mami.codi(
       chord,
-      temporal_variance  = variance,
-      spatial_variance   = if (heisenberg) NA else variance,
+      frequency_variance  = variance,
+      period_variance   = if (heisenberg) NA else variance,
       metadata       = list(
         octave_ratio   = octave_ratio,
         num_harmonics  = num_harmonics,

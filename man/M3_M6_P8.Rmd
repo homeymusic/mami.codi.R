@@ -56,8 +56,8 @@ cat("  \n###", title, '\n')
 print(knitr::kable(tibble::tibble_row(
   multicolored_line_sigma  = 0.2,
   green_line_sigma         = 2.0,
-  spatial_variance        = paste(round(chords$spatial_variance %>% unique, 5), collapse = ' '),
-  temporal_variance       = paste(round(chords$temporal_variance %>% unique, 5), collapse = ' '),
+  period_variance        = paste(round(chords$period_variance %>% unique, 5), collapse = ' '),
+  frequency_variance       = paste(round(chords$frequency_variance %>% unique, 5), collapse = ' '),
 )))
 print(plot_semitone_codi_smooth(chords, title))
 cat("  \n")
@@ -146,7 +146,7 @@ just_M3 %>% dplyr::select('semitone', 'consonance_dissonance')
 ###### Frequency ratios of the JT M3
 
 ```{r, echo=F}
-just_M3$temporal_ratios[[1]]
+just_M3$frequency_ratios[[1]]
 ```
 
 ##### Intervals near the major third ranked by lowest consonance
@@ -172,7 +172,7 @@ dissonant_M3 %>% dplyr::select('semitone', 'consonance_dissonance')
 ###### The lowest consonance ratios
 
 ```{r, echo=F}
-dissonant_M3$temporal_ratios[[1]]
+dissonant_M3$frequency_ratios[[1]]
 ```
 
 ###### The Pythagorean third is the second highest consonance
@@ -200,7 +200,7 @@ P_M3 %>% dplyr::select('semitone', 'consonance_dissonance')
 ###### Frequency ratios of the second highest consonance
 
 ```{r, echo=F}
-P_M3$temporal_ratios[[1]]
+P_M3$frequency_ratios[[1]]
 ```
 
 ###### References for the Pythagorean third
@@ -254,7 +254,7 @@ just_M6 %>% dplyr::select('semitone', 'consonance_dissonance')
 ###### Frequency ratios of the JT M6
 
 ```{r, echo=F}
-just_M6$temporal_ratios[[1]]
+just_M6$frequency_ratios[[1]]
 ```
 
 ##### Intervals near the major sixth ranked by lowest consonance
@@ -280,7 +280,7 @@ dissonant_M6 %>% dplyr::select('semitone', 'consonance_dissonance')
 ###### The lowest consonance ratios
 
 ```{r, echo=F}
-dissonant_M6$temporal_ratios[[1]]
+dissonant_M6$frequency_ratios[[1]]
 ```
 
 ###### The grave major sixth is the second highest consonance
@@ -308,7 +308,7 @@ G_M6 %>% dplyr::select('semitone', 'consonance_dissonance')
 ###### Frequency ratios of the second highest consonance
 
 ```{r, echo=F}
-G_M6$temporal_ratios[[1]]
+G_M6$frequency_ratios[[1]]
 ```
 
 ###### References for the grave major sixth

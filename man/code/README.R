@@ -1,5 +1,6 @@
 source('./utils.R')
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R',
+                         ref='gabor')
 
 library(mami.codi.R)
 devtools::load_all(".")
@@ -12,7 +13,7 @@ prepare(output.rds)
 default_variance = mami.codi.R::default_variance()
 experiment.rds = '../data/Pure.rds'
 grid_1 = tidyr::expand_grid(
-  temporal_variance = 0.03,
+  frequency_variance = 0.03,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=1,
   octave_ratio=2.0,
@@ -21,7 +22,7 @@ grid_1 = tidyr::expand_grid(
 
 experiment.rds = '../data/Bonang.rds'
 grid_Bonang = tidyr::expand_grid(
-  temporal_variance = default_variance / 2,
+  frequency_variance = default_variance / 2,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=4,
   octave_ratio=2,
@@ -30,7 +31,7 @@ grid_Bonang = tidyr::expand_grid(
 
 experiment.rds = '../data/5Partials.rds'
 grid_5 = tidyr::expand_grid(
-  temporal_variance = default_variance,
+  frequency_variance = default_variance,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=5,
   octave_ratio=2.0,
@@ -39,7 +40,7 @@ grid_5 = tidyr::expand_grid(
 
 experiment.rds = '../data/5PartialsNo3.rds'
 grid_5PartialsNo3 = tidyr::expand_grid(
-  temporal_variance = default_variance,
+  frequency_variance = default_variance,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=5,
   octave_ratio=2.0,
@@ -48,7 +49,7 @@ grid_5PartialsNo3 = tidyr::expand_grid(
 
 experiment.rds = '../data/Harmonic.rds'
 grid_10 = tidyr::expand_grid(
-  temporal_variance = default_variance,
+  frequency_variance = default_variance,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
   octave_ratio=2.0,
@@ -57,7 +58,7 @@ grid_10 = tidyr::expand_grid(
 
 experiment.rds = '../data/Stretched.rds'
 grid_10_stretched = tidyr::expand_grid(
-  temporal_variance = default_variance,
+  frequency_variance = default_variance,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics = 10,
   octave_ratio = 2.1,
@@ -66,7 +67,7 @@ grid_10_stretched = tidyr::expand_grid(
 
 experiment.rds = '../data/Compressed.rds'
 grid_10_compressed = tidyr::expand_grid(
-  temporal_variance = default_variance,
+  frequency_variance = default_variance,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
   octave_ratio=1.9,
@@ -75,7 +76,7 @@ grid_10_compressed = tidyr::expand_grid(
 
 experiment.rds = '../data/M3.rds'
 grid_M3 = tidyr::expand_grid(
-  temporal_variance = default_variance,
+  frequency_variance = default_variance,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
   octave_ratio=2.0,
@@ -84,7 +85,7 @@ grid_M3 = tidyr::expand_grid(
 
 experiment.rds = '../data/M6.rds'
 grid_M6 = tidyr::expand_grid(
-  temporal_variance = default_variance,
+  frequency_variance = default_variance,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
   octave_ratio=2.0,
@@ -93,7 +94,7 @@ grid_M6 = tidyr::expand_grid(
 
 experiment.rds = '../data/P8.rds'
 grid_P8 = tidyr::expand_grid(
-  temporal_variance = default_variance,
+  frequency_variance = default_variance,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
   octave_ratio=2.0,
@@ -101,8 +102,8 @@ grid_P8 = tidyr::expand_grid(
 )
 
 experiment.rds = '../data/P8ZoomedTemporal.rds'
-grid_P8_zoomed_temporal = tidyr::expand_grid(
-  temporal_variance = 5e-05,
+grid_P8_zoomed_frequency = tidyr::expand_grid(
+  frequency_variance = 5e-05,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
   octave_ratio=2.0,
@@ -110,8 +111,8 @@ grid_P8_zoomed_temporal = tidyr::expand_grid(
 )
 
 experiment.rds = '../data/P8ZoomedSpatial.rds'
-grid_P8_zoomed_spatial = tidyr::expand_grid(
-  temporal_variance = HEISENBERG / 5e-05,
+grid_P8_zoomed_period = tidyr::expand_grid(
+  frequency_variance = HEISENBERG / 5e-05,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
   octave_ratio=2.0,
@@ -123,13 +124,13 @@ grid = dplyr::bind_rows(grid_1,
                         grid_5,grid_5PartialsNo3,
                         grid_10,grid_10_stretched,grid_10_compressed,
                         grid_M3,grid_M6,grid_P8,
-                        grid_P8_zoomed_temporal,grid_P8_zoomed_spatial
+                        grid_P8_zoomed_frequency,grid_P8_zoomed_period
                         )
 
 
 plan(multisession, workers=parallelly::availableCores())
 
-output = grid %>% furrr::future_pmap_dfr(\(temporal_variance,
+output = grid %>% furrr::future_pmap_dfr(\(frequency_variance,
                                            interval,
                                            num_harmonics,
                                            octave_ratio,
@@ -172,7 +173,7 @@ output = grid %>% furrr::future_pmap_dfr(\(temporal_variance,
   }
 
   mami.codi.R::mami.codi(study_chord,
-                         temporal_variance = temporal_variance,
+                         frequency_variance = frequency_variance,
                          metadata = list(
                            num_harmonics = num_harmonics,
                            octave_ratio  = octave_ratio,

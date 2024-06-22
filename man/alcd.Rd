@@ -13,7 +13,7 @@ alcd(x, variance, octave_deviation, label)
 
 \item{octave_deviation}{Deviation for approximating least common multiples}
 
-\item{label}{A custom label for the output usually 'spatial' or 'temporal'}
+\item{label}{A custom label for the output usually 'period' or 'frequency'}
 }
 \value{
 The approximate least common denominator of the rational numbers

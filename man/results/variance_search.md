@@ -55,6 +55,6 @@ Octave Ratios:
 
 ![](../figures/variance_search/_CoDi-1.png)<!-- -->
 
-## Spatiotemporal
+## Spatiofrequency
 
-![](../figures/variance_search/_Spatiotemporal-1.png)<!-- -->
+![](../figures/variance_search/_Spatiofrequency-1.png)<!-- -->

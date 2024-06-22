@@ -42,7 +42,7 @@ tibble::tibble_row(
 ratio_norms <- function(chord) {
   f = chord$frequencies[[1]] %>% unique()
   r_f = f / min(f)
-  l = chord$wavelengths[[1]] %>% unique()
+  l = chord$periods[[1]] %>% unique()
   r_l = l / min(l)
   r_f_l = cbind(r_f, r_l)
   f_inv = cbind(f, 1/f)

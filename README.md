@@ -54,7 +54,7 @@ $$\sigma^2 = \sqrt{\frac{1} {16 \pi^2}} = \frac{1}{4 \pi} \approx 0.08$$
 Uncertainty in our model is not the time duration and frequency
 uncertainty $\Delta t \Delta f \simeq 1$ of Gabor or Wiener’s famous
 quantum physics and music analogy. If in Gabor (1946) Fig. 1.4 (b) the
-bank of reeds measured wavelengths in a stationary state at $t=0$
+bank of reeds measured periods in a stationary state at $t=0$
 instead of frequencies then his 2D model would be akin to ours. Our
 model is frequency and wavelength  
 uncertainty $\Delta f \Delta \lambda$, closer to the original quantum
@@ -74,7 +74,7 @@ If we put those waves in a medium with a wave speed of
 
 $c = max(f) * min(f) = 3\times 10^{4}$
 
-for an infinitely long time then the range of values for the wavelengths
+for an infinitely long time then the range of values for the periods
 $\lambda = \frac{c}{f}$ will be the same as the range for the
 frequencies:
 
@@ -210,7 +210,7 @@ activity along the auditory nerve.
 The fundamental tone of middle C is over a meter long in room
 temperature air at sea level. But the basilar membrane is only 33mm
 long. How can the hair cells positioned along the basilar membrane
-detect wavelengths that are longer than the entire basilar membrane?  
+detect periods that are longer than the entire basilar membrane?  
 
 The traveling sound waves shorten as they travel around the spiral
 cochlea. Middle C’s fundamental wavelength of 1.31 meters in air shrinks
@@ -220,16 +220,16 @@ of the cochlea send electrical activity along the auditory nerve.
 
 When a musical chord comprised of many fundamental tones and harmonics
 is sounded, the hair cells at each shortened wavelength position send
-signals along the auditory nerve. This spatial or rate-place arrangement
-of hair cell positions and wavelengths of tones is known as tonotopy.  
+signals along the auditory nerve. This period or rate-place arrangement
+of hair cell positions and periods of tones is known as tonotopy.  
 
 ### The Core Idea of MaMi.CoDi
 
 If we play a chord, freeze time and observe which hair cells are
 displaced, what are we observing? Are we observing frequencies? Periods?
-No. Time is frozen. Frequency (1/s) and period (s) are temporal
-observations. We are making a purely spatial observation about
-wavelengths (m). We will come back to temporal observations shortly.  
+No. Time is frozen. Frequency (1/s) and period (s) are frequency
+observations. We are making a purely period observation about
+periods (m). We will come back to frequency observations shortly.  
 
 When we combine all the component parts of a chord together into a
 whole, we can estimate the overall wavelength for the whole chord. A
@@ -239,15 +239,15 @@ parts and a selected reference part. The greatest common divisor (LCD)
 of those part ratios will be a measure of the periodicity of the
 whole.  
 
-Chords with short wavelengths relative to the component wavelengths
-sound pleasant. And chords with long wavelengths relative to component
-wavelengths sound unpleasant. MaMi.CoDi uses this measure of relative
-wavelengths to predict the perceived spatial consonance of a chord.  
+Chords with short periods relative to the component periods
+sound pleasant. And chords with long periods relative to component
+periods sound unpleasant. MaMi.CoDi uses this measure of relative
+periods to predict the perceived period consonance of a chord.  
 
 Let us unfreeze time and start counting how often a hair cell moves due
 to a pure tone of our sounded chord. If we count the number of movements
 relative to a certain amount of time, we will be observing the frequency
-of the partial. This would be a temporal observation. The auditory
+of the partial. This would be a frequency observation. The auditory
 system has a property called phase locking which allows it to encode the
 time intervals, periods, between spikes from sound waves.  
 
@@ -256,21 +256,21 @@ estimate the overall period for the whole chord. That chord period will
 be as long as or longer than the longest component period of the chord.
 Short relative periods sound pleasant. Long relative periods sound
 unpleasant. MaMi.CoDi uses this measure of chord period to predict the
-perceived temporal consonance of a chord.  
+perceived frequency consonance of a chord.  
 
-MaMi.CoDi sums the spatial and temporal consonance predictions to create
+MaMi.CoDi sums the period and frequency consonance predictions to create
 an overall consonance-dissonance prediction. MaMi.CoDi subtracts the
-spatial consonance from the temporal consonance to create a major-minor
+period consonance from the frequency consonance to create a major-minor
 polarity prediction. Positive values will sound major, negative values
 minor and values around zero will sound neutral.  
 
 Because wavelength and frequency are inverse of each other one might
-imagine that the spatial and temporal signals would have the same
+imagine that the period and frequency signals would have the same
 values. However, for complex pitches that is not the case. The pattern
 of the two sets of components are different. See the example of the
 major triad with 5 harmonics, below.
 
-### Estimating Spatiotemporal Periodicity
+### Estimating Spatiofrequency Periodicity
 
 To estimate the periodicity of a chord, the MaMi.CoDi model uses a
 signal processing technique. It finds fractions, within a given
@@ -280,16 +280,16 @@ those fractions is a measure of the cycle length, relative to the
 reference tone. Long relative cycles are predicted to sound unpleasant
 and short relative cycles are predicted to sound pleasant.  
 
-MaMi.CoDi creates two estimates of the chord’s period: a temporal
-estimate and a spatial estimate.  
+MaMi.CoDi creates two estimates of the chord’s period: a frequency
+estimate and a period estimate.  
 
-For the temporal (i.e. phase-locking or frequency) estimate the
+For the frequency (i.e. phase-locking or frequency) estimate the
 reference tone is the smallest frequency. Small frequencies are low
 tones and are detected by the inner ear hair cells closest to the apex
 of the cochlea, which is the end furthest from the source of the wave.  
 
-For the spatial (i.e. rate-place or wavelength) estimate, the reference
-tone is the smallest wavelength. Small wavelengths are high tones and
+For the period (i.e. rate-place or wavelength) estimate, the reference
+tone is the smallest wavelength. Small periods are high tones and
 are detected by the inner ear hair cells closest to the base of the
 cochlea, which is the end closest to the middle ear, the source of the
 wave.  
@@ -303,7 +303,7 @@ orthogonal dimension.
 Below, we estimate the periodicity of the C4, E4 major third with 1, 10
 and 20 harmonics per pitch. The MaMi.CoDi model is based on fractions of
 tones - both frequency and wavelength fractions. The input to the model
-is a sparse frequency spectrum. We convert frequencies to wavelengths by
+is a sparse frequency spectrum. We convert frequencies to periods by
 dividing a speed of sound constant by the frequency.  
 
 For tone ratios, the value of the speed of sound constant does not
@@ -321,27 +321,27 @@ We chose the speed of sound in room temperature air.
 
 - Frequencies: 261.626, 329.628  
 
-- Wavelengths: 1.311, 1.041  
+- Wavelengths: 0.004, 0.003  
 
-- Speed of Sound: 343.000
+- Speed of Sound: 1.000
 
 - f0: 87.209
 
-- l0: 3.933
+- l0: 0.011
 
-- Quantum Speed of Sound: 343.000
+- Quantum Speed of Sound: 1.000
 
 ###### MaMi.CoDi Predictions
 
-| consonance_dissonance | major_minor | temporal_consonance | spatial_consonance |
+| consonance_dissonance | major_minor | frequency_consonance | period_consonance |
 |----------------------:|------------:|--------------------:|-------------------:|
 |              96.83007 |           0 |            48.41504 |           48.41504 |
 
 #### Temporal Periodicity
 
-| lcd | chord_Sz | chord_Hz | c_sound |  chord_m |   chord_s |
-|----:|---------:|---------:|--------:|---------:|----------:|
-|   3 | 1.584963 | 87.20852 |     343 | 3.933102 | 0.0114668 |
+| lcd | chord_Sz | chord_Hz | c_sound |   chord_m |   chord_s |
+|----:|---------:|---------:|--------:|----------:|----------:|
+|   3 | 1.584963 | 87.20852 |       1 | 0.0114668 | 0.0114668 |
 
 ##### Partial Periods
 
@@ -360,9 +360,9 @@ We chose the speed of sound in room temperature air.
 
 #### Spatial Periodicity
 
-| lcd | chord_Sz | chord_Hz | c_sound |  chord_m |   chord_s |
-|----:|---------:|---------:|--------:|---------:|----------:|
-|   3 | 1.584963 | 87.20852 |     343 | 3.933102 | 0.0114668 |
+| lcd | chord_Sz | chord_Hz | c_sound |   chord_m |   chord_s |
+|----:|---------:|---------:|--------:|----------:|----------:|
+|   3 | 1.584963 | 87.20852 |       1 | 0.0114668 | 0.0114668 |
 
 ##### Partial Wavelengths
 
@@ -374,10 +374,10 @@ We chose the speed of sound in room temperature air.
 
 ##### Wavelength fractions
 
-| index | num | den |   tone_m |     freq | midi | pseudo_rational_number |
-|------:|----:|----:|---------:|---------:|-----:|-----------------------:|
-|     1 |   4 |   3 | 1.311034 | 261.6256 |   60 |               1.259921 |
-|     2 |   1 |   1 | 1.040568 | 329.6276 |   64 |               1.000000 |
+| index | num | den |    tone_m |     freq | midi | pseudo_rational_number |
+|------:|----:|----:|----------:|---------:|-----:|-----------------------:|
+|     1 |   4 |   3 | 0.0038223 | 261.6256 |   60 |               1.259921 |
+|     2 |   1 |   1 | 0.0030337 | 329.6276 |   64 |               1.000000 |
 
 #### 20 Harmonics
 
@@ -392,31 +392,31 @@ We chose the speed of sound in room temperature air.
   4186.009, 4285.158, 4447.635, 4614.786, 4709.260, 4944.413, 4970.886,
   5232.511, 5274.041, 5603.668, 5933.296, 6262.924, 6592.551  
 
-- Wavelengths: 1.311, 1.041, 0.656, 0.520, 0.437, 0.347, 0.328, 0.262,
-  0.260, 0.219, 0.208, 0.187, 0.173, 0.164, 0.149, 0.146, 0.131, 0.130,
-  0.119, 0.116, 0.109, 0.104, 0.101, 0.095, 0.094, 0.087, 0.087, 0.082,
-  0.080, 0.077, 0.074, 0.073, 0.069, 0.069, 0.066, 0.065, 0.061, 0.058,
-  0.055, 0.052  
+- Wavelengths: 0.004, 0.003, 0.002, 0.002, 0.001, 0.001, 0.001, 0.001,
+  0.001, 0.001, 0.001, 0.001, 0.001, 0.000, 0.000, 0.000, 0.000, 0.000,
+  0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000,
+  0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000,
+  0.000, 0.000  
 
-- Speed of Sound: 343.000
+- Speed of Sound: 1.000
 
 - f0: 4.360
 
-- l0: 78.662
+- l0: 0.229
 
-- Quantum Speed of Sound: 343.000
+- Quantum Speed of Sound: 1.000
 
 ###### MaMi.CoDi Predictions
 
-| consonance_dissonance | major_minor | temporal_consonance | spatial_consonance |
+| consonance_dissonance | major_minor | frequency_consonance | period_consonance |
 |----------------------:|------------:|--------------------:|-------------------:|
 |              88.18622 |           0 |            44.09311 |           44.09311 |
 
 #### Temporal Periodicity
 
-| lcd | chord_Sz | chord_Hz | c_sound |  chord_m |   chord_s |
-|----:|---------:|---------:|--------:|---------:|----------:|
-|  60 | 5.906891 | 4.360426 |     343 | 78.66204 | 0.2293354 |
+| lcd | chord_Sz | chord_Hz | c_sound |   chord_m |   chord_s |
+|----:|---------:|---------:|--------:|----------:|----------:|
+|  60 | 5.906891 | 4.360426 |       1 | 0.2293354 | 0.2293354 |
 
 ##### Partial Periods
 
@@ -473,9 +473,9 @@ We chose the speed of sound in room temperature air.
 
 #### Spatial Periodicity
 
-| lcd | chord_Sz | chord_Hz | c_sound |  chord_m |   chord_s |
-|----:|---------:|---------:|--------:|---------:|----------:|
-|  60 | 5.906891 | 4.360426 |     343 | 78.66204 | 0.2293354 |
+| lcd | chord_Sz | chord_Hz | c_sound |   chord_m |   chord_s |
+|----:|---------:|---------:|--------:|----------:|----------:|
+|  60 | 5.906891 | 4.360426 |       1 | 0.2293354 | 0.2293354 |
 
 ##### Partial Wavelengths
 
@@ -489,46 +489,46 @@ We chose the speed of sound in room temperature air.
 
 | index | num | den |    tone_m |      freq |      midi | pseudo_rational_number |
 |------:|----:|----:|----------:|----------:|----------:|-----------------------:|
-|     1 | 101 |   4 | 1.3110340 |  261.6256 |  60.00000 |              25.198421 |
-|     2 |  20 |   1 | 1.0405683 |  329.6276 |  64.00000 |              20.000000 |
-|     3 |  38 |   3 | 0.6555170 |  523.2511 |  72.00000 |              12.599210 |
-|     4 |  10 |   1 | 0.5202842 |  659.2551 |  76.00000 |              10.000000 |
-|     5 |  25 |   3 | 0.4370113 |  784.8767 |  79.01955 |               8.399474 |
-|     6 |  20 |   3 | 0.3468561 |  988.8827 |  83.01955 |               6.666667 |
-|     7 |  19 |   3 | 0.3277585 | 1046.5023 |  84.00000 |               6.299605 |
-|     8 |   5 |   1 | 0.2622068 | 1308.1278 |  87.86314 |               5.039684 |
-|     9 |   5 |   1 | 0.2601421 | 1318.5102 |  88.00000 |               5.000000 |
-|    10 |  17 |   4 | 0.2185057 | 1569.7534 |  91.01955 |               4.199737 |
-|    11 |   4 |   1 | 0.2081137 | 1648.1378 |  91.86314 |               4.000000 |
-|    12 |  11 |   3 | 0.1872906 | 1831.3790 |  93.68826 |               3.599774 |
-|    13 |  10 |   3 | 0.1734281 | 1977.7653 |  95.01955 |               3.333333 |
-|    14 |  16 |   5 | 0.1638792 | 2093.0045 |  96.00000 |               3.149803 |
-|    15 |  14 |   5 | 0.1486526 | 2307.3929 |  97.68826 |               2.857143 |
-|    16 |  11 |   4 | 0.1456704 | 2354.6301 |  98.03910 |               2.799825 |
-|    17 |   5 |   2 | 0.1311034 | 2616.2556 |  99.86314 |               2.519842 |
-|    18 |   5 |   2 | 0.1300710 | 2637.0205 | 100.00000 |               2.500000 |
-|    19 |   7 |   3 | 0.1191849 | 2877.8811 | 101.51318 |               2.290766 |
-|    20 |   9 |   4 | 0.1156187 | 2966.6480 | 102.03910 |               2.222222 |
-|    21 |  13 |   6 | 0.1092528 | 3139.5068 | 103.01955 |               2.099868 |
-|    22 |   2 |   1 | 0.1040568 | 3296.2755 | 103.86314 |               2.000000 |
-|    23 |   2 |   1 | 0.1008488 | 3401.1324 | 104.40528 |               1.938340 |
-|    24 |   7 |   4 | 0.0945971 | 3625.9030 | 105.51318 |               1.818182 |
-|    25 |   7 |   4 | 0.0936453 | 3662.7579 | 105.68826 |               1.799887 |
-|    26 |   5 |   3 | 0.0874023 | 3924.3834 | 106.88269 |               1.679895 |
-|    27 |   5 |   3 | 0.0867140 | 3955.5307 | 107.01955 |               1.666667 |
-|    28 |   3 |   2 | 0.0819396 | 4186.0090 | 108.00000 |               1.574901 |
-|    29 |   3 |   2 | 0.0800437 | 4285.1583 | 108.40528 |               1.538461 |
-|    30 |   3 |   2 | 0.0771196 | 4447.6346 | 109.04955 |               1.482260 |
-|    31 |   3 |   2 | 0.0743263 | 4614.7858 | 109.68826 |               1.428571 |
-|    32 |   4 |   3 | 0.0728352 | 4709.2602 | 110.03910 |               1.399912 |
-|    33 |   4 |   3 | 0.0693712 | 4944.4133 | 110.88269 |               1.333333 |
-|    34 |   4 |   3 | 0.0690018 | 4970.8857 | 110.97513 |               1.326233 |
-|    35 |   4 |   3 | 0.0655517 | 5232.5113 | 111.86314 |               1.259921 |
-|    36 |   5 |   4 | 0.0650355 | 5274.0409 | 112.00000 |               1.250000 |
-|    37 |   5 |   4 | 0.0612099 | 5603.6684 | 113.04955 |               1.176471 |
-|    38 |   7 |   6 | 0.0578094 | 5933.2960 | 114.03910 |               1.111111 |
-|    39 |   1 |   1 | 0.0547668 | 6262.9235 | 114.97513 |               1.052632 |
-|    40 |   1 |   1 | 0.0520284 | 6592.5511 | 115.86314 |               1.000000 |
+|     1 | 101 |   4 | 0.0038223 |  261.6256 |  60.00000 |              25.198421 |
+|     2 |  20 |   1 | 0.0030337 |  329.6276 |  64.00000 |              20.000000 |
+|     3 |  38 |   3 | 0.0019111 |  523.2511 |  72.00000 |              12.599210 |
+|     4 |  10 |   1 | 0.0015169 |  659.2551 |  76.00000 |              10.000000 |
+|     5 |  25 |   3 | 0.0012741 |  784.8767 |  79.01955 |               8.399474 |
+|     6 |  20 |   3 | 0.0010112 |  988.8827 |  83.01955 |               6.666667 |
+|     7 |  19 |   3 | 0.0009556 | 1046.5023 |  84.00000 |               6.299605 |
+|     8 |   5 |   1 | 0.0007645 | 1308.1278 |  87.86314 |               5.039684 |
+|     9 |   5 |   1 | 0.0007584 | 1318.5102 |  88.00000 |               5.000000 |
+|    10 |  17 |   4 | 0.0006370 | 1569.7534 |  91.01955 |               4.199737 |
+|    11 |   4 |   1 | 0.0006067 | 1648.1378 |  91.86314 |               4.000000 |
+|    12 |  11 |   3 | 0.0005460 | 1831.3790 |  93.68826 |               3.599774 |
+|    13 |  10 |   3 | 0.0005056 | 1977.7653 |  95.01955 |               3.333333 |
+|    14 |  16 |   5 | 0.0004778 | 2093.0045 |  96.00000 |               3.149803 |
+|    15 |  14 |   5 | 0.0004334 | 2307.3929 |  97.68826 |               2.857143 |
+|    16 |  11 |   4 | 0.0004247 | 2354.6301 |  98.03910 |               2.799825 |
+|    17 |   5 |   2 | 0.0003822 | 2616.2556 |  99.86314 |               2.519842 |
+|    18 |   5 |   2 | 0.0003792 | 2637.0205 | 100.00000 |               2.500000 |
+|    19 |   7 |   3 | 0.0003475 | 2877.8811 | 101.51318 |               2.290766 |
+|    20 |   9 |   4 | 0.0003371 | 2966.6480 | 102.03910 |               2.222222 |
+|    21 |  13 |   6 | 0.0003185 | 3139.5068 | 103.01955 |               2.099868 |
+|    22 |   2 |   1 | 0.0003034 | 3296.2755 | 103.86314 |               2.000000 |
+|    23 |   2 |   1 | 0.0002940 | 3401.1324 | 104.40528 |               1.938340 |
+|    24 |   7 |   4 | 0.0002758 | 3625.9030 | 105.51318 |               1.818182 |
+|    25 |   7 |   4 | 0.0002730 | 3662.7579 | 105.68826 |               1.799887 |
+|    26 |   5 |   3 | 0.0002548 | 3924.3834 | 106.88269 |               1.679895 |
+|    27 |   5 |   3 | 0.0002528 | 3955.5307 | 107.01955 |               1.666667 |
+|    28 |   3 |   2 | 0.0002389 | 4186.0090 | 108.00000 |               1.574901 |
+|    29 |   3 |   2 | 0.0002334 | 4285.1583 | 108.40528 |               1.538461 |
+|    30 |   3 |   2 | 0.0002248 | 4447.6346 | 109.04955 |               1.482260 |
+|    31 |   3 |   2 | 0.0002167 | 4614.7858 | 109.68826 |               1.428571 |
+|    32 |   4 |   3 | 0.0002123 | 4709.2602 | 110.03910 |               1.399912 |
+|    33 |   4 |   3 | 0.0002022 | 4944.4133 | 110.88269 |               1.333333 |
+|    34 |   4 |   3 | 0.0002012 | 4970.8857 | 110.97513 |               1.326233 |
+|    35 |   4 |   3 | 0.0001911 | 5232.5113 | 111.86314 |               1.259921 |
+|    36 |   5 |   4 | 0.0001896 | 5274.0409 | 112.00000 |               1.250000 |
+|    37 |   5 |   4 | 0.0001785 | 5603.6684 | 113.04955 |               1.176471 |
+|    38 |   7 |   6 | 0.0001685 | 5933.2960 | 114.03910 |               1.111111 |
+|    39 |   1 |   1 | 0.0001597 | 6262.9235 | 114.97513 |               1.052632 |
+|    40 |   1 |   1 | 0.0001517 | 6592.5511 | 115.86314 |               1.000000 |
 
 #### 10 Harmonics
 
@@ -540,29 +540,29 @@ We chose the speed of sound in room temperature air.
   1046.502, 1308.128, 1318.510, 1569.753, 1648.138, 1831.379, 1977.765,
   2093.005, 2307.393, 2354.630, 2616.256, 2637.020, 2966.648, 3296.276  
 
-- Wavelengths: 1.311, 1.041, 0.656, 0.520, 0.437, 0.347, 0.328, 0.262,
-  0.260, 0.219, 0.208, 0.187, 0.173, 0.164, 0.149, 0.146, 0.131, 0.130,
-  0.116, 0.104  
+- Wavelengths: 0.004, 0.003, 0.002, 0.002, 0.001, 0.001, 0.001, 0.001,
+  0.001, 0.001, 0.001, 0.001, 0.001, 0.000, 0.000, 0.000, 0.000, 0.000,
+  0.000, 0.000  
 
-- Speed of Sound: 343.000
+- Speed of Sound: 1.000
 
 - f0: 21.802
 
-- l0: 78.662
+- l0: 0.229
 
-- Quantum Speed of Sound: 1715.000
+- Quantum Speed of Sound: 5.000
 
 ###### MaMi.CoDi Predictions
 
-| consonance_dissonance | major_minor | temporal_consonance | spatial_consonance |
+| consonance_dissonance | major_minor | frequency_consonance | period_consonance |
 |----------------------:|------------:|--------------------:|-------------------:|
 |              90.50815 |    2.321928 |            46.41504 |           44.09311 |
 
 #### Temporal Periodicity
 
-| lcd | chord_Sz | chord_Hz | c_sound |  chord_m |   chord_s |
-|----:|---------:|---------:|--------:|---------:|----------:|
-|  12 | 3.584963 | 21.80213 |     343 | 15.73241 | 0.0458671 |
+| lcd | chord_Sz | chord_Hz | c_sound |   chord_m |   chord_s |
+|----:|---------:|---------:|--------:|----------:|----------:|
+|  12 | 3.584963 | 21.80213 |       1 | 0.0458671 | 0.0458671 |
 
 ##### Partial Periods
 
@@ -599,9 +599,9 @@ We chose the speed of sound in room temperature air.
 
 #### Spatial Periodicity
 
-| lcd | chord_Sz | chord_Hz | c_sound |  chord_m |   chord_s |
-|----:|---------:|---------:|--------:|---------:|----------:|
-|  60 | 5.906891 | 4.360426 |     343 | 78.66204 | 0.2293354 |
+| lcd | chord_Sz | chord_Hz | c_sound |   chord_m |   chord_s |
+|----:|---------:|---------:|--------:|----------:|----------:|
+|  60 | 5.906891 | 4.360426 |       1 | 0.2293354 | 0.2293354 |
 
 ##### Partial Wavelengths
 
@@ -615,33 +615,33 @@ We chose the speed of sound in room temperature air.
 
 | index | num | den |    tone_m |      freq |      midi | pseudo_rational_number |
 |------:|----:|----:|----------:|----------:|----------:|-----------------------:|
-|     1 |  38 |   3 | 1.3110340 |  261.6256 |  60.00000 |              12.599210 |
-|     2 |  10 |   1 | 1.0405683 |  329.6276 |  64.00000 |              10.000000 |
-|     3 |  19 |   3 | 0.6555170 |  523.2511 |  72.00000 |               6.299605 |
-|     4 |   5 |   1 | 0.5202842 |  659.2551 |  76.00000 |               5.000000 |
-|     5 |  17 |   4 | 0.4370113 |  784.8767 |  79.01955 |               4.199737 |
-|     6 |  10 |   3 | 0.3468561 |  988.8827 |  83.01955 |               3.333333 |
-|     7 |  16 |   5 | 0.3277585 | 1046.5023 |  84.00000 |               3.149803 |
-|     8 |   5 |   2 | 0.2622068 | 1308.1278 |  87.86314 |               2.519842 |
-|     9 |   5 |   2 | 0.2601421 | 1318.5102 |  88.00000 |               2.500000 |
-|    10 |  13 |   6 | 0.2185057 | 1569.7534 |  91.01955 |               2.099868 |
-|    11 |   2 |   1 | 0.2081137 | 1648.1378 |  91.86314 |               2.000000 |
-|    12 |   7 |   4 | 0.1872906 | 1831.3790 |  93.68826 |               1.799887 |
-|    13 |   5 |   3 | 0.1734281 | 1977.7653 |  95.01955 |               1.666667 |
-|    14 |   3 |   2 | 0.1638792 | 2093.0045 |  96.00000 |               1.574901 |
-|    15 |   3 |   2 | 0.1486526 | 2307.3929 |  97.68826 |               1.428571 |
-|    16 |   4 |   3 | 0.1456704 | 2354.6301 |  98.03910 |               1.399912 |
-|    17 |   4 |   3 | 0.1311034 | 2616.2556 |  99.86314 |               1.259921 |
-|    18 |   5 |   4 | 0.1300710 | 2637.0205 | 100.00000 |               1.250000 |
-|    19 |   7 |   6 | 0.1156187 | 2966.6480 | 102.03910 |               1.111111 |
-|    20 |   1 |   1 | 0.1040568 | 3296.2755 | 103.86314 |               1.000000 |
+|     1 |  38 |   3 | 0.0038223 |  261.6256 |  60.00000 |              12.599210 |
+|     2 |  10 |   1 | 0.0030337 |  329.6276 |  64.00000 |              10.000000 |
+|     3 |  19 |   3 | 0.0019111 |  523.2511 |  72.00000 |               6.299605 |
+|     4 |   5 |   1 | 0.0015169 |  659.2551 |  76.00000 |               5.000000 |
+|     5 |  17 |   4 | 0.0012741 |  784.8767 |  79.01955 |               4.199737 |
+|     6 |  10 |   3 | 0.0010112 |  988.8827 |  83.01955 |               3.333333 |
+|     7 |  16 |   5 | 0.0009556 | 1046.5023 |  84.00000 |               3.149803 |
+|     8 |   5 |   2 | 0.0007645 | 1308.1278 |  87.86314 |               2.519842 |
+|     9 |   5 |   2 | 0.0007584 | 1318.5102 |  88.00000 |               2.500000 |
+|    10 |  13 |   6 | 0.0006370 | 1569.7534 |  91.01955 |               2.099868 |
+|    11 |   2 |   1 | 0.0006067 | 1648.1378 |  91.86314 |               2.000000 |
+|    12 |   7 |   4 | 0.0005460 | 1831.3790 |  93.68826 |               1.799887 |
+|    13 |   5 |   3 | 0.0005056 | 1977.7653 |  95.01955 |               1.666667 |
+|    14 |   3 |   2 | 0.0004778 | 2093.0045 |  96.00000 |               1.574901 |
+|    15 |   3 |   2 | 0.0004334 | 2307.3929 |  97.68826 |               1.428571 |
+|    16 |   4 |   3 | 0.0004247 | 2354.6301 |  98.03910 |               1.399912 |
+|    17 |   4 |   3 | 0.0003822 | 2616.2556 |  99.86314 |               1.259921 |
+|    18 |   5 |   4 | 0.0003792 | 2637.0205 | 100.00000 |               1.250000 |
+|    19 |   7 |   6 | 0.0003371 | 2966.6480 | 102.03910 |               1.111111 |
+|    20 |   1 |   1 | 0.0003034 | 3296.2755 | 103.86314 |               1.000000 |
 
 ### Finding the variance Values
 
-“One difficulty with distinguishing between place and temporal (or
-place-time) models of pitch is that spectral and temporal
+“One difficulty with distinguishing between place and frequency (or
+place-time) models of pitch is that spectral and frequency
 representations of a signal are mathematically equivalent: any change in
-the spectral representation is reflected by a change in the temporal
+the spectral representation is reflected by a change in the frequency
 representation, and vice versa . Discovering what the auditory system
 does means focusing on the physiological limits imposed by the cochlea
 and auditory nerve.  
@@ -651,10 +651,10 @@ frequency selectivity: if pitch can be heard when only unresolved
 harmonics are presented (eliminating place information), then place
 information is not necessary for pitch. Similarly, if all the
 frequencies within a stimulus are above the upper limits of phase
-locking, and the temporal envelope information is somehow suppressed,
-then temporal information is not necessary for pitch perception.”  
+locking, and the frequency envelope information is somehow suppressed,
+then frequency information is not necessary for pitch perception.”  
 
-from “Revisiting place and temporal theories of pitch”, Andrew J.
+from “Revisiting place and frequency theories of pitch”, Andrew J.
 Oxenham, 2014.  
 
 The MaMi.CoDi model, based on Stolzenburg (2015), has one one parameter:
@@ -663,18 +663,18 @@ ratios as rational fractions that are then used to estimate the relative
 periodicity of chords. variance acts as the physiological limits
 mentioned by Oxenham, above.  
 
-Considering that the spatial and temporal signals had two different
+Considering that the period and frequency signals had two different
 physiological origins, we searched a two-dimensional variance space in
 order to match model predictions with the large-scale behavioral
 results. It turned out that the values that best matched large-scale
-behavioral results were always the same for temporal and spatial
+behavioral results were always the same for frequency and period
 variance. This might indicate that the physiological limitations are not
 specific to place signals or time signals separetely. But instead the
 limitation is higher in the auditory system after the signals have been
 passed along.  
 
-That is to say, the limits that creates differences between temporal and
-spatial signals might not be frequency selectivity or phase locking but
+That is to say, the limits that creates differences between frequency and
+period signals might not be frequency selectivity or phase locking but
 instead a limit of higher-level perception or pattern recognition, where
 estimates of the period of a complex signal is made from components.  
 
@@ -684,13 +684,13 @@ For the MaMi.CoDi model we ran thousands of computations with various
 variance values and compared the predictions with results from six of
 the large-scale behavioral experiments.  
 
-Because the spatial signal and the temporal signal have different
+Because the period signal and the frequency signal have different
 origins we initially did a two-dimensional variance search. However the
-closest fits to the behavioral data came from spatial and variance
+closest fits to the behavioral data came from period and variance
 values being the same. Insofar as this model represents processing in
 the auditory cortex, it would seem that estimating the cyclicity of the
-two signals happens higher up in the auditoray system after the spatial
-and temporal signals have been processed.  
+two signals happens higher up in the auditoray system after the period
+and frequency signals have been processed.  
 
 ### Difference between Stern-Brocot Rational Fraction Approximations and Floating Point Values
 
@@ -737,7 +737,7 @@ the 15 semitones but the overall peak structure agrees with MaMi.CoDi
 predictions. For futher comparison, the theoretical predictions for
 major-minor versus the behavioral results are included in a plot below.
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| frequency_variance | period_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 0.03              | 0.21109          |             0.2 |
 
@@ -751,7 +751,7 @@ major-minor versus the behavioral results are included in a plot below.
 
 For 10 harmonics, behavioral results and theoretical predictions agree.
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| frequency_variance | period_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
@@ -768,7 +768,7 @@ For comparison with the study below (5 partils with the third partial
 deleted), notice that the m3 peak is only slightly lower than the M3
 peak.
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| frequency_variance | period_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
@@ -785,7 +785,7 @@ theoretical predictions mostly agree. As expected, the m3 peak without
 the third partial is now lower than the m3 peak with all 5 harmonics
 while the M3 peak is slightly higher without the 3rd partial.
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| frequency_variance | period_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
@@ -803,7 +803,7 @@ predicts a dissonance trough with minor polarity at P4 that is not in
 the behavioral results. MaMi.CoDi predicts P5 to have minor polarity and
 be relatively higher than the behavioral results.
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| frequency_variance | period_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 0.03979           | 0.15915          |             0.2 |
 
@@ -819,7 +819,7 @@ For stretched harmonics, behavioral results and theoretical predictions
 mostly agree. MaMi.Codi predicts peaks with minor polarity just above m3
 and m7 that do not exist in the behavioral results.
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| frequency_variance | period_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
@@ -834,7 +834,7 @@ and m7 that do not exist in the behavioral results.
 For compressed harmonics, the pronounced behavioral peaks mostly agree
 with the theoretical peaks.
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| frequency_variance | period_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
@@ -850,7 +850,7 @@ with the theoretical peaks.
 
 Description is below.
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| frequency_variance | period_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |           0.035 |
 
@@ -864,7 +864,7 @@ Description is below.
 
 Description is below.
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| frequency_variance | period_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |           0.035 |
 
@@ -878,7 +878,7 @@ Description is below.
 
 Description is below.
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| frequency_variance | period_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |           0.035 |
 
@@ -891,9 +891,9 @@ Description is below.
 ##### P8ZoomedTemporal ~ Partials: 10
 
 Due to the Heisenberg uncertainty principle, focusing on one signal
-(temporal) is akin to shutting off the other (spatial).
+(frequency) is akin to shutting off the other (period).
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| frequency_variance | period_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 5e-05             | 126.65148        |           0.035 |
 
@@ -906,9 +906,9 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 ##### P8ZoomedSpatial ~ Partials: 10
 
 Due to the Heisenberg uncertainty principle, focusing on one signal
-(spatial) is akin to shutting off the other (temporal).
+(period) is akin to shutting off the other (frequency).
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| frequency_variance | period_variance | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 126.65148         | 5e-05            |           0.035 |
 
@@ -922,7 +922,7 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 
 ##### Harmonic ~ Roll Off: 12
 
-| temporal_variance | spatial_variance | min_amplitude | smoothing_sigma |
+| frequency_variance | period_variance | min_amplitude | smoothing_sigma |
 |:------------------|:-----------------|:--------------|----------------:|
 | 0.07958           | 0.07958          | 0.013         |             0.2 |
 
@@ -931,7 +931,7 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 
 ##### Harmonic ~ Roll Off: 7
 
-| temporal_variance | spatial_variance | min_amplitude | smoothing_sigma |
+| frequency_variance | period_variance | min_amplitude | smoothing_sigma |
 |:------------------|:-----------------|:--------------|----------------:|
 | 0.07958           | 0.07958          | 0.08          |             0.2 |
 
@@ -940,7 +940,7 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 
 ##### Harmonic ~ Roll Off: 2
 
-| temporal_variance | spatial_variance | min_amplitude | smoothing_sigma |
+| frequency_variance | period_variance | min_amplitude | smoothing_sigma |
 |:------------------|:-----------------|:--------------|----------------:|
 | 0.07958           | 0.07958          | 0             |             0.2 |
 

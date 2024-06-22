@@ -7,8 +7,8 @@
 mami.codi(
   x,
   amplitude = MINIMUM_AMPLITUDE,
-  temporal_variance = NA,
-  spatial_variance = NA,
+  frequency_variance = NA,
+  period_variance = NA,
   deviation = OCTAVE_DEVIATION,
   metadata = NA,
   verbose = FALSE,
@@ -21,9 +21,9 @@ hrep::sparse_fr_spectrum}
 
 \item{amplitude}{An optional minimum amplitude for deciding which partials to include.}
 
-\item{temporal_variance}{An optional temporal variance value for finding rational fractions.}
+\item{frequency_variance}{An optional frequency variance value for finding rational fractions.}
 
-\item{spatial_variance}{An optional spatial variance value for finding rational fractions.}
+\item{period_variance}{An optional period variance value for finding rational fractions.}
 
 \item{deviation}{An optional deviation value for approximating least common multiples.}
 
@@ -40,5 +40,5 @@ Major-Minor, Consonance-Dissonance and metadata plus additional
 information if verbose=TRUE
 }
 \description{
-A spatiotemporal periodicity model of consonance perception.
+A spatiofrequency periodicity model of consonance perception.
 }

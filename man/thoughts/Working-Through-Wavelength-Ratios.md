@@ -9,7 +9,7 @@ Working Through Wavelength Ratios
 #### Temporal
 
     ## # A tibble: 1 × 3
-    ##   temporal_gcn temporal_lcd temporal_consonance
+    ##   frequency_gcn frequency_lcd frequency_consonance
     ##          <dbl>        <dbl>               <dbl>
     ## 1            1            1                   1
 
@@ -28,7 +28,7 @@ Working Through Wavelength Ratios
 #### Spatial
 
     ## # A tibble: 1 × 3
-    ##   spatial_gcn spatial_lcd spatial_consonance
+    ##   period_gcn period_lcd period_consonance
     ##         <dbl>       <dbl>              <dbl>
     ## 1           1          30             0.0333
 

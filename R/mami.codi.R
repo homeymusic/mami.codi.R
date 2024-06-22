@@ -6,8 +6,8 @@
 #' @param x Chord to analyse specified in MIDI, coerced to
 #' hrep::sparse_fr_spectrum
 #' @param amplitude An optional minimum amplitude for deciding which partials to include.
-#' @param temporal_variance An optional temporal variance value for finding rational fractions.
-#' @param spatial_variance  An optional spatial variance value for finding rational fractions.
+#' @param frequency_variance An optional frequency variance value for finding rational fractions.
+#' @param period_variance  An optional period variance value for finding rational fractions.
 #' @param deviation An optional deviation value for approximating least common multiples.
 #' @param metadata User-provided list of metadata that round trips with each call.
 #' helpful for analysis and plots
@@ -23,8 +23,8 @@
 mami.codi <- function(
     x,
     amplitude         = MINIMUM_AMPLITUDE,
-    temporal_variance = NA,
-    spatial_variance  = NA,
+    frequency_variance = NA,
+    period_variance  = NA,
     deviation         = OCTAVE_DEVIATION,
     metadata          = NA,
     verbose            = FALSE,
@@ -33,8 +33,8 @@ mami.codi <- function(
 
   parse_input(x, ...)                      %>%
     parse_variances(
-      temporal_variance,
-      spatial_variance
+      frequency_variance,
+      period_variance
     )                                      %>%
     compute_consonance(
       amplitude,
@@ -78,20 +78,20 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 
 }
 
-parse_variances <- function(x, temporal_variance, spatial_variance) {
+parse_variances <- function(x, frequency_variance, period_variance) {
 
-  if (is.na(temporal_variance) && is.na(spatial_variance)) {
-    temporal_variance = sqrt(HEISENBERG)
-    spatial_variance  = sqrt(HEISENBERG)
-  } else if (is.na(spatial_variance)) {
-    spatial_variance  = HEISENBERG / temporal_variance
-  } else if (is.na(temporal_variance)) {
-    temporal_variance = HEISENBERG / spatial_variance
+  if (is.na(frequency_variance) && is.na(period_variance)) {
+    frequency_variance = sqrt(HEISENBERG)
+    period_variance  = sqrt(HEISENBERG)
+  } else if (is.na(period_variance)) {
+    period_variance  = HEISENBERG / frequency_variance
+  } else if (is.na(frequency_variance)) {
+    frequency_variance = HEISENBERG / period_variance
   }
 
   x %>% dplyr::mutate(
-    temporal_variance,
-    spatial_variance
+    frequency_variance,
+    period_variance
   )
 
 }
@@ -119,8 +119,8 @@ parse_variances <- function(x, temporal_variance, spatial_variance) {
 #' fractions f/f_min: 1/1 2/1 3/1 4/1 5/1 6/1 7/1 8/1 9/1 10/1
 #' LCD: 1
 #'
-#' wavelengths = l = c_sound / f
-#' wavelengths: 100 111.11 125.00 142.85 166.66 200.00 250.00 333.33 500.00 1000
+#' periods = l = c_sound / f
+#' periods: 100 111.11 125.00 142.85 166.66 200.00 250.00 333.33 500.00 1000
 #' fractions l/l_min: 1/1 7/6 5/4 3/2 5/3 2/1 5/2 10/3 5/1 10/1
 #' LCD: 12
 #'
@@ -128,7 +128,7 @@ parse_variances <- function(x, temporal_variance, spatial_variance) {
 #' only 4 of the same values: 100, 200, 500 and 1,000. The other 6 values are
 #' different. And so the pattern recognition machinery of the auditory system,
 #' which we approximate with the LCD, will perceive different cycle lengths:
-#' 1 cycle for frequencies but 12 cycles for wavelengths.
+#' 1 cycle for frequencies but 12 cycles for periods.
 #'
 #' Many of the wavelength ratios will look familiar to those who know their
 #' just intoned music intervals. However, the familiar ratios are not for the
@@ -147,7 +147,7 @@ parse_variances <- function(x, temporal_variance, spatial_variance) {
 #'
 #' Instead, the difference in cycle estimates seems be a fundamental uncertainty
 #' that is built into the conjugate relationship between frequencies
-#' and wavelengths. See Gabor 1946.
+#' and periods. See Gabor 1946.
 #'
 #' see:
 #' https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6662181/#:~:text=The%20speed%20of%20sound%20in,%2Fs)%20for%20image%20reconstruction.
@@ -157,46 +157,44 @@ parse_variances <- function(x, temporal_variance, spatial_variance) {
 #'
 compute_consonance = function(x, minimum_amplitude, octave_deviation) {
 
-  f       = x$spectrum[[1]] %>% dplyr::filter(.data$y>minimum_amplitude) %>% hrep::freq()
-  c_sound = 1 # m/s
-  l       = c_sound / f
+  f = x$spectrum[[1]] %>% dplyr::filter(.data$y>minimum_amplitude) %>% hrep::freq()
+  P = 1 / f
 
   x %>% dplyr::mutate(
 
-    alcd(f/min(f), .data$temporal_variance, octave_deviation, 'temporal'),
-    alcd(l/min(l), .data$spatial_variance,  octave_deviation, 'spatial'),
+    alcd(f/min(f), .data$frequency_variance, octave_deviation, 'frequency'),
+    alcd(P/min(P), .data$period_variance,    octave_deviation, 'period'),
 
-    f0                    = min(f) / .data$temporal_alcd,
-    l0                    = max(l) * .data$spatial_alcd,
+    f0                    = min(f) / .data$frequency_alcd,
+    P0                    = max(P) * .data$period_alcd,
 
-    temporal_consonance   = 50 - log2(.data$temporal_alcd),
-    spatial_consonance    = 50 - log2(.data$spatial_alcd),
+    frequency_consonance  = 50 - log2(.data$frequency_alcd),
+    period_consonance     = 50 - log2(.data$period_alcd),
 
-    consonance_dissonance = .data$temporal_consonance + .data$spatial_consonance,
-    major_minor           = ma_mi(.data$temporal_consonance, .data$spatial_consonance,
-                                  .data$temporal_variance, .data$spatial_variance),
+    consonance_dissonance = .data$frequency_consonance + .data$period_consonance,
+    major_minor           = ma_mi(.data$frequency_consonance, .data$period_consonance,
+                                  .data$frequency_variance, .data$period_variance),
 
     frequencies           = list(f),
-    wavelengths           = list(l),
-    temporal_Sz           = log2(.data$temporal_alcd),
-    spatial_Sz            = log2(.data$spatial_alcd),
-    speed_of_sound        = c_sound,
+    periods               = list(P),
+    frequency_Sz          = log2(.data$frequency_alcd),
+    period_Sz             = log2(.data$period_alcd),
     minimum_amplitude,
-    temporal_variance,
-    spatial_variance,
+    frequency_variance,
+    period_variance,
     octave_deviation
 
   )
 
 }
 
-ma_mi = function(temporal_consonance, spatial_consonance,
-                 temporal_variance, spatial_variance) {
+ma_mi = function(frequency_consonance, period_consonance,
+                 frequency_variance, period_variance) {
 
-  if (spatial_variance == temporal_variance) {
-    temporal_consonance - spatial_consonance
+  if (period_variance == frequency_variance) {
+    frequency_consonance - period_consonance
   } else {
-    spatial_consonance - temporal_consonance
+    period_consonance - frequency_consonance
   }
 
 }
@@ -224,7 +222,7 @@ ma_mi = function(temporal_consonance, spatial_consonance,
 #' @param x Vector of rational numbers
 #' @param variance Precision for creating rational fractions
 #' @param octave_deviation Deviation for approximating least common multiples
-#' @param label A custom label for the output usually 'spatial' or 'temporal'
+#' @param label A custom label for the output usually 'period' or 'frequency'
 #'
 #' @return The approximate least common denominator of the rational numbers
 #'

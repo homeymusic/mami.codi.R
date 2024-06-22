@@ -12,7 +12,7 @@ source('../code/plot.R')
 
 ```{r, echo=F, message=F, include=F}
 chord = c(60) %>% mami.codi(
-  spatial_tolerance = 0.1,
+  period_tolerance = 0.1,
   verbose=T, 
   num_harmonics=10
 )
@@ -29,26 +29,26 @@ chord %>% dplyr::select(
 
 ```{r, echo=F, message=F}
 chord %>% dplyr::select(
-  temporal_gcn,
-  temporal_lcd,
-  temporal_consonance
+  frequency_gcn,
+  frequency_lcd,
+  frequency_consonance
 )
 ```
 
 ```{r, echo=F, message=F}
-chord$temporal_ratios[[1]]
+chord$frequency_ratios[[1]]
 ```
 
 #### Spatial
 
 ```{r, echo=F, message=F}
 chord %>% dplyr::select(
-  spatial_gcn,
-  spatial_lcd,
-  spatial_consonance
+  period_gcn,
+  period_lcd,
+  period_consonance
 )
 ```
 
 ```{r, echo=F, message=F}
-chord$spatial_ratios[[1]]
+chord$period_ratios[[1]]
 ```

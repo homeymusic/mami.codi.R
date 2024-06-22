@@ -37,19 +37,19 @@ po$pseudo_octave %>% most_common_pseudo_octave()
 ```
 
 ```{r, echo=F, message=F}
-P1$spatial_fractions
+P1$period_fractions
 ```
 
 ```{r, echo=F, message=F}
-P1$temporal_fractions
+P1$frequency_fractions
 ```
 
 ```{r, echo=T, message=F}
-P1$wavelengths[[1]]
+P1$periods[[1]]
 ```
 
 ```{r, echo=F, message=F}
-po = P1$wavelengths[[1]] %>% pseudo_octaves()
+po = P1$periods[[1]] %>% pseudo_octaves()
 po
 ```
 

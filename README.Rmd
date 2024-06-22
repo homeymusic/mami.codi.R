@@ -71,7 +71,7 @@ $$\sigma^2 = \sqrt{\frac{1} {16 \pi^2}} = \frac{1}{4 \pi} \approx 0.08$$
 Uncertainty in our model is not the time duration and frequency uncertainty 
 $\Delta t \Delta f \simeq 1$ of Gabor or Wiener's famous quantum physics and 
 music analogy. If in Gabor (1946) Fig. 1.4 (b) the bank of reeds measured 
-wavelengths in a stationary state at $t=0$ instead of frequencies then his 2D 
+periods in a stationary state at $t=0$ instead of frequencies then his 2D 
 model would be akin to ours. Our model is frequency and wavelength  
 uncertainty $\Delta f \Delta \lambda$, closer to the original quantum ideas of 
 Einstein and de Broglie.\
@@ -103,7 +103,7 @@ l_formatted = sprintf(l, fmt = '%#.2f')
 
 $c = max(f) * min(f) = `r c_medium`$
 
-for an infinitely long time then the range of values for the wavelengths 
+for an infinitely long time then the range of values for the periods 
 $\lambda = \frac{c}{f}$ will be the same as the range for the frequencies:
 
 $\lambda_i=`r l_formatted`$ m\
@@ -243,7 +243,7 @@ electrical activity along the auditory nerve.\
 
 The fundamental tone of middle C is over a meter long
 in room temperature air at sea level. But the basilar membrane is only 33mm long. 
-How can the hair cells positioned along the basilar membrane detect wavelengths that are
+How can the hair cells positioned along the basilar membrane detect periods that are
 longer than the entire basilar membrane?\
 
 The traveling sound waves shorten as they travel around the spiral
@@ -254,15 +254,15 @@ send electrical activity along the auditory nerve.\
 
 When a musical chord comprised of many fundamental tones and harmonics is sounded,
 the hair cells at each shortened wavelength position send signals along 
-the auditory nerve. This spatial or rate-place arrangement of hair cell positions and 
-wavelengths of tones is known as tonotopy.\
+the auditory nerve. This period or rate-place arrangement of hair cell positions and 
+periods of tones is known as tonotopy.\
 
 ### The Core Idea of MaMi.CoDi
 
 If we play a chord, freeze time and observe which hair cells are displaced, what 
 are we observing? Are we observing frequencies? Periods? No. Time is frozen.
-Frequency (1/s) and period (s) are temporal observations. We are making a purely 
-spatial observation about wavelengths (m). We will come back to temporal
+Frequency (1/s) and period (s) are frequency observations. We are making a purely 
+period observation about periods (m). We will come back to frequency
 observations shortly.\
 
 When we combine all the component parts of a chord together into a whole, 
@@ -272,15 +272,15 @@ between each of the parts and a selected reference part.
 The greatest common divisor (LCD) of those part ratios will be a measure of the periodicity 
 of the whole.\
 
-Chords with short wavelengths relative to the component wavelengths sound pleasant. 
-And chords with long wavelengths relative to component wavelengths sound unpleasant. 
-MaMi.CoDi uses this measure of relative wavelengths to predict the 
-perceived spatial consonance of a chord.\
+Chords with short periods relative to the component periods sound pleasant. 
+And chords with long periods relative to component periods sound unpleasant. 
+MaMi.CoDi uses this measure of relative periods to predict the 
+perceived period consonance of a chord.\
 
 Let us unfreeze time and start counting how often a hair cell moves due to a 
 pure tone of our sounded chord. If we count the number of movements relative to a
 certain amount of time, we will be observing the frequency of the partial. 
-This would be a temporal observation. The auditory system has a property called 
+This would be a frequency observation. The auditory system has a property called 
 phase locking which allows it to encode the time intervals, periods, between spikes from 
 sound waves.\
 
@@ -288,28 +288,28 @@ When we combine the period components of a chord together, we can estimate
 the overall period for the whole chord. That chord period will be as long as
 or longer than the longest component period of the chord. Short relative periods
 sound pleasant. Long relative periods sound unpleasant.
-MaMi.CoDi uses this measure of chord period to predict the perceived temporal 
+MaMi.CoDi uses this measure of chord period to predict the perceived frequency 
 consonance of a chord.\
 
-MaMi.CoDi sums the spatial and temporal consonance predictions to create
+MaMi.CoDi sums the period and frequency consonance predictions to create
 an overall consonance-dissonance prediction. MaMi.CoDi subtracts
-the spatial consonance from the temporal consonance to create a major-minor polarity 
+the period consonance from the frequency consonance to create a major-minor polarity 
 prediction. Positive values will sound major, negative values minor and values 
 around zero will sound neutral.\
 
 Because wavelength and frequency are inverse of each other one might imagine that 
-the spatial and temporal signals would have the same values. However, for complex 
+the period and frequency signals would have the same values. However, for complex 
 pitches that is not the case. The pattern of the two sets of components are different.
 See the example of the major triad with 5 harmonics, below.
 
-```{r, child=c('man/Spatiotemporal_Periodicity.Rmd')}
+```{r, child=c('man/Spatiofrequency_Periodicity.Rmd')}
 ```
 
 ### Finding the variance Values
 
-"One difficulty with distinguishing between place and temporal (or place-time) models of
-pitch is that spectral and temporal representations of a signal are mathematically equivalent:
-any change in the spectral representation is reflected by a change in the temporal
+"One difficulty with distinguishing between place and frequency (or place-time) models of
+pitch is that spectral and frequency representations of a signal are mathematically equivalent:
+any change in the spectral representation is reflected by a change in the frequency
 representation, and vice versa . Discovering what the auditory system does means focusing
 on the physiological limits imposed by the cochlea and auditory nerve.\
 
@@ -317,10 +317,10 @@ on the physiological limits imposed by the cochlea and auditory nerve.\
 place theory can be tested using known limits of frequency selectivity: if pitch can be heard
 when only unresolved harmonics are presented (eliminating place information), then place
 information is not necessary for pitch. Similarly, if all the frequencies within a stimulus are
-above the upper limits of phase locking, and the temporal envelope information is somehow
-suppressed, then temporal information is not necessary for pitch perception."\
+above the upper limits of phase locking, and the frequency envelope information is somehow
+suppressed, then frequency information is not necessary for pitch perception."\
 
-from "Revisiting place and temporal theories of pitch", Andrew J. Oxenham, 2014.\
+from "Revisiting place and frequency theories of pitch", Andrew J. Oxenham, 2014.\
 
 The MaMi.CoDi model, based on Stolzenburg (2015), has one one parameter: 
 variance. Variance is used by the Stern-Brocot algorithm to find tone
@@ -328,16 +328,16 @@ ratios as rational fractions that are then used to estimate the relative
 periodicity of chords. variance acts as the physiological limits mentioned by 
 Oxenham, above.\
 
-Considering that the spatial and temporal signals had two different physiological
+Considering that the period and frequency signals had two different physiological
 origins, we searched a two-dimensional variance space in order to match model
 predictions with the large-scale behavioral results. It turned out that the 
 values that best matched large-scale behavioral results were always the
-same for temporal and spatial variance. This might indicate that the physiological 
+same for frequency and period variance. This might indicate that the physiological 
 limitations are not specific to place signals or time signals separetely. But 
 instead the limitation is higher in the auditory system after the signals have
 been passed along.\
 
-That is to say, the limits that creates differences between temporal and spatial 
+That is to say, the limits that creates differences between frequency and period 
 signals might not be frequency selectivity or phase locking but instead a limit
 of higher-level perception or pattern recognition, where estimates of the period 
 of a complex signal is made from components.\
@@ -348,12 +348,12 @@ MaMi.CoDi model we ran thousands of computations with various variance values
 and compared the predictions with results from six of the large-scale behavioral 
 experiments.\
 
-Because the spatial signal and the temporal signal have different origins
+Because the period signal and the frequency signal have different origins
 we initially did a two-dimensional variance search. However the closest 
-fits to the behavioral data came from spatial and variance values being the 
+fits to the behavioral data came from period and variance values being the 
 same. Insofar as this model represents processing in the auditory cortex, it 
 would seem that estimating the cyclicity of the two signals happens higher up
-in the auditoray system after the spatial and temporal signals have been processed.\
+in the auditoray system after the period and frequency signals have been processed.\
 
 
 ### Difference between Stern-Brocot Rational Fraction Approximations and Floating Point Values
@@ -489,13 +489,13 @@ p = params %>% purrr::map(\(p) {
     gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 2/1)-60)
     black_vlines  = c(11.94, 12.08)
     description = '  Due to the Heisenberg uncertainty principle, focusing on 
-    one signal (temporal) is akin to shutting off the other (spatial).'
+    one signal (frequency) is akin to shutting off the other (period).'
     sigma = BEHAVIOURAL_SMOOTH_NARROW
   } else if (p$t == 'P8ZoomedSpatial') {
     gray_vlines = c(hrep::freq_to_midi(hrep::midi_to_freq(60) * 2/1)-60)
     black_vlines  = c(11.94, 12.08)
     description = '  Due to the Heisenberg uncertainty principle, focusing on 
-    one signal (spatial) is akin to shutting off the other (temporal).'
+    one signal (period) is akin to shutting off the other (frequency).'
     sigma = BEHAVIOURAL_SMOOTH_NARROW
   }
   title = paste(
@@ -507,8 +507,8 @@ p = params %>% purrr::map(\(p) {
   chords <- dyads %>% dplyr::filter(timbre == p$t)
   chords$consonance_dissonance_z = z_scores(chords$consonance_dissonance)
   chords$major_minor_z = z_scores(chords$major_minor)
-  chords$spatial_consonance_z = z_scores(chords$spatial_consonance)
-  chords$temporal_consonance_z = z_scores(chords$temporal_consonance)
+  chords$period_consonance_z = z_scores(chords$period_consonance)
+  chords$frequency_consonance_z = z_scores(chords$frequency_consonance)
   
   experiment.rds = paste0('./man/data/',
                           p$t,
@@ -535,11 +535,11 @@ p = params %>% purrr::map(\(p) {
   }
   cat("  \n#####", title, '\n')
   cat(description)
-  t_v = chords$temporal_variance %>% unique() %>% max()
-  s_v = chords$spatial_variance %>% unique() %>% max()
+  t_v = chords$frequency_variance %>% unique() %>% max()
+  s_v = chords$period_variance %>% unique() %>% max()
   print(knitr::kable(tibble::tibble_row(
-    temporal_variance = paste(round(t_v, 5), collapse = ' '),
-    spatial_variance  = paste(round(s_v, 5), collapse = ' '),
+    frequency_variance = paste(round(t_v, 5), collapse = ' '),
+    period_variance  = paste(round(s_v, 5), collapse = ' '),
     smoothing_sigma   = sigma
   )))
   
@@ -548,7 +548,7 @@ p = params %>% purrr::map(\(p) {
                            black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")
   
-  print(plot_semitone_spatial_temporal(chords, paste('Spatial and Temporal Consonance'),
+  print(plot_semitone_period_frequency(chords, paste('Spatial and Temporal Consonance'),
                                        goal=NULL,sigma=sigma,include_points=T,
                                        black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")
@@ -558,14 +558,14 @@ p = params %>% purrr::map(\(p) {
                            black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")
   
-  temporal_error = (chords %>% tidyr::unnest(temporal_fractions))$error
-  temporal_error = remove_floating_point_mistakes(temporal_error, t_v)
-  print(plot_error_hist(temporal_error, bins=21, 'major', t_v, 'Temporal Variance'))
+  frequency_error = (chords %>% tidyr::unnest(frequency_fractions))$error
+  frequency_error = remove_floating_point_mistakes(frequency_error, t_v)
+  print(plot_error_hist(frequency_error, bins=21, 'major', t_v, 'Temporal Variance'))
   cat("  \n")
   
-  spatial_error = (chords %>% tidyr::unnest(spatial_fractions))$error
-  spatial_error = remove_floating_point_mistakes(spatial_error, s_v)
-  print(plot_error_hist(spatial_error,  bins=21, 'minor', s_v, 'Spatial Variance'))
+  period_error = (chords %>% tidyr::unnest(period_fractions))$error
+  period_error = remove_floating_point_mistakes(period_error, s_v)
+  print(plot_error_hist(period_error,  bins=21, 'minor', s_v, 'Spatial Variance'))
   cat("  \n")
   
 })
@@ -628,8 +628,8 @@ p = params %>% purrr::map(\(p) {
   sigma = BEHAVIOURAL_SMOOTH_BROAD
   cat("  \n#####", title, '\n')
   print(knitr::kable(tibble::tibble_row(
-    temporal_variance = paste(round(chords$temporal_variance %>% unique, 5), collapse = ' '),
-    spatial_variance  = paste(round(chords$spatial_variance %>% unique, 5), collapse = ' '),
+    frequency_variance = paste(round(chords$frequency_variance %>% unique, 5), collapse = ' '),
+    period_variance  = paste(round(chords$period_variance %>% unique, 5), collapse = ' '),
     min_amplitude       = paste(round(chords$minimum_amplitude %>% unique, 5), collapse = ' '),
     smoothing_sigma = sigma
   )))
@@ -638,7 +638,7 @@ p = params %>% purrr::map(\(p) {
                            black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")
   
-  print(plot_semitone_spatial_temporal(chords, paste('Spatial and Temporal Consonance'),
+  print(plot_semitone_period_frequency(chords, paste('Spatial and Temporal Consonance'),
                                        goal=NULL,sigma=sigma,include_points=T,
                                        black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")

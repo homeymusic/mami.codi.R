@@ -17,18 +17,18 @@ knitr::opts_chunk$set(dev = 'svg')
 p = RATIONAL_FRACTION_PRECISION
 ```
 
-The dimensions of Heisenberg's Uncertainty Principle (HUP) are a purely spatial 
-dimension, position (s) measured in meters, and a spatio-temporal mass dimension, 
+The dimensions of Heisenberg's Uncertainty Principle (HUP) are a purely period 
+dimension, position (s) measured in meters, and a spatio-frequency mass dimension, 
 momentum (p) measured in kg * m / s. One dimension includes time, the other does
 not.\
 
-The dimensions of Gabor's application of HUP to signal analysis are a temporal 
-dimension, time of the signal (t) measured in seconds, and another temporal 
+The dimensions of Gabor's application of HUP to signal analysis are a frequency 
+dimension, time of the signal (t) measured in seconds, and another frequency 
 dimension, frequency of the signal (f), measured in 1 / seconds. Both dimensions 
 include time.\
 
 The dimensions of MaMi.CoDis application of HUP to signal analysis are a  
-spatial dimension, wavelength (l) measured in meters, and a temporal 
+period dimension, wavelength (l) measured in meters, and a frequency 
 dimension, frequency (f) measured in 1 / seconds.  One dimension includes time, 
 the other does not.\
 
@@ -57,18 +57,18 @@ Wavelength ratio variance x Frequency ratio variance  = Number of the order one\
 One observation happens in a "characteristic rectangle" in the space-time diagram.
 
 The conventional language is a blocker for me. When time is frozen and we measure
-the wavelength in the cochlea that is a purely spatial observation. But the convention
+the wavelength in the cochlea that is a purely period observation. But the convention
 is to label that a frequency measured in Hz, which is 1/s. But time is frozen. There
 are no seconds? What gives?\
 
-It should be a spatial length measured in meters. Can we abandon the label of 
+It should be a period length measured in meters. Can we abandon the label of 
 time-frequency domain and replace it with space-time domain?\
 
 But this can be a problem too:\
 ```{r, echo=F, message=F}
 tibble::tibble(
-  space  = c('spatial length', 'wavelength', 'count in space', 'wavenumber'),
-  time   = c('temporal length', 'period', 'count in time', 'frequency')
+  space  = c('period length', 'wavelength', 'count in space', 'wavenumber'),
+  time   = c('frequency length', 'period', 'count in time', 'frequency')
 )
 ```
 

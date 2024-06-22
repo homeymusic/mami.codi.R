@@ -41,8 +41,8 @@ color_values_homey <- function() {
     'behavioral'=colors_homey$neutral)
 }
 space_time_colors <- function() {
-  c('spatial'=colors_homey$minor,
-    'temporal'=colors_homey$major,
+  c('period'=colors_homey$minor,
+    'frequency'=colors_homey$major,
     'behavioral'=colors_homey$neutral)
 }
 theme_homey <- function(aspect.ratio=NULL){
@@ -176,9 +176,9 @@ plot_dilo.dihi <- function(chords, title, chords_to_label=NULL,
   if (is.null(chords_to_label)) {
     chords_to_label = chords
   }
-  slope = chords$spatial_dissonance[tonic_index] / chords$period_dissonance[tonic_index]
+  slope = chords$period_dissonance[tonic_index] / chords$period_dissonance[tonic_index]
   ggplot2::ggplot(chords, ggplot2::aes(x = .data$period_dissonance,
-                                       y = .data$spatial_dissonance)) +
+                                       y = .data$period_dissonance)) +
     { if(include_abline) ggplot2::geom_abline(slope = slope, color = colors_homey$neutral) } +
     ggplot2::geom_point(shape=21, stroke=NA, size=0.5, fill=colors_homey$neutral) +
     ggrepel::geom_text_repel(data=chords_to_label, color=colors_homey$neutral,
@@ -189,7 +189,7 @@ plot_dilo.dihi <- function(chords, title, chords_to_label=NULL,
     ggplot2::scale_color_manual(guide='none') +
     ggplot2::ggtitle(title) +
     ggplot2::scale_x_continuous(
-      limits=c(0,max(c(chords$period_dissonance,chords$spatial_dissonance)))) +
+      limits=c(0,max(c(chords$period_dissonance,chords$period_dissonance)))) +
     {if (minimal) theme_homey_minimal(aspect.ratio=aspect.ratio) else theme_homey(aspect.ratio=aspect.ratio)}
 }
 plot_cofreq.cowave <- function(chords, title, chords_to_label=NULL,
@@ -198,9 +198,9 @@ plot_cofreq.cowave <- function(chords, title, chords_to_label=NULL,
   if (is.null(chords_to_label)) {
     chords_to_label = chords
   }
-  slope = chords$spatial_consonance[tonic_index] / chords$temporal_consonance[tonic_index]
-  ggplot2::ggplot(chords, ggplot2::aes(x = .data$temporal_consonance,
-                                       y = .data$spatial_consonance)) +
+  slope = chords$period_consonance[tonic_index] / chords$frequency_consonance[tonic_index]
+  ggplot2::ggplot(chords, ggplot2::aes(x = .data$frequency_consonance,
+                                       y = .data$period_consonance)) +
     { if(include_abline) ggplot2::geom_abline(slope = slope, color = colors_homey$neutral) } +
     ggplot2::geom_point(shape=21, stroke=NA, size=0.5, fill=colors_homey$neutral) +
     { if (include_labels)
@@ -213,8 +213,8 @@ plot_cofreq.cowave <- function(chords, title, chords_to_label=NULL,
     ggplot2::ggtitle(title) +
     # ggplot2::coord_fixed() +
     # ggplot2::scale_x_continuous(
-    #   limits=c(min(c(chords$temporal_consonance,chords$spatial_consonance)),
-    #            max(c(chords$temporal_consonance,chords$spatial_consonance)))) +
+    #   limits=c(min(c(chords$frequency_consonance,chords$period_consonance)),
+    #            max(c(chords$frequency_consonance,chords$period_consonance)))) +
     {if (minimal) theme_homey_minimal(aspect.ratio=aspect.ratio) else theme_homey(aspect.ratio=aspect.ratio)}
 }
 plot_error_hist <- function(errors, bins=21, signal, variance, title='') {
@@ -333,20 +333,20 @@ plot_semitone_mami <- function(chords, title='', include_line=T, sigma=0.2,
     ggplot2::labs(color = NULL) +
     theme_homey()
 }
-plot_semitone_spatial_temporal <- function(chords, title='', include_line=T, sigma=0.2,
+plot_semitone_period_frequency <- function(chords, title='', include_line=T, sigma=0.2,
                                            dashed_minor = F,include_points=T,
                                            include_linear_regression = F, goal=NULL,
                                            black_vlines=c(),gray_vlines=c()) {
 
-  chords$smoothed.temporal_consonance = smoothed(chords$semitone,
-                                                 chords$temporal_consonance,
+  chords$smoothed.frequency_consonance = smoothed(chords$semitone,
+                                                 chords$frequency_consonance,
                                                  sigma)
-  chords$smoothed.spatial_consonance = smoothed(chords$semitone,
-                                                chords$spatial_consonance,
+  chords$smoothed.period_consonance = smoothed(chords$semitone,
+                                                chords$period_consonance,
                                                 sigma)
 
-  mean_theoretical = mean(c(chords$smoothed.temporal_consonance,
-                            chords$smoothed.spatial_consonance))
+  mean_theoretical = mean(c(chords$smoothed.frequency_consonance,
+                            chords$smoothed.period_consonance))
 
   linetype_for_minor = if (dashed_minor) {'dashed'} else {'solid'}
 
@@ -354,22 +354,22 @@ plot_semitone_spatial_temporal <- function(chords, title='', include_line=T, sig
     ggplot2::geom_vline(xintercept = black_vlines, color=colors_homey$highlight) +
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
     { if (include_points)
-      ggplot2::geom_point(ggplot2::aes(y = .data$temporal_consonance),
+      ggplot2::geom_point(ggplot2::aes(y = .data$frequency_consonance),
                           shape=21, stroke=NA, size=1,
                           fill=colors_homey$major)
     } +
     { if (include_points)
-      ggplot2::geom_point(ggplot2::aes(y = .data$spatial_consonance),
+      ggplot2::geom_point(ggplot2::aes(y = .data$period_consonance),
                           shape=21, stroke=NA, size=1,
                           fill=colors_homey$minor)
     } +
     ggplot2::geom_line(ggplot2::aes(
-      y = .data$smoothed.temporal_consonance,
-      color = 'temporal'),
+      y = .data$smoothed.frequency_consonance,
+      color = 'frequency'),
       linewidth = 1) +
     ggplot2::geom_line(ggplot2::aes(
-      y = .data$smoothed.spatial_consonance,
-      color = 'spatial'),
+      y = .data$smoothed.period_consonance,
+      color = 'period'),
       linewidth = 1,
       linetype = linetype_for_minor) +
     {if (!is.null(goal))
@@ -386,17 +386,17 @@ plot_semitone_spatial_temporal <- function(chords, title='', include_line=T, sig
     ggplot2::xlab('Semitone') +
     ggplot2::scale_color_manual(
       values=space_time_colors(),
-      breaks=c('spatial', 'temporal', 'behavioral')) +
+      breaks=c('period', 'frequency', 'behavioral')) +
     ggplot2::labs(color = NULL) +
     theme_homey()
 }
-plot_semitone_spatial <- function(chords, title='', include_line=T, sigma=0.2,
+plot_semitone_period <- function(chords, title='', include_line=T, sigma=0.2,
                                   dashed_minor = F,include_points=T,
                                   include_linear_regression = F, goal=NULL,
                                   black_vlines=c(),gray_vlines=c()) {
 
-  chords$smoothed.spatial_consonance = smoothed(chords$semitone,
-                                                chords$spatial_consonance,
+  chords$smoothed.period_consonance = smoothed(chords$semitone,
+                                                chords$period_consonance,
                                                 sigma)
 
   linetype_for_minor = if (dashed_minor) {'dashed'} else {'solid'}
@@ -405,13 +405,13 @@ plot_semitone_spatial <- function(chords, title='', include_line=T, sigma=0.2,
     ggplot2::geom_vline(xintercept = black_vlines, color=colors_homey$highlight) +
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
     { if (include_points)
-      ggplot2::geom_point(ggplot2::aes(y = .data$spatial_consonance),
+      ggplot2::geom_point(ggplot2::aes(y = .data$period_consonance),
                           shape=21, stroke=NA, size=1,
                           fill=colors_homey$minor)
     } +
     ggplot2::geom_line(ggplot2::aes(
-      y = .data$smoothed.spatial_consonance,
-      color = 'spatial'),
+      y = .data$smoothed.period_consonance,
+      color = 'period'),
       linewidth = 1,
       linetype = linetype_for_minor) +
     ggplot2::ggtitle(title) +
@@ -422,17 +422,17 @@ plot_semitone_spatial <- function(chords, title='', include_line=T, sigma=0.2,
     ggplot2::xlab('Semitone') +
     ggplot2::scale_color_manual(
       values=space_time_colors(),
-      breaks=c('spatial', 'temporal', 'behavioral')) +
+      breaks=c('period', 'frequency', 'behavioral')) +
     ggplot2::labs(color = NULL) +
     theme_homey()
 }
-plot_semitone_temporal <- function(chords, title='', include_line=T, sigma=0.2,
+plot_semitone_frequency <- function(chords, title='', include_line=T, sigma=0.2,
                                    dashed_minor = F,include_points=T,
                                    include_linear_regression = F, goal=NULL,
                                    black_vlines=c(),gray_vlines=c()) {
 
-  chords$smoothed.temporal_consonance = smoothed(chords$semitone,
-                                                 chords$temporal_consonance,
+  chords$smoothed.frequency_consonance = smoothed(chords$semitone,
+                                                 chords$frequency_consonance,
                                                  sigma)
 
   linetype_for_minor = if (dashed_minor) {'dashed'} else {'solid'}
@@ -441,13 +441,13 @@ plot_semitone_temporal <- function(chords, title='', include_line=T, sigma=0.2,
     ggplot2::geom_vline(xintercept = black_vlines, color=colors_homey$highlight) +
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
     { if (include_points)
-      ggplot2::geom_point(ggplot2::aes(y = .data$temporal_consonance),
+      ggplot2::geom_point(ggplot2::aes(y = .data$frequency_consonance),
                           shape=21, stroke=NA, size=1,
                           fill=colors_homey$major)
     } +
     ggplot2::geom_line(ggplot2::aes(
-      y = .data$smoothed.temporal_consonance,
-      color = 'temporal'),
+      y = .data$smoothed.frequency_consonance,
+      color = 'frequency'),
       linewidth = 1,
       linetype = linetype_for_minor) +
     ggplot2::ggtitle(title) +
@@ -458,28 +458,28 @@ plot_semitone_temporal <- function(chords, title='', include_line=T, sigma=0.2,
     ggplot2::xlab('Semitone') +
     ggplot2::scale_color_manual(
       values=space_time_colors(),
-      breaks=c('spatial', 'temporal', 'behavioral')) +
+      breaks=c('period', 'frequency', 'behavioral')) +
     ggplot2::labs(color = NULL) +
     theme_homey()
 }
 plot_semitone_co <- function(chords, title='') {
-  temporal_semitone =chords$semitone %>% min
-  spatial_semitone =chords$semitone %>% max
+  frequency_semitone =chords$semitone %>% min
+  period_semitone =chords$semitone %>% max
   ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone,
                                        y = .data$consonance)) +
     ggplot2::geom_point(color=colors_homey$neutral) +
-    ggplot2::scale_x_continuous(breaks = seq(temporal_semitone,spatial_semitone),
+    ggplot2::scale_x_continuous(breaks = seq(frequency_semitone,period_semitone),
                                 minor_breaks = c()) +
     ggplot2::ggtitle(title) +
     theme_homey()
 }
-plot_semitone_temporal_variance <- function(chords, title='') {
-  temporal_semitone =chords$semitone %>% min
-  spatial_semitone =chords$semitone %>% max
+plot_semitone_frequency_variance <- function(chords, title='') {
+  frequency_semitone =chords$semitone %>% min
+  period_semitone =chords$semitone %>% max
   ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone,
-                                       y = .data$temporal_variance)) +
+                                       y = .data$frequency_variance)) +
     ggplot2::geom_point(color=colors_homey$neutral, size=0.5) +
-    ggplot2::scale_x_continuous(breaks = seq(temporal_semitone,spatial_semitone),
+    ggplot2::scale_x_continuous(breaks = seq(frequency_semitone,period_semitone),
                                 minor_breaks = c()) +
     ggplot2::ggtitle(title) +
     theme_homey()
@@ -537,12 +537,12 @@ plot_semitone_codi_grid <- function(theory, experiment,
                                     include_points=T,
                                     title) {
   per_plot_labels = tidyr::expand_grid(
-    temporal_variance = theory$temporal_variance %>% unique
+    frequency_variance = theory$frequency_variance %>% unique
   )
   per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(temporal_temporal_variance,temporal_variance) {
+    purrr::pmap_vec(\(frequency_frequency_variance,frequency_variance) {
       tols = paste(
-        'temporal_variance:', temporal_variance
+        'frequency_variance:', frequency_variance
       )
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=z_score)) +
@@ -567,7 +567,7 @@ plot_semitone_codi_grid <- function(theory, experiment,
                                                           vjust="inward",hjust="inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_grid(temporal_variance ~ temporal_variance, scales = 'free_y') +
+    ggplot2::facet_grid(frequency_variance ~ frequency_variance, scales = 'free_y') +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()
@@ -577,11 +577,11 @@ plot_semitone_codi_wrap <- function(theory, experiment,
                                     title,ncols=12,
                                     include_points=T) {
   per_plot_labels = tidyr::expand_grid(
-    temporal_variance  = theory$temporal_variance  %>% unique
+    frequency_variance  = theory$frequency_variance  %>% unique
   )
   per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(temporal_variance) {
-      tols = paste0('   temporal_variance:', temporal_variance)
+    purrr::pmap_vec(\(frequency_variance) {
+      tols = paste0('   frequency_variance:', frequency_variance)
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
@@ -606,27 +606,27 @@ plot_semitone_codi_wrap <- function(theory, experiment,
                                     vjust="inward",hjust="inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_wrap(~temporal_variance,ncol=ncols,dir='v') +
+    ggplot2::facet_wrap(~frequency_variance,ncol=ncols,dir='v') +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()
 }
-plot_semitone_spatial_wrap <- function(theory,
+plot_semitone_period_wrap <- function(theory,
                                        black_vlines=c(), gray_vlines=c(),
                                        title,ncols=1) {
   per_plot_labels = tidyr::expand_grid(
-    temporal_variance  = theory$temporal_variance  %>% unique
+    frequency_variance  = theory$frequency_variance  %>% unique
   )
   per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(temporal_variance) {
-      tols = paste0('   temporal_variance:', temporal_variance)
+    purrr::pmap_vec(\(frequency_variance) {
+      tols = paste0('   frequency_variance:', frequency_variance)
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
     ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
                         fill=colors_homey$minor,
-                        ggplot2::aes(x = semitone, y = spatial_consonance)) +
+                        ggplot2::aes(x = semitone, y = period_consonance)) +
     ggplot2::geom_line(
       color=colors_homey$minor,
       data=theory,
@@ -637,27 +637,27 @@ plot_semitone_spatial_wrap <- function(theory,
                                     vjust="inward",hjust="inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_wrap(~temporal_variance,ncol=ncols,dir='v') +
+    ggplot2::facet_wrap(~frequency_variance,ncol=ncols,dir='v') +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()
 }
-plot_semitone_temporal_wrap <- function(theory,
+plot_semitone_frequency_wrap <- function(theory,
                                         black_vlines=c(), gray_vlines=c(),
                                         title,ncols=1) {
   per_plot_labels = tidyr::expand_grid(
-    temporal_variance  = theory$temporal_variance  %>% unique
+    frequency_variance  = theory$frequency_variance  %>% unique
   )
   per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(temporal_variance) {
-      tols = paste0('   temporal_variance:', temporal_variance)
+    purrr::pmap_vec(\(frequency_variance) {
+      tols = paste0('   frequency_variance:', frequency_variance)
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
     ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
                         fill=colors_homey$major,
-                        ggplot2::aes(x = semitone, y = temporal_consonance)) +
+                        ggplot2::aes(x = semitone, y = frequency_consonance)) +
     ggplot2::geom_line(
       color=colors_homey$major,
       data=theory,
@@ -668,46 +668,46 @@ plot_semitone_temporal_wrap <- function(theory,
                                     vjust="inward",hjust="inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_wrap(~temporal_variance,ncol=ncols,dir='v') +
+    ggplot2::facet_wrap(~frequency_variance,ncol=ncols,dir='v') +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()
 }
-plot_semitone_spatial_temporal_wrap <- function(theory,
+plot_semitone_period_frequency_wrap <- function(theory,
                                                 black_vlines=c(), gray_vlines=c(),
                                                 title,ncols=1) {
   per_plot_labels = tidyr::expand_grid(
-    temporal_variance  = theory$temporal_variance  %>% unique
+    frequency_variance  = theory$frequency_variance  %>% unique
   )
   per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(temporal_variance) {
-      tols = paste0('   temporal_variance:', temporal_variance)
+    purrr::pmap_vec(\(frequency_variance) {
+      tols = paste0('   frequency_variance:', frequency_variance)
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
     ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
                         fill=colors_homey$major,
-                        ggplot2::aes(x = semitone, y = temporal_consonance)) +
+                        ggplot2::aes(x = semitone, y = frequency_consonance)) +
     ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
                         fill=colors_homey$minor,
-                        ggplot2::aes(x = semitone, y = spatial_consonance)) +
+                        ggplot2::aes(x = semitone, y = period_consonance)) +
     ggplot2::geom_line(
       color=colors_homey$major,
       data=theory,
-      ggplot2::aes(x = semitone, y = smooth_temporal,
+      ggplot2::aes(x = semitone, y = smooth_frequency,
                    group=1)) +
     ggplot2::geom_line(
       color=colors_homey$minor,
       data=theory,
-      ggplot2::aes(x = semitone, y = smooth_spatial,
+      ggplot2::aes(x = semitone, y = smooth_period,
                    group=1)) +
     ggplot2::geom_text(data=per_plot_labels, color=colors_homey$neutral,
                        ggplot2::aes(x=-Inf,y=-Inf,label=label,
                                     vjust="inward",hjust="inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_wrap(~temporal_variance,ncol=ncols,dir='v') +
+    ggplot2::facet_wrap(~frequency_variance,ncol=ncols,dir='v') +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()
@@ -716,11 +716,11 @@ plot_semitone_mami_wrap <- function(theory, experiment,
                                     black_vlines=c(), gray_vlines=c(),
                                     title,ncols=12) {
   per_plot_labels = tidyr::expand_grid(
-    temporal_variance  = theory$temporal_variance  %>% unique,
+    frequency_variance  = theory$frequency_variance  %>% unique,
   )
   per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(temporal_variance) {
-      tols = paste0('  ', temporal_variance)
+    purrr::pmap_vec(\(frequency_variance) {
+      tols = paste0('  ', frequency_variance)
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=major_minor)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
@@ -735,7 +735,7 @@ plot_semitone_mami_wrap <- function(theory, experiment,
                                     vjust="inward",hjust="inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_wrap(~temporal_variance,ncol=ncols,dir='v') +
+    ggplot2::facet_wrap(~frequency_variance,ncol=ncols,dir='v') +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()
@@ -977,7 +977,7 @@ plot_semitone_codi_wrap_amp <- function(theory, experiment,
                                 minor_breaks = 0:15) +
     theme_homey()
 }
-plot_semitone_spatial_wrap_amp <- function(theory,
+plot_semitone_period_wrap_amp <- function(theory,
                                            black_vlines=c(), gray_vlines=c(),
                                            title,ncols=1) {
   per_plot_labels = tidyr::expand_grid(
@@ -992,7 +992,7 @@ plot_semitone_spatial_wrap_amp <- function(theory,
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
     ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
                         fill=colors_homey$minor,
-                        ggplot2::aes(x = semitone, y = spatial_consonance)) +
+                        ggplot2::aes(x = semitone, y = period_consonance)) +
     ggplot2::geom_line(
       color=colors_homey$minor,
       data=theory,
@@ -1008,7 +1008,7 @@ plot_semitone_spatial_wrap_amp <- function(theory,
                                 minor_breaks = 0:15) +
     theme_homey()
 }
-plot_semitone_temporal_wrap_amp <- function(theory,
+plot_semitone_frequency_wrap_amp <- function(theory,
                                             black_vlines=c(), gray_vlines=c(),
                                             title,ncols=1) {
   per_plot_labels = tidyr::expand_grid(
@@ -1023,7 +1023,7 @@ plot_semitone_temporal_wrap_amp <- function(theory,
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
     ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
                         fill=colors_homey$major,
-                        ggplot2::aes(x = semitone, y = temporal_consonance)) +
+                        ggplot2::aes(x = semitone, y = frequency_consonance)) +
     ggplot2::geom_line(
       color=colors_homey$major,
       data=theory,

@@ -37,10 +37,10 @@ chords <- chords %>% dplyr::filter(timbre == 'Harmonic')
 ```
 
 ```{r}
-chords$spatial_consonance = log2(chords$spatial_consonance+1)
-print(plot_semitone_spatial(chords, 'Spatial'))
+chords$period_consonance = log2(chords$period_consonance+1)
+print(plot_semitone_period(chords, 'Spatial'))
 ```
 ```{r}
-chords$temporal_consonance = log2(chords$temporal_consonance+1)
-print(plot_semitone_temporal(chords, 'Temporal'))
+chords$frequency_consonance = log2(chords$frequency_consonance+1)
+print(plot_semitone_frequency(chords, 'Temporal'))
 ```
