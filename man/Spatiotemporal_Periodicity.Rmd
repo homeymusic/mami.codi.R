@@ -59,7 +59,7 @@ chord = midi %>% mami.codi(
   verbose=T,
   num_harmonics = num_harmonics
 )
-c_sound = chord$speed_of_sound
+c_sound = 1
 ```
 
 * Fundamentals in MIDI: `r midi`\
@@ -96,9 +96,8 @@ knitr::kable(tibble::tibble(
   max_T_s  = 1 / min_f_Hz,
   chord_s  = lcd * max_T_s,
   chord_Hz = 1 / chord_s,
-  chord_m  = c_sound / chord_Hz,
-  c_sound
-) %>% dplyr::select(lcd, chord_Sz, chord_Hz, c_sound, chord_m, chord_s))
+  chord_m  = 1 / chord_Hz
+) %>% dplyr::select(lcd, chord_Sz, chord_Hz, chord_m, chord_s))
 ```
 
 ##### Partial Periods
@@ -145,10 +144,9 @@ knitr::kable(tibble::tibble(
   chord_Sz = chord$period_Sz,
   max_l_m  = max(chord$periods[[1]]),
   chord_m  = lcd * max_l_m,
-  chord_Hz = c_sound / chord_m,
-  chord_s  = 1 / chord_Hz,
-  c_sound
-) %>% dplyr::select(lcd, chord_Sz, chord_Hz, c_sound, chord_m, chord_s))
+  chord_Hz = 1 / chord_m,
+  chord_s  = 1 / chord_Hz
+) %>% dplyr::select(lcd, chord_Sz, chord_Hz, chord_m, chord_s))
 ```
 
 ##### Partial Wavelengths
@@ -158,7 +156,7 @@ period_fractions = chord$period_fractions[[1]] %>%
   dplyr::mutate(
     index = dplyr::row_number(),
     tone = min(chord$periods[[1]]) * chord$period_fractions[[1]]$pseudo_rational_number,
-    freq = c_sound / tone,
+    freq = 1 / tone,
     midi = hrep::freq_to_midi(freq)
   ) %>% 
   dplyr::select(
@@ -170,13 +168,13 @@ period_fractions = chord$period_fractions[[1]] %>%
     midi
   )
 lcd    = chord$period_alcd
-plot_periodicity(period_fractions, lcd, 'period', c_sound = c_sound,relative = F)
+plot_periodicity(period_fractions, lcd, 'period', c_sound = 1, relative = F)
 ```
 
 ##### Chord Wavelength
 
 ```{r, echo=F, results='asis', message=F}
-plot_periodicity(period_fractions, lcd, 'period', c_sound = c_sound)
+plot_periodicity(period_fractions, lcd, 'period', c_sound = 1)
 ```
 
 ##### Wavelength fractions
@@ -197,7 +195,7 @@ chord = midi %>% mami.codi(
   verbose=T,
   num_harmonics = num_harmonics
 )
-c_sound = chord$speed_of_sound
+c_sound = 1
 ```
 
 * Fundamentals in MIDI: `r midi`\
@@ -234,9 +232,8 @@ knitr::kable(tibble::tibble(
   max_T_s  = 1 / min_f_Hz,
   chord_s  = lcd * max_T_s,
   chord_Hz = 1 / chord_s,
-  chord_m  = c_sound / chord_Hz,
-  c_sound
-) %>% dplyr::select(lcd, chord_Sz, chord_Hz, c_sound, chord_m, chord_s))
+  chord_m  = 1 / chord_Hz
+) %>% dplyr::select(lcd, chord_Sz, chord_Hz, chord_m, chord_s))
 ```
 
 ##### Partial Periods
@@ -283,10 +280,9 @@ knitr::kable(tibble::tibble(
   chord_Sz = chord$period_Sz,
   max_l_m  = max(chord$periods[[1]]),
   chord_m  = lcd * max_l_m,
-  chord_Hz = c_sound / chord_m,
+  chord_Hz = 1 / chord_m,
   chord_s  = 1 / chord_Hz,
-  c_sound,
-) %>% dplyr::select(lcd, chord_Sz, chord_Hz, c_sound, chord_m, chord_s))
+) %>% dplyr::select(lcd, chord_Sz, chord_Hz, chord_m, chord_s))
 ```
 
 ##### Partial Wavelengths
@@ -296,7 +292,7 @@ period_fractions = chord$period_fractions[[1]] %>%
   dplyr::mutate(
     index = dplyr::row_number(),
     tone = min(chord$periods[[1]]) * chord$period_fractions[[1]]$pseudo_rational_number,
-    freq = c_sound / tone,
+    freq = 1 / tone,
     midi = hrep::freq_to_midi(freq)
   ) %>% 
   dplyr::select(
@@ -308,13 +304,13 @@ period_fractions = chord$period_fractions[[1]] %>%
     midi
   )
 lcd    = chord$period_alcd
-plot_periodicity(period_fractions, lcd, 'period', c_sound = c_sound,relative = F)
+plot_periodicity(period_fractions, lcd, 'period', c_sound = 1,relative = F)
 ```
 
 ##### Chord Wavelength
 
 ```{r, echo=F, results='asis', message=F}
-plot_periodicity(period_fractions, lcd, 'period', c_sound = c_sound)
+plot_periodicity(period_fractions, lcd, 'period', c_sound = 1)
 ```
 
 ##### Wavelength fractions
@@ -334,7 +330,7 @@ chord = midi %>% mami.codi(
   verbose=T,
   num_harmonics = num_harmonics
 )
-c_sound = chord$speed_of_sound
+c_sound = 1
 ```
 
 * Fundamentals in MIDI: `r midi`\
@@ -371,7 +367,7 @@ knitr::kable(tibble::tibble(
   max_T_s  = 1 / min_f_Hz,
   chord_s  = lcd * max_T_s,
   chord_Hz = 1 / chord_s
-) %>% dplyr::select(lcd, chord_Sz, chord_Hz, c_sound, chord_s))
+) %>% dplyr::select(lcd, chord_Sz, chord_Hz, chord_s))
 ```
 
 ##### Partial Periods
@@ -426,7 +422,7 @@ period_fractions = chord$period_fractions[[1]] %>%
   dplyr::mutate(
     index = dplyr::row_number(),
     tone = min(chord$periods[[1]]) * chord$period_fractions[[1]]$pseudo_rational_number,
-    freq = c_sound / tone,
+    freq = 1 / tone,
     midi = hrep::freq_to_midi(freq)
   ) %>% 
   dplyr::select(
@@ -438,13 +434,13 @@ period_fractions = chord$period_fractions[[1]] %>%
     midi
   )
 lcd    = chord$period_alcd
-plot_periodicity(period_fractions, lcd, 'period', c_sound = c_sound,relative = F)
+plot_periodicity(period_fractions, lcd, 'period', c_sound = 1,relative = F)
 ```
 
 ##### Chord Wavelength
 
 ```{r, echo=F, results='asis', message=F}
-plot_periodicity(period_fractions, lcd, 'period', c_sound = c_sound)
+plot_periodicity(period_fractions, lcd, 'period', c_sound = 1)
 ```
 
 ##### Wavelength fractions
