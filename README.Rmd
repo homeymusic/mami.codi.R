@@ -1,5 +1,6 @@
 ---
-title: "MaMi.CoDi: A Quantum Model of Consonance Perception at the Heisenberg Uncertainty Limit"
+title: "MaMi.CoDi: A quantized model of consonance perception at the 
+Heisenberg-Gabor uncertainty limit"
 output:
   github_document: default
 ---

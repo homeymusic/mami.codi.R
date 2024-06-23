@@ -1,5 +1,5 @@
-MaMi.CoDi: A Quantum Model of Consonance Perception at the Heisenberg
-Uncertainty Limit
+MaMi.CoDi: A quantized model of consonance perception at the classical
+uncertainty limit
 ================
 
 ## Quantum Consonance Perception
