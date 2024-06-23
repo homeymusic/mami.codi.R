@@ -2,7 +2,7 @@ source('./man/code/utils.R')
 
 variance       = mami.codi.R::default_variance()
 num_harmonics   = 10
-octave_ratio    = 1.9
+octave_ratio    = 2.0
 amount_of_noise = 0
 num_tones       = 2*amount_of_noise + num_harmonics
 
@@ -10,7 +10,7 @@ lo = hrep::sparse_fr_spectrum(60,
                               num_harmonics=num_harmonics,
                               octave_ratio=octave_ratio)
 
-hi = hrep::sparse_fr_spectrum(70.9,
+hi = hrep::sparse_fr_spectrum(63,
                               num_harmonics=num_harmonics,
                               octave_ratio=octave_ratio)
 

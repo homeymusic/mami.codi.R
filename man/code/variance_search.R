@@ -1,7 +1,8 @@
-search_label = 'Harmonic'
-heisenberg   = T
+search_label = 'P8'
+heisenberg   = F
 options(timeout = max(1000, getOption("timeout")))
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+devtools::install_github('git@github.com:homeymusic/mami.codi.R',
+                         auth_token = Sys.getenv("GITHUBTOKEN"))
 
 # Detailed
 # from_prec   = 0.08
