@@ -1,12 +1,12 @@
-search_label = 'Pure'
-heisenberg   = T
-
-# devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+search_label = 'Harmonic'
+heisenberg   = F
+options(timeout = max(1000, getOption("timeout")))
+devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 
 # Detailed
-from_prec   = 0.03
-to_prec     = 0.04
-by_prec     = 0.0001
+from_prec   = 0.08
+to_prec     = 0.09
+by_prec     = 0.001
 variances = sort(c(seq(from=from_prec, to=to_prec, by=by_prec),
               mami.codi.R::default_variance()))
 
