@@ -1,6 +1,6 @@
 #' Major-Minor Consonance-Dissonance
 #'
-#' A Quantized Model of Consonance Perception at the Classical Uncertainty Limit
+#' A quantized model of consonance perception at the Heisenberg-Gabor uncertainty limit
 #'
 #'
 #' @param x Chord to analyse specified in MIDI, coerced to
