@@ -20,7 +20,7 @@ Imports:
     rlang,
     dplyr,
     tidyr,
-    hrep (>= 0.17),
+    hrep (>= 0.20),
     gmp,
     Rcpp (>= 1.0.10)
 LinkingTo: Rcpp
