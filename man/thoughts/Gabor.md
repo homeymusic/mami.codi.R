@@ -1,22 +1,39 @@
 Gabor
 ================
 
+![](../figures/gabor-unnamed-chunk-2-1.svg)<!-- -->
+
+    #> Warning in xy.coords(x, y, xlabel, ylabel, log): imaginary parts discarded in
+    #> coercion
+
+![](../figures/gabor-unnamed-chunk-3-1.svg)<!-- -->
+
+    #> Warning in xy.coords(x, y, xlabel, ylabel, log): imaginary parts discarded in
+    #> coercion
+
+![](../figures/gabor-unnamed-chunk-4-1.svg)<!-- -->
+
+![](../figures/gabor-unnamed-chunk-5-1.svg)<!-- -->
+
 The dimensions of Heisenberg’s Uncertainty Principle (HUP) are a purely
 spatial dimension, position (s) measured in meters, and a
-spatio-temporal mass dimension, momentum (p) measured in kg \* m / s.  
+spatio-temporal mass dimension, momentum (p) measured in kg \* m / s.
+One dimension includes time, the other does not.  
 
 The dimensions of Gabor’s application of HUP to signal analysis are a
 temporal dimension, time of the signal (t) measured in seconds, and
 another temporal dimension, frequency of the signal (f), measured in 1 /
-seconds.  
+seconds. Both dimensions include time.  
 
 The dimensions of MaMi.CoDis application of HUP to signal analysis are
 a  
 spatial dimension, wavelength (l) measured in meters, and a temporal
-dimension, frequency (f) measured in 1 / seconds.  
+dimension, frequency (f) measured in 1 / seconds. One dimension includes
+time, the other does not.  
 
-Do sound waves have mass? [Sound Waves Carry
-Mass](https://physics.aps.org/articles/v12/23)  
+Do sound waves have mass? See [Sound Waves Carry
+Mass](https://physics.aps.org/articles/v12/23) and
+[Phonons](https://en.wikipedia.org/wiki/Phonon)  
 
 “sub specie aeternitatis” p 431  
 
@@ -78,9 +95,9 @@ of size 2(f2-f1)tau.
 
 ### Equation 1.1
 
-![](../figures/gabor-unnamed-chunk-4-1.svg)<!-- -->
+![](../figures/gabor-unnamed-chunk-8-1.svg)<!-- -->
 
-![](../figures/gabor-unnamed-chunk-5-1.svg)<!-- -->
+![](../figures/gabor-unnamed-chunk-9-1.svg)<!-- -->
 
     #> Warning: `as.tibble()` was deprecated in tibble 2.0.0.
     #> ℹ Please use `as_tibble()` instead.
@@ -89,6 +106,6 @@ of size 2(f2-f1)tau.
     #> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
     #> generated.
 
-![](../figures/gabor-unnamed-chunk-6-1.svg)<!-- -->
+![](../figures/gabor-unnamed-chunk-10-1.svg)<!-- -->
 
-![](../figures/gabor-unnamed-chunk-8-1.svg)<!-- -->
+![](../figures/gabor-unnamed-chunk-12-1.svg)<!-- -->

@@ -14,7 +14,6 @@ knitr::opts_chunk$set(
   fig.path = "../figures/gabor-"
 )
 knitr::opts_chunk$set(dev = 'svg')
-p = RATIONAL_FRACTION_PRECISION
 ```
 
 ```{r, echo=F, message=F}
@@ -33,6 +32,10 @@ plot(t,sinusoid)
 
 ```{r, echo=F, message=F}
 plot(t, gaussian * sinusoid)
+```
+
+```{r, echo=F, message=F}
+plot(t, gaussian * Re(sinusoid)^2)
 ```
 
 The dimensions of Heisenberg's Uncertainty Principle (HUP) are a purely spatial 
@@ -97,7 +100,7 @@ f  = P1 %>% hrep::freq()
 tibble::tibble_row(
   f1 = min(f),
   f2 = max(f),
-  tau_s = alcd(f/f1, 0.08, 0.11)$alcd / f1, # period of the chord
+  tau_s = alcd(f/f1, 0.08, 0.11, 'temporal')$temporal_alcd / f1, # period of the chord
   data_count = (f2 - f1) * tau_s
 )
 ```

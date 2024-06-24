@@ -13,7 +13,6 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "../figures/GCD-"
 )
-knitr::opts_chunk$set(dev = 'svg')
 p = RATIONAL_FRACTION_PRECISION
 ```
 
