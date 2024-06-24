@@ -52,7 +52,7 @@ plot_fundamental_wavelength(midi)
 
 ## The Cochlea Diagram
 
-The human cochlea is $~33 mm$ long.
+The human cochlea is $\sim 33 mm$ long.
 
 ![The physics of hearing: fluid mechanics and the active process of the inner ear, Tobias Reichenbach and A J Hudspeth 2014 Rep. Prog. Phys. 77 076601](man/scrapbook/cochlea.png)
 
@@ -177,7 +177,7 @@ we hear these waves log based
 
 now we have two measures of consonance that work even when we shift the chords up or down
 
-## REPEAT math equations of l0 and consonance from lcd
+![Harmony Perception by Periodicity Detection∗ Frieder Stolzenburg, Journal of Mathematics and Music, 9(3):215–238, 2015](man/scrapbook/stolzenburg.png)
 
 ## Periodicity plot of wavelengths 1 cycle each 1, 20, 10 harmonics
 
@@ -199,15 +199,26 @@ now we have two measures of consonance that work even when we shift the chords u
 
 ## Gabor reed oscillisciope figure
 
+![Gabor, D. (1946). Theory of communication. Part 1: the analysis of information. Electrical Engineers-Part III: Journal of the Institution of Radio and Communication Engineering, 93(26), 429–441.](man/scrapbook/gabor_reeds.png)
+
 ## Gabor words about artifical flipping
+
+![Gabor, D. (1946). Theory of communication. Part 1: the analysis of information. Electrical Engineers-Part III: Journal of the Institution of Radio and Communication Engineering, 93(26), 429–441.](man/scrapbook/gabor_artificial.png)
 
 What is S-B variance?
 
 ## Gabor Elemtary Signal
 
-equality case of uncertainty
+![Gabor, D. (1946). Theory of communication. Part 1: the analysis of information. Electrical Engineers-Part III: Journal of the Institution of Radio and Communication Engineering, 93(26), 429–441.](man/scrapbook/gabor_elementary_words.png)
+
+
+![Gabor, D. (1946). Theory of communication. Part 1: the analysis of information. Electrical Engineers-Part III: Journal of the Institution of Radio and Communication Engineering, 93(26), 429–441.](man/scrapbook/gabor_elementary_gaussian.png)
+
+![Gabor, D. (1946). Theory of communication. Part 1: the analysis of information. Electrical Engineers-Part III: Journal of the Institution of Radio and Communication Engineering, 93(26), 429–441.](man/scrapbook/gabor_elementary_wavelet.png)
 
 ## Benedetto screenshot
+
+![Benedetto. (1990). Uncertainty principle inequalities and spectrum estimation. Recent Advances in Fourier Analysis and Its Applications (J. S. Bymes and J. L. Byrnes, eds.). Kluwer Acad. Publ., Dordrecht. MR 91i:94010](man/scrapbook/benedetto.png)
 
 ## Stern-Brocot as probability waves
 
