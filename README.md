@@ -10,30 +10,60 @@ $$e ^ {-i \left( \omega t - k x \right)}$$
 
 ## Middle C Wavelength Plot
 
-Consider the case where $t=0$.  
-
-$$e ^ {i \left( k x \right)}$$
-
-``` r
-midi=60
-plot_fundamental_wavelength(midi)
-```
+Consider the fundamental tone of middle C playing from $-\infty$ to
+$\infty$. If we freeze time at $t=0$, then we have a plane wave
+$e ^ {i k x}$. Assuming room temperature air at sea level, the
+wavelength $\lambda$ is 1.31m.
 
 ![](man/figures/README-unnamed-chunk-2-1.png)<!-- -->
 
 ## The Cochlea Diagram
 
-33 cm
+The human cochlea is $\sim 33 mm$ long.
+
+<figure>
+<img src="man/scrapbook/cochlea.png"
+alt="The physics of hearing: fluid mechanics and the active process of the inner ear, Tobias Reichenbach and A J Hudspeth 2014 Rep. Prog. Phys. 77 076601" />
+<figcaption aria-hidden="true">The physics of hearing: fluid mechanics
+and the active process of the inner ear, Tobias Reichenbach and A J
+Hudspeth 2014 Rep. Prog. Phys. 77 076601</figcaption>
+</figure>
 
 ## hrep Plots of Cochlea %
 
-longer wavelengths are apical
+How does a 1.3m wave fit in the cochlea?
 
-shorter wavelengths are basal
+<figure>
+<img src="man/scrapbook/bekesy.png"
+alt="Elizabeth S. Olson, Hendrikus Duifhuis, Charles R. Steele, Von Békésy and cochlear mechanics, Hearing Research, Volume 293, Issues 1–2, 2012, Pages 31-43" />
+<figcaption aria-hidden="true">Elizabeth S. Olson, Hendrikus Duifhuis,
+Charles R. Steele, Von Békésy and cochlear mechanics, Hearing Research,
+Volume 293, Issues 1–2, 2012, Pages 31-43</figcaption>
+</figure>
 
-pause time
+``` r
+midi=24
+C1 = c(midi) %>% hrep::sparse_fr_spectrum(num_harmonics=5)
+C1 %>% plot(cochlea=T,ggplot=T,xlim=c(0,100))
+```
 
-t=0 stationary state
+![](man/figures/README-unnamed-chunk-3-1.png)<!-- -->
+
+``` r
+midi=60
+C4 = c(midi) %>% hrep::sparse_fr_spectrum(num_harmonics=5)
+C4 %>% plot(cochlea=T,ggplot=T,xlim=c(0,100))
+```
+
+![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->
+
+``` r
+midi=97
+C7 = c(midi) %>% hrep::sparse_fr_spectrum(num_harmonics=5)
+C7 %>% plot(cochlea=T,ggplot=T,xlim=c(0,100))
+```
+
+![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->
 
 ## Diagram of Phases in Cochlea
 
@@ -45,25 +75,114 @@ from Loeb paper 80s
 
 when time runs we get some blurring / uncertainty of the wavelength
 
+<figure>
+<img src="man/scrapbook/loeb.png"
+alt="Loeb, G.E., White, M.W. and Merzenich, M.M., Spatial cross-correlation: a proposed mechanism for acoustic pitch perception, Biol. Cybern., 47 (1983) 149-163." />
+<figcaption aria-hidden="true">Loeb, G.E., White, M.W. and Merzenich,
+M.M., Spatial cross-correlation: a proposed mechanism for acoustic pitch
+perception, Biol. Cybern., 47 (1983) 149-163.</figcaption>
+</figure>
+
 ## Diagram of Oscilliscopes at every hair cell
 
 when t=0 there is no oscilliscope
 
 when we unpause time the oscilliscope runs and we have information
 
-## phase locking diagram
+<figure>
+<img src="man/scrapbook/rudnicki.png"
+alt="Cell Tissue Res (2015) 361:159–175 DOI 10.1007/s00441-015-2202-z Modeling auditory coding: from sound to spikes Marek Rudnicki, Oliver Schoppe, Michael Isik, Florian Volk, Werner Hemmert" />
+<figcaption aria-hidden="true">Cell Tissue Res (2015) 361:159–175 DOI
+10.1007/s00441-015-2202-z Modeling auditory coding: from sound to spikes
+Marek Rudnicki, Oliver Schoppe, Michael Isik, Florian Volk, Werner
+Hemmert</figcaption>
+</figure>
+
+## Phase locking diagram
 
 now we have frequency information
 
 the more time runs the more frequency information we have
 
+<figure>
+<img src="man/scrapbook/winter.png"
+alt="Winter, I.M., 2005. The neurophysiology of pitch. In: Plack, C.J., Oxenham, A.J., Fay, R.R., Popper, A.N. (Eds.), Pitch: Neural Coding and Perception. Springer, New York, NY, p. 364." />
+<figcaption aria-hidden="true">Winter, I.M., 2005. The neurophysiology
+of pitch. In: Plack, C.J., Oxenham, A.J., Fay, R.R., Popper, A.N.
+(Eds.), Pitch: Neural Coding and Perception. Springer, New York, NY,
+p. 364.</figcaption>
+</figure>
+
 ## hrep Plots of freq spectrum Hz
+
+``` r
+midi=24
+C1 = c(midi) %>% hrep::sparse_fr_spectrum(num_harmonics=5)
+C1 %>% plot(ggplot=T,xlim=c(10,12000),trans='log10')
+```
+
+![](man/figures/README-unnamed-chunk-6-1.png)<!-- -->
+
+``` r
+midi=60
+C4 = c(midi) %>% hrep::sparse_fr_spectrum(num_harmonics=5)
+C4 %>% plot(ggplot=T,xlim=c(10,12000),trans='log10')
+```
+
+![](man/figures/README-unnamed-chunk-7-1.png)<!-- -->
+
+``` r
+midi=97
+C7 = c(midi) %>% hrep::sparse_fr_spectrum(num_harmonics=5)
+C7 %>% plot(ggplot=T,xlim=c(10,12000),trans='log10')
+```
+
+![](man/figures/README-unnamed-chunk-8-1.png)<!-- -->
 
 ## screenshot of calculating f0 from ratios and LCD
 
-## math equations of f0 from lcd
+<figure>
+<img src="man/scrapbook/sundararajan.png"
+alt="D. Sundararajan, Fourier Analysis—A Signal Processing Approach, 2018" />
+<figcaption aria-hidden="true">D. Sundararajan, Fourier Analysis—A
+Signal Processing Approach, 2018</figcaption>
+</figure>
+
+## math equations of f0 and l0 from lcd
+
+### Fundamental Frequency
+
+$$f_{0} = \frac{f_{min}}{{ LCD}\left(r_{f 1},..., r_{f N}\right)}$$
+$LCD()$ is the least common denominator.  
+
+$$r_{f i} = \frac{f_{i}}{f_{min}} \pm \sigma_{f}^{2} = \frac{a_{i}}{b_{i}}$$
+
+$\sigma^2$ is the tolerance for converting a real number into a rational
+fraction. Later we will treat the Stern-Brocot function as a strictly
+localized probability distribution with variance $\sigma^2$.
+
+$${GCD}(a_{i}, b_{i}) = 1$$
+
+$GCD()$ is the greatest common divisor.  
+
+### Fundamental Wavelength
+
+$$\lambda_{0} = \lambda_{max} { LCD}\left(r_{\lambda 1},..., r_{\lambda N}\right)$$
+
+$$r_{\lambda i} = \frac{\lambda_{i}}{\lambda_{min}} \pm \sigma_{\lambda}^{2} = \frac{c_{i}}{d_{i}}$$
+
+$${ GCD}(c_{i}, d_{i}) = 1$$
 
 ## Stern-Brocot Tree diagram
+
+<figure>
+<img src="man/scrapbook/forisek.png"
+alt="Approximating Rational Numbers by Fraction, Michal Forisek, Fun with Algorithms, 4th International Conference, FUN 2007 Castiglioncello, Italy, June 2007 Proceedings" />
+<figcaption aria-hidden="true">Approximating Rational Numbers by
+Fraction, Michal Forisek, Fun with Algorithms, 4th International
+Conference, FUN 2007 Castiglioncello, Italy, June 2007
+Proceedings</figcaption>
+</figure>
 
 ## Periodicity plot of frequencies 1 cycle each 1, 20, 10 harmonics
 
@@ -82,7 +201,13 @@ we hear these waves log based
 now we have two measures of consonance that work even when we shift the
 chords up or down
 
-## REPEAT math equations of l0 and consonance from lcd
+<figure>
+<img src="man/scrapbook/stolzenburg.png"
+alt="Harmony Perception by Periodicity Detection∗ Frieder Stolzenburg, Journal of Mathematics and Music, 9(3):215–238, 2015" />
+<figcaption aria-hidden="true">Harmony Perception by Periodicity
+Detection∗ Frieder Stolzenburg, Journal of Mathematics and Music,
+9(3):215–238, 2015</figcaption>
+</figure>
 
 ## Periodicity plot of wavelengths 1 cycle each 1, 20, 10 harmonics
 
@@ -92,23 +217,91 @@ chords up or down
 
 ## comparison Table show outputs for 1, 20, 10 harmonics
 
-## Sharma 2D consonance
+## Shamma 2D consonance
+
+<figure>
+<img src="man/scrapbook/shamma.png"
+alt="S. Shamma On the role of space and time in auditory processing, Trends Cogn. Sci., 5 (2001), pp. 340-348" />
+<figcaption aria-hidden="true">S. Shamma On the role of space and time
+in auditory processing, Trends Cogn. Sci., 5 (2001),
+pp. 340-348</figcaption>
+</figure>
 
 ## Oxenham mathematically equivalent
+
+<figure>
+<img src="man/scrapbook/oxenham.png"
+alt="Revisiting place and temporal theories of pitch, Andrew J. Oxenham, Acoust Sci Technol. 2013; 34(6): 388–396." />
+<figcaption aria-hidden="true">Revisiting place and temporal theories of
+pitch, Andrew J. Oxenham, Acoust Sci Technol. 2013; 34(6):
+388–396.</figcaption>
+</figure>
 
 ## 2D plots of variance searching ???
 
 ## Gabor reed oscillisciope figure
 
+<figure>
+<img src="man/scrapbook/gabor_reeds.png"
+alt="Gabor, D. (1946). Theory of communication. Part 1: the analysis of information. Electrical Engineers-Part III: Journal of the Institution of Radio and Communication Engineering, 93(26), 429–441." />
+<figcaption aria-hidden="true">Gabor, D. (1946). Theory of
+communication. Part 1: the analysis of information. Electrical
+Engineers-Part III: Journal of the Institution of Radio and
+Communication Engineering, 93(26), 429–441.</figcaption>
+</figure>
+
 ## Gabor words about artifical flipping
+
+<figure>
+<img src="man/scrapbook/gabor_artificial.png"
+alt="Gabor, D. (1946). Theory of communication. Part 1: the analysis of information. Electrical Engineers-Part III: Journal of the Institution of Radio and Communication Engineering, 93(26), 429–441." />
+<figcaption aria-hidden="true">Gabor, D. (1946). Theory of
+communication. Part 1: the analysis of information. Electrical
+Engineers-Part III: Journal of the Institution of Radio and
+Communication Engineering, 93(26), 429–441.</figcaption>
+</figure>
 
 What is S-B variance?
 
 ## Gabor Elemtary Signal
 
-equality case of uncertainty
+<figure>
+<img src="man/scrapbook/gabor_elementary_words.png"
+alt="Gabor, D. (1946). Theory of communication. Part 1: the analysis of information. Electrical Engineers-Part III: Journal of the Institution of Radio and Communication Engineering, 93(26), 429–441." />
+<figcaption aria-hidden="true">Gabor, D. (1946). Theory of
+communication. Part 1: the analysis of information. Electrical
+Engineers-Part III: Journal of the Institution of Radio and
+Communication Engineering, 93(26), 429–441.</figcaption>
+</figure>
+
+<figure>
+<img src="man/scrapbook/gabor_elementary_gaussian.png"
+alt="Gabor, D. (1946). Theory of communication. Part 1: the analysis of information. Electrical Engineers-Part III: Journal of the Institution of Radio and Communication Engineering, 93(26), 429–441." />
+<figcaption aria-hidden="true">Gabor, D. (1946). Theory of
+communication. Part 1: the analysis of information. Electrical
+Engineers-Part III: Journal of the Institution of Radio and
+Communication Engineering, 93(26), 429–441.</figcaption>
+</figure>
+
+<figure>
+<img src="man/scrapbook/gabor_elementary_wavelet.png"
+alt="Gabor, D. (1946). Theory of communication. Part 1: the analysis of information. Electrical Engineers-Part III: Journal of the Institution of Radio and Communication Engineering, 93(26), 429–441." />
+<figcaption aria-hidden="true">Gabor, D. (1946). Theory of
+communication. Part 1: the analysis of information. Electrical
+Engineers-Part III: Journal of the Institution of Radio and
+Communication Engineering, 93(26), 429–441.</figcaption>
+</figure>
 
 ## Benedetto screenshot
+
+<figure>
+<img src="man/scrapbook/benedetto.png"
+alt="Benedetto. (1990). Uncertainty principle inequalities and spectrum estimation. Recent Advances in Fourier Analysis and Its Applications (J. S. Bymes and J. L. Byrnes, eds.). Kluwer Acad. Publ., Dordrecht. MR 91i:94010" />
+<figcaption aria-hidden="true">Benedetto. (1990). Uncertainty principle
+inequalities and spectrum estimation. Recent Advances in Fourier
+Analysis and Its Applications (J. S. Bymes and J. L. Byrnes, eds.).
+Kluwer Acad. Publ., Dordrecht. MR 91i:94010</figcaption>
+</figure>
 
 ## Stern-Brocot as probability waves
 
@@ -295,26 +488,6 @@ $N$ is the number of traveling waves in the chord.
 
 $$i=1...N$$
 
-#### Fundamental Wavelength
-
-$$\lambda_{0} = \lambda_{max} { ALCD}\left(r_{\lambda 1},..., r_{\lambda N}\right)$$
-$ALCD()$ is an approximate least common denominator.  
-
-#### Wavelength Ratios 
-
-$$r_{\lambda i} = \frac{\lambda_{i}}{\lambda_{min}} \pm \sigma_{\lambda}^{2} = \frac{a_{i}}{b_{i}}$$
-
-$${ GCD}(a_{i}, b_{i}) = 1$$ $GCD()$ is the greatest common divisor.  
-
-#### Fundamental Frequency
-
-$$f_{0} = f_{min} / { ALCD}\left(r_{f 1},..., r_{f N}\right)$$ Frequency
-Ratios
-
-$$r_{f i} = \frac{f_{i}}{f_{min}} \pm \sigma_{f}^{2} = \frac{c_{i}}{d_{i}}$$
-
-$${GCD}(c_{i}, d_{i}) = 1$$
-
 #### Heisenberg Uncertainty
 
 $$\sigma_{\lambda}^{2} \sigma_{f}^{2} = \frac{1}{16\pi^{2}}$$
@@ -484,7 +657,7 @@ and temporal signals have been processed.
 
 ### Difference between Stern-Brocot Rational Fraction Approximations and Floating Point Values
 
-![](man/figures/README-unnamed-chunk-9-1.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-15-1.png)<!-- -->  
 Number of Samples: 1,000,000  
 
 [Additional Stern-Brocot Plots](/man/thoughts/SternBrocotCurve.md)
@@ -531,11 +704,11 @@ major-minor versus the behavioral results are included in a plot below.
 |:------------------|:-----------------|----------------:|
 | 0.03              | 0.21109          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-12-1.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-2.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-3.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-4.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-5.png)<!-- -->
+![](man/figures/README-unnamed-chunk-18-1.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-2.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-3.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-4.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-5.png)<!-- -->
 
 ##### Harmonic ~ Partials: 10
 
@@ -545,11 +718,11 @@ For 10 harmonics, behavioral results and theoretical predictions agree.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-12-6.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-7.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-8.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-9.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-10.png)<!-- -->
+![](man/figures/README-unnamed-chunk-18-6.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-7.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-8.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-9.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-10.png)<!-- -->
 
 ##### 5Partials ~ Partials: 5
 
@@ -562,11 +735,11 @@ peak.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-12-11.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-12.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-13.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-14.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-15.png)<!-- -->
+![](man/figures/README-unnamed-chunk-18-11.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-12.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-13.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-14.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-15.png)<!-- -->
 
 ##### 5PartialsNo3 ~ Partials: 5
 
@@ -579,11 +752,11 @@ while the M3 peak is slightly higher without the 3rd partial.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-12-16.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-17.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-18.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-19.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-20.png)<!-- -->
+![](man/figures/README-unnamed-chunk-18-16.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-17.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-18.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-19.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-20.png)<!-- -->
 
 ##### Bonang ~ Partials: 4
 
@@ -597,11 +770,11 @@ be relatively higher than the behavioral results.
 |:------------------|:-----------------|----------------:|
 | 0.03979           | 0.15915          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-12-21.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-22.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-23.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-24.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-25.png)<!-- -->
+![](man/figures/README-unnamed-chunk-18-21.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-22.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-23.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-24.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-25.png)<!-- -->
 
 ##### Stretched ~ Partials: 10
 
@@ -613,11 +786,11 @@ and m7 that do not exist in the behavioral results.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-12-26.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-27.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-28.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-29.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-30.png)<!-- -->
+![](man/figures/README-unnamed-chunk-18-26.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-27.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-28.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-29.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-30.png)<!-- -->
 
 ##### Compressed ~ Partials: 10
 
@@ -628,11 +801,11 @@ with the theoretical peaks.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-12-31.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-32.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-33.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-34.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-35.png)<!-- -->
+![](man/figures/README-unnamed-chunk-18-31.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-32.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-33.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-34.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-35.png)<!-- -->
 
 #### Dyads spanning 1 quarter tone
 
@@ -644,11 +817,11 @@ Description is below.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |           0.035 |
 
-![](man/figures/README-unnamed-chunk-12-36.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-37.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-38.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-39.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-40.png)<!-- -->
+![](man/figures/README-unnamed-chunk-18-36.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-37.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-38.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-39.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-40.png)<!-- -->
 
 ##### M6 ~ Partials: 10
 
@@ -658,11 +831,11 @@ Description is below.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |           0.035 |
 
-![](man/figures/README-unnamed-chunk-12-41.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-42.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-43.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-44.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-45.png)<!-- -->
+![](man/figures/README-unnamed-chunk-18-41.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-42.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-43.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-44.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-45.png)<!-- -->
 
 ##### P8 ~ Partials: 10
 
@@ -672,11 +845,11 @@ Description is below.
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |           0.035 |
 
-![](man/figures/README-unnamed-chunk-12-46.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-47.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-48.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-49.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-50.png)<!-- -->
+![](man/figures/README-unnamed-chunk-18-46.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-47.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-48.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-49.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-50.png)<!-- -->
 
 ##### P8ZoomedTemporal ~ Partials: 10
 
@@ -687,11 +860,11 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 |:------------------|:-----------------|----------------:|
 | 5e-05             | 126.65148        |           0.035 |
 
-![](man/figures/README-unnamed-chunk-12-51.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-52.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-53.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-54.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-55.png)<!-- -->
+![](man/figures/README-unnamed-chunk-18-51.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-52.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-53.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-54.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-55.png)<!-- -->
 
 ##### P8ZoomedSpatial ~ Partials: 10
 
@@ -702,11 +875,11 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 |:------------------|:-----------------|----------------:|
 | 126.65148         | 5e-05            |           0.035 |
 
-![](man/figures/README-unnamed-chunk-12-56.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-57.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-58.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-59.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-12-60.png)<!-- -->
+![](man/figures/README-unnamed-chunk-18-56.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-57.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-58.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-59.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-18-60.png)<!-- -->
 
 ### Manipulating amplitudes
 
@@ -716,8 +889,8 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 |:------------------|:-----------------|:--------------|----------------:|
 | 0.07958           | 0.07958          | 0.013         |             0.2 |
 
-![](man/figures/README-unnamed-chunk-16-1.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-16-2.png)<!-- -->
+![](man/figures/README-unnamed-chunk-22-1.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-22-2.png)<!-- -->
 
 ##### Harmonic ~ Roll Off: 7
 
@@ -725,8 +898,8 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 |:------------------|:-----------------|:--------------|----------------:|
 | 0.07958           | 0.07958          | 0.08          |             0.2 |
 
-![](man/figures/README-unnamed-chunk-16-3.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-16-4.png)<!-- -->
+![](man/figures/README-unnamed-chunk-22-3.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-22-4.png)<!-- -->
 
 ##### Harmonic ~ Roll Off: 2
 
@@ -734,8 +907,8 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 |:------------------|:-----------------|:--------------|----------------:|
 | 0.07958           | 0.07958          | 0             |             0.2 |
 
-![](man/figures/README-unnamed-chunk-16-5.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-16-6.png)<!-- -->
+![](man/figures/README-unnamed-chunk-22-5.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-22-6.png)<!-- -->
 
 #### Notes on plots:
 

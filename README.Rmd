@@ -1,5 +1,4 @@
-17245.
-
+---
 title: "MaMi.CoDi: A Quantum Model of Consonance Perception at the Heisenberg Uncertainty Limit"
 output:
   github_document: default
