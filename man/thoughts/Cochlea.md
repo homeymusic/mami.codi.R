@@ -5,9 +5,21 @@ Cochlea
 C1 = c(24) %>% hrep::sparse_fr_spectrum(num_harmonics=5)
 ```
 
+``` r
+C1 %>% hrep::wave(length_sec=time) %>% plot(ggplot=T)
+```
+
 ![](../figures/Cochlea-unnamed-chunk-3-1.png)<!-- -->
 
+``` r
+C1 %>% plot(ggplot=T)
+```
+
 ![](../figures/Cochlea-unnamed-chunk-4-1.png)<!-- -->
+
+``` r
+C1 %>% plot(cochlea =T,ggplot=T,xlim=c(0,100))
+```
 
 ![](../figures/Cochlea-unnamed-chunk-5-1.png)<!-- -->
 
@@ -15,9 +27,21 @@ C1 = c(24) %>% hrep::sparse_fr_spectrum(num_harmonics=5)
 C4 = c(60) %>% hrep::sparse_fr_spectrum(num_harmonics=5)
 ```
 
+``` r
+C4 %>% hrep::wave(length_sec=time) %>% plot(ggplot=T)
+```
+
 ![](../figures/Cochlea-unnamed-chunk-7-1.png)<!-- -->
 
+``` r
+C4 %>% plot(ggplot=T)
+```
+
 ![](../figures/Cochlea-unnamed-chunk-8-1.png)<!-- -->
+
+``` r
+C4 %>% plot(cochlea =T,ggplot=T,xlim=c(0,100))
+```
 
 ![](../figures/Cochlea-unnamed-chunk-9-1.png)<!-- -->
 
