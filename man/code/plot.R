@@ -259,6 +259,12 @@ plot_semitone_codi <- function(chords, title='', include_line=T, sigma=0.2,
                                include_points=T,
                                include_linear_regression = F, goal=NULL,
                                black_vlines=c(),gray_vlines=c()) {
+
+
+  color_factor_homey <- function(x,column_name) {
+    cut(x[[column_name]],c(-Inf,-1e-6,1e-6,Inf),labels=c("minor","neutral","major"))
+  }
+
   chords$smoothed.consonance_dissonance = smoothed(chords$semitone,
                                                    chords$consonance_dissonance_z,
                                                    sigma)
