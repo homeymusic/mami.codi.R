@@ -319,9 +319,53 @@ Kluwer Acad. Publ., Dordrecht. MR 91i:94010</figcaption>
 
 ## Screenshot of feynman stretching consonance
 
-## Screenshots of Ford engine, doppler and other one
+[![Feynman Lecture 50 Audio from 24:20 to
+28:20](man/scrapbook/feynman.png)](https://www.feynmanlectures.caltech.edu/I_50.html)
 
-Approximate LCD versus harmonic template
+## Approximate LCD
+
+### Corrupted Harmonics
+
+<figure>
+<img src="man/scrapbook/sreenivas1.png"
+alt="Pitch extraction from corrupted harmonics of the power spectrum, T. V. Sreenivas and P. V. S. Rao, ComputerGroup, Tata Institute of Fundamental Research,Bombay–400 005, India (Received 22 November 1977; revised 16 July 1978)" />
+<figcaption aria-hidden="true">Pitch extraction from corrupted harmonics
+of the power spectrum, T. V. Sreenivas and P. V. S. Rao, ComputerGroup,
+Tata Institute of Fundamental Research,Bombay–400 005, India (Received
+22 November 1977; revised 16 July 1978)</figcaption>
+</figure>
+
+<figure>
+<img src="man/scrapbook/sreenivas2.png"
+alt="Pitch extraction from corrupted harmonics of the power spectrum, T. V. Sreenivas and P. V. S. Rao, ComputerGroup, Tata Institute of Fundamental Research,Bombay–400 005, India (Received 22 November 1977; revised 16 July 1978)" />
+<figcaption aria-hidden="true">Pitch extraction from corrupted harmonics
+of the power spectrum, T. V. Sreenivas and P. V. S. Rao, ComputerGroup,
+Tata Institute of Fundamental Research,Bombay–400 005, India (Received
+22 November 1977; revised 16 July 1978)</figcaption>
+</figure>
+
+### Automotive Engine Harmonics
+
+<figure>
+<img src="man/scrapbook/amman.png"
+alt="IEEE TRANSACTIONS ON INDUSTRIAL ELECTRONICS, VOL. 48, NO. 1, FEBRUARY 2001 225 An Efficient Technique for Modeling and Synthesis of Automotive Engine Sounds Scott A. Amman and Manohar Das, Member, IEEE" />
+<figcaption aria-hidden="true">IEEE TRANSACTIONS ON INDUSTRIAL
+ELECTRONICS, VOL. 48, NO. 1, FEBRUARY 2001 225 An Efficient Technique
+for Modeling and Synthesis of Automotive Engine Sounds Scott A. Amman
+and Manohar Das, Member, IEEE</figcaption>
+</figure>
+
+### Moving Targets
+
+<figure>
+<img src="man/scrapbook/huang.png"
+alt="IEEE TRANSACTIONS ON INSTRUMENTATION AND MEASUREMENT, VOL. 63, NO. 2, FEBRUARY 2014 267, A Practical Fundamental Frequency Extraction, Algorithm for Motion Parameters Estimation of Moving Targets, Jingchang Huang, Xin Zhang, Qianwei Zhou, Enliang Song, and Baoqing Li" />
+<figcaption aria-hidden="true">IEEE TRANSACTIONS ON INSTRUMENTATION AND
+MEASUREMENT, VOL. 63, NO. 2, FEBRUARY 2014 267, A Practical Fundamental
+Frequency Extraction, Algorithm for Motion Parameters Estimation of
+Moving Targets, Jingchang Huang, Xin Zhang, Qianwei Zhou, Enliang Song,
+and Baoqing Li</figcaption>
+</figure>
 
 ## Stretched
 

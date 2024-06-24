@@ -235,9 +235,23 @@ What is S-B variance?
 
 ## Screenshot of feynman stretching consonance
 
-## Screenshots of Ford engine, doppler and other one
+[![Feynman Lecture 50 Audio from 24:20 to 28:20](man/scrapbook/feynman.png)](https://www.feynmanlectures.caltech.edu/I_50.html)
 
-Approximate LCD versus harmonic template
+## Approximate LCD
+
+### Corrupted Harmonics
+
+![Pitch extraction from corrupted harmonics of the power spectrum, T. V. Sreenivas and P. V. S. Rao, ComputerGroup, Tata Institute of Fundamental Research,Bombay--400 005, India (Received 22 November 1977; revised 16 July 1978)](man/scrapbook/sreenivas1.png)
+
+![Pitch extraction from corrupted harmonics of the power spectrum, T. V. Sreenivas and P. V. S. Rao, ComputerGroup, Tata Institute of Fundamental Research,Bombay--400 005, India (Received 22 November 1977; revised 16 July 1978)](man/scrapbook/sreenivas2.png)
+
+### Automotive Engine Harmonics
+
+![IEEE TRANSACTIONS ON INDUSTRIAL ELECTRONICS, VOL. 48, NO. 1, FEBRUARY 2001 225 An Efficient Technique for Modeling and Synthesis of Automotive Engine Sounds Scott A. Amman and Manohar Das, Member, IEEE](man/scrapbook/amman.png)
+
+### Moving Targets
+
+![IEEE TRANSACTIONS ON INSTRUMENTATION AND MEASUREMENT, VOL. 63, NO. 2, FEBRUARY 2014 267, A Practical Fundamental Frequency Extraction, Algorithm for Motion Parameters Estimation of Moving Targets, Jingchang Huang, Xin Zhang, Qianwei Zhou, Enliang Song, and Baoqing Li](man/scrapbook/huang.png)
 
 ## Stretched
 
