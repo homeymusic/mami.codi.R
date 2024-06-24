@@ -17,6 +17,24 @@ knitr::opts_chunk$set(dev = 'svg')
 p = RATIONAL_FRACTION_PRECISION
 ```
 
+```{r, echo=F, message=F}
+t        = seq(from=-sqrt(HEISENBERG),to=sqrt(HEISENBERG),by=0.001)
+sigma_2  = HEISENBERG / 4
+sigma    = sqrt(sigma_2)
+gaussian = (1 / (sigma * sqrt(2 * pi))) * exp(- 0.5 * (t^2 / sigma_2))
+plot(t,gaussian)
+```
+
+```{r, echo=F, message=F}
+f0 = 15
+sinusoid = exp(1i * 2 * pi * f0 * t)
+plot(t,sinusoid)
+```
+
+```{r, echo=F, message=F}
+plot(t, gaussian * sinusoid)
+```
+
 The dimensions of Heisenberg's Uncertainty Principle (HUP) are a purely spatial 
 dimension, position (s) measured in meters, and a spatio-temporal mass dimension, 
 momentum (p) measured in kg * m / s. One dimension includes time, the other does
