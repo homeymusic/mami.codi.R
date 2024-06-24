@@ -14,7 +14,6 @@ knitr::opts_chunk$set(
   fig.path = "../figures/conjugates-"
 )
 knitr::opts_chunk$set(dev = 'svg')
-p = RATIONAL_FRACTION_PRECISION
 ```
 
 ```{r, echo=F, message=F}

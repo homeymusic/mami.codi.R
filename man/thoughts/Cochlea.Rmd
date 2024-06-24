@@ -14,10 +14,27 @@ knitr::opts_chunk$set(
   fig.path = "../figures/Cochlea-"
 )
 time = 2 * (1 / hrep::midi_to_freq(24))
+plot_fundamental_wavelength <- function(midi) {
+  freq = hrep::midi_to_freq(midi)
+  c_sound = 343
+  wavelength = c_sound / freq
+  wavenumber = (2 * pi) / wavelength
+  tibble::tibble(
+    meters=seq(0, wavelength ,0.001),
+    amplitude=sin(wavenumber * meters)
+  ) %>% ggplot2::ggplot(ggplot2::aes(meters, amplitude)) +
+    ggplot2::geom_line()
+}
 ```
 
 ```{r, echo=T, message=F, include=T}
-C1 = c(24) %>% hrep::sparse_fr_spectrum(num_harmonics=5)
+midi=24
+plot_fundamental_wavelength(midi)
+```
+
+```{r, echo=T, message=F, include=T}
+C1 = c(midi) %>% hrep::sparse_fr_spectrum(num_harmonics=5)
+C1 %>% plot(cochlea =T,ggplot=T,xlim=c(0,100))
 ```
 
 ```{r, echo=T, message=F, include=T}
@@ -29,11 +46,13 @@ C1 %>% plot(ggplot=T)
 ```
 
 ```{r, echo=T, message=F, include=T}
-C1 %>% plot(cochlea =T,ggplot=T,xlim=c(0,100))
+midi=60
+plot_fundamental_wavelength(midi)
 ```
 
 ```{r, echo=T, message=F, include=T}
-C4 = c(60) %>% hrep::sparse_fr_spectrum(num_harmonics=5)
+C4 = c(midi) %>% hrep::sparse_fr_spectrum(num_harmonics=5)
+C4 %>% plot(cochlea =T,ggplot=T,xlim=c(0,100))
 ```
 
 ```{r, echo=T, message=F, include=T}
@@ -45,21 +64,19 @@ C4 %>% plot(ggplot=T)
 ```
 
 ```{r, echo=T, message=F, include=T}
-C4 %>% plot(cochlea =T,ggplot=T,xlim=c(0,100))
-```
-
-```{r, echo=T, message=F, include=T}
-C7 = c(96) %>% hrep::sparse_fr_spectrum(num_harmonics=5)
+midi=96
+plot_fundamental_wavelength(midi)
 ```
 
 ```{r, echo=F, message=F, include=T}
+C7 = c(midi) %>% hrep::sparse_fr_spectrum(num_harmonics=5)
+C7 %>% plot(cochlea =T,ggplot=T,xlim=c(0,100))
+```
+
+```{r, echo=T, message=F, include=T}
 C7 %>% hrep::wave(length_sec=time) %>% plot(ggplot=T)
 ```
 
 ```{r, echo=F, message=F, include=T}
 C7 %>% plot(ggplot=T)
-```
-
-```{r, echo=F, message=F, include=T}
-C7 %>% plot(cochlea =T,ggplot=T,xlim=c(0,100))
 ```
