@@ -240,6 +240,9 @@ Number of Samples: `r fractions %>% nrow() %>% format(big.mark=',',scientific=F,
 Number of Bins: `r bins` \
 [Additional Stern-Brocot Plots](/man/thoughts/SternBrocotCurve.md)
 
+
+[![Number Systems Adapted from Wikipedia](man/scrapbook/numbers.png)](https://en.wikipedia.org/wiki/Rational_number)
+
 ## Benedetto screenshot
 
 ![Benedetto. (1990). Uncertainty principle inequalities and spectrum estimation. Recent Advances in Fourier Analysis and Its Applications (J. S. Bymes and J. L. Byrnes, eds.). Kluwer Acad. Publ., Dordrecht. MR 91i:94010](man/scrapbook/benedetto.png)

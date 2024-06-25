@@ -307,6 +307,9 @@ Number of Samples: 1,000,000
 Number of Bins: 21  
 [Additional Stern-Brocot Plots](/man/thoughts/SternBrocotCurve.md)
 
+[![Number Systems Adapted from
+Wikipedia](man/scrapbook/numbers.png)](https://en.wikipedia.org/wiki/Rational_number)
+
 ## Benedetto screenshot
 
 <figure>
