@@ -487,9 +487,9 @@ uncertainty $\Delta t \Delta f \simeq 1$ of Gabor or Wiener’s famous
 quantum physics and music analogy. If in Gabor (1946) Fig. 1.4 (b) the
 bank of reeds measured wavelengths in a stationary state at $t=0$
 instead of frequencies then his 2D model would be akin to ours. Our
-model is frequency and wavelength  
-uncertainty $\Delta f \Delta \lambda$, closer to the original quantum
-ideas of Einstein and de Broglie.  
+model is frequency and wavelength uncertainty $\Delta f \Delta \lambda$
+that is mediated by $\Delta t$, closer to the original quantum ideas of
+Einstein and de Broglie.  
 
 $$\lambda=\frac{2 \pi}{k}=\frac{h}{p}$$
 
