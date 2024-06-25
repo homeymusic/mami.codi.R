@@ -341,7 +341,21 @@ $${\sigma_f}^2 = \frac{\frac{1} {16 \pi^2}}{{\sigma_\lambda}^2} \approx \frac{0.
 
 ## M3 variance search
 
+<figure>
+<img src="man/scrapbook/M3VarianceSearch.png"
+alt="M3 Variance Search - Equal Values" />
+<figcaption aria-hidden="true">M3 Variance Search - Equal
+Values</figcaption>
+</figure>
+
 ## M6 variance search
+
+<figure>
+<img src="man/scrapbook/M6VarianceSearch.png"
+alt="M6 Variance Search - Equal Values" />
+<figcaption aria-hidden="true">M6 Variance Search - Equal
+Values</figcaption>
+</figure>
 
 ## Harmonic results
 

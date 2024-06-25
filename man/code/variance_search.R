@@ -1,8 +1,8 @@
-search_label = 'P8'
+search_label = 'M6'
 heisenberg   = F
-options(timeout = max(1000, getOption("timeout")))
-devtools::install_github('git@github.com:homeymusic/mami.codi.R',
-                         auth_token = Sys.getenv("GITHUBTOKEN"))
+# options(timeout = max(1000, getOption("timeout")))
+# devtools::install_github('git@github.com:homeymusic/mami.codi.R',
+#                          auth_token = Sys.getenv("GITHUBTOKEN"))
 
 # Detailed
 # from_prec   = 0.08
@@ -12,8 +12,7 @@ devtools::install_github('git@github.com:homeymusic/mami.codi.R',
 #               mami.codi.R::default_variance()))
 
 # Orders of Magnitude
-variances   = sort(c(1:9 %o% 10^(-2:-1),
-                      mami.codi.R::default_variance()))
+variances   = c(1:9 %o% 10^(-2:-1))
 
 source('./freq_trials.R')
 run_trials(search_label, variances, heisenberg)

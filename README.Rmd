@@ -269,7 +269,11 @@ $${\sigma_f}^2 = \frac{\frac{1} {16 \pi^2}}{{\sigma_\lambda}^2} \approx \frac{0.
 
 ## M3 variance search
 
+![M3 Variance Search - Equal Values](man/scrapbook/M3VarianceSearch.png)
+
 ## M6 variance search
+
+![M6 Variance Search - Equal Values](man/scrapbook/M6VarianceSearch.png)
 
 ## Harmonic results
 
