@@ -22,7 +22,7 @@ wavelength $\lambda$ is 1.31m.
 The human cochlea is $\sim 33 mm$ long.
 
 <figure>
-<img src="man/scrapbook/cochlea.png"
+<img src="man/scrapbook/reichenbach_cochlea.png"
 alt="The physics of hearing: fluid mechanics and the active process of the inner ear, Tobias Reichenbach and A J Hudspeth 2014 Rep. Prog. Phys. 77 076601" />
 <figcaption aria-hidden="true">The physics of hearing: fluid mechanics
 and the active process of the inner ear, Tobias Reichenbach and A J
@@ -34,11 +34,11 @@ Hudspeth 2014 Rep. Prog. Phys. 77 076601</figcaption>
 How does a 1.3m wave fit in the cochlea?
 
 <figure>
-<img src="man/scrapbook/bekesy.png"
-alt="Elizabeth S. Olson, Hendrikus Duifhuis, Charles R. Steele, Von Békésy and cochlear mechanics, Hearing Research, Volume 293, Issues 1–2, 2012, Pages 31-43" />
-<figcaption aria-hidden="true">Elizabeth S. Olson, Hendrikus Duifhuis,
-Charles R. Steele, Von Békésy and cochlear mechanics, Hearing Research,
-Volume 293, Issues 1–2, 2012, Pages 31-43</figcaption>
+<img src="man/scrapbook/reichenbach_wave.png"
+alt="The physics of hearing: fluid mechanics and the active process of the inner ear, Tobias Reichenbach and A J Hudspeth 2014 Rep. Prog. Phys. 77 076601" />
+<figcaption aria-hidden="true">The physics of hearing: fluid mechanics
+and the active process of the inner ear, Tobias Reichenbach and A J
+Hudspeth 2014 Rep. Prog. Phys. 77 076601</figcaption>
 </figure>
 
 ``` r
@@ -74,6 +74,14 @@ t=0+deltas
 from Loeb paper 80s
 
 when time runs we get some blurring / uncertainty of the wavelength
+
+<figure>
+<img src="man/scrapbook/bekesy.png"
+alt="Elizabeth S. Olson, Hendrikus Duifhuis, Charles R. Steele, Von Békésy and cochlear mechanics, Hearing Research, Volume 293, Issues 1–2, 2012, Pages 31-43" />
+<figcaption aria-hidden="true">Elizabeth S. Olson, Hendrikus Duifhuis,
+Charles R. Steele, Von Békésy and cochlear mechanics, Hearing Research,
+Volume 293, Issues 1–2, 2012, Pages 31-43</figcaption>
+</figure>
 
 <figure>
 <img src="man/scrapbook/loeb.png"
@@ -303,9 +311,33 @@ Analysis and Its Applications (J. S. Bymes and J. L. Byrnes, eds.).
 Kluwer Acad. Publ., Dordrecht. MR 91i:94010</figcaption>
 </figure>
 
+## Uncertainty Principle
+
+$${\sigma_f}^2 {\sigma_\lambda}^2 \ge \frac{1} {16 \pi^2}$$
+
+The uncertainty equality holds if the wave functions behave like a
+sinusoidal gaussian.  
+
+$${\sigma_f}^2 {\sigma_\lambda}^2 = \frac{1} {16 \pi^2}$$
+
+When wavelength and frequency variance are the same:  
+
+$$\sigma^2 = {\sigma_f}^2 = {\sigma_\lambda}^2$$
+
+We have:  
+
+$$\sigma^2 = \sqrt{\frac{1} {16 \pi^2}} = \frac{1}{4 \pi} \approx 0.08$$
+
+Otherwise the variances are constrained by the relationship:
+
+$${\sigma_f}^2 = \frac{\frac{1} {16 \pi^2}}{{\sigma_\lambda}^2} \approx \frac{0.006}{{\sigma_\lambda}^2}$$
+
 ## Stern-Brocot as probability waves
 
-## Equation of freq and wavelength variance
+![](man/figures/README-unnamed-chunk-10-1.png)<!-- -->  
+Number of Samples: 1,000,000  
+Number of Bins: 21  
+[Additional Stern-Brocot Plots](man/thoughts/SternBrocotCurve.md)
 
 ## M3 variance search
 
@@ -418,27 +450,6 @@ frequency.
 $$\lambda=\frac{2 \pi}{k}$$
 
 $$f=\frac{\omega}{2 \pi}$$
-
-$${\sigma_f}^2 {\sigma_\lambda}^2 \ge \frac{1} {16 \pi^2}$$
-
-The uncertainty equality holds if the underlying function is normalized
-to 1, like a probability distribution.  
-
-Following Stolzenberg, our model uses the Stern-Brocot tree to
-approximate rational fractions within a given variance. In that sense
-the values are zero outside the variance and the probability of finding
-an approximation is 100%. So we will assume the equality condition is
-met, so that:  
-
-$${\sigma_f}^2 {\sigma_\lambda}^2 = \frac{1} {16 \pi^2}$$
-
-When wavelength and frequency variance are the same:  
-
-$$\sigma^2 = {\sigma_f}^2 = {\sigma_\lambda}^2$$
-
-We have:  
-
-$$\sigma^2 = \sqrt{\frac{1} {16 \pi^2}} = \frac{1}{4 \pi} \approx 0.08$$
 
 #### Some Thoughts on Uncertainty
 
@@ -700,11 +711,6 @@ two signals happens higher up in the auditoray system after the spatial
 and temporal signals have been processed.  
 
 ### Difference between Stern-Brocot Rational Fraction Approximations and Floating Point Values
-
-![](man/figures/README-unnamed-chunk-15-1.png)<!-- -->  
-Number of Samples: 1,000,000  
-
-[Additional Stern-Brocot Plots](/man/thoughts/SternBrocotCurve.md)
 
 The Stern-Brocot curve is a repeatable, deterministic curve of where
 rational fractions exist or do not exist within a given variance.  

@@ -53,13 +53,14 @@ plot_fundamental_wavelength(midi)
 
 The human cochlea is $\sim 33 mm$ long.
 
-![The physics of hearing: fluid mechanics and the active process of the inner ear, Tobias Reichenbach and A J Hudspeth 2014 Rep. Prog. Phys. 77 076601](man/scrapbook/cochlea.png)
+![The physics of hearing: fluid mechanics and the active process of the inner ear, Tobias Reichenbach and A J Hudspeth 2014 Rep. Prog. Phys. 77 076601](man/scrapbook/reichenbach_cochlea.png)
 
 ## hrep Plots of Cochlea %
 
 How does a 1.3m wave fit in the cochlea?
 
-![Elizabeth S. Olson, Hendrikus Duifhuis, Charles R. Steele, Von Békésy and cochlear mechanics, Hearing Research, Volume 293, Issues 1–2, 2012, Pages 31-43](man/scrapbook/bekesy.png)
+![The physics of hearing: fluid mechanics and the active process of the inner ear, Tobias Reichenbach and A J Hudspeth 2014 Rep. Prog. Phys. 77 076601](man/scrapbook/reichenbach_wave.png)
+
 
 ```{r, echo=T, message=F, include=T}
 midi=24
@@ -88,6 +89,8 @@ t=0+deltas
 from Loeb paper 80s
 
 when time runs we get some blurring / uncertainty of the wavelength
+
+![Elizabeth S. Olson, Hendrikus Duifhuis, Charles R. Steele, Von Békésy and cochlear mechanics, Hearing Research, Volume 293, Issues 1–2, 2012, Pages 31-43](man/scrapbook/bekesy.png)
 
 ![Loeb, G.E., White, M.W. and Merzenich, M.M., Spatial cross-correlation: a proposed mechanism for acoustic pitch perception, Biol. Cybern., 47 (1983) 149-163.](man/scrapbook/loeb.png)
 
@@ -219,9 +222,49 @@ What is S-B variance?
 
 ![Benedetto. (1990). Uncertainty principle inequalities and spectrum estimation. Recent Advances in Fourier Analysis and Its Applications (J. S. Bymes and J. L. Byrnes, eds.). Kluwer Acad. Publ., Dordrecht. MR 91i:94010](man/scrapbook/benedetto.png)
 
-## Stern-Brocot as probability waves
+## Uncertainty Principle
 
-## Equation of freq and wavelength variance
+
+$${\sigma_f}^2 {\sigma_\lambda}^2 \ge \frac{1} {16 \pi^2}$$
+
+The uncertainty equality holds if the wave functions behave like a sinusoidal 
+gaussian.\
+
+
+$${\sigma_f}^2 {\sigma_\lambda}^2 = \frac{1} {16 \pi^2}$$
+
+When wavelength and frequency variance are the same:\
+
+$$\sigma^2 = {\sigma_f}^2 = {\sigma_\lambda}^2$$
+
+We have: \
+
+$$\sigma^2 = \sqrt{\frac{1} {16 \pi^2}} = \frac{1}{4 \pi} \approx 0.08$$
+
+Otherwise the variances are constrained by the relationship: 
+
+$${\sigma_f}^2 = \frac{\frac{1} {16 \pi^2}}{{\sigma_\lambda}^2} \approx \frac{0.006}{{\sigma_\lambda}^2}$$
+
+## Stern-Brocot as probability waves
+```{r, echo=F, message=F}
+variance = default_variance()
+path = paste0('./man/data/stern_brocot_',variance,'.rds')
+fractions = readRDS(path)
+```
+
+```{r, echo=F, message=F}
+bins = 21
+print(plot_error_hist(fractions$error,
+                      bins=bins,
+                      'fundamental', 
+                      variance,
+                      'Stern-Brocot Curve'))
+cat("  \n")
+
+```
+Number of Samples: `r fractions %>% nrow() %>% format(big.mark=',',scientific=F,trim=T)` \
+Number of Bins: `r bins` \
+[Additional Stern-Brocot Plots](/man/thoughts/SternBrocotCurve.md)
 
 ## M3 variance search
 
@@ -303,26 +346,6 @@ wavelength of a wave, the less we know about its frequency. \
 $$\lambda=\frac{2 \pi}{k}$$
 
 $$f=\frac{\omega}{2 \pi}$$
-
-$${\sigma_f}^2 {\sigma_\lambda}^2 \ge \frac{1} {16 \pi^2}$$
-
-The uncertainty equality holds if the underlying function is normalized to 1, like a 
-probability distribution.\
-
-Following Stolzenberg, our model uses the Stern-Brocot tree to approximate 
-rational fractions within a given variance. In that sense the values are zero
-outside the variance and the probability of finding an approximation is 100%.
-So we will assume the equality condition is met, so that:\
-
-$${\sigma_f}^2 {\sigma_\lambda}^2 = \frac{1} {16 \pi^2}$$
-
-When wavelength and frequency variance are the same:\
-
-$$\sigma^2 = {\sigma_f}^2 = {\sigma_\lambda}^2$$
-
-We have: \
-
-$$\sigma^2 = \sqrt{\frac{1} {16 \pi^2}} = \frac{1}{4 \pi} \approx 0.08$$
 
 #### Some Thoughts on Uncertainty
 
@@ -593,25 +616,6 @@ in the auditoray system after the spatial and temporal signals have been process
 
 
 ### Difference between Stern-Brocot Rational Fraction Approximations and Floating Point Values
-
-```{r, echo=F, message=F}
-variance = default_variance()
-path = paste0('./man/data/stern_brocot_',variance,'.rds')
-fractions = readRDS(path)
-```
-
-```{r, echo=F, message=F}
-print(plot_error_hist(fractions$error,
-                      bins=21,
-                      'fundamental', 
-                      variance,
-                      'Stern-Brocot Curve'))
-cat("  \n")
-
-```
-Number of Samples: `r fractions %>% nrow() %>% format(big.mark=',',scientific=F,trim=T)` \
-
-[Additional Stern-Brocot Plots](/man/thoughts/SternBrocotCurve.md)
 
 The Stern-Brocot curve is a repeatable, deterministic curve of where rational 
 fractions exist or do not exist within a given variance.\
