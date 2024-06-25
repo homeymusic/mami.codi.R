@@ -1,5 +1,5 @@
 ---
-title: "MaMi.CoDi: A Quantum Model of Consonance Perception at the Heisenberg Uncertainty Limit"
+title: "MaMi.CoDi: A Model of Consonance Perception"
 output:
   github_document: default
 ---
@@ -33,33 +33,34 @@ plot_fundamental_wavelength <- function(midi) {
 ```
 
 
-# Outline
-
-## Traveling Wave Equation
+# The Traveling Wave
 
 $$e ^ {-i \left( \omega t - k x \right)}$$
 
-## Middle C Wavelength Plot
+# Wavelengths
 
-Consider the fundamental tone of middle C playing from $-\infty$ to $\infty$. If
-we freeze time at $t=0$, then we have a plane wave $e ^ {i k x}$. Assuming room temperature air at sea level, the wavelength $\lambda$ is `r sprintf(c_sound / hrep::midi_to_freq(60), fmt = '%#.2f')`m.
+Consider the fundamental tone of middle C playing from $t=-\infty$ to $t=\infty$. 
+
+Assuming room temperature air at sea level, the wavelength $\lambda$ is `r sprintf(c_sound / hrep::midi_to_freq(60), fmt = '%#.2f')`m.
 
 ```{r, echo=F, message=F, include=T}
 midi=60
 plot_fundamental_wavelength(midi)
 ```
 
-## The Cochlea Diagram
-
 The human cochlea is $\sim 33 mm$ long.
 
 ![The physics of hearing: fluid mechanics and the active process of the inner ear, Tobias Reichenbach and A J Hudspeth 2014 Rep. Prog. Phys. 77 076601](man/scrapbook/reichenbach_cochlea.png)
 
-## hrep Plots of Cochlea %
-
 How does a 1.3m wave fit in the cochlea?
 
 ![The physics of hearing: fluid mechanics and the active process of the inner ear, Tobias Reichenbach and A J Hudspeth 2014 Rep. Prog. Phys. 77 076601](man/scrapbook/reichenbach_wave.png)
+
+## t=0
+
+If we freeze time at $t=0$, then we have a plane wave:
+
+$$e ^ {i k x}$$
 
 
 ```{r, echo=T, message=F, include=T}
@@ -80,37 +81,31 @@ C7 = c(midi) %>% hrep::sparse_fr_spectrum(num_harmonics=5)
 C7 %>% plot(cochlea=T,ggplot=T,xlim=c(0,100))
 ```
 
-## Diagram of Phases in Cochlea 
+## t=0+deltas
 
-then unpause for a moment 
-
-t=0+deltas
-
-from Loeb paper 80s
-
-when time runs we get some blurring / uncertainty of the wavelength
+If we briefly unfreeze time for a few times $t=0+0\delta$, $t=0+1\delta$, 
+$t=0+2\delta$, $t=0+3\delta$ we get a changes of phase. Our uncertainty increases.
 
 ![Elizabeth S. Olson, Hendrikus Duifhuis, Charles R. Steele, Von Békésy and cochlear mechanics, Hearing Research, Volume 293, Issues 1–2, 2012, Pages 31-43](man/scrapbook/bekesy.png)
 
 ![Loeb, G.E., White, M.W. and Merzenich, M.M., Spatial cross-correlation: a proposed mechanism for acoustic pitch perception, Biol. Cybern., 47 (1983) 149-163.](man/scrapbook/loeb.png)
 
-## Diagram of Oscilliscopes at every hair cell
+# Frequencies
 
-when t=0 there is no oscilliscope 
+Imagine an oscilloscope attached to every hair cell bundle, each $x$ position.
 
-when we unpause time the oscilliscope runs and we have information
+When $t=0$ there is no time. So there is no frequency. We have complete uncertainty. 
+
+## x=0
+
+$$e ^ {-i \left( \omega t\right)}$$
+
+For a fixed location, say $x=0$ is the hair cell bundle with resonant frequency 
+at 300 Hz, we will have a better idea about frequency as time unfolds.
 
 ![Cell Tissue Res (2015) 361:159–175 DOI 10.1007/s00441-015-2202-z Modeling auditory coding: from sound to spikes Marek Rudnicki, Oliver Schoppe, Michael Isik, Florian Volk, Werner Hemmert](man/scrapbook/rudnicki.png)
 
-## Phase locking diagram
-
-now we have frequency information
-
-the more time runs the more frequency information we have
-
 ![Winter, I.M., 2005. The neurophysiology of pitch. In: Plack, C.J., Oxenham, A.J., Fay, R.R., Popper, A.N. (Eds.), Pitch: Neural Coding and Perception. Springer, New York, NY, p. 364.](man/scrapbook/winter.png)
-
-## hrep Plots of freq spectrum Hz
 
 ```{r, echo=T, message=F, include=T}
 midi=24
@@ -130,124 +125,31 @@ C7 = c(midi) %>% hrep::sparse_fr_spectrum(num_harmonics=5)
 C7 %>% plot(ggplot=T,xlim=c(10,12000),trans='log10')
 ```
 
-## screenshot of calculating  f0 from ratios and LCD
+# 2D: Wavelengths and Frequencies
 
-![D. Sundararajan, Fourier Analysis—A Signal Processing Approach, 2018](man/scrapbook/sundararajan.png)
-
-## math equations of f0 and l0 from lcd
-
-### Fundamental Frequency
-
-$$f_{0} = \frac{f_{min}}{{ LCD}\left(r_{f 1},..., r_{f N}\right)}$$
-$LCD()$ is the least common denominator.\
-
-$$r_{f i} = \frac{f_{i}}{f_{min}} \pm \sigma_{f}^{2} = \frac{a_{i}}{b_{i}}$$
-
-$\sigma^2$ is the tolerance for converting a real number into a rational fraction.
-Later we will treat the Stern-Brocot function as a strictly localized probability 
-distribution with variance $\sigma^2$.
-
-$${GCD}(a_{i}, b_{i}) = 1$$
-
-$GCD()$ is the greatest common divisor.\
-
-### Fundamental Wavelength
-
-$$\lambda_{0} = \lambda_{max} { LCD}\left(r_{\lambda 1},..., r_{\lambda N}\right)$$
-
-$$r_{\lambda i} = \frac{\lambda_{i}}{\lambda_{min}} \pm \sigma_{\lambda}^{2} = \frac{c_{i}}{d_{i}}$$
-
-$${ GCD}(c_{i}, d_{i}) = 1$$
-
-## Stern-Brocot Tree diagram
-
-![Approximating Rational Numbers by Fraction, Michal Forisek, Fun with Algorithms, 4th International Conference, FUN 2007 Castiglioncello, Italy, June 2007 Proceedings](man/scrapbook/forisek.png)
-
-## Periodicity plot of frequencies 1 cycle each 1, 20, 10 harmonics
-
-## Periodicity plot of frequencies full cycles 1, 20, 10 harmonics
-
-## Table show outputs for  1, 20, 10 harmonics
-
-The lcd machinery gives us fundamental frequency and wavelength 
-
-we hear these waves log based
-
-## Table of shifting the frequency up or down
-
-## Equation of consonance log2(lcd(...))
-
-now we have two measures of consonance that work even when we shift the chords up or down
-
-![Harmony Perception by Periodicity Detection∗ Frieder Stolzenburg, Journal of Mathematics and Music, 9(3):215–238, 2015](man/scrapbook/stolzenburg.png)
-
-## Periodicity plot of wavelengths 1 cycle each 1, 20, 10 harmonics
-
-## Periodicity plot of wavelengths full cycles 1, 20, 10 harmonics
-
-## Table show outputs for 1, 20, 10 harmonics
-
-## comparison Table show outputs for 1, 20, 10 harmonics
-
-## Shamma 2D consonance
+## Shamma
 
 ![S. Shamma On the role of space and time in auditory processing, Trends Cogn. Sci., 5 (2001), pp. 340-348](man/scrapbook/shamma.png)
 
-## Oxenham mathematically equivalent
+## Oxenham
 
 ![Revisiting place and temporal theories of pitch, Andrew J. Oxenham, Acoust Sci Technol. 2013; 34(6): 388–396.](man/scrapbook/oxenham.png)
 
-## 2D plots of variance searching ???
-
-## Gabor reed oscillisciope figure
+## Gabor
 
 ![Gabor, D. (1946). Theory of communication. Part 1: the analysis of information. Electrical Engineers-Part III: Journal of the Institution of Radio and Communication Engineering, 93(26), 429–441.](man/scrapbook/gabor_reeds.png)
 
-## Gabor words about artifical flipping
+# Uncertainty
 
 ![Gabor, D. (1946). Theory of communication. Part 1: the analysis of information. Electrical Engineers-Part III: Journal of the Institution of Radio and Communication Engineering, 93(26), 429–441.](man/scrapbook/gabor_artificial.png)
 
-What is S-B variance?
-
-## Gabor Elemtary Signal
-
 ![Gabor, D. (1946). Theory of communication. Part 1: the analysis of information. Electrical Engineers-Part III: Journal of the Institution of Radio and Communication Engineering, 93(26), 429–441.](man/scrapbook/gabor_elementary_words.png)
-
 
 ![Gabor, D. (1946). Theory of communication. Part 1: the analysis of information. Electrical Engineers-Part III: Journal of the Institution of Radio and Communication Engineering, 93(26), 429–441.](man/scrapbook/gabor_elementary_gaussian.png)
 
 ![Gabor, D. (1946). Theory of communication. Part 1: the analysis of information. Electrical Engineers-Part III: Journal of the Institution of Radio and Communication Engineering, 93(26), 429–441.](man/scrapbook/gabor_elementary_wavelet.png)
 
-## Stern-Brocot as probability waves
-
-```{r, echo=F, message=F}
-variance = default_variance()
-path = paste0('./man/data/stern_brocot_',variance,'.rds')
-fractions = readRDS(path)
-```
-
-```{r, echo=F, message=F}
-bins = 21
-print(plot_error_hist(fractions$error,
-                      bins=bins,
-                      'fundamental', 
-                      variance,
-                      'Stern-Brocot Curve'))
-cat("  \n")
-
-```
-Number of Samples: `r fractions %>% nrow() %>% format(big.mark=',',scientific=F,trim=T)` \
-Number of Bins: `r bins` \
-[Additional Stern-Brocot Plots](/man/thoughts/SternBrocotCurve.md)
-
-
-[![Number Systems Adapted from Wikipedia](man/scrapbook/numbers.png)](https://en.wikipedia.org/wiki/Rational_number)
-
-## Benedetto screenshot
-
 ![Benedetto. (1990). Uncertainty principle inequalities and spectrum estimation. Recent Advances in Fourier Analysis and Its Applications (J. S. Bymes and J. L. Byrnes, eds.). Kluwer Acad. Publ., Dordrecht. MR 91i:94010](man/scrapbook/benedetto.png)
-
-## Uncertainty Principle
 
 
 $${\sigma_f}^2 {\sigma_\lambda}^2 \ge \frac{1} {16 \pi^2}$$
@@ -270,27 +172,106 @@ Otherwise the variances are constrained by the relationship:
 
 $${\sigma_f}^2 = \frac{\frac{1} {16 \pi^2}}{{\sigma_\lambda}^2} \approx \frac{0.006}{{\sigma_\lambda}^2}$$
 
-## M3 variance search
+# Computing Fundamentals
+
+### Least Common Denominator of Ratios
+
+![D. Sundararajan, Fourier Analysis—A Signal Processing Approach, 2018](man/scrapbook/sundararajan.png)
+
+## Fundamental Frequency
+
+$$f_{0} = \frac{f_{min}}{{ LCD}\left(r_{f 1},..., r_{f N}\right)}$$
+$LCD()$ is the least common denominator.\
+
+$$r_{f i} = \frac{f_{i}}{f_{min}} \pm \sigma_{f}^{2} = \frac{a_{i}}{b_{i}}$$
+
+$\sigma^2$ is the tolerance for converting a real number into a rational fraction.
+Later we will treat the Stern-Brocot function as a strictly localized probability 
+distribution with variance $\sigma^2$.
+
+$${GCD}(a_{i}, b_{i}) = 1$$
+
+$GCD()$ is the greatest common divisor.\
+
+## Fundamental Wavelength
+
+$$\lambda_{0} = \lambda_{max} { LCD}\left(r_{\lambda 1},..., r_{\lambda N}\right)$$
+
+$$r_{\lambda i} = \frac{\lambda_{i}}{\lambda_{min}} \pm \sigma_{\lambda}^{2} = \frac{c_{i}}{d_{i}}$$
+
+$${ GCD}(c_{i}, d_{i}) = 1$$
+
+## Least Common Denominator as Relative Periodicity
+
+![Harmony Perception by Periodicity Detection∗ Frieder Stolzenburg, Journal of Mathematics and Music, 9(3):215–238, 2015](man/scrapbook/stolzenburg.png)
+
+# Stern-Brocot
+
+## Stern-Brocot as Rational Number Finder
+
+[![Number Systems Adapted from Wikipedia](man/scrapbook/numbers.png)](https://en.wikipedia.org/wiki/Rational_number)
+
+![Approximating Rational Numbers by Fraction, Michal Forisek, Fun with Algorithms, 4th International Conference, FUN 2007 Castiglioncello, Italy, June 2007 Proceedings](man/scrapbook/forisek.png)
+
+## Stern-Brocot as Strictly Localized Probability Distribution
+
+```{r, echo=F, message=F}
+variance = default_variance()
+path = paste0('./man/data/stern_brocot_',variance,'.rds')
+fractions = readRDS(path)
+```
+
+```{r, echo=F, message=F}
+bins = 21
+print(plot_error_hist(fractions$error,
+                      bins=bins,
+                      'fundamental', 
+                      variance,
+                      'Stern-Brocot Curve'))
+cat("  \n")
+
+```
+Number of Samples: `r fractions %>% nrow() %>% format(big.mark=',',scientific=F,trim=T)` \
+Number of Bins: `r bins` \
+[Additional Stern-Brocot Plots](/man/thoughts/SternBrocotCurve.md)
+
+## Some Thoughts on Uncertainty
+
+The MaMi.CoDi model is quantized and uncertainty introduced when transforming 
+wavelength and frequency ratios to rational fractions using the Stern-Brocot 
+tree with variance $\sigma^2$. In our model, the more we know about the 
+wavelength of a wave, the less we know about its frequency. \
+
+$$\lambda=\frac{2 \pi}{k}$$
+
+$$f=\frac{\omega}{2 \pi}$$
+
+
+Uncertainty in our model is not the time duration and frequency uncertainty 
+$\Delta t \Delta f \simeq 1$ of Gabor or Wiener's famous quantum physics and 
+music analogy. If in Gabor (1946) Fig. 1.4 (b) the bank of reeds measured 
+wavelengths in a stationary state at $t=0$ instead of frequencies then his 2D 
+model would be akin to ours. Our model is frequency and wavelength uncertainty 
+$\Delta f \Delta \lambda$ that is mediated by $\Delta t$, closer to the original 
+quantum ideas of Einstein and de Broglie.\
+
+$$\lambda=\frac{2 \pi}{k}=\frac{h}{p}$$
+
+$$f=\frac{\omega}{2 \pi}=\frac{E}{h}$$
+
+## 2D Variance Searches
+
+![2D Variance Searches](man/scrapbook/Harmonic2D.png)
+
+## M3 Variance Search: Frequency and Wavelength Equal 
 
 ![M3 Variance Search - Equal Values](man/scrapbook/M3VarianceSearch.png)
 
-## M6 variance search
+## M3 Variance Search: Frequency and Wavelength Equal 
 
 ![M6 Variance Search - Equal Values](man/scrapbook/M6VarianceSearch.png)
 
-## Harmonic results
-
-[![Harmonic Wavelength and Frequency Consonance](https://img.youtube.com/vi/H3RO3NYzVJ8/0.jpg)](https://www.youtube.com/watch?v=H3RO3NYzVJ8)
-
-## 5 Partials
-
-[![5 Partials Wavelength and Frequency Consonance](https://img.youtube.com/vi/zzvs3_MsIZQ/0.jpg)](https://www.youtube.com/watch?v=zzvs3_MsIZQ)
-
-## 5 Partials No 3
-
-[![5 Partials No 3 Wavelength and Frequency Consonance](https://img.youtube.com/vi/ustqdAdhc_U/0.jpg)](https://www.youtube.com/watch?v=ustqdAdhc_U)
-
-## Screenshot of feynman stretching consonance
+# Stretching and Compressing
 
 [![Feynman Lecture 50 Audio from 24:20 to 28:20](man/scrapbook/feynman.png)](https://www.feynmanlectures.caltech.edu/I_50.html)
 
@@ -311,352 +292,19 @@ $${\sigma_f}^2 = \frac{\frac{1} {16 \pi^2}}{{\sigma_\lambda}^2} \approx \frac{0.
 ![IEEE TRANSACTIONS ON INSTRUMENTATION AND MEASUREMENT, VOL. 63, NO. 2, FEBRUARY 2014 267, A Practical Fundamental Frequency Extraction, Algorithm for Motion Parameters Estimation of Moving Targets, Jingchang Huang, Xin Zhang, Qianwei Zhou, Enliang Song, and Baoqing Li](man/scrapbook/huang1.png)
 ![IEEE TRANSACTIONS ON INSTRUMENTATION AND MEASUREMENT, VOL. 63, NO. 2, FEBRUARY 2014 267, A Practical Fundamental Frequency Extraction, Algorithm for Motion Parameters Estimation of Moving Targets, Jingchang Huang, Xin Zhang, Qianwei Zhou, Enliang Song, and Baoqing Li](man/scrapbook/huang2.png)
 
-## Stretched
+# Attention
 
-## Compressed
+![Attention improves performance primarily by reducing interneuronal correlations, Marlene R Cohen & John H R Maunsell, VOLUME 12 | NUMBER 12 | december 2009 nature NEUROSCIENCE](man/scrapbook/cohen.png)
 
-## Screenshot of Attention / inhibition studies
+![A Real-Time Gabor Primal Sketch for Visual Attention, IBPRIA - 2nd Iberian Conference on Pattern Recognition and Image Analysis, Estoril, Portugal, June 7-9, 2005 ](man/scrapbook/bernardino.png)
 
-## Bonang
+# Gabor Signals in Neuroscience
 
-[![Bonang Wavelength and Frequency Consonance](https://img.youtube.com/vi/UupIS6A6m0I/0.jpg)](https://www.youtube.com/watch?v=UupIS6A6m0I)
+![Vision Res. Vol. 24, No. 9. pp. 891-910. 1984, SPATIAL VISUAL CHANNELS IN THE FOURIER PLANE, JOHN G. DAUGMAN, Harvard University, Division of Applied Sciences, Cambridge. ,MA 02 138, U.S.A](man/scrapbook/daugman.png)
 
-## Pure
+# Behavioral
 
-[![Pure Wavelength and Frequency Consonance](https://img.youtube.com/vi/Q24nZNuPuTU/0.jpg)](https://www.youtube.com/watch?v=Q24nZNuPuTU)
-
-## P8
-
-## picture of concentric circles of N, Q, R, C numbers
-
-## Gabor wavelets are "found" in neuron resreach
-
-## screenshot of Gabor wavelet not being strictly local
-
-but S-B is strictly local
-
-## Back to Zarlino and Rameau
-
-show ratios that are octave complements
-
-## Double slit experiment
-
-## Quantum Consonance Perception
-
-### Angular Frequency
-
-A fourier transform from wavenumber to angular frequency.
-
-$$\psi(\omega, t) = \int \phi(k) e^{-i \left( \omega t - k x \right) } dk$$
-
-### Wavenumber
-
-A fourier transform from angular frequency to wavenumber.
-
-$$\phi(k, t) = \int \psi(\omega, t) e^{-i \left( k x \right) } d\omega$$
-
-### Uncertainty
-
-The model is quantized and uncertainty introduced when transforming 
-wavelength and frequency ratios to rational fractions using the Stern-Brocot 
-tree with variance $\sigma^2$. In our model, the more we know about the 
-wavelength of a wave, the less we know about its frequency. \
-
-$$\lambda=\frac{2 \pi}{k}$$
-
-$$f=\frac{\omega}{2 \pi}$$
-
-#### Some Thoughts on Uncertainty
-
-Uncertainty in our model is not the time duration and frequency uncertainty 
-$\Delta t \Delta f \simeq 1$ of Gabor or Wiener's famous quantum physics and 
-music analogy. If in Gabor (1946) Fig. 1.4 (b) the bank of reeds measured 
-wavelengths in a stationary state at $t=0$ instead of frequencies then his 2D 
-model would be akin to ours. Our model is frequency and wavelength uncertainty 
-$\Delta f \Delta \lambda$ that is mediated by $\Delta t$, closer to the original 
-quantum ideas of Einstein and de Broglie.\
-
-$$\lambda=\frac{2 \pi}{k}=\frac{h}{p}$$
-
-$$f=\frac{\omega}{2 \pi}=\frac{E}{h}$$
-
-#### Computing Fundamental Wavelength and Fundamental Frequency of a Chord
-
-```{r, echo=F, message=F}
-f0 = 100
-num_harmonics = 3
-f = 1:num_harmonics * f0
-f_formatted = sprintf(f, fmt = '%#.2f')
-```
-
-Consider a $`r f0`$ Hz wave with $`r num_harmonics`$ harmonics:
-
-$f_i=`r f_formatted`$ Hz\
-
-If we put those waves in a medium with a wave speed of
-
-```{r, echo=F, message=F}
-c_medium = max(f) * min(f)
-l=c_medium/f
-l_formatted = sprintf(l, fmt = '%#.2f')
-```
-
-$c = max(f) * min(f) = `r c_medium`$
-
-for an infinitely long time then the range of values for the wavelengths 
-$\lambda = \frac{c}{f}$ will be the same as the range for the frequencies:
-
-$\lambda_i=`r l_formatted`$ m\
-
-Lets calculate the overall cycle of the whole wave with harmonics twice, using 
-a traditional signal processing technique. We will find the frequency and 
-wavelength ratios as rational fractions using the Stern-Brocot tree with variances
-at the Heisenberg limit and then compute the least common denominator (LCD) for 
-each. Using the LCD we will find the overall cycle. \
-
-But a quick glance at the normalized wavelength and frequency values, above, will 
-show us that we are headed for a disagreement: the denominators of those ratios 
-will not be the same (even with complete precision) and ultimately we will have 
-two different values for the overall cycle.\
-
-Frequency Ratios
-
-```{r, echo=F, message=F, results='asis'}
-f_ratios = (f / min(f)) %>% sort()
-l_ratios = (l / min(l)) %>% sort()
-f_rational = approximate_rational_fractions(f_ratios, default_variance(), default_octave_deviation())
-print(knitr::kable(f_rational %>% dplyr::select(num, den)))
-```
-
-Wavelength Ratios
-
-```{r, echo=F, message=F, results='asis'}
-l_rational = approximate_rational_fractions(l_ratios, default_variance(), default_octave_deviation())
-print(knitr::kable(l_rational %>% dplyr::select(num, den)))
-```
-
-And the period(s) is (are?):
-
-```{r, echo=F, message=F, results='asis'}
-results = tibble::tibble(
-  frequency_lcd  = lcm_integers(f_rational$den),
-  f_whole        = min(f) / frequency_lcd,
-  T_from_f       = 1 / f_whole,
-  wavelength_lcd = lcm_integers(l_rational$den),
-  l_whole        = max(l) * wavelength_lcd,
-  T_from_l       = l_whole / c_medium
-)
-T_from_f = results$T_from_f
-T_from_l = results$T_from_l
-print(knitr::kable(
-  results  
-))
-```
-
-From the frequency perspective, the period of the whole wave is $`r T_from_f`$ s.\
-
-From the wavelength (space) perspective, the period of the whole wave is $`r T_from_l`$ s.\
-
-The periods disagree. The disagreement is not due to a lack of precision in the 
-sensors or the time duration that the waves were in the medium or even the rational 
-fraction approximation ($3/2$ is precisely $150/100$). The disagreement seems 
-to be a fundamental difference in the way the pattern would be perceived between
-wavelength and frequency sensors. This disagreement at the level of pattern 
-recognition of the combined wave is not the same as the uncertainty between 
-the wavelength and frequency of each partial in the wave, above.\
-
-## How MaMi.CoDi is Implemented
-
- ### The Math
-
-#### Traveling Waves
-
-$$s_{i}(x, t) = \sin \left( \frac{2\pi x}{\lambda_{i}} - 2 \pi f_{i} t \right)$$
-$N$ is the number of traveling waves in the chord.
-
-$$i=1...N$$
-
-#### Heisenberg Uncertainty
-
-$$\sigma_{\lambda}^{2} \sigma_{f}^{2} = \frac{1}{16\pi^{2}}$$
-
-The Stern-Brocot approximation is 0 outside $\pm\sigma^{2}$ which satisfies the
-exponential decay constraint and so we can presume equality.
-
-#### Consonance Perception
-
-Spatial Consonance
-
-$$C_{\lambda} = 50- \log_{2}\left({ ALCD}\left(r_{\lambda 1},..., r_{\lambda N}\right)\right)$$
-Temporal Consonance
-
-$$C_{f} = 50 - \log_{2}\left({ ALCD}\left(r_{f 1},..., r_{f N}\right)\right)$$
-
-Total Consonance
-
-$$C_{\lambda f} = C_{\lambda} + C_{f}$$
-
-Pure tone will have a total consonance $C_{\lambda f}$ of 100.
-
-Major-Minor
-
-$$M_{\lambda f} = C_{f} - C_{\lambda}$$
-Neutral chords will have a major-minor value $M_{\lambda f}$ of 0.
-
-### The Basilar Membrane
-
-When a chord is sounded, pressure waves travel through the air. Those pressure
-waves enter the ear canal where they vibrate the ear drum. The ear drum transfers
-the energy of the pressure waves through a series of bones in the fluid of the 
-middle ear to an oval window on the shell-shaped cochlea of the inner ear. 
-Within the fluid of the cochlea, the sound energy is converted into a traveling 
-surface wave along the basilar membrane.\
-
-Human basilar membranes are around 33 mm long. Thousands of evenly-spaced hair 
-cells are arranged in a line on the basilar membrane. The hair cells transduce
-mechanical vibrations into electrical activity that is sent along the auditory 
-nerve to the central auditory system. When a sound wave travels along the basilar 
-membrane, the hair cells positioned near the wavelength of that sound will send 
-electrical activity along the auditory nerve.\
-
-The fundamental tone of middle C is over a meter long
-in room temperature air at sea level. But the basilar membrane is only 33mm long. 
-How can the hair cells positioned along the basilar membrane detect wavelengths that are
-longer than the entire basilar membrane?\
-
-The traveling sound waves shorten as they travel around the spiral
-cochlea. Middle C's fundamental wavelength of 1.31 meters in air shrinks to 
-26 mm along the basilar membrane. So, when the fundamental tone of middle C is 
-sounded, the hair cells positioned 26 mm (81%) from the base of the cochlea
-send electrical activity along the auditory nerve.\
-
-When a musical chord comprised of many fundamental tones and harmonics is sounded,
-the hair cells at each shortened wavelength position send signals along 
-the auditory nerve. This spatial or rate-place arrangement of hair cell positions and 
-wavelengths of tones is known as tonotopy.\
-
-### The Core Idea of MaMi.CoDi
-
-If we play a chord, freeze time and observe which hair cells are displaced, what 
-are we observing? Are we observing frequencies? Periods? No. Time is frozen.
-Frequency (1/s) and period (s) are temporal observations. We are making a purely 
-spatial observation about wavelengths (m). We will come back to temporal
-observations shortly.\
-
-When we combine all the component parts of a chord together into a whole, 
-we can estimate the overall wavelength for the whole chord. A technique used in digital signal 
-processing and bricklaying is to estimate ratios (within an acceptable variance)
-between each of the parts and a selected reference part.
-The greatest common divisor (LCD) of those part ratios will be a measure of the periodicity 
-of the whole.\
-
-Chords with short wavelengths relative to the component wavelengths sound pleasant. 
-And chords with long wavelengths relative to component wavelengths sound unpleasant. 
-MaMi.CoDi uses this measure of relative wavelengths to predict the 
-perceived spatial consonance of a chord.\
-
-Let us unfreeze time and start counting how often a hair cell moves due to a 
-pure tone of our sounded chord. If we count the number of movements relative to a
-certain amount of time, we will be observing the frequency of the partial. 
-This would be a temporal observation. The auditory system has a property called 
-phase locking which allows it to encode the time intervals, periods, between spikes from 
-sound waves.\
-
-When we combine the period components of a chord together, we can estimate 
-the overall period for the whole chord. That chord period will be as long as
-or longer than the longest component period of the chord. Short relative periods
-sound pleasant. Long relative periods sound unpleasant.
-MaMi.CoDi uses this measure of chord period to predict the perceived temporal 
-consonance of a chord.\
-
-MaMi.CoDi sums the spatial and temporal consonance predictions to create
-an overall consonance-dissonance prediction. MaMi.CoDi subtracts
-the spatial consonance from the temporal consonance to create a major-minor polarity 
-prediction. Positive values will sound major, negative values minor and values 
-around zero will sound neutral.\
-
-Because wavelength and frequency are inverse of each other one might imagine that 
-the spatial and temporal signals would have the same values. However, for complex 
-pitches that is not the case. The pattern of the two sets of components are different.
-See the example of the major triad with 5 harmonics, below.
-
-# ```{r, child=c('man/Spatiotemporal_Periodicity.Rmd')}
-# ```
-
-### Finding the variance Values
-
-"One difficulty with distinguishing between place and temporal (or place-time) models of
-pitch is that spectral and temporal representations of a signal are mathematically equivalent:
-any change in the spectral representation is reflected by a change in the temporal
-representation, and vice versa . Discovering what the auditory system does means focusing
-on the physiological limits imposed by the cochlea and auditory nerve.\
-
-"For instance, the
-place theory can be tested using known limits of frequency selectivity: if pitch can be heard
-when only unresolved harmonics are presented (eliminating place information), then place
-information is not necessary for pitch. Similarly, if all the frequencies within a stimulus are
-above the upper limits of phase locking, and the temporal envelope information is somehow
-suppressed, then temporal information is not necessary for pitch perception."\
-
-from "Revisiting place and temporal theories of pitch", Andrew J. Oxenham, 2014.\
-
-The MaMi.CoDi model, based on Stolzenburg (2015), has one one parameter: 
-variance. Variance is used by the Stern-Brocot algorithm to find tone
-ratios as rational fractions that are then used to estimate the relative 
-periodicity of chords. variance acts as the physiological limits mentioned by 
-Oxenham, above.\
-
-Considering that the spatial and temporal signals had two different physiological
-origins, we searched a two-dimensional variance space in order to match model
-predictions with the large-scale behavioral results. It turned out that the 
-values that best matched large-scale behavioral results were always the
-same for temporal and spatial variance. This might indicate that the physiological 
-limitations are not specific to place signals or time signals separetely. But 
-instead the limitation is higher in the auditory system after the signals have
-been passed along.\
-
-That is to say, the limits that creates differences between temporal and spatial 
-signals might not be frequency selectivity or phase locking but instead a limit
-of higher-level perception or pattern recognition, where estimates of the period 
-of a complex signal is made from components.\
-
-MaMi.CoDi uses the Stern-Brocot tree to find rational fractions for the ratios 
-within a given variance. How do we find the best variance values? For the 
-MaMi.CoDi model we ran thousands of computations with various variance values 
-and compared the predictions with results from six of the large-scale behavioral 
-experiments.\
-
-Because the spatial signal and the temporal signal have different origins
-we initially did a two-dimensional variance search. However the closest 
-fits to the behavioral data came from spatial and variance values being the 
-same. Insofar as this model represents processing in the auditory cortex, it 
-would seem that estimating the cyclicity of the two signals happens higher up
-in the auditoray system after the spatial and temporal signals have been processed.\
-
-
-### Difference between Stern-Brocot Rational Fraction Approximations and Floating Point Values
-
-The Stern-Brocot curve is a repeatable, deterministic curve of where rational 
-fractions exist or do not exist within a given variance.\
-
-However, the value is 0 outside $\pm \sigma^{2}$ and the area of the 
-curve equals one so that we can use it like a probability density 
-function.\ 
-
-When I see the shape of this curve of rational numbers at the Heisenberg limit
-I can't help but think about the double-slit experiment and chance versus 
-determinism, in general.\
-
-Perhaps things are quantized but not probabilistic?\
-
-Maybe God does not play dice with the universe. Whatever the game, God keeps 
-score with rational fractions at the Heisenberg limit.\
-
-## Theoretical predictions compared to large-scale behavioral results
-
-The large-scale behavioral data in the plots below are from [Timbral effects on consonance disentangle psychoacoustic mechanisms and suggest perceptual origins for musical scales](https://www.nature.com/articles/s41467-024-45812-z) by Raja Marjieh, Peter M. C. Harrison, Harin Lee, Fotini Deligiannaki & Nori Jacoby.
-
-### Manipulating harmonic frequencies
+## Manipulating Harmonic Frequencies
 
 ```{r, include=F}
 timbre_paper = readRDS('./man/data/readme.rds')
@@ -903,6 +551,316 @@ p = params %>% purrr::map(\(p) {
   cat("  \n")
 })
 ```
+
+# Some Videos
+
+## Pure
+
+[![Pure Wavelength and Frequency Consonance](https://img.youtube.com/vi/Q24nZNuPuTU/0.jpg)](https://www.youtube.com/watch?v=Q24nZNuPuTU)
+
+## Bonang
+
+[![Bonang Wavelength and Frequency Consonance](https://img.youtube.com/vi/UupIS6A6m0I/0.jpg)](https://www.youtube.com/watch?v=UupIS6A6m0I)
+
+## Harmonic results
+
+[![Harmonic Wavelength and Frequency Consonance](https://img.youtube.com/vi/H3RO3NYzVJ8/0.jpg)](https://www.youtube.com/watch?v=H3RO3NYzVJ8)
+
+## 5 Partials
+
+[![5 Partials Wavelength and Frequency Consonance](https://img.youtube.com/vi/zzvs3_MsIZQ/0.jpg)](https://www.youtube.com/watch?v=zzvs3_MsIZQ)
+
+## 5 Partials No 3
+
+[![5 Partials No 3 Wavelength and Frequency Consonance](https://img.youtube.com/vi/ustqdAdhc_U/0.jpg)](https://www.youtube.com/watch?v=ustqdAdhc_U)
+
+
+# Fourier Transform Between Wavelength and Frequency Probability Waves
+
+A fourier transform from wavenumber to angular frequency.
+
+$$\psi(\omega, t) = \int \phi(k) e^{-i \left( \omega t - k x \right) } dk$$
+
+A fourier transform from angular frequency to wavenumber.
+
+$$\phi(k, t) = \int \psi(\omega, t) e^{-i \left( k x \right) } d\omega$$
+
+# Frequency and Wavelength Patterns
+
+```{r, echo=F, message=F}
+f0 = 100
+num_harmonics = 3
+f = 1:num_harmonics * f0
+f_formatted = sprintf(f, fmt = '%#.2f')
+```
+
+Consider a $`r f0`$ Hz wave with $`r num_harmonics`$ harmonics:
+
+$f_i=`r f_formatted`$ Hz\
+
+If we put those waves in a medium with a wave speed of
+
+```{r, echo=F, message=F}
+c_medium = max(f) * min(f)
+l=c_medium/f
+l_formatted = sprintf(l, fmt = '%#.2f')
+```
+
+$c = max(f) * min(f) = `r c_medium`$
+
+for an infinitely long time then the range of values for the wavelengths 
+$\lambda = \frac{c}{f}$ will be the same as the range for the frequencies:
+
+$\lambda_i=`r l_formatted`$ m\
+
+Lets calculate the overall cycle of the whole wave with harmonics twice, using 
+a traditional signal processing technique. We will find the frequency and 
+wavelength ratios as rational fractions using the Stern-Brocot tree with variances
+at the Heisenberg limit and then compute the least common denominator (LCD) for 
+each. Using the LCD we will find the overall cycle. \
+
+But a quick glance at the normalized wavelength and frequency values, above, will 
+show us that we are headed for a disagreement: the denominators of those ratios 
+will not be the same (even with complete precision) and ultimately we will have 
+two different values for the overall cycle.\
+
+Frequency Ratios
+
+```{r, echo=F, message=F, results='asis'}
+f_ratios = (f / min(f)) %>% sort()
+l_ratios = (l / min(l)) %>% sort()
+f_rational = approximate_rational_fractions(f_ratios, default_variance(), default_octave_deviation())
+print(knitr::kable(f_rational %>% dplyr::select(num, den)))
+```
+
+Wavelength Ratios
+
+```{r, echo=F, message=F, results='asis'}
+l_rational = approximate_rational_fractions(l_ratios, default_variance(), default_octave_deviation())
+print(knitr::kable(l_rational %>% dplyr::select(num, den)))
+```
+
+And the period(s) is (are?):
+
+```{r, echo=F, message=F, results='asis'}
+results = tibble::tibble(
+  frequency_lcd  = lcm_integers(f_rational$den),
+  f_whole        = min(f) / frequency_lcd,
+  T_from_f       = 1 / f_whole,
+  wavelength_lcd = lcm_integers(l_rational$den),
+  l_whole        = max(l) * wavelength_lcd,
+  T_from_l       = l_whole / c_medium
+)
+T_from_f = results$T_from_f
+T_from_l = results$T_from_l
+print(knitr::kable(
+  results  
+))
+```
+
+From the frequency perspective, the period of the whole wave is $`r T_from_f`$ s.\
+
+From the wavelength (space) perspective, the period of the whole wave is $`r T_from_l`$ s.\
+
+The periods disagree. The disagreement is not due to a lack of precision in the 
+sensors or the time duration that the waves were in the medium or even the rational 
+fraction approximation ($3/2$ is precisely $150/100$). The disagreement seems 
+to be a fundamental difference in the way the pattern would be perceived between
+wavelength and frequency sensors. This disagreement at the level of pattern 
+recognition of the combined wave is not the same as the uncertainty between 
+the wavelength and frequency of each partial in the wave, above.\
+
+## How MaMi.CoDi is Implemented
+
+### The Math
+
+#### Traveling Waves
+
+$$s_{i}(x, t) = \sin \left( \frac{2\pi x}{\lambda_{i}} - 2 \pi f_{i} t \right)$$
+$N$ is the number of traveling waves in the chord.
+
+$$i=1...N$$
+
+#### Heisenberg Uncertainty
+
+$$\sigma_{\lambda}^{2} \sigma_{f}^{2} = \frac{1}{16\pi^{2}}$$
+
+The Stern-Brocot approximation is 0 outside $\pm\sigma^{2}$ which satisfies the
+exponential decay constraint and so we can presume equality.
+
+#### Consonance Perception
+
+Spatial Consonance
+
+$$C_{\lambda} = 50- \log_{2}\left({ ALCD}\left(r_{\lambda 1},..., r_{\lambda N}\right)\right)$$
+Temporal Consonance
+
+$$C_{f} = 50 - \log_{2}\left({ ALCD}\left(r_{f 1},..., r_{f N}\right)\right)$$
+
+Total Consonance
+
+$$C_{\lambda f} = C_{\lambda} + C_{f}$$
+
+Pure tone will have a total consonance $C_{\lambda f}$ of 100.
+
+Major-Minor
+
+$$M_{\lambda f} = C_{f} - C_{\lambda}$$
+Neutral chords will have a major-minor value $M_{\lambda f}$ of 0.
+
+### The Basilar Membrane
+
+When a chord is sounded, pressure waves travel through the air. Those pressure
+waves enter the ear canal where they vibrate the ear drum. The ear drum transfers
+the energy of the pressure waves through a series of bones in the fluid of the 
+middle ear to an oval window on the shell-shaped cochlea of the inner ear. 
+Within the fluid of the cochlea, the sound energy is converted into a traveling 
+surface wave along the basilar membrane.\
+
+Human basilar membranes are around 33 mm long. Thousands of evenly-spaced hair 
+cells are arranged in a line on the basilar membrane. The hair cells transduce
+mechanical vibrations into electrical activity that is sent along the auditory 
+nerve to the central auditory system. When a sound wave travels along the basilar 
+membrane, the hair cells positioned near the wavelength of that sound will send 
+electrical activity along the auditory nerve.\
+
+The fundamental tone of middle C is over a meter long
+in room temperature air at sea level. But the basilar membrane is only 33mm long. 
+How can the hair cells positioned along the basilar membrane detect wavelengths that are
+longer than the entire basilar membrane?\
+
+The traveling sound waves shorten as they travel around the spiral
+cochlea. Middle C's fundamental wavelength of 1.31 meters in air shrinks to 
+26 mm along the basilar membrane. So, when the fundamental tone of middle C is 
+sounded, the hair cells positioned 26 mm (81%) from the base of the cochlea
+send electrical activity along the auditory nerve.\
+
+When a musical chord comprised of many fundamental tones and harmonics is sounded,
+the hair cells at each shortened wavelength position send signals along 
+the auditory nerve. This spatial or rate-place arrangement of hair cell positions and 
+wavelengths of tones is known as tonotopy.\
+
+### The Core Idea of MaMi.CoDi
+
+If we play a chord, freeze time and observe which hair cells are displaced, what 
+are we observing? Are we observing frequencies? Periods? No. Time is frozen.
+Frequency (1/s) and period (s) are temporal observations. We are making a purely 
+spatial observation about wavelengths (m). We will come back to temporal
+observations shortly.\
+
+When we combine all the component parts of a chord together into a whole, 
+we can estimate the overall wavelength for the whole chord. A technique used in digital signal 
+processing and bricklaying is to estimate ratios (within an acceptable variance)
+between each of the parts and a selected reference part.
+The greatest common divisor (LCD) of those part ratios will be a measure of the periodicity 
+of the whole.\
+
+Chords with short wavelengths relative to the component wavelengths sound pleasant. 
+And chords with long wavelengths relative to component wavelengths sound unpleasant. 
+MaMi.CoDi uses this measure of relative wavelengths to predict the 
+perceived spatial consonance of a chord.\
+
+Let us unfreeze time and start counting how often a hair cell moves due to a 
+pure tone of our sounded chord. If we count the number of movements relative to a
+certain amount of time, we will be observing the frequency of the partial. 
+This would be a temporal observation. The auditory system has a property called 
+phase locking which allows it to encode the time intervals, periods, between spikes from 
+sound waves.\
+
+When we combine the period components of a chord together, we can estimate 
+the overall period for the whole chord. That chord period will be as long as
+or longer than the longest component period of the chord. Short relative periods
+sound pleasant. Long relative periods sound unpleasant.
+MaMi.CoDi uses this measure of chord period to predict the perceived temporal 
+consonance of a chord.\
+
+MaMi.CoDi sums the spatial and temporal consonance predictions to create
+an overall consonance-dissonance prediction. MaMi.CoDi subtracts
+the spatial consonance from the temporal consonance to create a major-minor polarity 
+prediction. Positive values will sound major, negative values minor and values 
+around zero will sound neutral.\
+
+Because wavelength and frequency are inverse of each other one might imagine that 
+the spatial and temporal signals would have the same values. However, for complex 
+pitches that is not the case. The pattern of the two sets of components are different.
+See the example of the major triad with 5 harmonics, below.
+
+```{r, child=c('man/Spatiotemporal_Periodicity.Rmd')}
+```
+
+### Finding the variance Values
+
+"One difficulty with distinguishing between place and temporal (or place-time) models of
+pitch is that spectral and temporal representations of a signal are mathematically equivalent:
+any change in the spectral representation is reflected by a change in the temporal
+representation, and vice versa . Discovering what the auditory system does means focusing
+on the physiological limits imposed by the cochlea and auditory nerve.\
+
+"For instance, the
+place theory can be tested using known limits of frequency selectivity: if pitch can be heard
+when only unresolved harmonics are presented (eliminating place information), then place
+information is not necessary for pitch. Similarly, if all the frequencies within a stimulus are
+above the upper limits of phase locking, and the temporal envelope information is somehow
+suppressed, then temporal information is not necessary for pitch perception."\
+
+from "Revisiting place and temporal theories of pitch", Andrew J. Oxenham, 2014.\
+
+The MaMi.CoDi model, based on Stolzenburg (2015), has one one parameter: 
+variance. Variance is used by the Stern-Brocot algorithm to find tone
+ratios as rational fractions that are then used to estimate the relative 
+periodicity of chords. variance acts as the physiological limits mentioned by 
+Oxenham, above.\
+
+Considering that the spatial and temporal signals had two different physiological
+origins, we searched a two-dimensional variance space in order to match model
+predictions with the large-scale behavioral results. It turned out that the 
+values that best matched large-scale behavioral results were always the
+same for temporal and spatial variance. This might indicate that the physiological 
+limitations are not specific to place signals or time signals separetely. But 
+instead the limitation is higher in the auditory system after the signals have
+been passed along.\
+
+That is to say, the limits that creates differences between temporal and spatial 
+signals might not be frequency selectivity or phase locking but instead a limit
+of higher-level perception or pattern recognition, where estimates of the period 
+of a complex signal is made from components.\
+
+MaMi.CoDi uses the Stern-Brocot tree to find rational fractions for the ratios 
+within a given variance. How do we find the best variance values? For the 
+MaMi.CoDi model we ran thousands of computations with various variance values 
+and compared the predictions with results from six of the large-scale behavioral 
+experiments.\
+
+Because the spatial signal and the temporal signal have different origins
+we initially did a two-dimensional variance search. However the closest 
+fits to the behavioral data came from spatial and variance values being the 
+same. Insofar as this model represents processing in the auditory cortex, it 
+would seem that estimating the cyclicity of the two signals happens higher up
+in the auditoray system after the spatial and temporal signals have been processed.\
+
+
+### Difference between Stern-Brocot Rational Fraction Approximations and Floating Point Values
+
+The Stern-Brocot curve is a repeatable, deterministic curve of where rational 
+fractions exist or do not exist within a given variance.\
+
+However, the value is 0 outside $\pm \sigma^{2}$ and the area of the 
+curve equals one so that we can use it like a probability density 
+function.\ 
+
+When I see the shape of this curve of rational numbers at the Heisenberg limit
+I can't help but think about the double-slit experiment and chance versus 
+determinism, in general.\
+
+Perhaps things are quantized but not probabilistic?\
+
+Maybe God does not play dice with the universe. Whatever the game, God keeps 
+score with rational fractions at the Heisenberg limit.\
+
+## Theoretical predictions compared to large-scale behavioral results
+
+The large-scale behavioral data in the plots below are from [Timbral effects on consonance disentangle psychoacoustic mechanisms and suggest perceptual origins for musical scales](https://www.nature.com/articles/s41467-024-45812-z) by Raja Marjieh, Peter M. C. Harrison, Harin Lee, Fotini Deligiannaki & Nori Jacoby.
+
 
 #### Notes on plots:
 
