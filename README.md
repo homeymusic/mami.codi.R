@@ -300,6 +300,13 @@ Engineers-Part III: Journal of the Institution of Radio and
 Communication Engineering, 93(26), 429–441.</figcaption>
 </figure>
 
+## Stern-Brocot as probability waves
+
+![](man/figures/README-unnamed-chunk-10-1.png)<!-- -->  
+Number of Samples: 1,000,000  
+Number of Bins: 21  
+[Additional Stern-Brocot Plots](/man/thoughts/SternBrocotCurve.md)
+
 ## Benedetto screenshot
 
 <figure>
@@ -332,22 +339,24 @@ Otherwise the variances are constrained by the relationship:
 
 $${\sigma_f}^2 = \frac{\frac{1} {16 \pi^2}}{{\sigma_\lambda}^2} \approx \frac{0.006}{{\sigma_\lambda}^2}$$
 
-## Stern-Brocot as probability waves
-
-![](man/figures/README-unnamed-chunk-10-1.png)<!-- -->  
-Number of Samples: 1,000,000  
-Number of Bins: 21  
-[Additional Stern-Brocot Plots](man/thoughts/SternBrocotCurve.md)
-
 ## M3 variance search
 
 ## M6 variance search
 
 ## Harmonic results
 
+[![Harmonic Wavelength and Frequency
+Consonance](https://img.youtube.com/vi/H3RO3NYzVJ8/0.jpg)](https://www.youtube.com/watch?v=H3RO3NYzVJ8)
+
 ## 5 Partials
 
+[![5 Partials Wavelength and Frequency
+Consonance](https://img.youtube.com/vi/zzvs3_MsIZQ/0.jpg)](https://www.youtube.com/watch?v=zzvs3_MsIZQ)
+
 ## 5 Partials No 3
+
+[![5 Partials No 3 Wavelength and Frequency
+Consonance](https://img.youtube.com/vi/ustqdAdhc_U/0.jpg)](https://www.youtube.com/watch?v=ustqdAdhc_U)
 
 ## Screenshot of feynman stretching consonance
 
@@ -389,15 +398,15 @@ and Manohar Das, Member, IEEE</figcaption>
 
 ### Moving Targets
 
-<figure>
-<img src="man/scrapbook/huang.png"
-alt="IEEE TRANSACTIONS ON INSTRUMENTATION AND MEASUREMENT, VOL. 63, NO. 2, FEBRUARY 2014 267, A Practical Fundamental Frequency Extraction, Algorithm for Motion Parameters Estimation of Moving Targets, Jingchang Huang, Xin Zhang, Qianwei Zhou, Enliang Song, and Baoqing Li" />
-<figcaption aria-hidden="true">IEEE TRANSACTIONS ON INSTRUMENTATION AND
+![IEEE TRANSACTIONS ON INSTRUMENTATION AND MEASUREMENT, VOL. 63, NO. 2,
+FEBRUARY 2014 267, A Practical Fundamental Frequency Extraction,
+Algorithm for Motion Parameters Estimation of Moving Targets, Jingchang
+Huang, Xin Zhang, Qianwei Zhou, Enliang Song, and Baoqing
+Li](man/scrapbook/huang1.png) ![IEEE TRANSACTIONS ON INSTRUMENTATION AND
 MEASUREMENT, VOL. 63, NO. 2, FEBRUARY 2014 267, A Practical Fundamental
 Frequency Extraction, Algorithm for Motion Parameters Estimation of
 Moving Targets, Jingchang Huang, Xin Zhang, Qianwei Zhou, Enliang Song,
-and Baoqing Li</figcaption>
-</figure>
+and Baoqing Li](man/scrapbook/huang2.png)
 
 ## Stretched
 
@@ -407,7 +416,13 @@ and Baoqing Li</figcaption>
 
 ## Bonang
 
+[![Bonang Wavelength and Frequency
+Consonance](https://img.youtube.com/vi/UupIS6A6m0I/0.jpg)](https://www.youtube.com/watch?v=UupIS6A6m0I)
+
 ## Pure
+
+[![Pure Wavelength and Frequency
+Consonance](https://img.youtube.com/vi/Q24nZNuPuTU/0.jpg)](https://www.youtube.com/watch?v=Q24nZNuPuTU)
 
 ## P8
 
