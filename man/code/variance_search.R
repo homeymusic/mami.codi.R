@@ -1,4 +1,4 @@
-search_label = 'M6'
+search_label = 'M3'
 heisenberg   = F
 # options(timeout = max(1000, getOption("timeout")))
 # devtools::install_github('git@github.com:homeymusic/mami.codi.R',

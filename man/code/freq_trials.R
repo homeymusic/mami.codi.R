@@ -63,7 +63,13 @@ run_trials <- function(search_label, variances, heisenberg) {
                       bass_df$frequency) %>% unique %>% sort,
         amplitude = 1
       )
-      chord = chord_df %>% as.list() %>% hrep::sparse_fr_spectrum()
+      octave_f0 <- hrep::midi_to_freq(tonic_midi + 12)
+      octave <- tibble::tibble(
+        frequency = octave_f0 * 1:4,
+        amplitude = 1
+      ) %>% as.list() %>%  hrep::sparse_fr_spectrum()
+
+      chord = do.call(hrep::combine_sparse_spectra, list(bass,upper,octave))
     } else if (search_label == '5PartialsNo3') {
       bass_f0 <- hrep::midi_to_freq(tonic_midi)
       bass <- tibble::tibble(
@@ -77,12 +83,18 @@ run_trials <- function(search_label, variances, heisenberg) {
         amplitude = c(1, 1, 0, 1, 1)
       ) %>% as.list() %>%  hrep::sparse_fr_spectrum()
 
-      chord = do.call(hrep::combine_sparse_spectra, list(bass,upper))
+      octave_f0 <- hrep::midi_to_freq(tonic_midi)
+      octave <- tibble::tibble(
+        frequency = octave_f0 * 1:5,
+        amplitude = c(1, 1, 0, 1, 1)
+      ) %>% as.list() %>%  hrep::sparse_fr_spectrum()
+
+      chord = do.call(hrep::combine_sparse_spectra, list(bass,upper,octave))
     } else {
-      chord = hrep::sparse_fr_spectrum(c(tonic_midi, interval),
-                                       num_harmonics = num_harmonics,
-                                       roll_off_dB   = roll_off,
-                                       octave_ratio  = octave_ratio
+      chord = c(tonic_midi, interval + tonic_midi, tonic_midi+12) %>% hrep::sparse_fr_spectrum(
+        num_harmonics = num_harmonics,
+        octave_ratio  = octave_ratio,
+        roll_off_dB   = 3.0
       )
     }
 

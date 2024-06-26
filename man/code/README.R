@@ -1,5 +1,5 @@
 source('./utils.R')
-devtools::install_github('git@github.com:homeymusic/mami.codi.R')
+# devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 
 library(mami.codi.R)
 devtools::load_all(".")
@@ -148,7 +148,13 @@ output = grid %>% furrr::future_pmap_dfr(\(temporal_variance,
       amplitude = 1
     ) %>% as.list() %>%  hrep::sparse_fr_spectrum()
 
-    study_chord = do.call(hrep::combine_sparse_spectra, list(bass,upper))
+    octave_f0 <- hrep::midi_to_freq(tonic_midi + 12)
+    octave <- tibble::tibble(
+      frequency = octave_f0 * 1:4,
+      amplitude = 1
+    ) %>% as.list() %>%  hrep::sparse_fr_spectrum()
+
+    study_chord = do.call(hrep::combine_sparse_spectra, list(bass,upper,octave))
   } else if (timbre == '5PartialsNo3') {
     bass_f0 <- hrep::midi_to_freq(tonic_midi)
     bass <- tibble::tibble(
@@ -162,9 +168,15 @@ output = grid %>% furrr::future_pmap_dfr(\(temporal_variance,
       amplitude = c(1, 1, 0, 1, 1)
     ) %>% as.list() %>%  hrep::sparse_fr_spectrum()
 
-    study_chord = do.call(hrep::combine_sparse_spectra, list(bass,upper))
+    octave_f0 <- hrep::midi_to_freq(tonic_midi)
+    octave <- tibble::tibble(
+      frequency = octave_f0 * 1:5,
+      amplitude = c(1, 1, 0, 1, 1)
+    ) %>% as.list() %>%  hrep::sparse_fr_spectrum()
+
+    study_chord = do.call(hrep::combine_sparse_spectra, list(bass,upper,octave))
   } else {
-    study_chord = c(tonic_midi, interval + tonic_midi) %>% hrep::sparse_fr_spectrum(
+    study_chord = c(tonic_midi, interval + tonic_midi, tonic_midi+12) %>% hrep::sparse_fr_spectrum(
       num_harmonics = num_harmonics,
       octave_ratio  = octave_ratio,
       roll_off_dB   = 3.0
