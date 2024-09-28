@@ -27,7 +27,7 @@ mami.codi <- function(
     spatial_variance  = NA,
     deviation         = OCTAVE_DEVIATION,
     metadata          = NA,
-    verbose            = FALSE,
+    verbose           = FALSE,
     ...
 ) {
 
