@@ -1,6 +1,17 @@
 MaMi.CoDi: A Model of Consonance Perception
 ================
 
+# Harmony Perception
+
+Below is a schematic of the MaMi.CoDi model of harmony perception.
+
+<figure>
+<img src="man/scrapbook/schematic_diagram.png"
+alt="Schematic Diagrm of Harmony Perception" />
+<figcaption aria-hidden="true">Schematic Diagrm of Harmony
+Perception</figcaption>
+</figure>
+
 # The Traveling Wave
 
 $$e ^ {-i \left( \omega t - k x \right)}$$

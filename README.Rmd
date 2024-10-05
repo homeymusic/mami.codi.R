@@ -32,6 +32,11 @@ plot_fundamental_wavelength <- function(midi) {
 }
 ```
 
+# Harmony Perception
+
+Below is a schematic of the MaMi.CoDi model of harmony perception.
+
+![Schematic Diagrm of Harmony Perception](man/scrapbook/schematic_diagram.png)
 
 # The Traveling Wave
 
