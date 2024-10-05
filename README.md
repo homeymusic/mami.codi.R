@@ -325,6 +325,40 @@ Number of Bins: 21
 
 ## Some Thoughts on Uncertainty
 
+### An Evolution of Gabor Uncertainty
+
+While Gabor’s analogy to Heisenberg’s uncertainty was innovative in its
+application to signal processing, it is important to note that
+Heisenberg’s uncertainty applies to a purely spatial component
+(position) and a time-dependent component (momentum). Gabor’s framework,
+however, modifies this principle such that both variables are temporal:
+a purely temporal component (time) and a time-dependent component
+(frequency), inviting us to re-explore the power and applicability of
+this analogy.
+
+”… daß kanonisch konjugierte Größen simultan nur mit einer
+charakteristischen Ungenauigkeit bestimmt werden können.” — Heisenberg
+(”… that canonically conjugate quantities can only be determined
+simultaneously with a characteristic uncertainty.”)
+
+In his borrowing of the principle for signal processing, Gabor’s idea of
+time (as one component of the uncertainty pair) is actually closer to
+Heisenberg’s idea of observational simultaneity: for Heisenberg, elapsed
+time was not one of the components of the conjugate pair but instead
+framed the observation.
+
+In contrast to Gabor, our model returns to the original spirit of
+Heisenberg’s principle, describing an uncertainty relation that involves
+a purely spatial component (wavelength) and a time-dependent component
+(frequency) in the context of a sample interval, $\Delta t$. This brings
+us closer to the original insights of Heisenberg by maintaining the
+trade-off between a purely spatial and a time-dependent conjugate pair.
+
+By combining spatial and temporal uncertainties in a way that aligns
+more closely with Heisenberg’s original intent, our model introduces
+wavelength as a spatial counterpart to frequency. This provides a novel
+uncertainty framework for classical systems governed by wave behavior.
+
 The MaMi.CoDi model is quantized and uncertainty introduced when
 transforming wavelength and frequency ratios to rational fractions using
 the Stern-Brocot tree with variance $\sigma^2$. In our model, the more
