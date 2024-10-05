@@ -6,12 +6,10 @@ MaMi.CoDi: A Model of Harmony Perception
 Below is a schematic diagram of the MaMi.CoDi model of harmony
 perception.
 
-<figure>
-<img src="man/scrapbook/schematic_diagram.png"
-alt="Schematic Diagrm of Harmony Perception" />
-<figcaption aria-hidden="true">Schematic Diagrm of Harmony
-Perception</figcaption>
-</figure>
+![](man/scrapbook/schematic_diagram.png)
+
+(The information design of this diagram is an homage to [Claude
+Shannon](https://en.wikipedia.org/wiki/Claude_Shannon).)
 
 # The Traveling Wave
 
