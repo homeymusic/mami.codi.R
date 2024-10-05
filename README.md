@@ -9,7 +9,9 @@ perception.
 ![](man/scrapbook/schematic_diagram.png)
 
 (The information design of this diagram is an homage to [Claude
-Shannon](https://en.wikipedia.org/wiki/Claude_Shannon).)
+Shannon](https://en.wikipedia.org/wiki/Claude_Shannon)’s [The
+Mathematical Theory of
+Communication](https://www.google.com/books/edition/The_Mathematical_Theory_of_Communication/IZ77BwAAQBAJ).)
 
 # The Traveling Wave
 
