@@ -1,5 +1,5 @@
 ---
-title: "MaMi.CoDi: A Model of Consonance Perception"
+title: "MaMi.CoDi: A Model of Harmony Perception"
 output:
   github_document: default
 ---
@@ -32,9 +32,9 @@ plot_fundamental_wavelength <- function(midi) {
 }
 ```
 
-# Harmony Perception
+# Harmony Perception Overview
 
-Below is a schematic of the MaMi.CoDi model of harmony perception.
+Below is a schematic diagram of the MaMi.CoDi model of harmony perception.
 
 ![Schematic Diagrm of Harmony Perception](man/scrapbook/schematic_diagram.png)
 

@@ -1,9 +1,10 @@
-MaMi.CoDi: A Model of Consonance Perception
+MaMi.CoDi: A Model of Harmony Perception
 ================
 
-# Harmony Perception
+# Harmony Perception Overview
 
-Below is a schematic of the MaMi.CoDi model of harmony perception.
+Below is a schematic diagram of the MaMi.CoDi model of harmony
+perception.
 
 <figure>
 <img src="man/scrapbook/schematic_diagram.png"
