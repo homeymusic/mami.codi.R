@@ -5,9 +5,13 @@ MaMi.CoDi: A Model of Harmony Perception
 
 $$\mathbf{H} = (h_f - h_\lambda) \mathbf{\hat{i}} + (h_f + h_\lambda) \mathbf{\hat{j}}$$
 
-$$h_f = log_2 \left(ALCD\left(\left\{ \frac{f_n}{f_{min}} \pm \sigma_f \right\}_{n=1}^{N}\right)\right)$$
+$$
+h_f = \log_2 \left( ALCD\left( \left\{ \frac{f_n}{f_{min}} \pm \sigma_f \right\}_{n=1}^{N} \right) \right)
+$$
 
-$$h_\lambda = log_2 \left(ALCD\left(\left\{ \frac{\lambda_n}{\lambda_{min}} \pm \sigma_\lambda \right\}_{n=1}^{N}\right)\right)$$
+$$
+h_\lambda = \log_2 \left( ALCD\left( \left\{ \frac{\lambda_n}{\lambda_{min}} \pm \sigma_\lambda \right\}_{n=1}^{N} \right) \right)
+$$
 
 $$\sigma_f\sigma_\lambda \le \frac{1}{4 \pi}$$
 
