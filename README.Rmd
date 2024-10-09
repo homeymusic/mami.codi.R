@@ -34,30 +34,25 @@ plot_fundamental_wavelength <- function(midi) {
 
 # Harmony Perception Overview
 
-$$\mathbf{H} = (h_f - h_\lambda) \mathbf{\hat{i}} + (h_f + h_\lambda) \mathbf{\hat{j}}$$
-
-
-```math
-h_f = \log_2 \left( ALCD\left( \left\{ \frac{f_n}{f_{min}} \pm \sigma_f \right\}_{n=1}^{N} \right) \right)
-```
-
-```math
-h_\lambda = \log_2 \left( ALCD\left( \left\{ \frac{\lambda_n}{\lambda_{min}} \pm \sigma_\lambda \right\}_{n=1}^{N} \right) \right)
-```
-
-```math
-\sigma_f\sigma_\lambda \le \frac{1}{4 \pi}
-```
-
-Below is a schematic diagram of the MaMi.CoDi model of harmony perception.
-
 ![](man/scrapbook/harmony_perception_schematic.png)
 
 (The information design of this diagram is intended as a respectful homage to a hero, [Claude Shannon](https://en.wikipedia.org/wiki/Claude_Shannon), and his seminal work [The Mathematical Theory of Communication](https://www.google.com/books/edition/The_Mathematical_Theory_of_Communication/IZ77BwAAQBAJ).)
 
-# The Traveling Wave
+$$\mathbf{H} = (h_\omega - h_k) \mathbf{i} + (h_\omega + h_k) \mathbf{j}$$
 
-$$e ^ {-i \left( \omega t - k x \right)}$$
+```math
+h_\omega = \log_2 \left( ALCD\left( \left\{ \frac{\omega_n \pm \sigma_\omega}{\omega_{min} \pm \sigma_\omega} \right\}_{n=1}^{N} \right) \right)
+```
+
+```math
+h_k = \log_2 \left( ALCN\left( \left\{ \frac{k_n \pm \sigma_k}{k_{max} \pm \sigma_k} \right\}_{n=1}^{N} \right) \right)
+```
+
+```math
+\Delta(\sigma_x, \sigma_k, \sigma_t, \sigma_\omega, \dots) \geq \kappa
+```
+
+$$p(x,t) = A(x,t) e ^ {-i \left( \omega t - k x \right)}$$
 
 # Wavelengths
 
