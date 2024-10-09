@@ -19,7 +19,8 @@ Communication](https://www.google.com/books/edition/The_Mathematical_Theory_of_C
 \mathbf{H_{P1_{pure}}} = 0 \mathbf{i} + 0 \mathbf{j} \ Sz
 ```
 
-Psychophysical units of perceived cyclicity are Stolzenburgs (Sz)
+We will define the psychophysical units of perceived cyclicity as
+Stolzenburgs (Sz), but we can also refer to them as Sertz. :)
 
 ``` math
 h_\omega = \log_2 \left( ALCD\left( \left\{ \frac{\omega_n \pm \sigma_\omega}{\omega_{min} \pm \sigma_\omega} \right\}_{n=1}^{N} \right) \right)
