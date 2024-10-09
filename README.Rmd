@@ -46,7 +46,7 @@ plot_fundamental_wavelength <- function(midi) {
 \mathbf{H_{{P1}_{pure}}} = 0 \mathbf{i} + 0 \mathbf{j} \ Sz
 ```
 
-We will define the psychophysical units of perceived cyclicity as Stolzenburgs (Sz), but we can also refer to them as Sertz. :)
+We will define the psychophysical units of perceived cyclicity as Stolzenburgs (Sz), but we might also refer to them as Sertz. :)
 
 ```math
 {MaMi} = (h_\omega - h_k)

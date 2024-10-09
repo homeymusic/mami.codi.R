@@ -20,7 +20,7 @@ Communication](https://www.google.com/books/edition/The_Mathematical_Theory_of_C
 ```
 
 We will define the psychophysical units of perceived cyclicity as
-Stolzenburgs (Sz), but we can also refer to them as Sertz. :)
+Stolzenburgs (Sz), but we might also refer to them as Sertz. :)
 
 ``` math
 {MaMi} = (h_\omega - h_k)
