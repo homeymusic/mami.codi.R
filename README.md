@@ -11,7 +11,15 @@ Shannon](https://en.wikipedia.org/wiki/Claude_Shannon), and his seminal
 work [The Mathematical Theory of
 Communication](https://www.google.com/books/edition/The_Mathematical_Theory_of_Communication/IZ77BwAAQBAJ).)
 
-$$\mathbf{H} = (h_\omega - h_k) \mathbf{i} + (h_\omega + h_k) \mathbf{j}$$
+``` math
+\mathbf{H} = (h_\omega - h_k) \mathbf{i} + (h_\omega + h_k) \mathbf{j}
+```
+
+``` math
+\mathbf{H_{P1_{pure}}} = 0 \mathbf{i} + 0 \mathbf{j} \ Sz
+```
+
+Psychophysical units of perceived cyclicity are Stolzenburgs (Sz)
 
 ``` math
 h_\omega = \log_2 \left( ALCD\left( \left\{ \frac{\omega_n \pm \sigma_\omega}{\omega_{min} \pm \sigma_\omega} \right\}_{n=1}^{N} \right) \right)
@@ -22,10 +30,16 @@ h_k = \log_2 \left( ALCN\left( \left\{ \frac{k_n \pm \sigma_k}{k_{max} \pm \sigm
 ```
 
 ``` math
+\sigma_x \sigma_k \geq \frac{1}{2}, \ \sigma_t\sigma_\omega \geq \frac{1}{2}
+```
+
+``` math
 \Delta(\sigma_x, \sigma_k, \sigma_t, \sigma_\omega, \dots) \geq \kappa
 ```
 
-$$p(x,t) = A(x,t) e ^ {-i \left( \omega t - k x \right)}$$
+``` math
+p(x,t) = \sum_{n=1}^{N} A_n(x,t) e^{-i \left( n \omega t - n k x \right)}
+```
 
 # Wavelengths
 
