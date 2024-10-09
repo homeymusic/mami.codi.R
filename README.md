@@ -47,6 +47,10 @@ h_k = \log_2 \left( ALCN\left( \left\{ \frac{k_n \pm \sigma_k}{k_{max} \pm \sigm
 ```
 
 ``` math
+\frac{\sigma_x \sigma_k}{\sigma_t \sigma_\omega} \geq 1
+```
+
+``` math
 p(x,t) = \sum_{n=1}^{N} A_n(x,t) e^{-i \left( n \omega t - n k x \right)}
 ```
 
