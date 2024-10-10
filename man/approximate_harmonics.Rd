@@ -4,12 +4,12 @@
 \alias{approximate_harmonics}
 \title{approximate_harmonics}
 \usage{
-approximate_harmonics(x, deviation)
+approximate_harmonics(x, approximate_lcm_sd)
 }
 \arguments{
 \item{x}{Chord frequencies}
 
-\item{deviation}{Deviation for estimating least common multiples}
+\item{approximate_lcm_sd}{Deviation for estimating least common multiples}
 }
 \value{
 A double of the best guess of the pseudo octave

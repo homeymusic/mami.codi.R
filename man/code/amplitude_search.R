@@ -8,9 +8,9 @@ if (search_label == 'Rolloff2') {
   roll_off = 12
 }
 
-amplitudes = c(hrep::amp(hrep::sparse_fr_spectrum(60, num_harmonics=10, roll_off_dB = roll_off))[-1],0)
+amplitude_lower_bounds = c(hrep::amp(hrep::sparse_fr_spectrum(60, num_harmonics=10, roll_off_dB = roll_off))[-1],0)
 
 devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 
 source('./amp_trials.R')
-run_trials(search_label, amplitudes)
+run_trials(search_label, amplitude_lower_bounds)

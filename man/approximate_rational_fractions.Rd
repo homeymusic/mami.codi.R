@@ -4,14 +4,16 @@
 \alias{approximate_rational_fractions}
 \title{approximate_rational_fractions}
 \usage{
-approximate_rational_fractions(x, variance, deviation)
+approximate_rational_fractions(x, reference, sd, approximate_lcm_sd)
 }
 \arguments{
 \item{x}{Vector of floating point numbers to approximate}
 
-\item{variance}{Precision for finding rational fractions}
+\item{reference}{This will be the denominator of the ratios}
 
-\item{deviation}{Deviation for estimating least common multiples}
+\item{sd}{Standard deviation for each evaluated parameter}
+
+\item{approximate_lcm_sd}{Standard deviation for estimating least common multiples}
 }
 \value{
 A data frame of rational numbers and metadata

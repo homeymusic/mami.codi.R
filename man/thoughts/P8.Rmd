@@ -15,20 +15,20 @@ knitr::opts_chunk$set(
 )
 knitr::opts_chunk$set(dev = 'png')
 tonic_midi = 60
-temporal_variance = mami.codi.R::default_variance()
+temporal_frequency_sd = mami.codi.R::default_variance()
 ```
 
 ## P8
 ```{r, echo=F, message=F}
 experiment.rds = './man/data/P8.rds'
 grid_P8 = tidyr::expand_grid(
-  temporal_variance = temporal_variance,
+  temporal_frequency_sd = temporal_frequency_sd,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
   octave_ratio=2.0,
   timbre = 'P8'
 )
-P8 = grid_P8 %>% purrr::pmap_dfr(\(temporal_variance,
+P8 = grid_P8 %>% purrr::pmap_dfr(\(temporal_frequency_sd,
                               interval,
                               num_harmonics,
                               octave_ratio,
@@ -40,7 +40,7 @@ P8 = grid_P8 %>% purrr::pmap_dfr(\(temporal_variance,
     roll_off_dB   = 3.0
   )
   mami.codi.R::mami.codi(study_chord,
-                         temporal_variance=temporal_variance,
+                         temporal_frequency_sd=temporal_frequency_sd,
                          metadata = list(
                            num_harmonics = num_harmonics,
                            octave_ratio  = octave_ratio,
@@ -65,13 +65,13 @@ hist(dens, breaks=breaks)
 ```{r, echo=F, message=F}
 experiment.rds = './man/data/M6.rds'
 grid_M6 = tidyr::expand_grid(
-  temporal_variance = temporal_variance,
+  temporal_frequency_sd = temporal_frequency_sd,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
   octave_ratio=2.0,
   timbre = 'M6'
 )
-M6 = grid_M6 %>% purrr::pmap_dfr(\(temporal_variance,
+M6 = grid_M6 %>% purrr::pmap_dfr(\(temporal_frequency_sd,
                               interval,
                               num_harmonics,
                               octave_ratio,
@@ -83,7 +83,7 @@ M6 = grid_M6 %>% purrr::pmap_dfr(\(temporal_variance,
     roll_off_dB   = 3.0
   )
   mami.codi.R::mami.codi(study_chord,
-                         temporal_variance=temporal_variance,
+                         temporal_frequency_sd=temporal_frequency_sd,
                          metadata = list(
                            num_harmonics = num_harmonics,
                            octave_ratio  = octave_ratio,
@@ -110,13 +110,13 @@ hist(dens, breaks = breaks)
 ```{r, echo=F, message=F}
 experiment.rds = './man/data/M3.rds'
 grid_M3 = tidyr::expand_grid(
-  temporal_variance = temporal_variance,
+  temporal_frequency_sd = temporal_frequency_sd,
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
   octave_ratio=2.0,
   timbre = 'M3'
 )
-M3 = grid_M3 %>% purrr::pmap_dfr(\(temporal_variance,
+M3 = grid_M3 %>% purrr::pmap_dfr(\(temporal_frequency_sd,
                               interval,
                               num_harmonics,
                               octave_ratio,
@@ -128,7 +128,7 @@ M3 = grid_M3 %>% purrr::pmap_dfr(\(temporal_variance,
     roll_off_dB   = 3.0
   )
   mami.codi.R::mami.codi(study_chord,
-                         temporal_variance=temporal_variance,
+                         temporal_frequency_sd=temporal_frequency_sd,
                          metadata = list(
                            num_harmonics = num_harmonics,
                            octave_ratio  = octave_ratio,

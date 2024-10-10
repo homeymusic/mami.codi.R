@@ -21,27 +21,27 @@ p = RATIONAL_FRACTION_PRECISION
 
 Maybe we evaluate stern brocot approximation with these limits:\
 
-valid_min = pow(2.0, log(freq_ratio) / log(1.89))\
+lower_bound = pow(2.0, log(freq_ratio) / log(1.89))\
 
-valid_max = pow(2.0, log(freq_ratio) / log(2.11))\
+upper_bound = pow(2.0, log(freq_ratio) / log(2.11))\
 
 ```{r, echo=F, message=F}
 
 ratio = 880/440
 
-valid_min = 2.0 ^ (log(880/440) / log(1.89))
+lower_bound = 2.0 ^ (log(880/440) / log(1.89))
 
-valid_max = 2.0 ^ (log(880/440) / log(2.11))
+upper_bound = 2.0 ^ (log(880/440) / log(2.11))
 
 C4 = hrep::midi_to_freq(60)
 E4 = hrep::midi_to_freq(64)
 ratio = E4 / C4
 
-valid_min = 2.0 ^ (log(ratio) / log(2.11))
+lower_bound = 2.0 ^ (log(ratio) / log(2.11))
 
-valid_max = 2.0 ^ (log(ratio) / log(1.89))
+upper_bound = 2.0 ^ (log(ratio) / log(1.89))
 
-valid_max - ratio
+upper_bound - ratio
   
 variance = default_variance()
 f0 = 440

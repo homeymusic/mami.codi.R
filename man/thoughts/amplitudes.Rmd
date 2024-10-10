@@ -23,7 +23,7 @@ midi = c(0,rolloff_12dB$interval[2]) + 60
 tibble::tibble(
   i         = seq_len(num_harmonics),
   dB        = -decay_dB_per_octave * log2(i),
-  amplitude = 1 * 10 ^ (dB / 20)
+  amplitude_lower_bound = 1 * 10 ^ (dB / 20)
 )
 ```
 
@@ -33,7 +33,7 @@ midi = c(0,rolloff_12dB$interval[2]) + 60
 tibble::tibble(
   i         = seq_len(num_harmonics),
   dB        = -decay_dB_per_octave * log2(i),
-  amplitude = 1 * 10 ^ (dB / 20)
+  amplitude_lower_bound = 1 * 10 ^ (dB / 20)
 )
 ```
 ```{r}
@@ -42,6 +42,6 @@ midi = c(0,rolloff_12dB$interval[2]) + 60
 tibble::tibble(
   i         = seq_len(num_harmonics),
   dB        = -decay_dB_per_octave * log2(i),
-  amplitude = 1 * 10 ^ (dB / 20)
+  amplitude_lower_bound = 1 * 10 ^ (dB / 20)
 )
 ```

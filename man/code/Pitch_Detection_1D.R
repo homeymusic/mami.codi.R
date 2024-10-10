@@ -28,7 +28,7 @@ noise_spectrum = tibble::tibble(
     runif(n=amount_of_noise, min=15, max=60),
     runif(n=amount_of_noise, min=60, max=102)
   )),
-  amplitude = 1
+  amplitude_lower_bound = 1
 ) %>% as.list() %>%  hrep::sparse_fr_spectrum()
 
 noisy_chord_spectrum = do.call(

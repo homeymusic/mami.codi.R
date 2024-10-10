@@ -4,12 +4,14 @@
 \alias{stern_brocot}
 \title{stern_brocot}
 \usage{
-stern_brocot(x, variance)
+stern_brocot(lower_bound, x, upper_bound)
 }
 \arguments{
+\item{lower_bound}{Binary search stops once the approximation is above the lower bound and..,}
+
 \item{x}{Number to convert to rational fraction}
 
-\item{variance}{Binary search stops once the desired variance is reached}
+\item{upper_bound}{... below the upper bound.}
 }
 \value{
 A ratio of num / den

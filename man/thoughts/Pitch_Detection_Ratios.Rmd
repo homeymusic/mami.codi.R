@@ -26,7 +26,7 @@ chord_spectrum = chord$spectrum[[1]]
 
 noise_spectrum = tibble::tibble(
   frequency = hrep::midi_to_freq(noise),
-  amplitude = 1
+  amplitude_lower_bound = 1
 ) %>% as.list() %>%  hrep::sparse_fr_spectrum()
 
 noisy_chord_spectrum = do.call(
@@ -40,7 +40,7 @@ noisy_chord_spectrum = noisy_chord$spectrum[[1]]
 
 noisier_spectrum = tibble::tibble(
   frequency = hrep::midi_to_freq(noisier),
-  amplitude = 1
+  amplitude_lower_bound = 1
 ) %>% as.list() %>%  hrep::sparse_fr_spectrum()
 
 noisier_chord_spectrum = do.call(

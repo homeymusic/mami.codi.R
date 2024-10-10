@@ -60,7 +60,7 @@ for (trial in 1:1000) {
       runif(n=amount_of_noise, min=60, max=102),
       runif(n=amount_of_noise, min=102, max=127)
     )),
-    amplitude = 1
+    amplitude_lower_bound = 1
   ) %>% as.list() %>%  hrep::sparse_fr_spectrum()
   
   noisy_chord_spectrum = do.call(

@@ -5,9 +5,9 @@ Greatest Common Divisor
 
 Maybe we evaluate stern brocot approximation with these limits:  
 
-valid_min = pow(2.0, log(freq_ratio) / log(1.89))  
+lower_bound = pow(2.0, log(freq_ratio) / log(1.89))  
 
-valid_max = pow(2.0, log(freq_ratio) / log(2.11))  
+upper_bound = pow(2.0, log(freq_ratio) / log(2.11))  
 
 ## P1
 

@@ -63,7 +63,7 @@ title = paste0(t,'WavelengthFrequency')
 R.utils::mkdirs("output/videos")
 
 .spectrum_frequency_ratios = 1:5
-.spectrum_amplitudes = c(1, 1, 1, 1, 1)
+.spectrum_amplitude_lower_bounds = c(1, 1, 1, 1, 1)
 sweep_v_line_over_plot(
   p1,
   x_start = 0,
@@ -76,14 +76,14 @@ sweep_v_line_over_plot(
     static_complex_tone(
       midi_root = 60,
       spectrum_frequency_ratios = .spectrum_frequency_ratios,
-      spectrum_amplitudes = .spectrum_amplitudes
+      spectrum_amplitude_lower_bounds = .spectrum_amplitude_lower_bounds
     ),
     linear_freq_sweep_complex_tone(
       start_midi_root = 60,
       end_midi_root = 60 + 15,
       duration = 75,
       spectrum_frequency_ratios = .spectrum_frequency_ratios,
-      spectrum_amplitudes = .spectrum_amplitudes
+      spectrum_amplitude_lower_bounds = .spectrum_amplitude_lower_bounds
     )
   )
 )

@@ -16,20 +16,20 @@ knitr::opts_chunk$set(
 knitr::opts_chunk$set(dev = 'png')
 ```
 ```{r, echo=F, message=F}
-temporal_variance = default_variance() / (2*pi)
+temporal_frequency_sd = default_variance() / (2*pi)
 ```
 
 
 ```{r, echo=F, message=F}
 mami_codi_harmonics <- function(h) mami.codi(c(60), verbose=T, num_harmonics = h,
-                                             temporal_variance = temporal_variance)
+                                             temporal_frequency_sd = temporal_frequency_sd)
 P1 = 1:20  %>% purrr::map_dfr(mami_codi_harmonics)
 ```
 
 ## Tight Temporal, Loose Spatial
 
-Temporal variance: `r P1$temporal_variance %>% unique()`\
-Spatial  variance: `r P1$spatial_variance %>% unique()`
+Temporal variance: `r P1$temporal_frequency_sd %>% unique()`\
+Spatial  variance: `r P1$spatial_frequency_sd %>% unique()`
 
 ### P1
 
@@ -46,7 +46,7 @@ P1 %>%
 
 ```{r, echo=F, message=F}
 mami_codi_harmonics <- function(h) mami.codi(c(60,65), verbose=T, num_harmonics = h,
-                                             temporal_variance = temporal_variance)
+                                             temporal_frequency_sd = temporal_frequency_sd)
 1:20  %>% purrr::map_dfr(mami_codi_harmonics) %>% 
   dplyr::mutate(
     T_f = 1 / f0, 
@@ -59,7 +59,7 @@ mami_codi_harmonics <- function(h) mami.codi(c(60,65), verbose=T, num_harmonics 
 
 ```{r, echo=F, message=F}
 mami_codi_harmonics <- function(h) mami.codi(c(60,67), verbose=T, num_harmonics = h,
-                                             temporal_variance = temporal_variance)
+                                             temporal_frequency_sd = temporal_frequency_sd)
 1:20  %>% purrr::map_dfr(mami_codi_harmonics) %>% 
   dplyr::mutate(
     T_f = 1 / f0, 
@@ -75,8 +75,8 @@ P1 = 1:20  %>% purrr::map_dfr(mami_codi_harmonics)
 
 ## Even Steven
 
-Temporal variance: `r P1$temporal_variance %>% unique()`\
-Spatial  variance: `r P1$spatial_variance %>% unique()`
+Temporal variance: `r P1$temporal_frequency_sd %>% unique()`\
+Spatial  variance: `r P1$spatial_frequency_sd %>% unique()`
 
 ### P1
 

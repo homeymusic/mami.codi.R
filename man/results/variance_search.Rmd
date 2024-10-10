@@ -74,7 +74,7 @@ theory <- theory %>% dplyr::rowwise() %>% dplyr::mutate(
   octave_ratio   = metadata$octave_ratio,
   semitone       = metadata$semitone,
   .before=1
-) %>% dplyr::group_by(temporal_variance)
+) %>% dplyr::group_by(temporal_frequency_sd)
 ```
 
 ```{r, echo=F, results='asis', message=F}
@@ -84,13 +84,13 @@ experiment <- experiment
 
 Temporal Variances:
 ```{r, echo=F}
-tols = theory$temporal_variance %>% unique
+tols = theory$temporal_frequency_sd %>% unique
 tols
 ```
 
 Spatial Variances:
 ```{r, echo=F}
-tols = theory$spatial_variance %>% unique
+tols = theory$spatial_frequency_sd %>% unique
 tols
 ```
 Number of Harmonics:

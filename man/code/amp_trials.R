@@ -1,4 +1,4 @@
-run_trials <- function(search_label, amplitudes) {
+run_trials <- function(search_label, amplitude_lower_bounds) {
   devtools::load_all(".")
   tonic_midi = 60
   source('./utils.R')
@@ -21,7 +21,7 @@ run_trials <- function(search_label, amplitudes) {
   print(paste('num_harmonics:',num_harmonics))
   print(paste('roll_off:',roll_off))
 
-  rds = paste0('../data/amplitude_',
+  rds = paste0('../data/amplitude_lower_bound_',
                search_label,
                '.rds')
   prepare(rds)
@@ -40,7 +40,7 @@ run_trials <- function(search_label, amplitudes) {
 
   grid = tidyr::expand_grid(
     interval  = intervals,
-    amplitude = amplitudes
+    amplitude_lower_bound = amplitude_lower_bounds
   )
 
   print(grid)
@@ -49,7 +49,7 @@ run_trials <- function(search_label, amplitudes) {
 
   data = grid %>% furrr::future_pmap_dfr(\(
     interval,
-    amplitude
+    amplitude_lower_bound
   ) {
 
     chord = hrep::sparse_fr_spectrum(c(tonic_midi, interval),
@@ -60,7 +60,7 @@ run_trials <- function(search_label, amplitudes) {
 
     mami.codi.R::mami.codi(
       chord,
-      amplitude        = amplitude,
+      amplitude_lower_bound        = amplitude_lower_bound,
       metadata         = list(
         octave_ratio   = octave_ratio,
         num_harmonics  = num_harmonics,

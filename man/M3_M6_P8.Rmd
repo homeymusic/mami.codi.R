@@ -56,8 +56,8 @@ cat("  \n###", title, '\n')
 print(knitr::kable(tibble::tibble_row(
   multicolored_line_sigma  = 0.2,
   green_line_sigma         = 2.0,
-  spatial_variance        = paste(round(chords$spatial_variance %>% unique, 5), collapse = ' '),
-  temporal_variance       = paste(round(chords$temporal_variance %>% unique, 5), collapse = ' '),
+  spatial_frequency_sd        = paste(round(chords$spatial_frequency_sd %>% unique, 5), collapse = ' '),
+  temporal_frequency_sd       = paste(round(chords$temporal_frequency_sd %>% unique, 5), collapse = ' '),
 )))
 print(plot_semitone_codi_smooth(chords, title))
 cat("  \n")

@@ -21,8 +21,8 @@ plot_fundamental_wavelength <- function(midi) {
   wavenumber = (2 * pi) / wavelength
   tibble::tibble(
     meters=seq(0, wavelength ,0.001),
-    amplitude=sin(wavenumber * meters)
-  ) %>% ggplot2::ggplot(ggplot2::aes(meters, amplitude)) +
+    amplitude_lower_bound=sin(wavenumber * meters)
+  ) %>% ggplot2::ggplot(ggplot2::aes(meters, amplitude_lower_bound)) +
     ggplot2::geom_line()
 }
 ```

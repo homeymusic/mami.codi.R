@@ -5,14 +5,15 @@
 #'
 #' Approximates a floating-point number to arbitrary variance.
 #'
+#' @param lower_bound Binary search stops once the approximation is above the lower bound and..,
 #' @param x Number to convert to rational fraction
-#' @param variance Binary search stops once the desired variance is reached
+#' @param upper_bound ... below the upper bound.
 #'
 #' @return A ratio of num / den
 #'
 #' @export
-stern_brocot <- function(x, variance) {
-    .Call(`_mami_codi_R_stern_brocot`, x, variance)
+stern_brocot <- function(lower_bound, x, upper_bound) {
+    .Call(`_mami_codi_R_stern_brocot`, lower_bound, x, upper_bound)
 }
 
 #' compute_pseudo_octave
@@ -35,16 +36,16 @@ compute_pseudo_octave <- function(fn, f0, n) {
 #' Determine pseudo octave of all frequencies relative to lowest frequency
 #'
 #' @param x Chord frequencies
-#' @param deviation Deviation for estimating least common multiples
+#' @param approximate_lcm_sd Deviation for estimating least common multiples
 #'
 #' @return A double of the best guess of the pseudo octave
 #'
 #' @export
-approximate_harmonics <- function(x, deviation) {
-    .Call(`_mami_codi_R_approximate_harmonics`, x, deviation)
+approximate_harmonics <- function(x, approximate_lcm_sd) {
+    .Call(`_mami_codi_R_approximate_harmonics`, x, approximate_lcm_sd)
 }
 
-#' pseudo_octave
+#' approximate_pseudo_octave
 #'
 #' Finds the pseudo octave from approximate harmonics.
 #'
@@ -53,8 +54,8 @@ approximate_harmonics <- function(x, deviation) {
 #' @return A data frame of rational numbers and metadata
 #'
 #' @export
-pseudo_octave <- function(approximate_harmonics) {
-    .Call(`_mami_codi_R_pseudo_octave`, approximate_harmonics)
+approximate_pseudo_octave <- function(approximate_harmonics) {
+    .Call(`_mami_codi_R_approximate_pseudo_octave`, approximate_harmonics)
 }
 
 #' approximate_rational_fractions
@@ -62,13 +63,14 @@ pseudo_octave <- function(approximate_harmonics) {
 #' Approximates floating-point numbers to arbitrary variance.
 #'
 #' @param x Vector of floating point numbers to approximate
-#' @param variance Precision for finding rational fractions
-#' @param deviation Deviation for estimating least common multiples
+#' @param reference This will be the denominator of the ratios
+#' @param sd Standard deviation for each evaluated parameter
+#' @param approximate_lcm_sd Standard deviation for estimating least common multiples
 #'
 #' @return A data frame of rational numbers and metadata
 #'
 #' @export
-approximate_rational_fractions <- function(x, variance, deviation) {
-    .Call(`_mami_codi_R_approximate_rational_fractions`, x, variance, deviation)
+approximate_rational_fractions <- function(x, reference, sd, approximate_lcm_sd) {
+    .Call(`_mami_codi_R_approximate_rational_fractions`, x, reference, sd, approximate_lcm_sd)
 }
 

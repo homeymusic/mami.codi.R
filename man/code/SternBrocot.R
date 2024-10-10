@@ -10,7 +10,7 @@ rationals = seq(from=1/samples, to=1, by=1/samples)
 plan(multisession, workers=parallelly::availableCores())
 fractions = rationals %>%
   furrr::future_map(\(r) {
-    approximate_rational_fractions(r, variance=variance, deviation=default_octave_deviation())
+    approximate_rational_fractions(r, variance=variance, approximate_lcm_sd=default_approximate_lcm_sd())
   }, .progress=TRUE, .options = furrr::furrr_options(seed = T)) %>%
   purrr::list_rbind()
 

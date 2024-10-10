@@ -479,11 +479,11 @@ plot_semitone_co <- function(chords, title='') {
     ggplot2::ggtitle(title) +
     theme_homey()
 }
-plot_semitone_temporal_variance <- function(chords, title='') {
+plot_semitone_temporal_frequency_sd <- function(chords, title='') {
   temporal_semitone =chords$semitone %>% min
   spatial_semitone =chords$semitone %>% max
   ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone,
-                                       y = .data$temporal_variance)) +
+                                       y = .data$temporal_frequency_sd)) +
     ggplot2::geom_point(color=colors_homey$neutral, size=0.5) +
     ggplot2::scale_x_continuous(breaks = seq(temporal_semitone,spatial_semitone),
                                 minor_breaks = c()) +
@@ -520,10 +520,10 @@ plot_semitone_registers <- function(chords, title='') {
     theme_homey()
 }
 
-plot_num_harmonics_deviation <- function(num_harmonics_deviation, title='') {
-  num_harmonics = num_harmonics_deviation$num_harmonics
-  ggplot2::ggplot(num_harmonics_deviation, ggplot2::aes(x = .data$num_harmonics)) +
-    ggplot2::geom_point(ggplot2::aes(y = .data$candidate_deviation),
+plot_num_harmonics_approximate_lcm_sd <- function(num_harmonics_approximate_lcm_sd, title='') {
+  num_harmonics = num_harmonics_approximate_lcm_sd$num_harmonics
+  ggplot2::ggplot(num_harmonics_approximate_lcm_sd, ggplot2::aes(x = .data$num_harmonics)) +
+    ggplot2::geom_point(ggplot2::aes(y = .data$candidate_approximate_lcm_sd),
                         color=colors_homey$green, size=0.5) +
     ggplot2::geom_point(ggplot2::aes(y = .data$min),
                         color=colors_homey$major, size=0.5) +
@@ -543,12 +543,12 @@ plot_semitone_codi_grid <- function(theory, experiment,
                                     include_points=T,
                                     title) {
   per_plot_labels = tidyr::expand_grid(
-    temporal_variance = theory$temporal_variance %>% unique
+    temporal_frequency_sd = theory$temporal_frequency_sd %>% unique
   )
   per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(temporal_temporal_variance,temporal_variance) {
+    purrr::pmap_vec(\(temporal_temporal_frequency_sd,temporal_frequency_sd) {
       tols = paste(
-        'temporal_variance:', temporal_variance
+        'temporal_frequency_sd:', temporal_frequency_sd
       )
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=z_score)) +
@@ -573,7 +573,7 @@ plot_semitone_codi_grid <- function(theory, experiment,
                                                           vjust="inward",hjust="inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_grid(temporal_variance ~ temporal_variance, scales = 'free_y') +
+    ggplot2::facet_grid(temporal_frequency_sd ~ temporal_frequency_sd, scales = 'free_y') +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()
@@ -583,11 +583,11 @@ plot_semitone_codi_wrap <- function(theory, experiment,
                                     title,ncols=12,
                                     include_points=T) {
   per_plot_labels = tidyr::expand_grid(
-    temporal_variance  = theory$temporal_variance  %>% unique
+    temporal_frequency_sd  = theory$temporal_frequency_sd  %>% unique
   )
   per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(temporal_variance) {
-      tols = paste0('   temporal_variance:', temporal_variance)
+    purrr::pmap_vec(\(temporal_frequency_sd) {
+      tols = paste0('   temporal_frequency_sd:', temporal_frequency_sd)
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
@@ -612,7 +612,7 @@ plot_semitone_codi_wrap <- function(theory, experiment,
                                     vjust="inward",hjust="inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_wrap(~temporal_variance,ncol=ncols,dir='v') +
+    ggplot2::facet_wrap(~temporal_frequency_sd,ncol=ncols,dir='v') +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()
@@ -621,11 +621,11 @@ plot_semitone_spatial_wrap <- function(theory,
                                        black_vlines=c(), gray_vlines=c(),
                                        title,ncols=1) {
   per_plot_labels = tidyr::expand_grid(
-    temporal_variance  = theory$temporal_variance  %>% unique
+    temporal_frequency_sd  = theory$temporal_frequency_sd  %>% unique
   )
   per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(temporal_variance) {
-      tols = paste0('   temporal_variance:', temporal_variance)
+    purrr::pmap_vec(\(temporal_frequency_sd) {
+      tols = paste0('   temporal_frequency_sd:', temporal_frequency_sd)
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
@@ -643,7 +643,7 @@ plot_semitone_spatial_wrap <- function(theory,
                                     vjust="inward",hjust="inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_wrap(~temporal_variance,ncol=ncols,dir='v') +
+    ggplot2::facet_wrap(~temporal_frequency_sd,ncol=ncols,dir='v') +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()
@@ -652,11 +652,11 @@ plot_semitone_temporal_wrap <- function(theory,
                                         black_vlines=c(), gray_vlines=c(),
                                         title,ncols=1) {
   per_plot_labels = tidyr::expand_grid(
-    temporal_variance  = theory$temporal_variance  %>% unique
+    temporal_frequency_sd  = theory$temporal_frequency_sd  %>% unique
   )
   per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(temporal_variance) {
-      tols = paste0('   temporal_variance:', temporal_variance)
+    purrr::pmap_vec(\(temporal_frequency_sd) {
+      tols = paste0('   temporal_frequency_sd:', temporal_frequency_sd)
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
@@ -674,7 +674,7 @@ plot_semitone_temporal_wrap <- function(theory,
                                     vjust="inward",hjust="inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_wrap(~temporal_variance,ncol=ncols,dir='v') +
+    ggplot2::facet_wrap(~temporal_frequency_sd,ncol=ncols,dir='v') +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()
@@ -683,11 +683,11 @@ plot_semitone_spatial_temporal_wrap <- function(theory,
                                                 black_vlines=c(), gray_vlines=c(),
                                                 title,ncols=1) {
   per_plot_labels = tidyr::expand_grid(
-    temporal_variance  = theory$temporal_variance  %>% unique
+    temporal_frequency_sd  = theory$temporal_frequency_sd  %>% unique
   )
   per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(temporal_variance) {
-      tols = paste0('   temporal_variance:', temporal_variance)
+    purrr::pmap_vec(\(temporal_frequency_sd) {
+      tols = paste0('   temporal_frequency_sd:', temporal_frequency_sd)
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
@@ -713,7 +713,7 @@ plot_semitone_spatial_temporal_wrap <- function(theory,
                                     vjust="inward",hjust="inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_wrap(~temporal_variance,ncol=ncols,dir='v') +
+    ggplot2::facet_wrap(~temporal_frequency_sd,ncol=ncols,dir='v') +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()
@@ -722,11 +722,11 @@ plot_semitone_mami_wrap <- function(theory, experiment,
                                     black_vlines=c(), gray_vlines=c(),
                                     title,ncols=12) {
   per_plot_labels = tidyr::expand_grid(
-    temporal_variance  = theory$temporal_variance  %>% unique,
+    temporal_frequency_sd  = theory$temporal_frequency_sd  %>% unique,
   )
   per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(temporal_variance) {
-      tols = paste0('  ', temporal_variance)
+    purrr::pmap_vec(\(temporal_frequency_sd) {
+      tols = paste0('  ', temporal_frequency_sd)
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=major_minor)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
@@ -741,7 +741,7 @@ plot_semitone_mami_wrap <- function(theory, experiment,
                                     vjust="inward",hjust="inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_wrap(~temporal_variance,ncol=ncols,dir='v') +
+    ggplot2::facet_wrap(~temporal_frequency_sd,ncol=ncols,dir='v') +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()
@@ -949,11 +949,11 @@ plot_semitone_codi_wrap_amp <- function(theory, experiment,
                                         title,ncols=12,
                                         include_points=T) {
   per_plot_labels = tidyr::expand_grid(
-    amplitude  = theory$amplitude  %>% unique
+    amplitude_lower_bound  = theory$amplitude_lower_bound  %>% unique
   )
   per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(amplitude) {
-      tols = paste0('   amplitude:', amplitude)
+    purrr::pmap_vec(\(amplitude_lower_bound) {
+      tols = paste0('   amplitude_lower_bound:', amplitude_lower_bound)
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
@@ -978,7 +978,7 @@ plot_semitone_codi_wrap_amp <- function(theory, experiment,
                                     vjust="inward",hjust="inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_wrap(~amplitude,ncol=ncols,dir='v') +
+    ggplot2::facet_wrap(~amplitude_lower_bound,ncol=ncols,dir='v') +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()
@@ -987,11 +987,11 @@ plot_semitone_spatial_wrap_amp <- function(theory,
                                            black_vlines=c(), gray_vlines=c(),
                                            title,ncols=1) {
   per_plot_labels = tidyr::expand_grid(
-    amplitude  = theory$amplitude  %>% unique
+    amplitude_lower_bound  = theory$amplitude_lower_bound  %>% unique
   )
   per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(amplitude) {
-      tols = paste0('   amplitude:', amplitude)
+    purrr::pmap_vec(\(amplitude_lower_bound) {
+      tols = paste0('   amplitude_lower_bound:', amplitude_lower_bound)
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
@@ -1009,7 +1009,7 @@ plot_semitone_spatial_wrap_amp <- function(theory,
                                     vjust="inward",hjust="inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_wrap(~amplitude,ncol=ncols,dir='v') +
+    ggplot2::facet_wrap(~amplitude_lower_bound,ncol=ncols,dir='v') +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()
@@ -1018,11 +1018,11 @@ plot_semitone_temporal_wrap_amp <- function(theory,
                                             black_vlines=c(), gray_vlines=c(),
                                             title,ncols=1) {
   per_plot_labels = tidyr::expand_grid(
-    amplitude  = theory$amplitude  %>% unique
+    amplitude_lower_bound  = theory$amplitude_lower_bound  %>% unique
   )
   per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(amplitude) {
-      tols = paste0('   amplitude:', amplitude)
+    purrr::pmap_vec(\(amplitude_lower_bound) {
+      tols = paste0('   amplitude_lower_bound:', amplitude_lower_bound)
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
@@ -1040,7 +1040,7 @@ plot_semitone_temporal_wrap_amp <- function(theory,
                                     vjust="inward",hjust="inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_wrap(~amplitude,ncol=ncols,dir='v') +
+    ggplot2::facet_wrap(~amplitude_lower_bound,ncol=ncols,dir='v') +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()

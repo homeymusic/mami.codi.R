@@ -18,7 +18,7 @@ source('../code/utils.R')
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "../figures/amplitude_search/"
+  fig.path = "../figures/amplitude_lower_bound_search/"
 )
 knitr::opts_chunk$set(dev = 'png')
 ```
@@ -48,7 +48,7 @@ experiment = read.csv(experiment.csv) %>%
     semitone              = interval
   )
 
-theory.rds = paste0('../data/amplitude_',
+theory.rds = paste0('../data/amplitude_lower_bound_',
                     search_label,
                     '.rds')
 theory = readRDS(theory.rds)
@@ -62,7 +62,7 @@ theory <- theory %>% dplyr::rowwise() %>% dplyr::mutate(
   semitone       = metadata$semitone,
   roll_off_dB    = metadata$roll_off_dB,
   .before=1
-) %>% dplyr::group_by(amplitude)
+) %>% dplyr::group_by(amplitude_lower_bound)
 ```
 
 Sounded Amplitudes:
@@ -73,7 +73,7 @@ sounded_amps
 
 MaMi.CoDi Minimum Amplitudes:
 ```{r, echo=F}
-amps = theory$amplitude %>% unique
+amps = theory$amplitude_lower_bound %>% unique
 amps
 ```
 

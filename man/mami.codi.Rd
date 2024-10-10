@@ -6,10 +6,10 @@
 \usage{
 mami.codi(
   x,
-  amplitude = MINIMUM_AMPLITUDE,
-  temporal_variance = NA,
-  spatial_variance = NA,
-  deviation = OCTAVE_DEVIATION,
+  amplitude_lower_bound = AMPLITUDE_LOWER_BOUND_DEFAULT,
+  temporal_frequency_sd = NA,
+  spatial_frequency_sd = NA,
+  approximate_lcm_sd = APPROXIMATE_LCM_SD_DEFAULT,
   metadata = NA,
   verbose = FALSE,
   ...
@@ -19,13 +19,13 @@ mami.codi(
 \item{x}{Chord to analyse specified in MIDI, coerced to
 hrep::sparse_fr_spectrum}
 
-\item{amplitude}{An optional minimum amplitude for deciding which partials to include.}
+\item{amplitude_lower_bound}{An optional minimum amplitude_lower_bound for deciding which partials to include.}
 
-\item{temporal_variance}{An optional temporal variance value for finding rational fractions.}
+\item{temporal_frequency_sd}{An optional temporal variance value for finding rational fractions.}
 
-\item{spatial_variance}{An optional spatial variance value for finding rational fractions.}
+\item{spatial_frequency_sd}{An optional spatial variance value for finding rational fractions.}
 
-\item{deviation}{An optional deviation value for approximating least common multiples.}
+\item{approximate_lcm_sd}{An optional approximate_lcm_sd value for approximating least common multiples.}
 
 \item{metadata}{User-provided list of metadata that round trips with each call.
 helpful for analysis and plots}

@@ -539,7 +539,7 @@ the 15 semitones but the overall peak structure agrees with MaMi.CoDi
 predictions. For futher comparison, the theoretical predictions for
 major-minor versus the behavioral results are included in a plot below.
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| temporal_frequency_sd | spatial_frequency_sd | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 0.03              | 0.21109          |             0.2 |
 
@@ -553,7 +553,7 @@ major-minor versus the behavioral results are included in a plot below.
 
 For 10 harmonics, behavioral results and theoretical predictions agree.
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| temporal_frequency_sd | spatial_frequency_sd | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
@@ -570,7 +570,7 @@ For comparison with the study below (5 partils with the third partial
 deleted), notice that the m3 peak is only slightly lower than the M3
 peak.
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| temporal_frequency_sd | spatial_frequency_sd | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
@@ -587,7 +587,7 @@ theoretical predictions mostly agree. As expected, the m3 peak without
 the third partial is now lower than the m3 peak with all 5 harmonics
 while the M3 peak is slightly higher without the 3rd partial.
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| temporal_frequency_sd | spatial_frequency_sd | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
@@ -605,7 +605,7 @@ predicts a dissonance trough with minor polarity at P4 that is not in
 the behavioral results. MaMi.CoDi predicts P5 to have minor polarity and
 be relatively higher than the behavioral results.
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| temporal_frequency_sd | spatial_frequency_sd | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 0.03979           | 0.15915          |             0.2 |
 
@@ -621,7 +621,7 @@ For stretched harmonics, behavioral results and theoretical predictions
 mostly agree. MaMi.Codi predicts peaks with minor polarity just above m3
 and m7 that do not exist in the behavioral results.
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| temporal_frequency_sd | spatial_frequency_sd | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
@@ -636,7 +636,7 @@ and m7 that do not exist in the behavioral results.
 For compressed harmonics, the pronounced behavioral peaks mostly agree
 with the theoretical peaks.
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| temporal_frequency_sd | spatial_frequency_sd | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
@@ -652,7 +652,7 @@ with the theoretical peaks.
 
 Description is below.
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| temporal_frequency_sd | spatial_frequency_sd | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |           0.035 |
 
@@ -666,7 +666,7 @@ Description is below.
 
 Description is below.
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| temporal_frequency_sd | spatial_frequency_sd | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |           0.035 |
 
@@ -680,7 +680,7 @@ Description is below.
 
 Description is below.
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| temporal_frequency_sd | spatial_frequency_sd | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |           0.035 |
 
@@ -695,7 +695,7 @@ Description is below.
 Due to the Heisenberg uncertainty principle, focusing on one signal
 (temporal) is akin to shutting off the other (spatial).
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| temporal_frequency_sd | spatial_frequency_sd | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 5e-05             | 126.65148        |           0.035 |
 
@@ -710,7 +710,7 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 Due to the Heisenberg uncertainty principle, focusing on one signal
 (spatial) is akin to shutting off the other (temporal).
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| temporal_frequency_sd | spatial_frequency_sd | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 126.65148         | 5e-05            |           0.035 |
 
@@ -720,11 +720,11 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 ![](man/figures/README-unnamed-chunk-13-59.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-13-60.png)<!-- -->
 
-### Manipulating amplitudes
+### Manipulating amplitude_lower_bounds
 
 ##### Harmonic ~ Roll Off: 12
 
-| temporal_variance | spatial_variance | min_amplitude | smoothing_sigma |
+| temporal_frequency_sd | spatial_frequency_sd | min_amplitude_lower_bound | smoothing_sigma |
 |:------------------|:-----------------|:--------------|----------------:|
 | 0.07958           | 0.07958          | 0.013         |             0.2 |
 
@@ -733,7 +733,7 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 
 ##### Harmonic ~ Roll Off: 7
 
-| temporal_variance | spatial_variance | min_amplitude | smoothing_sigma |
+| temporal_frequency_sd | spatial_frequency_sd | min_amplitude_lower_bound | smoothing_sigma |
 |:------------------|:-----------------|:--------------|----------------:|
 | 0.07958           | 0.07958          | 0.08          |             0.2 |
 
@@ -742,7 +742,7 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 
 ##### Harmonic ~ Roll Off: 2
 
-| temporal_variance | spatial_variance | min_amplitude | smoothing_sigma |
+| temporal_frequency_sd | spatial_frequency_sd | min_amplitude_lower_bound | smoothing_sigma |
 |:------------------|:-----------------|:--------------|----------------:|
 | 0.07958           | 0.07958          | 0             |             0.2 |
 

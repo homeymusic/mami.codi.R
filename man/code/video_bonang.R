@@ -74,7 +74,7 @@ sweep_v_line_over_plot(
   audio_components = c(
     static_basic_harmonic_complex_tone(
       midi = 60,
-      amplitude = 1,
+      amplitude_lower_bound = 1,
       n_harmonics = 5L,
       decay_dB_per_octave = 0,
       octave_definition = 2
@@ -83,7 +83,7 @@ sweep_v_line_over_plot(
       start_midi_root = 60,
       end_midi_root = 75,
       duration = 75,
-      amplitude = 1
+      amplitude_lower_bound = 1
     )
   )
 )

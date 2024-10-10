@@ -11,7 +11,7 @@ tone_sweep <- function(
     tones %>%
     map(~ mutate(., freq = hrep::midi_to_freq(midi))) %>%
     map(~ mutate(., phase = get_instantaneous_phase(freq, time))) %>%
-    map(~ mutate(., value = get_wave_value(amplitude, phase))) %>%
+    map(~ mutate(., value = get_wave_value(amplitude_lower_bound, phase))) %>%
     map("value") %>%
     do.call(cbind, .) %>%
     rowSums()
@@ -19,8 +19,8 @@ tone_sweep <- function(
   wave
 }
 
-get_wave_value <- function(amplitude, phase) {
-  amplitude * sin(phase)
+get_wave_value <- function(amplitude_lower_bound, phase) {
+  amplitude_lower_bound * sin(phase)
 }
 
 get_instantaneous_phase <- function(freq, time) {
@@ -43,16 +43,16 @@ map_to_range <- function(x, input_low, input_high, output_low, output_high) {
 }
 
 
-static_pure_tone <- function(amplitude, midi) {
+static_pure_tone <- function(amplitude_lower_bound, midi) {
   list(
     function(time) {
-      tibble(time, amplitude, midi)
+      tibble(time, amplitude_lower_bound, midi)
     }
   )
 }
 
 linear_freq_sweep_pure_tone <- function(
-    amplitude,
+    amplitude_lower_bound,
     start_midi,
     end_midi,
     duration
@@ -60,7 +60,7 @@ linear_freq_sweep_pure_tone <- function(
   function(time) {
     tibble(
       time,
-      amplitude,
+      amplitude_lower_bound,
       midi = map_to_range(
         time,
         input_low = 0,
@@ -80,14 +80,14 @@ frequency_ratios_to_midi_intervals <- function(ratios) {
 static_complex_tone <- function(
     midi_root,
     spectrum_frequency_ratios,
-    spectrum_amplitudes
+    spectrum_amplitude_lower_bounds
 ) {
   linear_freq_sweep_complex_tone(
     start_midi_root = midi_root,
     end_midi_root = midi_root,
     duration = 1,
     spectrum_frequency_ratios = spectrum_frequency_ratios,
-    spectrum_amplitudes = spectrum_amplitudes
+    spectrum_amplitude_lower_bounds = spectrum_amplitude_lower_bounds
   )
 }
 
@@ -96,17 +96,17 @@ linear_freq_sweep_complex_tone <- function(
     end_midi_root,
     duration,
     spectrum_frequency_ratios,
-    spectrum_amplitudes
+    spectrum_amplitude_lower_bounds
 ) {
   spectrum_midi_intervals <-
     frequency_ratios_to_midi_intervals(spectrum_frequency_ratios)
 
   map2(
     spectrum_midi_intervals,
-    spectrum_amplitudes,
-    function(midi_interval, amplitude) {
+    spectrum_amplitude_lower_bounds,
+    function(midi_interval, amplitude_lower_bound) {
       linear_freq_sweep_pure_tone(
-        amplitude = amplitude,
+        amplitude_lower_bound = amplitude_lower_bound,
         start_midi = start_midi_root + midi_interval,
         end_midi = end_midi_root + midi_interval,
         duration = duration
@@ -118,7 +118,7 @@ linear_freq_sweep_complex_tone <- function(
 
 static_basic_harmonic_complex_tone <- function(
     midi,
-    amplitude,
+    amplitude_lower_bound,
     n_harmonics,
     decay_dB_per_octave,
     octave_definition = 2
@@ -127,7 +127,7 @@ static_basic_harmonic_complex_tone <- function(
     start_midi_root = midi,
     end_midi_root = midi,
     duration = 1,
-    amplitude = amplitude,
+    amplitude_lower_bound = amplitude_lower_bound,
     n_harmonics = n_harmonics,
     decay_dB_per_octave = decay_dB_per_octave,
     octave_definition = octave_definition
@@ -138,14 +138,14 @@ linear_freq_sweep_basic_harmonic_complex_tone <- function(
     start_midi_root,
     end_midi_root,
     duration,
-    amplitude,
+    amplitude_lower_bound,
     n_harmonics,
     decay_dB_per_octave,
     octave_definition = 2
 ) {
   harmonic_number <- 1:n_harmonics
   dB <- - decay_dB_per_octave * log2(harmonic_number)
-  amplitudes <- amplitude * 10 ^ (dB / 20)
+  amplitude_lower_bounds <- amplitude_lower_bound * 10 ^ (dB / 20)
   spectrum_frequency_ratios <- octave_definition ^ log2(1:n_harmonics)
 
   linear_freq_sweep_complex_tone(
@@ -153,7 +153,7 @@ linear_freq_sweep_basic_harmonic_complex_tone <- function(
     end_midi_root,
     duration,
     spectrum_frequency_ratios = spectrum_frequency_ratios,
-    spectrum_amplitudes = amplitudes
+    spectrum_amplitude_lower_bounds = amplitude_lower_bounds
   )
 }
 
@@ -161,14 +161,14 @@ linear_freq_sweep_bonang_tone <- function(
     start_midi_root,
     end_midi_root,
     duration,
-    amplitude
+    amplitude_lower_bound
 ) {
   linear_freq_sweep_complex_tone(
     start_midi_root = start_midi_root,
     end_midi_root = end_midi_root,
     duration = duration,
     spectrum_frequency_ratios = c(1, 1.52, 3.46, 3.92),
-    spectrum_amplitudes = c(1, 1, 1, 1)
+    spectrum_amplitude_lower_bounds = c(1, 1, 1, 1)
   )
 }
 
@@ -335,7 +335,7 @@ if (FALSE) {
 #   audio_components = c(
 #     static_basic_harmonic_complex_tone(
 #       midi = 60,
-#       amplitude = 1,
+#       amplitude_lower_bound = 1,
 #       n_harmonics = 11,
 #       decay_dB_per_octave = 3
 #     ),
@@ -343,7 +343,7 @@ if (FALSE) {
 #       start_midi_root = 60,
 #       end_midi_root = 75,
 #       duration = 75,
-#       amplitude = 1,
+#       amplitude_lower_bound = 1,
 #       n_harmonics = 11,
 #       decay_dB_per_octave = 3
 #     )
@@ -358,7 +358,7 @@ if (FALSE) {
 
     components = c(
       static_basic_harmonic_complex_tone(
-        midi = 60, amplitude = 1, n_harmonics = 4, decay_dB_per_octave = 0
+        midi = 60, amplitude_lower_bound = 1, n_harmonics = 4, decay_dB_per_octave = 0
       ),
       linear_freq_sweep_bonang_tone(
         start_midi_root = 60,
@@ -379,7 +379,7 @@ if (FALSE) {
       # #   end_midi_root = 72,
       # #   duration = 5,
       # #   spectrum_frequency_ratios = 1:5,
-      # #   spectrum_amplitudes = 1 / (1:5) ^ 2
+      # #   spectrum_amplitude_lower_bounds = 1 / (1:5) ^ 2
       # # )
     )
   ) %>%

@@ -26,8 +26,8 @@ plot_fundamental_wavelength <- function(midi) {
   wavenumber = (2 * pi) / wavelength
   tibble::tibble(
     meters=seq(0, wavelength ,0.001),
-    amplitude=sin(wavenumber * meters)
-  ) %>% ggplot2::ggplot(ggplot2::aes(meters, amplitude)) +
+    amplitude_lower_bound=sin(wavenumber * meters)
+  ) %>% ggplot2::ggplot(ggplot2::aes(meters, amplitude_lower_bound)) +
     ggplot2::geom_line()
 }
 ```
@@ -499,11 +499,11 @@ p = params %>% purrr::map(\(p) {
   }
   cat("  \n#####", title, '\n')
   cat(description)
-  t_v = chords$temporal_variance %>% unique() %>% max()
-  s_v = chords$spatial_variance %>% unique() %>% max()
+  t_v = chords$temporal_frequency_sd %>% unique() %>% max()
+  s_v = chords$spatial_frequency_sd %>% unique() %>% max()
   print(knitr::kable(tibble::tibble_row(
-    temporal_variance = paste(round(t_v, 5), collapse = ' '),
-    spatial_variance  = paste(round(s_v, 5), collapse = ' '),
+    temporal_frequency_sd = paste(round(t_v, 5), collapse = ' '),
+    spatial_frequency_sd  = paste(round(s_v, 5), collapse = ' '),
     smoothing_sigma   = sigma
   )))
   
@@ -535,7 +535,7 @@ p = params %>% purrr::map(\(p) {
 })
 ```
 
-### Manipulating amplitudes
+### Manipulating amplitude_lower_bounds
 
 ```{r, include=F}
 timbre_paper = readRDS('./man/data/roll_off_timbre_paper.rds')
@@ -592,9 +592,9 @@ p = params %>% purrr::map(\(p) {
   sigma = BEHAVIOURAL_SMOOTH_BROAD
   cat("  \n#####", title, '\n')
   print(knitr::kable(tibble::tibble_row(
-    temporal_variance = paste(round(chords$temporal_variance %>% unique, 5), collapse = ' '),
-    spatial_variance  = paste(round(chords$spatial_variance %>% unique, 5), collapse = ' '),
-    min_amplitude       = paste(round(chords$minimum_amplitude %>% unique, 5), collapse = ' '),
+    temporal_frequency_sd = paste(round(chords$temporal_frequency_sd %>% unique, 5), collapse = ' '),
+    spatial_frequency_sd  = paste(round(chords$spatial_frequency_sd %>% unique, 5), collapse = ' '),
+    min_amplitude_lower_bound       = paste(round(chords$minimum_amplitude_lower_bound %>% unique, 5), collapse = ' '),
     smoothing_sigma = sigma
   )))
   print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),
@@ -686,14 +686,14 @@ Frequency Ratios
 ```{r, echo=F, message=F, results='asis'}
 f_ratios = (f / min(f)) %>% sort()
 l_ratios = (l / min(l)) %>% sort()
-f_rational = approximate_rational_fractions(f_ratios, default_variance(), default_octave_deviation())
+f_rational = approximate_rational_fractions(f_ratios, default_variance(), default_approximate_lcm_sd())
 print(knitr::kable(f_rational %>% dplyr::select(num, den)))
 ```
 
 Wavelength Ratios
 
 ```{r, echo=F, message=F, results='asis'}
-l_rational = approximate_rational_fractions(l_ratios, default_variance(), default_octave_deviation())
+l_rational = approximate_rational_fractions(l_ratios, default_variance(), default_approximate_lcm_sd())
 print(knitr::kable(l_rational %>% dplyr::select(num, den)))
 ```
 

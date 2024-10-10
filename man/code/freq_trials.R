@@ -55,26 +55,26 @@ run_trials <- function(search_label, variances, heisenberg) {
       bass_f0 <- hrep::midi_to_freq(tonic_midi)
       bass_df <- tibble::tibble(
         frequency = bass_f0 * 1:4,
-        amplitude = 1
+        amplitude_lower_bound = 1
       )
       upper_f0 <- hrep::midi_to_freq(interval)
       chord_df <- tibble::tibble(
         frequency = c(upper_f0 * c(1, 1.52, 3.46, 3.92),
                       bass_df$frequency) %>% unique %>% sort,
-        amplitude = 1
+        amplitude_lower_bound = 1
       )
       chord = chord_df %>% as.list() %>% hrep::sparse_fr_spectrum()
     } else if (search_label == '5PartialsNo3') {
       bass_f0 <- hrep::midi_to_freq(tonic_midi)
       bass <- tibble::tibble(
         frequency = bass_f0 * 1:5,
-        amplitude = c(1, 1, 0, 1, 1)
+        amplitude_lower_bound = c(1, 1, 0, 1, 1)
       ) %>% as.list() %>%  hrep::sparse_fr_spectrum()
 
       upper_f0 <- hrep::midi_to_freq(interval)
       upper <- tibble::tibble(
         frequency = upper_f0 * 1:5,
-        amplitude = c(1, 1, 0, 1, 1)
+        amplitude_lower_bound = c(1, 1, 0, 1, 1)
       ) %>% as.list() %>%  hrep::sparse_fr_spectrum()
 
       chord = do.call(hrep::combine_sparse_spectra, list(bass,upper))
@@ -88,8 +88,8 @@ run_trials <- function(search_label, variances, heisenberg) {
 
     mami.codi.R::mami.codi(
       chord,
-      temporal_variance  = variance,
-      spatial_variance   = if (heisenberg) NA else variance,
+      temporal_frequency_sd  = variance,
+      spatial_frequency_sd   = if (heisenberg) NA else variance,
       metadata       = list(
         octave_ratio   = octave_ratio,
         num_harmonics  = num_harmonics,

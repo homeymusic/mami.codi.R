@@ -17,8 +17,8 @@ knitr::opts_chunk$set(dev = 'svg')
 ```
 
 ```{r, echo=F, message=F}
-t        = seq(from=-sqrt(HEISENBERG),to=sqrt(HEISENBERG),by=0.001)
-sigma_2  = HEISENBERG / 4
+t        = seq(from=-sqrt(TEMPORAL_FREQUENCY_SD_DEFAULT),to=sqrt(TEMPORAL_FREQUENCY_SD_DEFAULT),by=0.001)
+sigma_2  = TEMPORAL_FREQUENCY_SD_DEFAULT / 4
 sigma    = sqrt(sigma_2)
 gaussian = (1 / (sigma * sqrt(2 * pi))) * exp(- 0.5 * (t^2 / sigma_2))
 plot(t,gaussian)

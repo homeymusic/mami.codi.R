@@ -35,15 +35,15 @@ output = grid %>% furrr::future_pmap_dfr(\(index, num_harmonics, octave_ratio,
                                            roll_off) {
 
   if (roll_off == 2) {
-    amplitude = 0.00
+    amplitude_lower_bound = 0.00
   } else if (roll_off == 7) {
-    amplitude = 0.08
+    amplitude_lower_bound = 0.08
   } else if (roll_off == 12) {
-    amplitude = 0.013
+    amplitude_lower_bound = 0.013
   }
 
   mami.codi.R::mami.codi(c(tonic_midi,intervals[index]),
-                         amplitude = amplitude,
+                         amplitude_lower_bound = amplitude_lower_bound,
                          num_harmonics=num_harmonics,
                          octave_ratio=octave_ratio,
                          roll_off_dB   = roll_off,
