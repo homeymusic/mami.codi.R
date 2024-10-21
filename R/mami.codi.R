@@ -81,12 +81,12 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 parse_variances <- function(x, temporal_variance, spatial_variance) {
 
   if (is.na(temporal_variance) && is.na(spatial_variance)) {
-    temporal_variance = sqrt(HEISENBERG)
-    spatial_variance  = sqrt(HEISENBERG)
+    temporal_variance = sqrt(default_variance())
+    spatial_variance  = sqrt(default_variance())
   } else if (is.na(spatial_variance)) {
-    spatial_variance  = HEISENBERG / temporal_variance
+    spatial_variance  = default_variance() / temporal_variance
   } else if (is.na(temporal_variance)) {
-    temporal_variance = HEISENBERG / spatial_variance
+    temporal_variance = default_variance() / spatial_variance
   }
 
   x %>% dplyr::mutate(
@@ -103,11 +103,10 @@ compute_consonance = function(x, minimum_amplitude, octave_deviation) {
   l       = c_sound / f
 
   x %>% dplyr::mutate(
-
-    alcd( f / min(f), .data$temporal_variance, octave_deviation, 'temporal'),
+    alcd( f, min(f), .data$temporal_variance, octave_deviation, 'temporal'),
     temporal_consonance   = 50 - log2(.data$temporal_alcd),
 
-    alcd( l / min(l), .data$spatial_variance,  octave_deviation, 'spatial'),
+    alcd( l, min(l), .data$spatial_variance,  octave_deviation, 'spatial'),
     spatial_consonance    = 50 - log2(.data$spatial_alcd),
 
     consonance_dissonance = .data$temporal_consonance + .data$spatial_consonance,
@@ -159,8 +158,8 @@ compute_consonance = function(x, minimum_amplitude, octave_deviation) {
 #'
 #' @rdname alcd
 #' @export
-alcd <- function(x, variance, octave_deviation, label) {
-  fractions = approximate_rational_fractions(x, variance, octave_deviation)
+alcd <- function(x, reference, sd, approximate_lcm_sd, label) {
+  fractions = approximate_rational_fractions(x, reference, sd, approximate_lcm_sd)
   tibble::tibble_row(
     alcd       = lcm_integers(fractions$den),
     fractions  = list(fractions)
@@ -227,8 +226,7 @@ format_output <- function(x, metadata, verbose) {
 #' @rdname default_variance
 #' @export
 default_variance <- function() { DEFAULT_VARIANCE }
-HEISENBERG = 1 / (16 * pi ^2)
-DEFAULT_VARIANCE = sqrt(HEISENBERG)
+DEFAULT_VARIANCE = 1
 
 #' Default Approximate Least Common Multiple Deviation
 #'

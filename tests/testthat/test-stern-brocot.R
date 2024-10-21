@@ -3,7 +3,7 @@ library(testthat)
 # Define the test function for stern_brocot
 test_that("stern_brocot approximates irrational number to a ratio and specific num/den within a tolerance", {
   # Test with Pi, an irrational number
-  pi_approx <- stern_brocot(pi, 0.01)
+  pi_approx <- stern_brocot(pi-0.01, pi, pi+0.01)
   approx_pi <- pi_approx[1] / pi_approx[2]
 
   # Check if the approximation is within the tolerance
@@ -15,7 +15,7 @@ test_that("stern_brocot approximates irrational number to a ratio and specific n
   expect_equal(pi_approx[2], 7, info = "Denominator for Pi approximation is incorrect")
 
   # Test with sqrt(2), another irrational number
-  sqrt2_approx <- stern_brocot(sqrt(2), 0.0001)
+  sqrt2_approx <- stern_brocot(sqrt(2) - 0.0001, sqrt(2), sqrt(2) + 0.0001)
   approx_sqrt2 <- sqrt2_approx[1] / sqrt2_approx[2]
 
   # Check if the approximation is within the tolerance

@@ -11,14 +11,15 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // stern_brocot
-NumericVector stern_brocot(const double x, const double variance);
-RcppExport SEXP _mami_codi_R_stern_brocot(SEXP xSEXP, SEXP varianceSEXP) {
+NumericVector stern_brocot(const double lower_bound, const double x, const double upper_bound);
+RcppExport SEXP _mami_codi_R_stern_brocot(SEXP lower_boundSEXP, SEXP xSEXP, SEXP upper_boundSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const double >::type lower_bound(lower_boundSEXP);
     Rcpp::traits::input_parameter< const double >::type x(xSEXP);
-    Rcpp::traits::input_parameter< const double >::type variance(varianceSEXP);
-    rcpp_result_gen = Rcpp::wrap(stern_brocot(x, variance));
+    Rcpp::traits::input_parameter< const double >::type upper_bound(upper_boundSEXP);
+    rcpp_result_gen = Rcpp::wrap(stern_brocot(lower_bound, x, upper_bound));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -36,48 +37,49 @@ BEGIN_RCPP
 END_RCPP
 }
 // approximate_harmonics
-DataFrame approximate_harmonics(const NumericVector x, const double deviation);
-RcppExport SEXP _mami_codi_R_approximate_harmonics(SEXP xSEXP, SEXP deviationSEXP) {
+DataFrame approximate_harmonics(const NumericVector x, const double approximate_lcm_sd);
+RcppExport SEXP _mami_codi_R_approximate_harmonics(SEXP xSEXP, SEXP approximate_lcm_sdSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< const double >::type deviation(deviationSEXP);
-    rcpp_result_gen = Rcpp::wrap(approximate_harmonics(x, deviation));
+    Rcpp::traits::input_parameter< const double >::type approximate_lcm_sd(approximate_lcm_sdSEXP);
+    rcpp_result_gen = Rcpp::wrap(approximate_harmonics(x, approximate_lcm_sd));
     return rcpp_result_gen;
 END_RCPP
 }
-// pseudo_octave
-const double pseudo_octave(NumericVector approximate_harmonics);
-RcppExport SEXP _mami_codi_R_pseudo_octave(SEXP approximate_harmonicsSEXP) {
+// approximate_pseudo_octave
+const double approximate_pseudo_octave(NumericVector approximate_harmonics);
+RcppExport SEXP _mami_codi_R_approximate_pseudo_octave(SEXP approximate_harmonicsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type approximate_harmonics(approximate_harmonicsSEXP);
-    rcpp_result_gen = Rcpp::wrap(pseudo_octave(approximate_harmonics));
+    rcpp_result_gen = Rcpp::wrap(approximate_pseudo_octave(approximate_harmonics));
     return rcpp_result_gen;
 END_RCPP
 }
 // approximate_rational_fractions
-DataFrame approximate_rational_fractions(NumericVector x, const double variance, const double deviation);
-RcppExport SEXP _mami_codi_R_approximate_rational_fractions(SEXP xSEXP, SEXP varianceSEXP, SEXP deviationSEXP) {
+DataFrame approximate_rational_fractions(NumericVector x, const double reference, const double sd, const double approximate_lcm_sd);
+RcppExport SEXP _mami_codi_R_approximate_rational_fractions(SEXP xSEXP, SEXP referenceSEXP, SEXP sdSEXP, SEXP approximate_lcm_sdSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< const double >::type variance(varianceSEXP);
-    Rcpp::traits::input_parameter< const double >::type deviation(deviationSEXP);
-    rcpp_result_gen = Rcpp::wrap(approximate_rational_fractions(x, variance, deviation));
+    Rcpp::traits::input_parameter< const double >::type reference(referenceSEXP);
+    Rcpp::traits::input_parameter< const double >::type sd(sdSEXP);
+    Rcpp::traits::input_parameter< const double >::type approximate_lcm_sd(approximate_lcm_sdSEXP);
+    rcpp_result_gen = Rcpp::wrap(approximate_rational_fractions(x, reference, sd, approximate_lcm_sd));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_mami_codi_R_stern_brocot", (DL_FUNC) &_mami_codi_R_stern_brocot, 2},
+    {"_mami_codi_R_stern_brocot", (DL_FUNC) &_mami_codi_R_stern_brocot, 3},
     {"_mami_codi_R_compute_pseudo_octave", (DL_FUNC) &_mami_codi_R_compute_pseudo_octave, 3},
     {"_mami_codi_R_approximate_harmonics", (DL_FUNC) &_mami_codi_R_approximate_harmonics, 2},
-    {"_mami_codi_R_pseudo_octave", (DL_FUNC) &_mami_codi_R_pseudo_octave, 1},
-    {"_mami_codi_R_approximate_rational_fractions", (DL_FUNC) &_mami_codi_R_approximate_rational_fractions, 3},
+    {"_mami_codi_R_approximate_pseudo_octave", (DL_FUNC) &_mami_codi_R_approximate_pseudo_octave, 1},
+    {"_mami_codi_R_approximate_rational_fractions", (DL_FUNC) &_mami_codi_R_approximate_rational_fractions, 4},
     {NULL, NULL, 0}
 };
 
