@@ -8,7 +8,7 @@
 #' @param amplitude_lower_bound An optional minimum amplitude_lower_bound for deciding which partials to include.
 #' @param temporal_frequency_sd An optional temporal variance value for finding rational fractions.
 #' @param spatial_frequency_sd  An optional spatial variance value for finding rational fractions.
-#' @param approximate_lcm_sd An optional approximate_lcm_sd value for approximating least common multiples.
+#' @param approximate_sd An optional approximate_sd value for approximating least common multiples.
 #' @param metadata User-provided list of metadata that round trips with each call.
 #' helpful for analysis and plots
 #' @param verbose Determines the amount of data to return from chord evaluation
@@ -25,7 +25,7 @@ mami.codi <- function(
     amplitude_lower_bound = AMPLITUDE_LOWER_BOUND_DEFAULT,
     temporal_frequency_sd = NA,
     spatial_frequency_sd  = NA,
-    approximate_lcm_sd    = APPROXIMATE_LCM_SD_DEFAULT,
+    approximate_sd    = approximate_sd_DEFAULT,
     metadata              = NA,
     verbose               = FALSE,
     ...
@@ -38,7 +38,7 @@ mami.codi <- function(
     )                                      %>%
     compute_consonance(
       amplitude_lower_bound,
-      approximate_lcm_sd
+      approximate_sd
     )                                      %>%
     format_output(metadata, verbose)
 
@@ -95,7 +95,7 @@ parse_variances <- function(x, temporal_frequency_sd, spatial_frequency_sd) {
 
 }
 
-compute_consonance = function(x, minimum_amplitude_lower_bound, approximate_lcm_sd) {
+compute_consonance = function(x, minimum_amplitude_lower_bound, approximate_sd) {
 
   f       = x$spectrum[[1]] %>% dplyr::filter(.data$y>minimum_amplitude_lower_bound) %>% hrep::freq()
   c_sound = 343 # m/s arbitrary, disappears in the ratios
@@ -106,11 +106,13 @@ compute_consonance = function(x, minimum_amplitude_lower_bound, approximate_lcm_
 
   x %>% dplyr::mutate(
 
-    alcm(w, min(w), RATIO_TERM["DENOMINATOR"], .data$temporal_frequency_sd, approximate_lcm_sd, 'temporal'),
-    temporal_dissonance   = log2(.data$temporal_alcm),
+    agcd(w, min(w), RATIO_TERM["NUMERATOR"], .data$temporal_frequency_sd, approximate_sd, 'temporal'),
+    alcm(w, min(w), RATIO_TERM["DENOMINATOR"], .data$temporal_frequency_sd, approximate_sd, 'temporal'),
+    temporal_dissonance   = log2(.data$temporal_agcd / .data$temporal_alcm + 1),
 
-    alcm(k, max(k), RATIO_TERM["NUMERATOR"], .data$spatial_frequency_sd,  approximate_lcm_sd, 'spatial'),
-    spatial_dissonance    = log2(.data$spatial_alcm),
+    alcm(k, max(k), RATIO_TERM["NUMERATOR"], .data$spatial_frequency_sd,  approximate_sd, 'spatial'),
+    agcd(k, max(k), RATIO_TERM["DENOMINATOR"], .data$spatial_frequency_sd,  approximate_sd, 'spatial'),
+    spatial_dissonance    = log2(.data$spatial_agcd / .data$spatial_alcm + 1),
 
     major_minor           = .data$spatial_dissonance - .data$temporal_dissonance,
     consonance_dissonance = .data$spatial_dissonance + .data$temporal_dissonance,
@@ -124,11 +126,34 @@ compute_consonance = function(x, minimum_amplitude_lower_bound, approximate_lcm_
     minimum_amplitude_lower_bound,
     temporal_frequency_sd,
     spatial_frequency_sd,
-    approximate_lcm_sd
+    approximate_sd
 
   )
 
 }
+
+#' Approximate Greatest Common Divisor
+#'
+#' @param x Signal vector
+#' @param reference Reference signal, this will be the denominator of the ratios
+#' @param ratio_term Which term of the fraction to find the GCD: numerator or denominator
+#' @param sd Standard deviation for each evaluated signal
+#' @param approximate_sd Deviation for approximating least common multiples
+#' @param label A custom label for the output usually 'spatial' or 'temporal'
+#'
+#' @return The approximate greatest common divisor
+#'
+#' @rdname agcd
+#' @export
+agcd <- function(x, reference, ratio_term, sd, approximate_sd, label) {
+  fractions = approximate_rational_fractions(x, reference, sd, approximate_sd)
+  tibble::tibble_row(
+    agcd           = if (ratio_term == RATIO_TERM["NUMERATOR"]) gcd_integers(fractions$num) else gcd_integers(fractions$den),
+    agcd_fractions = list(fractions)
+  ) %>% dplyr::rename_with(~ paste0(label, '_' , .))
+}
+gcd_integers <- function(x) Reduce(gmp::gcd.bigz, x) %>% as.numeric()
+
 
 #' Approximate Least Common Multiple
 #'
@@ -136,18 +161,18 @@ compute_consonance = function(x, minimum_amplitude_lower_bound, approximate_lcm_
 #' @param reference Reference signal, this will be the denominator of the ratios
 #' @param ratio_term Which term of the fraction to find the LCM: numerator or denominator
 #' @param sd Standard deviation for each evaluated signal
-#' @param approximate_lcm_sd Deviation for approximating least common multiples
+#' @param approximate_sd Deviation for approximating least common multiples
 #' @param label A custom label for the output usually 'spatial' or 'temporal'
 #'
 #' @return The approximate least common multiple
 #'
 #' @rdname alcm
 #' @export
-alcm <- function(x, reference, ratio_term, sd, approximate_lcm_sd, label) {
-  fractions = approximate_rational_fractions(x, reference, sd, approximate_lcm_sd)
+alcm <- function(x, reference, ratio_term, sd, approximate_sd, label) {
+  fractions = approximate_rational_fractions(x, reference, sd, approximate_sd)
   tibble::tibble_row(
-    alcm       = if (ratio_term == RATIO_TERM["NUMERATOR"]) lcm_integers(fractions$num) else lcm_integers(fractions$den),
-    fractions  = list(fractions)
+    alcm           = if (ratio_term == RATIO_TERM["NUMERATOR"]) lcm_integers(fractions$num) else lcm_integers(fractions$den),
+    alcm_fractions = list(fractions)
   ) %>% dplyr::rename_with(~ paste0(label, '_' , .))
 }
 lcm_integers <- function(x) Reduce(gmp::lcm.bigz, x) %>% as.numeric()
@@ -168,7 +193,7 @@ format_output <- function(x, metadata, verbose) {
 }
 
 # Constants
-APPROXIMATE_LCM_SD_DEFAULT = 0.11
+approximate_sd_DEFAULT = 0.11
 AMPLITUDE_LOWER_BOUND_DEFAULT = 0.07
 RATIO_TERM <- c("NUMERATOR" = 1, "DENOMINATOR" = 2)
 SPATIAL_FREQUENCY_SD_DEFAULT  = 0.1
