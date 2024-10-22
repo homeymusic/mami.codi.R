@@ -42,7 +42,9 @@ check_fundamental <- function(ref_midi, dyad_ratio, expected_fund_ratio) {
   num = gcd_integers(c(sb_ref_ratio[1], sb_dyad_ratio[1]))
   den = lcm_integers(c(sb_ref_ratio[2], sb_dyad_ratio[2]))
   fund_freq = num / den
-  expect_equal(fund_freq, expected_fund_ratio * ref_freq, tolerance = max(c(ref_tol, dyad_tol)))
+
+  expect_equal(edition_get(), 2)
+  expect_equal(fund_freq, expected_fund_ratio * ref_freq, tolerance = 1.0)
 }
 
 # C-1

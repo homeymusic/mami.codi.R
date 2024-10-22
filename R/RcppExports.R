@@ -17,15 +17,15 @@ approximate_pseudo_octave <- function(approximate_harmonics) {
     .Call(`_mami_codi_R_approximate_pseudo_octave`, approximate_harmonics)
 }
 
-approximate_rational_fractions <- function(x, reference, sd, approximate_lcm_sd) {
-    .Call(`_mami_codi_R_approximate_rational_fractions`, x, reference, sd, approximate_lcm_sd)
-}
-
 frequency_erb <- function(frequency) {
     .Call(`_mami_codi_R_frequency_erb`, frequency)
 }
 
 wavelength_erb <- function(wavelength, speed_of_sound) {
     .Call(`_mami_codi_R_wavelength_erb`, wavelength, speed_of_sound)
+}
+
+approximate_rational_fractions <- function(x, approximate_lcm_sd, frequency, speed_of_sound = 343.0) {
+    .Call(`_mami_codi_R_approximate_rational_fractions`, x, approximate_lcm_sd, frequency, speed_of_sound)
 }
 

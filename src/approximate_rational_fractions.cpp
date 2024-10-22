@@ -160,63 +160,6 @@ using namespace Rcpp;
    return std::stod(std::string(names_of_count[0]));
  }
 
- //' approximate_rational_fractions
- //'
- //' Approximates floating-point numbers to arbitrary variance.
- //'
- //' @param x Vector of floating point numbers to approximate
- //' @param reference This will be the denominator of the ratios
- //' @param sd Standard deviation for each evaluated parameter
- //' @param approximate_lcm_sd Standard deviation for estimating least common multiples
- //'
- //' @return A data frame of rational numbers and metadata
- //'
- //' @export
- // [[Rcpp::export]]
- DataFrame approximate_rational_fractions(NumericVector x,
-                                          const double reference,
-                                          const double sd,
-                                          const double approximate_lcm_sd) {
-
-   const int     n = x.size();
-   NumericVector upper_bound(n);
-   NumericVector pseudo_x(n);
-   NumericVector lower_bound(n);
-   NumericVector nums(n);
-   NumericVector dens(n);
-   NumericVector approximations(n);
-   NumericVector errors(n);
-
-   const DataFrame approximate_harmonics_df = approximate_harmonics(x / reference, approximate_lcm_sd);
-   const double pseudo_octave = approximate_pseudo_octave(approximate_harmonics_df["pseudo_octave"]);
-
-   for (int i = 0; i < n; ++i) {
-     upper_bound[i]               = pow(2.0, log((x[i] + sd)/(reference - sd)) / log(pseudo_octave));
-     pseudo_x[i]                  = pow(2.0, log(x[i]/reference) / log(pseudo_octave));
-     lower_bound[i]               = pow(2.0, log((x[i] - sd)/(reference + sd)) / log(pseudo_octave));
-     const NumericVector fraction = stern_brocot(lower_bound[i], pseudo_x[i], upper_bound[i]);
-     nums[i]                      = fraction[0];
-     dens[i]                      = fraction[1];
-     approximations[i]            = nums[i] / dens[i];
-     errors[i]                    = approximations[i] - pseudo_x[i];
-   }
-
-   return DataFrame::create(
-     _("x")                      = x,
-     _("reference")              = reference,
-     _("lower_bound")            = lower_bound,
-     _("pseudo_rational_number") = pseudo_x,
-     _("upper_bound")            = upper_bound,
-     _("rational_number")        = x / reference,
-     _("pseudo_octave")          = pseudo_octave,
-     _("num")                    = nums,
-     _("den")                    = dens,
-     _("approximation")          = approximations,
-     _("error")                  = errors,
-     _("sd")                     = sd
-   );
- }
-
  //' frequency_erb
  //'
  //' Uses ERB
@@ -244,4 +187,60 @@ using namespace Rcpp;
  // [[Rcpp::export]]
  const double wavelength_erb(const double wavelength, const double speed_of_sound) {
    return speed_of_sound / frequency_erb(speed_of_sound / wavelength);
+ }
+
+ //' approximate_rational_fractions
+ //'
+ //' Approximates floating-point numbers to arbitrary variance.
+ //'
+ //' @param x Vector of floating point numbers to approximate
+ //' @param approximate_lcm_sd Standard deviation for estimating least common multiples
+ //'
+ //' @return A data frame of rational numbers and metadata
+ //'
+ //' @export
+ // [[Rcpp::export]]
+ DataFrame approximate_rational_fractions(NumericVector x,
+                                          const double approximate_lcm_sd,
+                                          bool frequency,
+                                          const double speed_of_sound = 343.0) {
+
+   const double  reference = min(x);
+   const int     n = x.size();
+   NumericVector upper_bound(n);
+   NumericVector pseudo_x(n);
+   NumericVector lower_bound(n);
+   NumericVector nums(n);
+   NumericVector dens(n);
+   NumericVector approximations(n);
+   NumericVector errors(n);
+
+   const DataFrame approximate_harmonics_df = approximate_harmonics(x / reference, approximate_lcm_sd);
+   const double pseudo_octave = approximate_pseudo_octave(approximate_harmonics_df["pseudo_octave"]);
+
+   for (int i = 0; i < n; ++i) {
+     const double sd = frequency ? frequency_erb(x[i]) : wavelength_erb(x[i], speed_of_sound);
+     upper_bound[i]               = pow(2.0, log(x[i] + sd) / log(pseudo_octave));
+     pseudo_x[i]                  = pow(2.0, log(x[i]) / log(pseudo_octave));
+     lower_bound[i]               = pow(2.0, log(x[i] - sd) / log(pseudo_octave));
+     const NumericVector fraction = stern_brocot(lower_bound[i], pseudo_x[i], upper_bound[i]);
+     nums[i]                      = fraction[0];
+     dens[i]                      = fraction[1];
+     approximations[i]            = nums[i] / dens[i];
+     errors[i]                    = approximations[i] - pseudo_x[i];
+   }
+
+   return DataFrame::create(
+     _("x")                      = x,
+     _("reference")              = reference,
+     _("lower_bound")            = lower_bound,
+     _("pseudo_rational_number") = pseudo_x,
+     _("upper_bound")            = upper_bound,
+     _("rational_number")        = x / reference,
+     _("pseudo_octave")          = pseudo_octave,
+     _("num")                    = nums,
+     _("den")                    = dens,
+     _("approximation")          = approximations,
+     _("error")                  = errors
+   );
  }

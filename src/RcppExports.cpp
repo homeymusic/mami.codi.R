@@ -59,20 +59,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// approximate_rational_fractions
-DataFrame approximate_rational_fractions(NumericVector x, const double reference, const double sd, const double approximate_lcm_sd);
-RcppExport SEXP _mami_codi_R_approximate_rational_fractions(SEXP xSEXP, SEXP referenceSEXP, SEXP sdSEXP, SEXP approximate_lcm_sdSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< const double >::type reference(referenceSEXP);
-    Rcpp::traits::input_parameter< const double >::type sd(sdSEXP);
-    Rcpp::traits::input_parameter< const double >::type approximate_lcm_sd(approximate_lcm_sdSEXP);
-    rcpp_result_gen = Rcpp::wrap(approximate_rational_fractions(x, reference, sd, approximate_lcm_sd));
-    return rcpp_result_gen;
-END_RCPP
-}
 // frequency_erb
 const double frequency_erb(const double frequency);
 RcppExport SEXP _mami_codi_R_frequency_erb(SEXP frequencySEXP) {
@@ -96,15 +82,29 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// approximate_rational_fractions
+DataFrame approximate_rational_fractions(NumericVector x, const double approximate_lcm_sd, bool frequency, const double speed_of_sound);
+RcppExport SEXP _mami_codi_R_approximate_rational_fractions(SEXP xSEXP, SEXP approximate_lcm_sdSEXP, SEXP frequencySEXP, SEXP speed_of_soundSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< const double >::type approximate_lcm_sd(approximate_lcm_sdSEXP);
+    Rcpp::traits::input_parameter< bool >::type frequency(frequencySEXP);
+    Rcpp::traits::input_parameter< const double >::type speed_of_sound(speed_of_soundSEXP);
+    rcpp_result_gen = Rcpp::wrap(approximate_rational_fractions(x, approximate_lcm_sd, frequency, speed_of_sound));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_mami_codi_R_stern_brocot", (DL_FUNC) &_mami_codi_R_stern_brocot, 3},
     {"_mami_codi_R_compute_pseudo_octave", (DL_FUNC) &_mami_codi_R_compute_pseudo_octave, 3},
     {"_mami_codi_R_approximate_harmonics", (DL_FUNC) &_mami_codi_R_approximate_harmonics, 2},
     {"_mami_codi_R_approximate_pseudo_octave", (DL_FUNC) &_mami_codi_R_approximate_pseudo_octave, 1},
-    {"_mami_codi_R_approximate_rational_fractions", (DL_FUNC) &_mami_codi_R_approximate_rational_fractions, 4},
     {"_mami_codi_R_frequency_erb", (DL_FUNC) &_mami_codi_R_frequency_erb, 1},
     {"_mami_codi_R_wavelength_erb", (DL_FUNC) &_mami_codi_R_wavelength_erb, 2},
+    {"_mami_codi_R_approximate_rational_fractions", (DL_FUNC) &_mami_codi_R_approximate_rational_fractions, 4},
     {NULL, NULL, 0}
 };
 
