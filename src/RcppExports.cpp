@@ -85,13 +85,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // wavelength_uncertainty
-const double wavelength_uncertainty(const double wavelength);
-RcppExport SEXP _mami_codi_R_wavelength_uncertainty(SEXP wavelengthSEXP) {
+const double wavelength_uncertainty(const double wavelength, const double speed_of_sound);
+RcppExport SEXP _mami_codi_R_wavelength_uncertainty(SEXP wavelengthSEXP, SEXP speed_of_soundSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const double >::type wavelength(wavelengthSEXP);
-    rcpp_result_gen = Rcpp::wrap(wavelength_uncertainty(wavelength));
+    Rcpp::traits::input_parameter< const double >::type speed_of_sound(speed_of_soundSEXP);
+    rcpp_result_gen = Rcpp::wrap(wavelength_uncertainty(wavelength, speed_of_sound));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -103,7 +104,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_mami_codi_R_approximate_pseudo_octave", (DL_FUNC) &_mami_codi_R_approximate_pseudo_octave, 1},
     {"_mami_codi_R_approximate_rational_fractions", (DL_FUNC) &_mami_codi_R_approximate_rational_fractions, 4},
     {"_mami_codi_R_frequency_uncertainty", (DL_FUNC) &_mami_codi_R_frequency_uncertainty, 1},
-    {"_mami_codi_R_wavelength_uncertainty", (DL_FUNC) &_mami_codi_R_wavelength_uncertainty, 1},
+    {"_mami_codi_R_wavelength_uncertainty", (DL_FUNC) &_mami_codi_R_wavelength_uncertainty, 2},
     {NULL, NULL, 0}
 };
 

@@ -236,13 +236,12 @@ using namespace Rcpp;
  //' Uses ERB
  //'
  //' @param wavelength
+ //' @param speed_of_sound speed of sound
  //'
  //' @return wavelength uncertainty
  //'
  //' @export
  // [[Rcpp::export]]
- const double wavelength_uncertainty(const double wavelength) {
-   const double speed_of_sound = 343;
+ const double wavelength_uncertainty(const double wavelength, const double speed_of_sound) {
    return speed_of_sound / frequency_uncertainty(speed_of_sound / wavelength);
  }
-

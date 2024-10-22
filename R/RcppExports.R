@@ -25,7 +25,7 @@ frequency_uncertainty <- function(frequency) {
     .Call(`_mami_codi_R_frequency_uncertainty`, frequency)
 }
 
-wavelength_uncertainty <- function(wavelength) {
-    .Call(`_mami_codi_R_wavelength_uncertainty`, wavelength)
+wavelength_uncertainty <- function(wavelength, speed_of_sound) {
+    .Call(`_mami_codi_R_wavelength_uncertainty`, wavelength, speed_of_sound)
 }
 
