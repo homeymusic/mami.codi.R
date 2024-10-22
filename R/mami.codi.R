@@ -166,6 +166,7 @@ alcd <- function(x, reference, sd, approximate_lcm_sd, label) {
   ) %>% dplyr::rename_with(~ paste0(label, '_' , .))
 }
 lcm_integers <- function(x) Reduce(gmp::lcm.bigz, x) %>% as.numeric()
+gcd_integers <- function(x) Reduce(gmp::gcd.bigz, x) %>% as.numeric()
 
 format_output <- function(x, metadata, verbose) {
   x <- x %>% tibble::add_column(

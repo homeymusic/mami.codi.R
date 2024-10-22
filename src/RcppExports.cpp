@@ -73,6 +73,28 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// frequency_uncertainty
+const double frequency_uncertainty(const double frequency);
+RcppExport SEXP _mami_codi_R_frequency_uncertainty(SEXP frequencySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const double >::type frequency(frequencySEXP);
+    rcpp_result_gen = Rcpp::wrap(frequency_uncertainty(frequency));
+    return rcpp_result_gen;
+END_RCPP
+}
+// wavelength_uncertainty
+const double wavelength_uncertainty(const double wavelength);
+RcppExport SEXP _mami_codi_R_wavelength_uncertainty(SEXP wavelengthSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const double >::type wavelength(wavelengthSEXP);
+    rcpp_result_gen = Rcpp::wrap(wavelength_uncertainty(wavelength));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_mami_codi_R_stern_brocot", (DL_FUNC) &_mami_codi_R_stern_brocot, 3},
@@ -80,6 +102,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_mami_codi_R_approximate_harmonics", (DL_FUNC) &_mami_codi_R_approximate_harmonics, 2},
     {"_mami_codi_R_approximate_pseudo_octave", (DL_FUNC) &_mami_codi_R_approximate_pseudo_octave, 1},
     {"_mami_codi_R_approximate_rational_fractions", (DL_FUNC) &_mami_codi_R_approximate_rational_fractions, 4},
+    {"_mami_codi_R_frequency_uncertainty", (DL_FUNC) &_mami_codi_R_frequency_uncertainty, 1},
+    {"_mami_codi_R_wavelength_uncertainty", (DL_FUNC) &_mami_codi_R_wavelength_uncertainty, 1},
     {NULL, NULL, 0}
 };
 

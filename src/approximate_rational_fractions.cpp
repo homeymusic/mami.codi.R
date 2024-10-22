@@ -216,3 +216,33 @@ using namespace Rcpp;
      _("sd")                     = sd
    );
  }
+
+ //' frequency_uncertainty
+ //'
+ //' Uses ERB
+ //'
+ //' @param frequency
+ //'
+ //' @return frequency uncertainty
+ //'
+ //' @export
+ // [[Rcpp::export]]
+ const double frequency_uncertainty(const double frequency) {
+   return 24.7 + 0.108 * frequency;
+ }
+
+ //' wavelength_uncertainty
+ //'
+ //' Uses ERB
+ //'
+ //' @param wavelength
+ //'
+ //' @return wavelength uncertainty
+ //'
+ //' @export
+ // [[Rcpp::export]]
+ const double wavelength_uncertainty(const double wavelength) {
+   const double speed_of_sound = 343;
+   return speed_of_sound / frequency_uncertainty(speed_of_sound / wavelength);
+ }
+
