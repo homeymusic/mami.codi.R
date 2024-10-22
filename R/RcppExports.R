@@ -21,11 +21,11 @@ approximate_rational_fractions <- function(x, reference, sd, approximate_lcm_sd)
     .Call(`_mami_codi_R_approximate_rational_fractions`, x, reference, sd, approximate_lcm_sd)
 }
 
-frequency_uncertainty <- function(frequency) {
-    .Call(`_mami_codi_R_frequency_uncertainty`, frequency)
+frequency_erb <- function(frequency) {
+    .Call(`_mami_codi_R_frequency_erb`, frequency)
 }
 
-wavelength_uncertainty <- function(wavelength, speed_of_sound) {
-    .Call(`_mami_codi_R_wavelength_uncertainty`, wavelength, speed_of_sound)
+wavelength_erb <- function(wavelength, speed_of_sound) {
+    .Call(`_mami_codi_R_wavelength_erb`, wavelength, speed_of_sound)
 }
 

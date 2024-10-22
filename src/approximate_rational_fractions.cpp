@@ -217,7 +217,7 @@ using namespace Rcpp;
    );
  }
 
- //' frequency_uncertainty
+ //' frequency_erb
  //'
  //' Uses ERB
  //'
@@ -227,11 +227,11 @@ using namespace Rcpp;
  //'
  //' @export
  // [[Rcpp::export]]
- const double frequency_uncertainty(const double frequency) {
-   return 24.7 + 0.108 * frequency;
+ const double frequency_erb(const double frequency) {
+   return 24.7 * (4.37 * (frequency / 1000.0) + 1);
  }
 
- //' wavelength_uncertainty
+ //' wavelength_erb
  //'
  //' Uses ERB
  //'
@@ -242,6 +242,6 @@ using namespace Rcpp;
  //'
  //' @export
  // [[Rcpp::export]]
- const double wavelength_uncertainty(const double wavelength, const double speed_of_sound) {
-   return speed_of_sound / frequency_uncertainty(speed_of_sound / wavelength);
+ const double wavelength_erb(const double wavelength, const double speed_of_sound) {
+   return speed_of_sound / frequency_erb(speed_of_sound / wavelength);
  }

@@ -30,12 +30,12 @@ test_that("stern_brocot approximates irrational number to a ratio and specific n
 # helper for testing fundmanetals
 check_fundamental <- function(ref_midi, dyad_ratio, expected_fund_ratio) {
   ref_freq = hrep::midi_to_freq(ref_midi)
-  ref_tol = frequency_uncertainty(ref_freq)
+  ref_tol = frequency_erb(ref_freq)
   sb_ref_ratio = stern_brocot(ref_freq - ref_tol, ref_freq, ref_freq + ref_tol)
   expect_equal(sb_ref_ratio[1] / sb_ref_ratio[2], ref_freq, tolerance = ref_tol)
 
   dyad_freq = dyad_ratio * ref_freq
-  dyad_tol = frequency_uncertainty(dyad_freq)
+  dyad_tol = frequency_erb(dyad_freq)
   sb_dyad_ratio = stern_brocot(dyad_freq - dyad_tol, dyad_freq, dyad_freq + dyad_tol)
   expect_equal(sb_dyad_ratio[1] / sb_dyad_ratio[2], dyad_freq, tolerance = dyad_tol)
 
