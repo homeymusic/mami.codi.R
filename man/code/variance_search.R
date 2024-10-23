@@ -1,4 +1,4 @@
-search_label = 'P8'
+search_label = 'Bonang'
 heisenberg   = F
 # options(timeout = max(1000, getOption("timeout")))
 devtools::install_github('git@github.com:homeymusic/mami.codi.R',
@@ -7,9 +7,9 @@ devtools::install_github('git@github.com:homeymusic/mami.codi.R',
                          # auth_token = Sys.getenv("GITHUBTOKEN"))
 
 # Detailed
-from_prec   = 0.007
-to_prec     = 0.01
-by_prec     = 0.0001
+from_prec   = 0.01
+to_prec     = 0.02
+by_prec     = 0.001
 variances = sort(c(seq(from=from_prec, to=to_prec, by=by_prec),
               mami.codi.R::default_variance()))
 

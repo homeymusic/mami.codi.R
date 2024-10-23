@@ -227,7 +227,7 @@ format_output <- function(x, metadata, verbose) {
 #' @rdname default_variance
 #' @export
 default_variance <- function() { DEFAULT_VARIANCE }
-DEFAULT_VARIANCE = 0.0108
+DEFAULT_VARIANCE = 0.012
 
 #' Default Approximate Least Common Multiple Deviation
 #'
