@@ -160,7 +160,7 @@ compute_consonance = function(x, minimum_amplitude, octave_deviation) {
 #' @rdname alcd
 #' @export
 alcd <- function(x, variance, octave_deviation, label) {
-  fractions = approximate_rational_fractions(x, variance, octave_deviation)
+  fractions = approximate_rational_fractions(x, min(x), variance, octave_deviation)
   tibble::tibble_row(
     alcd       = lcm_integers(fractions$den),
     fractions  = list(fractions)
