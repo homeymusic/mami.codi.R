@@ -227,8 +227,7 @@ format_output <- function(x, metadata, verbose) {
 #' @rdname default_variance
 #' @export
 default_variance <- function() { DEFAULT_VARIANCE }
-HEISENBERG = 1 / (16 * pi ^2)
-DEFAULT_VARIANCE = sqrt(HEISENBERG)
+DEFAULT_VARIANCE = 0.0108
 
 #' Default Approximate Least Common Multiple Deviation
 #'
