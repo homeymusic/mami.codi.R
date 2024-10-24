@@ -78,8 +78,8 @@ compute_cyclicity = function(x, minimum_amplitude, temporal_standard_deviation, 
 
   f = x$spectrum[[1]] %>% dplyr::filter(.data$y>minimum_amplitude) %>% hrep::freq()
   P = 1 / f
-  k = f / C_SOUND
-  l = 1 / k
+  l = C_SOUND * P
+  k = 1 / l
 
   x %>% dplyr::mutate(
 
@@ -229,4 +229,4 @@ HARMONICS_DEVIATION = 0.11
 default_minimum_amplitude <- function() { MINIMUM_AMPLITUDE }
 MINIMUM_AMPLITUDE = 0.07
 
-C_SOUND = 343 # m/s arbitrary, disappears in the ratios
+C_SOUND = 1 # m/s arbitrary, disappears in the ratios

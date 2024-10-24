@@ -1,4 +1,4 @@
-search_label = 'M6'
+search_label = 'Harmonic'
 devtools::install_github('git@github.com:homeymusic/mami.codi.R',
                          ref = 'l_T')
 

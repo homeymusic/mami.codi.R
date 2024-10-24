@@ -1,7 +1,7 @@
 Variance Search
 ================
 
-# M6
+# Harmonic
 
 Temporal Variances:
 
