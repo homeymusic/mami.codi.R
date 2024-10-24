@@ -33,9 +33,9 @@ mami.codi <- function(
 
   parse_input(x, ...) %>%
     compute_cyclicity(minimum_amplitude,
-                       temporal_standard_deviation,
-                       spatial_standard_deviation,
-                       harmonics_deviation) %>%
+                      temporal_standard_deviation,
+                      spatial_standard_deviation,
+                      harmonics_deviation) %>%
     format_output(metadata, verbose)
 
 }
@@ -145,10 +145,22 @@ compute_cyclicity = function(x, minimum_amplitude, temporal_standard_deviation, 
 #' @export
 cycles <- function(x, ratio_element, standard_deviation, harmonics_deviation, label) {
   fractions = approximate_rational_fractions(x, standard_deviation, harmonics_deviation)
-  tibble::tibble_row(
-    cycles    = if (ratio_element == RATIO$DEN) {lcm_integers(fractions$den)} else {lcm_integers(fractions$num)},
+
+  if (any(fractions$num==0) || any(fractions$den==0)) {
+    stop(cat('a num or den was 0. should never happen x:',x))
+  }
+
+  t = tibble::tibble_row(
+    cycles = if (ratio_element == RATIO$DEN) {
+      lcm_integers(fractions$den)
+    } else if (ratio_element == RATIO$NUM) {
+      lcm_integers(fractions$num)
+    } else {
+      NA
+    },
     fractions = list(fractions)
   ) %>% dplyr::rename_with(~ paste0(label, '_' , .))
+  t
 }
 lcm_integers <- function(x) Reduce(gmp::lcm.bigz, x) %>% as.numeric()
 RATIO <- list(NUM = 1, DEN = 2)
