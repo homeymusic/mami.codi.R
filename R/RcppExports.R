@@ -15,59 +15,18 @@ stern_brocot <- function(x, standard_deviation) {
     .Call(`_mami_codi_R_stern_brocot`, x, standard_deviation)
 }
 
-#' compute_pseudo_octave
-#'
-#' Find the highest fundamental freq
-#'
-#' @param fn freq to eval
-#' @param f0 fundamental freq
-#' @param n  harmonic number
-#'
-#' @return Calculated pseudo octave
-#'
-#' @export
 compute_pseudo_octave <- function(fn, f0, n) {
     .Call(`_mami_codi_R_compute_pseudo_octave`, fn, f0, n)
 }
 
-#' approximate_harmonics
-#'
-#' Determine pseudo octave of all frequencies relative to lowest frequency
-#'
-#' @param x Chord frequencies
-#' @param deviation Deviation for estimating least common multiples
-#'
-#' @return A double of the best guess of the pseudo octave
-#'
-#' @export
 approximate_harmonics <- function(x, deviation) {
     .Call(`_mami_codi_R_approximate_harmonics`, x, deviation)
 }
 
-#' pseudo_octave
-#'
-#' Finds the pseudo octave from approximate harmonics.
-#'
-#' @param approximate_harmonics List of candidate pseudo octaves
-#'
-#' @return A data frame of rational numbers and metadata
-#'
-#' @export
 pseudo_octave <- function(approximate_harmonics) {
     .Call(`_mami_codi_R_pseudo_octave`, approximate_harmonics)
 }
 
-#' approximate_rational_fractions
-#'
-#' Approximates floating-point numbers to arbitrary standard_deviation.
-#'
-#' @param x Vector of floating point numbers to approximate
-#' @param standard_deviation Precision for finding rational fractions
-#' @param deviation Deviation for estimating least common multiples
-#'
-#' @return A data frame of rational numbers and metadata
-#'
-#' @export
 approximate_rational_fractions <- function(x, standard_deviation, deviation) {
     .Call(`_mami_codi_R_approximate_rational_fractions`, x, standard_deviation, deviation)
 }
