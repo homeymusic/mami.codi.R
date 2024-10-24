@@ -90,7 +90,7 @@ compute_cyclicity = function(x, minimum_amplitude, temporal_standard_deviation, 
     log2_spatial_cycles    = log2(.data$spatial_cycles),
 
     dissonance             = .data$log2_spatial_cycles + .data$log2_temporal_cycles,
-    majorness              = .data$log2_spatial_cycles - .data$log2_temporal_cycles,
+    majorness              = .data$log2_temporal_cycles - .data$log2_spatial_cycles,
 
     fundamental_frequency  = min(f) / .data$temporal_cycles,
     fundamental_wavenumber = min(k) / .data$spatial_cycles,

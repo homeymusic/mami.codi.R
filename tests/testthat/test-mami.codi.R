@@ -44,7 +44,6 @@ test_that('fundamental wavenumber calc',{
 test_that('major-minor tonality',{
   M3 = c(60, 64, 72) %>% mami.codi(num_harmonics = 1, verbose=T)
   m6 = c(60, 68, 72) %>% mami.codi(num_harmonics = 1, verbose=T)
-  expect_true(M3$temporal_cycles <= m6$temporal_cycles)
-  expect_true(M3$spatial_cycles >= m6$spatial_cycles)
-  expect_true(M3$majorness > m6$majorness)
+  implemented_yet = F
+  expect_true(implemented_yet)
 })
