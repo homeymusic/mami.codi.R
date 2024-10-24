@@ -13,19 +13,20 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r, echo=T, message=F, include=T}
+```{r, echo=F, message=F, include=T}
 P5 = c(60, 67) %>% mami.codi(num_harmonics = 1, verbose=T)
 domains = P5 %>% dplyr::select(c('frequencies', 'periods', 'wavenumbers', 'wavelengths')) %>% tidyr::unnest(cols=everything())
+domains
 ```
 
-```{r, echo=T, message=F, include=T}
+```{r, echo=F, message=F, include=T}
 tibble::tibble(
 cycles( domains$frequencies / min(domains$frequencies), 
         STANDARD_DEVIATION, HARMONICS_DEVIATION, 'f') %>% 
   dplyr::select('f_cycles'),
 cycles( domains$periods / max(domains$periods), 
-        STANDARD_DEVIATION, HARMONICS_DEVIATION, 't') %>% 
-  dplyr::select('t_cycles'),
+        STANDARD_DEVIATION, HARMONICS_DEVIATION, 'T') %>% 
+  dplyr::select('T_cycles'),
 
 cycles( domains$wavenumbers / max(domains$wavenumbers), 
         STANDARD_DEVIATION, HARMONICS_DEVIATION, 'k') %>% 
