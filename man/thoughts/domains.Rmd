@@ -14,27 +14,50 @@ knitr::opts_chunk$set(
 ```
 
 ```{r, echo=F, message=F, include=T}
-P5 = c(60, 67) %>% mami.codi(num_harmonics = 1, verbose=T)
-domains = P5 %>% dplyr::select(c('frequencies', 'periods', 'wavenumbers', 'wavelengths')) %>% tidyr::unnest(cols=everything())
+P1 = c(60) %>% mami.codi(num_harmonics = 3, verbose=T)
+domains = P1 %>% dplyr::select(c('frequencies', 'periods', 'wavenumbers', 'wavelengths')) %>% tidyr::unnest(cols=everything())
 domains
 ```
 
 ```{r, echo=F, message=F, include=T}
-tibble::tibble(
-cycles( domains$frequencies / min(domains$frequencies), 
-        STANDARD_DEVIATION, HARMONICS_DEVIATION, 'f') %>% 
-  dplyr::select('f_cycles'),
-cycles( domains$periods / max(domains$periods), 
-        STANDARD_DEVIATION, HARMONICS_DEVIATION, 'T') %>% 
-  dplyr::select('T_cycles'),
 
-cycles( domains$wavenumbers / max(domains$wavenumbers), 
-        STANDARD_DEVIATION, HARMONICS_DEVIATION, 'k') %>% 
-  dplyr::select('k_cycles'),
-cycles( domains$wavelengths / min(domains$wavelengths), 
-        STANDARD_DEVIATION, HARMONICS_DEVIATION, 'l') %>% 
-  dplyr::select('l_cycles'),
+f = cycles( domains$frequencies / min(domains$frequencies),
+        RATIO$DEN,
+        STANDARD_DEVIATION, HARMONICS_DEVIATION, 'f')
+  
+t = cycles( domains$periods / max(domains$periods), 
+        RATIO$NUM,
+        STANDARD_DEVIATION, HARMONICS_DEVIATION, 'T')
+
+k = cycles( domains$wavenumbers / max(domains$wavenumbers), 
+        RATIO$NUM,
+        STANDARD_DEVIATION, HARMONICS_DEVIATION, 'k')
+
+l = cycles( domains$wavelengths / min(domains$wavelengths), 
+        RATIO$DEN,
+        STANDARD_DEVIATION, HARMONICS_DEVIATION, 'l')
+table_data <- tibble::tibble(
+  f_num = f$f_fractions[[1]]$num,
+  f_den = f$f_fractions[[1]]$den,
+  t_num = t$t_fractions[[1]]$num,
+  t_den = t$t_fractions[[1]]$den,
+  k_num = k$k_fractions[[1]]$num,
+  k_den = k$k_fractions[[1]]$den,
+  l_num = l$l_fractions[[1]]$num,
+  l_den = l$l_fractions[[1]]$den
 )
 ```
-
-
+```{r, echo=F, message=F, include=T, results = 'asis'}
+knitr::kable(table_data, format = "markdown")
+```
+```{r, echo=F, message=F, include=T}
+table_data <- tibble::tibble(
+  f = f$f_cycles,
+  t = t$T_cycles,
+  k = k$k_cycles,
+  l = l$l_cycles
+)
+```
+```{r, echo=F, message=F, include=T, results = 'asis'}
+knitr::kable(table_data, format = "markdown")
+```

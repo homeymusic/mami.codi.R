@@ -578,46 +578,6 @@ plot_semitone_codi_grid <- function(theory, experiment,
                                 minor_breaks = 0:15) +
     theme_homey()
 }
-plot_semitone_codi_wrap <- function(theory, experiment,
-                                    black_vlines=c(), gray_vlines=c(),
-                                    title,ncols=12,
-                                    include_points=T) {
-
-  per_plot_labels = tidyr::expand_grid(
-    temporal_standard_deviation  = theory$temporal_standard_deviation  %>% unique
-  )
-  per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(temporal_standard_deviation) {
-      tols = paste0('   temporal_standard_deviation:', temporal_standard_deviation)
-    })
-  theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
-    ggplot2::geom_vline(xintercept = black_vlines, color='black') +
-    ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
-    {if (include_points)
-      ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
-                          ggplot2::aes(x = semitone, y = z_score,
-                                       fill=color_factor_homey(theory,'majorness')))} +
-    ggplot2::scale_fill_manual(values=color_values_homey(), guide="none") +
-    ggplot2::geom_line(
-      data=experiment,
-      color    = colors_homey$neutral,
-      ggplot2::aes(x = semitone, y = dissonance)) +
-    ggplot2::geom_line(
-      data=theory,
-      ggplot2::aes(x = semitone, y = smooth,
-                   group=1,
-                   color=color_factor_homey(theory,'majorness'))) +
-    ggplot2::scale_color_manual(values=color_values_homey(), guide='none') +
-    ggplot2::geom_text(data=per_plot_labels, color=colors_homey$neutral,
-                       ggplot2::aes(x=-Inf,y=-Inf,label=label,
-                                    vjust="inward",hjust="inward")) +
-    ggplot2::xlab(NULL) +
-    ggplot2::ylab(NULL) +
-    ggplot2::facet_wrap(~temporal_standard_deviation,ncol=ncols,dir='v') +
-    ggplot2::scale_x_continuous(breaks = c(),
-                                minor_breaks = 0:15) +
-    theme_homey()
-}
 plot_semitone_spatial_wrap <- function(theory,
                                        black_vlines=c(), gray_vlines=c(),
                                        title,ncols=1) {
@@ -664,50 +624,11 @@ plot_semitone_temporal_wrap <- function(theory,
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
     ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
                         fill=colors_homey$major,
-                        ggplot2::aes(x = semitone, y = temporal_dissonance)) +
+                        ggplot2::aes(x = semitone, y = temporal_consonance)) +
     ggplot2::geom_line(
       color=colors_homey$major,
       data=theory,
       ggplot2::aes(x = semitone, y = smooth,
-                   group=1)) +
-    ggplot2::geom_text(data=per_plot_labels, color=colors_homey$neutral,
-                       ggplot2::aes(x=-Inf,y=-Inf,label=label,
-                                    vjust="inward",hjust="inward")) +
-    ggplot2::xlab(NULL) +
-    ggplot2::ylab(NULL) +
-    ggplot2::facet_wrap(~temporal_standard_deviation,ncol=ncols,dir='v') +
-    ggplot2::scale_x_continuous(breaks = c(),
-                                minor_breaks = 0:15) +
-    theme_homey()
-}
-plot_semitone_spatial_temporal_wrap <- function(theory,
-                                                black_vlines=c(), gray_vlines=c(),
-                                                title,ncols=1) {
-  per_plot_labels = tidyr::expand_grid(
-    temporal_standard_deviation  = theory$temporal_standard_deviation  %>% unique
-  )
-  per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(temporal_standard_deviation) {
-      tols = paste0('   temporal_standard_deviation:', temporal_standard_deviation)
-    })
-  theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
-    ggplot2::geom_vline(xintercept = black_vlines, color='black') +
-    ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
-    ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
-                        fill=colors_homey$minor,
-                        ggplot2::aes(x = semitone, y = max(temporal_dissonance) - temporal_dissonance)) +
-    ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
-                        fill=colors_homey$major,
-                        ggplot2::aes(x = semitone, y = max(spatial_dissonance) - spatial_dissonance)) +
-    ggplot2::geom_line(
-      color=colors_homey$minor,
-      data=theory,
-      ggplot2::aes(x = semitone, y = smooth_temporal,
-                   group=1)) +
-    ggplot2::geom_line(
-      color=colors_homey$major,
-      data=theory,
-      ggplot2::aes(x = semitone, y = smooth_spatial,
                    group=1)) +
     ggplot2::geom_text(data=per_plot_labels, color=colors_homey$neutral,
                        ggplot2::aes(x=-Inf,y=-Inf,label=label,
@@ -967,7 +888,7 @@ plot_semitone_codi_wrap_amp <- function(theory, experiment,
     ggplot2::geom_line(
       data=experiment,
       color    = colors_homey$neutral,
-      ggplot2::aes(x = semitone, y = dissonance)) +
+      ggplot2::aes(x = semitone, y = consonance)) +
     ggplot2::geom_line(
       data=theory,
       ggplot2::aes(x = semitone, y = smooth,
@@ -1042,6 +963,89 @@ plot_semitone_temporal_wrap_amp <- function(theory,
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
     ggplot2::facet_wrap(~amplitude,ncol=ncols,dir='v') +
+    ggplot2::scale_x_continuous(breaks = c(),
+                                minor_breaks = 0:15) +
+    theme_homey()
+}
+
+
+
+plot_semitone_codi_wrap <- function(theory, experiment,
+                                    black_vlines=c(), gray_vlines=c(),
+                                    title,ncols=12,
+                                    include_points=T) {
+
+  per_plot_labels = tidyr::expand_grid(
+    temporal_standard_deviation  = theory$temporal_standard_deviation  %>% unique
+  )
+  per_plot_labels$label = per_plot_labels %>%
+    purrr::pmap_vec(\(temporal_standard_deviation) {
+      tols = paste0('   standard_deviation:', temporal_standard_deviation)
+    })
+  theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
+    ggplot2::geom_vline(xintercept = black_vlines, color='black') +
+    ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
+    {if (include_points)
+      ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
+                          ggplot2::aes(x = semitone, y = z_score,
+                                       fill=color_factor_homey(theory,'majorness')))} +
+    ggplot2::scale_fill_manual(values=color_values_homey(), guide="none") +
+    ggplot2::geom_line(
+      data=experiment,
+      color    = colors_homey$neutral,
+      ggplot2::aes(x = semitone, y = consonance)) +
+    ggplot2::geom_line(
+      data=theory,
+      ggplot2::aes(x = semitone, y = smooth,
+                   group=1,
+                   color=color_factor_homey(theory,'majorness'))) +
+    ggplot2::scale_color_manual(values=color_values_homey(), guide='none') +
+    ggplot2::geom_text(data=per_plot_labels, color=colors_homey$neutral,
+                       ggplot2::aes(x=-Inf,y=-Inf,label=label,
+                                    vjust="inward",hjust="inward")) +
+    ggplot2::xlab(NULL) +
+    ggplot2::ylab(NULL) +
+    ggplot2::facet_wrap(~temporal_standard_deviation,ncol=ncols,dir='v') +
+    ggplot2::scale_x_continuous(breaks = c(),
+                                minor_breaks = 0:15) +
+    theme_homey()
+}
+
+plot_semitone_spatial_temporal_wrap <- function(theory,
+                                                black_vlines=c(), gray_vlines=c(),
+                                                title,ncols=1) {
+  per_plot_labels = tidyr::expand_grid(
+    temporal_standard_deviation  = theory$temporal_standard_deviation  %>% unique
+  )
+  per_plot_labels$label = per_plot_labels %>%
+    purrr::pmap_vec(\(temporal_standard_deviation) {
+      tols = paste0('   standard_deviation:', temporal_standard_deviation)
+    })
+  theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
+    ggplot2::geom_vline(xintercept = black_vlines, color='black') +
+    ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
+    ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
+                        fill=colors_homey$major,
+                        ggplot2::aes(x = semitone, y = spatial_consonance)) +
+    ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
+                        fill=colors_homey$minor,
+                        ggplot2::aes(x = semitone, y = temporal_consonance)) +
+    ggplot2::geom_line(
+      color=colors_homey$minor,
+      data=theory,
+      ggplot2::aes(x = semitone, y = smooth_temporal,
+                   group=1)) +
+    ggplot2::geom_line(
+      color=colors_homey$major,
+      data=theory,
+      ggplot2::aes(x = semitone, y = smooth_spatial,
+                   group=1)) +
+    ggplot2::geom_text(data=per_plot_labels, color=colors_homey$neutral,
+                       ggplot2::aes(x=-Inf,y=-Inf,label=label,
+                                    vjust="inward",hjust="inward")) +
+    ggplot2::xlab(NULL) +
+    ggplot2::ylab(NULL) +
+    ggplot2::facet_wrap(~temporal_standard_deviation,ncol=ncols,dir='v') +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()

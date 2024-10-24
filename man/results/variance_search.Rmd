@@ -6,7 +6,7 @@ always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'Harmonic'
+search_label = 'Pure'
 ```
 
 # `r search_label`
@@ -58,7 +58,7 @@ experiment = readRDS(experiment.rds)$profile %>%
   dplyr::rename(semitone=interval)
 
 experiment <- experiment %>% dplyr::mutate(
-  dissonance = rating
+  consonance = rating
 )
 
 theory.rds = paste0('../data/standard_deviation_',
@@ -74,9 +74,9 @@ theory <- theory %>% dplyr::rowwise() %>% dplyr::mutate(
   num_harmonics  = metadata$num_harmonics,
   octave_ratio   = metadata$octave_ratio,
   semitone       = metadata$semitone,
-  consonance     = max_dissonance - dissonance,
-  temporal_consonance = max_dissonance - temporal_dissonance,
-  spatial_consonance  = max_dissonance - spatial_dissonance,
+  consonance     = max_dissonance - .data$dissonance,
+  temporal_consonance = max_dissonance - .data$temporal_dissonance,
+  spatial_consonance  = max_dissonance - .data$spatial_dissonance,
   .before=1
 ) %>% dplyr::group_by(temporal_standard_deviation)
 ```
@@ -148,7 +148,7 @@ rows = length(tols)
 # so for grid of 4x12 it would be height=12 and width=60
 theory <- theory %>% 
   dplyr::mutate(
-    z_score = z_scores(-dissonance),
+    z_score = z_scores(consonance),
     smooth  = smoothed(semitone, .data$z_score, params$sigma)
   )
 ```
@@ -173,8 +173,8 @@ plot_semitone_codi_wrap(
 
 theory <- theory %>% 
   dplyr::mutate(
-    smooth_temporal = smoothed(semitone, max(temporal_dissonance) - temporal_dissonance, params$sigma),
-    smooth_spatial  = smoothed(semitone, max(spatial_dissonance) - spatial_dissonance, params$sigma)
+    smooth_temporal = smoothed(semitone, temporal_consonance, params$sigma),
+    smooth_spatial  = smoothed(semitone, spatial_consonance, params$sigma)
   )
 
 plot_semitone_spatial_temporal_wrap(

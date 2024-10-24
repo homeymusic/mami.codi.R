@@ -83,8 +83,8 @@ compute_cyclicity = function(x, minimum_amplitude, temporal_standard_deviation, 
 
   x %>% dplyr::mutate(
 
-    cycles( P / max(P), temporal_standard_deviation, harmonics_deviation, 'temporal'),
-    cycles( l / min(l), spatial_standard_deviation,  harmonics_deviation, 'spatial'),
+    cycles(P/max(P), RATIO$NUM, temporal_standard_deviation, harmonics_deviation, 'temporal'),
+    cycles(l/min(l), RATIO$DEN, spatial_standard_deviation,  harmonics_deviation, 'spatial'),
 
     temporal_dissonance   = log2(.data$temporal_cycles),
     spatial_dissonance    = log2(.data$spatial_cycles),
@@ -134,6 +134,7 @@ compute_cyclicity = function(x, minimum_amplitude, temporal_standard_deviation, 
 #'
 #'
 #' @param x Vector of rational numbers
+#' @param ratio_element Use the numerator or denominator to find cycle length
 #' @param standard_deviation Precision for creating rational fractions
 #' @param harmonics_deviation Deviation for approximating least common multiples
 #' @param label A custom label for the output usually 'spatial' or 'temporal'
@@ -142,14 +143,15 @@ compute_cyclicity = function(x, minimum_amplitude, temporal_standard_deviation, 
 #'
 #' @rdname cycles
 #' @export
-cycles <- function(x, standard_deviation, harmonics_deviation, label) {
+cycles <- function(x, ratio_element, standard_deviation, harmonics_deviation, label) {
   fractions = approximate_rational_fractions(x, standard_deviation, harmonics_deviation)
   tibble::tibble_row(
-    cycles    = lcm_integers(fractions$den),
+    cycles    = if (ratio_element == RATIO$DEN) {lcm_integers(fractions$den)} else {lcm_integers(fractions$num)},
     fractions = list(fractions)
   ) %>% dplyr::rename_with(~ paste0(label, '_' , .))
 }
 lcm_integers <- function(x) Reduce(gmp::lcm.bigz, x) %>% as.numeric()
+RATIO <- list(NUM = 1, DEN = 2)
 
 format_output <- function(x, metadata, verbose) {
   x <- x %>% tibble::add_column(
@@ -232,4 +234,4 @@ HARMONICS_DEVIATION = 0.11
 default_minimum_amplitude <- function() { MINIMUM_AMPLITUDE }
 MINIMUM_AMPLITUDE = 0.07
 
-C_SOUND = 1 # m/s arbitrary, disappears in the ratios
+C_SOUND = 343 # m/s arbitrary, disappears in the ratios
