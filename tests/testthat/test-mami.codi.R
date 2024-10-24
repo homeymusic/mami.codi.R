@@ -1,8 +1,18 @@
 test_that('P1 pure tone looks good',{
   P1 = c(60) %>% mami.codi(num_harmonics=1, verbose=T)
   expect_equal(P1$dissonance, 0)
-  expect_equal(P1$log2_temporal_cycles, 0)
-  expect_equal(P1$log2_spatial_cycles, 0)
+  expect_equal(P1$temporal_cycles, 1)
+  expect_equal(P1$spatial_cycles, 1)
+  expect_equal(P1$temporal_dissonance, 0)
+  expect_equal(P1$spatial_dissonance, 0)
+})
+test_that('dissonant dyad looks good',{
+  d = c(60, 73) %>% mami.codi(num_harmonics=1, verbose=T)
+  expect_true(d$dissonance > 0)
+  expect_true(d$temporal_cycles>1)
+  expect_true(d$spatial_cycles>1)
+  expect_true(d$temporal_dissonance > 0)
+  expect_true(d$spatial_dissonance > 0)
 })
 test_that('fundamental wavenumber calc',{
   C4_wavenumber = hrep::midi_to_freq(60) / C_SOUND

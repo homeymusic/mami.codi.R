@@ -176,9 +176,9 @@ plot_dilo.dihi <- function(chords, title, chords_to_label=NULL,
   if (is.null(chords_to_label)) {
     chords_to_label = chords
   }
-  slope = chords$log2_spatial_cycles[tonic_index] / chords$period_dissonance[tonic_index]
+  slope = chords$spatial_dissonance[tonic_index] / chords$period_dissonance[tonic_index]
   ggplot2::ggplot(chords, ggplot2::aes(x = .data$period_dissonance,
-                                       y = .data$log2_spatial_cycles)) +
+                                       y = .data$spatial_dissonance)) +
     { if(include_abline) ggplot2::geom_abline(slope = slope, color = colors_homey$neutral) } +
     ggplot2::geom_point(shape=21, stroke=NA, size=0.5, fill=colors_homey$neutral) +
     ggrepel::geom_text_repel(data=chords_to_label, color=colors_homey$neutral,
@@ -189,7 +189,7 @@ plot_dilo.dihi <- function(chords, title, chords_to_label=NULL,
     ggplot2::scale_color_manual(guide='none') +
     ggplot2::ggtitle(title) +
     ggplot2::scale_x_continuous(
-      limits=c(0,max(c(chords$period_dissonance,chords$log2_spatial_cycles)))) +
+      limits=c(0,max(c(chords$period_dissonance,chords$spatial_dissonance)))) +
     {if (minimal) theme_homey_minimal(aspect.ratio=aspect.ratio) else theme_homey(aspect.ratio=aspect.ratio)}
 }
 plot_cofreq.cowave <- function(chords, title, chords_to_label=NULL,
@@ -198,9 +198,9 @@ plot_cofreq.cowave <- function(chords, title, chords_to_label=NULL,
   if (is.null(chords_to_label)) {
     chords_to_label = chords
   }
-  slope = chords$log2_spatial_cycles[tonic_index] / chords$log2_temporal_cycles[tonic_index]
-  ggplot2::ggplot(chords, ggplot2::aes(x = .data$log2_temporal_cycles,
-                                       y = .data$log2_spatial_cycles)) +
+  slope = chords$spatial_dissonance[tonic_index] / chords$temporal_dissonance[tonic_index]
+  ggplot2::ggplot(chords, ggplot2::aes(x = .data$temporal_dissonance,
+                                       y = .data$spatial_dissonance)) +
     { if(include_abline) ggplot2::geom_abline(slope = slope, color = colors_homey$neutral) } +
     ggplot2::geom_point(shape=21, stroke=NA, size=0.5, fill=colors_homey$neutral) +
     { if (include_labels)
@@ -213,8 +213,8 @@ plot_cofreq.cowave <- function(chords, title, chords_to_label=NULL,
     ggplot2::ggtitle(title) +
     # ggplot2::coord_fixed() +
     # ggplot2::scale_x_continuous(
-    #   limits=c(min(c(chords$log2_temporal_cycles,chords$log2_spatial_cycles)),
-    #            max(c(chords$log2_temporal_cycles,chords$log2_spatial_cycles)))) +
+    #   limits=c(min(c(chords$temporal_dissonance,chords$spatial_dissonance)),
+    #            max(c(chords$temporal_dissonance,chords$spatial_dissonance)))) +
     {if (minimal) theme_homey_minimal(aspect.ratio=aspect.ratio) else theme_homey(aspect.ratio=aspect.ratio)}
 }
 plot_error_hist <- function(errors, bins=21, signal, standard_deviation, title='') {
@@ -344,15 +344,15 @@ plot_semitone_spatial_temporal <- function(chords, title='', include_line=T, sig
                                            include_linear_regression = F, goal=NULL,
                                            black_vlines=c(),gray_vlines=c()) {
 
-  chords$smoothed.log2_temporal_cycles = smoothed(chords$semitone,
-                                                 chords$log2_temporal_cycles,
+  chords$smoothed.temporal_dissonance = smoothed(chords$semitone,
+                                                 chords$temporal_dissonance,
                                                  sigma)
-  chords$smoothed.log2_spatial_cycles = smoothed(chords$semitone,
-                                                chords$log2_spatial_cycles,
+  chords$smoothed.spatial_dissonance = smoothed(chords$semitone,
+                                                chords$spatial_dissonance,
                                                 sigma)
 
-  mean_theoretical = mean(c(chords$smoothed.log2_temporal_cycles,
-                            chords$smoothed.log2_spatial_cycles))
+  mean_theoretical = mean(c(chords$smoothed.temporal_dissonance,
+                            chords$smoothed.spatial_dissonance))
 
   linetype_for_minor = if (dashed_minor) {'dashed'} else {'solid'}
 
@@ -360,21 +360,21 @@ plot_semitone_spatial_temporal <- function(chords, title='', include_line=T, sig
     ggplot2::geom_vline(xintercept = black_vlines, color=colors_homey$highlight) +
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
     { if (include_points)
-      ggplot2::geom_point(ggplot2::aes(y = .data$log2_temporal_cycles),
+      ggplot2::geom_point(ggplot2::aes(y = .data$temporal_dissonance),
                           shape=21, stroke=NA, size=1,
                           fill=colors_homey$major)
     } +
     { if (include_points)
-      ggplot2::geom_point(ggplot2::aes(y = .data$log2_spatial_cycles),
+      ggplot2::geom_point(ggplot2::aes(y = .data$spatial_dissonance),
                           shape=21, stroke=NA, size=1,
                           fill=colors_homey$minor)
     } +
     ggplot2::geom_line(ggplot2::aes(
-      y = .data$smoothed.log2_temporal_cycles,
+      y = .data$smoothed.temporal_dissonance,
       color = 'temporal'),
       linewidth = 1) +
     ggplot2::geom_line(ggplot2::aes(
-      y = .data$smoothed.log2_spatial_cycles,
+      y = .data$smoothed.spatial_dissonance,
       color = 'spatial'),
       linewidth = 1,
       linetype = linetype_for_minor) +
@@ -401,8 +401,8 @@ plot_semitone_spatial <- function(chords, title='', include_line=T, sigma=0.2,
                                   include_linear_regression = F, goal=NULL,
                                   black_vlines=c(),gray_vlines=c()) {
 
-  chords$smoothed.log2_spatial_cycles = smoothed(chords$semitone,
-                                                chords$log2_spatial_cycles,
+  chords$smoothed.spatial_dissonance = smoothed(chords$semitone,
+                                                chords$spatial_dissonance,
                                                 sigma)
 
   linetype_for_minor = if (dashed_minor) {'dashed'} else {'solid'}
@@ -411,12 +411,12 @@ plot_semitone_spatial <- function(chords, title='', include_line=T, sigma=0.2,
     ggplot2::geom_vline(xintercept = black_vlines, color=colors_homey$highlight) +
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
     { if (include_points)
-      ggplot2::geom_point(ggplot2::aes(y = .data$log2_spatial_cycles),
+      ggplot2::geom_point(ggplot2::aes(y = .data$spatial_dissonance),
                           shape=21, stroke=NA, size=1,
                           fill=colors_homey$minor)
     } +
     ggplot2::geom_line(ggplot2::aes(
-      y = .data$smoothed.log2_spatial_cycles,
+      y = .data$smoothed.spatial_dissonance,
       color = 'spatial'),
       linewidth = 1,
       linetype = linetype_for_minor) +
@@ -437,8 +437,8 @@ plot_semitone_temporal <- function(chords, title='', include_line=T, sigma=0.2,
                                    include_linear_regression = F, goal=NULL,
                                    black_vlines=c(),gray_vlines=c()) {
 
-  chords$smoothed.log2_temporal_cycles = smoothed(chords$semitone,
-                                                 chords$log2_temporal_cycles,
+  chords$smoothed.temporal_dissonance = smoothed(chords$semitone,
+                                                 chords$temporal_dissonance,
                                                  sigma)
 
   linetype_for_minor = if (dashed_minor) {'dashed'} else {'solid'}
@@ -447,12 +447,12 @@ plot_semitone_temporal <- function(chords, title='', include_line=T, sigma=0.2,
     ggplot2::geom_vline(xintercept = black_vlines, color=colors_homey$highlight) +
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
     { if (include_points)
-      ggplot2::geom_point(ggplot2::aes(y = .data$log2_temporal_cycles),
+      ggplot2::geom_point(ggplot2::aes(y = .data$temporal_dissonance),
                           shape=21, stroke=NA, size=1,
                           fill=colors_homey$major)
     } +
     ggplot2::geom_line(ggplot2::aes(
-      y = .data$smoothed.log2_temporal_cycles,
+      y = .data$smoothed.temporal_dissonance,
       color = 'temporal'),
       linewidth = 1,
       linetype = linetype_for_minor) +
@@ -633,7 +633,7 @@ plot_semitone_spatial_wrap <- function(theory,
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
     ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
                         fill=colors_homey$minor,
-                        ggplot2::aes(x = semitone, y = log2_spatial_cycles)) +
+                        ggplot2::aes(x = semitone, y = spatial_dissonance)) +
     ggplot2::geom_line(
       color=colors_homey$minor,
       data=theory,
@@ -664,7 +664,7 @@ plot_semitone_temporal_wrap <- function(theory,
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
     ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
                         fill=colors_homey$major,
-                        ggplot2::aes(x = semitone, y = log2_temporal_cycles)) +
+                        ggplot2::aes(x = semitone, y = temporal_dissonance)) +
     ggplot2::geom_line(
       color=colors_homey$major,
       data=theory,
@@ -694,18 +694,18 @@ plot_semitone_spatial_temporal_wrap <- function(theory,
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
     ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
-                        fill=colors_homey$major,
-                        ggplot2::aes(x = semitone, y = max(log2_temporal_cycles) - log2_temporal_cycles)) +
-    ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
                         fill=colors_homey$minor,
-                        ggplot2::aes(x = semitone, y = max(log2_spatial_cycles) - log2_spatial_cycles)) +
+                        ggplot2::aes(x = semitone, y = max(temporal_dissonance) - temporal_dissonance)) +
+    ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
+                        fill=colors_homey$major,
+                        ggplot2::aes(x = semitone, y = max(spatial_dissonance) - spatial_dissonance)) +
     ggplot2::geom_line(
-      color=colors_homey$major,
+      color=colors_homey$minor,
       data=theory,
       ggplot2::aes(x = semitone, y = smooth_temporal,
                    group=1)) +
     ggplot2::geom_line(
-      color=colors_homey$minor,
+      color=colors_homey$major,
       data=theory,
       ggplot2::aes(x = semitone, y = smooth_spatial,
                    group=1)) +
@@ -999,7 +999,7 @@ plot_semitone_spatial_wrap_amp <- function(theory,
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
     ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
                         fill=colors_homey$minor,
-                        ggplot2::aes(x = semitone, y = log2_spatial_cycles)) +
+                        ggplot2::aes(x = semitone, y = spatial_dissonance)) +
     ggplot2::geom_line(
       color=colors_homey$minor,
       data=theory,
@@ -1030,7 +1030,7 @@ plot_semitone_temporal_wrap_amp <- function(theory,
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
     ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
                         fill=colors_homey$major,
-                        ggplot2::aes(x = semitone, y = log2_temporal_cycles)) +
+                        ggplot2::aes(x = semitone, y = temporal_dissonance)) +
     ggplot2::geom_line(
       color=colors_homey$major,
       data=theory,

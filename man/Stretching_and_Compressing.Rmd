@@ -35,7 +35,7 @@ c_sound = chord$speed_of_sound
 
 ###### MaMi.CoDi Predictions
 ```{r, echo=F, results='asis', message=F}
-knitr::kable(chord %>% dplyr::select('dissonance', 'major', 'log2_temporal_cycles', 'log2_spatial_cycles'))
+knitr::kable(chord %>% dplyr::select('dissonance', 'major', 'temporal_dissonance', 'spatial_dissonance'))
 ```
 
 #### Temporal Periodicity

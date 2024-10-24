@@ -1035,7 +1035,7 @@ We chose the speed of sound in room temperature air.
 
 ###### MaMi.CoDi Predictions
 
-| dissonance | major | log2_temporal_cycles | log2_spatial_cycles |
+| dissonance | major | temporal_dissonance | spatial_dissonance |
 |----------------------:|------------:|--------------------:|-------------------:|
 |              96.83007 |           0 |            48.41504 |           48.41504 |
 
@@ -1110,7 +1110,7 @@ We chose the speed of sound in room temperature air.
 
 ###### MaMi.CoDi Predictions
 
-| dissonance | major | log2_temporal_cycles | log2_spatial_cycles |
+| dissonance | major | temporal_dissonance | spatial_dissonance |
 |----------------------:|------------:|--------------------:|-------------------:|
 |              88.18622 |           0 |            44.09311 |           44.09311 |
 
@@ -1256,7 +1256,7 @@ We chose the speed of sound in room temperature air.
 
 ###### MaMi.CoDi Predictions
 
-| dissonance | major | log2_temporal_cycles | log2_spatial_cycles |
+| dissonance | major | temporal_dissonance | spatial_dissonance |
 |----------------------:|------------:|--------------------:|-------------------:|
 |              90.50815 |    2.321928 |            46.41504 |           44.09311 |
 

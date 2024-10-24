@@ -86,11 +86,14 @@ compute_cyclicity = function(x, minimum_amplitude, temporal_standard_deviation, 
     cycles( P / max(P), temporal_standard_deviation, harmonics_deviation, 'temporal'),
     cycles( l / min(l), spatial_standard_deviation,  harmonics_deviation, 'spatial'),
 
-    log2_temporal_cycles   = log2(.data$temporal_cycles),
-    log2_spatial_cycles    = log2(.data$spatial_cycles),
+    temporal_dissonance   = log2(.data$temporal_cycles),
+    spatial_dissonance    = log2(.data$spatial_cycles),
 
-    dissonance             = .data$log2_spatial_cycles + .data$log2_temporal_cycles,
-    majorness              = .data$log2_temporal_cycles - .data$log2_spatial_cycles,
+    dissonance             = .data$spatial_dissonance + .data$temporal_dissonance,
+    majorness              = .data$temporal_dissonance - .data$spatial_dissonance,
+
+    polar_dissonance       = sqrt((.data$spatial_dissonance)^2 + (.data$temporal_dissonance)^2),
+    polar_majorness        = atan2(.data$temporal_dissonance, .data$spatial_dissonance),
 
     fundamental_frequency  = min(f) / .data$temporal_cycles,
     fundamental_wavenumber = min(k) / .data$spatial_cycles,

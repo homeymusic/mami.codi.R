@@ -9,7 +9,7 @@ Working Through Wavelength Ratios
 #### Temporal
 
     ## # A tibble: 1 × 3
-    ##   temporal_gcn temporal_lcd log2_temporal_cycles
+    ##   temporal_gcn temporal_lcd temporal_dissonance
     ##          <dbl>        <dbl>               <dbl>
     ## 1            1            1                   1
 
@@ -28,7 +28,7 @@ Working Through Wavelength Ratios
 #### Spatial
 
     ## # A tibble: 1 × 3
-    ##   spatial_gcn spatial_lcd log2_spatial_cycles
+    ##   spatial_gcn spatial_lcd spatial_dissonance
     ##         <dbl>       <dbl>              <dbl>
     ## 1           1          30             0.0333
 

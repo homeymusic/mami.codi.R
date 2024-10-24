@@ -69,10 +69,14 @@ theory = readRDS(theory.rds)
 ```
 
 ```{r, echo=F, results='asis', message=F}
+max_dissonance = max(theory$dissonance)
 theory <- theory %>% dplyr::rowwise() %>% dplyr::mutate(
   num_harmonics  = metadata$num_harmonics,
   octave_ratio   = metadata$octave_ratio,
   semitone       = metadata$semitone,
+  consonance     = max_dissonance - dissonance,
+  temporal_consonance = max_dissonance - temporal_dissonance,
+  spatial_consonance  = max_dissonance - spatial_dissonance,
   .before=1
 ) %>% dplyr::group_by(temporal_standard_deviation)
 ```
@@ -169,8 +173,8 @@ plot_semitone_codi_wrap(
 
 theory <- theory %>% 
   dplyr::mutate(
-    smooth_temporal = smoothed(semitone, max(log2_temporal_cycles) - log2_temporal_cycles, params$sigma),
-    smooth_spatial  = smoothed(semitone, max(log2_spatial_cycles) - log2_spatial_cycles, params$sigma)
+    smooth_temporal = smoothed(semitone, max(temporal_dissonance) - temporal_dissonance, params$sigma),
+    smooth_spatial  = smoothed(semitone, max(spatial_dissonance) - spatial_dissonance, params$sigma)
   )
 
 plot_semitone_spatial_temporal_wrap(
