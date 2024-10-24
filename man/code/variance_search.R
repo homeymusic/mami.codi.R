@@ -1,8 +1,10 @@
 search_label = 'M6'
-heisenberg   = F
-# options(timeout = max(1000, getOption("timeout")))
-# devtools::install_github('git@github.com:homeymusic/mami.codi.R',
+devtools::install_github('git@github.com:homeymusic/mami.codi.R',
+                         ref = 'traveling_wave')
+# ,
 #                          auth_token = Sys.getenv("GITHUBTOKEN"))
+
+# options(timeout = max(1000, getOption("timeout")))
 
 # Detailed
 # from_prec   = 0.08
@@ -15,4 +17,4 @@ heisenberg   = F
 standard_deviations   = c(1:9 %o% 10^(-2:-1))
 
 source('./freq_trials.R')
-run_trials(search_label, standard_deviations, heisenberg)
+run_trials(search_label, standard_deviations)

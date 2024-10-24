@@ -29,7 +29,8 @@ mami.codi.map <- function(study, tolerances, tonic_midi) {
 
     mami.codi.R::mami.codi(
       chord,
-      tolerance=tolerance,
+      temporal_standard_deviation=tolerance,
+      spatial_standard_deviation=tolerance,
       metadata  = list(
         octave_ratio=octave_ratio,
         num_harmonics  = num_harmonics,

@@ -20,7 +20,6 @@ run_trials <- function(search_label, standard_deviations, heisenberg) {
   }
 
   print(search_label)
-  print(paste('heisenberg:',heisenberg))
   print(paste('octave_ratio:',octave_ratio))
   print(paste('num_harmonics:',num_harmonics))
   print(paste('roll_off:',roll_off))
@@ -89,7 +88,7 @@ run_trials <- function(search_label, standard_deviations, heisenberg) {
     mami.codi.R::mami.codi(
       chord,
       temporal_standard_deviation  = standard_deviation,
-      spatial_standard_deviation   = if (heisenberg) NA else standard_deviation,
+      spatial_standard_deviation   = standard_deviation,
       metadata       = list(
         octave_ratio   = octave_ratio,
         num_harmonics  = num_harmonics,

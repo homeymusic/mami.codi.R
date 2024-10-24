@@ -30,8 +30,8 @@ sigma = BEHAVIOURAL_SMOOTH_BROAD
 chords <- dyads %>% dplyr::filter(timbre == t)
 chords$dissonance_z = z_scores(chords$dissonance)
 chords$major_z = z_scores(chords$major)
-chords$spatial_consonance_z = z_scores(chords$spatial_consonance)
-chords$temporal_consonance_z = z_scores(chords$temporal_consonance)
+chords$log2_spatial_cycles_z = z_scores(chords$log2_spatial_cycles)
+chords$log2_temporal_cycles_z = z_scores(chords$log2_temporal_cycles)
 
 experiment.rds = paste0('./man/data/',
                         t,

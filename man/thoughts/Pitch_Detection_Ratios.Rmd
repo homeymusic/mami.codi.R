@@ -64,12 +64,12 @@ noisier_chord = noisier_chord_spectrum %>% mami.codi(verbose = T)
 
 ###### MaMi.CoDi Predictions
 ```{r, echo=F, results='asis', message=F}
-knitr::kable(chord %>% dplyr::select('dissonance', 'major', 'temporal_consonance', 'spatial_consonance'))
+knitr::kable(chord %>% dplyr::select('dissonance', 'major', 'log2_temporal_cycles', 'log2_spatial_cycles'))
 ```
 
 ###### MaMi.CoDi Predictions 2
 ```{r, echo=F, results='asis', message=F}
-knitr::kable(chord %>% dplyr::select('dissonance_2', 'major_2', 'temporal_consonance_2', 'spatial_consonance_2'))
+knitr::kable(chord %>% dplyr::select('dissonance_2', 'major_2', 'log2_temporal_cycles_2', 'log2_spatial_cycles_2'))
 ```
 
 #### Temporal Periodicity

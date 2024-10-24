@@ -471,8 +471,8 @@ p = params %>% purrr::map(\(p) {
   chords <- dyads %>% dplyr::filter(timbre == p$t)
   chords$dissonance_z = z_scores(chords$dissonance)
   chords$major_z = z_scores(chords$major)
-  chords$spatial_consonance_z = z_scores(chords$spatial_consonance)
-  chords$temporal_consonance_z = z_scores(chords$temporal_consonance)
+  chords$log2_spatial_cycles_z = z_scores(chords$log2_spatial_cycles)
+  chords$log2_temporal_cycles_z = z_scores(chords$log2_temporal_cycles)
   
   experiment.rds = paste0('./man/data/',
                           p$t,

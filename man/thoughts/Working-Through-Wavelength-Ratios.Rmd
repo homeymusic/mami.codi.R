@@ -31,7 +31,7 @@ chord %>% dplyr::select(
 chord %>% dplyr::select(
   temporal_gcn,
   temporal_lcd,
-  temporal_consonance
+  log2_temporal_cycles
 )
 ```
 
@@ -45,7 +45,7 @@ chord$temporal_ratios[[1]]
 chord %>% dplyr::select(
   spatial_gcn,
   spatial_lcd,
-  spatial_consonance
+  log2_spatial_cycles
 )
 ```
 

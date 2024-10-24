@@ -139,15 +139,17 @@ rows = length(tols)
 
 ## CoDi
 
-```{r _CoDi, fig.height=7*rows, fig.width=12*cols, echo=F}
+```{r _smoothCoDi, fig.height=7*rows, fig.width=12*cols, echo=F}
 # height = 3 per row and width = 5 per column
 # so for grid of 4x12 it would be height=12 and width=60
 theory <- theory %>% 
   dplyr::mutate(
-    z_score = z_scores(dissonance),
+    z_score = z_scores(-dissonance),
     smooth  = smoothed(semitone, .data$z_score, params$sigma)
   )
+```
 
+```{r _CoDi, fig.height=7*rows, fig.width=12*cols, echo=F}
 plot_semitone_codi_wrap(
   theory, 
   experiment,
@@ -167,8 +169,8 @@ plot_semitone_codi_wrap(
 
 theory <- theory %>% 
   dplyr::mutate(
-    smooth_temporal = smoothed(semitone, temporal_consonance, params$sigma),
-    smooth_spatial  = smoothed(semitone, spatial_consonance, params$sigma)
+    smooth_temporal = smoothed(semitone, -log2_temporal_cycles, params$sigma),
+    smooth_spatial  = smoothed(semitone, -log2_spatial_cycles, params$sigma)
   )
 
 plot_semitone_spatial_temporal_wrap(
