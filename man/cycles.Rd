@@ -4,10 +4,12 @@
 \alias{cycles}
 \title{Approximate Number of Cycles of Complex Wave}
 \usage{
-cycles(x, standard_deviation, harmonics_deviation, label)
+cycles(x, ratio_element, standard_deviation, harmonics_deviation, label)
 }
 \arguments{
 \item{x}{Vector of rational numbers}
+
+\item{ratio_element}{Use the numerator or denominator to find cycle length}
 
 \item{standard_deviation}{Precision for creating rational fractions}
 

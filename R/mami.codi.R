@@ -147,7 +147,10 @@ cycles <- function(x, ratio_element, standard_deviation, harmonics_deviation, la
   fractions = approximate_rational_fractions(x, standard_deviation, harmonics_deviation)
 
   if (any(fractions$num == 0) || any(fractions$den == 0)) {
-    stop(sprintf("Error: A numerator or denominator was 0. This should never happen. x: %s", paste(x, collapse = ", ")))
+    stop(sprintf("Error: A numerator or denominator was 0. This should never happen. x: %s nums: %s dens: %s",
+                 paste(x, collapse = ", "),
+                 paste(fractions$num, collapse = ", "),
+                 paste(fractions$den, collapse = ", ")))
   }
 
   t = tibble::tibble_row(
