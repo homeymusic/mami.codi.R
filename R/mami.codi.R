@@ -146,8 +146,8 @@ compute_cyclicity = function(x, minimum_amplitude, temporal_standard_deviation, 
 cycles <- function(x, ratio_element, standard_deviation, harmonics_deviation, label) {
   fractions = approximate_rational_fractions(x, standard_deviation, harmonics_deviation)
 
-  if (any(fractions$num==0) || any(fractions$den==0)) {
-    stop(cat('a num or den was 0. should never happen x:',x))
+  if (any(fractions$num == 0) || any(fractions$den == 0)) {
+    stop(sprintf("Error: A numerator or denominator was 0. This should never happen. x: %s", paste(x, collapse = ", ")))
   }
 
   t = tibble::tibble_row(
