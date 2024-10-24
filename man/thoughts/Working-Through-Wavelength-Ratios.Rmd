@@ -20,8 +20,8 @@ chord = c(60) %>% mami.codi(
 
 ```{r, echo=F, message=F}
 chord %>% dplyr::select(
-  consonance_dissonance, 
-  major_minor
+  dissonance, 
+  major
 )
 ```
 

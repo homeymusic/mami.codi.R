@@ -28,8 +28,8 @@ black_vlines  = c(2,3,4,5,7,8,9,12)
 sigma = BEHAVIOURAL_SMOOTH_BROAD
 
 chords <- dyads %>% dplyr::filter(timbre == t)
-chords$consonance_dissonance_z = z_scores(chords$consonance_dissonance)
-chords$major_minor_z = z_scores(chords$major_minor)
+chords$dissonance_z = z_scores(chords$dissonance)
+chords$major_z = z_scores(chords$major)
 chords$spatial_consonance_z = z_scores(chords$spatial_consonance)
 chords$temporal_consonance_z = z_scores(chords$temporal_consonance)
 
@@ -43,12 +43,12 @@ experiment = experiment_all$profile %>%
   dplyr::rename(semitone=interval)
 
 experiment <- experiment %>% dplyr::mutate(
-  consonance_dissonance = rating
+  dissonance = rating
 )
 
 experiment_raw = experiment_all$data %>%
   dplyr::rename(semitone=interval,
-                consonance_dissonance_z=rating)
+                dissonance_z=rating)
 
 p1 = plot_semitone_codi(chords, paste('Consonance-Dissonance'),
                         goal=experiment,sigma=sigma,include_points=T,

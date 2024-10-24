@@ -1,4 +1,4 @@
-run_trials <- function(search_label, variances, heisenberg) {
+run_trials <- function(search_label, standard_deviations, heisenberg) {
   devtools::load_all(".")
   tonic_midi = 60
   source('./utils.R')
@@ -25,7 +25,7 @@ run_trials <- function(search_label, variances, heisenberg) {
   print(paste('num_harmonics:',num_harmonics))
   print(paste('roll_off:',roll_off))
 
-  rds = paste0('../data/variance_',
+  rds = paste0('../data/standard_deviation_',
                search_label,
                '.rds')
   prepare(rds)
@@ -39,7 +39,7 @@ run_trials <- function(search_label, variances, heisenberg) {
 
   grid = tidyr::expand_grid(
     interval,
-    variance = variances
+    standard_deviation = standard_deviations
   )
 
   print(grid)
@@ -48,7 +48,7 @@ run_trials <- function(search_label, variances, heisenberg) {
 
   data = grid %>% furrr::future_pmap_dfr(\(
     interval,
-    variance
+    standard_deviation
   ) {
 
     if (search_label=='Bonang') {
@@ -88,8 +88,8 @@ run_trials <- function(search_label, variances, heisenberg) {
 
     mami.codi.R::mami.codi(
       chord,
-      temporal_variance  = variance,
-      spatial_variance   = if (heisenberg) NA else variance,
+      temporal_standard_deviation  = standard_deviation,
+      spatial_standard_deviation   = if (heisenberg) NA else standard_deviation,
       metadata       = list(
         octave_ratio   = octave_ratio,
         num_harmonics  = num_harmonics,

@@ -14,7 +14,7 @@ $$\phi(k, t) = \int \psi(\omega, t) e^{-i \left( k x \right) } d\omega$$
 
 The model is quantized and the uncertainty is introduced when converting wavlength 
 and frequency ratios to rational fractions using the Stern-Brocot tree with 
-variance $\sigma^2$.
+standard_deviation $\sigma^2$.
 
 $$\Delta \omega \Delta k \ge \frac{1} {2}$$
 
@@ -26,7 +26,7 @@ $${\sigma_f}^2 {\sigma_\lambda}^2 \ge \frac{1} {16 \pi^2}$$
     * The state of a tone ratio is described by a Stern-Brocot (SB) function 
     which is the probability of the tone ratio's rational fraction approximation.
         * Tone ratios are quantized.
-        * The SB distribution has variance $\sigma^2$.
+        * The SB distribution has standard_deviation $\sigma^2$.
         * The integral of the SB probability distribution is 1.
     * The fundamental tone of a series of tones is the ALCD of the ratios of 
     the series relative to the minimum tone. 
@@ -34,7 +34,7 @@ $${\sigma_f}^2 {\sigma_\lambda}^2 \ge \frac{1} {16 \pi^2}$$
         * Wavelength ratios
         * Frequency ratios
     * Wavelength and frequency ??? (ratios, fundamentals, values?) are conjugates.
-    * The variances of the wavelength and frequency variance are governed by 
+    * The standard_deviations of the wavelength and frequency standard_deviation are governed by 
     the generalized uncertainty principle.
     
     
@@ -86,7 +86,7 @@ Consonance perception of a chord with multiple partials is both a wave and a
 probabilistic phenomenon.
 
 The probabilistic aspect comes from approximating rational numbers within a given 
-variance using the Stern-Brocot tree.
+standard_deviation using the Stern-Brocot tree.
 
 ```{r, child=c('man/SternBrocotCurve.Rmd')}
 ```
@@ -135,7 +135,7 @@ $$P(x)=\int|\psi(x,t)|^2dx=1 $$
 
 ### Thoughts
 
-$f(x)$ and $g(x)$ are both probabilities. The product of their variance satisfies
+$f(x)$ and $g(x)$ are both probabilities. The product of their standard_deviation satisfies
 the uncertainty principle.\
 
 So what are they in our model?\

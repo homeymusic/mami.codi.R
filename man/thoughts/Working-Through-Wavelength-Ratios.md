@@ -2,7 +2,7 @@ Working Through Wavelength Ratios
 ================
 
     ## # A tibble: 1 × 2
-    ##   consonance_dissonance major_minor
+    ##   dissonance major
     ##                   <dbl>       <dbl>
     ## 1                  1.03       0.967
 

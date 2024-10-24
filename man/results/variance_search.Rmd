@@ -18,7 +18,7 @@ source('../code/utils.R')
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "../figures/variance_search/"
+  fig.path = "../figures/standard_deviation_search/"
 )
 knitr::opts_chunk$set(dev = 'png')
 ```
@@ -58,10 +58,10 @@ experiment = readRDS(experiment.rds)$profile %>%
   dplyr::rename(semitone=interval)
 
 experiment <- experiment %>% dplyr::mutate(
-  consonance_dissonance = rating
+  dissonance = rating
 )
 
-theory.rds = paste0('../data/variance_',
+theory.rds = paste0('../data/standard_deviation_',
                     search_label,
                     '.rds')
 theory = readRDS(theory.rds)
@@ -74,7 +74,7 @@ theory <- theory %>% dplyr::rowwise() %>% dplyr::mutate(
   octave_ratio   = metadata$octave_ratio,
   semitone       = metadata$semitone,
   .before=1
-) %>% dplyr::group_by(temporal_variance)
+) %>% dplyr::group_by(temporal_standard_deviation)
 ```
 
 ```{r, echo=F, results='asis', message=F}
@@ -84,13 +84,13 @@ experiment <- experiment
 
 Temporal Variances:
 ```{r, echo=F}
-tols = theory$temporal_variance %>% unique
+tols = theory$temporal_standard_deviation %>% unique
 tols
 ```
 
 Spatial Variances:
 ```{r, echo=F}
-tols = theory$spatial_variance %>% unique
+tols = theory$spatial_standard_deviation %>% unique
 tols
 ```
 Number of Harmonics:
@@ -144,7 +144,7 @@ rows = length(tols)
 # so for grid of 4x12 it would be height=12 and width=60
 theory <- theory %>% 
   dplyr::mutate(
-    z_score = z_scores(consonance_dissonance),
+    z_score = z_scores(dissonance),
     smooth  = smoothed(semitone, .data$z_score, params$sigma)
   )
 

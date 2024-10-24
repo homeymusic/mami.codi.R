@@ -281,7 +281,7 @@ sinusoidal gaussian.
 
 $${\sigma_f}^2 {\sigma_\lambda}^2 = \frac{1} {16 \pi^2}$$
 
-When wavelength and frequency variance are the same:  
+When wavelength and frequency standard_deviation are the same:  
 
 $$\sigma^2 = {\sigma_f}^2 = {\sigma_\lambda}^2$$
 
@@ -289,7 +289,7 @@ We have:
 
 $$\sigma^2 = \sqrt{\frac{1} {16 \pi^2}} = \frac{1}{4 \pi} \approx 0.08$$
 
-Otherwise the variances are constrained by the relationship:
+Otherwise the standard_deviations are constrained by the relationship:
 
 $${\sigma_f}^2 = \frac{\frac{1} {16 \pi^2}}{{\sigma_\lambda}^2} \approx \frac{0.006}{{\sigma_\lambda}^2}$$
 
@@ -313,7 +313,7 @@ $$r_{f i} = \frac{f_{i}}{f_{min}} \pm \sigma_{f}^{2} = \frac{a_{i}}{b_{i}}$$
 
 $\sigma^2$ is the tolerance for converting a real number into a rational
 fraction. Later we will treat the Stern-Brocot function as a strictly
-localized probability distribution with variance $\sigma^2$.
+localized probability distribution with standard_deviation $\sigma^2$.
 
 $${GCD}(a_{i}, b_{i}) = 1$$
 
@@ -398,7 +398,7 @@ uncertainty framework for classical systems governed by wave behavior.
 
 The MaMi.CoDi model is quantized and uncertainty introduced when
 transforming wavelength and frequency ratios to rational fractions using
-the Stern-Brocot tree with variance $\sigma^2$. In our model, the more
+the Stern-Brocot tree with standard_deviation $\sigma^2$. In our model, the more
 we know about the wavelength of a wave, the less we know about its
 frequency.  
 
@@ -539,7 +539,7 @@ the 15 semitones but the overall peak structure agrees with MaMi.CoDi
 predictions. For futher comparison, the theoretical predictions for
 major-minor versus the behavioral results are included in a plot below.
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| temporal_standard_deviation | spatial_standard_deviation | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 0.03              | 0.21109          |             0.2 |
 
@@ -553,7 +553,7 @@ major-minor versus the behavioral results are included in a plot below.
 
 For 10 harmonics, behavioral results and theoretical predictions agree.
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| temporal_standard_deviation | spatial_standard_deviation | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
@@ -570,7 +570,7 @@ For comparison with the study below (5 partils with the third partial
 deleted), notice that the m3 peak is only slightly lower than the M3
 peak.
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| temporal_standard_deviation | spatial_standard_deviation | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
@@ -587,7 +587,7 @@ theoretical predictions mostly agree. As expected, the m3 peak without
 the third partial is now lower than the m3 peak with all 5 harmonics
 while the M3 peak is slightly higher without the 3rd partial.
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| temporal_standard_deviation | spatial_standard_deviation | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
@@ -605,7 +605,7 @@ predicts a dissonance trough with minor polarity at P4 that is not in
 the behavioral results. MaMi.CoDi predicts P5 to have minor polarity and
 be relatively higher than the behavioral results.
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| temporal_standard_deviation | spatial_standard_deviation | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 0.03979           | 0.15915          |             0.2 |
 
@@ -621,7 +621,7 @@ For stretched harmonics, behavioral results and theoretical predictions
 mostly agree. MaMi.Codi predicts peaks with minor polarity just above m3
 and m7 that do not exist in the behavioral results.
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| temporal_standard_deviation | spatial_standard_deviation | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
@@ -636,7 +636,7 @@ and m7 that do not exist in the behavioral results.
 For compressed harmonics, the pronounced behavioral peaks mostly agree
 with the theoretical peaks.
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| temporal_standard_deviation | spatial_standard_deviation | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |             0.2 |
 
@@ -652,7 +652,7 @@ with the theoretical peaks.
 
 Description is below.
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| temporal_standard_deviation | spatial_standard_deviation | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |           0.035 |
 
@@ -666,7 +666,7 @@ Description is below.
 
 Description is below.
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| temporal_standard_deviation | spatial_standard_deviation | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |           0.035 |
 
@@ -680,7 +680,7 @@ Description is below.
 
 Description is below.
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| temporal_standard_deviation | spatial_standard_deviation | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 0.07958           | 0.07958          |           0.035 |
 
@@ -695,7 +695,7 @@ Description is below.
 Due to the Heisenberg uncertainty principle, focusing on one signal
 (temporal) is akin to shutting off the other (spatial).
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| temporal_standard_deviation | spatial_standard_deviation | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 5e-05             | 126.65148        |           0.035 |
 
@@ -710,7 +710,7 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 Due to the Heisenberg uncertainty principle, focusing on one signal
 (spatial) is akin to shutting off the other (temporal).
 
-| temporal_variance | spatial_variance | smoothing_sigma |
+| temporal_standard_deviation | spatial_standard_deviation | smoothing_sigma |
 |:------------------|:-----------------|----------------:|
 | 126.65148         | 5e-05            |           0.035 |
 
@@ -724,7 +724,7 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 
 ##### Harmonic ~ Roll Off: 12
 
-| temporal_variance | spatial_variance | min_amplitude | smoothing_sigma |
+| temporal_standard_deviation | spatial_standard_deviation | min_amplitude | smoothing_sigma |
 |:------------------|:-----------------|:--------------|----------------:|
 | 0.07958           | 0.07958          | 0.013         |             0.2 |
 
@@ -733,7 +733,7 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 
 ##### Harmonic ~ Roll Off: 7
 
-| temporal_variance | spatial_variance | min_amplitude | smoothing_sigma |
+| temporal_standard_deviation | spatial_standard_deviation | min_amplitude | smoothing_sigma |
 |:------------------|:-----------------|:--------------|----------------:|
 | 0.07958           | 0.07958          | 0.08          |             0.2 |
 
@@ -742,7 +742,7 @@ Due to the Heisenberg uncertainty principle, focusing on one signal
 
 ##### Harmonic ~ Roll Off: 2
 
-| temporal_variance | spatial_variance | min_amplitude | smoothing_sigma |
+| temporal_standard_deviation | spatial_standard_deviation | min_amplitude | smoothing_sigma |
 |:------------------|:-----------------|:--------------|----------------:|
 | 0.07958           | 0.07958          | 0             |             0.2 |
 
@@ -805,7 +805,7 @@ $\lambda_i=300.00, 150.00, 100.00$ m
 Lets calculate the overall cycle of the whole wave with harmonics twice,
 using a traditional signal processing technique. We will find the
 frequency and wavelength ratios as rational fractions using the
-Stern-Brocot tree with variances at the Heisenberg limit and then
+Stern-Brocot tree with standard_deviations at the Heisenberg limit and then
 compute the least common denominator (LCD) for each. Using the LCD we
 will find the overall cycle.  
 
@@ -936,7 +936,7 @@ wavelengths (m). We will come back to temporal observations shortly.
 When we combine all the component parts of a chord together into a
 whole, we can estimate the overall wavelength for the whole chord. A
 technique used in digital signal processing and bricklaying is to
-estimate ratios (within an acceptable variance) between each of the
+estimate ratios (within an acceptable standard_deviation) between each of the
 parts and a selected reference part. The greatest common divisor (LCD)
 of those part ratios will be a measure of the periodicity of the
 whole.  
@@ -976,7 +976,7 @@ major triad with 5 harmonics, below.
 
 To estimate the periodicity of a chord, the MaMi.CoDi model uses a
 signal processing technique. It finds fractions, within a given
-variance, for every tone in the chord (fundamental, harmonics, noise,
+standard_deviation, for every tone in the chord (fundamental, harmonics, noise,
 etc.) relative to a reference tone. The least common denominator of
 those fractions is a measure of the cycle length, relative to the
 reference tone. Long relative cycles are predicted to sound unpleasant
@@ -1035,7 +1035,7 @@ We chose the speed of sound in room temperature air.
 
 ###### MaMi.CoDi Predictions
 
-| consonance_dissonance | major_minor | temporal_consonance | spatial_consonance |
+| dissonance | major | temporal_consonance | spatial_consonance |
 |----------------------:|------------:|--------------------:|-------------------:|
 |              96.83007 |           0 |            48.41504 |           48.41504 |
 
@@ -1110,7 +1110,7 @@ We chose the speed of sound in room temperature air.
 
 ###### MaMi.CoDi Predictions
 
-| consonance_dissonance | major_minor | temporal_consonance | spatial_consonance |
+| dissonance | major | temporal_consonance | spatial_consonance |
 |----------------------:|------------:|--------------------:|-------------------:|
 |              88.18622 |           0 |            44.09311 |           44.09311 |
 
@@ -1256,7 +1256,7 @@ We chose the speed of sound in room temperature air.
 
 ###### MaMi.CoDi Predictions
 
-| consonance_dissonance | major_minor | temporal_consonance | spatial_consonance |
+| dissonance | major | temporal_consonance | spatial_consonance |
 |----------------------:|------------:|--------------------:|-------------------:|
 |              90.50815 |    2.321928 |            46.41504 |           44.09311 |
 
@@ -1338,7 +1338,7 @@ We chose the speed of sound in room temperature air.
 |    19 |   7 |   6 | 0.1156187 | 2966.6480 | 102.03910 |               1.111111 |
 |    20 |   1 |   1 | 0.1040568 | 3296.2755 | 103.86314 |               1.000000 |
 
-### Finding the variance Values
+### Finding the standard_deviation Values
 
 “One difficulty with distinguishing between place and temporal (or
 place-time) models of pitch is that spectral and temporal
@@ -1360,17 +1360,17 @@ from “Revisiting place and temporal theories of pitch”, Andrew J.
 Oxenham, 2014.  
 
 The MaMi.CoDi model, based on Stolzenburg (2015), has one one parameter:
-variance. Variance is used by the Stern-Brocot algorithm to find tone
+standard_deviation. Variance is used by the Stern-Brocot algorithm to find tone
 ratios as rational fractions that are then used to estimate the relative
-periodicity of chords. variance acts as the physiological limits
+periodicity of chords. standard_deviation acts as the physiological limits
 mentioned by Oxenham, above.  
 
 Considering that the spatial and temporal signals had two different
-physiological origins, we searched a two-dimensional variance space in
+physiological origins, we searched a two-dimensional standard_deviation space in
 order to match model predictions with the large-scale behavioral
 results. It turned out that the values that best matched large-scale
 behavioral results were always the same for temporal and spatial
-variance. This might indicate that the physiological limitations are not
+standard_deviation. This might indicate that the physiological limitations are not
 specific to place signals or time signals separetely. But instead the
 limitation is higher in the auditory system after the signals have been
 passed along.  
@@ -1381,14 +1381,14 @@ instead a limit of higher-level perception or pattern recognition, where
 estimates of the period of a complex signal is made from components.  
 
 MaMi.CoDi uses the Stern-Brocot tree to find rational fractions for the
-ratios within a given variance. How do we find the best variance values?
+ratios within a given standard_deviation. How do we find the best standard_deviation values?
 For the MaMi.CoDi model we ran thousands of computations with various
-variance values and compared the predictions with results from six of
+standard_deviation values and compared the predictions with results from six of
 the large-scale behavioral experiments.  
 
 Because the spatial signal and the temporal signal have different
-origins we initially did a two-dimensional variance search. However the
-closest fits to the behavioral data came from spatial and variance
+origins we initially did a two-dimensional standard_deviation search. However the
+closest fits to the behavioral data came from spatial and standard_deviation
 values being the same. Insofar as this model represents processing in
 the auditory cortex, it would seem that estimating the cyclicity of the
 two signals happens higher up in the auditoray system after the spatial
@@ -1397,7 +1397,7 @@ and temporal signals have been processed.
 ### Difference between Stern-Brocot Rational Fraction Approximations and Floating Point Values
 
 The Stern-Brocot curve is a repeatable, deterministic curve of where
-rational fractions exist or do not exist within a given variance.  
+rational fractions exist or do not exist within a given standard_deviation.  
 
 However, the value is 0 outside $\pm \sigma^{2}$ and the area of the
 curve equals one so that we can use it like a probability density

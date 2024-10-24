@@ -53,7 +53,7 @@ readings.” -Gabor
 
 For MaMi.CoDi:  
 
-Wavelength ratio variance x Frequency ratio variance = Number of the
+Wavelength ratio standard_deviation x Frequency ratio standard_deviation = Number of the
 order one  
 
 One observation happens in a “characteristic rectangle” in the

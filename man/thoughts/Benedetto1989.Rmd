@@ -20,11 +20,11 @@ For MaMi.CoDi:
 
 ```{r, echo=F, message=F}
 L2_f = 1
-variance = L2_f / (4 * pi)
-variance
+standard_deviation = L2_f / (4 * pi)
+standard_deviation
 ```
 
 It feel right now like equation 5.1.4 is the place to start.\
 
-c is variance ranging from 0 to 1?\
+c is standard_deviation ranging from 0 to 1?\
 

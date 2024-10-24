@@ -23,8 +23,8 @@ Octave Ratios:
 
 ## CoDi
 
-![](../figures/variance_search/_CoDi-1.png)<!-- -->
+![](../figures/standard_deviation_search/_CoDi-1.png)<!-- -->
 
 ## Spatiotemporal
 
-![](../figures/variance_search/_Spatiotemporal-1.png)<!-- -->
+![](../figures/standard_deviation_search/_Spatiotemporal-1.png)<!-- -->

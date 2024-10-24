@@ -44,7 +44,7 @@ experiment.csv = paste0('../data/',
 
 experiment = read.csv(experiment.csv) %>%
   dplyr::rename(
-    consonance_dissonance = rating,
+    dissonance = rating,
     semitone              = interval
   )
 
@@ -94,7 +94,7 @@ theory$roll_off_dB %>% unique
 
 Precisions:
 ```{r, echo=F}
-theory$variance %>% unique
+theory$standard_deviation %>% unique
 ```
 
 
@@ -139,7 +139,7 @@ rows = length(amps)
 # so for grid of 4x12 it would be height=12 and width=60
 theory <- theory %>% 
   dplyr::mutate(
-    z_score = z_scores(consonance_dissonance),
+    z_score = z_scores(dissonance),
     smooth  = smoothed(semitone, .data$z_score, params$sigma)
   )
 

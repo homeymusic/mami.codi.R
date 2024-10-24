@@ -56,8 +56,8 @@ cat("  \n###", title, '\n')
 print(knitr::kable(tibble::tibble_row(
   multicolored_line_sigma  = 0.2,
   green_line_sigma         = 2.0,
-  spatial_variance        = paste(round(chords$spatial_variance %>% unique, 5), collapse = ' '),
-  temporal_variance       = paste(round(chords$temporal_variance %>% unique, 5), collapse = ' '),
+  spatial_standard_deviation        = paste(round(chords$spatial_standard_deviation %>% unique, 5), collapse = ' '),
+  temporal_standard_deviation       = paste(round(chords$temporal_standard_deviation %>% unique, 5), collapse = ' '),
 )))
 print(plot_semitone_codi_smooth(chords, title))
 cat("  \n")
@@ -89,22 +89,22 @@ of those dissonance troughs.
 
 ### MaMi.CoDi resolution correlates with dissonance troughs and consonance peaks
 
-As the variance value of the MaMi.CoDi model varies from very small to very large
+As the standard_deviation value of the MaMi.CoDi model varies from very small to very large
 the consonance peaks expand their width until they overcome the dissonance troughs.
 See plot sets, below, for M3, M6 and P8.\
 
-MaMi.CoDi's variance value is the only parameter in the model and indicates
+MaMi.CoDi's standard_deviation value is the only parameter in the model and indicates
 the resolution for turning irrational ratios into rational fractions.
 Those fractions are then used to estimate wavelength periodicity and 
 frequency periodicity.\
 
-* Small variances give more accurate fractions which give longer periods.
-* Large variances give less accurate fractions which give shorter period estimates.
+* Small standard_deviations give more accurate fractions which give longer periods.
+* Large standard_deviations give less accurate fractions which give shorter period estimates.
 
 #### M3 ~ Major Third
 
-Plot of M3 with MaMi.CoDi variance values varying from 1e-08 to 0.1:
-![M3 with a range of MaMi.CoDi variance values.](./man/figures/variance_search/M3.png)
+Plot of M3 with MaMi.CoDi standard_deviation values varying from 1e-08 to 0.1:
+![M3 with a range of MaMi.CoDi standard_deviation values.](./man/figures/standard_deviation_search/M3.png)
 
 * JT: 5/4
 * ET: 2^(4/12)
@@ -125,8 +125,8 @@ tibble::tibble(
 mami.codi.data <- mami.codi.map('M3', c(0.0002), tonic_midi) %>% dplyr::rowwise() %>% dplyr::mutate(
   semitone       = metadata$semitone + tonic_midi,
   .before=1
-) %>% dplyr::ungroup() %>% dplyr::arrange(dplyr::desc(consonance_dissonance))
-mami.codi.data %>% dplyr::select('semitone', 'consonance_dissonance')
+) %>% dplyr::ungroup() %>% dplyr::arrange(dplyr::desc(dissonance))
+mami.codi.data %>% dplyr::select('semitone', 'dissonance')
 ```
 
 ###### The JT M3 has the highest consonance
@@ -140,7 +140,7 @@ just_M3$semitone
 ```
 
 ```{r, echo=F}
-just_M3 %>% dplyr::select('semitone', 'consonance_dissonance')
+just_M3 %>% dplyr::select('semitone', 'dissonance')
 ```
 
 ###### Frequency ratios of the JT M3
@@ -152,13 +152,13 @@ just_M3$temporal_ratios[[1]]
 ##### Intervals near the major third ranked by lowest consonance
 
 ```{r, echo=F}
-mami.codi.data %>% dplyr::arrange(consonance_dissonance) %>% 
-  dplyr::select('semitone', 'consonance_dissonance')
+mami.codi.data %>% dplyr::arrange(dissonance) %>% 
+  dplyr::select('semitone', 'dissonance')
 ```
 
 ###### The lowest consonance
 ```{r, echo=F}
-dissonant_M3 = mami.codi.data %>% dplyr::arrange(consonance_dissonance) %>% dplyr::slice(1)
+dissonant_M3 = mami.codi.data %>% dplyr::arrange(dissonance) %>% dplyr::slice(1)
 ```
 
 ```{r, echo=F}
@@ -166,7 +166,7 @@ dissonant_M3$semitone
 ```
 
 ```{r, echo=F}
-dissonant_M3 %>% dplyr::select('semitone', 'consonance_dissonance')
+dissonant_M3 %>% dplyr::select('semitone', 'dissonance')
 ```
 
 ###### The lowest consonance ratios
@@ -194,7 +194,7 @@ Cents:
 Consonance:
 
 ```{r, echo=F}
-P_M3 %>% dplyr::select('semitone', 'consonance_dissonance')
+P_M3 %>% dplyr::select('semitone', 'dissonance')
 ```
 
 ###### Frequency ratios of the second highest consonance
@@ -212,8 +212,8 @@ P_M3$temporal_ratios[[1]]
 
 #### M6 ~ Major Sixth
 
-Plot of M6 with MaMi.CoDi variance values varying from 1e-08 to 0.1:
-![M6 with a range of MaMi.CoDi variance values.](./man/figures/variance_search/M6.png)
+Plot of M6 with MaMi.CoDi standard_deviation values varying from 1e-08 to 0.1:
+![M6 with a range of MaMi.CoDi standard_deviation values.](./man/figures/standard_deviation_search/M6.png)
 
 * JT: 5/3
 * ET: 2^(9/12)
@@ -233,8 +233,8 @@ tibble::tibble(
 mami.codi.data <- mami.codi.map('M6', c(0.0002), tonic_midi) %>% dplyr::rowwise() %>% dplyr::mutate(
   semitone       = metadata$semitone + tonic_midi,
   .before=1
-) %>% dplyr::ungroup() %>% dplyr::arrange(dplyr::desc(consonance_dissonance))
-mami.codi.data %>% dplyr::select('semitone', 'consonance_dissonance')
+) %>% dplyr::ungroup() %>% dplyr::arrange(dplyr::desc(dissonance))
+mami.codi.data %>% dplyr::select('semitone', 'dissonance')
 ```
 
 ###### The JT M6 has the highest consonance
@@ -248,7 +248,7 @@ just_M6$semitone
 ```
 
 ```{r, echo=F}
-just_M6 %>% dplyr::select('semitone', 'consonance_dissonance')
+just_M6 %>% dplyr::select('semitone', 'dissonance')
 ```
 
 ###### Frequency ratios of the JT M6
@@ -260,13 +260,13 @@ just_M6$temporal_ratios[[1]]
 ##### Intervals near the major sixth ranked by lowest consonance
 
 ```{r, echo=F}
-mami.codi.data %>% dplyr::arrange(consonance_dissonance) %>% 
-  dplyr::select('semitone', 'consonance_dissonance')
+mami.codi.data %>% dplyr::arrange(dissonance) %>% 
+  dplyr::select('semitone', 'dissonance')
 ```
 
 ###### The lowest consonance
 ```{r, echo=F}
-dissonant_M6 = mami.codi.data %>% dplyr::arrange(consonance_dissonance) %>% dplyr::slice(1)
+dissonant_M6 = mami.codi.data %>% dplyr::arrange(dissonance) %>% dplyr::slice(1)
 ```
 
 ```{r, echo=F}
@@ -274,7 +274,7 @@ dissonant_M6$semitone
 ```
 
 ```{r, echo=F}
-dissonant_M6 %>% dplyr::select('semitone', 'consonance_dissonance')
+dissonant_M6 %>% dplyr::select('semitone', 'dissonance')
 ```
 
 ###### The lowest consonance ratios
@@ -302,7 +302,7 @@ Cents:
 Consonance:
 
 ```{r, echo=F}
-G_M6 %>% dplyr::select('semitone', 'consonance_dissonance')
+G_M6 %>% dplyr::select('semitone', 'dissonance')
 ```
 
 ###### Frequency ratios of the second highest consonance
@@ -318,5 +318,5 @@ G_M6$temporal_ratios[[1]]
 
 #### P8 Octave
 
-Plot of P8 with MaMi.CoDi variance values varying from 1e-08 to 0.1:
-![P8 with a range of MaMi.CoDi variance values.](./man/figures/variance_search/P8.png)
+Plot of P8 with MaMi.CoDi standard_deviation values varying from 1e-08 to 0.1:
+![P8 with a range of MaMi.CoDi standard_deviation values.](./man/figures/standard_deviation_search/P8.png)

@@ -138,7 +138,7 @@ for (trial in 1:1000) {
 
   spatiotemporal_scores = looped_paused %>% dplyr::rowwise() %>% dplyr::mutate(
     paused_frequency = metadata$paused_frequency,
-    distance         = noisy_chord$consonance_dissonance-consonance_dissonance
+    distance         = noisy_chord$dissonance-dissonance
   )
   
   spatiotemporal_results = spatiotemporal_scores %>%

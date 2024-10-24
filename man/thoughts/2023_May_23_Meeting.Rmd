@@ -102,5 +102,5 @@ P1_compressed = hrep::sparse_fr_spectrum(60, num_harmonics=10, octave_ratio=1.9)
 
 ```{r, echo=F}
 dplyr::bind_rows(P1_stretched, P1_harmonic, P1_compressed) %>%
-  dplyr::select(pseudo_octave, major_minor, consonance_dissonance)
+  dplyr::select(pseudo_octave, major, dissonance)
 ```

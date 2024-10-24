@@ -6,9 +6,9 @@
 #' @param x Chord to analyse specified in MIDI, coerced to
 #' hrep::sparse_fr_spectrum
 #' @param amplitude An optional minimum amplitude for deciding which partials to include.
-#' @param temporal_variance An optional temporal variance value for finding rational fractions.
-#' @param spatial_variance  An optional spatial variance value for finding rational fractions.
-#' @param deviation An optional deviation value for approximating least common multiples.
+#' @param temporal_standard_deviation An optional temporal standard_deviation value for finding rational fractions.
+#' @param spatial_standard_deviation  An optional spatial standard_deviation value for finding rational fractions.
+#' @param harmonics_deviation An optional deviation value for approximating least common multiples.
 #' @param metadata User-provided list of metadata that round trips with each call.
 #' helpful for analysis and plots
 #' @param verbose Determines the amount of data to return from chord evaluation
@@ -22,24 +22,20 @@
 #' @export
 mami.codi <- function(
     x,
-    amplitude         = MINIMUM_AMPLITUDE,
-    temporal_variance = NA,
-    spatial_variance  = NA,
-    deviation         = OCTAVE_DEVIATION,
-    metadata          = NA,
-    verbose           = FALSE,
+    minimum_amplitude           = MINIMUM_AMPLITUDE,
+    temporal_standard_deviation = STANDARD_DEVIATION,
+    spatial_standard_deviation  = STANDARD_DEVIATION,
+    harmonics_deviation         = HARMONICS_DEVIATION,
+    metadata                    = NA,
+    verbose                     = FALSE,
     ...
 ) {
 
-  parse_input(x, ...)                      %>%
-    parse_variances(
-      temporal_variance,
-      spatial_variance
-    )                                      %>%
-    compute_consonance(
-      amplitude,
-      deviation
-    )                                      %>%
+  parse_input(x, ...) %>%
+    compute_cyclicity(minimum_amplitude,
+                       temporal_standard_deviation,
+                       spatial_standard_deviation,
+                       harmonics_deviation) %>%
     format_output(metadata, verbose)
 
 }
@@ -78,59 +74,39 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 
 }
 
-parse_variances <- function(x, temporal_variance, spatial_variance) {
+compute_cyclicity = function(x, minimum_amplitude, temporal_standard_deviation, spatial_standard_deviation, harmonics_deviation) {
 
-  if (is.na(temporal_variance) && is.na(spatial_variance)) {
-    temporal_variance = sqrt(HEISENBERG)
-    spatial_variance  = sqrt(HEISENBERG)
-  } else if (is.na(spatial_variance)) {
-    spatial_variance  = HEISENBERG / temporal_variance
-  } else if (is.na(temporal_variance)) {
-    temporal_variance = HEISENBERG / spatial_variance
-  }
-
-  x %>% dplyr::mutate(
-    temporal_variance,
-    spatial_variance
-  )
-
-}
-
-compute_consonance = function(x, minimum_amplitude, octave_deviation) {
-
-  f       = x$spectrum[[1]] %>% dplyr::filter(.data$y>minimum_amplitude) %>% hrep::freq()
-  c_sound = 343 # m/s arbitrary, disappears in the ratios
-  l       = c_sound / f
+  f = x$spectrum[[1]] %>% dplyr::filter(.data$y>minimum_amplitude) %>% hrep::freq()
+  k = f / C_SOUND
 
   x %>% dplyr::mutate(
 
-    alcd( f / min(f), .data$temporal_variance, octave_deviation, 'temporal'),
-    temporal_consonance   = 50 - log2(.data$temporal_alcd),
+    cycles( f / min(f), temporal_standard_deviation, harmonics_deviation, 'temporal'),
+    cycles( k / max(k), spatial_standard_deviation,  harmonics_deviation, 'spatial'),
 
-    alcd( l / min(l), .data$spatial_variance,  octave_deviation, 'spatial'),
-    spatial_consonance    = 50 - log2(.data$spatial_alcd),
+    log2_temporal_cycles   = log2(.data$temporal_cycles),
+    log2_spatial_cycles    = log2(.data$spatial_cycles),
 
-    consonance_dissonance = .data$temporal_consonance + .data$spatial_consonance,
-    major_minor           = .data$temporal_consonance - .data$spatial_consonance,
+    dissonance             = .data$log2_spatial_cycles + .data$log2_temporal_cycles,
+    majorness              = .data$log2_spatial_cycles - .data$log2_temporal_cycles,
+
+    fundamental_frequency  = min(f) / .data$temporal_cycles,
+    fundamental_wavenumber = min(k) / .data$spatial_cycles,
 
     # Store the metadata
-    frequencies           = list(f),
-    wavelengths           = list(l),
-    temporal_Sz           = log2(.data$temporal_alcd),
-    spatial_Sz            = log2(.data$spatial_alcd),
-    speed_of_sound        = c_sound,
-    f0                    = min(f) / .data$temporal_alcd,
-    l0                    = max(l) * .data$spatial_alcd,
+    frequencies            = list(f),
+    wavenumbers            = list(k),
+    speed_of_sound         = C_SOUND,
     minimum_amplitude,
-    temporal_variance,
-    spatial_variance,
-    octave_deviation
+    temporal_standard_deviation,
+    spatial_standard_deviation,
+    harmonics_deviation
 
   )
 
 }
 
-#' Approximate Least Common Denominator
+#' Approximate Number of Cycles of Complex Wave
 #'
 #' See the articles below for previous work on approximate GCD / LCM
 #'
@@ -151,19 +127,19 @@ compute_consonance = function(x, minimum_amplitude, octave_deviation) {
 #'
 #'
 #' @param x Vector of rational numbers
-#' @param variance Precision for creating rational fractions
-#' @param octave_deviation Deviation for approximating least common multiples
+#' @param standard_deviation Precision for creating rational fractions
+#' @param harmonics_deviation Deviation for approximating least common multiples
 #' @param label A custom label for the output usually 'spatial' or 'temporal'
 #'
-#' @return The approximate least common denominator of the rational numbers
+#' @return Estimate the number of cycles using approximate least common denominator of the rational numbers
 #'
-#' @rdname alcd
+#' @rdname cycles
 #' @export
-alcd <- function(x, variance, octave_deviation, label) {
-  fractions = approximate_rational_fractions(x, variance, octave_deviation)
+cycles <- function(x, standard_deviation, harmonics_deviation, label) {
+  fractions = approximate_rational_fractions(x, standard_deviation, harmonics_deviation)
   tibble::tibble_row(
-    alcd       = lcm_integers(fractions$den),
-    fractions  = list(fractions)
+    cycles    = lcm_integers(fractions$den),
+    fractions = list(fractions)
   ) %>% dplyr::rename_with(~ paste0(label, '_' , .))
 }
 lcm_integers <- function(x) Reduce(gmp::lcm.bigz, x) %>% as.numeric()
@@ -177,8 +153,8 @@ format_output <- function(x, metadata, verbose) {
     x
   } else {
     x %>%
-      dplyr::select('major_minor',
-                    'consonance_dissonance',
+      dplyr::select('majorness',
+                    'dissonance',
                     'metadata')
   }
 }
@@ -187,7 +163,7 @@ format_output <- function(x, metadata, verbose) {
 
 #' Default Rational Fraction Precision
 #'
-#' Default variance for converting floating point numbers to rational fractions
+#' Default standard_deviation for converting floating point numbers to rational fractions
 #'
 #' See Heisenberg's uncertainty paper, translated into English by John Archibald
 #' Wheeler and Hubert Zurek, in Quantum Theory and Measurement, Wheeler and Zurek,
@@ -224,28 +200,29 @@ format_output <- function(x, metadata, verbose) {
 #' compact groups. Trans. Amer. Math. Soc., 308(1):105- 114, 1988
 #'
 #'
-#' @rdname default_variance
+#' @rdname default_standard_deviation
 #' @export
-default_variance <- function() { DEFAULT_VARIANCE }
-HEISENBERG = 1 / (16 * pi ^2)
-DEFAULT_VARIANCE = sqrt(HEISENBERG)
+default_standard_deviation <- function() { STANDARD_DEVIATION }
+STANDARD_DEVIATION = 1 / (4 * pi)
 
 #' Default Approximate Least Common Multiple Deviation
 #'
-#' Default octave_deviation for approximating the Least Common Multiple (LCM)
+#' Default harmonics_deviation for approximating the Least Common Multiple (LCM)
 #'
 #''
-#' @rdname default_octave_deviation
+#' @rdname default_harmonics_deviation
 #' @export
-default_octave_deviation <- function() { OCTAVE_DEVIATION }
-OCTAVE_DEVIATION = 0.11
+default_harmonics_deviation <- function() { HARMONICS_DEVIATION }
+HARMONICS_DEVIATION = 0.11
 
 #' Default Minimum Amplitude
 #'
 #' Default minimum amplitude for deciding which tones are evaluated
 #'
 #''
-#' @rdname default_octave_deviation
+#' @rdname default_minimum_amplitude
 #' @export
-default_octave_deviation <- function() { MINIMUM_AMPLITUDE }
+default_minimum_amplitude <- function() { MINIMUM_AMPLITUDE }
 MINIMUM_AMPLITUDE = 0.07
+
+C_SOUND = 343 # m/s arbitrary, disappears in the ratios

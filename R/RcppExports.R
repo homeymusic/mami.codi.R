@@ -3,16 +3,16 @@
 
 #' stern_brocot
 #'
-#' Approximates a floating-point number to arbitrary variance.
+#' Approximates a floating-point number to arbitrary standard_deviation.
 #'
 #' @param x Number to convert to rational fraction
-#' @param variance Binary search stops once the desired variance is reached
+#' @param standard_deviation Binary search stops once the desired standard_deviation is reached
 #'
 #' @return A ratio of num / den
 #'
 #' @export
-stern_brocot <- function(x, variance) {
-    .Call(`_mami_codi_R_stern_brocot`, x, variance)
+stern_brocot <- function(x, standard_deviation) {
+    .Call(`_mami_codi_R_stern_brocot`, x, standard_deviation)
 }
 
 #' compute_pseudo_octave
@@ -59,16 +59,16 @@ pseudo_octave <- function(approximate_harmonics) {
 
 #' approximate_rational_fractions
 #'
-#' Approximates floating-point numbers to arbitrary variance.
+#' Approximates floating-point numbers to arbitrary standard_deviation.
 #'
 #' @param x Vector of floating point numbers to approximate
-#' @param variance Precision for finding rational fractions
+#' @param standard_deviation Precision for finding rational fractions
 #' @param deviation Deviation for estimating least common multiples
 #'
 #' @return A data frame of rational numbers and metadata
 #'
 #' @export
-approximate_rational_fractions <- function(x, variance, deviation) {
-    .Call(`_mami_codi_R_approximate_rational_fractions`, x, variance, deviation)
+approximate_rational_fractions <- function(x, standard_deviation, deviation) {
+    .Call(`_mami_codi_R_approximate_rational_fractions`, x, standard_deviation, deviation)
 }
 

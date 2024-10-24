@@ -1,6 +1,6 @@
 source('./man/code/utils.R')
 
-variance       = mami.codi.R::default_variance()
+standard_deviation       = mami.codi.R::default_standard_deviation()
 num_harmonics   = 10
 octave_ratio    = 2.0
 amount_of_noise = 0
@@ -19,7 +19,7 @@ chord_spectrum = do.call(
   list(lo, hi)
 )
 chord = chord_spectrum %>% mami.codi(
-  variance  = variance,
+  standard_deviation  = standard_deviation,
   verbose = T
 )
 
@@ -37,7 +37,7 @@ noisy_chord_spectrum = do.call(
 )
 
 noisy_chord = noisy_chord_spectrum %>% mami.codi(
-  variance  = variance,
+  standard_deviation  = standard_deviation,
   verbose = T)
 
 pause_frequency = function(spectrum, pause_index) {
@@ -57,7 +57,7 @@ mami.codi_results = grid %>% purrr::pmap_dfr(\(
       pause_index
     ) %>%
     mami.codi.R::mami.codi(
-      variance = variance,
+      standard_deviation = standard_deviation,
       metadata  = list(
         paused_index = pause_index
       ),
@@ -67,10 +67,10 @@ mami.codi_results = grid %>% purrr::pmap_dfr(\(
 
 scores = mami.codi_results %>% dplyr::rowwise() %>% dplyr::mutate(
   paused_f    = noisy_chord_spectrum$x[metadata$paused_index],
-  change      = noisy_chord$consonance_dissonance - consonance_dissonance,
-  noisy_codi  = noisy_chord$consonance_dissonance,
-  paused_codi = consonance_dissonance,
-  clean_codi  = chord$consonance_dissonance,
+  change      = noisy_chord$dissonance - dissonance,
+  noisy_codi  = noisy_chord$dissonance,
+  paused_codi = dissonance,
+  clean_codi  = chord$dissonance,
 )  %>% dplyr::ungroup()
 
 results = scores %>%

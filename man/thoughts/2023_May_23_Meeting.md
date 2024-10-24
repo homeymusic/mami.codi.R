@@ -199,7 +199,7 @@ P1_compressed = hrep::sparse_fr_spectrum(60, num_harmonics=10, octave_ratio=1.9)
 ```
 
     ## # A tibble: 3 × 3
-    ##   pseudo_octave major_minor consonance_dissonance
+    ##   pseudo_octave major dissonance
     ##           <dbl>       <dbl>                 <dbl>
     ## 1           2.1           0                  97.3
     ## 2           2             0                  97.3

@@ -25,7 +25,7 @@ experiment.rds = paste0('../data/',
 experiment = readRDS(experiment.rds)$profile %>% 
   dplyr::rename(
     semitone=interval,
-    consonance_dissonance=rating
+    dissonance=rating
   )
 ```
 
@@ -45,7 +45,7 @@ theory = readRDS(theory.rds) %>% dplyr::rowwise() %>% dplyr::mutate(
   num_harmonics ==5 &
   scale != '5PartialsNo3'
 )
-theory$consonance_dissonance_z = z_scores(theory$consonance_dissonance)
+theory$dissonance_z = z_scores(theory$dissonance)
 ```
 
 ```{r}
@@ -61,7 +61,7 @@ m7_M7
 ```
 
 ```{r}
-max_m7_M7 <- m7_M7 %>% dplyr::arrange(dplyr::desc(consonance_dissonance))
+max_m7_M7 <- m7_M7 %>% dplyr::arrange(dplyr::desc(dissonance))
 ```
 
 ```{r}

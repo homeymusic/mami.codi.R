@@ -11,14 +11,14 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // stern_brocot
-NumericVector stern_brocot(const double x, const double variance);
-RcppExport SEXP _mami_codi_R_stern_brocot(SEXP xSEXP, SEXP varianceSEXP) {
+NumericVector stern_brocot(const double x, const double standard_deviation);
+RcppExport SEXP _mami_codi_R_stern_brocot(SEXP xSEXP, SEXP standard_deviationSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const double >::type x(xSEXP);
-    Rcpp::traits::input_parameter< const double >::type variance(varianceSEXP);
-    rcpp_result_gen = Rcpp::wrap(stern_brocot(x, variance));
+    Rcpp::traits::input_parameter< const double >::type standard_deviation(standard_deviationSEXP);
+    rcpp_result_gen = Rcpp::wrap(stern_brocot(x, standard_deviation));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -59,15 +59,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // approximate_rational_fractions
-DataFrame approximate_rational_fractions(NumericVector x, const double variance, const double deviation);
-RcppExport SEXP _mami_codi_R_approximate_rational_fractions(SEXP xSEXP, SEXP varianceSEXP, SEXP deviationSEXP) {
+DataFrame approximate_rational_fractions(NumericVector x, const double standard_deviation, const double deviation);
+RcppExport SEXP _mami_codi_R_approximate_rational_fractions(SEXP xSEXP, SEXP standard_deviationSEXP, SEXP deviationSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< const double >::type variance(varianceSEXP);
+    Rcpp::traits::input_parameter< const double >::type standard_deviation(standard_deviationSEXP);
     Rcpp::traits::input_parameter< const double >::type deviation(deviationSEXP);
-    rcpp_result_gen = Rcpp::wrap(approximate_rational_fractions(x, variance, deviation));
+    rcpp_result_gen = Rcpp::wrap(approximate_rational_fractions(x, standard_deviation, deviation));
     return rcpp_result_gen;
 END_RCPP
 }

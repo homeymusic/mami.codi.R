@@ -7,7 +7,7 @@ Consonance perception of a chord with multiple partials is both a wave
 and a probabilistic phenomenon.
 
 The probabilistic aspect comes from approximating rational numbers
-within a given variance using the Stern-Brocot tree.
+within a given standard_deviation using the Stern-Brocot tree.
 
 ![](man/figures/SternBrocotCurve-unnamed-chunk-5-1.png)<!-- -->  
 Number of Samples: 1,000,000  
@@ -76,7 +76,7 @@ $$P(x)=\int|\psi(x,t)|^2dx=1 $$
 
 ### Thoughts
 
-$f(x)$ and $g(x)$ are both probabilities. The product of their variance
+$f(x)$ and $g(x)$ are both probabilities. The product of their standard_deviation
 satisfies the uncertainty principle.  
 
 So what are they in our model?  

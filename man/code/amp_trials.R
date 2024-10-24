@@ -32,7 +32,7 @@ run_trials <- function(search_label, amplitudes) {
 
   experiment = read.csv(experiment.csv) %>%
     dplyr::rename(
-      consonance_dissonance = rating,
+      dissonance = rating,
       semitone              = interval
     )
 

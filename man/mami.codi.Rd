@@ -6,10 +6,10 @@
 \usage{
 mami.codi(
   x,
-  amplitude = MINIMUM_AMPLITUDE,
-  temporal_variance = NA,
-  spatial_variance = NA,
-  deviation = OCTAVE_DEVIATION,
+  minimum_amplitude = MINIMUM_AMPLITUDE,
+  temporal_standard_deviation = STANDARD_DEVIATION,
+  spatial_standard_deviation = STANDARD_DEVIATION,
+  harmonics_deviation = HARMONICS_DEVIATION,
   metadata = NA,
   verbose = FALSE,
   ...
@@ -19,13 +19,11 @@ mami.codi(
 \item{x}{Chord to analyse specified in MIDI, coerced to
 hrep::sparse_fr_spectrum}
 
-\item{amplitude}{An optional minimum amplitude for deciding which partials to include.}
+\item{temporal_standard_deviation}{An optional temporal standard_deviation value for finding rational fractions.}
 
-\item{temporal_variance}{An optional temporal variance value for finding rational fractions.}
+\item{spatial_standard_deviation}{An optional spatial standard_deviation value for finding rational fractions.}
 
-\item{spatial_variance}{An optional spatial variance value for finding rational fractions.}
-
-\item{deviation}{An optional deviation value for approximating least common multiples.}
+\item{harmonics_deviation}{An optional deviation value for approximating least common multiples.}
 
 \item{metadata}{User-provided list of metadata that round trips with each call.
 helpful for analysis and plots}
@@ -34,6 +32,8 @@ helpful for analysis and plots}
 TRUE is all and FALSE is just major-minor, consonance-dissonance and metadata.}
 
 \item{...}{parameters for hrep::sparse_fr_spectrum}
+
+\item{amplitude}{An optional minimum amplitude for deciding which partials to include.}
 }
 \value{
 Major-Minor, Consonance-Dissonance and metadata plus additional

@@ -19,12 +19,12 @@ p = RATIONAL_FRACTION_PRECISION
 
 ```{r, echo=F, message=F}
 L2_f = 1 
-variance = L2_f / (4 * pi)
-variance
+standard_deviation = L2_f / (4 * pi)
+standard_deviation
 ```
 
 ```{r, echo=F, message=F}
-std_dev = sqrt(variance)
+std_dev = sqrt(standard_deviation)
 std_dev
 ```
 

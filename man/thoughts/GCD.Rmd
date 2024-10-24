@@ -43,7 +43,7 @@ valid_max = 2.0 ^ (log(ratio) / log(1.89))
 
 valid_max - ratio
   
-variance = default_variance()
+standard_deviation = default_standard_deviation()
 f0 = 440
 pseudo_octave = 2.0
 n = 2
