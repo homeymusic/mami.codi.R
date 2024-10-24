@@ -15,9 +15,17 @@ using namespace Rcpp;
 //' @export
 // [[Rcpp::export]]
 NumericVector stern_brocot(const double x, const double standard_deviation) {
+  // Ensure x is positive and standard_deviation is non-negative
+  if (x <= 0) {
+    stop("STOP: x must be greater than 0");
+  }
+  if (standard_deviation < 0) {
+    stop("STOP: standard_deviation must be non-negative");
+  }
+
   double approximation;
 
-  const double valid_min = x - standard_deviation;
+  const double valid_min = std::max(0.0, x - standard_deviation);
   const double valid_max = x + standard_deviation;
 
   int left_num    = floor(x);
