@@ -21,4 +21,3 @@ test_that('P1 with 3 harmonics fundamental frequency and fundamental wavenumber 
 
   expect_false(expected_temporal_cycles == expected_spatial_cycles)
 })
-test_that()
