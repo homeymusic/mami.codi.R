@@ -24,22 +24,22 @@ test_that('fundamental frequency calc',{
 
 })
 test_that('fundamental wavenumber calc',{
-  C4_wavenumber = hrep::midi_to_freq(60) / C_SOUND
+  C4_wavelength = C_SOUND / hrep::midi_to_freq(60)
 
   P1 = c(60) %>% mami.codi(num_harmonics = 1, verbose=T)
   expected_fundamental_cycles = 1
   expect_equal(P1$spatial_cycles, expected_fundamental_cycles)
-  expect_equal(P1$fundamental_wavenumber, C4_wavenumber / expected_fundamental_cycles)
+  expect_equal(P1$fundamental_wavelength, C4_wavelength * expected_fundamental_cycles)
 
   P5 = c(60, 67) %>% mami.codi(num_harmonics = 1, verbose=T)
   expected_fundamental_cycles = 3
   expect_equal(P5$spatial_cycles, expected_fundamental_cycles)
-  expect_equal(P5$fundamental_wavenumber, C4_wavenumber / expected_fundamental_cycles)
+  expect_equal(P5$fundamental_wavelength, C4_wavelength * expected_fundamental_cycles)
 
   P8 = c(60, 72) %>% mami.codi(num_harmonics = 1, verbose=T)
   expected_fundamental_cycles = 2
   expect_equal(P8$spatial_cycles, expected_fundamental_cycles)
-  expect_equal(P8$fundamental_wavenumber, C4_wavenumber / expected_fundamental_cycles)
+  expect_equal(P8$fundamental_wavelength, C4_wavelength * expected_fundamental_cycles)
 })
 test_that('major-minor tonality',{
   M3 = c(60, 64, 72) %>% mami.codi(num_harmonics = 1, verbose=T)

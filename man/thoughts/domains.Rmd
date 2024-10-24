@@ -1,0 +1,39 @@
+---
+title: "Domain"
+output:
+  github_document: default
+always_allow_html: true
+---
+```{r, echo=F, message=F, include=F}
+devtools::load_all(".")
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "../figures/Domains-"
+)
+```
+
+```{r, echo=T, message=F, include=T}
+P5 = c(60, 67) %>% mami.codi(num_harmonics = 1, verbose=T)
+domains = P5 %>% dplyr::select(c('frequencies', 'periods', 'wavenumbers', 'wavelengths')) %>% tidyr::unnest(cols=everything())
+```
+
+```{r, echo=T, message=F, include=T}
+tibble::tibble(
+cycles( domains$frequencies / min(domains$frequencies), 
+        STANDARD_DEVIATION, HARMONICS_DEVIATION, 'f') %>% 
+  dplyr::select('f_cycles'),
+cycles( domains$periods / max(domains$periods), 
+        STANDARD_DEVIATION, HARMONICS_DEVIATION, 't') %>% 
+  dplyr::select('t_cycles'),
+
+cycles( domains$wavenumbers / max(domains$wavenumbers), 
+        STANDARD_DEVIATION, HARMONICS_DEVIATION, 'k') %>% 
+  dplyr::select('k_cycles'),
+cycles( domains$wavelengths / min(domains$wavelengths), 
+        STANDARD_DEVIATION, HARMONICS_DEVIATION, 'l') %>% 
+  dplyr::select('l_cycles'),
+)
+```
+
+

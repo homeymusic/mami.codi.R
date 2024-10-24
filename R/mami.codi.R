@@ -77,12 +77,14 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 compute_cyclicity = function(x, minimum_amplitude, temporal_standard_deviation, spatial_standard_deviation, harmonics_deviation) {
 
   f = x$spectrum[[1]] %>% dplyr::filter(.data$y>minimum_amplitude) %>% hrep::freq()
-  k = f / C_SOUND
+  t = 1 / f
+  k = f * C_SOUND
+  l = 1 / k
 
   x %>% dplyr::mutate(
 
     cycles( f / min(f), temporal_standard_deviation, harmonics_deviation, 'temporal'),
-    cycles( k / max(k), spatial_standard_deviation,  harmonics_deviation, 'spatial'),
+    cycles( l / min(l), spatial_standard_deviation,  harmonics_deviation, 'spatial'),
 
     log2_temporal_cycles   = log2(.data$temporal_cycles),
     log2_spatial_cycles    = log2(.data$spatial_cycles),
@@ -91,11 +93,13 @@ compute_cyclicity = function(x, minimum_amplitude, temporal_standard_deviation, 
     majorness              = .data$log2_spatial_cycles - .data$log2_temporal_cycles,
 
     fundamental_frequency  = min(f) / .data$temporal_cycles,
-    fundamental_wavenumber = min(k) / .data$spatial_cycles,
+    fundamental_wavelength = max(l) / .data$spatial_cycles,
 
     # Store the metadata
     frequencies            = list(f),
+    periods                = list(t),
     wavenumbers            = list(k),
+    wavelengths             = list(l),
     speed_of_sound         = C_SOUND,
     minimum_amplitude,
     temporal_standard_deviation,
@@ -225,4 +229,4 @@ HARMONICS_DEVIATION = 0.11
 default_minimum_amplitude <- function() { MINIMUM_AMPLITUDE }
 MINIMUM_AMPLITUDE = 0.07
 
-C_SOUND = 1 # m/s arbitrary, disappears in the ratios
+C_SOUND = 343 # m/s arbitrary, disappears in the ratios

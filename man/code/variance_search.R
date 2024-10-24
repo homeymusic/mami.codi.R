@@ -1,6 +1,6 @@
 search_label = 'M6'
 devtools::install_github('git@github.com:homeymusic/mami.codi.R',
-                         ref = 'traveling_wave')
+                         ref = 'wavlength_dissonance')
 
 # options(timeout = max(1000, getOption("timeout")))
 
