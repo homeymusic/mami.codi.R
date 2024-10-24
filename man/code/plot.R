@@ -695,10 +695,10 @@ plot_semitone_spatial_temporal_wrap <- function(theory,
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
     ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
                         fill=colors_homey$major,
-                        ggplot2::aes(x = semitone, y = log2_temporal_cycles)) +
+                        ggplot2::aes(x = semitone, y = max(log2_temporal_cycles) - log2_temporal_cycles)) +
     ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
                         fill=colors_homey$minor,
-                        ggplot2::aes(x = semitone, y = log2_spatial_cycles)) +
+                        ggplot2::aes(x = semitone, y = max(log2_spatial_cycles) - log2_spatial_cycles)) +
     ggplot2::geom_line(
       color=colors_homey$major,
       data=theory,
