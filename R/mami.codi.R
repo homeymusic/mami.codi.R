@@ -251,4 +251,4 @@ HARMONICS_DEVIATION = 0.11
 default_minimum_amplitude <- function() { MINIMUM_AMPLITUDE }
 MINIMUM_AMPLITUDE = 0.07
 
-C_SOUND = 343 # m/s arbitrary, disappears in the ratios
+C_SOUND = 1 # m/s arbitrary, disappears in the ratios
