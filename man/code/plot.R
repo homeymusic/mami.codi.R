@@ -600,7 +600,7 @@ plot_semitone_codi_wrap <- function(theory, experiment,
     ggplot2::geom_line(
       data=experiment,
       color    = colors_homey$neutral,
-      ggplot2::aes(x = semitone, y = dissonance)) +
+      ggplot2::aes(x = semitone, y = consonance)) +
     ggplot2::geom_line(
       data=theory,
       ggplot2::aes(x = semitone, y = smooth,
@@ -694,10 +694,10 @@ plot_semitone_spatial_temporal_wrap <- function(theory,
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
     ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
                         fill=colors_homey$major,
-                        ggplot2::aes(x = semitone, y = temporal_dissonance)) +
+                        ggplot2::aes(x = semitone, y = -temporal_dissonance)) +
     ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
                         fill=colors_homey$minor,
-                        ggplot2::aes(x = semitone, y = spatial_dissonance)) +
+                        ggplot2::aes(x = semitone, y = -spatial_dissonance)) +
     ggplot2::geom_line(
       color=colors_homey$major,
       data=theory,

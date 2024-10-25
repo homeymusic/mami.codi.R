@@ -134,7 +134,7 @@ compute_cyclicity = function(x, minimum_amplitude, temporal_standard_deviation, 
 #'
 #'
 #' @param x Vector of rational numbers
-#' @param ratio_element Use the numerator or denominator to find cycle length
+#' @param lcm_of Use the numerator or denominator to find cycle length
 #' @param standard_deviation Precision for creating rational fractions
 #' @param harmonics_deviation Deviation for approximating least common multiples
 #' @param label A custom label for the output usually 'spatial' or 'temporal'
@@ -143,7 +143,7 @@ compute_cyclicity = function(x, minimum_amplitude, temporal_standard_deviation, 
 #'
 #' @rdname cycles
 #' @export
-cycles <- function(x, ratio_element, standard_deviation, harmonics_deviation, label) {
+cycles <- function(x, lcm_of, standard_deviation, harmonics_deviation, label) {
   fractions = approximate_rational_fractions(x, standard_deviation, harmonics_deviation)
 
   if (any(fractions$num == 0) || any(fractions$den == 0)) {
@@ -156,9 +156,9 @@ cycles <- function(x, ratio_element, standard_deviation, harmonics_deviation, la
   }
 
   t = tibble::tibble_row(
-    cycles = if (ratio_element == RATIO$DEN) {
+    cycles = if (lcm_of == RATIO$DEN) {
       lcm_integers(fractions$den)
-    } else if (ratio_element == RATIO$NUM) {
+    } else if (lcm_of == RATIO$NUM) {
       lcm_integers(fractions$num)
     } else {
       NA

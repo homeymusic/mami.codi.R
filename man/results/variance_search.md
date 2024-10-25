@@ -1,7 +1,7 @@
 Standard Deviation Search
 ================
 
-# Harmonic
+# M3
 
 Temporal Standard Deviations:
 

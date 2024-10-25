@@ -6,7 +6,7 @@ always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'Harmonic'
+search_label = 'M3'
 ```
 
 # `r search_label`
@@ -58,7 +58,7 @@ experiment = readRDS(experiment.rds)$profile %>%
   dplyr::rename(semitone=interval)
 
 experiment <- experiment %>% dplyr::mutate(
-  dissonance = -rating
+  consonance = rating
 )
 
 theory.rds = paste0('../data/standard_deviation_',
@@ -108,14 +108,6 @@ theory$octave_ratio %>% unique
 ```
 
 ```{r, echo=F}
-z_scores <- function(x) {
-  sd = sd(x)
-  if (sd == 0) {
-    0
-  }  else {
-    (x-mean(x)) / sd(x) 
-  }
-}
 smoothing_file = './tests/notes/code/smooth_2d_gaussian.cpp'
 if (file.exists(smoothing_file))  {
   Rcpp::sourceCpp(smoothing_file)
@@ -148,7 +140,7 @@ rows = length(tols)
 # so for grid of 4x12 it would be height=12 and width=60
 theory <- theory %>% 
   dplyr::mutate(
-    z_score = z_scores(dissonance),
+    z_score = z_scores(-dissonance),
     smooth  = smoothed(semitone, .data$z_score, params$sigma)
   )
 
@@ -171,8 +163,8 @@ plot_semitone_codi_wrap(
 
 theory <- theory %>% 
   dplyr::mutate(
-    smooth_temporal = smoothed(semitone, temporal_dissonance, params$sigma),
-    smooth_spatial  = smoothed(semitone, spatial_dissonance, params$sigma)
+    smooth_temporal = smoothed(semitone, -temporal_dissonance, params$sigma),
+    smooth_spatial  = smoothed(semitone, -spatial_dissonance, params$sigma)
   )
 
 plot_semitone_spatial_temporal_wrap(
