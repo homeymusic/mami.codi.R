@@ -32,3 +32,20 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 
 }
 
+#' @rdname format_output
+#' @export
+format_output <- function(x, metadata, verbose) {
+  x <- x %>% tibble::add_column(
+    metadata=list(metadata)
+  )
+
+  if (verbose) {
+    x
+  } else {
+    x %>%
+      dplyr::select('majorness',
+                    'dissonance',
+                    'metadata')
+  }
+}
+

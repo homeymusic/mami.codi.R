@@ -1,6 +1,6 @@
 #' Major-Minor Consonance-Dissonance
 #'
-#' A model of consonance perception based on spacetime cycles.
+#' A model of consonance perception based on space and time cycles.
 #'
 #' @param x Chord to analyse specified in MIDI, coerced to
 #' hrep::sparse_fr_spectrum
@@ -31,10 +31,10 @@ mami.codi <- function(
 ) {
 
   parse_input(x, ...) %>%
-    spacetime_cycles(minimum_amplitude,
-                     time_standard_deviation,
-                     space_standard_deviation,
-                     harmonics_deviation) %>%
+    space_time_cycles(minimum_amplitude,
+                      time_standard_deviation,
+                      space_standard_deviation,
+                      harmonics_deviation) %>%
     format_output(metadata, verbose)
 
 }
@@ -49,11 +49,11 @@ mami.codi <- function(
 #'
 #' @return Estimate the cycle length of time and space signals
 #'
-#' @rdname spacetime_cycles
+#' @rdname space_time_cycles
 #' @export
-spacetime_cycles = function(x, minimum_amplitude,
-                            time_standard_deviation, space_standard_deviation,
-                            harmonics_deviation) {
+space_time_cycles = function(x, minimum_amplitude,
+                             time_standard_deviation, space_standard_deviation,
+                             harmonics_deviation) {
 
   f = x$spectrum[[1]] %>% dplyr::filter(.data$y>minimum_amplitude) %>% hrep::freq()
   P = 1 / f
@@ -62,11 +62,11 @@ spacetime_cycles = function(x, minimum_amplitude,
 
   x %>% dplyr::mutate(
 
-    cycles(f/min(f), RATIO$DEN, time_standard_deviation, harmonics_deviation, 'time'),
-    cycles(l/min(l), RATIO$DEN, space_standard_deviation,  harmonics_deviation, 'space'),
+    cycles(f/min(f), time_standard_deviation, harmonics_deviation, 'time'),
+    cycles(l/min(l), space_standard_deviation,  harmonics_deviation, 'space'),
 
-    time_dissonance   = log2(.data$time_cycles),
-    space_dissonance    = log2(.data$space_cycles),
+    time_dissonance        = log2(.data$time_cycles),
+    space_dissonance       = log2(.data$space_cycles),
 
     dissonance             = .data$space_dissonance + .data$time_dissonance,
     majorness              = .data$space_dissonance - .data$time_dissonance,
@@ -95,7 +95,6 @@ spacetime_cycles = function(x, minimum_amplitude,
 #' Approximate Number of Cycles of a Complex Wave
 #'
 #' @param x Vector of rational numbers
-#' @param lcm_of Use the numerator or denominator to find cycle length
 #' @param standard_deviation Precision for creating rational fractions
 #' @param harmonics_deviation Deviation for approximating least common multiples
 #' @param label A custom label for the output usually 'space' or 'time'
@@ -104,47 +103,16 @@ spacetime_cycles = function(x, minimum_amplitude,
 #'
 #' @rdname cycles
 #' @export
-cycles <- function(x, lcm_of, standard_deviation, harmonics_deviation, label) {
+cycles <- function(x, standard_deviation, harmonics_deviation, label) {
   fractions = approximate_rational_fractions(x, standard_deviation, harmonics_deviation)
 
-  if (any(fractions$num == 0) || any(fractions$den == 0)) {
-    stop(sprintf("Error: A numerator or denominator was 0. This should never happen.\n x: %s \n nums: %s \n dens: %s \n std: %f \n hdev: %f",
-                 paste(x, collapse = ", "),
-                 paste(fractions$num, collapse = ", "),
-                 paste(fractions$den, collapse = ", "),
-                 standard_deviation,
-                 harmonics_deviation))
-  }
-
   t = tibble::tibble_row(
-    cycles = if (lcm_of == RATIO$DEN) {
-      lcm_integers(fractions$den)
-    } else if (lcm_of == RATIO$NUM) {
-      lcm_integers(fractions$num)
-    } else {
-      NA
-    },
+    cycles = lcm_integers(fractions$den),
     fractions = list(fractions)
   ) %>% dplyr::rename_with(~ paste0(label, '_' , .))
   t
 }
 lcm_integers <- function(x) Reduce(gmp::lcm.bigz, x) %>% as.numeric()
-RATIO <- list(NUM = 1, DEN = 2)
-
-format_output <- function(x, metadata, verbose) {
-  x <- x %>% tibble::add_column(
-    metadata=list(metadata)
-  )
-
-  if (verbose) {
-    x
-  } else {
-    x %>%
-      dplyr::select('majorness',
-                    'dissonance',
-                    'metadata')
-  }
-}
 
 # Constants
 
@@ -178,4 +146,4 @@ HARMONICS_DEVIATION = 0.11
 default_minimum_amplitude <- function() { MINIMUM_AMPLITUDE }
 MINIMUM_AMPLITUDE = 0.07
 
-C_SOUND = 1 # m/s arbitrary, disappears in the ratios
+C_SOUND = 343 # m/s arbitrary, disappears in the ratios
