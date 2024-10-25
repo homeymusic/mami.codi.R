@@ -11,48 +11,146 @@ Shannon](https://en.wikipedia.org/wiki/Claude_Shannon), and his seminal
 work [The Mathematical Theory of
 Communication](https://www.google.com/books/edition/The_Mathematical_Theory_of_Communication/IZ77BwAAQBAJ).)
 
+## 2D Harmony: Major-Minor and Consonance-Dissonance
+
 ``` math
-\mathbf{H} = (h_\omega - h_k) \mathbf{i} + (h_\omega + h_k) \mathbf{j}
+\mathbf{H} = (h_f - h_\lambda) \mathbf{i} + (h_f + h_\lambda) \mathbf{j}
 ```
 
 ``` math
 \mathbf{H_{{P1}_{pure}}} = 0 \mathbf{i} + 0 \mathbf{j} \ Sz
 ```
 
-We will define the psychophysical units of perceived cyclicity as
-Stolzenburgs (Sz), but we might also refer to them as Sertz. :)
-
 ``` math
-{MaMi} = (h_\omega - h_k)
+\mathbf{H_{{M3}_{10}}} = 2.32 \mathbf{i} + 9.49 \mathbf{j} \ Sz
 ```
 
 ``` math
-{CoDi} = (h_\omega + h_k)
+\mathbf{H_{{m3}_{10}}} = -2.32 \mathbf{i} + 9.49 \mathbf{j} \ Sz
+```
+
+\[Introducing Stolzenburgs (Sz), a psychophysical unit of perceived
+dissonance.\]
+
+``` math
+{MaMi} = (h_f - h_\lambda)
 ```
 
 ``` math
-h_\omega = \log_2 \left( ALCD\left( \left\{ \frac{\omega_n \pm \sigma_\omega}{\omega_{min} \pm \sigma_\omega} \right\}_{n=1}^{N} \right) \right)
+{CoDi} = (h_f + h_\lambda)
 ```
 
 ``` math
-h_k = \log_2 \left( ALCN\left( \left\{ \frac{k_n \pm \sigma_k}{k_{max} \pm \sigma_k} \right\}_{n=1}^{N} \right) \right)
+p(x,t) = \sum_{n=1}^{N} A_n(x,t) e^{-i \left( 2 \pi n f t - \frac{2 \pi n}{\lambda} x \right)}
 ```
 
 ``` math
-\sigma_x \sigma_k \geq \frac{1}{2}, \ \sigma_t\sigma_\omega \geq \frac{1}{2}
+h_f = \log_2 \left( \text{LCD}\left( \left\{ \frac{f_n}{f_{\text{min}}} \pm \sigma_t \sigma_f \right\}_{n=1}^{N} \right) \right)
 ```
 
 ``` math
-\Delta(\sigma_x, \sigma_k, \sigma_t, \sigma_\omega, \dots) \geq \kappa
+h_\lambda = \log_2 \left( \text{LCD}\left( \left\{ \frac{\lambda_n}{\lambda_{\text{min}}} \pm \sigma_x \sigma_\lambda \right\}_{n=1}^{N} \right) \right)
+```
+
+## 2D Signals: Space-Time and Wavelength-Frequency
+
+In signal processing, the fundamental frequency of a set of frequencies
+$f_1, \ldots, f_N$ is determined by the formula
+$\text{GCD}(f_1, \ldots, f_N) / \text{LCD}(f_1, \ldots, f_N)$. We apply
+this principle in multiple ways. First, following Stolzenburg, we treat
+the log of the least common denominator (LCD) component as a
+psychophysical quantity, measured in a unit we introduce called
+Stolzenburg (Sz), to quantify dissonance perception.
+
+Since our model uses ratios that always include one of the partials in
+the denominator, the greatest common divisor (GCD) is always unity. By
+multiplying $1/\text{LCD}$ by a reference tone’s frequency or wavelength
+we can derive the fundamental frequency or the fundamental wavelength of
+the complex wave. When the fundamental values $f_0$ or $\lambda_0$ are
+converted to a common dimension (e.g., temporal period, $T$), they will
+not necessarily provide the same value. That is to say, spatial and
+temporal measures of the cycle length of a complex wave will usually be
+different, even when uncertainty is zero. We identify this inherent
+difference (or modulation) as the source of major-minor tonality
+perception.
+
+Consider the case of a 1 Hz wave with three harmonics, where
+$f = 1, 2, 3$ Hz. The least common denominator (LCD) of the frequency
+ratios is given by
+
+``` math
+\text{LCD}\left(\frac{1}{1}, \frac{2}{1}, \frac{3}{1}\right) = 1
+```
+
+For simplicity, assume natural units where the speed of sound
+$c_{\text{sound}} = 1$ m/s. The wavelengths are
+$\lambda = \frac{1}{1}, \frac{1}{2}, \frac{1}{3}$ with
+$\lambda_{\text{min}} = \frac{1}{3}$. Now, calculating
+
+``` math
+\text{LCD}\left( \frac{1}{1/3}, \frac{1/2}{1/3}, \frac{1/3}{1/3} \right) = \text{LCD}\left(\frac{3}{1}, \frac{3}{2}, \frac{1}{1}\right) = 2
+```
+
+Thus, even with three harmonics that can be easily expressed as rational
+fraction ratios for frequency and wavelength, we obtain two different
+estimates of cycle length of the complex wave.
+
+The temporal cycle estimate is
+$\log_2(\text{LCD}_f) = \log_2(1) = 0 \ \text{Sz}$, and the spatial
+cycle estimate is
+$\log_2(\text{LCD}_\lambda) = \log_2(2) = 1 \ \text{Sz}$.
+
+We believe that these space-time discrepancies in cycle length are the
+source of major-minor tonality perception.
+
+### Uncertainty
+
+Our approach must also address two issues concerning uncertainty. The
+first challenge is that our GCD/LCD approach necessitates rational
+fractions. If we only considered just-intoned intervals that would not
+be a problem. But our model will accommodate equal-tempered intervals,
+microtuning, and timbre manipulation. We will need to convert real
+numbers into rational fractions. To accomplish this, we introduce a
+controlled measure of uncertainty to find a rational fraction that
+approximates the actual number.
+
+The second challenge stems from auditory processing: the auditory system
+transforms stimuli from the four-dimensional space-time domain into a
+four-dimensional frequency domain. Accurately modeling this
+transformation requires accounting for Gabor uncertainty in both
+time-frequency and space-wavelength domains. When addressing similar
+uncertainty constraints in quantum mechanics, Max Born introduced the
+probabilistic interpretation of the wave function, linking the wave
+amplitude to probability density. This allowed quantum mechanics to
+operate under inherent uncertainty by adopting statistical measures. In
+our case, however, we seek a deterministic model of cycle perception and
+aim to avoid reliance on probabilistic interpretations.
+
+To approximate rational fractions, Stolzenburg employed the Stern-Brocot
+tree, enabling rational approximation within a relative deviation from a
+target number. Following this method, we also use the Stern-Brocot tree,
+but apply fixed deviations. Remarkably, when aligning our model with
+extensive human data on consonance perception, we find that our most
+compelling results emerge at Gabor’s uncertainty limit,
+$\frac{1}{4 \pi}$, in both space and time.
+
+Although we do not explicitly use the Fourier transform in our model, it
+serves as a clear reminder of how uncertainty is introduced when
+transitioning from the physical domain to the frequency domain.
+
+``` math
+F(f, \lambda) = \iint f(x, t) \, e^{-i \left(2 \pi f t - 2 \pi \frac{x}{\lambda}\right)} \, dx \, dt
 ```
 
 ``` math
-\Delta \equiv \frac{\sigma_x \sigma_k}{\sigma_t \sigma_\omega} \geq 1
+\sigma_x \sigma_\lambda \geq \frac{1}{4 \pi}, \ \sigma_t\sigma_f \geq \frac{1}{4 \pi}
 ```
 
-``` math
-p(x,t) = \sum_{n=1}^{N} A_n(x,t) e^{-i \left( n \omega t - n k x \right)}
-```
+Based on the bimodal shape of the Stern-Brocot distribution below,
+explore modeling the two-slit experiment using the deterministic SB
+method instead of a probabilistic curve; consult Bohmian researchers,
+who may find the Stern-Brocot’s deterministic approach relevant to
+quantum mechanics.
 
 # Wavelengths
 
@@ -130,9 +228,9 @@ Volume 293, Issues 1–2, 2012, Pages 31-43</figcaption>
 
 <figure>
 <img src="man/scrapbook/loeb.png"
-alt="Loeb, G.E., White, M.W. and Merzenich, M.M., Spatial cross-correlation: a proposed mechanism for acoustic pitch perception, Biol. Cybern., 47 (1983) 149-163." />
+alt="Loeb, G.E., White, M.W. and Merzenich, M.M., space cross-correlation: a proposed mechanism for acoustic pitch perception, Biol. Cybern., 47 (1983) 149-163." />
 <figcaption aria-hidden="true">Loeb, G.E., White, M.W. and Merzenich,
-M.M., Spatial cross-correlation: a proposed mechanism for acoustic pitch
+M.M., space cross-correlation: a proposed mechanism for acoustic pitch
 perception, Biol. Cybern., 47 (1983) 149-163.</figcaption>
 </figure>
 
@@ -210,8 +308,8 @@ pp. 340-348</figcaption>
 
 <figure>
 <img src="man/scrapbook/oxenham.png"
-alt="Revisiting place and temporal theories of pitch, Andrew J. Oxenham, Acoust Sci Technol. 2013; 34(6): 388–396." />
-<figcaption aria-hidden="true">Revisiting place and temporal theories of
+alt="Revisiting place and time theories of pitch, Andrew J. Oxenham, Acoust Sci Technol. 2013; 34(6): 388–396." />
+<figcaption aria-hidden="true">Revisiting place and time theories of
 pitch, Andrew J. Oxenham, Acoust Sci Technol. 2013; 34(6):
 388–396.</figcaption>
 </figure>
@@ -274,24 +372,21 @@ Analysis and Its Applications (J. S. Bymes and J. L. Byrnes, eds.).
 Kluwer Acad. Publ., Dordrecht. MR 91i:94010</figcaption>
 </figure>
 
-$${\sigma_f}^2 {\sigma_\lambda}^2 \ge \frac{1} {16 \pi^2}$$
+$${\sigma_t} {\sigma_f} \ge \frac{1} {4 \pi}$$
 
-The uncertainty equality holds if the wave functions behave like a
-sinusoidal gaussian.  
-
-$${\sigma_f}^2 {\sigma_\lambda}^2 = \frac{1} {16 \pi^2}$$
-
-When wavelength and frequency standard_deviation are the same:  
-
-$$\sigma^2 = {\sigma_f}^2 = {\sigma_\lambda}^2$$
+$${\sigma_x} {\sigma_k} \ge \frac{1} {4 \pi}$$
 
 We have:  
 
-$$\sigma^2 = \sqrt{\frac{1} {16 \pi^2}} = \frac{1}{4 \pi} \approx 0.08$$
+$$\frac{1}{4 \pi} \approx 0.08$$
 
-Otherwise the standard_deviations are constrained by the relationship:
+Because we are dealing with ratios of an entire complex wave the
+assertion is that we are accounting for the entire system. So for our
+temporal uncertainty we use the uncertainty product at the limit:
+${\sigma_t} {\sigma_f} = \frac{1} {4 \pi}$
 
-$${\sigma_f}^2 = \frac{\frac{1} {16 \pi^2}}{{\sigma_\lambda}^2} \approx \frac{0.006}{{\sigma_\lambda}^2}$$
+And we do the same for our spatial uncertainty:
+${\sigma_x} {\sigma_k} = \frac{1} {4 \pi}$
 
 # Computing Fundamentals
 
@@ -366,12 +461,11 @@ Number of Bins: 21
 
 While Gabor’s analogy to Heisenberg’s uncertainty was innovative in its
 application to signal processing, it is important to note that
-Heisenberg’s uncertainty applies to a purely spatial component
-(position) and a time-dependent component (momentum). Gabor’s framework,
-however, modifies this principle such that both variables are temporal:
-a purely temporal component (time) and a time-dependent component
-(frequency), inviting us to re-explore the power and applicability of
-this analogy.
+Heisenberg’s uncertainty applies to a purely space component (position)
+and a time-dependent component (momentum). Gabor’s framework, however,
+modifies this principle such that both variables are time: a purely time
+component (time) and a time-dependent component (frequency), inviting us
+to re-explore the power and applicability of this analogy.
 
 ”… daß kanonisch konjugierte Größen simultan nur mit einer
 charakteristischen Ungenauigkeit bestimmt werden können.” — Heisenberg
@@ -386,14 +480,14 @@ framed the observation.
 
 In contrast to Gabor, our model returns to the original spirit of
 Heisenberg’s principle, describing an uncertainty relation that involves
-a purely spatial component (wavelength) and a time-dependent component
+a purely space component (wavelength) and a time-dependent component
 (frequency) in the context of a sample interval, $\Delta t$. This brings
 us closer to the original insights of Heisenberg by maintaining the
-trade-off between a purely spatial and a time-dependent conjugate pair.
+trade-off between a purely space and a time-dependent conjugate pair.
 
-By combining spatial and temporal uncertainties in a way that aligns
-more closely with Heisenberg’s original intent, our model introduces
-wavelength as a spatial counterpart to frequency. This provides a novel
+By combining space and time uncertainties in a way that aligns more
+closely with Heisenberg’s original intent, our model introduces
+wavelength as a space counterpart to frequency. This provides a novel
 uncertainty framework for classical systems governed by wave behavior.
 
 The MaMi.CoDi model is quantized and uncertainty introduced when
@@ -517,9 +611,9 @@ and Image Analysis, Estoril, Portugal, June 7-9, 2005</figcaption>
 
 <figure>
 <img src="man/scrapbook/daugman.png"
-alt="Vision Res. Vol. 24, No. 9. pp. 891-910. 1984, SPATIAL VISUAL CHANNELS IN THE FOURIER PLANE, JOHN G. DAUGMAN, Harvard University, Division of Applied Sciences, Cambridge. ,MA 02 138, U.S.A" />
+alt="Vision Res. Vol. 24, No. 9. pp. 891-910. 1984, space VISUAL CHANNELS IN THE FOURIER PLANE, JOHN G. DAUGMAN, Harvard University, Division of Applied Sciences, Cambridge. ,MA 02 138, U.S.A" />
 <figcaption aria-hidden="true">Vision Res. Vol. 24, No. 9. pp. 891-910.
-1984, SPATIAL VISUAL CHANNELS IN THE FOURIER PLANE, JOHN G. DAUGMAN,
+1984, space VISUAL CHANNELS IN THE FOURIER PLANE, JOHN G. DAUGMAN,
 Harvard University, Division of Applied Sciences, Cambridge. ,MA 02 138,
 U.S.A</figcaption>
 </figure>
@@ -539,9 +633,9 @@ the 15 semitones but the overall peak structure agrees with MaMi.CoDi
 predictions. For futher comparison, the theoretical predictions for
 major-minor versus the behavioral results are included in a plot below.
 
-| temporal_standard_deviation | spatial_standard_deviation | smoothing_sigma |
-|:----------------------------|:---------------------------|----------------:|
-| 0.00796                     | 0.07958                    |             0.2 |
+| time_standard_deviation | space_standard_deviation | smoothing_sigma |
+|:------------------------|:-------------------------|----------------:|
+| 0.07958                 | 0.07958                  |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-13-1.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-13-2.png)<!-- -->  
@@ -553,9 +647,9 @@ major-minor versus the behavioral results are included in a plot below.
 
 For 10 harmonics, behavioral results and theoretical predictions agree.
 
-| temporal_standard_deviation | spatial_standard_deviation | smoothing_sigma |
-|:----------------------------|:---------------------------|----------------:|
-| 0.00796                     | 0.07958                    |             0.2 |
+| time_standard_deviation | space_standard_deviation | smoothing_sigma |
+|:------------------------|:-------------------------|----------------:|
+| 0.07958                 | 0.07958                  |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-13-6.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-13-7.png)<!-- -->  
@@ -570,9 +664,9 @@ For comparison with the study below (5 partils with the third partial
 deleted), notice that the m3 peak is only slightly lower than the M3
 peak.
 
-| temporal_standard_deviation | spatial_standard_deviation | smoothing_sigma |
-|:----------------------------|:---------------------------|----------------:|
-| 0.00796                     | 0.07958                    |             0.2 |
+| time_standard_deviation | space_standard_deviation | smoothing_sigma |
+|:------------------------|:-------------------------|----------------:|
+| 0.07958                 | 0.07958                  |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-13-11.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-13-12.png)<!-- -->  
@@ -587,9 +681,9 @@ theoretical predictions mostly agree. As expected, the m3 peak without
 the third partial is now lower than the m3 peak with all 5 harmonics
 while the M3 peak is slightly higher without the 3rd partial.
 
-| temporal_standard_deviation | spatial_standard_deviation | smoothing_sigma |
-|:----------------------------|:---------------------------|----------------:|
-| 0.00796                     | 0.07958                    |             0.2 |
+| time_standard_deviation | space_standard_deviation | smoothing_sigma |
+|:------------------------|:-------------------------|----------------:|
+| 0.07958                 | 0.07958                  |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-13-16.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-13-17.png)<!-- -->  
@@ -605,9 +699,9 @@ predicts a dissonance trough with minor polarity at P4 that is not in
 the behavioral results. MaMi.CoDi predicts P5 to have minor polarity and
 be relatively higher than the behavioral results.
 
-| temporal_standard_deviation | spatial_standard_deviation | smoothing_sigma |
-|:----------------------------|:---------------------------|----------------:|
-| 0.00796                     | 0.07958                    |             0.2 |
+| time_standard_deviation | space_standard_deviation | smoothing_sigma |
+|:------------------------|:-------------------------|----------------:|
+| 0.07958                 | 0.07958                  |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-13-21.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-13-22.png)<!-- -->  
@@ -621,9 +715,9 @@ For stretched harmonics, behavioral results and theoretical predictions
 mostly agree. MaMi.Codi predicts peaks with minor polarity just above m3
 and m7 that do not exist in the behavioral results.
 
-| temporal_standard_deviation | spatial_standard_deviation | smoothing_sigma |
-|:----------------------------|:---------------------------|----------------:|
-| 0.00796                     | 0.07958                    |             0.2 |
+| time_standard_deviation | space_standard_deviation | smoothing_sigma |
+|:------------------------|:-------------------------|----------------:|
+| 0.07958                 | 0.07958                  |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-13-26.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-13-27.png)<!-- -->  
@@ -636,9 +730,9 @@ and m7 that do not exist in the behavioral results.
 For compressed harmonics, the pronounced behavioral peaks mostly agree
 with the theoretical peaks.
 
-| temporal_standard_deviation | spatial_standard_deviation | smoothing_sigma |
-|:----------------------------|:---------------------------|----------------:|
-| 0.00796                     | 0.07958                    |             0.2 |
+| time_standard_deviation | space_standard_deviation | smoothing_sigma |
+|:------------------------|:-------------------------|----------------:|
+| 0.07958                 | 0.07958                  |             0.2 |
 
 ![](man/figures/README-unnamed-chunk-13-31.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-13-32.png)<!-- -->  
@@ -652,9 +746,9 @@ with the theoretical peaks.
 
 Description is below.
 
-| temporal_standard_deviation | spatial_standard_deviation | smoothing_sigma |
-|:----------------------------|:---------------------------|----------------:|
-| 0.00796                     | 0.07958                    |           0.035 |
+| time_standard_deviation | space_standard_deviation | smoothing_sigma |
+|:------------------------|:-------------------------|----------------:|
+| 0.07958                 | 0.07958                  |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-13-36.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-13-37.png)<!-- -->  
@@ -666,9 +760,9 @@ Description is below.
 
 Description is below.
 
-| temporal_standard_deviation | spatial_standard_deviation | smoothing_sigma |
-|:----------------------------|:---------------------------|----------------:|
-| 0.00796                     | 0.07958                    |           0.035 |
+| time_standard_deviation | space_standard_deviation | smoothing_sigma |
+|:------------------------|:-------------------------|----------------:|
+| 0.07958                 | 0.07958                  |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-13-41.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-13-42.png)<!-- -->  
@@ -680,45 +774,15 @@ Description is below.
 
 Description is below.
 
-| temporal_standard_deviation | spatial_standard_deviation | smoothing_sigma |
-|:----------------------------|:---------------------------|----------------:|
-| 0.00796                     | 0.07958                    |           0.035 |
+| time_standard_deviation | space_standard_deviation | smoothing_sigma |
+|:------------------------|:-------------------------|----------------:|
+| 0.07958                 | 0.07958                  |           0.035 |
 
 ![](man/figures/README-unnamed-chunk-13-46.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-13-47.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-13-48.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-13-49.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-13-50.png)<!-- -->
-
-##### P8ZoomedTemporal ~ Partials: 10
-
-Due to the Heisenberg uncertainty principle, focusing on one signal
-(temporal) is akin to shutting off the other (spatial).
-
-| temporal_standard_deviation | spatial_standard_deviation | smoothing_sigma |
-|:----------------------------|:---------------------------|----------------:|
-| 0.00796                     | 0.07958                    |           0.035 |
-
-![](man/figures/README-unnamed-chunk-13-51.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-13-52.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-13-53.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-13-54.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-13-55.png)<!-- -->
-
-##### P8ZoomedSpatial ~ Partials: 10
-
-Due to the Heisenberg uncertainty principle, focusing on one signal
-(spatial) is akin to shutting off the other (temporal).
-
-| temporal_standard_deviation | spatial_standard_deviation | smoothing_sigma |
-|:----------------------------|:---------------------------|----------------:|
-| 0.00796                     | 0.07958                    |           0.035 |
-
-![](man/figures/README-unnamed-chunk-13-56.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-13-57.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-13-58.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-13-59.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-13-60.png)<!-- -->
 
 ### Manipulating amplitudes
 
@@ -846,10 +910,10 @@ equality.
 
 #### Consonance Perception
 
-Spatial Consonance
+space Consonance
 
 $$C_{\lambda} = 50- \log_{2}\left({ ALCD}\left(r_{\lambda 1},..., r_{\lambda N}\right)\right)$$
-Temporal Consonance
+time Consonance
 
 $$C_{f} = 50 - \log_{2}\left({ ALCD}\left(r_{f 1},..., r_{f N}\right)\right)$$
 
@@ -895,16 +959,16 @@ of the cochlea send electrical activity along the auditory nerve.
 
 When a musical chord comprised of many fundamental tones and harmonics
 is sounded, the hair cells at each shortened wavelength position send
-signals along the auditory nerve. This spatial or rate-place arrangement
+signals along the auditory nerve. This space or rate-place arrangement
 of hair cell positions and wavelengths of tones is known as tonotopy.  
 
 ### The Core Idea of MaMi.CoDi
 
 If we play a chord, freeze time and observe which hair cells are
 displaced, what are we observing? Are we observing frequencies? Periods?
-No. Time is frozen. Frequency (1/s) and period (s) are temporal
-observations. We are making a purely spatial observation about
-wavelengths (m). We will come back to temporal observations shortly.  
+No. Time is frozen. Frequency (1/s) and period (s) are time
+observations. We are making a purely space observation about wavelengths
+(m). We will come back to time observations shortly.  
 
 When we combine all the component parts of a chord together into a
 whole, we can estimate the overall wavelength for the whole chord. A
@@ -917,56 +981,55 @@ whole.
 Chords with short wavelengths relative to the component wavelengths
 sound pleasant. And chords with long wavelengths relative to component
 wavelengths sound unpleasant. MaMi.CoDi uses this measure of relative
-wavelengths to predict the perceived spatial consonance of a chord.  
+wavelengths to predict the perceived space consonance of a chord.  
 
 Let us unfreeze time and start counting how often a hair cell moves due
 to a pure tone of our sounded chord. If we count the number of movements
 relative to a certain amount of time, we will be observing the frequency
-of the partial. This would be a temporal observation. The auditory
-system has a property called phase locking which allows it to encode the
-time intervals, periods, between spikes from sound waves.  
+of the partial. This would be a time observation. The auditory system
+has a property called phase locking which allows it to encode the time
+intervals, periods, between spikes from sound waves.  
 
 When we combine the period components of a chord together, we can
 estimate the overall period for the whole chord. That chord period will
 be as long as or longer than the longest component period of the chord.
 Short relative periods sound pleasant. Long relative periods sound
 unpleasant. MaMi.CoDi uses this measure of chord period to predict the
-perceived temporal consonance of a chord.  
+perceived time consonance of a chord.  
 
-MaMi.CoDi sums the spatial and temporal consonance predictions to create
-an overall consonance-dissonance prediction. MaMi.CoDi subtracts the
-spatial consonance from the temporal consonance to create a major-minor
-polarity prediction. Positive values will sound major, negative values
-minor and values around zero will sound neutral.  
+MaMi.CoDi sums the space and time consonance predictions to create an
+overall consonance-dissonance prediction. MaMi.CoDi subtracts the space
+consonance from the time consonance to create a major-minor polarity
+prediction. Positive values will sound major, negative values minor and
+values around zero will sound neutral.  
 
 Because wavelength and frequency are inverse of each other one might
-imagine that the spatial and temporal signals would have the same
-values. However, for complex pitches that is not the case. The pattern
-of the two sets of components are different. See the example of the
-major triad with 5 harmonics, below.
+imagine that the space and time signals would have the same values.
+However, for complex pitches that is not the case. The pattern of the
+two sets of components are different. See the example of the major triad
+with 5 harmonics, below.
 
-# `{r, child=c('man/Spatiotemporal_Periodicity.Rmd')} #`
+# `{r, child=c('man/Space_Time_Cycles.Rmd')} #`
 
 ### Finding the standard_deviation Values
 
-“One difficulty with distinguishing between place and temporal (or
-place-time) models of pitch is that spectral and temporal
-representations of a signal are mathematically equivalent: any change in
-the spectral representation is reflected by a change in the temporal
-representation, and vice versa . Discovering what the auditory system
-does means focusing on the physiological limits imposed by the cochlea
-and auditory nerve.  
+“One difficulty with distinguishing between place and time (or
+place-time) models of pitch is that spectral and time representations of
+a signal are mathematically equivalent: any change in the spectral
+representation is reflected by a change in the time representation, and
+vice versa . Discovering what the auditory system does means focusing on
+the physiological limits imposed by the cochlea and auditory nerve.  
 
 “For instance, the place theory can be tested using known limits of
 frequency selectivity: if pitch can be heard when only unresolved
 harmonics are presented (eliminating place information), then place
 information is not necessary for pitch. Similarly, if all the
 frequencies within a stimulus are above the upper limits of phase
-locking, and the temporal envelope information is somehow suppressed,
-then temporal information is not necessary for pitch perception.”  
+locking, and the time envelope information is somehow suppressed, then
+time information is not necessary for pitch perception.”  
 
-from “Revisiting place and temporal theories of pitch”, Andrew J.
-Oxenham, 2014.  
+from “Revisiting place and time theories of pitch”, Andrew J. Oxenham,
+2014.  
 
 The MaMi.CoDi model, based on Stolzenburg (2015), has one one parameter:
 standard_deviation. Variance is used by the Stern-Brocot algorithm to
@@ -974,18 +1037,18 @@ find tone ratios as rational fractions that are then used to estimate
 the relative periodicity of chords. standard_deviation acts as the
 physiological limits mentioned by Oxenham, above.  
 
-Considering that the spatial and temporal signals had two different
+Considering that the space and time signals had two different
 physiological origins, we searched a two-dimensional standard_deviation
 space in order to match model predictions with the large-scale
 behavioral results. It turned out that the values that best matched
-large-scale behavioral results were always the same for temporal and
-spatial standard_deviation. This might indicate that the physiological
+large-scale behavioral results were always the same for time and space
+standard_deviation. This might indicate that the physiological
 limitations are not specific to place signals or time signals
 separetely. But instead the limitation is higher in the auditory system
 after the signals have been passed along.  
 
-That is to say, the limits that creates differences between temporal and
-spatial signals might not be frequency selectivity or phase locking but
+That is to say, the limits that creates differences between time and
+space signals might not be frequency selectivity or phase locking but
 instead a limit of higher-level perception or pattern recognition, where
 estimates of the period of a complex signal is made from components.  
 
@@ -996,14 +1059,13 @@ computations with various standard_deviation values and compared the
 predictions with results from six of the large-scale behavioral
 experiments.  
 
-Because the spatial signal and the temporal signal have different
-origins we initially did a two-dimensional standard_deviation search.
-However the closest fits to the behavioral data came from spatial and
+Because the space signal and the time signal have different origins we
+initially did a two-dimensional standard_deviation search. However the
+closest fits to the behavioral data came from space and
 standard_deviation values being the same. Insofar as this model
 represents processing in the auditory cortex, it would seem that
 estimating the cyclicity of the two signals happens higher up in the
-auditoray system after the spatial and temporal signals have been
-processed.  
+auditoray system after the space and time signals have been processed.  
 
 ### Difference between Stern-Brocot Rational Fraction Approximations and Floating Point Values
 

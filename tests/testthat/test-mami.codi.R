@@ -21,16 +21,14 @@ test_that('P1 with 3 harmonics fundamental frequency and fundamental wavenumber 
 
   expect_false(expected_time_cycles == expected_space_cycles)
 })
-test_that('M3 is major',{
-  P1 = c(60) %>% mami.codi(num_harmonics=1, verbose=T)
+test_that('M3 is major m3 is minor pure P1 P8 neutral',{
+  num_harmonics = 10
+  P1 = c(60) %>% mami.codi(num_harmonics=1)
   expect_true(P1$majorness == 0)
-  M3 = c(60, 64) %>% mami.codi(num_harmonics=10, verbose=T)
-  expect_true(M3$majorness > 0)
-  m3 = c(60, 63) %>% mami.codi(num_harmonics=10, verbose=T)
+  m3 = c(60, 63) %>% mami.codi(num_harmonics=num_harmonics)
   expect_true(m3$majorness < 0)
-  m3_JI = c(60, hrep::freq_to_midi(hrep::midi_to_freq(60) * 6/5)) %>%
-    mami.codi(num_harmonics=10, verbose=T)
-  expect_equal(m3_JI$majorness, 0)
-  P8 = c(60, 72) %>% mami.codi(num_harmonics=10, verbose=T)
+  M3 = c(60, 64) %>% mami.codi(num_harmonics=num_harmonics)
+  expect_true(M3$majorness > 0)
+  P8 = c(60, 72) %>% mami.codi(num_harmonics=1)
   expect_true(P1$majorness == 0)
 })
