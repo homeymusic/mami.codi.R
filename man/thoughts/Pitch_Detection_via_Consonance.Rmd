@@ -166,7 +166,7 @@ for (trial in 1:1000) {
 
 }
 ```
-# Temporal
+# Time
 ### f0: `r f0_temporal_scoreboard`
 ### f1: `r f1_temporal_scoreboard`
 ### f2: `r f2_temporal_scoreboard`
@@ -174,7 +174,7 @@ for (trial in 1:1000) {
 ### f4: `r f4_temporal_scoreboard`
 ### best_temporal: `r best_temporal`
 
-# Spatial
+# Space
 ### f0: `r f0_spatial_scoreboard`
 ### f1: `r f1_spatial_scoreboard`
 ### f2: `r f2_spatial_scoreboard`
@@ -182,7 +182,7 @@ for (trial in 1:1000) {
 ### f4: `r f4_spatial_scoreboard`
 ### best_spatial: `r best_spatial`
 
-# Spatiotemporal
+# Space and Time
 ### f0: `r f0_spatiotemporal_scoreboard`
 ### f1: `r f1_spatiotemporal_scoreboard`
 ### f2: `r f2_spatiotemporal_scoreboard`

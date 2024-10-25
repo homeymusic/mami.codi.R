@@ -617,6 +617,47 @@ plot_semitone_codi_wrap <- function(theory, experiment,
                                 minor_breaks = 0:15) +
     theme_homey()
 }
+
+plot_semitone_polar_codi_wrap <- function(theory, experiment,
+                                    black_vlines=c(), gray_vlines=c(),
+                                    title,ncols=12,
+                                    include_points=T) {
+  per_plot_labels = tidyr::expand_grid(
+    time_standard_deviation  = theory$time_standard_deviation  %>% unique
+  )
+  per_plot_labels$label = per_plot_labels %>%
+    purrr::pmap_vec(\(time_standard_deviation) {
+      tols = paste0('   time_standard_deviation:', time_standard_deviation)
+    })
+  theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
+    ggplot2::geom_vline(xintercept = black_vlines, color='black') +
+    ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
+    {if (include_points)
+      ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
+                          ggplot2::aes(x = semitone, y = z_score,
+                                       fill=color_factor_homey(theory,'polar_majorness')))} +
+    ggplot2::scale_fill_manual(values=color_values_homey(), guide="none") +
+    ggplot2::geom_line(
+      data=experiment,
+      color    = colors_homey$neutral,
+      ggplot2::aes(x = semitone, y = consonance)) +
+    ggplot2::geom_line(
+      data=theory,
+      ggplot2::aes(x = semitone, y = smooth,
+                   group=1,
+                   color=color_factor_homey(theory,'polar_majorness'))) +
+    ggplot2::scale_color_manual(values=color_values_homey(), guide='none') +
+    ggplot2::geom_text(data=per_plot_labels, color=colors_homey$neutral,
+                       ggplot2::aes(x=-Inf,y=-Inf,label=label,
+                                    vjust="inward",hjust="inward")) +
+    ggplot2::xlab(NULL) +
+    ggplot2::ylab(NULL) +
+    ggplot2::facet_wrap(~time_standard_deviation,ncol=ncols,dir='v') +
+    ggplot2::scale_x_continuous(breaks = c(),
+                                minor_breaks = 0:15) +
+    theme_homey()
+}
+
 plot_semitone_space_wrap <- function(theory,
                                        black_vlines=c(), gray_vlines=c(),
                                        title,ncols=1) {

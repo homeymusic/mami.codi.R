@@ -2,40 +2,22 @@
 % Please edit documentation in R/mami.codi.R
 \name{cycles}
 \alias{cycles}
-\title{Approximate Number of Cycles of Complex Wave}
+\title{Approximate Number of Cycles of a Complex Wave}
 \usage{
-cycles(x, ratio_element, standard_deviation, harmonics_deviation, label)
+cycles(x, standard_deviation, harmonics_deviation, label)
 }
 \arguments{
 \item{x}{Vector of rational numbers}
-
-\item{ratio_element}{Use the numerator or denominator to find cycle length}
 
 \item{standard_deviation}{Precision for creating rational fractions}
 
 \item{harmonics_deviation}{Deviation for approximating least common multiples}
 
-\item{label}{A custom label for the output usually 'spatial' or 'temporal'}
+\item{label}{A custom label for the output usually 'space' or 'time'}
 }
 \value{
 Estimate the number of cycles using approximate least common denominator of the rational numbers
 }
 \description{
-See the articles below for previous work on approximate GCD / LCM
-}
-\details{
-"Pitch extraction from corrupted harmonics of the power spectrum"
-II. APPROXIMATE GCD ALGORITHM
-APPENDIX B: APPROXIMATE GCD ALGORITHM
-Sreenivas and Rao (1978)
-
-"An Efficient Technique for Modeling and Synthesis of Automotive Engine Sounds"
-IV. EXTRACTION OF DETERMINISTIC COMPONENTS USING AN SDFT
-Amman and Das (2001)
-
-"A Practical Fundamental Frequency Extraction Algorithm
-for Motion Parameters Estimation of Moving Targets"
-Huang et al. (2014)
-III. EXTRACTION OF A FUNDAMENTAL FREQUENCY
-A. Extraction of the Initial Pitch Using the AGCD Method
+Approximate Number of Cycles of a Complex Wave
 }

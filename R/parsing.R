@@ -32,6 +32,16 @@ parse_input.sparse_fr_spectrum <- function(x, ...) {
 
 }
 
+#' Format Output
+#'
+#' Allows the user to select which columns from the tibble are returned
+#'
+#'
+#' @param x The output tibble with all the data
+#' @param metadata Metadata that the user can include that will roundtrip from input to output
+#' @param verbose If true then all the data will be included.
+#' @param ... parameters for hrep::sparse_fr_spectrum
+#'
 #' @rdname format_output
 #' @export
 format_output <- function(x, metadata, verbose) {

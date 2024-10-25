@@ -135,6 +135,8 @@ rows = length(tols)
 
 ## CoDi
 
+### Cartesian Coordinates
+
 ```{r _CoDi, fig.height=7*rows, fig.width=12*cols, echo=F}
 # height = 3 per row and width = 5 per column
 # so for grid of 4x12 it would be height=12 and width=60
@@ -155,9 +157,31 @@ plot_semitone_codi_wrap(
 )
 ```
 
-## Spatiotime
+### Polar Coordinates
 
-```{r _Spatiotime, fig.height=7*rows, fig.width=12*cols, echo=F}
+```{r _Polar_CoDi, fig.height=7*rows, fig.width=12*cols, echo=F}
+# height = 3 per row and width = 5 per column
+# so for grid of 4x12 it would be height=12 and width=60
+theory <- theory %>% 
+  dplyr::mutate(
+    z_score = z_scores(-polar_dissonance),
+    smooth  = smoothed(semitone, .data$z_score, params$sigma)
+  )
+
+plot_semitone_polar_codi_wrap(
+  theory, 
+  experiment,
+  gray_vlines  = params$gray_vlines[[1]],
+  black_vlines = params$black_vlines[[1]],
+  title=paste(search_label),
+  ncols=cols,
+  include_points=T
+)
+```
+
+## Space and Time
+
+```{r _Spacetime, fig.height=7*rows, fig.width=12*cols, echo=F}
 # height = 3 per row and width = 5 per column
 # so for grid of 4x12 it would be height=12 and width=60
 

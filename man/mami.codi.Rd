@@ -7,8 +7,8 @@
 mami.codi(
   x,
   minimum_amplitude = MINIMUM_AMPLITUDE,
-  temporal_standard_deviation = STANDARD_DEVIATION,
-  spatial_standard_deviation = STANDARD_DEVIATION,
+  time_standard_deviation = STANDARD_DEVIATION,
+  space_standard_deviation = STANDARD_DEVIATION,
   harmonics_deviation = HARMONICS_DEVIATION,
   metadata = NA,
   verbose = FALSE,
@@ -19,11 +19,11 @@ mami.codi(
 \item{x}{Chord to analyse specified in MIDI, coerced to
 hrep::sparse_fr_spectrum}
 
-\item{temporal_standard_deviation}{An optional temporal standard_deviation value for finding rational fractions.}
+\item{time_standard_deviation}{An optional time standard_deviation value for finding rational fractions.}
 
-\item{spatial_standard_deviation}{An optional spatial standard_deviation value for finding rational fractions.}
+\item{space_standard_deviation}{An optional space standard_deviation value for finding rational fractions.}
 
-\item{harmonics_deviation}{An optional deviation value for approximating least common multiples.}
+\item{harmonics_deviation}{An optional deviation value that allows for harmonics to be not perfect integers.}
 
 \item{metadata}{User-provided list of metadata that round trips with each call.
 helpful for analysis and plots}
@@ -36,9 +36,9 @@ TRUE is all and FALSE is just major-minor, consonance-dissonance and metadata.}
 \item{amplitude}{An optional minimum amplitude for deciding which partials to include.}
 }
 \value{
-Major-Minor, Consonance-Dissonance and metadata plus additional
+Major-Minor (majorness), Consonance-Dissonance (dissonance) and metadata plus additional
 information if verbose=TRUE
 }
 \description{
-A spatiotemporal periodicity model of consonance perception.
+A model of consonance perception based on space and time cycles.
 }

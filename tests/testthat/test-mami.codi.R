@@ -21,3 +21,12 @@ test_that('P1 with 3 harmonics fundamental frequency and fundamental wavenumber 
 
   expect_false(expected_time_cycles == expected_space_cycles)
 })
+test_that('M3 is major',{
+  P1 = c(60) %>% mami.codi(num_harmonics=1, verbose=T)
+  expect_true(P1$majorness == 0)
+  expect_true(P1$polar_majorness == 0)
+  M3 = c(60, 64) %>% mami.codi(num_harmonics=10, verbose=T)
+  expect_true(M3$majorness > 0)
+  m3 = c(60, 62) %>% mami.codi(num_harmonics=10, verbose=T)
+  expect_true(M3$majorness > m3$majorness)
+})

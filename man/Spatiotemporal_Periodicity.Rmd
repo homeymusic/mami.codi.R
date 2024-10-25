@@ -13,7 +13,7 @@ midi  = c(0, 4) + 60
 num_harmonics = 1
 ```
 
-### Estimating Spatiotemporal Periodicity
+### Estimating Space and Time Cycles
 
 To estimate the periodicity of a chord, the MaMi.CoDi model uses a signal 
 processing technique. It finds fractions, within a given standard_deviation, 
