@@ -58,7 +58,7 @@ experiment = readRDS(experiment.rds)$profile %>%
   dplyr::rename(semitone=interval)
 
 experiment <- experiment %>% dplyr::mutate(
-  consonance_dissonance = -rating
+  dissonance = -rating
 )
 
 theory.rds = paste0('../data/standard_deviation_',
