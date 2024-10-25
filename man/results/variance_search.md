@@ -1,7 +1,7 @@
 Standard Deviation Search
 ================
 
-# minor6
+# 5PartialsNo3
 
 time Standard Deviations:
 
