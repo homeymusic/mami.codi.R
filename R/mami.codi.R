@@ -83,7 +83,7 @@ compute_cyclicity = function(x, minimum_amplitude, temporal_standard_deviation, 
 
   x %>% dplyr::mutate(
 
-    cycles(P/max(P), RATIO$NUM, temporal_standard_deviation, harmonics_deviation, 'temporal'),
+    cycles(f/min(f), RATIO$DEN, temporal_standard_deviation, harmonics_deviation, 'temporal'),
     cycles(l/min(l), RATIO$DEN, spatial_standard_deviation,  harmonics_deviation, 'spatial'),
 
     temporal_dissonance   = log2(.data$temporal_cycles),

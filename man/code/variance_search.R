@@ -1,6 +1,6 @@
 search_label = 'Harmonic'
 devtools::install_github('git@github.com:homeymusic/mami.codi.R',
-                         ref = 'l_T')
+                         ref = 'l_f')
 
 # options(timeout = max(1000, getOption("timeout")))
 
@@ -14,5 +14,5 @@ devtools::install_github('git@github.com:homeymusic/mami.codi.R',
 # Orders of Magnitude
 standard_deviations   = c(1:9 %o% 10^(-3:-2))
 
-source('./2D_fixed.R')
+source('./freq_trials.R')
 run_trials(search_label, standard_deviations)
