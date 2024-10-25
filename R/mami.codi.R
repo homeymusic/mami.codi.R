@@ -23,7 +23,7 @@
 mami.codi <- function(
     x,
     minimum_amplitude           = MINIMUM_AMPLITUDE,
-    temporal_standard_deviation = 10 * STANDARD_DEVIATION,
+    temporal_standard_deviation = STANDARD_DEVIATION,
     spatial_standard_deviation  = STANDARD_DEVIATION,
     harmonics_deviation         = HARMONICS_DEVIATION,
     metadata                    = NA,
@@ -90,7 +90,7 @@ compute_cyclicity = function(x, minimum_amplitude, temporal_standard_deviation, 
     spatial_dissonance    = log2(.data$spatial_cycles),
 
     dissonance             = .data$spatial_dissonance + .data$temporal_dissonance,
-    majorness              = .data$temporal_dissonance - .data$spatial_dissonance,
+    majorness              = .data$spatial_dissonance - .data$temporal_dissonance,
 
     polar_dissonance       = sqrt((.data$spatial_dissonance)^2 + (.data$temporal_dissonance)^2),
     polar_majorness        = atan2(.data$temporal_dissonance, .data$spatial_dissonance),

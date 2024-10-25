@@ -467,10 +467,11 @@ p = params %>% purrr::map(\(p) {
     '~',
     'Partials:', p$h
   )
-  
+
   chords <- dyads %>% dplyr::filter(timbre == p$t)
+
   chords$dissonance_z = z_scores(chords$dissonance)
-  chords$major_z = z_scores(chords$major)
+  chords$major_z = z_scores(chords$majorness)
   chords$spatial_dissonance_z = z_scores(chords$spatial_dissonance)
   chords$temporal_dissonance_z = z_scores(chords$temporal_dissonance)
   
@@ -484,12 +485,12 @@ p = params %>% purrr::map(\(p) {
     dplyr::rename(semitone=interval)
   
   experiment <- experiment %>% dplyr::mutate(
-    dissonance = rating
+    dissonance = -rating
   )
   
   experiment_raw = experiment_all$data %>% 
     dplyr::rename(semitone=interval, 
-                  dissonance_z=rating)
+                  dissonance_z=-rating)
   
   if (p$t=='Pure') {
     cat('  \n#### Dyads spanning 15 semitones\n')
@@ -559,54 +560,6 @@ params = list(
   list(h=10,r=7),
   list(h=10,r=2)
 )
-```
-
-```{r, fig.height=8, fig.width=12, echo=F, results='asis', message=F}
-p = params %>% purrr::map(\(p) {
-  gray_vlines = c()
-  if (p$r == 2) {
-    black_vlines = c(3,4,5,7,8,9,12)
-  } else if (p$r == 7) {
-    black_vlines = c(4,5,6,7,9,12)
-  } else if (p$r == 12) {
-    black_vlines = c(3,4,5,7,8,9,12)
-  }
-  title = paste(
-    'Harmonic ~',
-    'Roll Off:', p$r
-  )
-  
-  chords <- dyads %>% dplyr::filter(roll_off == p$r)
-  chords$dissonance_z = z_scores(chords$dissonance)
-  
-  experiment.csv = paste0('./man/data/',
-                          'roll_off_', p$r,
-                          '.csv')
-  
-  experiment = read.csv(experiment.csv) %>%
-    dplyr::rename(semitone=interval)
-  
-  experiment <- experiment %>% dplyr::mutate(
-    dissonance = rating
-  )
-  sigma = BEHAVIOURAL_SMOOTH_BROAD
-  cat("  \n#####", title, '\n')
-  print(knitr::kable(tibble::tibble_row(
-    temporal_standard_deviation = paste(round(chords$temporal_standard_deviation %>% unique, 5), collapse = ' '),
-    spatial_standard_deviation  = paste(round(chords$spatial_standard_deviation %>% unique, 5), collapse = ' '),
-    min_amplitude       = paste(round(chords$minimum_amplitude %>% unique, 5), collapse = ' '),
-    smoothing_sigma = sigma
-  )))
-  print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),
-                           goal=experiment,sigma=sigma,include_points=T,
-                           black_vlines=black_vlines,gray_vlines=gray_vlines))
-  cat("  \n")
-  
-  print(plot_semitone_spatial_temporal(chords, paste('Spatial and Temporal Consonance'),
-                                       goal=NULL,sigma=sigma,include_points=T,
-                                       black_vlines=black_vlines,gray_vlines=gray_vlines))
-  cat("  \n")
-})
 ```
 
 # Some Videos
@@ -842,8 +795,8 @@ the spatial and temporal signals would have the same values. However, for comple
 pitches that is not the case. The pattern of the two sets of components are different.
 See the example of the major triad with 5 harmonics, below.
 
-```{r, child=c('man/Spatiotemporal_Periodicity.Rmd')}
-```
+# ```{r, child=c('man/Spatiotemporal_Periodicity.Rmd')}
+# ```
 
 ### Finding the standard_deviation Values
 
