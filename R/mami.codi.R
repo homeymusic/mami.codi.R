@@ -23,7 +23,7 @@
 mami.codi <- function(
     x,
     minimum_amplitude           = MINIMUM_AMPLITUDE,
-    temporal_standard_deviation = STANDARD_DEVIATION,
+    temporal_standard_deviation = 10 * STANDARD_DEVIATION,
     spatial_standard_deviation  = STANDARD_DEVIATION,
     harmonics_deviation         = HARMONICS_DEVIATION,
     metadata                    = NA,

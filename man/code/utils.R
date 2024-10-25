@@ -167,7 +167,7 @@ chords = chords %>% dplyr::rowwise() %>% dplyr::mutate(
 )
 
 z_scores <- function(x) {
-  sd = sd(x)
+  sd = stats::sd(x)
   if (sd == 0) {
     0
   }  else {

@@ -99,14 +99,6 @@ theory$standard_deviation %>% unique
 
 
 ```{r, echo=F}
-z_scores <- function(x) {
-  sd = sd(x)
-  if (sd == 0) {
-    0
-  }  else {
-    (x-mean(x)) / sd(x) 
-  }
-}
 smoothing_file = './tests/notes/code/smooth_2d_gaussian.cpp'
 if (file.exists(smoothing_file))  {
   Rcpp::sourceCpp(smoothing_file)
