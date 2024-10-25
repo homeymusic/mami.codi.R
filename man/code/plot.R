@@ -133,8 +133,8 @@ plot_smoothed_mami.codi <- function(chords, title='', chords_to_label=NULL,
                                     minimal=F, sigma=0.25) {
 
   chords$smoothed_dissonance = smoothed(chords$semitone,
-                                                   chords$dissonance,
-                                                   sigma)
+                                        chords$dissonance,
+                                        sigma)
 
   chords = chords %>% dplyr::filter(semitone %in% 0:12)
 
@@ -266,8 +266,8 @@ plot_semitone_codi <- function(chords, title='', include_line=T, sigma=0.2,
   }
 
   chords$smoothed.dissonance = smoothed(chords$semitone,
-                                                   chords$dissonance_z,
-                                                   sigma)
+                                        chords$dissonance_z,
+                                        sigma)
 
   ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone,
                                        y = .data$dissonance_z)) +
@@ -305,8 +305,8 @@ plot_semitone_mami <- function(chords, title='', include_line=T, sigma=0.2,
                                include_linear_regression = F, goal=NULL,
                                black_vlines=c(),gray_vlines=c()) {
   chords$smoothed.majorness = smoothed(chords$semitone,
-                                         chords$majorness,
-                                         sigma)
+                                       chords$majorness,
+                                       sigma)
 
   ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone,
                                        y = .data$majorness)) +
@@ -340,16 +340,16 @@ plot_semitone_mami <- function(chords, title='', include_line=T, sigma=0.2,
     theme_homey()
 }
 plot_semitone_space_time <- function(chords, title='', include_line=T, sigma=0.2,
-                                           dashed_minor = F,include_points=T,
-                                           include_linear_regression = F, goal=NULL,
-                                           black_vlines=c(),gray_vlines=c()) {
+                                     dashed_minor = F,include_points=T,
+                                     include_linear_regression = F, goal=NULL,
+                                     black_vlines=c(),gray_vlines=c()) {
 
   chords$smoothed.time_dissonance = smoothed(chords$semitone,
-                                                 chords$time_dissonance,
-                                                 sigma)
+                                             chords$time_dissonance,
+                                             sigma)
   chords$smoothed.space_dissonance = smoothed(chords$semitone,
-                                                chords$space_dissonance,
-                                                sigma)
+                                              chords$space_dissonance,
+                                              sigma)
 
   mean_theoretical = mean(c(chords$smoothed.time_dissonance,
                             chords$smoothed.space_dissonance))
@@ -397,13 +397,13 @@ plot_semitone_space_time <- function(chords, title='', include_line=T, sigma=0.2
     theme_homey()
 }
 plot_semitone_space <- function(chords, title='', include_line=T, sigma=0.2,
-                                  dashed_minor = F,include_points=T,
-                                  include_linear_regression = F, goal=NULL,
-                                  black_vlines=c(),gray_vlines=c()) {
+                                dashed_minor = F,include_points=T,
+                                include_linear_regression = F, goal=NULL,
+                                black_vlines=c(),gray_vlines=c()) {
 
   chords$smoothed.space_dissonance = smoothed(chords$semitone,
-                                                chords$space_dissonance,
-                                                sigma)
+                                              chords$space_dissonance,
+                                              sigma)
 
   linetype_for_minor = if (dashed_minor) {'dashed'} else {'solid'}
 
@@ -433,13 +433,13 @@ plot_semitone_space <- function(chords, title='', include_line=T, sigma=0.2,
     theme_homey()
 }
 plot_semitone_time <- function(chords, title='', include_line=T, sigma=0.2,
-                                   dashed_minor = F,include_points=T,
-                                   include_linear_regression = F, goal=NULL,
-                                   black_vlines=c(),gray_vlines=c()) {
+                               dashed_minor = F,include_points=T,
+                               include_linear_regression = F, goal=NULL,
+                               black_vlines=c(),gray_vlines=c()) {
 
   chords$smoothed.time_dissonance = smoothed(chords$semitone,
-                                                 chords$time_dissonance,
-                                                 sigma)
+                                             chords$time_dissonance,
+                                             sigma)
 
   linetype_for_minor = if (dashed_minor) {'dashed'} else {'solid'}
 
@@ -597,10 +597,11 @@ plot_semitone_codi_wrap <- function(theory, experiment,
                           ggplot2::aes(x = semitone, y = z_score,
                                        fill=color_factor_homey(theory,'majorness')))} +
     ggplot2::scale_fill_manual(values=color_values_homey(), guide="none") +
-    ggplot2::geom_line(
-      data=experiment,
-      color    = colors_homey$neutral,
-      ggplot2::aes(x = semitone, y = consonance)) +
+    {if (!is.null(experiment)) {
+      ggplot2::geom_line(
+        data=experiment,
+        color    = colors_homey$neutral,
+        ggplot2::aes(x = semitone, y = consonance)) }} +
     ggplot2::geom_line(
       data=theory,
       ggplot2::aes(x = semitone, y = smooth,
@@ -619,9 +620,9 @@ plot_semitone_codi_wrap <- function(theory, experiment,
 }
 
 plot_semitone_polar_codi_wrap <- function(theory, experiment,
-                                    black_vlines=c(), gray_vlines=c(),
-                                    title,ncols=12,
-                                    include_points=T) {
+                                          black_vlines=c(), gray_vlines=c(),
+                                          title,ncols=12,
+                                          include_points=T) {
   per_plot_labels = tidyr::expand_grid(
     time_standard_deviation  = theory$time_standard_deviation  %>% unique
   )
@@ -637,10 +638,11 @@ plot_semitone_polar_codi_wrap <- function(theory, experiment,
                           ggplot2::aes(x = semitone, y = z_score,
                                        fill=color_factor_homey(theory,'polar_majorness')))} +
     ggplot2::scale_fill_manual(values=color_values_homey(), guide="none") +
-    ggplot2::geom_line(
-      data=experiment,
-      color    = colors_homey$neutral,
-      ggplot2::aes(x = semitone, y = consonance)) +
+    {if (!is.null(experiment)) {
+      ggplot2::geom_line(
+        data=experiment,
+        color    = colors_homey$neutral,
+        ggplot2::aes(x = semitone, y = consonance))}} +
     ggplot2::geom_line(
       data=theory,
       ggplot2::aes(x = semitone, y = smooth,
@@ -659,8 +661,8 @@ plot_semitone_polar_codi_wrap <- function(theory, experiment,
 }
 
 plot_semitone_space_wrap <- function(theory,
-                                       black_vlines=c(), gray_vlines=c(),
-                                       title,ncols=1) {
+                                     black_vlines=c(), gray_vlines=c(),
+                                     title,ncols=1) {
   per_plot_labels = tidyr::expand_grid(
     time_standard_deviation  = theory$time_standard_deviation  %>% unique
   )
@@ -690,8 +692,8 @@ plot_semitone_space_wrap <- function(theory,
     theme_homey()
 }
 plot_semitone_time_wrap <- function(theory,
-                                        black_vlines=c(), gray_vlines=c(),
-                                        title,ncols=1) {
+                                    black_vlines=c(), gray_vlines=c(),
+                                    title,ncols=1) {
   per_plot_labels = tidyr::expand_grid(
     time_standard_deviation  = theory$time_standard_deviation  %>% unique
   )
@@ -721,8 +723,8 @@ plot_semitone_time_wrap <- function(theory,
     theme_homey()
 }
 plot_semitone_space_time_wrap <- function(theory,
-                                                black_vlines=c(), gray_vlines=c(),
-                                                title,ncols=1) {
+                                          black_vlines=c(), gray_vlines=c(),
+                                          title,ncols=1) {
   per_plot_labels = tidyr::expand_grid(
     time_standard_deviation  = theory$time_standard_deviation  %>% unique
   )
@@ -794,8 +796,8 @@ plot_semitone_behavioral_codi <- function(experiment_raw,
                                           black_vlines=c(),
                                           gray_vlines=c()) {
   experiment_raw$smoothed.dissonance = smoothed(experiment_raw$semitone,
-                                                           experiment_raw$dissonance_z,
-                                                           sigma)
+                                                experiment_raw$dissonance_z,
+                                                sigma)
 
   ggplot2::ggplot(experiment_raw, ggplot2::aes(x = .data$semitone,
                                                y = .data$dissonance_z)) +
@@ -830,12 +832,12 @@ plot_semitone_codi_raw <- function(theory_raw,
                                    title='') {
 
   theory_raw$smoothed.dissonance = smoothed(theory_raw$semitone,
-                                                       theory_raw$dissonance_z,
-                                                       sigma)
+                                            theory_raw$dissonance_z,
+                                            sigma)
 
   experiment_raw$smoothed.dissonance = smoothed(experiment_raw$semitone,
-                                                           experiment_raw$dissonance_z,
-                                                           sigma)
+                                                experiment_raw$dissonance_z,
+                                                sigma)
 
   ggplot2::ggplot(theory_raw, ggplot2::aes(x = .data$semitone,
                                            y = .data$dissonance_z)) +
@@ -867,12 +869,12 @@ plot_semitone_codi_smooth <- function(chords, title='', include_line=T,
                                       include_linear_regression = F, goal=NULL,
                                       black_vlines=c(),gray_vlines=c()) {
   chords$smoothed.dissonance = smoothed(chords$semitone,
-                                                   chords$dissonance,
-                                                   sigma)
+                                        chords$dissonance,
+                                        sigma)
 
   chords$smoothed2.dissonance = smoothed(chords$semitone,
-                                                    chords$dissonance,
-                                                    sigma2)
+                                         chords$dissonance,
+                                         sigma2)
 
   ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone,
                                        y = .data$dissonance)) +
@@ -1025,8 +1027,8 @@ plot_semitone_codi_wrap_amp <- function(theory, experiment,
     theme_homey()
 }
 plot_semitone_space_wrap_amp <- function(theory,
-                                           black_vlines=c(), gray_vlines=c(),
-                                           title,ncols=1) {
+                                         black_vlines=c(), gray_vlines=c(),
+                                         title,ncols=1) {
   per_plot_labels = tidyr::expand_grid(
     amplitude  = theory$amplitude  %>% unique
   )
@@ -1056,8 +1058,8 @@ plot_semitone_space_wrap_amp <- function(theory,
     theme_homey()
 }
 plot_semitone_time_wrap_amp <- function(theory,
-                                            black_vlines=c(), gray_vlines=c(),
-                                            title,ncols=1) {
+                                        black_vlines=c(), gray_vlines=c(),
+                                        title,ncols=1) {
   per_plot_labels = tidyr::expand_grid(
     amplitude  = theory$amplitude  %>% unique
   )

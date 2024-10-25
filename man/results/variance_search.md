@@ -1,7 +1,7 @@
 Standard Deviation Search
 ================
 
-# M3
+# minor6
 
 time Standard Deviations:
 
@@ -25,6 +25,14 @@ Octave Ratios:
 
 ## CoDi
 
+``` r
+if (search_label == 'minor3' || search_label == 'minor6') {
+  experimental_data = NULL
+} else {
+  experimental_data = experiment
+}
+```
+
 ### Cartesian Coordinates
 
 ![](../figures/standard_deviation_search/_CoDi-1.png)<!-- -->
@@ -33,6 +41,6 @@ Octave Ratios:
 
 ![](../figures/standard_deviation_search/_Polar_CoDi-1.png)<!-- -->
 
-## Spatiotime
+## Space and Time
 
 ![](../figures/standard_deviation_search/_Spacetime-1.png)<!-- -->

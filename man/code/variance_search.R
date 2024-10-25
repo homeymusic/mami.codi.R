@@ -1,4 +1,4 @@
-search_label = 'M3'
+search_label = 'minor6'
 devtools::install_github('git@github.com:homeymusic/mami.codi.R',
                          ref = 'l_f')
 
