@@ -87,8 +87,8 @@ run_trials <- function(search_label, standard_deviations, heisenberg) {
 
     mami.codi.R::mami.codi(
       chord,
-      temporal_standard_deviation  = standard_deviation,
-      spatial_standard_deviation   = standard_deviation,
+      time_standard_deviation  = standard_deviation,
+      space_standard_deviation   = standard_deviation,
       metadata       = list(
         octave_ratio   = octave_ratio,
         num_harmonics  = num_harmonics,

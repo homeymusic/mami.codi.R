@@ -78,7 +78,7 @@ theory <- theory %>%
     .before=1
   ) %>% 
   dplyr::ungroup() %>%  # Ungroup after rowwise operations
-  dplyr::group_by(temporal_standard_deviation, spatial_standard_deviation)  # Group by both variables
+  dplyr::group_by(time_standard_deviation, space_standard_deviation)  # Group by both variables
 ```
 
 ```{r, echo=F, results='asis', message=F}
@@ -86,15 +86,15 @@ theory <- theory
 experiment <- experiment
 ```
 
-Temporal Standard Deviations:
+time Standard Deviations:
 ```{r, echo=F}
-tols = theory$temporal_standard_deviation %>% unique
+tols = theory$time_standard_deviation %>% unique
 tols
 ```
 
-Spatial Standard Deviations:
+space Standard Deviations:
 ```{r, echo=F}
-tols = theory$spatial_standard_deviation %>% unique
+tols = theory$space_standard_deviation %>% unique
 tols
 ```
 Number of Harmonics:
@@ -155,19 +155,19 @@ plot_semitone_codi_wrap(
 )
 ```
 
-## Spatiotemporal
+## Spatiotime
 
-```{r _Spatiotemporal, fig.height=7*rows, fig.width=12*cols, echo=F}
+```{r _Spatiotime, fig.height=7*rows, fig.width=12*cols, echo=F}
 # height = 3 per row and width = 5 per column
 # so for grid of 4x12 it would be height=12 and width=60
 
 theory <- theory %>% 
   dplyr::mutate(
-    smooth_temporal = smoothed(semitone, -temporal_dissonance, params$sigma),
-    smooth_spatial  = smoothed(semitone, -spatial_dissonance, params$sigma)
+    smooth_time = smoothed(semitone, -time_dissonance, params$sigma),
+    smooth_space  = smoothed(semitone, -space_dissonance, params$sigma)
   )
 
-plot_semitone_spatial_temporal_wrap(
+plot_semitone_space_time_wrap(
   theory, 
   gray_vlines  = params$gray_vlines[[1]],
   black_vlines = params$black_vlines[[1]],
