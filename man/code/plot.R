@@ -432,6 +432,7 @@ plot_semitone_space <- function(chords, title='', include_line=T, sigma=0.2,
     ggplot2::labs(color = NULL) +
     theme_homey()
 }
+
 plot_semitone_time <- function(chords, title='', include_line=T, sigma=0.2,
                                dashed_minor = F,include_points=T,
                                include_linear_regression = F, goal=NULL,
@@ -578,46 +579,60 @@ plot_semitone_codi_grid <- function(theory, experiment,
                                 minor_breaks = 0:15) +
     theme_homey()
 }
+
+
+
+
 plot_semitone_codi_wrap <- function(theory, experiment,
-                                    black_vlines=c(), gray_vlines=c(),
-                                    title,ncols=12,
-                                    include_points=T) {
+                                    black_vlines = c(), gray_vlines = c(),
+                                    title, ncols = 12,
+                                    include_points = T) {
   per_plot_labels = tidyr::expand_grid(
-    time_standard_deviation  = theory$time_standard_deviation  %>% unique
+    time_standard_deviation = theory$time_standard_deviation %>% unique
   )
   per_plot_labels$label = per_plot_labels %>%
     purrr::pmap_vec(\(time_standard_deviation) {
-      tols = paste0('   time_standard_deviation:', time_standard_deviation)
+      paste0('   time_standard_deviation:', time_standard_deviation)
     })
-  theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
-    ggplot2::geom_vline(xintercept = black_vlines, color='black') +
-    ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
+
+  # Determine range for x-axis labels based on semitone values
+  semitone_range <- range(theory$semitone, na.rm = TRUE)
+
+  theory %>% ggplot2::ggplot(ggplot2::aes(x = semitone, y = smooth)) +
+    ggplot2::geom_vline(xintercept = black_vlines, color = 'black') +
+    ggplot2::geom_vline(xintercept = gray_vlines, color = 'gray44', linetype = 'dotted') +
     {if (include_points)
-      ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
+      ggplot2::geom_point(data = theory, shape = 21, stroke = NA, size = 1,
                           ggplot2::aes(x = semitone, y = z_score,
-                                       fill=color_factor_homey(theory,'majorness')))} +
-    ggplot2::scale_fill_manual(values=color_values_homey(), guide="none") +
+                                       fill = color_factor_homey(theory, 'majorness')))} +
+    ggplot2::scale_fill_manual(values = color_values_homey(), guide = "none") +
     {if (!is.null(experiment)) {
       ggplot2::geom_line(
-        data=experiment,
-        color    = colors_homey$neutral,
-        ggplot2::aes(x = semitone, y = consonance)) }} +
+        data = experiment,
+        color = colors_homey$neutral,
+        ggplot2::aes(x = semitone, y = consonance))
+    }} +
     ggplot2::geom_line(
-      data=theory,
+      data = theory,
       ggplot2::aes(x = semitone, y = smooth,
-                   group=1,
-                   color=color_factor_homey(theory,'majorness'))) +
-    ggplot2::scale_color_manual(values=color_values_homey(), guide='none') +
-    ggplot2::geom_text(data=per_plot_labels, color=colors_homey$neutral,
-                       ggplot2::aes(x=-Inf,y=-Inf,label=label,
-                                    vjust="inward",hjust="inward")) +
+                   group = 1,
+                   color = color_factor_homey(theory, 'majorness'))) +
+    ggplot2::scale_color_manual(values = color_values_homey(), guide = 'none') +
+    ggplot2::geom_text(data = per_plot_labels, color = colors_homey$neutral,
+                       ggplot2::aes(x = -Inf, y = -Inf, label = label,
+                                    vjust = "inward", hjust = "inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_wrap(~time_standard_deviation,ncol=ncols,dir='v') +
-    ggplot2::scale_x_continuous(breaks = c(),
-                                minor_breaks = 0:15) +
-    theme_homey()
+    ggplot2::facet_wrap(~time_standard_deviation, ncol = ncols, dir = 'v') +
+
+    # Adjust x-axis breaks and labels
+    ggplot2::scale_x_continuous(
+      breaks = seq(floor(min(theory$semitone)), ceiling(max(theory$semitone)), by = 0.1),  # Adjust the interval
+      labels = scales::number_format(accuracy = 0.01)  # Control label formatting
+    ) +
+    theme_homey()  # Ensure your theme doesn't blank out axis text
 }
+
 
 plot_semitone_polar_codi_wrap <- function(theory, experiment,
                                           black_vlines=c(), gray_vlines=c(),

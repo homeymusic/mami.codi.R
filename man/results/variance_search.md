@@ -37,10 +37,6 @@ if (search_label == 'minor3' || search_label == 'minor6') {
 
 ![](../figures/standard_deviation_search/_CoDi-1.png)<!-- -->
 
-### Polar Coordinates
-
-![](../figures/standard_deviation_search/_Polar_CoDi-1.png)<!-- -->
-
 ## Space and Time
 
 ![](../figures/standard_deviation_search/_Spacetime-1.png)<!-- -->
