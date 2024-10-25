@@ -146,9 +146,22 @@ F(f, \lambda) = \iint f(x, t) \, e^{-i \left(2 \pi f t - 2 \pi \frac{x}{\lambda}
 \sigma_x \sigma_\lambda \geq \frac{1}{4 \pi}, \ \sigma_t\sigma_f \geq \frac{1}{4 \pi}
 ```
 
-Based on the bimodal shape of the Stern-Brocot distribution below,
-explore modeling the two-slit experiment using the deterministic SB
-method instead of a probabilistic curve; consult Bohmian researchers,
+Note 1: We currently treat each uncertainty product independently in the
+model. However, if we assume that $\sigma_x$ is constant due to cochlear
+geometry, and $\sigma_t$ relates to the temporal window, which varies
+with the time required to recognize the repeating pattern of a complex
+wave, we might expect that as $\sigma_t$ narrows, $\sigma_\lambda$ could
+improve by reducing phase uncertainty. While there is no formal 2D
+uncertainty proof connecting these, the idea seems intuitively
+plausible.
+
+``` math
+\sigma_x \sigma_\lambda \stackrel{?}{=} \sigma_t \sigma_f
+```
+
+Note 2: Based on the bimodal shape of the Stern-Brocot distribution
+below, explore modeling the two-slit experiment using the deterministic
+SB method instead of a probabilistic curve; consult Bohmian researchers,
 who may find the Stern-Brocot’s deterministic approach relevant to
 quantum mechanics.
 
