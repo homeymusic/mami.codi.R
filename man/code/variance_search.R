@@ -1,6 +1,5 @@
-search_label = '5PartialsNo3'
-devtools::install_github('git@github.com:homeymusic/mami.codi.R',
-                         ref = 'l_f')
+search_label = 'P8'
+devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 
 # options(timeout = max(1000, getOption("timeout")))
 
