@@ -96,9 +96,8 @@ fraction ratios for frequency and wavelength, we obtain two different
 estimates of cycle length of the complex wave.
 
 The temporal cycle estimate is
-$\log_2(\text{LCD}_f) = \log_2(1) = 0 \ \text{Sz}$, and the spatial
-cycle estimate is
-$\log_2(\text{LCD}_\lambda) = \log_2(2) = 1 \ \text{Sz}$.
+$log_2(\text{LCD}_f) = \log_2(1) = 0 \ \text{Sz}$, and the spatial cycle
+estimate is $log_2(\text{LCD}_\lambda) = log_2(2) = 1 \ \text{Sz}$.
 
 We believe that these space-time discrepancies in cycle length are the
 source of major-minor tonality perception.
@@ -116,7 +115,7 @@ approximates the actual number.
 
 The second uncertainty issue stems from the nature of waves and auditory
 processing: the auditory system transforms stimuli signals from the
-physical space-time domain into the frequency-wavelength domain.
+space-time physical domain into the space-time frequency domain.
 
 > ”… daß kanonisch konjugierte Größen simultan nur mit einer
 > charakteristischen Ungenauigkeit bestimmt werden können.” — Heisenberg
@@ -162,22 +161,45 @@ F(f, \lambda) = \iint f(x, t) \, e^{-i \left(2 \pi f t - 2 \pi \frac{x}{\lambda}
 \sigma_x \sigma_\lambda \geq \frac{1}{4 \pi}, \ \sigma_t\sigma_f \geq \frac{1}{4 \pi}
 ```
 
-Note 1: We currently treat each uncertainty product independently.
-However, if we assume that $\sigma_x$ is constant due to cochlear
-geometry, and $\sigma_t$ relates to the temporal window, which varies
-with the time required to recognize the repeating pattern of a complex
-wave, we might expect that as $\sigma_t$ narrows, $\sigma_\lambda$ would
-decrease because phase uncertainty would continue to decrease until the
-point at which $\Delta t = 0$ and we would be able to point to which
-specific inner hair cell was most displaced at that instant for each
-partial in the wave. After searching the literature, we were unable to
-find a proof for the uncertainty principle that emerges from the 2D
-spatiotemporal fourier transform but it is an interesting area to
-explore for the future.
+Note 1: We have previously considered each uncertainty
+product—space-wavelength and time-frequency—as independent. However, in
+a 2D space-time context, these uncertainties likely interrelate. Let’s
+explore how they might connect.
+
+Assuming that $\sigma_x$ is constant due to cochlear geometry, and that
+$\sigma_t$ relates to the temporal window for recognizing repeating
+patterns in complex waves, we might find that as $\sigma_t$ narrows,
+$\sigma_\lambda$ decreases. This continues until $\Delta t = 0$,
+allowing precise identification of the displaced inner hair cell for
+each wave partial. Of course, the opposite is true for frequency. As
+$\Delta t$ shrinks, frequency uncertainty grows.
+
+Let’s start with a simple question whether the two uncertainty products
+are equal to one another.
 
 ``` math
-\sigma_x \sigma_\lambda \stackrel{?}{=} \sigma_t \sigma_f
+\frac{1}{4 \pi} = \sigma_x \sigma_\lambda \stackrel{?}{=} \sigma_t \sigma_f = \frac{1}{4 \pi}
 ```
+
+Given the fixed spatial geometry of the cochlea, we set
+$\sigma_x = \kappa_{cochlea}$. Considering the variability of
+integration times used by the auditory system, we let
+$\sigma_t \equiv \Delta t_{integration}$.
+
+``` math
+\Delta t_{integration} \propto \frac{\sigma_{\lambda}}{\sigma_f} \kappa_{cochlea}
+```
+
+As the integration time increases, both wavelength and frequency
+uncertainty must change. A narrow window provides precise wavelength
+information but poor frequency data, while a wider window yields more
+frequency data at the expense of wavelength detail. Specifically, when
+the temporal window increases, frequency uncertainty improves, while
+wavelength uncertainty decreases.
+
+After reviewing the literature, it seems that proofs for an uncertainty
+principle emerging from the 2D spatiotemporal Fourier transform are
+elusive. This remains an interesting area for future exploration.
 
 Note 2: Based on the bimodal shape of the Stern-Brocot distribution
 below, explore modeling the two-slit experiment using the deterministic
