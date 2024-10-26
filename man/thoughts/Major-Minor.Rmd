@@ -13,28 +13,57 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Major-Minor
+```{r, echo=F, message=F, include=T, results='asis'}
+# Define the intervals
+intervals <- list(
+  # consonant intervals
+  M3 = c(60, 64),
+  m6 = c(60, 68),
+  M6 = c(60, 69),
+  m3 = c(60, 63),
+  # perfect intervals
+  P5 = c(60, 67),
+  P4 = c(60, 65),
+  P1 = c(60, 60),
+  P8 = c(60, 72),
+  # dissonant intervals
+  tt = c(60, 66),
+  M7 = c(60, 71),
+  m2 = c(60, 61),
+  M2 = c(60, 62),
+  m7 = c(60, 70)
+)
+framed_intervals <- purrr::map(intervals, ~c(.x, 72))
+```
+
+# Major-Minor Tonality
+
+## Hypothesis
+
+Let's test whether humans determine major-minor tonality using only the first 2 harmonics
+and framing the chord with the octave above or below the tonic depening on pitch direction.
+
+```{r, echo=F, message=F, include=T, results='asis'}
+num_harmonics = 2
+results <- purrr::map_dfr(names(framed_intervals), function(interval_name) {
+  result <- mami.codi(framed_intervals[[interval_name]], num_harmonics = num_harmonics)
+  tibble::tibble(
+    Interval = interval_name,
+    Majorness = result$majorness,
+    Chord = list(framed_intervals[[interval_name]]),
+    Dissonance = result$dissonance
+  )
+})
+
+# Print the results in a knitr table for the current num_harmonics
+cat(paste("### Framed Harmonics:", num_harmonics, "\n\n"))
+print(knitr::kable(results, format = "pipe",))
+cat("\n\n")  # Add spacing between tables
+```
 
 ## Unframed Dyads
 
 ```{r, echo=F, message=F, include=T, results='asis'}
-# Define the intervals
-intervals <- list(
-  P1 = c(60, 60),
-  m2 = c(60, 61),
-  M2 = c(60, 62),
-  m3 = c(60, 63),
-  M3 = c(60, 64),
-  P4 = c(60, 65),
-  tt = c(60, 66),
-  P5 = c(60, 67),
-  m6 = c(60, 68),
-  M6 = c(60, 69),
-  m7 = c(60, 70),
-  M7 = c(60, 71),
-  P8 = c(60, 72)
-)
-
 # Loop through num_harmonics from 1 to 100
 for (num_harmonics in 1:10) {
   results <- purrr::map_dfr(names(intervals), function(interval_name) {
@@ -58,7 +87,6 @@ for (num_harmonics in 1:10) {
 
 ```{r, echo=F, message=F, include=T, results='asis'}
 # Define the intervals
-framed_intervals <- purrr::map(intervals, ~c(.x, 72))
 
 # Loop through num_harmonics from 1 to 100
 for (num_harmonics in 1:10) {
