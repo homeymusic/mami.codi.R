@@ -117,6 +117,13 @@ approximates the actual number.
 The second uncertainty issue stems from the nature of waves and auditory
 processing: the auditory system transforms stimuli signals from the
 physical space-time domain into the frequency-wavelength domain.
+
+> ”… daß kanonisch konjugierte Größen simultan nur mit einer
+> charakteristischen Ungenauigkeit bestimmt werden können.” — Heisenberg
+>
+> (… that canonically conjugate quantities can only be determined
+> simultaneously with a characteristic uncertainty.)
+
 Accurately modeling this transformation requires accounting for Gabor
 uncertainty in both the time-frequency and space-wavelength forms. When
 addressing similar uncertainty constraints in quantum mechanics, Max
@@ -481,64 +488,6 @@ Number of Samples: 1,000,000
 Number of Bins: 21  
 [Additional Stern-Brocot Plots](/man/thoughts/SternBrocotCurve.md)
 
-## Some Thoughts on Uncertainty
-
-### An Evolution of Gabor Uncertainty
-
-While Gabor’s analogy to Heisenberg’s uncertainty was innovative in its
-application to signal processing, it is important to note that
-Heisenberg’s uncertainty applies to a purely space component (position)
-and a time-dependent component (momentum). Gabor’s framework, however,
-modifies this principle such that both variables are time: a purely time
-component (time) and a time-dependent component (frequency), inviting us
-to re-explore the power and applicability of this analogy.
-
-”… daß kanonisch konjugierte Größen simultan nur mit einer
-charakteristischen Ungenauigkeit bestimmt werden können.” — Heisenberg
-(”… that canonically conjugate quantities can only be determined
-simultaneously with a characteristic uncertainty.”)
-
-In his borrowing of the principle for signal processing, Gabor’s idea of
-time (as one component of the uncertainty pair) is actually closer to
-Heisenberg’s idea of observational simultaneity: for Heisenberg, elapsed
-time was not one of the components of the conjugate pair but instead
-framed the observation.
-
-In contrast to Gabor, our model returns to the original spirit of
-Heisenberg’s principle, describing an uncertainty relation that involves
-a purely space component (wavelength) and a time-dependent component
-(frequency) in the context of a sample interval, $\Delta t$. This brings
-us closer to the original insights of Heisenberg by maintaining the
-trade-off between a purely space and a time-dependent conjugate pair.
-
-By combining space and time uncertainties in a way that aligns more
-closely with Heisenberg’s original intent, our model introduces
-wavelength as a space counterpart to frequency. This provides a novel
-uncertainty framework for classical systems governed by wave behavior.
-
-The MaMi.CoDi model is quantized and uncertainty introduced when
-transforming wavelength and frequency ratios to rational fractions using
-the Stern-Brocot tree with standard_deviation $\sigma^2$. In our model,
-the more we know about the wavelength of a wave, the less we know about
-its frequency.  
-
-$$\lambda=\frac{2 \pi}{k}$$
-
-$$f=\frac{\omega}{2 \pi}$$
-
-Uncertainty in our model is not the time duration and frequency
-uncertainty $\Delta t \Delta f \simeq 1$ of Gabor or Wiener’s famous
-quantum physics and music analogy. If in Gabor (1946) Fig. 1.4 (b) the
-bank of reeds measured wavelengths in a stationary state at $t=0$
-instead of frequencies then his 2D model would be akin to ours. Our
-model is frequency and wavelength uncertainty $\Delta f \Delta \lambda$
-that is mediated by $\Delta t$, closer to the original quantum ideas of
-Einstein and de Broglie.  
-
-$$\lambda=\frac{2 \pi}{k}=\frac{h}{p}$$
-
-$$f=\frac{\omega}{2 \pi}=\frac{E}{h}$$
-
 ## 2D Variance Searches
 
 <figure>
@@ -648,9 +597,15 @@ U.S.A</figcaption>
 
 ## Hypothesis
 
-Let’s test whether humans determine major-minor tonality using only the
-first 2 harmonics and framing the chord with the octave above or below
-the tonic depening on pitch direction.
+We aim to test whether humans identify major-minor tonality using only
+the first two harmonics while framing the chord with an octave above or
+below the tonic, depending on pitch direction.
+
+For harmonic experiments, stimuli can frame the dyad within an octave,
+allowing differentiation between M3 and m6, for example.
+
+For melodic experiments, stimuli will present upward or downward pitch
+contours, using the framing only in the model to compare results.
 
 ### Framed Dyads with 2 Harmonics
 
