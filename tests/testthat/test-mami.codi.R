@@ -27,14 +27,14 @@ test_that('Major-minor tonality of octave complements',{
   ## Consonant Intervals
 
   # m3 & M6
-  expected_magnitude = 2.0
+  expected_magnitude = 2.0 # log2(4)
   dyad = c(60,63,72) %>% mami.codi(num_harmonics=2)
   expect_equal(dyad$majorness, -expected_magnitude)
   dyad = c(60,69,72) %>% mami.codi(num_harmonics=2)
   expect_equal(dyad$majorness, expected_magnitude)
 
   # M3 & m6
-  expected_magnitude = 1.0
+  expected_magnitude = 1.0 # log2(2)
   dyad = c(60,64,72) %>% mami.codi(num_harmonics=2)
   expect_equal(dyad$majorness, expected_magnitude)
   dyad = c(60,68,72) %>% mami.codi(num_harmonics=2)
@@ -43,14 +43,14 @@ test_that('Major-minor tonality of octave complements',{
   ## Perfect Intervals
 
   # P4 & P5
-  expected_magnitude = 0.5849625
+  expected_magnitude = 0.5849625 # log2(1.5)
   dyad = c(60,65,72) %>% mami.codi(num_harmonics=2)
   expect_equal(dyad$majorness, -expected_magnitude)
   dyad = c(60,67,72) %>% mami.codi(num_harmonics=2)
   expect_equal(dyad$majorness, expected_magnitude)
 
   # P1 & P8
-  expected_magnitude = 0.0
+  expected_magnitude = 0.0 # log2(1)
   dyad = c(60,60,72) %>% mami.codi(num_harmonics=2)
   expect_equal(dyad$majorness, expected_magnitude)
   dyad = c(60,72,72) %>% mami.codi(num_harmonics=2)
@@ -59,21 +59,21 @@ test_that('Major-minor tonality of octave complements',{
   ## Dissonant Intervals
 
   # M2 & m7 (traditional major-minor tonality is reversed)
-  expected_magnitude = 2.3219281
+  expected_magnitude = 2.3219281 # log2(5)
   dyad = c(60,62,72) %>% mami.codi(num_harmonics=2)
   expect_equal(dyad$majorness, -expected_magnitude)
   dyad = c(60,70,72) %>% mami.codi(num_harmonics=2)
   expect_equal(dyad$majorness, expected_magnitude)
 
   # m2 & M7 (traditional major-minor tonality is reversed)
-  expected_magnitude = 1.0
+  expected_magnitude = 1.0 # log2(2)
   dyad = c(60,61,72) %>% mami.codi(num_harmonics=2)
   expect_equal(dyad$majorness, expected_magnitude)
   dyad = c(60,71,72) %>% mami.codi(num_harmonics=2)
   expect_equal(dyad$majorness, -expected_magnitude)
 
   # tt with itself
-  expected_magnitude = 0.0
+  expected_magnitude = 0.0 # log2(1)
   dyad = c(60,66,72) %>% mami.codi(num_harmonics=2)
   expect_equal(dyad$majorness, -expected_magnitude)
   dyad = c(60,66,72) %>% mami.codi(num_harmonics=2)
