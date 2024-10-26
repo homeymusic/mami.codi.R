@@ -21,14 +21,62 @@ test_that('P1 with 3 harmonics fundamental frequency and fundamental wavenumber 
 
   expect_false(expected_time_cycles == expected_space_cycles)
 })
-test_that('M3 is major m3 is minor pure P1 P8 neutral',{
-  num_harmonics = 10
-  P1 = c(60) %>% mami.codi(num_harmonics=1)
-  expect_true(P1$majorness == 0)
-  m3 = c(60, 63) %>% mami.codi(num_harmonics=num_harmonics)
-  expect_true(m3$majorness < 0)
-  M3 = c(60, 64) %>% mami.codi(num_harmonics=num_harmonics)
-  expect_true(M3$majorness > 0)
-  P8 = c(60, 72) %>% mami.codi(num_harmonics=1)
-  expect_true(P1$majorness == 0)
+test_that('Major-minor tonality of octave complements',{
+  num_harmonics = 2
+
+  ## Consonant Intervals
+
+  # m3 & M6
+  expected_magnitude = 2.0
+  dyad = c(60,63,72) %>% mami.codi(num_harmonics=2)
+  expect_equal(dyad$majorness, -expected_magnitude)
+  dyad = c(60,69,72) %>% mami.codi(num_harmonics=2)
+  expect_equal(dyad$majorness, expected_magnitude)
+
+  # M3 & m6
+  expected_magnitude = 1.0
+  dyad = c(60,64,72) %>% mami.codi(num_harmonics=2)
+  expect_equal(dyad$majorness, expected_magnitude)
+  dyad = c(60,68,72) %>% mami.codi(num_harmonics=2)
+  expect_equal(dyad$majorness, -expected_magnitude)
+
+  ## Perfect Intervals
+
+  # P4 & P5
+  expected_magnitude = 0.5849625
+  dyad = c(60,65,72) %>% mami.codi(num_harmonics=2)
+  expect_equal(dyad$majorness, -expected_magnitude)
+  dyad = c(60,67,72) %>% mami.codi(num_harmonics=2)
+  expect_equal(dyad$majorness, expected_magnitude)
+
+  # P1 & P8
+  expected_magnitude = 0.0
+  dyad = c(60,60,72) %>% mami.codi(num_harmonics=2)
+  expect_equal(dyad$majorness, expected_magnitude)
+  dyad = c(60,72,72) %>% mami.codi(num_harmonics=2)
+  expect_equal(dyad$majorness, -expected_magnitude)
+
+  ## Dissonant Intervals
+
+  # M2 & m7 (traditional major-minor tonality is reversed)
+  expected_magnitude = 2.3219281
+  dyad = c(60,62,72) %>% mami.codi(num_harmonics=2)
+  expect_equal(dyad$majorness, -expected_magnitude)
+  dyad = c(60,70,72) %>% mami.codi(num_harmonics=2)
+  expect_equal(dyad$majorness, expected_magnitude)
+
+  # m2 & M7 (traditional major-minor tonality is reversed)
+  expected_magnitude = 1.0
+  dyad = c(60,61,72) %>% mami.codi(num_harmonics=2)
+  expect_equal(dyad$majorness, expected_magnitude)
+  dyad = c(60,71,72) %>% mami.codi(num_harmonics=2)
+  expect_equal(dyad$majorness, -expected_magnitude)
+
+  # tt with itself
+  expected_magnitude = 0.0
+  dyad = c(60,66,72) %>% mami.codi(num_harmonics=2)
+  expect_equal(dyad$majorness, -expected_magnitude)
+  dyad = c(60,66,72) %>% mami.codi(num_harmonics=2)
+  expect_equal(dyad$majorness, expected_magnitude)
+
 })
