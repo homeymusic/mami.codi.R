@@ -1,0 +1,19 @@
+---
+title: "Beats"
+output:
+  github_document: default
+always_allow_html: true
+---
+```{r, echo=F, message=F, include=F}
+devtools::load_all(".")
+```
+
+```{r, echo=F, message=F}
+C4_midi = 60
+f_beat = 7 # Hz
+C4_beat_midi = hrep::freq_to_midi(hrep::midi_to_freq(60) + f_beat)
+duration = 3.0
+num_harmonics = 5
+tone_1 = hrep::sparse_fr_spectrum(c(C4_midi, C4_beat_midi), num_harmonics=num_harmonics) %>% hrep::wave(length_sec = duration)
+tone_1  %>% hrep::play_wav(player = '/usr/bin/afplay')
+```

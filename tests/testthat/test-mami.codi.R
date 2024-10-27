@@ -80,3 +80,73 @@ test_that('Major-minor tonality of octave complements',{
   expect_equal(dyad$majorness, expected_magnitude)
 
 })
+test_that('beat spectrum looks interesting',{
+  C4_midi = 60
+  f_beat = 7 # Hz
+  C4_beat_midi = hrep::freq_to_midi(hrep::midi_to_freq(60) + f_beat)
+
+  num_harmonics = 2
+  C4_beats = c(C4_midi, C4_beat_midi) %>% mami.codi(num_harmonics=num_harmonics, verbose=T)
+
+  expect_equal(C4_beats$spectrum[[1]] %>% hrep::freq(),
+               c(hrep::midi_to_freq(C4_midi), hrep::midi_to_freq(C4_beat_midi),
+                 2 * hrep::midi_to_freq(C4_midi),
+                 2 * hrep::midi_to_freq(C4_beat_midi)))
+
+  expect_equal(C4_beats$spectrum[[1]] %>% hrep::amp(), c(1, 1, 0.89, 0.89),
+               tolerance=0.1)
+
+  expect_equal(C4_beats$spectrum_beats[[1]] %>% hrep::freq(),
+               c(hrep::midi_to_freq(C4_midi), hrep::midi_to_freq(C4_beat_midi),
+                 2 * hrep::midi_to_freq(C4_midi),
+                 2 * hrep::midi_to_freq(C4_beat_midi)))
+
+  expect_equal(C4_beats$spectrum_beats[[1]] %>% hrep::amp(), c(1, 1, 0.89, 0.89),
+               tolerance=0.1)
+
+
+  tidyr::expand_grid(f_1 = C4_beats$spectrum_beats[[1]]$x, f_2 = C4_beats$spectrum_beats[[1]]$x) %>%
+    dplyr::filter(f_1 < f_2) %>%  # Filter to avoid duplicate pairs and self-pairing
+    dplyr::mutate(beat_frequency = abs(f_1 - f_2))
+
+  tidyr::expand_grid(s_1 = C4_beats$spectrum_beats[[1]], s_2 = C4_beats$spectrum_beats[[1]]) %>%
+    dplyr::filter(s_1$x < s_2$x) %>%  # Filter to avoid duplicate pairs and self-pairing
+    dplyr::mutate(beat_frequency = abs(s_1$x - s_2$x)) %>%
+    dplyr::mutate(beat_min_amplitude = (s_1$y - s_2$y)^2) %>%
+    dplyr::mutate(beat_max_amplitude = (s_1$y + s_2$y)^2)
+})
+
+test_that('beat spectrum looks interesting',{
+  C4_midi = 60
+  f_beat = 7 # Hz
+  C4_beat_midi = hrep::freq_to_midi(hrep::midi_to_freq(60) + f_beat)
+
+  num_harmonics = 10
+  C4_beats = c(C4_midi, C4_beat_midi) %>% mami.codi(num_harmonics=num_harmonics, verbose=T)
+
+  expect_equal(C4_beats$spectrum[[1]] %>% hrep::freq(),
+               c(hrep::midi_to_freq(C4_midi), hrep::midi_to_freq(C4_beat_midi),
+                 2 * hrep::midi_to_freq(C4_midi),
+                 2 * hrep::midi_to_freq(C4_beat_midi)))
+
+  expect_equal(C4_beats$spectrum[[1]] %>% hrep::amp(), c(1, 1, 0.89, 0.89),
+               tolerance=0.1)
+
+  expect_equal(C4_beats$spectrum_beats[[1]] %>% hrep::freq(),
+               c(hrep::midi_to_freq(C4_midi), hrep::midi_to_freq(C4_beat_midi),
+                 2 * hrep::midi_to_freq(C4_midi),
+                 2 * hrep::midi_to_freq(C4_beat_midi)))
+
+  expect_equal(C4_beats$spectrum_beats[[1]] %>% hrep::amp(), c(1, 1, 0.89, 0.89),
+               tolerance=0.1)
+
+
+  tidyr::expand_grid(f_1 = C4_beats$spectrum_beats[[1]]$x, f_2 = C4_beats$spectrum_beats[[1]]$x) %>%
+    dplyr::filter(f_1 < f_2) %>%  # Filter to avoid duplicate pairs and self-pairing
+    dplyr::mutate(beat_frequency = abs(f_1 - f_2))
+
+  s = tidyr::expand_grid(s_1 = C4_beats$spectrum_beats[[1]], s_2 = C4_beats$spectrum_beats[[1]]) %>%
+    dplyr::filter(s_1$x < s_2$x) %>%  # Filter to avoid duplicate pairs and self-pairing
+    dplyr::mutate(beat_frequency = abs(s_1$x - s_2$x)) %>%
+    dplyr::mutate(beat_amplitude = (s_1$y + s_2$y)^2 / 4)
+})

@@ -31,11 +31,34 @@ mami.codi <- function(
 ) {
 
   parse_input(x, ...) %>%
+    stimulus() %>%
     space_time_cycles(minimum_amplitude,
                       time_standard_deviation,
                       space_standard_deviation,
                       harmonics_deviation) %>%
     format_output(metadata, verbose)
+
+}
+
+
+#' Create the stimulus
+#'
+#' @param x Vector of frequencies and amplitudes
+#'
+#' @return The stimulus
+#'
+#' @rdname stimulus
+#' @export
+stimulus = function(x) {
+
+  spectrum_beats = x$spectrum[[1]]
+
+
+
+  x %>% dplyr::mutate(
+    # Store the metadata
+    spectrum_beats = list(spectrum_beats),
+  )
 
 }
 
