@@ -51,13 +51,28 @@ mami.codi <- function(
 #' @export
 stimulus = function(x) {
 
-  spectrum_beats = x$spectrum[[1]]
+  f_a_beats = tidyr::expand_grid(s_1 = x$spectrum[[1]], s_2 = x$spectrum[[1]]) %>%
+    dplyr::filter(s_1$x < s_2$x) %>%  # Filter to avoid duplicate pairs and self-pairing
+    dplyr::mutate(frequency = abs(s_1$x - s_2$x)) %>%
+    dplyr::mutate(amplitude = (s_1$y + s_2$y)^2)
 
+  spectrum_beats = hrep::sparse_fr_spectrum(list(
+    frequency = c(f_a_beats$frequency),
+    amplitude = c(f_a_beats$amplitude)
+  ))
 
+  spectrum_combined = hrep::combine_sparse_spectra(
+    hrep::sparse_fr_spectrum(
+      list(
+        frequency = c(x$spectrum[[1]]$x, spectrum_beats$x),
+        amplitude = c(x$spectrum[[1]]$y, spectrum_beats$y)
+      )
+    )
+  )
 
   x %>% dplyr::mutate(
-    # Store the metadata
     spectrum_beats = list(spectrum_beats),
+    spectrum_combined = list(spectrum_combined)
   )
 
 }
