@@ -6,7 +6,7 @@ always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'P8'
+search_label = 'M3'
 ```
 
 # `r search_label`
@@ -81,6 +81,8 @@ theory <- theory %>%
     num_harmonics  = metadata$num_harmonics,
     octave_ratio   = metadata$octave_ratio,
     semitone       = metadata$semitone,
+    include_time_beats = metadata$include_time_beats, 
+    include_space_beats = metadata$include_space_beats,
     .before=1
   ) %>% 
   dplyr::ungroup() %>%  # Ungroup after rowwise operations
@@ -103,6 +105,17 @@ space Standard Deviations:
 tols = theory$space_standard_deviation %>% unique
 tols
 ```
+
+include time beats:
+```{r, echo=F}
+theory$include_time_beats %>% unique
+```
+
+include space beats:
+```{r, echo=F}
+theory$include_space_beats %>% unique
+```
+
 Number of Harmonics:
 ```{r, echo=F}
 theory$num_harmonics %>% unique
@@ -141,15 +154,13 @@ rows = length(tols)
 
 ## CoDi
 
-```{r}
+```{r, echo=F}
 if (search_label == 'minor3' || search_label == 'minor6') {
   experimental_data = NULL
 } else {
   experimental_data = experiment
 }
 ```
-
-### Cartesian Coordinates
 
 ```{r _CoDi, fig.height=7*rows, fig.width=12*cols, echo=F}
 # height = 3 per row and width = 5 per column

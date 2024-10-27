@@ -1,4 +1,5 @@
-run_trials <- function(search_label, standard_deviations, heisenberg) {
+run_trials <- function(search_label, standard_deviations,
+                       include_time_beats, include_space_beats) {
   devtools::load_all(".")
   tonic_midi = 60
   source('./utils.R')
@@ -20,6 +21,8 @@ run_trials <- function(search_label, standard_deviations, heisenberg) {
   }
 
   print(search_label)
+  print(paste('include_time_beats:',include_time_beats))
+  print(paste('include_space_beats:',include_space_beats))
   print(paste('octave_ratio:',octave_ratio))
   print(paste('num_harmonics:',num_harmonics))
   print(paste('roll_off:',roll_off))
@@ -87,11 +90,13 @@ run_trials <- function(search_label, standard_deviations, heisenberg) {
 
     mami.codi.R::mami.codi(
       chord,
-      include_time_beats=T,
-      include_space_beats=T,
+      include_time_beats=include_time_beats,
+      include_space_beats=include_space_beats,
       time_standard_deviation  = standard_deviation,
       space_standard_deviation   = standard_deviation,
       metadata       = list(
+        include_time_beats=include_time_beats,
+        include_space_beats=include_space_beats,
         octave_ratio   = octave_ratio,
         num_harmonics  = num_harmonics,
         roll_off_dB    = roll_off,

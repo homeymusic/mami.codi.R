@@ -1,7 +1,7 @@
 Standard Deviation Search
 ================
 
-# P8
+# Harmonic
 
 time Standard Deviations:
 
@@ -15,6 +15,14 @@ space Standard Deviations:
     #> [13] 0.040 0.050 0.060 0.070 0.080 0.090 0.100 0.200 0.300 0.400 0.500 0.600
     #> [25] 0.700 0.800 0.900 1.000
 
+include time beats:
+
+    #> [1] TRUE
+
+include space beats:
+
+    #> [1] TRUE
+
 Number of Harmonics:
 
     #> [1] 10
@@ -24,16 +32,6 @@ Octave Ratios:
     #> [1] 2
 
 ## CoDi
-
-``` r
-if (search_label == 'minor3' || search_label == 'minor6') {
-  experimental_data = NULL
-} else {
-  experimental_data = experiment
-}
-```
-
-### Cartesian Coordinates
 
 ![](../figures/standard_deviation_search/_CoDi-1.png)<!-- -->
 

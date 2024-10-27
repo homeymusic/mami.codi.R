@@ -1,4 +1,4 @@
-search_label = 'Harmonic'
+search_label = 'M3'
 devtools::install_github('git@github.com:homeymusic/mami.codi.R',
                          ref='beats')
 
@@ -15,4 +15,5 @@ devtools::install_github('git@github.com:homeymusic/mami.codi.R',
 standard_deviations   = c(1:9 %o% 10^(-3:-1), 1)
 
 source('./freq_trials.R')
-run_trials(search_label, standard_deviations)
+run_trials(search_label, standard_deviations,
+           include_time_beats=T, include_space_beats=T)
