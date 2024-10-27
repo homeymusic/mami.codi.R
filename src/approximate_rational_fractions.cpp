@@ -269,6 +269,6 @@ NumericVector stern_brocot(const double x, const double standard_deviation) {
    // Create the resulting DataFrame
    return DataFrame::create(
      Named("frequency") = beat_frequencies[Rcpp::Range(0, count - 1)],
-                                          Named("amplitude") = beat_amplitudes[Rcpp::Range(0, count - 1)]
+     Named("amplitude") = beat_amplitudes[Rcpp::Range(0, count - 1)]
    );
  }

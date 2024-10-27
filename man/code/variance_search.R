@@ -12,8 +12,8 @@ devtools::install_github('git@github.com:homeymusic/mami.codi.R',
 #               mami.codi.R::default_standard_deviation()))
 
 # Orders of Magnitude
-standard_deviations   = c(1:9 %o% 10^(-3:-1), 1)
-
+standard_deviations = c(1:9 %o% 10^(-2:-2), 1)
+standard_deviations = 0.07
 source('./freq_trials.R')
 run_trials(search_label, standard_deviations,
            include_time_beats=T, include_space_beats=T)

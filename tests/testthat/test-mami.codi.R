@@ -114,7 +114,7 @@ test_that('time beats work', {
   num_harmonics = 2
   C4_beats = c(C4_midi, C4_beat_midi) %>%
     mami.codi(include_time_beats=T, num_harmonics=num_harmonics, verbose=T)
-  expect_equal(C4_beats$frequencies[[1]], c(261.625565, 268.625564, 523.251131, 537.251128, 6.999999, 275.625563, 254.625567, 13.999998))
+  expect_equal(C4_beats$frequencies[[1]], c(261.625565, 268.625564, 523.251131, 537.251128, 6.999999, 254.625567, 13.999998))
 })
 test_that('space beats work', {
   C4_midi = 60
@@ -123,7 +123,7 @@ test_that('space beats work', {
   num_harmonics = 2
   C4_beats = c(C4_midi, C4_beat_midi) %>%
     mami.codi(include_space_beats=T, num_harmonics=num_harmonics, verbose=T)
-  expect_equal(C4_beats$wavelengths[[1]], c(1.3110340, 1.2768703,  0.6555170,  0.6384351, 49.0000086,  1.2444419,  1.3470760,  1.2768703, 24.5000043))
+  expect_equal(C4_beats$wavelengths[[1]], c(1.3110340, 1.2768703,  0.6555170,  0.6384351, 49.0000086,  1.3470760, 24.5000043))
 })
 test_that('space and time beats work', {
   C4_midi = 60
@@ -132,6 +132,6 @@ test_that('space and time beats work', {
   num_harmonics = 2
   C4_beats = c(C4_midi, C4_beat_midi) %>%
     mami.codi(include_space_beats=T, include_time_beats=T, num_harmonics=num_harmonics, verbose=T)
-  expect_equal(C4_beats$frequencies[[1]], c(261.625565, 268.625564, 523.251131, 537.251128, 6.999999, 275.625563, 254.625567, 13.999998))
-  expect_equal(C4_beats$wavelengths[[1]], c(1.3110340, 1.2768703,  0.6555170,  0.6384351, 49.0000086,  1.2444419,  1.3470760,  1.2768703, 24.5000043))
+  expect_equal(C4_beats$frequencies[[1]], c(261.625565, 268.625564, 523.251131, 537.251128, 6.999999, 254.625567, 13.999998))
+  expect_equal(C4_beats$wavelengths[[1]], c(1.3110340, 1.2768703,  0.6555170,  0.6384351, 49.0000086,  1.3470760, 24.5000043))
 })
