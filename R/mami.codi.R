@@ -47,7 +47,6 @@ mami.codi <- function(
 
 }
 
-
 #' Create the stimulus
 #'
 #' @param x Vector of frequencies and amplitudes
@@ -56,6 +55,7 @@ mami.codi <- function(
 #'
 #' @rdname stimulus
 #' @export
+
 stimulus = function(x) {
 
   beats = tidyr::expand_grid(s_1 = x$spectrum[[1]], s_2 = x$spectrum[[1]]) %>%
@@ -92,7 +92,9 @@ space_time_cycles = function(x,
                              time_standard_deviation, space_standard_deviation,
                              harmonics_deviation) {
 
-  f = x$spectrum[[1]] %>% dplyr::filter(.data$y>minimum_amplitude) %>% hrep::freq()
+  f = x$spectrum[[1]] %>%
+    dplyr::filter(.data$y>minimum_amplitude) %>%
+    hrep::freq()
   f_min = min(f)
   P = 1 / f
   l = C_SOUND * P
@@ -110,8 +112,8 @@ space_time_cycles = function(x,
              dplyr::filter(.data$y > minimum_amplitude) %>%
              hrep::freq() %>%
              purrr::map(~ C_SOUND / .x) %>%
-             unlist() %>%
-             unique())
+             unlist()) %>%
+             unique()
   }
 
   x %>% dplyr::mutate(
