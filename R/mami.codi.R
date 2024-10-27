@@ -21,6 +21,8 @@
 #' @export
 mami.codi <- function(
     x,
+    include_time_beats       = F,
+    include_space_beats      = F,
     minimum_amplitude        = MINIMUM_AMPLITUDE,
     time_standard_deviation  = STANDARD_DEVIATION,
     space_standard_deviation = STANDARD_DEVIATION,
@@ -31,11 +33,16 @@ mami.codi <- function(
 ) {
 
   parse_input(x, ...) %>%
-    stimulus() %>%
-    space_time_cycles(minimum_amplitude,
-                      time_standard_deviation,
-                      space_standard_deviation,
-                      harmonics_deviation) %>%
+    stimulus(
+    ) %>%
+    space_time_cycles(
+      include_time_beats,
+      include_space_beats,
+      minimum_amplitude,
+      time_standard_deviation,
+      space_standard_deviation,
+      harmonics_deviation
+    ) %>%
     format_output(metadata, verbose)
 
 }
@@ -51,28 +58,18 @@ mami.codi <- function(
 #' @export
 stimulus = function(x) {
 
-  f_a_beats = tidyr::expand_grid(s_1 = x$spectrum[[1]], s_2 = x$spectrum[[1]]) %>%
+  beats = tidyr::expand_grid(s_1 = x$spectrum[[1]], s_2 = x$spectrum[[1]]) %>%
     dplyr::filter(s_1$x < s_2$x) %>%  # Filter to avoid duplicate pairs and self-pairing
     dplyr::mutate(frequency = abs(s_1$x - s_2$x)) %>%
     dplyr::mutate(amplitude = (s_1$y + s_2$y)^2)
 
   spectrum_beats = hrep::sparse_fr_spectrum(list(
-    frequency = c(f_a_beats$frequency),
-    amplitude = c(f_a_beats$amplitude)
+    frequency = c(beats$frequency),
+    amplitude = c(beats$amplitude)
   ))
 
-  spectrum_combined = hrep::combine_sparse_spectra(
-    hrep::sparse_fr_spectrum(
-      list(
-        frequency = c(x$spectrum[[1]]$x, spectrum_beats$x),
-        amplitude = c(x$spectrum[[1]]$y, spectrum_beats$y)
-      )
-    )
-  )
-
   x %>% dplyr::mutate(
-    spectrum_beats = list(spectrum_beats),
-    spectrum_combined = list(spectrum_combined)
+    spectrum_beats    = list(spectrum_beats),
   )
 
 }
@@ -89,19 +86,38 @@ stimulus = function(x) {
 #'
 #' @rdname space_time_cycles
 #' @export
-space_time_cycles = function(x, minimum_amplitude,
+space_time_cycles = function(x,
+                             include_time_beats, include_space_beats,
+                             minimum_amplitude,
                              time_standard_deviation, space_standard_deviation,
                              harmonics_deviation) {
 
   f = x$spectrum[[1]] %>% dplyr::filter(.data$y>minimum_amplitude) %>% hrep::freq()
+  f_min = min(f)
   P = 1 / f
   l = C_SOUND * P
+  l_min = min(l)
   k = 1 / l
+
+  if (include_time_beats) {
+    f = c(f, x$spectrum_beats[[1]] %>%
+            dplyr::filter(.data$y>minimum_amplitude) %>%
+            hrep::freq()) %>% unique()
+  }
+
+  if (include_space_beats) {
+    l = c(l, x$spectrum_beats[[1]] %>%
+             dplyr::filter(.data$y > minimum_amplitude) %>%
+             hrep::freq() %>%
+             purrr::map(~ C_SOUND / .x) %>%
+             unlist() %>%
+             unique())
+  }
 
   x %>% dplyr::mutate(
 
-    cycles(f/min(f), time_standard_deviation, harmonics_deviation, 'time'),
-    cycles(l/min(l), space_standard_deviation,  harmonics_deviation, 'space'),
+    cycles(f/f_min, time_standard_deviation, harmonics_deviation, 'time'),
+    cycles(l/l_min, space_standard_deviation,  harmonics_deviation, 'space'),
 
     time_dissonance        = log2(.data$time_cycles),
     space_dissonance       = log2(.data$space_cycles),

@@ -113,17 +113,21 @@ test_that('beat spectrum looks interesting',{
     dplyr::mutate(beat_min_amplitude = (s_1$y - s_2$y)^2) %>%
     dplyr::mutate(beat_max_amplitude = (s_1$y + s_2$y)^2)
 })
-
-test_that('combined spectrum',{
+test_that('time beats work', {
   C4_midi = 60
   f_beat = 7 # Hz
   C4_beat_midi = hrep::freq_to_midi(hrep::midi_to_freq(60) + f_beat)
   num_harmonics = 2
-  C4_beats = c(C4_midi, C4_beat_midi) %>% mami.codi(num_harmonics=num_harmonics, verbose=T)
-  expect_equal(C4_beats$spectrum_combined[[1]]$x,
-               c(261.625565, 268.625564, 523.251131, 537.251128, 6.999999, 261.625565,
-                 275.625563, 254.625567, 268.625564, 13.999998))
-  expect_equal(C4_beats$spectrum_combined[[1]]$y,
-               c(1.0000000, 1.0000000, 0.8912509, 0.8912509, 4.0000000, 3.5768301,
-                 3.5768301, 3.5768301, 3.5768301, 3.1773129))
+  C4_beats = c(C4_midi, C4_beat_midi) %>%
+    mami.codi(include_time_beats=T, num_harmonics=num_harmonics, verbose=T)
+  expect_equal(C4_beats$frequencies[[1]], c(261.625565, 268.625564, 523.251131, 537.251128, 6.999999, 275.625563, 254.625567, 13.999998))
+})
+test_that('space beats work', {
+  C4_midi = 60
+  f_beat = 7 # Hz
+  C4_beat_midi = hrep::freq_to_midi(hrep::midi_to_freq(60) + f_beat)
+  num_harmonics = 2
+  C4_beats = c(C4_midi, C4_beat_midi) %>%
+    mami.codi(include_space_beats=T, num_harmonics=num_harmonics, verbose=T)
+  expect_equal(C4_beats$wavelengths[[1]], c(1.3110340,  1.2768703,  0.6555170,  0.6384351, 49.0000086,  1.3110340,  1.2444419,  1.3470760,  1.2768703, 24.5000043))
 })
