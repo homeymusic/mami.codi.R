@@ -13,7 +13,7 @@ devtools::install_github('git@github.com:homeymusic/mami.codi.R',
 
 # Orders of Magnitude
 standard_deviations = c(1:9 %o% 10^(-2:-2), 1)
-standard_deviations = 0.07
+
 source('./freq_trials.R')
 run_trials(search_label, standard_deviations,
-           include_time_beats=T, include_space_beats=T)
+           include_time_beats=F, include_space_beats=T)

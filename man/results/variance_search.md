@@ -5,15 +5,15 @@ Standard Deviation Search
 
 time Standard Deviations:
 
-    #> [1] 0.07
+    #>  [1] 0.01 0.02 0.03 0.04 0.05 0.06 0.07 0.08 0.09 1.00
 
 space Standard Deviations:
 
-    #> [1] 0.07
+    #>  [1] 0.01 0.02 0.03 0.04 0.05 0.06 0.07 0.08 0.09 1.00
 
 include time beats:
 
-    #> [1] TRUE
+    #> [1] FALSE
 
 include space beats:
 
