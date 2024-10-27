@@ -33,8 +33,6 @@ mami.codi <- function(
 ) {
 
   parse_input(x, ...) %>%
-    stimulus(
-    ) %>%
     space_time_cycles(
       include_time_beats,
       include_space_beats,
@@ -56,21 +54,17 @@ mami.codi <- function(
 #' @rdname stimulus
 #' @export
 
-stimulus = function(x) {
+beats = function(x) {
 
   beats = tidyr::expand_grid(s_1 = x$spectrum[[1]], s_2 = x$spectrum[[1]]) %>%
     dplyr::filter(s_1$x < s_2$x) %>%  # Filter to avoid duplicate pairs and self-pairing
     dplyr::mutate(frequency = abs(s_1$x - s_2$x)) %>%
     dplyr::mutate(amplitude = (s_1$y + s_2$y)^2)
 
-  spectrum_beats = hrep::sparse_fr_spectrum(list(
+  hrep::sparse_fr_spectrum(list(
     frequency = c(beats$frequency),
     amplitude = c(beats$amplitude)
   ))
-
-  x %>% dplyr::mutate(
-    spectrum_beats    = list(spectrum_beats),
-  )
 
 }
 
@@ -101,19 +95,27 @@ space_time_cycles = function(x,
   l_min = min(l)
   k = 1 / l
 
-  if (include_time_beats) {
-    f = c(f, x$spectrum_beats[[1]] %>%
-            dplyr::filter(.data$y>minimum_amplitude) %>%
-            hrep::freq()) %>% unique()
-  }
+  spectrum_beats = NULL
 
-  if (include_space_beats) {
-    l = c(l, x$spectrum_beats[[1]] %>%
-             dplyr::filter(.data$y > minimum_amplitude) %>%
-             hrep::freq() %>%
-             purrr::map(~ C_SOUND / .x) %>%
-             unlist()) %>%
-             unique()
+  if (include_time_beats || include_space_beats) {
+
+    spectrum_beats = beats(x)
+
+    if (include_time_beats) {
+      f = c(f, spectrum_beats %>%
+              dplyr::filter(.data$y>minimum_amplitude) %>%
+              hrep::freq()) %>% unique()
+    }
+
+    if (include_space_beats) {
+      l = c(l, spectrum_beats %>%
+              dplyr::filter(.data$y > minimum_amplitude) %>%
+              hrep::freq() %>%
+              purrr::map(~ C_SOUND / .x) %>%
+              unlist()) %>%
+        unique()
+    }
+
   }
 
   x %>% dplyr::mutate(
@@ -134,6 +136,7 @@ space_time_cycles = function(x,
     fundamental_wavenumber = min(k) / .data$space_cycles,
 
     # Store the metadata
+    spectrum_beats         = list(spectrum_beats),
     frequencies            = list(f),
     periods                = list(P),
     wavenumbers            = list(k),

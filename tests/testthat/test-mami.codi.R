@@ -86,7 +86,11 @@ test_that('beat spectrum looks interesting',{
   C4_beat_midi = hrep::freq_to_midi(hrep::midi_to_freq(60) + f_beat)
 
   num_harmonics = 2
-  C4_beats = c(C4_midi, C4_beat_midi) %>% mami.codi(num_harmonics=num_harmonics, verbose=T)
+  C4_beats = c(C4_midi, C4_beat_midi) %>%
+    mami.codi(include_space_beats=T,
+              include_time_beats=T,
+              num_harmonics=num_harmonics,
+              verbose=T)
 
   expect_equal(C4_beats$spectrum[[1]] %>% hrep::freq(),
                c(hrep::midi_to_freq(C4_midi), hrep::midi_to_freq(C4_beat_midi),
