@@ -45,29 +45,6 @@ mami.codi <- function(
 
 }
 
-#' Create the stimulus
-#'
-#' @param x Vector of frequencies and amplitudes
-#'
-#' @return The stimulus
-#'
-#' @rdname stimulus
-#' @export
-
-beats = function(x) {
-
-  beats = tidyr::expand_grid(s_1 = x$spectrum[[1]], s_2 = x$spectrum[[1]]) %>%
-    dplyr::filter(s_1$x < s_2$x) %>%  # Filter to avoid duplicate pairs and self-pairing
-    dplyr::mutate(frequency = abs(s_1$x - s_2$x)) %>%
-    dplyr::mutate(amplitude = (s_1$y + s_2$y)^2)
-
-  hrep::sparse_fr_spectrum(list(
-    frequency = c(beats$frequency),
-    amplitude = c(beats$amplitude)
-  ))
-
-}
-
 #' Compute the cycle lengths from space and time signals
 #'
 #' @param x Vector of frequencies and amplitudes
@@ -98,22 +75,15 @@ space_time_cycles = function(x,
   spectrum_beats = NULL
 
   if (include_time_beats || include_space_beats) {
-
-    spectrum_beats = beats(x)
+    spectrum_beats = calculate_beats(x$spectrum[[1]]$x, x$spectrum[[1]]$y)
+    f_beats = (spectrum_beats %>% dplyr::filter(.data$amplitude>minimum_amplitude))$frequency
 
     if (include_time_beats) {
-      f = c(f, spectrum_beats %>%
-              dplyr::filter(.data$y>minimum_amplitude) %>%
-              hrep::freq()) %>% unique()
+      f = c(f,f_beats) %>% unique()
     }
 
     if (include_space_beats) {
-      l = c(l, spectrum_beats %>%
-              dplyr::filter(.data$y > minimum_amplitude) %>%
-              hrep::freq() %>%
-              purrr::map(~ C_SOUND / .x) %>%
-              unlist()) %>%
-        unique()
+      l = c(l,C_SOUND/f_beats) %>% unique()
     }
 
   }

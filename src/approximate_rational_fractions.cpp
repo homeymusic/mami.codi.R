@@ -228,3 +228,47 @@ NumericVector stern_brocot(const double x, const double standard_deviation) {
      _("standard_deviation")               = standard_deviation
    );
  }
+
+
+//' Calculate Beats from Frequencies
+ //'
+ //' Generate beats from two sets of frequencies and return their frequency and amplitude.
+ //'
+ //' @param x A DataFrame containing a spectrum with two columns: x (frequencies) and y (amplitudes).
+ //'
+ //' @return A DataFrame containing the frequency and amplitude of the generated beats.
+ //' @export
+ // [[Rcpp::export]]
+ DataFrame calculate_beats(NumericVector f, NumericVector a) {
+   int n = f.size();
+
+   // Check for enough distinct frequencies
+   if (n < 2) {
+     // Return an empty DataFrame if not enough frequencies
+     return DataFrame::create(
+       Named("frequency") = NumericVector::create(),
+       Named("amplitude") = NumericVector::create()
+     );
+   }
+
+   // Vectors to hold the results
+   NumericVector beat_frequencies(n * (n - 1) / 2); // Max number of unique pairs
+   NumericVector beat_amplitudes(n * (n - 1) / 2);
+
+   int count = 0;
+
+   // Calculate the beats
+   for (int i = 0; i < n; i++) {
+     for (int j = i + 1; j < n; j++) {
+       beat_frequencies[count] = std::abs(f[i] - f[j]);
+       beat_amplitudes[count] = std::pow(a[i] + a[j], 2);
+       count++;
+     }
+   }
+
+   // Create the resulting DataFrame
+   return DataFrame::create(
+     Named("frequency") = beat_frequencies[Rcpp::Range(0, count - 1)],
+                                          Named("amplitude") = beat_amplitudes[Rcpp::Range(0, count - 1)]
+   );
+ }

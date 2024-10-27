@@ -100,22 +100,12 @@ test_that('beat spectrum looks interesting',{
   expect_equal(C4_beats$spectrum[[1]] %>% hrep::amp(), c(1, 1, 0.89, 0.89),
                tolerance=0.1)
 
-  expect_equal(C4_beats$spectrum_beats[[1]] %>% hrep::freq(),
+  expect_equal(C4_beats$spectrum_beats[[1]]$frequency,
                c(6.999999, 261.625565, 275.625563, 254.625567, 268.625564, 13.999998))
 
-  expect_equal(C4_beats$spectrum_beats[[1]] %>% hrep::amp(),
+  expect_equal(C4_beats$spectrum_beats[[1]]$amplitude,
                c(4.000000, 3.576830, 3.576830, 3.576830, 3.576830, 3.177313),
                tolerance=0.1)
-
-  tidyr::expand_grid(f_1 = C4_beats$spectrum_beats[[1]]$x, f_2 = C4_beats$spectrum_beats[[1]]$x) %>%
-    dplyr::filter(f_1 < f_2) %>%  # Filter to avoid duplicate pairs and self-pairing
-    dplyr::mutate(beat_frequency = abs(f_1 - f_2))
-
-  tidyr::expand_grid(s_1 = C4_beats$spectrum_beats[[1]], s_2 = C4_beats$spectrum_beats[[1]]) %>%
-    dplyr::filter(s_1$x < s_2$x) %>%  # Filter to avoid duplicate pairs and self-pairing
-    dplyr::mutate(beat_frequency = abs(s_1$x - s_2$x)) %>%
-    dplyr::mutate(beat_min_amplitude = (s_1$y - s_2$y)^2) %>%
-    dplyr::mutate(beat_max_amplitude = (s_1$y + s_2$y)^2)
 })
 test_that('time beats work', {
   C4_midi = 60
