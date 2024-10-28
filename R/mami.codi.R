@@ -70,6 +70,9 @@ space_time_cycles = function(x,
   l = C_SOUND * P
   k = 1 / l
 
+  f_min = min(f)
+  l_min = min(l)
+
   spectrum_beats = NULL
 
   if (include_time_beats || include_space_beats) {
