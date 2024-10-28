@@ -6,6 +6,7 @@
 \usage{
 mami.codi(
   x,
+  include_beats = F,
   minimum_amplitude = MINIMUM_AMPLITUDE,
   time_standard_deviation = STANDARD_DEVIATION,
   space_standard_deviation = STANDARD_DEVIATION,

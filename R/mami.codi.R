@@ -21,8 +21,7 @@
 #' @export
 mami.codi <- function(
     x,
-    include_time_beats       = F,
-    include_space_beats      = F,
+    include_beats            = F,
     minimum_amplitude        = MINIMUM_AMPLITUDE,
     time_standard_deviation  = STANDARD_DEVIATION,
     space_standard_deviation = STANDARD_DEVIATION,
@@ -33,9 +32,10 @@ mami.codi <- function(
 ) {
 
   parse_input(x, ...) %>%
+    stimulus(
+      include_beats
+    ) %>%
     space_time_cycles(
-      include_time_beats,
-      include_space_beats,
       minimum_amplitude,
       time_standard_deviation,
       space_standard_deviation,
@@ -45,9 +45,58 @@ mami.codi <- function(
 
 }
 
+#' Generate the stimulus wave patterns in terms of frequency spectrum and wavelength spectrum
+#'
+#' @param x A sparse frequency spectrum
+#' @param include_beats Whether to include beats in the wavelength spectrum
+#'
+#' @return Frequency spectrum, wavelength spectrum and wavelength beats spectrum
+#'
+#' @rdname stimulus
+#' @export
+stimulus <- function(x, include_beats) {
+
+  frequency_spectrum = tibble::tibble(
+    frequency = x %>% hrep::freq(),
+    amplitude = x %>% hrep::amp()
+  )
+
+  wavelength_spectrum = tibble::tibble(
+    wavelength = C_SOUND / frequency_spectrum$frequency,
+    amplitude  = frequency_spectrum$amplitude
+  )
+
+  if (include_beats) {
+
+    beats_spectrum = calculate_beats(
+      wavelength = wavelength_spectrum$wavelength,
+      amplitude = wavelength_spectrum$amplitude
+    ) %>% dplyr::arrange(.data$wavelength)
+
+    wavelength_spectrum = dplyr::bind_rows(
+      wavelength_spectrum, beats_spectrum
+    ) %>% dplyr::arrange(.data$wavelength)
+
+  } else {
+
+    beats_spectrum = tibble::tibble(
+      wavelength = numeric(0),
+      amplitude = numeric(0)
+    )
+
+  }
+
+  tibble::tibble_row(
+    frequency_spectrum  = list(frequency_spectrum),
+    wavelength_spectrum = list(wavelength_spectrum),
+    beats_spectrum      = list(beats_spectrum)
+  )
+
+}
+
 #' Compute the cycle lengths from space and time signals
 #'
-#' @param x Vector of frequencies and amplitudes
+#' @param x Stimulus encoded as frequency and wavelength spectra
 #' @param minimum_amplitude Ignore all frequencies below this threshold
 #' @param time_standard_deviation Uncertainty for creating rational fractions
 #' @param space_standard_deviation Uncertainty for creating rational fractions
@@ -58,47 +107,22 @@ mami.codi <- function(
 #' @rdname space_time_cycles
 #' @export
 space_time_cycles = function(x,
-                             include_time_beats, include_space_beats,
                              minimum_amplitude,
                              time_standard_deviation, space_standard_deviation,
                              harmonics_deviation) {
 
-  f = x$spectrum[[1]] %>%
-    dplyr::filter(.data$y>minimum_amplitude) %>%
-    hrep::freq()
+  f = (x$frequency_spectrum[[1]] %>%
+         dplyr::filter(.data$amplitude>minimum_amplitude))$frequency
+  l = (x$wavelength_spectrum[[1]] %>%
+         dplyr::filter(.data$amplitude>minimum_amplitude))$wavelength
+
   P = 1 / f
-  l = C_SOUND * P
   k = 1 / l
-
-  f_min = min(f)
-  l_min = min(l)
-
-  spectrum_beats = NULL
-
-  if (include_time_beats || include_space_beats) {
-    spectrum_beats = calculate_beats(x$spectrum[[1]]$x, x$spectrum[[1]]$y)
-    f_beats = (spectrum_beats %>% dplyr::filter(
-      .data$frequency < f_min &
-      .data$amplitude > minimum_amplitude
-    ))$frequency %>% unique()
-
-    if (include_time_beats) {
-      f = c(f,f_beats) %>% unique()
-    }
-
-    if (include_space_beats) {
-      l = c(l,C_SOUND/f_beats) %>% unique()
-    }
-
-  }
-
-  f_min = min(f)
-  l_min = min(l)
 
   x %>% dplyr::mutate(
 
-    cycles(f/f_min, time_standard_deviation, harmonics_deviation, 'time'),
-    cycles(l/l_min, space_standard_deviation,  harmonics_deviation, 'space'),
+    cycles(f/min(f), time_standard_deviation, harmonics_deviation, 'time'),
+    cycles(l/min(l), space_standard_deviation,  harmonics_deviation, 'space'),
 
     time_dissonance        = log2(.data$time_cycles),
     space_dissonance       = log2(.data$space_cycles),
@@ -113,11 +137,10 @@ space_time_cycles = function(x,
     fundamental_wavenumber = min(k) / .data$space_cycles,
 
     # Store the metadata
-    spectrum_beats         = list(spectrum_beats),
     frequencies            = list(f),
+    wavelengths            = list(l),
     periods                = list(P),
     wavenumbers            = list(k),
-    wavelengths            = list(l),
     speed_of_sound         = C_SOUND,
     minimum_amplitude,
     time_standard_deviation,

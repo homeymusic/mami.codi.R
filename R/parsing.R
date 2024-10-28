@@ -26,9 +26,7 @@ parse_input.default <- function(x, ...) {
 #' @export
 parse_input.sparse_fr_spectrum <- function(x, ...) {
 
-  tibble::tibble_row(
-    spectrum = list(x)
-  )
+  x
 
 }
 

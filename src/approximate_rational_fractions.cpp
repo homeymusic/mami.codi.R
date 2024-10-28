@@ -230,45 +230,56 @@ NumericVector stern_brocot(const double x, const double standard_deviation) {
  }
 
 
-//' Calculate Beats from Frequencies
+ //' Calculate Beats from Frequencies
  //'
  //' Generate beats from two sets of frequencies and return their frequency and amplitude.
  //'
- //' @param x A DataFrame containing a spectrum with two columns: x (frequencies) and y (amplitudes).
+ //' @param frequencies
+ //' @param amplitudes
  //'
- //' @return A DataFrame containing the frequency and amplitude of the generated beats.
+ //' @return A DataFrame containing the spectrum, frequencies and amplitudes, of the beats.
  //' @export
  // [[Rcpp::export]]
- DataFrame calculate_beats(NumericVector f, NumericVector a) {
-   int n = f.size();
+ DataFrame calculate_beats(NumericVector wavelength, NumericVector amplitude) {
+   int n = wavelength.size();
 
-   // Check for enough distinct frequencies
    if (n < 2) {
-     // Return an empty DataFrame if not enough frequencies
      return DataFrame::create(
-       Named("frequency") = NumericVector::create(),
-       Named("amplitude") = NumericVector::create()
+       _("wavelength") = NumericVector::create(),
+       _("amplitude") = NumericVector::create()
      );
    }
 
    // Vectors to hold the results
-   NumericVector beat_frequencies(n * (n - 1) / 2); // Max number of unique pairs
-   NumericVector beat_amplitudes(n * (n - 1) / 2);
+   NumericVector beat_wavelength(n * (n - 1) / 2); // Max number of unique pairs
+   NumericVector beat_amplitude(n * (n - 1) / 2);
 
    int count = 0;
 
    // Calculate the beats
    for (int i = 0; i < n; i++) {
      for (int j = i + 1; j < n; j++) {
-       beat_frequencies[count] = std::abs(f[i] - f[j]);
-       beat_amplitudes[count] = std::pow(a[i] + a[j], 2);
-       count++;
+       const double l = (wavelength[i] * wavelength[j]) / std::abs(wavelength[i] - wavelength[j]);
+       // if (l > max(wavelength)) {
+         beat_wavelength[count] = l;
+         beat_amplitude[count] = std::pow(amplitude[i] + amplitude[j], 2);
+         count++;
+       // }
      }
    }
 
-   // Create the resulting DataFrame
-   return DataFrame::create(
-     Named("frequency") = beat_frequencies[Rcpp::Range(0, count - 1)],
-     Named("amplitude") = beat_amplitudes[Rcpp::Range(0, count - 1)]
-   );
+   // Check for enough distinct frequencies
+   // if (count < 1) {
+     // Return an empty DataFrame if not enough frequencies
+     // return DataFrame::create(
+       // _("wavelength") = NumericVector::create(),
+       // _("amplitude") = NumericVector::create()
+     // );
+   // } else {
+     // Create the resulting DataFrame
+     return DataFrame::create(
+       _("wavelength") = beat_wavelength[Rcpp::Range(0, count - 1)],
+       _("amplitude") = beat_amplitude[Rcpp::Range(0, count - 1)]
+     );
+   // }
  }

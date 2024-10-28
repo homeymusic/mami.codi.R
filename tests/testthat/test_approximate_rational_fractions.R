@@ -1,6 +1,3 @@
-library(testthat)
-
-
 # Test for approximate_rational_fractions
 test_that("approximate_rational_fractions works as expected", {
 
@@ -37,4 +34,32 @@ test_that("approximate_rational_fractions works as expected", {
   expect_false(any(is.infinite(log2(result$num))), info = "Numerators should not contain Inf or -Inf")
   expect_false(any(is.infinite(log2(result$den))), info = "Denominators should not contain Inf or -Inf")
 
+})
+test_that('calculated beat matches actual beat',{
+  C4_freq = hrep::midi_to_freq(60)
+  beat_freq = 7
+  freqs = c(C4_freq, C4_freq+beat_freq)
+  wavelengths = C_SOUND / freqs
+
+  beats_spectrum = calculate_beats(wavelength = wavelengths, amplitude=c(1,0.95))
+
+  expect_equal(beats_spectrum$wavelength, c(49), tolerance = 0.1)
+  expect_equal(beats_spectrum$amplitude,  c(3.8025), tolerance = 0.1)
+  calculated_beat_freq = C_SOUND / beats_spectrum$wavelength
+  expect_equal(beat_freq, calculated_beat_freq, tolerance = 0.1)
+})
+test_that('only low beats are returned',{
+  C4_freq = hrep::midi_to_freq(60)
+  E4_freq = hrep::midi_to_freq(64)
+  beat_freq = 7
+  freqs = c(C4_freq, C4_freq+beat_freq, E4_freq)
+  wavelengths = C_SOUND / freqs
+  amplitudes  = rep(1, length(wavelengths))
+
+  beats_spectrum = calculate_beats(wavelength = wavelengths, amplitude=amplitudes)
+
+  expect_equal(beats_spectrum$wavelength, c(49,5.04,5.62), tolerance = 0.1)
+  expect_equal(beats_spectrum$amplitude,  c(4,4,4), tolerance = 0.1)
+  calculated_beat_freqs = C_SOUND / beats_spectrum$wavelength
+  expect_true(any(abs(calculated_beat_freqs - beat_freq) < 0.1))
 })
