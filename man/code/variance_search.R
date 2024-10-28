@@ -1,6 +1,6 @@
-search_label = 'Bonang'
+search_label = 'Harmonic'
 devtools::install_github('git@github.com:homeymusic/mami.codi.R',
-                         ref='beats')
+                         ref='beats_low')
 
 # options(timeout = max(1000, getOption("timeout")))
 
@@ -12,7 +12,7 @@ devtools::install_github('git@github.com:homeymusic/mami.codi.R',
 #               mami.codi.R::default_standard_deviation()))
 
 # Orders of Magnitude
-standard_deviations = c(1:9 %o% 10^(-2:-2), 1)
+# standard_deviations = c(1:9 %o% 10^(-2:-2), 1)
 
 standard_deviations = c(1/(4 * pi))
 
