@@ -634,18 +634,18 @@ contours, using the framing only in the model to compare results.
 | Interval |  Majorness | Chord      | Dissonance |
 |:---------|-----------:|:-----------|-----------:|
 | M3       |  1.0000000 | 60, 64, 72 |   6.169925 |
-| m6       | -1.0000000 | 60, 68, 72 |   6.169925 |
-| M6       |  2.0000000 | 60, 69, 72 |   5.169925 |
-| m3       | -2.0000000 | 60, 63, 72 |   5.169925 |
+| m6       |  2.3219281 | 60, 68, 72 |   9.491853 |
+| M6       |  4.3219281 | 60, 69, 72 |   7.491853 |
+| m3       |  1.3219281 | 60, 63, 72 |   8.491853 |
 | P5       |  0.5849625 | 60, 67, 72 |   2.584963 |
-| P4       | -0.5849625 | 60, 65, 72 |   2.584963 |
-| P1       |  0.0000000 | 60, 60, 72 |   0.000000 |
-| P8       |  0.0000000 | 60, 72, 72 |   0.000000 |
-| tt       |  0.0000000 | 60, 66, 72 |   8.643856 |
-| M7       | -1.0000000 | 60, 71, 72 |   6.169925 |
-| m2       |  1.0000000 | 60, 61, 72 |   6.169925 |
-| M2       | -2.3219281 | 60, 62, 72 |   6.321928 |
-| m7       |  2.3219281 | 60, 70, 72 |   6.321928 |
+| P4       |  1.0000000 | 60, 65, 72 |   4.169925 |
+| P1       |  1.5849625 | 60, 60, 72 |   1.584963 |
+| P8       |  1.5849625 | 60, 72, 72 |   1.584963 |
+| tt       |  1.5849625 | 60, 66, 72 |  10.228819 |
+| M7       |  0.0000000 | 60, 71, 72 |   7.169925 |
+| m2       |  3.3219281 | 60, 61, 72 |   8.491853 |
+| M2       | -0.7369656 | 60, 62, 72 |   7.906891 |
+| m7       |  3.9068906 | 60, 70, 72 |   7.906891 |
 
 # Behavioral
 
@@ -662,9 +662,9 @@ the 15 semitones but the overall peak structure agrees with MaMi.CoDi
 predictions. For futher comparison, the theoretical predictions for
 major-minor versus the behavioral results are included in a plot below.
 
-| time_standard_deviation | space_standard_deviation | smoothing_sigma |
-|:------------------------|:-------------------------|----------------:|
-| 0.07958                 | 0.07958                  |             0.2 |
+| time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
+|:---|:---|---:|---:|
+| 0.07958 | 0.07958 | 0.2 | 2 |
 
 ![](man/figures/README-unnamed-chunk-15-1.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-2.png)<!-- -->  
@@ -676,9 +676,9 @@ major-minor versus the behavioral results are included in a plot below.
 
 For 10 harmonics, behavioral results and theoretical predictions agree.
 
-| time_standard_deviation | space_standard_deviation | smoothing_sigma |
-|:------------------------|:-------------------------|----------------:|
-| 0.07958                 | 0.07958                  |             0.2 |
+| time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
+|:---|:---|---:|---:|
+| 0.07958 | 0.07958 | 0.2 | 2 |
 
 ![](man/figures/README-unnamed-chunk-15-6.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-7.png)<!-- -->  
@@ -693,9 +693,9 @@ For comparison with the study below (5 partils with the third partial
 deleted), notice that the m3 peak is only slightly lower than the M3
 peak.
 
-| time_standard_deviation | space_standard_deviation | smoothing_sigma |
-|:------------------------|:-------------------------|----------------:|
-| 0.07958                 | 0.07958                  |             0.2 |
+| time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
+|:---|:---|---:|---:|
+| 0.07958 | 0.07958 | 0.2 | 2 |
 
 ![](man/figures/README-unnamed-chunk-15-11.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-12.png)<!-- -->  
@@ -710,9 +710,9 @@ theoretical predictions mostly agree. As expected, the m3 peak without
 the third partial is now lower than the m3 peak with all 5 harmonics
 while the M3 peak is slightly higher without the 3rd partial.
 
-| time_standard_deviation | space_standard_deviation | smoothing_sigma |
-|:------------------------|:-------------------------|----------------:|
-| 0.07958                 | 0.07958                  |             0.2 |
+| time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
+|:---|:---|---:|---:|
+| 0.07958 | 0.07958 | 0.2 | 2 |
 
 ![](man/figures/README-unnamed-chunk-15-16.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-17.png)<!-- -->  
@@ -728,9 +728,9 @@ predicts a dissonance trough with minor polarity at P4 that is not in
 the behavioral results. MaMi.CoDi predicts P5 to have minor polarity and
 be relatively higher than the behavioral results.
 
-| time_standard_deviation | space_standard_deviation | smoothing_sigma |
-|:------------------------|:-------------------------|----------------:|
-| 0.07958                 | 0.07958                  |             0.2 |
+| time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
+|:---|:---|---:|---:|
+| 0.07958 | 0.07958 | 0.2 | 2 |
 
 ![](man/figures/README-unnamed-chunk-15-21.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-22.png)<!-- -->  
@@ -744,9 +744,9 @@ For stretched harmonics, behavioral results and theoretical predictions
 mostly agree. MaMi.Codi predicts peaks with minor polarity just above m3
 and m7 that do not exist in the behavioral results.
 
-| time_standard_deviation | space_standard_deviation | smoothing_sigma |
-|:------------------------|:-------------------------|----------------:|
-| 0.07958                 | 0.07958                  |             0.2 |
+| time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
+|:---|:---|---:|---:|
+| 0.07958 | 0.07958 | 0.2 | 2.1 |
 
 ![](man/figures/README-unnamed-chunk-15-26.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-27.png)<!-- -->  
@@ -759,9 +759,9 @@ and m7 that do not exist in the behavioral results.
 For compressed harmonics, the pronounced behavioral peaks mostly agree
 with the theoretical peaks.
 
-| time_standard_deviation | space_standard_deviation | smoothing_sigma |
-|:------------------------|:-------------------------|----------------:|
-| 0.07958                 | 0.07958                  |             0.2 |
+| time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
+|:---|:---|---:|---:|
+| 0.07958 | 0.07958 | 0.2 | 1.9 |
 
 ![](man/figures/README-unnamed-chunk-15-31.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-32.png)<!-- -->  
@@ -775,9 +775,9 @@ with the theoretical peaks.
 
 Description is below.
 
-| time_standard_deviation | space_standard_deviation | smoothing_sigma |
-|:------------------------|:-------------------------|----------------:|
-| 0.07958                 | 0.07958                  |           0.035 |
+| time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
+|:---|:---|---:|---:|
+| 0.07958 | 0.07958 | 0.035 | 2 |
 
 ![](man/figures/README-unnamed-chunk-15-36.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-37.png)<!-- -->  
@@ -789,9 +789,9 @@ Description is below.
 
 Description is below.
 
-| time_standard_deviation | space_standard_deviation | smoothing_sigma |
-|:------------------------|:-------------------------|----------------:|
-| 0.07958                 | 0.07958                  |           0.035 |
+| time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
+|:---|:---|---:|---:|
+| 0.07958 | 0.07958 | 0.035 | 2 |
 
 ![](man/figures/README-unnamed-chunk-15-41.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-42.png)<!-- -->  
@@ -803,9 +803,9 @@ Description is below.
 
 Description is below.
 
-| time_standard_deviation | space_standard_deviation | smoothing_sigma |
-|:------------------------|:-------------------------|----------------:|
-| 0.07958                 | 0.07958                  |           0.035 |
+| time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
+|:---|:---|---:|---:|
+| 0.07958 | 0.07958 | 0.035 | 2 |
 
 ![](man/figures/README-unnamed-chunk-15-46.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-47.png)<!-- -->  
@@ -885,17 +885,17 @@ Frequency Ratios
 
 | num | den |
 |----:|----:|
-|   1 |   1 |
 |   2 |   1 |
 |   3 |   1 |
+|   1 |   1 |
 
 Wavelength Ratios
 
 | num | den |
 |----:|----:|
-|   1 |   1 |
 |   3 |   2 |
 |   3 |   1 |
+|   1 |   1 |
 
 And the period(s) is (are?):
 

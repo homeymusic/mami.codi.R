@@ -570,12 +570,14 @@ p = params %>% purrr::map(\(p) {
   }
   cat("  \n#####", title, '\n')
   cat(description)
-  t_v = chords$time_standard_deviation %>% unique() %>% max()
-  s_v = chords$space_standard_deviation %>% unique() %>% max()
+  t_v = chords$time_standard_deviation %>% max()
+  s_v = chords$space_standard_deviation %>% max()
+  p_o = chords$space_fractions[[1]]$pseudo_octave %>% max() 
   print(knitr::kable(tibble::tibble_row(
     time_standard_deviation = paste(round(t_v, 5), collapse = ' '),
     space_standard_deviation  = paste(round(s_v, 5), collapse = ' '),
-    smoothing_sigma   = sigma
+    smoothing_sigma   = sigma,
+    pseudo_octave = p_o
   )))
   
   print(plot_semitone_codi(chords, paste('Consonance-Dissonance'),
