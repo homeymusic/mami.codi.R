@@ -198,6 +198,8 @@ NumericVector stern_brocot(const double x, const double standard_deviation) {
                                           const double standard_deviation,
                                           const double deviation) {
 
+   x = unique(x);
+
    const int     n = x.size();
    NumericVector nums(n);
    NumericVector dens(n);

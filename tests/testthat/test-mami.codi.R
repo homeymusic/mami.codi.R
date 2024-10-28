@@ -331,23 +331,23 @@ test_that('mami codi with beats around unison and octave', {
                  num_harmonics = num_harmonics,
                  verbose =T)
 
-  expect_equal(P1$time_fractions[[1]]$num, c(1,2))
-  expect_equal(P1$time_fractions[[1]]$den, c(1,1))
-  expect_equal(P1$space_fractions[[1]]$num, c(1,2,2))
-  expect_equal(P1$space_fractions[[1]]$den, c(1,1,1))
+  expect_equal(P1$time_fractions[[1]]$num %>% sort(), c(1,2))
+  expect_equal(P1$time_fractions[[1]]$den %>% sort(), c(1,1))
+  expect_equal(P1$space_fractions[[1]]$num %>% sort(), c(1,2))
+  expect_equal(P1$space_fractions[[1]]$den %>% sort(), c(1,1))
 
   P1_beats = mami.codi(c(C4_midi, C4_beat_midi),
                        include_beats=T,
                        num_harmonics = num_harmonics,
                        verbose =T)
 
-  expect_equal(P1_beats$time_fractions[[1]]$num, c(1,1,2,2))
-  expect_equal(P1_beats$time_fractions[[1]]$den, c(1,1,1,1))
-  expect_equal(P1_beats$space_fractions[[1]]$num,
-               c(1, 1, 2, 2, 2, 2, 2, 13, 115, 307)
+  expect_equal(P1_beats$time_fractions[[1]]$num %>% sort(), c(1,1,2,2))
+  expect_equal(P1_beats$time_fractions[[1]]$den %>% sort(), c(1,1,1,1))
+  expect_equal(P1_beats$space_fractions[[1]]$num  %>% sort(),
+               c(1, 1, 2, 2, 2, 13, 115, 307)
                )
-  expect_equal(P1_beats$space_fractions[[1]]$den,
-               c(1, 1, 1, 1, 1, 1, 1, 6, 3, 4)
+  expect_equal(P1_beats$space_fractions[[1]]$den  %>% sort(),
+               c(1, 1, 1, 1, 1, 3, 4, 6)
                )
 
   P8_beats = mami.codi(c(C4_midi, C5_beat_midi),

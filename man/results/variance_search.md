@@ -1,7 +1,7 @@
 Standard Deviation Search
 ================
 
-# M6
+# Harmonic
 
 time Standard Deviations:
 

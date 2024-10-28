@@ -1,4 +1,4 @@
-search_label = 'M6'
+search_label = 'Harmonic'
 # Attempt to install the package from GitHub
 github_result = devtools::install_github('homeymusic/mami.codi.R',
                                          ref='wavelength_beats')
