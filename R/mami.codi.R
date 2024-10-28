@@ -21,7 +21,7 @@
 #' @export
 mami.codi <- function(
     x,
-    include_beats            = F,
+    include_beats            = T,
     minimum_amplitude        = MINIMUM_AMPLITUDE,
     time_standard_deviation  = STANDARD_DEVIATION,
     space_standard_deviation = STANDARD_DEVIATION,

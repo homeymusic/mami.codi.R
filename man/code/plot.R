@@ -88,8 +88,6 @@ theme_homey_minimal <- function(aspect.ratio=NULL){
     aspect.ratio = aspect.ratio
   )
 }
-path_homey <- function() {
-}
 plot_mami.codi <- function(chords, title='', chords_to_label=NULL,include_labels=F,
                            include_path=FALSE, aspect.ratio=NULL,
                            minimal=F) {
@@ -617,8 +615,8 @@ plot_semitone_codi_wrap <- function(theory, experiment,
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
     ggplot2::scale_x_continuous() +  # Automatically generate x-axis labels
-    ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1)) +  # Rotate x-axis labels for readability
-    ggplot2::facet_wrap(~space_standard_deviation, ncol = ncols, dir = 'v', scales = "free_y") +
+    ggplot2::facet_wrap(~space_standard_deviation, ncol = ncols, dir = 'v',
+                        scales = "free_y") +
     theme_homey()
 }
 

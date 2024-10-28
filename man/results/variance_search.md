@@ -1,7 +1,7 @@
 Standard Deviation Search
 ================
 
-# Bonang
+# Harmonic
 
 time Standard Deviations:
 
@@ -9,7 +9,7 @@ time Standard Deviations:
 
 space Standard Deviations:
 
-    #> [1] 0.080 0.085 0.090 0.095 0.100
+    #> [1] 5e-05
 
 include beats:
 
