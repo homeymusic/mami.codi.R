@@ -22,7 +22,6 @@
 mami.codi <- function(
     x,
     include_beats            = F,
-    minimum_beat_wavelength  = MINIMUM_BEAT_WAVELENGTH,
     minimum_amplitude        = MINIMUM_AMPLITUDE,
     time_standard_deviation  = STANDARD_DEVIATION,
     space_standard_deviation = STANDARD_DEVIATION,
@@ -34,8 +33,7 @@ mami.codi <- function(
 
   parse_input(x, ...) %>%
     stimulus(
-      include_beats,
-      minimum_beat_wavelength
+      include_beats
     ) %>%
     space_time_cycles(
       minimum_amplitude,
@@ -51,13 +49,12 @@ mami.codi <- function(
 #'
 #' @param x A sparse frequency spectrum
 #' @param include_beats Whether to include beats in the wavelength spectrum
-#' @param minimum_beat_wavelength Only wavelengths greater than this value will be included
 #'
 #' @return Frequency spectrum, wavelength spectrum and wavelength beats spectrum
 #'
 #' @rdname stimulus
 #' @export
-stimulus <- function(x, include_beats, minimum_beat_wavelength) {
+stimulus <- function(x, include_beats) {
 
   frequency_spectrum = tibble::tibble(
     frequency = x %>% hrep::freq(),
@@ -74,9 +71,7 @@ stimulus <- function(x, include_beats, minimum_beat_wavelength) {
     beats_spectrum = calculate_beats(
       wavelength = wavelength_spectrum$wavelength,
       amplitude = wavelength_spectrum$amplitude
-    ) %>%
-      dplyr::filter(.data$wavelength > minimum_beat_wavelength) %>%
-      dplyr::arrange(.data$wavelength)
+    ) %>% dplyr::arrange(.data$wavelength)
 
     wavelength_spectrum = dplyr::bind_rows(
       wavelength_spectrum, beats_spectrum
@@ -211,4 +206,3 @@ default_minimum_amplitude <- function() { MINIMUM_AMPLITUDE }
 MINIMUM_AMPLITUDE = 0.07
 
 C_SOUND = 343 # m/s arbitrary, disappears in the ratios
-MINIMUM_BEAT_WAVELENGTH = C_SOUND / 10 # maximum beat frequency of 10 Hz

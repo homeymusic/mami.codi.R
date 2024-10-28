@@ -6,7 +6,7 @@ always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'M3'
+search_label = 'Pure'
 ```
 
 # `r search_label`
@@ -81,7 +81,7 @@ theory <- theory %>%
     num_harmonics  = metadata$num_harmonics,
     octave_ratio   = metadata$octave_ratio,
     semitone       = metadata$semitone,
-    include_beats = metadata$include_beats, 
+    include_beats  = metadata$include_beats,
     .before=1
   ) %>% 
   dplyr::ungroup() %>%  # Ungroup after rowwise operations
