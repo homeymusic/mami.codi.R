@@ -77,9 +77,8 @@ space_time_cycles = function(x,
   if (include_time_beats || include_space_beats) {
     spectrum_beats = calculate_beats(x$spectrum[[1]]$x, x$spectrum[[1]]$y)
     f_beats = (spectrum_beats %>% dplyr::filter(
-      .data$frequency<f_min &
       .data$amplitude>minimum_amplitude
-      ))$frequency
+      ))$frequency %>% unique()
 
     if (include_time_beats) {
       f = c(f,f_beats) %>% unique()
