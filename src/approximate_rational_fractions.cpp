@@ -241,17 +241,18 @@ NumericVector stern_brocot(const double x, const double standard_deviation) {
  //' @export
  // [[Rcpp::export]]
  DataFrame calculate_beats(NumericVector wavelength, NumericVector amplitude) {
+
    int n = wavelength.size();
 
    if (n < 2) {
      return DataFrame::create(
-       _("wavelength") = NumericVector::create(),
-       _("amplitude") = NumericVector::create()
+       _("wavelength")      = NumericVector::create(),
+       _("amplitude")       = NumericVector::create()
      );
    }
 
    // Vectors to hold the results
-   NumericVector beat_wavelength(n * (n - 1) / 2); // Max number of unique pairs
+   NumericVector beat_wavelength(n * (n - 1) / 2); // Max number
    NumericVector beat_amplitude(n * (n - 1) / 2);
 
    int count = 0;
@@ -259,27 +260,16 @@ NumericVector stern_brocot(const double x, const double standard_deviation) {
    // Calculate the beats
    for (int i = 0; i < n; i++) {
      for (int j = i + 1; j < n; j++) {
-       const double l = (wavelength[i] * wavelength[j]) / std::abs(wavelength[i] - wavelength[j]);
-       // if (l > max(wavelength)) {
-         beat_wavelength[count] = l;
-         beat_amplitude[count] = std::pow(amplitude[i] + amplitude[j], 2);
-         count++;
-       // }
+       beat_wavelength[count]      = (wavelength[i] * wavelength[j]) /
+         std::abs(wavelength[i] - wavelength[j]);
+       beat_amplitude[count]       = std::pow(amplitude[i] + amplitude[j], 2);
+       count++;
      }
    }
 
-   // Check for enough distinct frequencies
-   // if (count < 1) {
-     // Return an empty DataFrame if not enough frequencies
-     // return DataFrame::create(
-       // _("wavelength") = NumericVector::create(),
-       // _("amplitude") = NumericVector::create()
-     // );
-   // } else {
-     // Create the resulting DataFrame
-     return DataFrame::create(
-       _("wavelength") = beat_wavelength[Rcpp::Range(0, count - 1)],
-       _("amplitude") = beat_amplitude[Rcpp::Range(0, count - 1)]
-     );
-   // }
- }
+   // Create the resulting DataFrame
+   return DataFrame::create(
+     _("wavelength")      = beat_wavelength[Rcpp::Range(0, count - 1)],
+     _("amplitude")       = beat_amplitude[Rcpp::Range(0, count - 1)]
+   );
+}

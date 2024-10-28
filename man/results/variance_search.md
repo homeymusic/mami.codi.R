@@ -1,7 +1,7 @@
 Standard Deviation Search
 ================
 
-# Pure
+# M3
 
 time Standard Deviations:
 
@@ -17,7 +17,7 @@ include beats:
 
 Number of Harmonics:
 
-    #> [1] 1
+    #> [1] 10
 
 Octave Ratios:
 

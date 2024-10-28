@@ -43,8 +43,12 @@ test_that('calculated beat matches actual beat',{
 
   beats_spectrum = calculate_beats(wavelength = wavelengths, amplitude=c(1,0.95))
 
-  expect_equal(beats_spectrum$wavelength, c(49), tolerance = 0.1)
-  expect_equal(beats_spectrum$amplitude,  c(3.8025), tolerance = 0.1)
+  expect_equal(beats_spectrum$wavelength,
+               c(49),
+               tolerance = 0.1)
+  expect_equal(beats_spectrum$amplitude,
+               c(3.8025),
+               tolerance = 0.1)
   calculated_beat_freq = C_SOUND / beats_spectrum$wavelength
   expect_equal(beat_freq, calculated_beat_freq, tolerance = 0.1)
 })
@@ -58,8 +62,12 @@ test_that('only low beats are returned',{
 
   beats_spectrum = calculate_beats(wavelength = wavelengths, amplitude=amplitudes)
 
-  expect_equal(beats_spectrum$wavelength, c(49,5.04,5.62), tolerance = 0.1)
-  expect_equal(beats_spectrum$amplitude,  c(4,4,4), tolerance = 0.1)
+  expect_equal(beats_spectrum$wavelength,
+               c(49.00, 5.04, 5.62),
+               tolerance = 0.1)
+  expect_equal(beats_spectrum$amplitude,
+               c(4,4,4),
+               tolerance = 0.1)
   calculated_beat_freqs = C_SOUND / beats_spectrum$wavelength
   expect_true(any(abs(calculated_beat_freqs - beat_freq) < 0.1))
 })

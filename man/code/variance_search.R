@@ -1,6 +1,12 @@
-search_label = 'Pure'
-devtools::install_github('git@github.com:homeymusic/mami.codi.R',
-                         ref='wavelength_beats')
+search_label = 'M3'
+# Attempt to install the package from GitHub
+github_result = devtools::install_github('homeymusic/mami.codi.R', ref='wavelength_beats')
+
+if (is.na(github_result)) {
+  stop("Fatal error: Unable to install the package from GitHub. Please check the repository and branch name.")
+} else {
+  message("Repo looks good: ", github_result)
+}
 
 # options(timeout = max(1000, getOption("timeout")))
 

@@ -13,7 +13,7 @@ space_time_cycles(
 )
 }
 \arguments{
-\item{x}{Vector of frequencies and amplitudes}
+\item{x}{Stimulus encoded as frequency and wavelength spectra}
 
 \item{minimum_amplitude}{Ignore all frequencies below this threshold}
 

@@ -100,11 +100,11 @@ test_that('beat spectrum looks interesting',{
                tolerance=0.1)
 
   expect_equal(C4_beats$beats_spectrum[[1]]$wavelength,
-               c(1.24, 1.28, 1.31, 1.35, 24.50, 49.00),
+               c(49.00),
                tolerance=0.1)
 
   expect_equal(C4_beats$beats_spectrum[[1]]$amplitude,
-               c(3.57, 3.57, 3.57, 3.57, 3.17, 4.00),
+               c(4.00),
                tolerance=0.1)
 })
 test_that('beats work', {
@@ -117,7 +117,7 @@ test_that('beats work', {
     mami.codi(include_beats=T, num_harmonics=num_harmonics, verbose=T)
 
   f_expected <- c(261.62, 268.62, 523.25, 537.25)
-  l_expected <- c(0.63, 0.65, 1.24, 1.27, 1.27, 1.31, 1.31, 1.34, 24.50, 49.00)
+  l_expected <- c(0.63, 0.65, 1.27, 1.31, 49.00)
 
   expect_equal(C4_beats$frequencies[[1]], f_expected, tolerance=0.1)
   expect_equal(C4_beats$wavelengths[[1]], l_expected, tolerance=0.001)
@@ -151,7 +151,8 @@ test_that('stimulus works', {
                tolerance=0.1)
 
   # beats stimulus
-  beats_stimulus = stimulus(spectrum, include_beats=T)
+  beats_stimulus = stimulus(spectrum, include_beats=T,
+                            minimum_beat_wavelength=MINIMUM_BEAT_WAVELENGTH)
   expect_equal(beats_stimulus$frequency_spectrum[[1]]$frequency,
                c(261.62, 268.62),
                tolerance=0.1)
