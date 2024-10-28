@@ -1,4 +1,4 @@
-search_label = 'Harmonic'
+search_label = 'P8'
 devtools::install_github('git@github.com:homeymusic/mami.codi.R',
                          ref='beats')
 
@@ -13,6 +13,8 @@ devtools::install_github('git@github.com:homeymusic/mami.codi.R',
 
 # Orders of Magnitude
 standard_deviations = c(1:9 %o% 10^(-2:-2), 1)
+
+standard_deviations = c(1/(4 * pi))
 
 source('./freq_trials.R')
 run_trials(search_label, standard_deviations,
