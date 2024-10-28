@@ -1,7 +1,7 @@
 Standard Deviation Search
 ================
 
-# Pure
+# M6
 
 time Standard Deviations:
 
@@ -15,13 +15,9 @@ include beats:
 
     #> [1] TRUE
 
-minimum beat wavelength:
-
-    #> [1] 34.3
-
 Number of Harmonics:
 
-    #> [1] 1
+    #> [1] 10
 
 Octave Ratios:
 

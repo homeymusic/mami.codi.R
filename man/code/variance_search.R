@@ -1,6 +1,7 @@
-search_label = 'Pure'
+search_label = 'M6'
 # Attempt to install the package from GitHub
-github_result = devtools::install_github('homeymusic/mami.codi.R', ref='wavelength_beats')
+github_result = devtools::install_github('homeymusic/mami.codi.R',
+                                         ref='wavelength_beats')
 
 if (is.na(github_result)) {
   stop("Fatal error: Unable to install the package from GitHub. Please check the repository and branch name.")
