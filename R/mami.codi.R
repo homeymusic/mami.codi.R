@@ -66,10 +66,8 @@ space_time_cycles = function(x,
   f = x$spectrum[[1]] %>%
     dplyr::filter(.data$y>minimum_amplitude) %>%
     hrep::freq()
-  f_min = min(f)
   P = 1 / f
   l = C_SOUND * P
-  l_min = min(l)
   k = 1 / l
 
   spectrum_beats = NULL
@@ -90,6 +88,9 @@ space_time_cycles = function(x,
     }
 
   }
+
+  f_min = min(f)
+  l_min = min(l)
 
   x %>% dplyr::mutate(
 
