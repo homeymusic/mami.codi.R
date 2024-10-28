@@ -1,6 +1,6 @@
-search_label = 'Harmonic'
+search_label = 'Pure'
 devtools::install_github('git@github.com:homeymusic/mami.codi.R',
-                         ref='beats_low')
+                         ref='wavelength_beats')
 
 # options(timeout = max(1000, getOption("timeout")))
 
@@ -17,5 +17,4 @@ devtools::install_github('git@github.com:homeymusic/mami.codi.R',
 standard_deviations = c(1/(4 * pi))
 
 source('./freq_trials.R')
-run_trials(search_label, standard_deviations,
-           include_time_beats=F, include_space_beats=T)
+run_trials(search_label, standard_deviations, include_beats=T)

@@ -1,7 +1,7 @@
 Standard Deviation Search
 ================
 
-# Harmonic
+# Pure
 
 time Standard Deviations:
 
@@ -11,17 +11,13 @@ space Standard Deviations:
 
     #> [1] 0.07957747
 
-include time beats:
-
-    #> [1] FALSE
-
-include space beats:
+include beats:
 
     #> [1] TRUE
 
 Number of Harmonics:
 
-    #> [1] 10
+    #> [1] 1
 
 Octave Ratios:
 

@@ -6,7 +6,7 @@ always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'Harmonic'
+search_label = 'Pure'
 ```
 
 # `r search_label`
@@ -81,8 +81,7 @@ theory <- theory %>%
     num_harmonics  = metadata$num_harmonics,
     octave_ratio   = metadata$octave_ratio,
     semitone       = metadata$semitone,
-    include_time_beats = metadata$include_time_beats, 
-    include_space_beats = metadata$include_space_beats,
+    include_beats = metadata$include_beats, 
     .before=1
   ) %>% 
   dplyr::ungroup() %>%  # Ungroup after rowwise operations
@@ -106,14 +105,9 @@ tols = theory$space_standard_deviation %>% unique
 tols
 ```
 
-include time beats:
+include beats:
 ```{r, echo=F}
-theory$include_time_beats %>% unique
-```
-
-include space beats:
-```{r, echo=F}
-theory$include_space_beats %>% unique
+theory$include_beats %>% unique
 ```
 
 Number of Harmonics:
