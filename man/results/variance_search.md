@@ -1,7 +1,7 @@
 Standard Deviation Search
 ================
 
-# Harmonic
+# Bonang
 
 time Standard Deviations:
 

@@ -1,4 +1,4 @@
-search_label = 'Harmonic'
+search_label = 'Bonang'
 # Attempt to install the package from GitHub
 github_result = devtools::install_github('homeymusic/mami.codi.R',
                                          ref='time_integration')
