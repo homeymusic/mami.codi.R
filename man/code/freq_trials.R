@@ -88,14 +88,18 @@ run_trials <- function(search_label, standard_deviations,
       )
     }
 
+
+    time_standard_deviation = mami.codi.R::default_standard_deviation()
+    space_standard_deviation = standard_deviation
     mami.codi.R::mami.codi(
       chord,
       include_beats            = include_beats,
-      time_standard_deviation  = STANDARD_DEVIATION,
-      space_standard_deviation = standard_deviation,
+      time_standard_deviation  = time_standard_deviation,
+      space_standard_deviation = space_standard_deviation,
       metadata         = list(
-        space_standard_deviation = space_standard_deviation,
         include_beats  = include_beats,
+        space_standard_deviation = space_standard_deviation,
+        time_standard_deviation  = time_standard_deviation,
         octave_ratio   = octave_ratio,
         num_harmonics  = num_harmonics,
         roll_off_dB    = roll_off,

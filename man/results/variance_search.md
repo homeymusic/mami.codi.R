@@ -9,7 +9,7 @@ time Standard Deviations:
 
 space Standard Deviations:
 
-    #> [1] 0.07957747
+    #> [1] 0.080 0.085 0.090 0.095 0.100
 
 include beats:
 

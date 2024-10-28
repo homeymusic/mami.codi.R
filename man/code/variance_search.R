@@ -20,7 +20,7 @@ if (is.na(github_result)) {
 
 # Orders of Magnitude
 # standard_deviations = c(1:9 %o% 10^(-2:-2), 1)
-
+standard_deviations = c(seq(8,10,0.5) %o% 10^(-2:-2))
 # standard_deviations = c(1/(4 * pi))
 
 source('./freq_trials.R')
