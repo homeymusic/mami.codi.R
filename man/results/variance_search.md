@@ -1,7 +1,7 @@
 Standard Deviation Search
 ================
 
-# P8
+# Bonang
 
 time Standard Deviations:
 
