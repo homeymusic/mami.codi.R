@@ -21,6 +21,7 @@ run_trials <- function(search_label, standard_deviations,
   }
 
   print(search_label)
+  print(paste('standard_deviations:',standard_deviations))
   print(paste('include_beats:',include_beats))
   print(paste('octave_ratio:',octave_ratio))
   print(paste('num_harmonics:',num_harmonics))
@@ -90,9 +91,10 @@ run_trials <- function(search_label, standard_deviations,
     mami.codi.R::mami.codi(
       chord,
       include_beats            = include_beats,
-      time_standard_deviation  = standard_deviation,
+      time_standard_deviation  = STANDARD_DEVIATION,
       space_standard_deviation = standard_deviation,
       metadata         = list(
+        space_standard_deviation = space_standard_deviation,
         include_beats  = include_beats,
         octave_ratio   = octave_ratio,
         num_harmonics  = num_harmonics,

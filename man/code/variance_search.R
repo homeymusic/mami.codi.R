@@ -1,7 +1,7 @@
 search_label = 'Harmonic'
 # Attempt to install the package from GitHub
 github_result = devtools::install_github('homeymusic/mami.codi.R',
-                                         ref='wavelength_beats')
+                                         ref='time_integration')
 
 if (is.na(github_result)) {
   stop("Fatal error: Unable to install the package from GitHub. Please check the repository and branch name.")
@@ -21,7 +21,7 @@ if (is.na(github_result)) {
 # Orders of Magnitude
 # standard_deviations = c(1:9 %o% 10^(-2:-2), 1)
 
-standard_deviations = c(1/(4 * pi))
+# standard_deviations = c(1/(4 * pi))
 
 source('./freq_trials.R')
 run_trials(search_label, standard_deviations, include_beats=T)
