@@ -117,7 +117,9 @@ stimulus <- function(x, sfoae_num_harmonics=0, include_beats=F) {
     beating             = log2(1+sum(beats_spectrum$wavelength, na.rm = TRUE)),
     sfoae_spectrum      = list(sfoae_spectrum),
     beats_spectrum      = list(beats_spectrum),
-    source_spectrum     = list(x)
+    source_spectrum     = list(x),
+    sfoae_num_harmonics,
+    include_beats
   )
 
 }

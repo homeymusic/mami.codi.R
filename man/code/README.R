@@ -1,6 +1,6 @@
 source('./utils.R')
 devtools::install_github('git@github.com:homeymusic/mami.codi.R',
-                         ref='plot_beats')
+                         ref='sfoae')
 
 library(mami.codi.R)
 devtools::load_all(".")
@@ -144,6 +144,7 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
                          include_beats=T,
                          metadata = list(
                            include_beats=T,
+                           sfoae_num_harmonics=2,
                            num_harmonics = num_harmonics,
                            octave_ratio  = octave_ratio,
                            semitone      = interval,
