@@ -71,3 +71,46 @@ test_that('only low beats are returned',{
   calculated_beat_freqs = C_SOUND / beats_spectrum$wavelength
   expect_true(any(abs(calculated_beat_freqs - beat_freq) < 0.1))
 })
+test_that('beats near the octave',{
+
+  C4_freq = hrep::midi_to_freq(60)
+  Cb5_freq = hrep::midi_to_freq(71)
+
+  freqs = c(C4_freq, Cb5_freq)
+  wavelengths = C_SOUND / freqs
+  l = (wavelengths[1] * wavelengths[2]) / abs(wavelengths[1] - wavelengths[2])
+  expect_true(l > max(wavelengths))
+  amplitudes  = rep(1, length(wavelengths))
+  beating = mami.codi(c(60,71), num_harmonics=1, verbose=T, include_beats=T)$beating
+  expect_equal(beating, 1.30, tolerance = 0.01)
+  beats_spectrum = calculate_beats(wavelength = wavelengths, amplitude=amplitudes)
+  expect_equal(beats_spectrum$wavelength,
+               c(1.47),
+               tolerance = 0.1)
+
+  C5_freq = hrep::midi_to_freq(72)
+  freqs = c(C4_freq, C5_freq)
+  wavelengths = C_SOUND / freqs
+  l = (wavelengths[1] * wavelengths[2]) / abs(wavelengths[1] - wavelengths[2])
+  expect_true(l <= max(wavelengths))
+  amplitudes  = rep(1, length(wavelengths))
+  beating = mami.codi(c(60,72), num_harmonics=1, verbose=T, include_beats=T)$beating
+  expect_equal(beating, 0, tolerance = 0.01)
+  beats_spectrum = calculate_beats(wavelength = wavelengths, amplitude=amplitudes)
+  expect_equal(beats_spectrum$wavelength,
+               numeric(0),
+               tolerance = 0.1)
+
+  Db5_freq = hrep::midi_to_freq(73)
+  freqs = c(C4_freq, Db5_freq)
+  wavelengths = C_SOUND / freqs
+  l = (wavelengths[1] * wavelengths[2]) / abs(wavelengths[1] - wavelengths[2])
+  # above the ocatve the beats are not audible?
+  expect_true(l < max(wavelengths))
+  amplitudes  = rep(1, length(wavelengths))
+  beating = mami.codi(c(60,73), num_harmonics=1, verbose=T, include_beats=T)$beating
+  expect_equal(beating, 0, tolerance = 0.01)
+  beats_spectrum = calculate_beats(wavelength = wavelengths, amplitude=amplitudes)
+  expect_equal(beats_spectrum$wavelength,
+               numeric(0))
+})
