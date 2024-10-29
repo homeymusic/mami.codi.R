@@ -147,12 +147,13 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
     )
   }
 
+  sfoae_num_harmonics = 3
   m = mami.codi.R::mami.codi(study_chord,
                          include_beats=T,
-                         sfoae_num_harmonics = 2,
+                         sfoae_num_harmonics = sfoae_num_harmonics,
                          metadata = list(
                            include_beats       =T,
-                           sfoae_num_harmonics = 2,
+                           sfoae_num_harmonics = sfoae_num_harmonics,
                            num_harmonics       = num_harmonics,
                            octave_ratio        = octave_ratio,
                            semitone            = interval,
@@ -160,8 +161,8 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
                          ),
                          verbose=TRUE)
 
-  if (m$sfoae_num_harmonics != 2) {
-    stop(paste("Fatal error: m$sfoae_num_harmonics != 2"))
+  if (m$sfoae_num_harmonics != sfoae_num_harmonics) {
+    stop(paste("Fatal error: m$sfoae_num_harmonics != ",sfoae_num_harmonics))
   }
   m
 }, .progress=TRUE, .options = furrr::furrr_options(seed = T))

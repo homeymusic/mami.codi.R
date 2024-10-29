@@ -62,6 +62,7 @@ stimulus <- function(x, sfoae_num_harmonics=0, include_beats=F) {
 
   if (sfoae_num_harmonics > 0) {
 
+
     sfoae = hrep::sparse_fr_spectrum(
       hrep::freq_to_midi(x %>% hrep::freq() %>% min()),
       num_harmonics = sfoae_num_harmonics
