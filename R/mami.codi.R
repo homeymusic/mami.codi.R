@@ -111,8 +111,11 @@ stimulus <- function(x, sfoae_num_harmonics=0, include_beats=F) {
 
   }
 
-  beating = log2(1+sum(beats_spectrum$amplitude * beats_spectrum$wavelength,
-                       na.rm = TRUE))
+  beating =  if (nrow(beats_spectrum) > 0) {
+    log2(1+sum(beats_spectrum$amplitude * beats_spectrum$wavelength, na.rm = TRUE)/nrow(beats_spectrum))
+  } else {
+    0
+  }
 
   tibble::tibble_row(
     frequency_spectrum  = list(frequency_spectrum),

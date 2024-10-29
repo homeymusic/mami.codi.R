@@ -478,12 +478,22 @@ test_that('pure tone beat makes sense with without SFOAE',{
   expect_equal(dyad$beats_spectrum[[1]]$amplitude, numeric(0),, tolerance = 0.01)
 
   # with SFOAE
+
+  dyad = mami.codi(c(60,61),
+                   num_harmonics=1,
+                   sfoae_num_harmonics = 2,
+                   include_beats=T,
+                   verbose=T)
+  expect_equal(dyad$beating, 5.57, tolerance = 0.01)
+  expect_equal(dyad$beats_spectrum[[1]]$wavelength, c(22.04, 1.39), tolerance = 0.01)
+  expect_equal(dyad$beats_spectrum[[1]]$amplitude, c(4,3.57), tolerance = 0.01)
+
   dyad = mami.codi(c(60,71),
                    num_harmonics=1,
                    sfoae_num_harmonics = 2,
                    include_beats=T,
                    verbose=T)
-  expect_equal(dyad$beating, 5.60, tolerance = 0.01)
+  expect_equal(dyad$beating, 4.63, tolerance = 0.01)
   expect_equal(dyad$beats_spectrum[[1]]$wavelength, c(1.47, 11.67), tolerance = 0.01)
   expect_equal(dyad$beats_spectrum[[1]]$amplitude, c(4,3.57), tolerance = 0.01)
 
