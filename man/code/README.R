@@ -149,8 +149,6 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
 
   m = mami.codi.R::mami.codi(study_chord,
                          metadata = list(
-                           include_beats       =T,
-                           sfoae_num_harmonics = sfoae_num_harmonics,
                            num_harmonics       = num_harmonics,
                            octave_ratio        = octave_ratio,
                            semitone            = interval,
