@@ -397,8 +397,56 @@ test_that('we can quanity the amount of beating in chord', {
   expect_equal(P1_beats$beating, log2(49.0+1), tolerance=0.1)
 })
 test_that('Stimulus Frequency Otoacoustic Emissions',{
-  P1 = mami.codi(60, verbose=T, include_sfoae = F, num_harmonics=1)
-  expect_equal(P1$sfoae_spectrum[[1]] %>% nrow(), 0)
-  P1_sfoae = mami.codi(60, verbose=T, include_sfoae = T, num_harmonics=1)
-  expect_equal(P1_sfoae$sfoae_spectrum[[1]] %>% nrow(), 2)
+  sfoae_num_harmonics=0
+  P1 = mami.codi(60, verbose=T, sfoae_num_harmonics = sfoae_num_harmonics, num_harmonics=1)
+  expect_equal(P1$sfoae_spectrum[[1]] %>% nrow(), sfoae_num_harmonics)
+  expect_equal(P1$frequencies[[1]], c(261.6), tolerance=0.1)
+
+  sfoae_num_harmonics=2
+  P1_sfoae = mami.codi(60, verbose=T, sfoae_num_harmonics = sfoae_num_harmonics, num_harmonics=1)
+  expect_equal(P1_sfoae$sfoae_spectrum[[1]] %>% nrow(), sfoae_num_harmonics)
+  expect_equal(P1_sfoae$frequencies[[1]] %>% length(), sfoae_num_harmonics)
+  expect_equal(P1_sfoae$frequencies[[1]], c(261.6, 523.2), tolerance=0.1)
+})
+test_that('Beats and Stimulus Frequency Otoacoustic Emissions',{
+  num_harmonics = 1
+
+  C4_midi = 60
+  C5_midi = 72
+  f_beat = 7 # Hz
+
+  C5_beat_midi = hrep::freq_to_midi(hrep::midi_to_freq(C5_midi) - f_beat)
+
+  sfoae_num_harmonics = 0
+  P8_beats = mami.codi(c(C4_midi, C5_beat_midi),
+                       sfoae_num_harmonics = 0,
+                       include_beats=T,
+                       num_harmonics = num_harmonics,
+                       verbose =T)
+  expect_equal(P8_beats$sfoae_spectrum[[1]] %>% nrow(), sfoae_num_harmonics)
+  expect_true(P8_beats$beating < 2.0)
+  expect_equal(P8_beats$beats_spectrum[[1]]$wavelength %>% sort,
+               c(1.34),
+               tolerance=0.1)
+  expect_equal(P8_beats$beats_spectrum[[1]]$amplitude %>% sort,
+               c(4.00),
+               tolerance=0.1)
+
+
+  sfoae_num_harmonics = 2
+  P8_beats_sfoae = mami.codi(c(C4_midi, C5_beat_midi),
+                       sfoae_num_harmonics = sfoae_num_harmonics,
+                       include_beats=T,
+                       num_harmonics = num_harmonics,
+                       verbose =T)
+  expect_equal(P8_beats_sfoae$sfoae_spectrum[[1]] %>% nrow(), sfoae_num_harmonics)
+  expect_true(P8_beats_sfoae$beating > 2.0)
+  expect_equal(P8_beats_sfoae$beats_spectrum[[1]]$wavelength %>% sort,
+               c(1.34, 48.99),
+               tolerance=0.1)
+  expect_equal(P8_beats_sfoae$beats_spectrum[[1]]$amplitude %>% sort,
+               c(4.00, 3.57) %>% sort(),
+               tolerance=0.1)
+
+
 })

@@ -5,7 +5,7 @@
 #' @param x Chord to analyse specified in MIDI, coerced to
 #' hrep::sparse_fr_spectrum
 #' @param include_beats Beats
-#' @param include_sfoae Stimulus Frequency Otoacoustic Emissions
+#' @param sfoae_num_harmonics Stimulus Frequency Otoacoustic Emissions
 #' @param minimum_amplitude An optional minimum amplitude for deciding which partials to include.
 #' @param time_standard_deviation An optional time standard_deviation value for finding rational fractions.
 #' @param space_standard_deviation  An optional space standard_deviation value for finding rational fractions.
@@ -23,7 +23,7 @@
 #' @export
 mami.codi <- function(
     x,
-    include_sfoae            = F,
+    sfoae_num_harmonics      = 0,
     include_beats            = F,
     minimum_amplitude        = MINIMUM_AMPLITUDE,
     time_standard_deviation  = STANDARD_DEVIATION,
@@ -36,7 +36,7 @@ mami.codi <- function(
 
   parse_input(x, ...) %>%
     stimulus(
-      include_sfoae,
+      sfoae_num_harmonics,
       include_beats
     ) %>%
     space_time_cycles(
@@ -58,13 +58,14 @@ mami.codi <- function(
 #'
 #' @rdname stimulus
 #' @export
-stimulus <- function(x, include_sfoae=F, include_beats=F) {
+stimulus <- function(x, sfoae_num_harmonics=0, include_beats=F) {
 
-  if (include_sfoae) {
+  if (sfoae_num_harmonics > 0) {
+
     sfoae = hrep::sparse_fr_spectrum(
       hrep::freq_to_midi(x %>% hrep::freq() %>% min()),
-      num_harmonics = 2
-      )
+      num_harmonics = sfoae_num_harmonics
+    )
 
     sfoae_spectrum = tibble::tibble(
       frequency = sfoae %>% hrep::freq(),
@@ -74,16 +75,16 @@ stimulus <- function(x, include_sfoae=F, include_beats=F) {
   } else {
 
     sfoae_spectrum = tibble::tibble(
-      wavelength = numeric(0),
+      frequency = numeric(0),
       amplitude = numeric(0)
     )
 
   }
 
   frequency_spectrum = tibble::tibble(
-    frequency = x %>% hrep::freq(),
-    amplitude = x %>% hrep::amp()
-  )
+    frequency = c(x %>% hrep::freq(), sfoae_spectrum$frequency),
+    amplitude = c(x %>% hrep::amp(),  sfoae_spectrum$amplitude)
+  ) %>% dplyr::distinct()
 
   wavelength_spectrum = tibble::tibble(
     wavelength = C_SOUND / frequency_spectrum$frequency,
@@ -137,7 +138,6 @@ space_time_cycles = function(x,
                              minimum_amplitude,
                              time_standard_deviation, space_standard_deviation,
                              harmonics_deviation) {
-
   f = (x$frequency_spectrum[[1]] %>%
          dplyr::filter(.data$amplitude>minimum_amplitude))$frequency
   l = (x$wavelength_spectrum[[1]] %>%
