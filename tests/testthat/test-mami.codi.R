@@ -516,9 +516,10 @@ test_that('pure tone beat makes sense with without SFOAE 3 harmonics',{
                    sfoae_num_harmonics = 3,
                    include_beats=T,
                    verbose=T)
-  expect_equal(dyad$beating, 5.06, tolerance = 0.01)
-  expect_equal(dyad$beats_spectrum[[1]]$wavelength, c(22.04, 1.39, 1.31), tolerance = 0.01)
-  expect_equal(dyad$beats_spectrum[[1]]$amplitude, c(4,3.57, 2.97), tolerance = 0.01)
+  expect_equal(dyad$beating, 4.85, tolerance = 0.01)
+  expect_equal(dyad$beats_spectrum[[1]]$wavelength %>% sort(),
+               c(22.04,2.62,1.39,2.97) %>% sort(), tolerance = 0.01)
+  expect_equal(dyad$beats_spectrum[[1]]$amplitude, c(4,3.36, 3.57, 3.36), tolerance = 0.01)
 
   dyad = mami.codi(c(60,71),
                    num_harmonics=1,
@@ -527,25 +528,25 @@ test_that('pure tone beat makes sense with without SFOAE 3 harmonics',{
                    verbose=T)
   expect_equal(dyad$beating, 4.18, tolerance = 0.01)
   expect_equal(dyad$beats_spectrum[[1]]$wavelength %>% sort,
-               c(1.31, 1.47, 11.67), tolerance = 0.01)
-  expect_equal(dyad$beats_spectrum[[1]]$amplitude %>% sort(), c(2.97,3.57,4.00), tolerance = 0.01)
+               c(1.476808,  2.622068 , 11.679447,  3.381144) %>% sort(), tolerance = 0.01)
+  expect_equal(dyad$beats_spectrum[[1]]$amplitude %>% sort(), c(4.000000, 3.360641, 3.576830 ,3.360641) %>% sort(), tolerance = 0.01)
 
   dyad = mami.codi(c(60,67),
                    num_harmonics=1,
                    sfoae_num_harmonics = 3,
                    include_beats=T,
                    verbose=T)
-  expect_equal(dyad$beating, 3.16, tolerance = 0.01)
-  expect_equal(dyad$beats_spectrum[[1]]$wavelength %>% sort(), c(1.31, 2.61, 2.63), tolerance = 0.01)
-  expect_equal(dyad$beats_spectrum[[1]]$amplitude %>% sort(), c(2.97, 3.57, 4.00), tolerance = 0.01)
+  expect_equal(dyad$beating, 9.36, tolerance = 0.01)
+  expect_equal(dyad$beats_spectrum[[1]]$wavelength %>% sort(), c( 2.630976,2.622068,2.613220,774.420598), tolerance = 0.01)
+  expect_equal(dyad$beats_spectrum[[1]]$amplitude %>% sort(), c(4.00,3.36,3.57,3.36) %>% sort(), tolerance = 0.01)
 
   dyad = mami.codi(c(60,73),
                    num_harmonics=1,
                    sfoae_num_harmonics = 3,
                    include_beats=T,
                    verbose=T)
-  expect_equal(dyad$beating, 4.09, tolerance = 0.01)
-  expect_equal(dyad$beats_spectrum[[1]]$wavelength %>% sort(), c(1.31, 1.48, 11.02), tolerance = 0.01)
-  expect_equal(dyad$beats_spectrum[[1]]$amplitude %>% sort(), c(2.97, 3.36, 3.57), tolerance = 0.01)
+  expect_equal(dyad$beating, 4.28, tolerance = 0.01)
+  expect_equal(dyad$beats_spectrum[[1]]$wavelength %>% sort(), c(2.622068, 11.023930,  2.118240) %>% sort(), tolerance = 0.01)
+  expect_equal(dyad$beats_spectrum[[1]]$amplitude %>% sort(), c(3.360641,3.576830,3.360641) %>% sort(), tolerance = 0.01)
 
 })

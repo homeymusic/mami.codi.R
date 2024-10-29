@@ -62,15 +62,29 @@ stimulus <- function(x, sfoae_num_harmonics=0, include_beats=F) {
 
   if (sfoae_num_harmonics > 0) {
 
+    f_ref = x %>% hrep::freq() %>% min()
 
-    sfoae = hrep::sparse_fr_spectrum(
-      hrep::freq_to_midi(x %>% hrep::freq() %>% min()),
+    sfoae_sparse_fr_spectrum = hrep::sparse_fr_spectrum(
+      hrep::freq_to_midi(f_ref),
       num_harmonics = sfoae_num_harmonics
     )
 
+    transposed_frequencies <- sapply(sfoae_sparse_fr_spectrum$x, function(f) {
+
+      octave_difference <- log2(f_ref / f)
+
+      if (octave_difference == -1) {
+        octave_difference = 0
+      } else {
+        octave_difference = ceiling(octave_difference)
+      }
+
+      return(f * (2 ^ octave_difference))
+    })
+
     sfoae_spectrum = tibble::tibble(
-      frequency = sfoae %>% hrep::freq(),
-      amplitude = sfoae %>% hrep::amp()
+      frequency = transposed_frequencies,
+      amplitude = sfoae_sparse_fr_spectrum %>% hrep::amp()
     )
 
   } else {

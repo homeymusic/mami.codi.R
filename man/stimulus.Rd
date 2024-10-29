@@ -4,7 +4,7 @@
 \alias{stimulus}
 \title{Generate the stimulus wave patterns in terms of frequency spectrum and wavelength spectrum}
 \usage{
-stimulus(x, include_beats)
+stimulus(x, sfoae_num_harmonics = 0, include_beats = F)
 }
 \arguments{
 \item{x}{A sparse frequency spectrum}

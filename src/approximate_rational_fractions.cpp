@@ -231,6 +231,15 @@ using namespace Rcpp;
    );
  }
 
+ // Function to check if a value exists in a numeric vector with a tolerance
+ bool contains_value(const NumericVector& vec, double value, double tolerance = 1e-6) {
+   for (int k = 0; k < vec.size(); k++) {
+     if (std::abs(vec[k] - value) < tolerance) {
+       return true; // Value found within tolerance
+     }
+   }
+   return false; // Value not found
+ }
 
  //' Calculate Beats from Frequencies
  //'
@@ -263,11 +272,13 @@ using namespace Rcpp;
    // Calculate the beats
    for (int i = 0; i < n; i++) {
      for (int j = i + 1; j < n; j++) {
-       const double l = (wavelength[i] * wavelength[j]) / std::abs(wavelength[i] - wavelength[j]);
-       if (l > max_wavelength) {
-         beat_wavelength[count] = l;
-         beat_amplitude[count]  = std::pow(amplitude[i] + amplitude[j], 2);
-         count++;
+       if (wavelength[i] != wavelength[j]) {
+         const double l = (wavelength[i] * wavelength[j]) / std::abs(wavelength[i] - wavelength[j]);
+         if ((l > max_wavelength) && (!contains_value(beat_wavelength, l))) {
+           beat_wavelength[count] = l;
+           beat_amplitude[count]  = std::pow(amplitude[i] + amplitude[j], 2);
+           count++;
+         }
        }
      }
    }

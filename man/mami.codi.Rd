@@ -6,6 +6,7 @@
 \usage{
 mami.codi(
   x,
+  sfoae_num_harmonics = 0,
   include_beats = F,
   minimum_amplitude = MINIMUM_AMPLITUDE,
   time_standard_deviation = STANDARD_DEVIATION,
@@ -20,6 +21,12 @@ mami.codi(
 \item{x}{Chord to analyse specified in MIDI, coerced to
 hrep::sparse_fr_spectrum}
 
+\item{sfoae_num_harmonics}{Stimulus Frequency Otoacoustic Emissions}
+
+\item{include_beats}{Beats}
+
+\item{minimum_amplitude}{An optional minimum amplitude for deciding which partials to include.}
+
 \item{time_standard_deviation}{An optional time standard_deviation value for finding rational fractions.}
 
 \item{space_standard_deviation}{An optional space standard_deviation value for finding rational fractions.}
@@ -33,8 +40,6 @@ helpful for analysis and plots}
 TRUE is all and FALSE is just major-minor, consonance-dissonance and metadata.}
 
 \item{...}{parameters for hrep::sparse_fr_spectrum}
-
-\item{amplitude}{An optional minimum amplitude for deciding which partials to include.}
 }
 \value{
 Major-Minor (majorness), Consonance-Dissonance (dissonance) and metadata plus additional
