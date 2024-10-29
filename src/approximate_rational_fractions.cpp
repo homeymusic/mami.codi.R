@@ -3,78 +3,78 @@
 
 using namespace Rcpp;
 
-//' stern_brocot
-//'
-//' Approximates a floating-point number to arbitrary standard_deviation.
-//'
-//' @param x Number to convert to rational fraction
-//' @param standard_deviation Binary search stops once the desired standard_deviation is reached
-//'
-//' @return A ratio of num / den
-//'
-//' @export
-// [[Rcpp::export]]
-NumericVector stern_brocot(const double x, const double standard_deviation) {
-  // Ensure x is positive and standard_deviation is non-negative
-  if (x <= 0) {
-    stop("STOP: x must be greater than 0");
-  }
-  if (standard_deviation < 0) {
-    stop("STOP: standard_deviation must be non-negative");
-  }
+ //' stern_brocot
+ //'
+ //' Approximates a floating-point number to arbitrary standard_deviation.
+ //'
+ //' @param x Number to convert to rational fraction
+ //' @param standard_deviation Binary search stops once the desired standard_deviation is reached
+ //'
+ //' @return A ratio of num / den
+ //'
+ //' @export
+ // [[Rcpp::export]]
+ NumericVector stern_brocot(const double x, const double standard_deviation) {
+   // Ensure x is positive and standard_deviation is non-negative
+   if (x <= 0) {
+     stop("STOP: x must be greater than 0");
+   }
+   if (standard_deviation < 0) {
+     stop("STOP: standard_deviation must be non-negative");
+   }
 
-  double approximation;
+   double approximation;
 
-  const double valid_min = std::max(std::numeric_limits<double>::min(), x - standard_deviation);
-  const double valid_max = x + standard_deviation;
+   const double valid_min = std::max(std::numeric_limits<double>::min(), x - standard_deviation);
+   const double valid_max = x + standard_deviation;
 
-  int left_num    = floor(x);
-  int left_den    = 1;
-  int mediant_num = round(x);
-  int mediant_den = 1;
-  int right_num   = floor(x) + 1;
-  int right_den   = 1;
+   int left_num    = floor(x);
+   int left_den    = 1;
+   int mediant_num = round(x);
+   int mediant_den = 1;
+   int right_num   = floor(x) + 1;
+   int right_den   = 1;
 
-  approximation = (double) mediant_num / mediant_den;
+   approximation = (double) mediant_num / mediant_den;
 
-  int sanity = 0;
-  const int insane = 1000;
-  while (((approximation < valid_min) || (valid_max < approximation)) && sanity < insane) {
-    double x0  = 2 * x - approximation;
+   int sanity = 0;
+   const int insane = 1000;
+   while (((approximation < valid_min) || (valid_max < approximation)) && sanity < insane) {
+     double x0  = 2 * x - approximation;
 
-    if (approximation < valid_min) {
-      left_num  = mediant_num;
-      left_den  = mediant_den;
-      int k     = floor((right_num - x0 * right_den) / (x0 * left_den - left_num));
-      right_num = right_num + k * left_num;
-      right_den = right_den + k * left_den;
+     if (approximation < valid_min) {
+       left_num  = mediant_num;
+       left_den  = mediant_den;
+       int k     = floor((right_num - x0 * right_den) / (x0 * left_den - left_num));
+       right_num = right_num + k * left_num;
+       right_den = right_den + k * left_den;
 
-    } else if (valid_max < approximation) {
-      right_num = mediant_num;
-      right_den = mediant_den;
-      int k     = floor((x0 * left_den - left_num) / (right_num - x0 * right_den));
-      left_num  = left_num + k * right_num;
-      left_den  = left_den + k * right_den;
-    }
+     } else if (valid_max < approximation) {
+       right_num = mediant_num;
+       right_den = mediant_den;
+       int k     = floor((x0 * left_den - left_num) / (right_num - x0 * right_den));
+       left_num  = left_num + k * right_num;
+       left_den  = left_den + k * right_den;
+     }
 
-    mediant_num   = left_num + right_num;
-    mediant_den   = left_den + right_den;
+     mediant_num   = left_num + right_num;
+     mediant_den   = left_den + right_den;
 
-    approximation = (double) mediant_num / (double) mediant_den;
-    sanity++;
-  }
+     approximation = (double) mediant_num / (double) mediant_den;
+     sanity++;
+   }
 
-  // Final checks
-  if (mediant_num <= 0) {
-    stop("STOP: this should not happen, mediant_num is less than or equal to zero");
-  }
+   // Final checks
+   if (mediant_num <= 0) {
+     stop("STOP: this should not happen, mediant_num is less than or equal to zero");
+   }
 
-  if (mediant_den <= 0) {
-    stop("STOP: this should not happen, mediant_den is less than or equal to zero");
-  }
+   if (mediant_den <= 0) {
+     stop("STOP: this should not happen, mediant_den is less than or equal to zero");
+   }
 
-  return NumericVector::create(mediant_num, mediant_den);
-}
+   return NumericVector::create(mediant_num, mediant_den);
+ }
 
  //' compute_pseudo_octave
  //'
@@ -244,7 +244,8 @@ NumericVector stern_brocot(const double x, const double standard_deviation) {
  // [[Rcpp::export]]
  DataFrame calculate_beats(NumericVector wavelength, NumericVector amplitude) {
 
-   int n = wavelength.size();
+   const int n = wavelength.size();
+   const double max_wavelength = max(wavelength);
 
    if (n < 2) {
      return DataFrame::create(
@@ -262,16 +263,26 @@ NumericVector stern_brocot(const double x, const double standard_deviation) {
    // Calculate the beats
    for (int i = 0; i < n; i++) {
      for (int j = i + 1; j < n; j++) {
-       beat_wavelength[count]      = (wavelength[i] * wavelength[j]) /
-         std::abs(wavelength[i] - wavelength[j]);
-       beat_amplitude[count]       = std::pow(amplitude[i] + amplitude[j], 2);
-       count++;
+       const double l = (wavelength[i] * wavelength[j]) / std::abs(wavelength[i] - wavelength[j]);
+       if (l > max_wavelength) {
+         beat_wavelength[count] = l;
+         beat_amplitude[count]  = std::pow(amplitude[i] + amplitude[j], 2);
+         count++;
+       }
      }
    }
 
-   // Create the resulting DataFrame
-   return DataFrame::create(
-     _("wavelength")      = beat_wavelength[Rcpp::Range(0, count - 1)],
-     _("amplitude")       = beat_amplitude[Rcpp::Range(0, count - 1)]
-   );
-}
+   if (count < 1) {
+     return DataFrame::create(
+       _("wavelength")      = NumericVector::create(),
+       _("amplitude")       = NumericVector::create()
+     );
+   } else {
+     // Create the resulting DataFrame
+     return DataFrame::create(
+       _("wavelength")      = beat_wavelength[Rcpp::Range(0, count - 1)],
+       _("amplitude")       = beat_amplitude[Rcpp::Range(0, count - 1)]
+     );
+   }
+
+ }
