@@ -112,7 +112,7 @@ stimulus <- function(x, sfoae_num_harmonics=0, include_beats=F) {
   }
 
   beating =  if (nrow(beats_spectrum) > 0) {
-    log2(1+sum(beats_spectrum$amplitude * beats_spectrum$wavelength, na.rm = TRUE))
+    log2(1+sum(beats_spectrum$amplitude ^ 2 * beats_spectrum$wavelength, na.rm = TRUE))
   } else {
     0
   }
