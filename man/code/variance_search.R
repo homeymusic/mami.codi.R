@@ -1,4 +1,4 @@
-search_label = 'Harmonic'
+search_label = 'P8'
 # Attempt to install the package from GitHub
 github_result = devtools::install_github('homeymusic/mami.codi.R',
                                          ref='beats_filtered')
@@ -17,7 +17,7 @@ if (is.na(github_result)) {
 # by_prec     = 0.01
 # standard_deviations = sort(c(seq(from=from_prec, to=to_prec, by=by_prec)))
 
-standard_deviations = c(1:9 %o% 10^(-2:-2))
+standard_deviations = c(1:9 %o% 10^(-3:-1))
 # standard_deviations = c(1/(4 * pi))
 
 # standard_deviations = c(5e-05)

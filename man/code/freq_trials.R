@@ -89,7 +89,7 @@ run_trials <- function(search_label, standard_deviations,
     }
 
 
-    time_standard_deviation = mami.codi.R::default_standard_deviation()
+    time_standard_deviation = standard_deviation
     space_standard_deviation = standard_deviation
     mami.codi.R::mami.codi(
       chord,
