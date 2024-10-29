@@ -1,6 +1,6 @@
 source('./utils.R')
 devtools::install_github('git@github.com:homeymusic/mami.codi.R',
-                         ref='time_integration')
+                         ref='beats_filtered')
 
 library(mami.codi.R)
 devtools::load_all(".")
@@ -141,7 +141,9 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
   }
 
   mami.codi.R::mami.codi(study_chord,
+                         include_beats=T,
                          metadata = list(
+                           include_beats=T,
                            num_harmonics = num_harmonics,
                            octave_ratio  = octave_ratio,
                            semitone      = interval,

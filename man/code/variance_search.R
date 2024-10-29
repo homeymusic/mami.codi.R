@@ -1,7 +1,7 @@
 search_label = 'Harmonic'
 # Attempt to install the package from GitHub
 github_result = devtools::install_github('homeymusic/mami.codi.R',
-                                         ref='time_integration')
+                                         ref='beats_filtered')
 
 if (is.na(github_result)) {
   stop("Fatal error: Unable to install the package from GitHub. Please check the repository and branch name.")
@@ -12,12 +12,12 @@ if (is.na(github_result)) {
 # options(timeout = max(1000, getOption("timeout")))
 
 # Detailed
-from_prec   = 0.07
-to_prec     = 0.09
-by_prec     = 0.01
-standard_deviations = sort(c(seq(from=from_prec, to=to_prec, by=by_prec)))
+# from_prec   = 0.07
+# to_prec     = 0.09
+# by_prec     = 0.01
+# standard_deviations = sort(c(seq(from=from_prec, to=to_prec, by=by_prec)))
 
-# standard_deviations = c(seq(8,10,0.5) %o% 10^(-2:-2))
+standard_deviations = c(1:9 %o% 10^(-2:-2))
 # standard_deviations = c(1/(4 * pi))
 
 # standard_deviations = c(5e-05)
