@@ -394,5 +394,5 @@ test_that('we can quanity the amount of beating in  chord', {
                        include_beats=T,
                        num_harmonics = num_harmonics,
                        verbose =T)
-  expect_equal(P1_beats$beating, 49.0, tolerance=0.1)
+  expect_equal(P1_beats$beating, log2(49.0+1), tolerance=0.1)
 })

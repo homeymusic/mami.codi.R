@@ -620,51 +620,6 @@ plot_semitone_codi_wrap <- function(theory, experiment,
     theme_homey()
 }
 
-# plot_semitone_codi_wrap <- function(theory, experiment,
-#                                     black_vlines = c(), gray_vlines = c(),
-#                                     title, ncols = 12,
-#                                     include_points = T) {
-#   per_plot_labels = tidyr::expand_grid(
-#     space_standard_deviation = theory$space_standard_deviation %>% unique
-#   )
-#   per_plot_labels$label = per_plot_labels %>%
-#     purrr::pmap_vec(\(space_standard_deviation) {
-#       paste0('   space_standard_deviation:', space_standard_deviation)
-#     })
-#
-#   # Determine range for x-axis labels based on semitone values
-#   semitone_range <- range(theory$semitone, na.rm = TRUE)
-#
-#   theory %>% ggplot2::ggplot(ggplot2::aes(x = semitone, y = smooth)) +
-#     ggplot2::geom_vline(xintercept = black_vlines, color = 'black') +
-#     ggplot2::geom_vline(xintercept = gray_vlines, color = 'gray44', linetype = 'dotted') +
-#     {if (include_points)
-#       ggplot2::geom_point(data = theory, shape = 21, stroke = NA, size = 1,
-#                           ggplot2::aes(x = semitone, y = z_score,
-#                                        fill = color_factor_homey(theory, 'majorness')))} +
-#     ggplot2::scale_fill_manual(values = color_values_homey(), guide = "none") +
-#     {if (!is.null(experiment)) {
-#       ggplot2::geom_line(
-#         data = experiment,
-#         color = colors_homey$neutral,
-#         ggplot2::aes(x = semitone, y = consonance))
-#     }} +
-#     ggplot2::geom_line(
-#       data = theory,
-#       ggplot2::aes(x = semitone, y = smooth,
-#                    group = 1,
-#                    color = color_factor_homey(theory, 'majorness'))) +
-#     ggplot2::scale_color_manual(values = color_values_homey(), guide = 'none') +
-#     ggplot2::geom_text(data = per_plot_labels, color = colors_homey$neutral,
-#                        ggplot2::aes(x = -Inf, y = -Inf, label = label,
-#                                     vjust = "inward", hjust = "inward")) +
-#     ggplot2::xlab(NULL) +
-#     ggplot2::ylab(NULL) +
-#     ggplot2::facet_wrap(~space_standard_deviation, ncol = ncols, dir = 'v') +
-#     theme_homey()
-# }
-#
-
 plot_semitone_polar_codi_wrap <- function(theory, experiment,
                                           black_vlines=c(), gray_vlines=c(),
                                           title,ncols=12,
@@ -1132,5 +1087,35 @@ plot_semitone_time_wrap_amp <- function(theory,
     ggplot2::facet_wrap(~amplitude,ncol=ncols,dir='v') +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
+    theme_homey()
+}
+
+plot_semitone_beating <- function(chords, title = '', include_line = TRUE, sigma = 0.2,
+                                  include_points = TRUE,
+                                  black_vlines = c(), gray_vlines = c()) {
+
+  # Smooth the beating metric
+  chords$smoothed.beating <- smoothed(chords$semitone, chords$beating, sigma)
+
+  # Plotting
+  ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone, y = .data$beating)) +
+    ggplot2::geom_vline(xintercept = black_vlines, color = colors_homey$highlight) +
+    ggplot2::geom_vline(xintercept = gray_vlines, color = colors_homey$highlight, linetype = 'dotted') +
+    { if (include_points)
+      ggplot2::geom_point(shape = 21, stroke = NA, size = 1, fill = colors_homey$green)  # Set fill directly
+    } +
+    { if (include_line)
+      ggplot2::geom_line(data = chords,
+                         ggplot2::aes(x = semitone,
+                                      y = smoothed.beating,
+                                      group = 1), color = colors_homey$neutral, linewidth = 1)  # Set color directly
+    } +
+    ggplot2::scale_fill_manual(values = color_values_homey(), guide = "none") +
+    ggplot2::scale_color_manual(values = color_values_homey()) +
+    ggplot2::ggtitle(title) +
+    ggplot2::scale_x_continuous(breaks = -15:15, minor_breaks = c()) +
+    ggplot2::ylab('Beating') +
+    ggplot2::xlab('Semitone') +
+    ggplot2::labs(color = NULL) +
     theme_homey()
 }
