@@ -71,7 +71,7 @@ stimulus <- function(x, include_beats) {
     beats_spectrum = calculate_beats(
       wavelength = wavelength_spectrum$wavelength,
       amplitude = wavelength_spectrum$amplitude
-    )
+    ) %>% dplyr::filter(.data$wavelength > max(wavelength_spectrum$wavelength))
 
     wavelength_spectrum = dplyr::bind_rows(
       wavelength_spectrum, beats_spectrum
