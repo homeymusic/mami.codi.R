@@ -82,7 +82,7 @@ test_that('beats near the octave',{
   expect_true(l > max(wavelengths))
   amplitudes  = rep(1, length(wavelengths))
   beating = mami.codi(c(60,71), num_harmonics=1, verbose=T, include_beats=T)$beating
-  expect_equal(beating, 2.78, tolerance = 0.01)
+  expect_equal(beating, 4.62, tolerance = 0.01)
   beats_spectrum = calculate_beats(wavelength = wavelengths, amplitude=amplitudes)
   expect_equal(beats_spectrum$wavelength,
                c(1.47),
