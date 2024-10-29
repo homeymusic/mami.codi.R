@@ -662,9 +662,9 @@ the 15 semitones but the overall peak structure agrees with MaMi.CoDi
 predictions. For futher comparison, the theoretical predictions for
 major-minor versus the behavioral results are included in a plot below.
 
-| time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
-|:---|:---|---:|---:|
-| 0.07958 | 0.07958 | 0.2 | 2 |
+| sfoae_num_harmonics | time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
+|---:|:---|:---|---:|---:|
+| 6 | 0.07958 | 0.07958 | 0.2 | 2 |
 
 ![](man/figures/README-unnamed-chunk-15-1.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-2.png)<!-- -->  
@@ -677,9 +677,9 @@ major-minor versus the behavioral results are included in a plot below.
 
 For 10 harmonics, behavioral results and theoretical predictions agree.
 
-| time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
-|:---|:---|---:|---:|
-| 0.07958 | 0.07958 | 0.2 | 2 |
+| sfoae_num_harmonics | time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
+|---:|:---|:---|---:|---:|
+| 6 | 0.07958 | 0.07958 | 0.2 | 2 |
 
 ![](man/figures/README-unnamed-chunk-15-7.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-8.png)<!-- -->  
@@ -695,9 +695,9 @@ For comparison with the study below (5 partils with the third partial
 deleted), notice that the m3 peak is only slightly lower than the M3
 peak.
 
-| time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
-|:---|:---|---:|---:|
-| 0.07958 | 0.07958 | 0.2 | 2 |
+| sfoae_num_harmonics | time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
+|---:|:---|:---|---:|---:|
+| 6 | 0.07958 | 0.07958 | 0.2 | 2 |
 
 ![](man/figures/README-unnamed-chunk-15-13.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-14.png)<!-- -->  
@@ -713,9 +713,9 @@ theoretical predictions mostly agree. As expected, the m3 peak without
 the third partial is now lower than the m3 peak with all 5 harmonics
 while the M3 peak is slightly higher without the 3rd partial.
 
-| time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
-|:---|:---|---:|---:|
-| 0.07958 | 0.07958 | 0.2 | 2 |
+| sfoae_num_harmonics | time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
+|---:|:---|:---|---:|---:|
+| 6 | 0.07958 | 0.07958 | 0.2 | 2 |
 
 ![](man/figures/README-unnamed-chunk-15-19.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-20.png)<!-- -->  
@@ -732,9 +732,9 @@ predicts a dissonance trough with minor polarity at P4 that is not in
 the behavioral results. MaMi.CoDi predicts P5 to have minor polarity and
 be relatively higher than the behavioral results.
 
-| time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
-|:---|:---|---:|---:|
-| 0.07958 | 0.07958 | 0.2 | 2 |
+| sfoae_num_harmonics | time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
+|---:|:---|:---|---:|---:|
+| 6 | 0.07958 | 0.07958 | 0.2 | 2 |
 
 ![](man/figures/README-unnamed-chunk-15-25.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-26.png)<!-- -->  
@@ -749,9 +749,9 @@ For stretched harmonics, behavioral results and theoretical predictions
 mostly agree. MaMi.Codi predicts peaks with minor polarity just above m3
 and m7 that do not exist in the behavioral results.
 
-| time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
-|:---|:---|---:|---:|
-| 0.07958 | 0.07958 | 0.2 | 2.1 |
+| sfoae_num_harmonics | time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
+|---:|:---|:---|---:|---:|
+| 6 | 0.07958 | 0.07958 | 0.2 | 2.1 |
 
 ![](man/figures/README-unnamed-chunk-15-31.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-32.png)<!-- -->  
@@ -765,9 +765,9 @@ and m7 that do not exist in the behavioral results.
 For compressed harmonics, the pronounced behavioral peaks mostly agree
 with the theoretical peaks.
 
-| time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
-|:---|:---|---:|---:|
-| 0.07958 | 0.07958 | 0.2 | 1.9 |
+| sfoae_num_harmonics | time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
+|---:|:---|:---|---:|---:|
+| 6 | 0.07958 | 0.07958 | 0.2 | 1.9 |
 
 ![](man/figures/README-unnamed-chunk-15-37.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-38.png)<!-- -->  
@@ -782,9 +782,9 @@ with the theoretical peaks.
 
 Description is below.
 
-| time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
-|:---|:---|---:|---:|
-| 0.07958 | 0.07958 | 0.035 | 2 |
+| sfoae_num_harmonics | time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
+|---:|:---|:---|---:|---:|
+| 6 | 0.07958 | 0.07958 | 0.035 | 2 |
 
 ![](man/figures/README-unnamed-chunk-15-43.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-44.png)<!-- -->  
@@ -797,9 +797,9 @@ Description is below.
 
 Description is below.
 
-| time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
-|:---|:---|---:|---:|
-| 0.07958 | 0.07958 | 0.035 | 2 |
+| sfoae_num_harmonics | time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
+|---:|:---|:---|---:|---:|
+| 6 | 0.07958 | 0.07958 | 0.035 | 2 |
 
 ![](man/figures/README-unnamed-chunk-15-49.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-50.png)<!-- -->  
@@ -812,9 +812,9 @@ Description is below.
 
 Description is below.
 
-| time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
-|:---|:---|---:|---:|
-| 0.07958 | 0.07958 | 0.035 | 2 |
+| sfoae_num_harmonics | time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
+|---:|:---|:---|---:|---:|
+| 6 | 0.07958 | 0.07958 | 0.035 | 2 |
 
 ![](man/figures/README-unnamed-chunk-15-55.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-56.png)<!-- -->  
