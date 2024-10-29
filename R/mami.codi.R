@@ -4,7 +4,9 @@
 #'
 #' @param x Chord to analyse specified in MIDI, coerced to
 #' hrep::sparse_fr_spectrum
-#' @param amplitude An optional minimum amplitude for deciding which partials to include.
+#' @param include_beats Beats
+#' @param include_sfoae Stimulus Frequency Otoacoustic Emissions
+#' @param minimum_amplitude An optional minimum amplitude for deciding which partials to include.
 #' @param time_standard_deviation An optional time standard_deviation value for finding rational fractions.
 #' @param space_standard_deviation  An optional space standard_deviation value for finding rational fractions.
 #' @param harmonics_deviation An optional deviation value that allows for harmonics to be not perfect integers.
@@ -21,6 +23,7 @@
 #' @export
 mami.codi <- function(
     x,
+    include_sfoae            = F,
     include_beats            = F,
     minimum_amplitude        = MINIMUM_AMPLITUDE,
     time_standard_deviation  = STANDARD_DEVIATION,
@@ -33,6 +36,7 @@ mami.codi <- function(
 
   parse_input(x, ...) %>%
     stimulus(
+      include_sfoae,
       include_beats
     ) %>%
     space_time_cycles(
@@ -54,7 +58,27 @@ mami.codi <- function(
 #'
 #' @rdname stimulus
 #' @export
-stimulus <- function(x, include_beats) {
+stimulus <- function(x, include_sfoae=F, include_beats=F) {
+
+  if (include_sfoae) {
+    sfoae = hrep::sparse_fr_spectrum(
+      hrep::freq_to_midi(x %>% hrep::freq() %>% min()),
+      num_harmonics = 2
+      )
+
+    sfoae_spectrum = tibble::tibble(
+      frequency = sfoae %>% hrep::freq(),
+      amplitude = sfoae %>% hrep::amp()
+    )
+
+  } else {
+
+    sfoae_spectrum = tibble::tibble(
+      wavelength = numeric(0),
+      amplitude = numeric(0)
+    )
+
+  }
 
   frequency_spectrum = tibble::tibble(
     frequency = x %>% hrep::freq(),
@@ -90,6 +114,7 @@ stimulus <- function(x, include_beats) {
     frequency_spectrum  = list(frequency_spectrum),
     wavelength_spectrum = list(wavelength_spectrum),
     beating             = log2(1+sum(beats_spectrum$wavelength, na.rm = TRUE)),
+    sfoae_spectrum      = list(sfoae_spectrum),
     beats_spectrum      = list(beats_spectrum),
     source_spectrum     = list(x)
   )

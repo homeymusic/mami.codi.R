@@ -396,3 +396,9 @@ test_that('we can quanity the amount of beating in chord', {
                        verbose =T)
   expect_equal(P1_beats$beating, log2(49.0+1), tolerance=0.1)
 })
+test_that('Stimulus Frequency Otoacoustic Emissions',{
+  P1 = mami.codi(60, verbose=T, include_sfoae = F, num_harmonics=1)
+  expect_equal(P1$sfoae_spectrum[[1]] %>% nrow(), 0)
+  P1_sfoae = mami.codi(60, verbose=T, include_sfoae = T, num_harmonics=1)
+  expect_equal(P1_sfoae$sfoae_spectrum[[1]] %>% nrow(), 2)
+})
