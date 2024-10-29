@@ -458,3 +458,19 @@ test_that('params round trip', {
   expect_equal(P1$sfoae_num_harmonics, 2)
   expect_equal(P1$include_beats, T)
 })
+test_that('pure tone beat makes sense',{
+  dyad = mami.codi(c(60,71.25), num_harmonics=1, include_beats=T, verbose=T)
+  dyad$beats_spectrum[[1]]
+
+  dyad = mami.codi(c(60,71.5), num_harmonics=1, include_beats=T, verbose=T)
+  dyad$beats_spectrum[[1]]
+
+  dyad = mami.codi(c(60,71.75), num_harmonics=1, include_beats=T, verbose=T)
+  dyad$beats_spectrum[[1]]
+
+  dyad = mami.codi(c(60,72), num_harmonics=1, include_beats=T, verbose=T)
+  dyad$beats_spectrum[[1]]
+
+  dyad = mami.codi(c(60,73), num_harmonics=1, include_beats=T, verbose=T)
+  dyad$beats_spectrum[[1]]
+})

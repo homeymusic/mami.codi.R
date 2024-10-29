@@ -1,6 +1,13 @@
+github_result = devtools::install_github('homeymusic/mami.codi.R',
+                                         ref='sfoae')
+
+if (is.na(github_result)) {
+  stop("Fatal error: Unable to install the package from GitHub. Please check the repository and branch name.")
+} else {
+  message("Repo looks good: ", github_result)
+}
+
 source('./utils.R')
-devtools::install_github('git@github.com:homeymusic/mami.codi.R',
-                         ref='sfoae')
 
 library(mami.codi.R)
 devtools::load_all(".")
@@ -143,12 +150,12 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
   mami.codi.R::mami.codi(study_chord,
                          include_beats=T,
                          metadata = list(
-                           include_beats=T,
-                           sfoae_num_harmonics=2,
-                           num_harmonics = num_harmonics,
-                           octave_ratio  = octave_ratio,
-                           semitone      = interval,
-                           timbre        = timbre
+                           include_beats       =T,
+                           sfoae_num_harmonics = 2,
+                           num_harmonics       = num_harmonics,
+                           octave_ratio        = octave_ratio,
+                           semitone            = interval,
+                           timbre              = timbre
                          ),
                          verbose=TRUE)
 
