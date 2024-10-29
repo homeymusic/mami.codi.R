@@ -81,7 +81,8 @@ test_that('beats near the octave',{
   l = (wavelengths[1] * wavelengths[2]) / abs(wavelengths[1] - wavelengths[2])
   expect_true(l > max(wavelengths))
   amplitudes  = rep(1, length(wavelengths))
-  beating = mami.codi(c(60,71), num_harmonics=1, verbose=T, include_beats=T)$beating
+  beating = mami.codi(c(60,71), num_harmonics=1, verbose=T, include_beats=T,
+                      sfoae_num_harmonics=0)$beating
   expect_equal(beating, 4.62, tolerance = 0.01)
   beats_spectrum = calculate_beats(wavelength = wavelengths, amplitude=amplitudes)
   expect_equal(beats_spectrum$wavelength,
@@ -94,7 +95,8 @@ test_that('beats near the octave',{
   l = (wavelengths[1] * wavelengths[2]) / abs(wavelengths[1] - wavelengths[2])
   expect_true(l <= max(wavelengths))
   amplitudes  = rep(1, length(wavelengths))
-  beating = mami.codi(c(60,72), num_harmonics=1, verbose=T, include_beats=T)$beating
+  beating = mami.codi(c(60,72), num_harmonics=1, verbose=T, include_beats=T,
+                      sfoae_num_harmonics=0)$beating
   expect_equal(beating, 0, tolerance = 0.01)
   beats_spectrum = calculate_beats(wavelength = wavelengths, amplitude=amplitudes)
   expect_equal(beats_spectrum$wavelength,
@@ -108,7 +110,8 @@ test_that('beats near the octave',{
   # above the ocatve the beats are not audible?
   expect_true(l < max(wavelengths))
   amplitudes  = rep(1, length(wavelengths))
-  beating = mami.codi(c(60,73), num_harmonics=1, verbose=T, include_beats=T)$beating
+  beating = mami.codi(c(60,73), num_harmonics=1, verbose=T, include_beats=T,
+                      sfoae_num_harmonics=0)$beating
   expect_equal(beating, 0, tolerance = 0.01)
   beats_spectrum = calculate_beats(wavelength = wavelengths, amplitude=amplitudes)
   expect_equal(beats_spectrum$wavelength,

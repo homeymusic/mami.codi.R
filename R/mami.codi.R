@@ -23,8 +23,8 @@
 #' @export
 mami.codi <- function(
     x,
-    sfoae_num_harmonics      = 0,
-    include_beats            = F,
+    sfoae_num_harmonics      = 5,
+    include_beats            = T,
     minimum_amplitude        = MINIMUM_AMPLITUDE,
     time_standard_deviation  = STANDARD_DEVIATION,
     space_standard_deviation = STANDARD_DEVIATION,
