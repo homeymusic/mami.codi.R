@@ -147,7 +147,7 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
     )
   }
 
-  sfoae_num_harmonics = 3
+  sfoae_num_harmonics = 2
   m = mami.codi.R::mami.codi(study_chord,
                          include_beats=T,
                          sfoae_num_harmonics = sfoae_num_harmonics,
