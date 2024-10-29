@@ -378,3 +378,21 @@ test_that('original source spectrum is available',{
   P1 = mami.codi(60, verbose=T)
   expect_equal(P1$source_spectrum[[1]] %>% nrow(), 11)
 })
+test_that('we can quanity the amount of beating in  chord', {
+  C4_midi = 60
+  f_beat = 7 # Hz
+  C4_beat_midi = hrep::freq_to_midi(hrep::midi_to_freq(C4_midi) + f_beat)
+  num_harmonics = 1
+
+  P1_beats = mami.codi(C4_midi,
+                       include_beats=T,
+                       num_harmonics = num_harmonics,
+                       verbose =T)
+  expect_equal(P1_beats$beating, 0.0, tolerance=0.1)
+
+  P1_beats = mami.codi(c(C4_midi, C4_beat_midi),
+                       include_beats=T,
+                       num_harmonics = num_harmonics,
+                       verbose =T)
+  expect_equal(P1_beats$beating, 49.0, tolerance=0.1)
+})

@@ -89,6 +89,7 @@ stimulus <- function(x, include_beats) {
   tibble::tibble_row(
     frequency_spectrum  = list(frequency_spectrum),
     wavelength_spectrum = list(wavelength_spectrum),
+    beating             = sum(beats_spectrum$wavelength, na.rm = TRUE),
     beats_spectrum      = list(beats_spectrum),
     source_spectrum     = list(x)
   )
