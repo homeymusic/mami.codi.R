@@ -1,5 +1,5 @@
 github_result = devtools::install_github('homeymusic/mami.codi.R',
-                                         ref='sfoae')
+                                         ref='sfoae_no_transpose')
 
 if (is.na(github_result)) {
   stop("Fatal error: Unable to install the package from GitHub. Please check the repository and branch name.")
