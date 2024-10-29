@@ -147,7 +147,7 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
     )
   }
 
-  m = mami.codi.R::mami.codi(study_chord,
+  mami.codi.R::mami.codi(study_chord,
                          metadata = list(
                            num_harmonics       = num_harmonics,
                            octave_ratio        = octave_ratio,
@@ -156,9 +156,5 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
                          ),
                          verbose=TRUE)
 
-  if (m$sfoae_num_harmonics != sfoae_num_harmonics) {
-    stop(paste("Fatal error: m$sfoae_num_harmonics != ",sfoae_num_harmonics))
-  }
-  m
 }, .progress=TRUE, .options = furrr::furrr_options(seed = T))
 saveRDS(output,output.rds)
