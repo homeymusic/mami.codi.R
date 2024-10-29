@@ -450,3 +450,11 @@ test_that('Beats and Stimulus Frequency Otoacoustic Emissions',{
 
 
 })
+test_that('params round trip', {
+  P1 = mami.codi(60,
+                 verbose=T,
+                 sfoae_num_harmonics = 2,
+                 include_beats=T)
+  expect_equal(P1$sfoae_num_harmonics, 2)
+  expect_equal(P1$include_beats, T)
+})
