@@ -1,5 +1,5 @@
 github_result = devtools::install_github('homeymusic/mami.codi.R',
-                                         ref='main')
+                                         ref='more_oae_harmonics')
 
 if (is.na(github_result)) {
   stop("Fatal error: Unable to install the package from GitHub. Please check the repository and branch name.")
@@ -147,7 +147,7 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
     )
   }
 
-  sfoae_num_harmonics = 2
+  sfoae_num_harmonics = 5
   m = mami.codi.R::mami.codi(study_chord,
                          include_beats=T,
                          sfoae_num_harmonics = sfoae_num_harmonics,
