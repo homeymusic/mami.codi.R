@@ -458,3 +458,39 @@ test_that('params round trip', {
   expect_equal(P1$sfoae_num_harmonics, 2)
   expect_equal(P1$include_beats, T)
 })
+test_that('pure tone beat makes sense with without SFOAE',{
+
+  # without SFOAE
+  dyad = mami.codi(c(60,71),
+                   num_harmonics=1,
+                   include_beats=T,
+                   verbose=T)
+  expect_equal(dyad$beating, 1.30, tolerance = 0.01)
+  expect_equal(dyad$beats_spectrum[[1]]$wavelength, 1.47, tolerance = 0.01)
+
+  dyad = mami.codi(c(60,73),
+                   num_harmonics=1,
+                   include_beats=T,
+                   verbose=T)
+  expect_equal(dyad$beating, 0, tolerance = 0.01)
+  expect_equal(dyad$beats_spectrum[[1]]$wavelength, numeric(0), tolerance = 0.01)
+
+
+  # with SFOAE
+  dyad = mami.codi(c(60,71),
+                   num_harmonics=1,
+                   sfoae_num_harmonics = 2,
+                   include_beats=T,
+                   verbose=T)
+  expect_equal(dyad$beating, 3.82, tolerance = 0.01)
+  expect_equal(dyad$beats_spectrum[[1]]$wavelength, c(1.47, 11.67), tolerance = 0.01)
+
+  dyad = mami.codi(c(60,73),
+                   num_harmonics=1,
+                   sfoae_num_harmonics = 2,
+                   include_beats=T,
+                   verbose=T)
+  expect_equal(dyad$beating, 3.58, tolerance = 0.01)
+  expect_equal(dyad$beats_spectrum[[1]]$wavelength, c(11.02), tolerance = 0.01)
+
+})
