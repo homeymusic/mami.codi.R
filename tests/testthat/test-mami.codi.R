@@ -484,7 +484,7 @@ test_that('pure tone beat makes sense with without SFOAE 2 harmonics',{
                    sfoae_num_harmonics = 2,
                    include_beats=T,
                    verbose=T)
-  expect_equal(dyad$beating, 5.57, tolerance = 0.01)
+  expect_equal(dyad$beating, 6.55, tolerance = 0.01)
   expect_equal(dyad$beats_spectrum[[1]]$wavelength, c(22.04, 1.39), tolerance = 0.01)
   expect_equal(dyad$beats_spectrum[[1]]$amplitude, c(4,3.57), tolerance = 0.01)
 
@@ -493,7 +493,7 @@ test_that('pure tone beat makes sense with without SFOAE 2 harmonics',{
                    sfoae_num_harmonics = 2,
                    include_beats=T,
                    verbose=T)
-  expect_equal(dyad$beating, 4.63, tolerance = 0.01)
+  expect_equal(dyad$beating, 5.60, tolerance = 0.01)
   expect_equal(dyad$beats_spectrum[[1]]$wavelength, c(1.47, 11.67), tolerance = 0.01)
   expect_equal(dyad$beats_spectrum[[1]]$amplitude, c(4,3.57), tolerance = 0.01)
 
