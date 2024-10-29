@@ -394,7 +394,7 @@ test_that('we can quanity the amount of beating in chord', {
                        include_beats=T,
                        num_harmonics = num_harmonics,
                        verbose =T)
-  expect_equal(P1_beats$beating, log2(49.0+1), tolerance=0.1)
+  expect_equal(P1_beats$beating, log2(4*49.0+1), tolerance=0.1)
 })
 test_that('Stimulus Frequency Otoacoustic Emissions',{
   sfoae_num_harmonics=0
@@ -424,7 +424,7 @@ test_that('Beats and Stimulus Frequency Otoacoustic Emissions',{
                        num_harmonics = num_harmonics,
                        verbose =T)
   expect_equal(P8_beats$sfoae_spectrum[[1]] %>% nrow(), sfoae_num_harmonics)
-  expect_true(P8_beats$beating < 2.0)
+  expect_true(P8_beats$beating < 3.0)
   expect_equal(P8_beats$beats_spectrum[[1]]$wavelength %>% sort,
                c(1.34),
                tolerance=0.1)
@@ -440,7 +440,7 @@ test_that('Beats and Stimulus Frequency Otoacoustic Emissions',{
                        num_harmonics = num_harmonics,
                        verbose =T)
   expect_equal(P8_beats_sfoae$sfoae_spectrum[[1]] %>% nrow(), sfoae_num_harmonics)
-  expect_true(P8_beats_sfoae$beating > 2.0)
+  expect_true(P8_beats_sfoae$beating > 3.0)
   expect_equal(P8_beats_sfoae$beats_spectrum[[1]]$wavelength %>% sort,
                c(1.34, 48.99),
                tolerance=0.1)
@@ -465,8 +465,9 @@ test_that('pure tone beat makes sense with without SFOAE',{
                    num_harmonics=1,
                    include_beats=T,
                    verbose=T)
-  expect_equal(dyad$beating, 1.30, tolerance = 0.01)
+  expect_equal(dyad$beating, 2.78, tolerance = 0.01)
   expect_equal(dyad$beats_spectrum[[1]]$wavelength, 1.47, tolerance = 0.01)
+  expect_equal(dyad$beats_spectrum[[1]]$amplitude, 4, tolerance = 0.01)
 
   dyad = mami.codi(c(60,73),
                    num_harmonics=1,
@@ -474,7 +475,7 @@ test_that('pure tone beat makes sense with without SFOAE',{
                    verbose=T)
   expect_equal(dyad$beating, 0, tolerance = 0.01)
   expect_equal(dyad$beats_spectrum[[1]]$wavelength, numeric(0), tolerance = 0.01)
-
+  expect_equal(dyad$beats_spectrum[[1]]$amplitude, numeric(0),, tolerance = 0.01)
 
   # with SFOAE
   dyad = mami.codi(c(60,71),
@@ -482,15 +483,17 @@ test_that('pure tone beat makes sense with without SFOAE',{
                    sfoae_num_harmonics = 2,
                    include_beats=T,
                    verbose=T)
-  expect_equal(dyad$beating, 3.82, tolerance = 0.01)
+  expect_equal(dyad$beating, 5.60, tolerance = 0.01)
   expect_equal(dyad$beats_spectrum[[1]]$wavelength, c(1.47, 11.67), tolerance = 0.01)
+  expect_equal(dyad$beats_spectrum[[1]]$amplitude, c(4,3.57), tolerance = 0.01)
 
   dyad = mami.codi(c(60,73),
                    num_harmonics=1,
                    sfoae_num_harmonics = 2,
                    include_beats=T,
                    verbose=T)
-  expect_equal(dyad$beating, 3.58, tolerance = 0.01)
+  expect_equal(dyad$beating, 5.34, tolerance = 0.01)
   expect_equal(dyad$beats_spectrum[[1]]$wavelength, c(11.02), tolerance = 0.01)
+  expect_equal(dyad$beats_spectrum[[1]]$amplitude, c(3.57), tolerance = 0.01)
 
 })
