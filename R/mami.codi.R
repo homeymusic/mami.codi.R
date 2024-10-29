@@ -21,7 +21,7 @@
 #' @export
 mami.codi <- function(
     x,
-    include_beats            = T,
+    include_beats            = F,
     minimum_amplitude        = MINIMUM_AMPLITUDE,
     time_standard_deviation  = STANDARD_DEVIATION,
     space_standard_deviation = STANDARD_DEVIATION,
@@ -89,7 +89,8 @@ stimulus <- function(x, include_beats) {
   tibble::tibble_row(
     frequency_spectrum  = list(frequency_spectrum),
     wavelength_spectrum = list(wavelength_spectrum),
-    beats_spectrum      = list(beats_spectrum)
+    beats_spectrum      = list(beats_spectrum),
+    source_spectrum     = list(x)
   )
 
 }

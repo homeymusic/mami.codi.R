@@ -374,3 +374,7 @@ test_that('mami codi with beats around unison and octave', {
                c(0.89, 3.58, 3.18, 1.00, 3.58, 0.89, 4.00, 1.00, 3.58, 3.58) %>% sort(),
                tolerance=0.1)
 })
+test_that('original source spectrum is available',{
+  P1 = mami.codi(60, verbose=T)
+  expect_equal(P1$source_spectrum[[1]] %>% nrow(), 11)
+})
