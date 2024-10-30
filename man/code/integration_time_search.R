@@ -12,12 +12,12 @@ if (is.na(github_result)) {
 # options(timeout = max(1000, getOption("timeout")))
 
 # Detailed
-# from_prec   = 0.07
-# to_prec     = 0.09
-# by_prec     = 0.01
-# standard_deviations = sort(c(seq(from=from_prec, to=to_prec, by=by_prec)))
+from_prec   = 0.08
+to_prec     = 0.1
+by_prec     = 0.001
+uncertainties = sort(c(seq(from=from_prec, to=to_prec, by=by_prec)))
 
-uncertainties = c(1:9 %o% 10^(-5:0))
+# uncertainties = c(1:9 %o% 10^(-5:0))
 
 # Calculate integration_time values
 integration_times <- sapply(uncertainties, function(uncertainty) {
