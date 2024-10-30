@@ -1,4 +1,4 @@
-run_trials <- function(search_label, standard_deviations,
+run_trials <- function(search_label, integration_times,
                        include_beats) {
   devtools::load_all(".")
   tonic_midi = 60
@@ -21,18 +21,18 @@ run_trials <- function(search_label, standard_deviations,
   }
 
   print(search_label)
-  print(paste('standard_deviations:',standard_deviations))
+  print(paste('integration_times:',integration_times))
   print(paste('include_beats:',include_beats))
   print(paste('octave_ratio:',octave_ratio))
   print(paste('num_harmonics:',num_harmonics))
   print(paste('roll_off:',roll_off))
 
-  rds = paste0('../data/standard_deviation_',
+  rds = paste0('../data/output/integration_time_',
                search_label,
                '.rds')
   prepare(rds)
 
-  behavior.rds = paste0('../data/',
+  behavior.rds = paste0('../data/input/',
                         search_label,
                         '.rds')
   behavior = readRDS(behavior.rds)
@@ -41,7 +41,7 @@ run_trials <- function(search_label, standard_deviations,
 
   grid = tidyr::expand_grid(
     interval,
-    standard_deviation = standard_deviations
+    integration_time = integration_times
   )
 
   print(grid)
@@ -50,7 +50,7 @@ run_trials <- function(search_label, standard_deviations,
 
   data = grid %>% furrr::future_pmap_dfr(\(
     interval,
-    standard_deviation
+    integration_time
   ) {
 
     if (search_label=='Bonang') {
@@ -89,21 +89,17 @@ run_trials <- function(search_label, standard_deviations,
     }
 
 
-    time_standard_deviation = standard_deviation
-    space_standard_deviation = standard_deviation
     mami.codi.R::mami.codi(
       chord,
-      include_beats            = include_beats,
-      time_standard_deviation  = time_standard_deviation,
-      space_standard_deviation = space_standard_deviation,
-      metadata         = list(
-        include_beats  = include_beats,
-        space_standard_deviation = space_standard_deviation,
-        time_standard_deviation  = time_standard_deviation,
-        octave_ratio   = octave_ratio,
-        num_harmonics  = num_harmonics,
-        roll_off_dB    = roll_off,
-        semitone       = interval - tonic_midi
+      include_beats      = include_beats,
+      integration_time   = integration_time,
+      metadata           = list(
+        include_beats    = include_beats,
+        integration_time = integration_time,
+        octave_ratio     = octave_ratio,
+        num_harmonics    = num_harmonics,
+        roll_off_dB      = roll_off,
+        semitone         = interval - tonic_midi
       ),
       verbose=T
     )

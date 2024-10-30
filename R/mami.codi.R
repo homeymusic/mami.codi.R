@@ -195,14 +195,14 @@ space_time_cycles = function(x,
 #' @export
 cycles <- function(x, dimension, integration_time, harmonics_deviation) {
 
-  standard_deviation = uncertainty(DIMENSION$TIME, integration_time)
+  uncertainty = uncertainty(dimension, integration_time)
 
-  fractions = approximate_rational_fractions(x, standard_deviation, harmonics_deviation)
+  fractions = approximate_rational_fractions(x, uncertainty, harmonics_deviation)
 
   t = tibble::tibble_row(
     cycles = lcm_integers(fractions$den),
     fractions = list(fractions),
-    standard_deviation
+    uncertainty
   ) %>% dplyr::rename_with(~ paste0(dimension, '_' , .))
   t
 }
@@ -219,16 +219,19 @@ lcm_integers <- function(x) Reduce(gmp::lcm.bigz, x) %>% as.numeric()
 #' @rdname uncertainty
 #' @export
 uncertainty <- function(dimension, integration_time) {
-  if (dimension == DIMENSION$SPACE) {
+
+  if (integration_time < 0) {
+    stop('Integration time must be greater than zero.')
+  }
+
+  if (dimension == DIMENSION$TIME) {
     UNCERTAINTY_LIMIT
-  } else if (dimension == DIMENSION$TIME) {
-    UNCERTAINTY_LIMIT
+  } else if (dimension == DIMENSION$SPACE) {
+    (integration_time / INTEGRATION_TIME) * UNCERTAINTY_LIMIT
   } else {
     stop("Invalid dimension")
   }
 }
-
-INTEGRATION_TIME = 1
 
 # Constants
 
@@ -244,12 +247,12 @@ UNCERTAINTY_LIMIT = 1 / (4 * pi)
 
 #' Default Integration Time
 #'
-#' Default standard_deviation for converting floating point numbers to rational fractions
+#' Default integration time for sampling the space and time signals
 #'
 #'
 #' @rdname default_integration_time
 #' @export
-default_integration <- function() { INTEGRATION_TIME }
+default_integration_time <- function() { INTEGRATION_TIME }
 INTEGRATION_TIME = 1
 
 #' Default Approximate Least Common Multiple Deviation

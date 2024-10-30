@@ -550,3 +550,19 @@ test_that('pure tone beat makes sense with without SFOAE 2 harmonics',{
   expect_equal(dyad$beats_spectrum[[1]]$amplitude, c(3.57), tolerance = 0.01)
 
 })
+test_that('uncertaintiy relationships makes sense wrt integration time', {
+  default_t = default_integration_time()
+
+  P1 = mami.codi(60, integration_time = default_t, num_harmonics=1, verbose=T)
+  expect_equal(P1$time_uncertainty, UNCERTAINTY_LIMIT)
+  expect_equal(P1$space_uncertainty, UNCERTAINTY_LIMIT)
+
+  shorter_integration_time = mami.codi(60, integration_time = default_t - 0.1, num_harmonics=1, verbose=T)
+  expect_equal(shorter_integration_time$time_uncertainty, UNCERTAINTY_LIMIT)
+  expect_true(shorter_integration_time$space_uncertainty < UNCERTAINTY_LIMIT)
+
+  longer_integration_time = mami.codi(60, integration_time = default_t + 0.1, num_harmonics=1, verbose=T)
+  expect_equal(longer_integration_time$time_uncertainty, UNCERTAINTY_LIMIT)
+  expect_true(longer_integration_time$space_uncertainty > UNCERTAINTY_LIMIT)
+
+})
