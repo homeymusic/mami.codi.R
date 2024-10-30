@@ -566,3 +566,13 @@ test_that('uncertaintiy relationships makes sense wrt integration time', {
   expect_true(longer_integration_time$space_uncertainty > UNCERTAINTY_LIMIT)
 
 })
+test_that('uncertaintiy and integration time round trip', {
+  u = uncertainty_limit()
+  t = integration_time(DIMENSION$SPACE,u)
+  expect_equal(t, default_integration_time())
+
+  t = default_integration_time()
+  u = uncertainty(DIMENSION$SPACE, t)
+  expect_equal(u, uncertainty_limit())
+
+})

@@ -233,6 +233,33 @@ uncertainty <- function(dimension, integration_time) {
   }
 }
 
+
+#' Integration Time
+#'
+#' Given an uncertainty returns an integration time.
+#'
+#' @param dimension Space or time dimension
+#' @param uncertainty Uncertainty product
+#'
+#' @rdname integration_time
+#' @export
+integration_time <- function(dimension, uncertainty) {
+
+  if (uncertainty < 0) {
+    stop('Uncertainty must be greater than zero.')
+  }
+
+  if (dimension == DIMENSION$TIME) {
+    INTEGRATION_TIME
+  } else if (dimension == DIMENSION$SPACE) {
+    (uncertainty * INTEGRATION_TIME) / UNCERTAINTY_LIMIT
+  } else {
+    stop("Invalid dimension")
+  }
+}
+
+
+
 # Constants
 
 #' Uncertainty Limit

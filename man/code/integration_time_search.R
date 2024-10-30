@@ -17,11 +17,11 @@ if (is.na(github_result)) {
 # by_prec     = 0.01
 # standard_deviations = sort(c(seq(from=from_prec, to=to_prec, by=by_prec)))
 
-uncertainties = c(1:9 %o% 10^(-3:-1))
+uncertainties = c(1:9 %o% 10^(-5:0))
 
 # Calculate integration_time values
-integration_times <- sapply(uncertainties, function(output) {
-  (output * INTEGRATION_TIME) / UNCERTAINTY_LIMIT
+integration_times <- sapply(uncertainties, function(uncertainty) {
+  integration_time('space', uncertainty)
 })
 
 source('./freq_trials.R')
