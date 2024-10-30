@@ -12,8 +12,6 @@ source('./man/code/utils.R')
 library(mami.codi.R)
 devtools::load_all(".")
 
-tonic_midi = 60
-
 output.rds = './man/data/output/readme.rds'
 prepare(output.rds)
 
@@ -25,6 +23,7 @@ grid_1 = tidyr::expand_grid(
   timbre = 'Pure'
 )
 
+experiment.rds = './man/data/input/Bonang.rds'
 grid_Bonang = tidyr::expand_grid(
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=4,
@@ -111,13 +110,13 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
                                            timbre) {
 
   if (timbre == 'Bonang') {
-    bass_f0 <- hrep::midi_to_freq(tonic_midi)
+    bass_f0 <- hrep::midi_to_freq(0)
     bass <- tibble::tibble(
       frequency = bass_f0 * 1:4,
       amplitude = 1
     ) %>% as.list() %>%  hrep::sparse_fr_spectrum()
 
-    upper_f0 <- hrep::midi_to_freq(interval + tonic_midi)
+    upper_f0 <- hrep::midi_to_freq(interval)
     upper <- tibble::tibble(
       frequency = upper_f0 * c(1, 1.52, 3.46, 3.92),
       amplitude = 1
@@ -125,13 +124,13 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
 
     study_chord = do.call(hrep::combine_sparse_spectra, list(bass,upper))
   } else if (timbre == '5PartialsNo3') {
-    bass_f0 <- hrep::midi_to_freq(tonic_midi)
+    bass_f0 <- hrep::midi_to_freq(0)
     bass <- tibble::tibble(
       frequency = bass_f0 * 1:5,
       amplitude = c(1, 1, 0, 1, 1)
     ) %>% as.list() %>%  hrep::sparse_fr_spectrum()
 
-    upper_f0 <- hrep::midi_to_freq(interval + tonic_midi)
+    upper_f0 <- hrep::midi_to_freq(interval)
     upper <- tibble::tibble(
       frequency = upper_f0 * 1:5,
       amplitude = c(1, 1, 0, 1, 1)
@@ -139,7 +138,7 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
 
     study_chord = do.call(hrep::combine_sparse_spectra, list(bass,upper))
   } else {
-    study_chord = c(tonic_midi, interval + tonic_midi) %>% hrep::sparse_fr_spectrum(
+    study_chord = c(0, interval) %>% hrep::sparse_fr_spectrum(
       num_harmonics = num_harmonics,
       octave_ratio  = octave_ratio,
       roll_off_dB   = 3.0

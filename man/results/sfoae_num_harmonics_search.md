@@ -1,7 +1,7 @@
 SFOAE Number of Harmonics Search
 ================
 
-# Bonang
+# Stretched
 
 SFOAE Number of Harmonics:
 

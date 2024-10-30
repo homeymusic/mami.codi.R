@@ -1,5 +1,4 @@
-timbres=c('Bonang')
-# timbres=c('Pure','5PartialsNo3','5Partials','Bonang','Harmonic','Stretched','Compressed')
+timbres=c('Pure','5PartialsNo3','5Partials','Bonang','Harmonic','Stretched','Compressed')
 
 devtools::load_all(".")
 source('./man/code/plot.R')

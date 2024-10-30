@@ -6,7 +6,7 @@ always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'Bonang'
+search_label = 'Stretched'
 ```
 
 # `r search_label`
@@ -78,7 +78,6 @@ theory = readRDS(theory.rds)
 theory <- theory %>% 
   dplyr::rowwise() %>% 
   dplyr::mutate(
-    sfoae_num_harmonics = metadata$sfoae_num_harmonics,
     num_harmonics  = metadata$num_harmonics,
     octave_ratio   = metadata$octave_ratio,
     semitone       = metadata$semitone,

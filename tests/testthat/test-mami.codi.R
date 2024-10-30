@@ -550,3 +550,7 @@ test_that('pure tone beat makes sense with without SFOAE 2 harmonics',{
   expect_equal(dyad$beats_spectrum[[1]]$amplitude, c(3.57), tolerance = 0.01)
 
 })
+test_that('sfoae_num_harmonics round trips', {
+  P1 = mami.codi(60, verbose=T)
+  expect_equal(P1$sfoae_num_harmonics, 5)
+})
