@@ -16,7 +16,7 @@ num_harmonics = 1
 ### Estimating Space and Time Cycles
 
 To estimate the periodicity of a chord, the MaMi.CoDi model uses a signal 
-processing technique. It finds fractions, within a given standard_deviation, 
+processing technique. It finds fractions, within a given uncertainty, 
 for every tone in the chord (fundamental, harmonics, noise, etc.) relative to 
 a reference tone. The least common denominator of those fractions is a measure of the 
 cycle length, relative to the reference tone. Long relative cycles are predicted 

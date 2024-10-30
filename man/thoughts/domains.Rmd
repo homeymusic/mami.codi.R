@@ -23,19 +23,19 @@ domains
 
 f = cycles( domains$frequencies / min(domains$frequencies),
         RATIO$DEN,
-        STANDARD_DEVIATION, HARMONICS_DEVIATION, 'f')
+        UNCERTAINTY_LIMIT, INTEGER_HARMONICS_TOLERANCE, 'f')
   
 t = cycles( domains$periods / max(domains$periods), 
         RATIO$NUM,
-        STANDARD_DEVIATION, HARMONICS_DEVIATION, 'T')
+        UNCERTAINTY_LIMIT, INTEGER_HARMONICS_TOLERANCE, 'T')
 
 k = cycles( domains$wavenumbers / max(domains$wavenumbers), 
         RATIO$NUM,
-        STANDARD_DEVIATION, HARMONICS_DEVIATION, 'k')
+        UNCERTAINTY_LIMIT, INTEGER_HARMONICS_TOLERANCE, 'k')
 
 l = cycles( domains$wavelengths / min(domains$wavelengths), 
         RATIO$DEN,
-        STANDARD_DEVIATION, HARMONICS_DEVIATION, 'l')
+        UNCERTAINTY_LIMIT, INTEGER_HARMONICS_TOLERANCE, 'l')
 table_data <- tibble::tibble(
   f_num = f$f_fractions[[1]]$num,
   f_den = f$f_fractions[[1]]$den,

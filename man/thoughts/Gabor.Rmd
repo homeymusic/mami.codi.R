@@ -17,8 +17,8 @@ knitr::opts_chunk$set(dev = 'svg')
 ```
 
 ```{r, echo=F, message=F}
-t        = seq(from=-sqrt(default_standard_deviation()),to=sqrt(default_standard_deviation()),by=0.001)
-sigma_2  = default_standard_deviation() / 4
+t        = seq(from=-sqrt(uncertainty_limit()),to=sqrt(uncertainty_limit()),by=0.001)
+sigma_2  = uncertainty_limit() / 4
 sigma    = sqrt(sigma_2)
 gaussian = (1 / (sigma * sqrt(2 * pi))) * exp(- 0.5 * (t^2 / sigma_2))
 plot(t,gaussian)
@@ -73,7 +73,7 @@ be obtained by direct readings." -Gabor\
 
 For MaMi.CoDi:\
 
-Wavelength ratio standard_deviation x Frequency ratio standard_deviation  = Number of the order one\
+Wavelength ratio uncertainty x Frequency ratio uncertainty  = Number of the order one\
 
 One observation happens in a "characteristic rectangle" in the space-time diagram.
 

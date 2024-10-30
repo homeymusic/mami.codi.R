@@ -7,9 +7,9 @@
 space_time_cycles(
   x,
   minimum_amplitude,
-  time_standard_deviation,
-  space_standard_deviation,
-  harmonics_deviation
+  time_uncertainty,
+  space_uncertainty,
+  integer_harmonics_tolerance
 )
 }
 \arguments{
@@ -17,11 +17,11 @@ space_time_cycles(
 
 \item{minimum_amplitude}{Ignore all frequencies below this threshold}
 
-\item{time_standard_deviation}{Uncertainty for creating rational fractions}
+\item{time_uncertainty}{Uncertainty for creating rational fractions}
 
-\item{space_standard_deviation}{Uncertainty for creating rational fractions}
+\item{space_uncertainty}{Uncertainty for creating rational fractions}
 
-\item{harmonics_deviation}{Error allowance for harmonics not being perfect integers}
+\item{integer_harmonics_tolerance}{Error allowance for harmonics not being perfect integers}
 }
 \value{
 Estimate the cycle length of time and space signals

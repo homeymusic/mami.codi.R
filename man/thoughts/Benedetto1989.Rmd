@@ -20,11 +20,11 @@ For MaMi.CoDi:
 
 ```{r, echo=F, message=F}
 L2_f = 1
-standard_deviation = L2_f / (4 * pi)
-standard_deviation
+uncertainty = L2_f / (4 * pi)
+uncertainty
 ```
 
 It feel right now like equation 5.1.4 is the place to start.\
 
-c is standard_deviation ranging from 0 to 1?\
+c is uncertainty ranging from 0 to 1?\
 

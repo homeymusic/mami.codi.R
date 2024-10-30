@@ -7,9 +7,9 @@
 #' @param include_beats Beats
 #' @param sfoae_num_harmonics Stimulus Frequency Otoacoustic Emissions
 #' @param minimum_amplitude An optional minimum amplitude for deciding which partials to include.
-#' @param time_standard_deviation An optional time standard_deviation value for finding rational fractions.
-#' @param space_standard_deviation  An optional space standard_deviation value for finding rational fractions.
-#' @param harmonics_deviation An optional deviation value that allows for harmonics to be not perfect integers.
+#' @param time_uncertainty An optional time uncertainty value for finding rational fractions.
+#' @param space_uncertainty  An optional space uncertainty value for finding rational fractions.
+#' @param integer_harmonics_tolerance An optional deviation value that allows for harmonics to be not perfect integers.
 #' @param metadata User-provided list of metadata that round trips with each call.
 #' helpful for analysis and plots
 #' @param verbose Determines the amount of data to return from chord evaluation
@@ -23,14 +23,14 @@
 #' @export
 mami.codi <- function(
     x,
-    sfoae_num_harmonics      = 5,
-    include_beats            = T,
-    minimum_amplitude        = MINIMUM_AMPLITUDE,
-    time_standard_deviation  = STANDARD_DEVIATION,
-    space_standard_deviation = STANDARD_DEVIATION,
-    harmonics_deviation      = HARMONICS_DEVIATION,
-    metadata                 = NA,
-    verbose                  = FALSE,
+    sfoae_num_harmonics         = 5,
+    include_beats               = T,
+    minimum_amplitude           = MINIMUM_AMPLITUDE,
+    time_uncertainty            = UNCERTAINTY_LIMIT,
+    space_uncertainty           = UNCERTAINTY_LIMIT,
+    integer_harmonics_tolerance = INTEGER_HARMONICS_TOLERANCE,
+    metadata                    = NA,
+    verbose                     = FALSE,
     ...
 ) {
 
@@ -41,9 +41,9 @@ mami.codi <- function(
     ) %>%
     space_time_cycles(
       minimum_amplitude,
-      time_standard_deviation,
-      space_standard_deviation,
-      harmonics_deviation
+      time_uncertainty,
+      space_uncertainty,
+      integer_harmonics_tolerance
     ) %>%
     format_output(metadata, verbose)
 
@@ -134,9 +134,9 @@ stimulus <- function(x, sfoae_num_harmonics=0, include_beats=F) {
 #'
 #' @param x Stimulus encoded as frequency and wavelength spectra
 #' @param minimum_amplitude Ignore all frequencies below this threshold
-#' @param time_standard_deviation Uncertainty for creating rational fractions
-#' @param space_standard_deviation Uncertainty for creating rational fractions
-#' @param harmonics_deviation Error allowance for harmonics not being perfect integers
+#' @param time_uncertainty Uncertainty for creating rational fractions
+#' @param space_uncertainty Uncertainty for creating rational fractions
+#' @param integer_harmonics_tolerance Error allowance for harmonics not being perfect integers
 #'
 #' @return Estimate the cycle length of time and space signals
 #'
@@ -144,8 +144,8 @@ stimulus <- function(x, sfoae_num_harmonics=0, include_beats=F) {
 #' @export
 space_time_cycles = function(x,
                              minimum_amplitude,
-                             time_standard_deviation, space_standard_deviation,
-                             harmonics_deviation) {
+                             time_uncertainty, space_uncertainty,
+                             integer_harmonics_tolerance) {
   f = (x$frequency_spectrum[[1]] %>%
          dplyr::filter(.data$amplitude>minimum_amplitude))$frequency
   l = (x$wavelength_spectrum[[1]] %>%
@@ -156,8 +156,8 @@ space_time_cycles = function(x,
 
   x %>% dplyr::mutate(
 
-    cycles(f/min(f), time_standard_deviation, harmonics_deviation, 'time'),
-    cycles(l/min(l), space_standard_deviation,  harmonics_deviation, 'space'),
+    cycles(f/min(f), time_uncertainty, integer_harmonics_tolerance, 'time'),
+    cycles(l/min(l), space_uncertainty,  integer_harmonics_tolerance, 'space'),
 
     time_dissonance        = log2(.data$time_cycles),
     space_dissonance       = log2(.data$space_cycles),
@@ -178,9 +178,9 @@ space_time_cycles = function(x,
     wavenumbers            = list(k),
     speed_of_sound         = C_SOUND,
     minimum_amplitude,
-    time_standard_deviation,
-    space_standard_deviation,
-    harmonics_deviation
+    time_uncertainty,
+    space_uncertainty,
+    integer_harmonics_tolerance
 
   )
 
@@ -189,16 +189,16 @@ space_time_cycles = function(x,
 #' Approximate Number of Cycles of a Complex Wave
 #'
 #' @param x Vector of rational numbers
-#' @param standard_deviation Precision for creating rational fractions
-#' @param harmonics_deviation Deviation for approximating least common multiples
+#' @param uncertainty Precision for creating rational fractions
+#' @param integer_harmonics_tolerance Deviation for approximating least common multiples
 #' @param label A custom label for the output usually 'space' or 'time'
 #'
 #' @return Estimate the number of cycles using approximate least common denominator of the rational numbers
 #'
 #' @rdname cycles
 #' @export
-cycles <- function(x, standard_deviation, harmonics_deviation, label) {
-  fractions = approximate_rational_fractions(x, standard_deviation, harmonics_deviation)
+cycles <- function(x, uncertainty, integer_harmonics_tolerance, label) {
+  fractions = approximate_rational_fractions(x, uncertainty, integer_harmonics_tolerance)
 
   t = tibble::tibble_row(
     cycles = lcm_integers(fractions$den),
@@ -210,25 +210,28 @@ lcm_integers <- function(x) Reduce(gmp::lcm.bigz, x) %>% as.numeric()
 
 # Constants
 
-#' Default Standard Deviation
+#' Uncertainty limit
 #'
-#' Default standard_deviation for converting floating point numbers to rational fractions
+#' Uncertainty limit for the uncertainty products of
+#' time, frequency or space, wavelength
 #'
 #'
-#' @rdname default_standard_deviation
+#' @rdname uncertainty_limit
 #' @export
-default_standard_deviation <- function() { STANDARD_DEVIATION }
-STANDARD_DEVIATION = 1 / (4 * pi)
+uncertainty_limit <- function() { UNCERTAINTY_LIMIT }
+UNCERTAINTY_LIMIT = 1 / (4 * pi)
 
-#' Default Approximate Least Common Multiple Deviation
+#' Default integer harmonic tolerance
 #'
-#' Default harmonics_deviation for approximating the Least Common Multiple (LCM)
+#' Tolerance for the case when harmonics are not perfect integers
+#' useful for approximating the Least Common Multiple (LCM) and
+#' to determine the pseudo octave in the case of stretched timbre
 #'
 #''
-#' @rdname default_harmonics_deviation
+#' @rdname default_integer_harmonics_tolerance
 #' @export
-default_harmonics_deviation <- function() { HARMONICS_DEVIATION }
-HARMONICS_DEVIATION = 0.11
+default_integer_harmonics_tolerance <- function() { INTEGER_HARMONICS_TOLERANCE }
+INTEGER_HARMONICS_TOLERANCE = 0.11
 
 #' Default Minimum Amplitude
 #'

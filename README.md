@@ -463,7 +463,7 @@ $$r_{f i} = \frac{f_{i}}{f_{min}} \pm \sigma_{f}^{2} = \frac{a_{i}}{b_{i}}$$
 
 $\sigma^2$ is the tolerance for converting a real number into a rational
 fraction. Later we will treat the Stern-Brocot function as a strictly
-localized probability distribution with standard_deviation $\sigma^2$.
+localized probability distribution with uncertainty $\sigma^2$.
 
 $${GCD}(a_{i}, b_{i}) = 1$$
 
@@ -662,7 +662,7 @@ the 15 semitones but the overall peak structure agrees with MaMi.CoDi
 predictions. For futher comparison, the theoretical predictions for
 major-minor versus the behavioral results are included in a plot below.
 
-| sfoae_num_harmonics | time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
+| sfoae_num_harmonics | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
 |---:|:---|:---|---:|---:|
 | 5 | 0.07958 | 0.07958 | 0.2 | 2 |
 
@@ -677,7 +677,7 @@ major-minor versus the behavioral results are included in a plot below.
 
 For 10 harmonics, behavioral results and theoretical predictions agree.
 
-| sfoae_num_harmonics | time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
+| sfoae_num_harmonics | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
 |---:|:---|:---|---:|---:|
 | 5 | 0.07958 | 0.07958 | 0.2 | 2 |
 
@@ -695,7 +695,7 @@ For comparison with the study below (5 partils with the third partial
 deleted), notice that the m3 peak is only slightly lower than the M3
 peak.
 
-| sfoae_num_harmonics | time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
+| sfoae_num_harmonics | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
 |---:|:---|:---|---:|---:|
 | 5 | 0.07958 | 0.07958 | 0.2 | 2 |
 
@@ -713,7 +713,7 @@ theoretical predictions mostly agree. As expected, the m3 peak without
 the third partial is now lower than the m3 peak with all 5 harmonics
 while the M3 peak is slightly higher without the 3rd partial.
 
-| sfoae_num_harmonics | time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
+| sfoae_num_harmonics | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
 |---:|:---|:---|---:|---:|
 | 5 | 0.07958 | 0.07958 | 0.2 | 2 |
 
@@ -732,7 +732,7 @@ predicts a dissonance trough with minor polarity at P4 that is not in
 the behavioral results. MaMi.CoDi predicts P5 to have minor polarity and
 be relatively higher than the behavioral results.
 
-| sfoae_num_harmonics | time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
+| sfoae_num_harmonics | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
 |---:|:---|:---|---:|---:|
 | 5 | 0.07958 | 0.07958 | 0.2 | 2 |
 
@@ -749,7 +749,7 @@ For stretched harmonics, behavioral results and theoretical predictions
 mostly agree. MaMi.Codi predicts peaks with minor polarity just above m3
 and m7 that do not exist in the behavioral results.
 
-| sfoae_num_harmonics | time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
+| sfoae_num_harmonics | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
 |---:|:---|:---|---:|---:|
 | 5 | 0.07958 | 0.07958 | 0.2 | 2.1 |
 
@@ -765,7 +765,7 @@ and m7 that do not exist in the behavioral results.
 For compressed harmonics, the pronounced behavioral peaks mostly agree
 with the theoretical peaks.
 
-| sfoae_num_harmonics | time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
+| sfoae_num_harmonics | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
 |---:|:---|:---|---:|---:|
 | 5 | 0.07958 | 0.07958 | 0.2 | 1.9 |
 
@@ -782,7 +782,7 @@ with the theoretical peaks.
 
 Description is below.
 
-| sfoae_num_harmonics | time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
+| sfoae_num_harmonics | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
 |---:|:---|:---|---:|---:|
 | 5 | 0.07958 | 0.07958 | 0.035 | 2 |
 
@@ -797,7 +797,7 @@ Description is below.
 
 Description is below.
 
-| sfoae_num_harmonics | time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
+| sfoae_num_harmonics | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
 |---:|:---|:---|---:|---:|
 | 5 | 0.07958 | 0.07958 | 0.035 | 2 |
 
@@ -812,7 +812,7 @@ Description is below.
 
 Description is below.
 
-| sfoae_num_harmonics | time_standard_deviation | space_standard_deviation | smoothing_sigma | pseudo_octave |
+| sfoae_num_harmonics | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
 |---:|:---|:---|---:|---:|
 | 5 | 0.07958 | 0.07958 | 0.035 | 2 |
 
@@ -881,7 +881,7 @@ $\lambda_i=300.00, 150.00, 100.00$ m
 Lets calculate the overall cycle of the whole wave with harmonics twice,
 using a traditional signal processing technique. We will find the
 frequency and wavelength ratios as rational fractions using the
-Stern-Brocot tree with standard_deviations at the Heisenberg limit and
+Stern-Brocot tree with uncertaintys at the Heisenberg limit and
 then compute the least common denominator (LCD) for each. Using the LCD
 we will find the overall cycle.  
 
@@ -1012,7 +1012,7 @@ observations. We are making a purely space observation about wavelengths
 When we combine all the component parts of a chord together into a
 whole, we can estimate the overall wavelength for the whole chord. A
 technique used in digital signal processing and bricklaying is to
-estimate ratios (within an acceptable standard_deviation) between each
+estimate ratios (within an acceptable uncertainty) between each
 of the parts and a selected reference part. The greatest common divisor
 (LCD) of those part ratios will be a measure of the periodicity of the
 whole.  
@@ -1050,7 +1050,7 @@ with 5 harmonics, below.
 
 # `{r, child=c('man/Space_Time_Cycles.Rmd')} #`
 
-### Finding the standard_deviation Values
+### Finding the uncertainty Values
 
 “One difficulty with distinguishing between place and time (or
 place-time) models of pitch is that spectral and time representations of
@@ -1071,17 +1071,17 @@ from “Revisiting place and time theories of pitch”, Andrew J. Oxenham,
 2014.  
 
 The MaMi.CoDi model, based on Stolzenburg (2015), has one one parameter:
-standard_deviation. Variance is used by the Stern-Brocot algorithm to
+uncertainty. Variance is used by the Stern-Brocot algorithm to
 find tone ratios as rational fractions that are then used to estimate
-the relative periodicity of chords. standard_deviation acts as the
+the relative periodicity of chords. uncertainty acts as the
 physiological limits mentioned by Oxenham, above.  
 
 Considering that the space and time signals had two different
-physiological origins, we searched a two-dimensional standard_deviation
+physiological origins, we searched a two-dimensional uncertainty
 space in order to match model predictions with the large-scale
 behavioral results. It turned out that the values that best matched
 large-scale behavioral results were always the same for time and space
-standard_deviation. This might indicate that the physiological
+uncertainty. This might indicate that the physiological
 limitations are not specific to place signals or time signals
 separetely. But instead the limitation is higher in the auditory system
 after the signals have been passed along.  
@@ -1092,16 +1092,16 @@ instead a limit of higher-level perception or pattern recognition, where
 estimates of the period of a complex signal is made from components.  
 
 MaMi.CoDi uses the Stern-Brocot tree to find rational fractions for the
-ratios within a given standard_deviation. How do we find the best
-standard_deviation values? For the MaMi.CoDi model we ran thousands of
-computations with various standard_deviation values and compared the
+ratios within a given uncertainty. How do we find the best
+uncertainty values? For the MaMi.CoDi model we ran thousands of
+computations with various uncertainty values and compared the
 predictions with results from six of the large-scale behavioral
 experiments.  
 
 Because the space signal and the time signal have different origins we
-initially did a two-dimensional standard_deviation search. However the
+initially did a two-dimensional uncertainty search. However the
 closest fits to the behavioral data came from space and
-standard_deviation values being the same. Insofar as this model
+uncertainty values being the same. Insofar as this model
 represents processing in the auditory cortex, it would seem that
 estimating the cyclicity of the two signals happens higher up in the
 auditoray system after the space and time signals have been processed.  
@@ -1110,7 +1110,7 @@ auditoray system after the space and time signals have been processed.
 
 The Stern-Brocot curve is a repeatable, deterministic curve of where
 rational fractions exist or do not exist within a given
-standard_deviation.  
+uncertainty.  
 
 However, the value is 0 outside $\pm \sigma^{2}$ and the area of the
 curve equals one so that we can use it like a probability density

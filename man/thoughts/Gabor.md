@@ -53,7 +53,7 @@ readings.” -Gabor
 
 For MaMi.CoDi:  
 
-Wavelength ratio standard_deviation x Frequency ratio standard_deviation = Number of the
+Wavelength ratio uncertainty x Frequency ratio uncertainty = Number of the
 order one  
 
 One observation happens in a “characteristic rectangle” in the

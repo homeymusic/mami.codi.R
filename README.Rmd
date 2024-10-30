@@ -15,9 +15,9 @@ knitr::opts_chunk$set(
   warning = FALSE, 
   message = FALSE
 )
-remove_floating_point_mistakes <- function(errors, standard_deviation) {
-  errors = errors[errors>=-standard_deviation]
-  errors[errors<=standard_deviation]
+remove_floating_point_mistakes <- function(errors, uncertainty) {
+  errors = errors[errors>=-uncertainty]
+  errors[errors<=uncertainty]
 }
 c_sound = 343
 plot_fundamental_wavelength <- function(midi) {
@@ -295,7 +295,7 @@ $$r_{f i} = \frac{f_{i}}{f_{min}} \pm \sigma_{f}^{2} = \frac{a_{i}}{b_{i}}$$
 
 $\sigma^2$ is the tolerance for converting a real number into a rational fraction.
 Later we will treat the Stern-Brocot function as a strictly localized probability 
-distribution with standard_deviation $\sigma^2$.
+distribution with uncertainty $\sigma^2$.
 
 $${GCD}(a_{i}, b_{i}) = 1$$
 
@@ -324,8 +324,8 @@ $${ GCD}(c_{i}, d_{i}) = 1$$
 ## Stern-Brocot as Strictly Localized Probability Distribution
 
 ```{r, echo=F, message=F}
-standard_deviation = default_standard_deviation()
-path = paste0('./man/data/stern_brocot_',standard_deviation,'.rds')
+uncertainty = uncertainty_limit()
+path = paste0('./man/data/stern_brocot_',uncertainty,'.rds')
 fractions = readRDS(path)
 ```
 
@@ -334,7 +334,7 @@ bins = 21
 print(plot_error_hist(fractions$error,
                       bins=bins,
                       'fundamental', 
-                      standard_deviation,
+                      uncertainty,
                       'Stern-Brocot Curve'))
 cat("  \n")
 
@@ -571,13 +571,13 @@ p = params %>% purrr::map(\(p) {
   cat("  \n#####", title, '\n')
   cat(description)
   sfoae_num_harmonics = chords$sfoae_num_harmonics %>% max()
-  t_v = chords$time_standard_deviation %>% max()
-  s_v = chords$space_standard_deviation %>% max()
+  t_v = chords$time_uncertainty %>% max()
+  s_v = chords$space_uncertainty %>% max()
   p_o = chords$space_fractions[[1]]$pseudo_octave %>% max() 
   print(knitr::kable(tibble::tibble_row(
     sfoae_num_harmonics = sfoae_num_harmonics,
-    time_standard_deviation = paste(round(t_v, 5), collapse = ' '),
-    space_standard_deviation  = paste(round(s_v, 5), collapse = ' '),
+    time_uncertainty = paste(round(t_v, 5), collapse = ' '),
+    space_uncertainty  = paste(round(s_v, 5), collapse = ' '),
     smoothing_sigma   = sigma,
     pseudo_octave = p_o
   )))
@@ -706,7 +706,7 @@ $\lambda_i=`r l_formatted`$ m\
 
 Lets calculate the overall cycle of the whole wave with harmonics twice, using 
 a traditional signal processing technique. We will find the frequency and 
-wavelength ratios as rational fractions using the Stern-Brocot tree with standard_deviations
+wavelength ratios as rational fractions using the Stern-Brocot tree with uncertaintys
 at the Heisenberg limit and then compute the least common denominator (LCD) for 
 each. Using the LCD we will find the overall cycle. \
 
@@ -720,14 +720,14 @@ Frequency Ratios
 ```{r, echo=F, message=F, results='asis'}
 f_ratios = (f / min(f)) %>% sort()
 l_ratios = (l / min(l)) %>% sort()
-f_rational = approximate_rational_fractions(f_ratios, default_standard_deviation(), default_harmonics_deviation())
+f_rational = approximate_rational_fractions(f_ratios, uncertainty_limit(), default_integer_harmonics_tolerance())
 print(knitr::kable(f_rational %>% dplyr::select(num, den)))
 ```
 
 Wavelength Ratios
 
 ```{r, echo=F, message=F, results='asis'}
-l_rational = approximate_rational_fractions(l_ratios, default_standard_deviation(), default_harmonics_deviation())
+l_rational = approximate_rational_fractions(l_ratios, uncertainty_limit(), default_integer_harmonics_tolerance())
 print(knitr::kable(l_rational %>% dplyr::select(num, den)))
 ```
 
@@ -841,7 +841,7 @@ observations shortly.\
 
 When we combine all the component parts of a chord together into a whole, 
 we can estimate the overall wavelength for the whole chord. A technique used in digital signal 
-processing and bricklaying is to estimate ratios (within an acceptable standard_deviation)
+processing and bricklaying is to estimate ratios (within an acceptable uncertainty)
 between each of the parts and a selected reference part.
 The greatest common divisor (LCD) of those part ratios will be a measure of the periodicity 
 of the whole.\
@@ -879,7 +879,7 @@ See the example of the major triad with 5 harmonics, below.
 # ```{r, child=c('man/Space_Time_Cycles.Rmd')}
 # ```
 
-### Finding the standard_deviation Values
+### Finding the uncertainty Values
 
 "One difficulty with distinguishing between place and time (or place-time) models of
 pitch is that spectral and time representations of a signal are mathematically equivalent:
@@ -897,16 +897,16 @@ suppressed, then time information is not necessary for pitch perception."\
 from "Revisiting place and time theories of pitch", Andrew J. Oxenham, 2014.\
 
 The MaMi.CoDi model, based on Stolzenburg (2015), has one one parameter: 
-standard_deviation. Variance is used by the Stern-Brocot algorithm to find tone
+uncertainty. Variance is used by the Stern-Brocot algorithm to find tone
 ratios as rational fractions that are then used to estimate the relative 
-periodicity of chords. standard_deviation acts as the physiological limits mentioned by 
+periodicity of chords. uncertainty acts as the physiological limits mentioned by 
 Oxenham, above.\
 
 Considering that the space and time signals had two different physiological
-origins, we searched a two-dimensional standard_deviation space in order to match model
+origins, we searched a two-dimensional uncertainty space in order to match model
 predictions with the large-scale behavioral results. It turned out that the 
 values that best matched large-scale behavioral results were always the
-same for time and space standard_deviation. This might indicate that the physiological 
+same for time and space uncertainty. This might indicate that the physiological 
 limitations are not specific to place signals or time signals separetely. But 
 instead the limitation is higher in the auditory system after the signals have
 been passed along.\
@@ -917,14 +917,14 @@ of higher-level perception or pattern recognition, where estimates of the period
 of a complex signal is made from components.\
 
 MaMi.CoDi uses the Stern-Brocot tree to find rational fractions for the ratios 
-within a given standard_deviation. How do we find the best standard_deviation values? For the 
-MaMi.CoDi model we ran thousands of computations with various standard_deviation values 
+within a given uncertainty. How do we find the best uncertainty values? For the 
+MaMi.CoDi model we ran thousands of computations with various uncertainty values 
 and compared the predictions with results from six of the large-scale behavioral 
 experiments.\
 
 Because the space signal and the time signal have different origins
-we initially did a two-dimensional standard_deviation search. However the closest 
-fits to the behavioral data came from space and standard_deviation values being the 
+we initially did a two-dimensional uncertainty search. However the closest 
+fits to the behavioral data came from space and uncertainty values being the 
 same. Insofar as this model represents processing in the auditory cortex, it 
 would seem that estimating the cyclicity of the two signals happens higher up
 in the auditoray system after the space and time signals have been processed.\
@@ -933,7 +933,7 @@ in the auditoray system after the space and time signals have been processed.\
 ### Difference between Stern-Brocot Rational Fraction Approximations and Floating Point Values
 
 The Stern-Brocot curve is a repeatable, deterministic curve of where rational 
-fractions exist or do not exist within a given standard_deviation.\
+fractions exist or do not exist within a given uncertainty.\
 
 However, the value is 0 outside $\pm \sigma^{2}$ and the area of the 
 curve equals one so that we can use it like a probability density 

@@ -5,28 +5,28 @@ using namespace Rcpp;
 
  //' stern_brocot
  //'
- //' Approximates a floating-point number to arbitrary standard_deviation.
+ //' Approximates a floating-point number to arbitrary uncertainty.
  //'
  //' @param x Number to convert to rational fraction
- //' @param standard_deviation Binary search stops once the desired standard_deviation is reached
+ //' @param uncertainty Binary search stops once the desired uncertainty is reached
  //'
  //' @return A ratio of num / den
  //'
  //' @export
  // [[Rcpp::export]]
- NumericVector stern_brocot(const double x, const double standard_deviation) {
-   // Ensure x is positive and standard_deviation is non-negative
+ NumericVector stern_brocot(const double x, const double uncertainty) {
+   // Ensure x is positive and uncertainty is non-negative
    if (x <= 0) {
      stop("STOP: x must be greater than 0");
    }
-   if (standard_deviation < 0) {
-     stop("STOP: standard_deviation must be non-negative");
+   if (uncertainty < 0) {
+     stop("STOP: uncertainty must be non-negative");
    }
 
    double approximation;
 
-   const double valid_min = std::max(std::numeric_limits<double>::min(), x - standard_deviation);
-   const double valid_max = x + standard_deviation;
+   const double valid_min = std::max(std::numeric_limits<double>::min(), x - uncertainty);
+   const double valid_max = x + uncertainty;
 
    int left_num    = floor(x);
    int left_den    = 1;
@@ -184,10 +184,10 @@ using namespace Rcpp;
 
  //' approximate_rational_fractions
  //'
- //' Approximates floating-point numbers to arbitrary standard_deviation.
+ //' Approximates floating-point numbers to arbitrary uncertainty.
  //'
  //' @param x Vector of floating point numbers to approximate
- //' @param standard_deviation Precision for finding rational fractions
+ //' @param uncertainty Precision for finding rational fractions
  //' @param deviation Deviation for estimating least common multiples
  //'
  //' @return A data frame of rational numbers and metadata
@@ -195,7 +195,7 @@ using namespace Rcpp;
  //' @export
  // [[Rcpp::export]]
  DataFrame approximate_rational_fractions(NumericVector x,
-                                          const double standard_deviation,
+                                          const double uncertainty,
                                           const double deviation) {
 
    x = unique(x);
@@ -212,7 +212,7 @@ using namespace Rcpp;
 
    for (int i = 0; i < n; ++i) {
      pseudo_x[i]                  = pow(2.0, log(x[i]) / log(pseudo_octave_double));
-     const NumericVector fraction = stern_brocot(pseudo_x[i], standard_deviation);
+     const NumericVector fraction = stern_brocot(pseudo_x[i], uncertainty);
      nums[i]                      = fraction[0];
      dens[i]                      = fraction[1];
      approximations[i]            = nums[i] / dens[i];
@@ -227,7 +227,7 @@ using namespace Rcpp;
      _("den")                    = dens,
      _("approximation")          = approximations,
      _("error")                  = errors,
-     _("standard_deviation")               = standard_deviation
+     _("uncertainty")               = uncertainty
    );
  }
 

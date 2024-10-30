@@ -6,12 +6,12 @@
 \usage{
 mami.codi(
   x,
-  sfoae_num_harmonics = 0,
-  include_beats = F,
+  sfoae_num_harmonics = 5,
+  include_beats = T,
   minimum_amplitude = MINIMUM_AMPLITUDE,
-  time_standard_deviation = STANDARD_DEVIATION,
-  space_standard_deviation = STANDARD_DEVIATION,
-  harmonics_deviation = HARMONICS_DEVIATION,
+  time_uncertainty = UNCERTAINTY_LIMIT,
+  space_uncertainty = UNCERTAINTY_LIMIT,
+  integer_harmonics_tolerance = INTEGER_HARMONICS_TOLERANCE,
   metadata = NA,
   verbose = FALSE,
   ...
@@ -27,11 +27,11 @@ hrep::sparse_fr_spectrum}
 
 \item{minimum_amplitude}{An optional minimum amplitude for deciding which partials to include.}
 
-\item{time_standard_deviation}{An optional time standard_deviation value for finding rational fractions.}
+\item{time_uncertainty}{An optional time uncertainty value for finding rational fractions.}
 
-\item{space_standard_deviation}{An optional space standard_deviation value for finding rational fractions.}
+\item{space_uncertainty}{An optional space uncertainty value for finding rational fractions.}
 
-\item{harmonics_deviation}{An optional deviation value that allows for harmonics to be not perfect integers.}
+\item{integer_harmonics_tolerance}{An optional deviation value that allows for harmonics to be not perfect integers.}
 
 \item{metadata}{User-provided list of metadata that round trips with each call.
 helpful for analysis and plots}
