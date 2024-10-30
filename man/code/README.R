@@ -1,5 +1,5 @@
 github_result = devtools::install_github('homeymusic/mami.codi.R',
-                                         ref='more_oae_harmonics')
+                                         ref='main')
 
 if (is.na(github_result)) {
   stop("Fatal error: Unable to install the package from GitHub. Please check the repository and branch name.")
@@ -7,17 +7,17 @@ if (is.na(github_result)) {
   message("Repo looks good: ", github_result)
 }
 
-source('./utils.R')
+source('./man/code/utils.R')
 
 library(mami.codi.R)
 devtools::load_all(".")
 
 tonic_midi = 60
 
-output.rds = '../data/readme.rds'
+output.rds = './man/data/output/readme.rds'
 prepare(output.rds)
 
-experiment.rds = '../data/Pure.rds'
+experiment.rds = './man/data/input/Pure.rds'
 grid_1 = tidyr::expand_grid(
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=1,
@@ -25,7 +25,6 @@ grid_1 = tidyr::expand_grid(
   timbre = 'Pure'
 )
 
-experiment.rds = '../data/Bonang.rds'
 grid_Bonang = tidyr::expand_grid(
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=4,
@@ -33,7 +32,7 @@ grid_Bonang = tidyr::expand_grid(
   timbre = 'Bonang'
 )
 
-experiment.rds = '../data/5Partials.rds'
+experiment.rds = './man/data/input/5Partials.rds'
 grid_5 = tidyr::expand_grid(
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=5,
@@ -41,7 +40,7 @@ grid_5 = tidyr::expand_grid(
   timbre='5Partials'
 )
 
-experiment.rds = '../data/5PartialsNo3.rds'
+experiment.rds = './man/data/input/5PartialsNo3.rds'
 grid_5PartialsNo3 = tidyr::expand_grid(
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=5,
@@ -49,7 +48,7 @@ grid_5PartialsNo3 = tidyr::expand_grid(
   timbre = '5PartialsNo3'
 )
 
-experiment.rds = '../data/Harmonic.rds'
+experiment.rds = './man/data/input/Harmonic.rds'
 grid_10 = tidyr::expand_grid(
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
@@ -57,7 +56,7 @@ grid_10 = tidyr::expand_grid(
   timbre='Harmonic'
 )
 
-experiment.rds = '../data/Stretched.rds'
+experiment.rds = './man/data/input/Stretched.rds'
 grid_10_stretched = tidyr::expand_grid(
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics = 10,
@@ -65,7 +64,7 @@ grid_10_stretched = tidyr::expand_grid(
   timbre = 'Stretched'
 )
 
-experiment.rds = '../data/Compressed.rds'
+experiment.rds = './man/data/input/Compressed.rds'
 grid_10_compressed = tidyr::expand_grid(
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
@@ -73,7 +72,7 @@ grid_10_compressed = tidyr::expand_grid(
   timbre = 'Compressed'
 )
 
-experiment.rds = '../data/M3.rds'
+experiment.rds = './man/data/input/M3.rds'
 grid_M3 = tidyr::expand_grid(
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
@@ -81,7 +80,7 @@ grid_M3 = tidyr::expand_grid(
   timbre = 'M3'
 )
 
-experiment.rds = '../data/M6.rds'
+experiment.rds = './man/data/input/M6.rds'
 grid_M6 = tidyr::expand_grid(
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,
@@ -89,7 +88,7 @@ grid_M6 = tidyr::expand_grid(
   timbre = 'M6'
 )
 
-experiment.rds = '../data/P8.rds'
+experiment.rds = './man/data/input/P8.rds'
 grid_P8 = tidyr::expand_grid(
   interval = readRDS(experiment.rds)$profile$interval,
   num_harmonics=10,

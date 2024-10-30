@@ -881,9 +881,9 @@ $\lambda_i=300.00, 150.00, 100.00$ m
 Lets calculate the overall cycle of the whole wave with harmonics twice,
 using a traditional signal processing technique. We will find the
 frequency and wavelength ratios as rational fractions using the
-Stern-Brocot tree with uncertaintys at the Heisenberg limit and
-then compute the least common denominator (LCD) for each. Using the LCD
-we will find the overall cycle.  
+Stern-Brocot tree with uncertaintys at the Heisenberg limit and then
+compute the least common denominator (LCD) for each. Using the LCD we
+will find the overall cycle.  
 
 But a quick glance at the normalized wavelength and frequency values,
 above, will show us that we are headed for a disagreement: the
@@ -1012,9 +1012,9 @@ observations. We are making a purely space observation about wavelengths
 When we combine all the component parts of a chord together into a
 whole, we can estimate the overall wavelength for the whole chord. A
 technique used in digital signal processing and bricklaying is to
-estimate ratios (within an acceptable uncertainty) between each
-of the parts and a selected reference part. The greatest common divisor
-(LCD) of those part ratios will be a measure of the periodicity of the
+estimate ratios (within an acceptable uncertainty) between each of the
+parts and a selected reference part. The greatest common divisor (LCD)
+of those part ratios will be a measure of the periodicity of the
 whole.  
 
 Chords with short wavelengths relative to the component wavelengths
@@ -1071,20 +1071,20 @@ from “Revisiting place and time theories of pitch”, Andrew J. Oxenham,
 2014.  
 
 The MaMi.CoDi model, based on Stolzenburg (2015), has one one parameter:
-uncertainty. Variance is used by the Stern-Brocot algorithm to
-find tone ratios as rational fractions that are then used to estimate
-the relative periodicity of chords. uncertainty acts as the
-physiological limits mentioned by Oxenham, above.  
+uncertainty. Variance is used by the Stern-Brocot algorithm to find tone
+ratios as rational fractions that are then used to estimate the relative
+periodicity of chords. uncertainty acts as the physiological limits
+mentioned by Oxenham, above.  
 
 Considering that the space and time signals had two different
-physiological origins, we searched a two-dimensional uncertainty
-space in order to match model predictions with the large-scale
-behavioral results. It turned out that the values that best matched
-large-scale behavioral results were always the same for time and space
-uncertainty. This might indicate that the physiological
-limitations are not specific to place signals or time signals
-separetely. But instead the limitation is higher in the auditory system
-after the signals have been passed along.  
+physiological origins, we searched a two-dimensional uncertainty space
+in order to match model predictions with the large-scale behavioral
+results. It turned out that the values that best matched large-scale
+behavioral results were always the same for time and space uncertainty.
+This might indicate that the physiological limitations are not specific
+to place signals or time signals separetely. But instead the limitation
+is higher in the auditory system after the signals have been passed
+along.  
 
 That is to say, the limits that creates differences between time and
 space signals might not be frequency selectivity or phase locking but
@@ -1092,25 +1092,23 @@ instead a limit of higher-level perception or pattern recognition, where
 estimates of the period of a complex signal is made from components.  
 
 MaMi.CoDi uses the Stern-Brocot tree to find rational fractions for the
-ratios within a given uncertainty. How do we find the best
-uncertainty values? For the MaMi.CoDi model we ran thousands of
-computations with various uncertainty values and compared the
-predictions with results from six of the large-scale behavioral
-experiments.  
+ratios within a given uncertainty. How do we find the best uncertainty
+values? For the MaMi.CoDi model we ran thousands of computations with
+various uncertainty values and compared the predictions with results
+from six of the large-scale behavioral experiments.  
 
 Because the space signal and the time signal have different origins we
-initially did a two-dimensional uncertainty search. However the
-closest fits to the behavioral data came from space and
-uncertainty values being the same. Insofar as this model
-represents processing in the auditory cortex, it would seem that
-estimating the cyclicity of the two signals happens higher up in the
-auditoray system after the space and time signals have been processed.  
+initially did a two-dimensional uncertainty search. However the closest
+fits to the behavioral data came from space and uncertainty values being
+the same. Insofar as this model represents processing in the auditory
+cortex, it would seem that estimating the cyclicity of the two signals
+happens higher up in the auditoray system after the space and time
+signals have been processed.  
 
 ### Difference between Stern-Brocot Rational Fraction Approximations and Floating Point Values
 
 The Stern-Brocot curve is a repeatable, deterministic curve of where
-rational fractions exist or do not exist within a given
-uncertainty.  
+rational fractions exist or do not exist within a given uncertainty.  
 
 However, the value is 0 outside $\pm \sigma^{2}$ and the area of the
 curve equals one so that we can use it like a probability density

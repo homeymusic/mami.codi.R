@@ -325,7 +325,7 @@ $${ GCD}(c_{i}, d_{i}) = 1$$
 
 ```{r, echo=F, message=F}
 uncertainty = uncertainty_limit()
-path = paste0('./man/data/stern_brocot_',uncertainty,'.rds')
+path = paste0('./man/data/output/stern_brocot_',uncertainty,'.rds')
 fractions = readRDS(path)
 ```
 
@@ -445,7 +445,7 @@ print(knitr::kable(results, format = "pipe",))
 ## Manipulating Harmonic Frequencies
 
 ```{r, include=F}
-timbre_paper = readRDS('./man/data/readme.rds')
+timbre_paper = readRDS('./man/data/output/readme.rds')
 ```
 
 ```{r, include=F}
@@ -545,7 +545,7 @@ p = params %>% purrr::map(\(p) {
   chords$space_consonance_z = z_scores(-chords$space_dissonance)
   chords$time_consonance_z = z_scores(-chords$time_dissonance)
   
-  experiment.rds = paste0('./man/data/',
+  experiment.rds = paste0('./man/data/input/',
                           p$t,
                           '.rds')
   
@@ -620,7 +620,7 @@ p = params %>% purrr::map(\(p) {
 ### Manipulating amplitudes
 
 ```{r, include=F}
-timbre_paper = readRDS('./man/data/roll_off_timbre_paper.rds')
+timbre_paper = readRDS('./man/data/output/roll_off_timbre_paper.rds')
 ```
 
 ```{r, include=F}

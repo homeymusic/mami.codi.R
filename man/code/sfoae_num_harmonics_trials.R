@@ -1,7 +1,7 @@
 run_trials <- function(search_label, sfoae_num_harmonics) {
   devtools::load_all(".")
   tonic_midi = 60
-  source('./utils.R')
+  source('./man/code/utils.R')
 
   library(mami.codi.R)
 
@@ -25,12 +25,12 @@ run_trials <- function(search_label, sfoae_num_harmonics) {
   print(paste('num_harmonics:',num_harmonics))
   print(paste('roll_off:',roll_off))
 
-  rds = paste0('../data/output/sfoae_num_harmonics_',
+  rds = paste0('./man/data/output/sfoae_num_harmonics_',
                search_label,
                '.rds')
   prepare(rds)
 
-  behavior.rds = paste0('../data/input/',
+  behavior.rds = paste0('./man/data/input/',
                         search_label,
                         '.rds')
   behavior = readRDS(behavior.rds)
