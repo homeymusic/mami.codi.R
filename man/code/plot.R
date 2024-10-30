@@ -342,10 +342,10 @@ plot_semitone_space_time <- function(chords, title='', include_line=T, sigma=0.2
                                      include_linear_regression = F, goal=NULL,
                                      black_vlines=c(),gray_vlines=c()) {
   chords$smoothed.time_consonance = smoothed(chords$semitone,
-                                             chords$time_consonance,
+                                             -chords$time_dissonance,
                                              sigma)
   chords$smoothed.space_consonance = smoothed(chords$semitone,
-                                              chords$space_consonance,
+                                              -chords$space_dissonance,
                                               sigma)
 
   mean_theoretical = mean(c(chords$smoothed.time_consonance,
@@ -357,12 +357,12 @@ plot_semitone_space_time <- function(chords, title='', include_line=T, sigma=0.2
     ggplot2::geom_vline(xintercept = black_vlines, color=colors_homey$highlight) +
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
     { if (include_points)
-      ggplot2::geom_point(ggplot2::aes(y = .data$time_consonance),
+      ggplot2::geom_point(ggplot2::aes(y = -.data$time_dissonance),
                           shape=21, stroke=NA, size=1,
                           fill=colors_homey$major)
     } +
     { if (include_points)
-      ggplot2::geom_point(ggplot2::aes(y = .data$space_consonance),
+      ggplot2::geom_point(ggplot2::aes(y = -.data$space_dissonance),
                           shape=21, stroke=NA, size=1,
                           fill=colors_homey$minor)
     } +
@@ -393,6 +393,7 @@ plot_semitone_space_time <- function(chords, title='', include_line=T, sigma=0.2
     ggplot2::labs(color = NULL) +
     theme_homey()
 }
+
 plot_semitone_space <- function(chords, title='', include_line=T, sigma=0.2,
                                 dashed_minor = F,include_points=T,
                                 include_linear_regression = F, goal=NULL,
@@ -1009,7 +1010,7 @@ plot_semitone_time_wrap_amp <- function(theory,
     theme_homey()
 }
 
-plot_semitone_beating <- function(chords, title = '', include_line = TRUE, sigma = 0.2,
+plot_semitone_beating <- function(chords, title = '', include_line = F, sigma = 0.2,
                                   include_points = TRUE,
                                   black_vlines = c(), gray_vlines = c()) {
 

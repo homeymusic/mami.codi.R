@@ -1,7 +1,7 @@
 SFOAE Number of Harmonics Search
 ================
 
-# P8
+# Harmonic
 
 SFOAE Number of Harmonics:
 
