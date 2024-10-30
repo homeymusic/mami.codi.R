@@ -1,6 +1,3 @@
-t='5PartialsNo3'
-print(paste('Timbre:', t))
-
 devtools::load_all(".")
 source('./man/code/plot.R')
 source('./man/code/utils.R')
@@ -22,126 +19,176 @@ dyads <- timbre_paper %>% dplyr::rowwise() %>% dplyr::mutate(
   .before=1
 )
 
-if (t=='Pure') {
-  audio_components = c(
-    static_complex_tone(
-      midi_root = 60,
-      spectrum_frequency_ratios = .spectrum_frequency_ratios,
-      spectrum_amplitudes = .spectrum_amplitudes
-    ),
-    linear_freq_sweep_complex_tone(
-      start_midi_root = 60,
-      end_midi_root = 60 + 15,
-      duration = 75,
-      spectrum_frequency_ratios = .spectrum_frequency_ratios,
-      spectrum_amplitudes = .spectrum_amplitudes
+audio_components <- function(t) {
+  if (t=='Pure') {
+    .spectrum_frequency_ratios = 1
+    .spectrum_amplitudes = 1
+    audio_components = c(
+      static_complex_tone(
+        midi_root = 60,
+        spectrum_frequency_ratios = .spectrum_frequency_ratios,
+        spectrum_amplitudes = .spectrum_amplitudes
+      ),
+      linear_freq_sweep_complex_tone(
+        start_midi_root = 60,
+        end_midi_root = 60 + 15,
+        duration = 75,
+        spectrum_frequency_ratios = .spectrum_frequency_ratios,
+        spectrum_amplitudes = .spectrum_amplitudes
+      )
     )
-  )
-} else if (t=='Bonang') {
-  audio_components = c(
-    static_basic_harmonic_complex_tone(
-      midi = 60,
-      amplitude = 1,
-      n_harmonics = 5L,
-      decay_dB_per_octave = 0,
-      octave_definition = 2
-    ),
-    linear_freq_sweep_bonang_tone(
-      start_midi_root = 60,
-      end_midi_root = 75,
-      duration = 75,
-      amplitude = 1
+  } else if (t=='Bonang') {
+    audio_components = c(
+      static_basic_harmonic_complex_tone(
+        midi = 60,
+        amplitude = 1,
+        n_harmonics = 5L,
+        decay_dB_per_octave = 0,
+        octave_definition = 2
+      ),
+      linear_freq_sweep_bonang_tone(
+        start_midi_root = 60,
+        end_midi_root = 75,
+        duration = 75,
+        amplitude = 1
+      )
     )
-  )
-} else if (t=='Harmonic') {
-  audio_components = c(
-    static_basic_harmonic_complex_tone(
-      midi = 60,
-      amplitude = 1,
-      n_harmonics = 11,
-      decay_dB_per_octave = 3
-    ),
-    linear_freq_sweep_basic_harmonic_complex_tone(
-      start_midi_root = 60,
-      end_midi_root = 75,
-      duration = 75,
-      amplitude = 1,
-      n_harmonics = 11,
-      decay_dB_per_octave = 3
+  } else if (t=='5Partials') {
+    .spectrum_frequency_ratios = 1:5
+    .spectrum_amplitudes = c(1, 1, 1, 1, 1)
+    audio_components = c(
+      static_complex_tone(
+        midi_root = 60,
+        spectrum_frequency_ratios = .spectrum_frequency_ratios,
+        spectrum_amplitudes = .spectrum_amplitudes
+      ),
+      linear_freq_sweep_complex_tone(
+        start_midi_root = 60,
+        end_midi_root = 60 + 15,
+        duration = 75,
+        spectrum_frequency_ratios = .spectrum_frequency_ratios,
+        spectrum_amplitudes = .spectrum_amplitudes
+      )
     )
-  )
-} else if (t=='5Partials') {
-  .spectrum_frequency_ratios = 1:5
-  .spectrum_amplitudes = c(1, 1, 1, 1, 1)
-  audio_components = c(
-    static_complex_tone(
-      midi_root = 60,
-      spectrum_frequency_ratios = .spectrum_frequency_ratios,
-      spectrum_amplitudes = .spectrum_amplitudes
-    ),
-    linear_freq_sweep_complex_tone(
-      start_midi_root = 60,
-      end_midi_root = 60 + 15,
-      duration = 75,
-      spectrum_frequency_ratios = .spectrum_frequency_ratios,
-      spectrum_amplitudes = .spectrum_amplitudes
+  } else if (t=='5PartialsNo3') {
+    .spectrum_frequency_ratios = 1:5
+    .spectrum_amplitudes = c(1, 1, 0, 1, 1)
+    audio_components = c(
+      static_complex_tone(
+        midi_root = 60,
+        spectrum_frequency_ratios = .spectrum_frequency_ratios,
+        spectrum_amplitudes = .spectrum_amplitudes
+      ),
+      linear_freq_sweep_complex_tone(
+        start_midi_root = 60,
+        end_midi_root = 60 + 15,
+        duration = 75,
+        spectrum_frequency_ratios = .spectrum_frequency_ratios,
+        spectrum_amplitudes = .spectrum_amplitudes
+      )
     )
-  )
+  } else if (t=='Harmonic') {
+    audio_components = c(
+      static_basic_harmonic_complex_tone(
+        midi = 60,
+        amplitude = 1,
+        n_harmonics = 11,
+        decay_dB_per_octave = 3
+      ),
+      linear_freq_sweep_basic_harmonic_complex_tone(
+        start_midi_root = 60,
+        end_midi_root = 75,
+        duration = 75,
+        amplitude = 1,
+        n_harmonics = 11,
+        decay_dB_per_octave = 3
+      )
+    )
+  } else if (t=='Stretched') {
+    audio_components = c(
+      static_basic_harmonic_complex_tone(
+        midi = 60,
+        amplitude = 1,
+        n_harmonics = 10,
+        decay_dB_per_octave = 3,
+        octave_definition = 2.1
+      ),
+      linear_freq_sweep_basic_harmonic_complex_tone(
+        start_midi_root = 60,
+        end_midi_root = 75,
+        duration = 75,
+        amplitude = 1,
+        n_harmonics = 10,
+        decay_dB_per_octave = 3,
+        octave_definition = 2.1
+      )
+    )
+  } else if (t=='Compressed') {
+    audio_components = c(
+      static_basic_harmonic_complex_tone(
+        midi = 60,
+        amplitude = 1,
+        n_harmonics = 10,
+        decay_dB_per_octave = 3,
+        octave_definition = 1.9
+      ),
+      linear_freq_sweep_basic_harmonic_complex_tone(
+        start_midi_root = 60,
+        end_midi_root = 75,
+        duration = 75,
+        amplitude = 1,
+        n_harmonics = 10,
+        decay_dB_per_octave = 3,
+        octave_definition = 1.9
+      )
+    )
+  } else {
+    stop(paste('Not implemented yet:', t))
+  }
 }
 
+# timbres=c('Pure','5PartialsNo3','5Partials','Bonang','Harmonic')
+timbres=c('Stretched','Compressed')
 
-chords <- dyads %>% dplyr::filter(timbre == t)
-chords$dissonance_z = z_scores(chords$dissonance)
-chords$major_z = z_scores(chords$majorness)
-chords$space_dissonance_z = z_scores(chords$space_dissonance)
-chords$time_dissonance_z = z_scores(chords$time_dissonance)
+results <- purrr::map(timbres, function(t) {
+  print(paste('Timbre:', t))
 
-p2 = plot_semitone_beating(chords, paste(t, ': Beating'))
-title = paste0(t,'_Beating')
+  chords <- dyads %>% dplyr::filter(timbre == t)
+  chords$dissonance_z = z_scores(chords$dissonance)
+  chords$major_z = z_scores(chords$majorness)
+  chords$space_dissonance_z = z_scores(chords$space_dissonance)
+  chords$time_dissonance_z = z_scores(chords$time_dissonance)
 
-R.utils::mkdirs("output/videos")
+  p2 = plot_semitone_beating(chords, paste(t, ': Beating'))
+  title = paste0(t,'_Beating')
 
-.spectrum_frequency_ratios = 1
-.spectrum_amplitudes = 1
-sweep_v_line_over_plot(
-  p2,
-  x_start = 0,
-  x_end = 15,
-  duration = 75,
-  path = paste0('output/videos/',title,'.mp4'),
-  fps = 30,
-  dpi = 300,
-  audio_components = audio_components
-)
+  R.utils::mkdirs("output/videos")
 
-p1 = plot_semitone_space_time(chords, paste(t, ': Space Time Consonance'))
-title = paste0(t,'_Space_Time_Consonance')
-
-R.utils::mkdirs("output/videos")
-
-.spectrum_frequency_ratios = 1
-.spectrum_amplitudes = 1
-sweep_v_line_over_plot(
-  p1,
-  x_start = 0,
-  x_end = 15,
-  duration = 75,
-  path = paste0('output/videos/',title,'.mp4'),
-  fps = 30,
-  dpi = 300,
-  audio_components = c(
-    static_complex_tone(
-      midi_root = 60,
-      spectrum_frequency_ratios = .spectrum_frequency_ratios,
-      spectrum_amplitudes = .spectrum_amplitudes
-    ),
-    linear_freq_sweep_complex_tone(
-      start_midi_root = 60,
-      end_midi_root = 60 + 15,
-      duration = 75,
-      spectrum_frequency_ratios = .spectrum_frequency_ratios,
-      spectrum_amplitudes = .spectrum_amplitudes
-    )
+  sweep_v_line_over_plot(
+    p2,
+    x_start = 0,
+    x_end = 15,
+    duration = 75,
+    path = paste0('output/videos/',title,'.mp4'),
+    fps = 30,
+    dpi = 300,
+    audio_components = audio_components(t)
   )
-)
 
+  p1 = plot_semitone_space_time(chords, paste(t, ': Space Time Consonance'))
+  title = paste0(t,'_Space_Time_Consonance')
+
+  R.utils::mkdirs("output/videos")
+
+  sweep_v_line_over_plot(
+    p1,
+    x_start = 0,
+    x_end = 15,
+    duration = 75,
+    path = paste0('output/videos/',title,'.mp4'),
+    fps = 30,
+    dpi = 300,
+    audio_components = audio_components(t)
+  )
+  return(paste("Processed timbre:", t))
+})
