@@ -1,4 +1,3 @@
-search_label = 'P8'
 # Attempt to install the package from GitHub
 github_result = devtools::install_github('homeymusic/mami.codi.R',
                                          ref='main')
