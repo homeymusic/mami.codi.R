@@ -17,7 +17,7 @@ if (is.na(github_result)) {
 # by_prec     = 0.001
 # uncertainties = sort(c(seq(from=from_prec, to=to_prec, by=by_prec)))
 
-uncertainties = c(1:9 %o% 10^(-3:-1))
+uncertainties = c(1:9 %o% 10^(-2:-1))
 
 source('./uncertainty_trials.R')
 

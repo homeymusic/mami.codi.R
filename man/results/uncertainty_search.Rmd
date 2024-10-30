@@ -1,12 +1,12 @@
 ---
-title: "Integeration Time Search"
+title: "Uncertainty Search"
 output:
   github_document: default
 always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'P8'
+search_label = 'Harmonic'
 ```
 
 # `r search_label`
@@ -18,7 +18,7 @@ source('../code/utils.R')
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "../figures/integration_time_search/"
+  fig.path = "../figures/uncertainty_search/"
 )
 knitr::opts_chunk$set(dev = 'png')
 ```
@@ -67,7 +67,7 @@ experiment <- experiment %>% dplyr::mutate(
   consonance = rating
 )
 
-theory.rds = paste0('../data/output/integration_time_',
+theory.rds = paste0('../data/output/uncertainty_',
                     search_label,
                     '.rds')
 theory = readRDS(theory.rds)

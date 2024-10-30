@@ -19,12 +19,12 @@ run_trials <- function(search_label, uncertainties) {
   }
 
   print(search_label)
-  print(paste('sfoae_num_harmonics:',sfoae_num_harmonics))
+  print(paste('uncertainties:',uncertainties))
   print(paste('octave_ratio:',octave_ratio))
   print(paste('num_harmonics:',num_harmonics))
   print(paste('roll_off:',roll_off))
 
-  output_rds = paste0('./man/data/output/sfoae_num_harmonics_',
+  output_rds = paste0('./man/data/output/uncertainty_',
                       search_label,
                       '.rds')
   prepare(output_rds)
