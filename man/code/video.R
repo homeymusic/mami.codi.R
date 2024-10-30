@@ -147,8 +147,7 @@ audio_components <- function(t) {
   }
 }
 
-# timbres=c('Pure','5PartialsNo3','5Partials','Bonang','Harmonic')
-timbres=c('Stretched','Compressed')
+timbres=c('Pure','5PartialsNo3','5Partials','Bonang','Harmonic','Stretched','Compressed')
 
 results <- purrr::map(timbres, function(t) {
   print(paste('Timbre:', t))
