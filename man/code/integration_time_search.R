@@ -21,7 +21,7 @@ uncertainties = c(1:9 %o% 10^(-5:0))
 
 # Calculate integration_time values
 integration_times <- sapply(uncertainties, function(uncertainty) {
-  integration_time('space', uncertainty)
+  mami.codi.R::integration_time('space', uncertainty)
 })
 
 source('./freq_trials.R')

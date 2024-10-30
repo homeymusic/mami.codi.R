@@ -1050,7 +1050,7 @@ plot_semitone_codi_wrap <- function(theory, experiment,
   per_plot_labels$label = per_plot_labels %>%
     purrr::pmap_vec(\(space_uncertainty, integration_time) {
       paste0('   space_uncertainty:', space_uncertainty,
-             '   integration_time:', integration_time)
+             '   integration_time:', format(mami.codi.R::integration_time('space', space_uncertainty), digits = 2, nsmall = 2))
     })
 
   theory %>% ggplot2::ggplot(ggplot2::aes(x = semitone, y = smooth)) +
@@ -1092,7 +1092,8 @@ plot_semitone_space_time_wrap <- function(theory,
   )
   per_plot_labels$label = per_plot_labels %>%
     purrr::pmap_vec(\(space_uncertainty) {
-      tols = paste0('   space_uncertainty:', space_uncertainty)
+      paste0('   space_uncertainty:', space_uncertainty,
+             '   integration_time:', format(mami.codi.R::integration_time('space', space_uncertainty), digits = 2, nsmall = 2))
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
