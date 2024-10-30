@@ -4,22 +4,14 @@
 \alias{space_time_cycles}
 \title{Compute the cycle lengths from space and time signals}
 \usage{
-space_time_cycles(
-  x,
-  minimum_amplitude,
-  time_standard_deviation,
-  space_standard_deviation,
-  harmonics_deviation
-)
+space_time_cycles(x, minimum_amplitude, integration_time, harmonics_deviation)
 }
 \arguments{
 \item{x}{Stimulus encoded as frequency and wavelength spectra}
 
 \item{minimum_amplitude}{Ignore all frequencies below this threshold}
 
-\item{time_standard_deviation}{Uncertainty for creating rational fractions}
-
-\item{space_standard_deviation}{Uncertainty for creating rational fractions}
+\item{integration_time}{Integration time to sample the space and time signals}
 
 \item{harmonics_deviation}{Error allowance for harmonics not being perfect integers}
 }

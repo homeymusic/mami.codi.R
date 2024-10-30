@@ -6,11 +6,10 @@
 \usage{
 mami.codi(
   x,
-  sfoae_num_harmonics = 0,
-  include_beats = F,
+  sfoae_num_harmonics = 5,
+  include_beats = T,
   minimum_amplitude = MINIMUM_AMPLITUDE,
-  time_standard_deviation = STANDARD_DEVIATION,
-  space_standard_deviation = STANDARD_DEVIATION,
+  integration_time = INTEGRATION_TIME,
   harmonics_deviation = HARMONICS_DEVIATION,
   metadata = NA,
   verbose = FALSE,
@@ -27,9 +26,7 @@ hrep::sparse_fr_spectrum}
 
 \item{minimum_amplitude}{An optional minimum amplitude for deciding which partials to include.}
 
-\item{time_standard_deviation}{An optional time standard_deviation value for finding rational fractions.}
-
-\item{space_standard_deviation}{An optional space standard_deviation value for finding rational fractions.}
+\item{integration_time}{Integration time to sample the space and time signals}
 
 \item{harmonics_deviation}{An optional deviation value that allows for harmonics to be not perfect integers.}
 

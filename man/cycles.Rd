@@ -4,16 +4,16 @@
 \alias{cycles}
 \title{Approximate Number of Cycles of a Complex Wave}
 \usage{
-cycles(x, standard_deviation, harmonics_deviation, label)
+cycles(x, dimension, integration_time, harmonics_deviation)
 }
 \arguments{
 \item{x}{Vector of rational numbers}
 
-\item{standard_deviation}{Precision for creating rational fractions}
+\item{dimension}{Space or time dimension}
+
+\item{integration_time}{Integration time to sample the space or time signal}
 
 \item{harmonics_deviation}{Deviation for approximating least common multiples}
-
-\item{label}{A custom label for the output usually 'space' or 'time'}
 }
 \value{
 Estimate the number of cycles using approximate least common denominator of the rational numbers

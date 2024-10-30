@@ -7,8 +7,7 @@
 #' @param include_beats Beats
 #' @param sfoae_num_harmonics Stimulus Frequency Otoacoustic Emissions
 #' @param minimum_amplitude An optional minimum amplitude for deciding which partials to include.
-#' @param time_standard_deviation An optional time standard_deviation value for finding rational fractions.
-#' @param space_standard_deviation  An optional space standard_deviation value for finding rational fractions.
+#' @param integration_time Integration time to sample the space and time signals
 #' @param harmonics_deviation An optional deviation value that allows for harmonics to be not perfect integers.
 #' @param metadata User-provided list of metadata that round trips with each call.
 #' helpful for analysis and plots
@@ -26,8 +25,7 @@ mami.codi <- function(
     sfoae_num_harmonics      = 5,
     include_beats            = T,
     minimum_amplitude        = MINIMUM_AMPLITUDE,
-    time_standard_deviation  = STANDARD_DEVIATION,
-    space_standard_deviation = STANDARD_DEVIATION,
+    integration_time         = INTEGRATION_TIME,
     harmonics_deviation      = HARMONICS_DEVIATION,
     metadata                 = NA,
     verbose                  = FALSE,
@@ -41,8 +39,7 @@ mami.codi <- function(
     ) %>%
     space_time_cycles(
       minimum_amplitude,
-      time_standard_deviation,
-      space_standard_deviation,
+      integration_time,
       harmonics_deviation
     ) %>%
     format_output(metadata, verbose)
@@ -134,8 +131,7 @@ stimulus <- function(x, sfoae_num_harmonics=0, include_beats=F) {
 #'
 #' @param x Stimulus encoded as frequency and wavelength spectra
 #' @param minimum_amplitude Ignore all frequencies below this threshold
-#' @param time_standard_deviation Uncertainty for creating rational fractions
-#' @param space_standard_deviation Uncertainty for creating rational fractions
+#' @param integration_time Integration time to sample the space and time signals
 #' @param harmonics_deviation Error allowance for harmonics not being perfect integers
 #'
 #' @return Estimate the cycle length of time and space signals
@@ -144,8 +140,9 @@ stimulus <- function(x, sfoae_num_harmonics=0, include_beats=F) {
 #' @export
 space_time_cycles = function(x,
                              minimum_amplitude,
-                             time_standard_deviation, space_standard_deviation,
+                             integration_time,
                              harmonics_deviation) {
+
   f = (x$frequency_spectrum[[1]] %>%
          dplyr::filter(.data$amplitude>minimum_amplitude))$frequency
   l = (x$wavelength_spectrum[[1]] %>%
@@ -156,8 +153,8 @@ space_time_cycles = function(x,
 
   x %>% dplyr::mutate(
 
-    cycles(f/min(f), time_standard_deviation, harmonics_deviation, 'time'),
-    cycles(l/min(l), space_standard_deviation,  harmonics_deviation, 'space'),
+    cycles(f/min(f), DIMENSION$TIME,  integration_time, harmonics_deviation),
+    cycles(l/min(l), DIMENSION$SPACE, integration_time, harmonics_deviation),
 
     time_dissonance        = log2(.data$time_cycles),
     space_dissonance       = log2(.data$space_cycles),
@@ -178,8 +175,7 @@ space_time_cycles = function(x,
     wavenumbers            = list(k),
     speed_of_sound         = C_SOUND,
     minimum_amplitude,
-    time_standard_deviation,
-    space_standard_deviation,
+    integration_time,
     harmonics_deviation
 
   )
@@ -189,36 +185,72 @@ space_time_cycles = function(x,
 #' Approximate Number of Cycles of a Complex Wave
 #'
 #' @param x Vector of rational numbers
-#' @param standard_deviation Precision for creating rational fractions
+#' @param dimension Space or time dimension
+#' @param integration_time Integration time to sample the space or time signal
 #' @param harmonics_deviation Deviation for approximating least common multiples
-#' @param label A custom label for the output usually 'space' or 'time'
 #'
 #' @return Estimate the number of cycles using approximate least common denominator of the rational numbers
 #'
 #' @rdname cycles
 #' @export
-cycles <- function(x, standard_deviation, harmonics_deviation, label) {
+cycles <- function(x, dimension, integration_time, harmonics_deviation) {
+
+  standard_deviation = uncertainty(DIMENSION$TIME, integration_time)
+
   fractions = approximate_rational_fractions(x, standard_deviation, harmonics_deviation)
 
   t = tibble::tibble_row(
     cycles = lcm_integers(fractions$den),
-    fractions = list(fractions)
-  ) %>% dplyr::rename_with(~ paste0(label, '_' , .))
+    fractions = list(fractions),
+    standard_deviation
+  ) %>% dplyr::rename_with(~ paste0(dimension, '_' , .))
   t
 }
 lcm_integers <- function(x) Reduce(gmp::lcm.bigz, x) %>% as.numeric()
 
+#' Uncertainty
+#'
+#' The uncertainty product of the given dimension is used to convert
+#' floating-point numbers to rational fractions.
+#'
+#' @param dimension Space or time dimension
+#' @param integration_time Integration time to sample the space or time signal
+#'
+#' @rdname uncertainty
+#' @export
+uncertainty <- function(dimension, integration_time) {
+  if (dimension == DIMENSION$SPACE) {
+    UNCERTAINTY_LIMIT
+  } else if (dimension == DIMENSION$TIME) {
+    UNCERTAINTY_LIMIT
+  } else {
+    stop("Invalid dimension")
+  }
+}
+
+INTEGRATION_TIME = 1
+
 # Constants
 
-#' Default Standard Deviation
+#' Uncertainty Limit
+#'
+#' The limit of the uncertainty product for space-wavenumber or time-frequency
+#'
+#'
+#' @rdname uncertainty_limit
+#' @export
+uncertainty_limit <- function() { UNCERTAINTY_LIMIT }
+UNCERTAINTY_LIMIT = 1 / (4 * pi)
+
+#' Default Integration Time
 #'
 #' Default standard_deviation for converting floating point numbers to rational fractions
 #'
 #'
-#' @rdname default_standard_deviation
+#' @rdname default_integration_time
 #' @export
-default_standard_deviation <- function() { STANDARD_DEVIATION }
-STANDARD_DEVIATION = 1 / (4 * pi)
+default_integration <- function() { INTEGRATION_TIME }
+INTEGRATION_TIME = 1
 
 #' Default Approximate Least Common Multiple Deviation
 #'
@@ -241,3 +273,8 @@ default_minimum_amplitude <- function() { MINIMUM_AMPLITUDE }
 MINIMUM_AMPLITUDE = 0.07
 
 C_SOUND = 343 # m/s arbitrary, disappears in the ratios
+
+DIMENSION <- list(
+  SPACE = "space",
+  TIME = "time"
+)
