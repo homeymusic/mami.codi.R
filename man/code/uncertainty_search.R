@@ -1,6 +1,5 @@
 # Attempt to install the package from GitHub
 github_result = devtools::install('/Users/homeymusic/Documents/git/homeymusic/mami.codi.R',
-                                  ref='main',
                                   dependencies = F)
 
 if (is.na(github_result)) {
@@ -22,6 +21,7 @@ uncertainties = c(1:9 %o% 10^(-2:-1))
 source('./man/code/uncertainty_trials.R')
 
 timbres=c('Pure','5PartialsNo3','5Partials','Bonang','Harmonic','Stretched','Compressed')
+timbres=c('M3','M6','P8', 'minor3', 'minor6')
 results <- purrr::map(timbres, function(t) {
   print(paste('Timbre:', t))
   run_trials(t, uncertainties)

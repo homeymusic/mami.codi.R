@@ -1,5 +1,4 @@
 github_result = devtools::install('/Users/homeymusic/Documents/git/homeymusic/mami.codi.R',
-                                  dependencies = F,
                                   ref='main')
 
 if (is.na(github_result)) {

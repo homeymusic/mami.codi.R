@@ -1,7 +1,7 @@
 Uncertainty Search
 ================
 
-# Stretched
+# P8
 
 Time Uncertainties:
 
@@ -19,7 +19,7 @@ Number of Harmonics:
 
 Octave Ratios:
 
-    #> [1] 2.1
+    #> [1] 2
 
 ## CoDi
 
