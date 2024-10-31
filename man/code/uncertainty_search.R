@@ -1,6 +1,7 @@
 # Attempt to install the package from GitHub
-github_result = devtools::install_github('homeymusic/mami.codi.R',
-                                         ref='main')
+github_result = devtools::install('/Users/homeymusic/Documents/git/homeymusic/mami.codi.R',
+                                  ref='main',
+                                  dependencies = F)
 
 if (is.na(github_result)) {
   stop("Fatal error: Unable to install the package from GitHub. Please check the repository and branch name.")
@@ -18,7 +19,7 @@ if (is.na(github_result)) {
 
 uncertainties = c(1:9 %o% 10^(-2:-1))
 
-source('./uncertainty_trials.R')
+source('./man/code/uncertainty_trials.R')
 
 timbres=c('Pure','5PartialsNo3','5Partials','Bonang','Harmonic','Stretched','Compressed')
 results <- purrr::map(timbres, function(t) {

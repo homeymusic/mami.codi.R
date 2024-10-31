@@ -67,7 +67,7 @@ run_trials <- function(search_label, uncertainties) {
       chord = do.call(hrep::combine_sparse_spectra, list(bass,upper))
 
     } else if (search_label == '5PartialsNo3') {
-      bass_f0 <- hrep::midi_to_freq()
+      bass_f0 <- hrep::midi_to_freq(0)
       bass <- tibble::tibble(
         frequency = bass_f0 * 1:5,
         amplitude = c(1, 1, 0, 1, 1)

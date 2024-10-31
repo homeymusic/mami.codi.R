@@ -6,7 +6,7 @@ always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'Harmonic'
+search_label = 'Stretched'
 ```
 
 # `r search_label`
@@ -18,7 +18,7 @@ source('../code/utils.R')
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "../figures/uncertainty_search/"
+  fig.path = "../figures/uncertainty/"
 )
 knitr::opts_chunk$set(dev = 'png')
 ```
@@ -78,11 +78,9 @@ theory = readRDS(theory.rds)
 theory <- theory %>% 
   dplyr::rowwise() %>% 
   dplyr::mutate(
-    integration_time = metadata$integration_time,
     num_harmonics  = metadata$num_harmonics,
     octave_ratio   = metadata$octave_ratio,
     semitone       = metadata$semitone,
-    include_beats  = metadata$include_beats,
     .before=1
   ) %>% 
   dplyr::ungroup() %>%  # Ungroup after rowwise operations
@@ -92,11 +90,6 @@ theory <- theory %>%
 ```{r, echo=F, results='asis', message=F}
 theory <- theory
 experiment <- experiment
-```
-
-Integration Times:
-```{r, echo=F}
-theory$integration_time %>% unique
 ```
 
 Time Uncertainties:

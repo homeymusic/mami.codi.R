@@ -1,4 +1,3 @@
-# devtools::install_github('git@github.com:homeymusic/mami.codi.R')
 devtools::load_all(".")
 source('./utils.R')
 
