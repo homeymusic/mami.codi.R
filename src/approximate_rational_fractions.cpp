@@ -231,16 +231,6 @@ using namespace Rcpp;
    );
  }
 
- // Function to check if a value exists in a numeric vector with a tolerance
- bool contains_value(const NumericVector& vec, double value, double tolerance = 1e-6) {
-   for (int k = 0; k < vec.size(); k++) {
-     if (std::abs(vec[k] - value) < tolerance) {
-       return true; // Value found within tolerance
-     }
-   }
-   return false; // Value not found
- }
-
  //' Calculate Beats from Frequencies
  //'
  //' Generate beats from two sets of frequencies and return their frequency and amplitude.
@@ -251,10 +241,9 @@ using namespace Rcpp;
  //' @return A DataFrame containing the spectrum, frequencies and amplitudes, of the beats.
  //' @export
  // [[Rcpp::export]]
- DataFrame calculate_beats(NumericVector wavelength, NumericVector amplitude) {
+ DataFrame compute_beats(NumericVector wavelength, NumericVector amplitude) {
 
    const int n = wavelength.size();
-   const double max_wavelength = max(wavelength);
 
    if (n < 2) {
      return DataFrame::create(
@@ -273,12 +262,9 @@ using namespace Rcpp;
    for (int i = 0; i < n; i++) {
      for (int j = i + 1; j < n; j++) {
        if (wavelength[i] != wavelength[j]) {
-         const double l = (wavelength[i] * wavelength[j]) / std::abs(wavelength[i] - wavelength[j]);
-         if ((l > max_wavelength) && (!contains_value(beat_wavelength, l))) {
-           beat_wavelength[count] = l;
-           beat_amplitude[count]  = std::pow(amplitude[i] + amplitude[j], 2);
-           count++;
-         }
+         beat_wavelength[count] = (wavelength[i] * wavelength[j]) / std::abs(wavelength[i] - wavelength[j]);
+         beat_amplitude[count]  = std::pow(amplitude[i] + amplitude[j], 2);
+         count++;
        }
      }
    }

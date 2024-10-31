@@ -56,4 +56,3 @@ format_output <- function(x, metadata, verbose) {
                     'metadata')
   }
 }
-

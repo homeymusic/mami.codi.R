@@ -6,11 +6,10 @@
 \usage{
 mami.codi(
   x,
-  sfoae_num_harmonics = 5,
-  include_beats = T,
-  minimum_amplitude = MINIMUM_AMPLITUDE,
-  time_uncertainty = UNCERTAINTY_LIMIT,
+  beat_pass_filter = BEAT_PASS_FILTER$LOW,
+  sfoae_num_harmonics = SFOAE_NUM_HARMONICS,
   space_uncertainty = UNCERTAINTY_LIMIT,
+  time_uncertainty = UNCERTAINTY_LIMIT,
   integer_harmonics_tolerance = INTEGER_HARMONICS_TOLERANCE,
   metadata = NA,
   verbose = FALSE,
@@ -18,33 +17,42 @@ mami.codi(
 )
 }
 \arguments{
-\item{x}{Chord to analyse specified in MIDI, coerced to
-hrep::sparse_fr_spectrum}
+\item{x}{Chord to analyze, which is parsed using
+\code{hrep::sparse_fr_spectrum}. For more details, see
+\href{https://github.com/pmcharrison/hrep/blob/master/R/sparse-fr-spectrum.R}{hrep::sparse_fr_spectrum documentation}.}
 
-\item{sfoae_num_harmonics}{Stimulus Frequency Otoacoustic Emissions}
+\item{beat_pass_filter}{Specifies which bands of beats to include: low, high, all, or none.
+\describe{
+@eval paste0(
+"\item{\\code{", BEAT_PASS_FILTER$LOW, "}}{Passes beat tones lower than the lowest stimulus tone.}\n",
+"\item{\\code{", BEAT_PASS_FILTER$HIGH, "}}{Passes beat tones higher than the lowest stimulus tone.}\n",
+"\item{\\code{", BEAT_PASS_FILTER$ALL, "}}{Passes all beat tones.}\n",
+"\item{\\code{", BEAT_PASS_FILTER$NONE, "}}{Passes none of the beat tones.}\n"
+)
+}}
 
-\item{include_beats}{Beats}
+\item{sfoae_num_harmonics}{Number of harmonics to include for the stimulus-frequency otoacoustic emission.}
 
-\item{minimum_amplitude}{An optional minimum amplitude for deciding which partials to include.}
+\item{space_uncertainty}{Optional space uncertainty value for finding rational fractions.}
 
-\item{time_uncertainty}{An optional time uncertainty value for finding rational fractions.}
+\item{time_uncertainty}{Optional time uncertainty value for finding rational fractions.}
 
-\item{space_uncertainty}{An optional space uncertainty value for finding rational fractions.}
+\item{integer_harmonics_tolerance}{Optional tolerance for harmonics to deviate from perfect integers.}
 
-\item{integer_harmonics_tolerance}{An optional deviation value that allows for harmonics to be not perfect integers.}
+\item{metadata}{User-provided list of metadata that accompanies each call. Useful for analysis and plots.}
 
-\item{metadata}{User-provided list of metadata that round trips with each call.
-helpful for analysis and plots}
+\item{verbose}{Determines the amount of data to return from chord evaluation. Options are:
+\describe{
+\item{\code{TRUE}}{Returns all available evaluation data.}
+\item{\code{FALSE}}{Returns only essential data: major/minor classification, consonance/dissonance, and metadata.}
+}}
 
-\item{verbose}{Determines the amount of data to return from chord evaluation
-TRUE is all and FALSE is just major-minor, consonance-dissonance and metadata.}
-
-\item{...}{parameters for hrep::sparse_fr_spectrum}
+\item{...}{Additional parameters for \code{hrep::sparse_fr_spectrum}.}
 }
 \value{
-Major-Minor (majorness), Consonance-Dissonance (dissonance) and metadata plus additional
-information if verbose=TRUE
+Major-Minor (majorness), Consonance-Dissonance (dissonance), and metadata, with additional
+information if \code{verbose = TRUE}.
 }
 \description{
-A model of consonance perception based on space and time cycles.
+A model of consonance perception based on the fundamental cycles of complex space and time signals.
 }
