@@ -81,7 +81,6 @@ theory <- theory %>%
     num_harmonics  = metadata$num_harmonics,
     octave_ratio   = metadata$octave_ratio,
     semitone       = metadata$semitone,
-    include_beats  = metadata$include_beats,
     .before=1
   ) %>% 
   dplyr::ungroup() %>%  

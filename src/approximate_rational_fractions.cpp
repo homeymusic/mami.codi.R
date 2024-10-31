@@ -231,14 +231,17 @@ using namespace Rcpp;
    );
  }
 
+#include <Rcpp.h>
+ using namespace Rcpp;
+
  //' Calculate Beats from Frequencies
  //'
- //' Generate beats from two sets of frequencies and return their frequency and amplitude.
+ //' Generate beats from two sets of frequencies and return their wavelength and amplitude.
  //'
- //' @param frequencies
- //' @param amplitudes
+ //' @param wavelength NumericVector of wavelengths
+ //' @param amplitude NumericVector of amplitudes
  //'
- //' @return A DataFrame containing the spectrum, frequencies and amplitudes, of the beats.
+ //' @return A DataFrame containing the spectrum, wavelengths, and amplitudes of the beats.
  //' @export
  // [[Rcpp::export]]
  DataFrame compute_beats(NumericVector wavelength, NumericVector amplitude) {
@@ -247,13 +250,17 @@ using namespace Rcpp;
 
    if (n < 2) {
      return DataFrame::create(
-       _("wavelength")      = NumericVector::create(),
-       _("amplitude")       = NumericVector::create()
+       _("wavelength") = NumericVector::create(),
+       _("amplitude")  = NumericVector::create()
      );
    }
 
+   // Define tolerance and maximum wavelength
+   const double tolerance = 1e-6;
+   const double max_wavelength = max(wavelength);
+
    // Vectors to hold the results
-   NumericVector beat_wavelength(n * (n - 1) / 2); // Max number
+   NumericVector beat_wavelength(n * (n - 1) / 2); // Max number of pairs
    NumericVector beat_amplitude(n * (n - 1) / 2);
 
    int count = 0;
@@ -262,24 +269,29 @@ using namespace Rcpp;
    for (int i = 0; i < n; i++) {
      for (int j = i + 1; j < n; j++) {
        if (wavelength[i] != wavelength[j]) {
-         beat_wavelength[count] = (wavelength[i] * wavelength[j]) / std::abs(wavelength[i] - wavelength[j]);
-         beat_amplitude[count]  = std::pow(amplitude[i] + amplitude[j], 2);
-         count++;
+         // Compute the raw beat wavelength
+         const double computed_wavelength = (wavelength[i] * wavelength[j]) / std::abs(wavelength[i] - wavelength[j]);
+         // Check if it's within tolerance of max_wavelength
+         if (std::abs(computed_wavelength - max_wavelength) > tolerance) {
+           beat_wavelength[count] = computed_wavelength;
+           // Compute the beat amplitude
+           beat_amplitude[count] = std::pow(amplitude[i] + amplitude[j], 2);
+           count++;
+         }
        }
      }
    }
 
    if (count < 1) {
      return DataFrame::create(
-       _("wavelength")      = NumericVector::create(),
-       _("amplitude")       = NumericVector::create()
+       _("wavelength") = NumericVector::create(),
+       _("amplitude")  = NumericVector::create()
      );
    } else {
      // Create the resulting DataFrame
      return DataFrame::create(
-       _("wavelength")      = beat_wavelength[Rcpp::Range(0, count - 1)],
-       _("amplitude")       = beat_amplitude[Rcpp::Range(0, count - 1)]
+       _("wavelength") = beat_wavelength[Rcpp::Range(0, count - 1)],
+                                        _("amplitude")  = beat_amplitude[Rcpp::Range(0, count - 1)]
      );
    }
-
  }

@@ -48,8 +48,12 @@ mami.codi <- function(
     parse_input(...) %>%
     # Physical Domain
     generate_stimulus() %>%
-    generate_beats(beat_pass_filter) %>%
-    generate_cochlea_emissions(sfoae_num_harmonics) %>%
+    generate_beats(
+      beat_pass_filter
+    ) %>%
+    generate_cochlea_emissions(
+      sfoae_num_harmonics
+    ) %>%
     # Frequency Domain
     compute_fundamental_wavenumber(
       space_uncertainty,
@@ -61,6 +65,7 @@ mami.codi <- function(
     ) %>%
     # Psychophysical Domain
     compute_harmony_perception() %>%
+    compute_beats_perception()   %>%
     # App Domain
     format_output(metadata, verbose)
 
@@ -130,10 +135,10 @@ generate_beats <- function(
   max_stimulus_wavelength = x$wavelength_spectrum[[1]]$wavelength %>% max()
 
   low_beats_spectrum = all_beats_spectrum %>%
-    dplyr::filter(wavelength > (max_stimulus_wavelength + FLOATING_POINT_TOLERANCE))
+    dplyr::filter(wavelength > max_stimulus_wavelength)
 
   high_beats_spectrum = all_beats_spectrum %>%
-    dplyr::filter(wavelength < (max_stimulus_wavelength - FLOATING_POINT_TOLERANCE))
+    dplyr::filter(wavelength < max_stimulus_wavelength)
 
   if (beat_pass_filter == BEAT_PASS_FILTER$LOW) {
     filtered_beats_spectrum = low_beats_spectrum
@@ -155,6 +160,7 @@ generate_beats <- function(
     all_beats_spectrum      = list(all_beats_spectrum),
     low_beats_spectrum      = list(low_beats_spectrum),
     high_beats_spectrum     = list(high_beats_spectrum),
+    beat_pass_filter,
     max_stimulus_wavelength
   )
 
@@ -180,35 +186,35 @@ generate_cochlea_emissions <- function(
       num_harmonics = sfoae_num_harmonics
     )
 
-    cochlea_frequency_spectrum = tibble::tibble(
+    sfoae_frequency_spectrum = tibble::tibble(
       frequency = cochlea_sparse_fr_spectrum %>% hrep::freq(),
       amplitude = cochlea_sparse_fr_spectrum %>% hrep::amp()
     )
 
     x$frequency_spectrum = list(dplyr::bind_rows(
-      x$frequency_spectrum, cochlea_frequency_spectrum
+      x$frequency_spectrum, sfoae_frequency_spectrum
     ))
 
-    cochlea_wavelength_spectrum = tibble::tibble(
-      wavelength = x$speed_of_sound / cochlea_frequency_spectrum$frequency,
+    sfoae_wavelength_spectrum = tibble::tibble(
+      wavelength = x$speed_of_sound / sfoae_frequency_spectrum$frequency,
       amplitude  = cochlea_sparse_fr_spectrum %>% hrep::amp()
     )
 
     x$wavelength_spectrum = list(dplyr::bind_rows(
-      x$wavelength_spectrum, cochlea_wavelength_spectrum
+      x$wavelength_spectrum, sfoae_wavelength_spectrum
     ))
 
   } else {
 
-    cochlea_frequency_spectrum  = empty_spectrum()
-    cochlea_wavelength_spectrum = empty_spectrum()
+    sfoae_frequency_spectrum  = empty_spectrum()
+    sfoae_wavelength_spectrum = empty_spectrum()
 
   }
 
   # Store the values
   x %>% dplyr::mutate(
-    cochlea_wavelength_spectrum = list(cochlea_wavelength_spectrum),
-    cochlea_frequency_spectrum  = list(cochlea_frequency_spectrum),
+    sfoae_wavelength_spectrum = list(sfoae_wavelength_spectrum),
+    sfoae_frequency_spectrum  = list(sfoae_frequency_spectrum),
     sfoae_num_harmonics
   )
 
@@ -326,7 +332,7 @@ lcm_integers <- function(x) Reduce(gmp::lcm.bigz, x) %>% as.numeric()
 
 #' Compute harmony perception from cycle lengths
 #'
-#' Computes harmony perception metrics based on cycle lengths from the spatial
+#' Computes harmony perception based on cycle lengths from the spatial
 #' and temporal frequency domains, converting them into psychophysical measures
 #' of dissonance perception. The sum of wavelength dissonance and frequency
 #' dissonance provides an overall sense of dissonance, while the difference
@@ -352,12 +358,51 @@ compute_harmony_perception <- function(x) {
 
 }
 
-# low_beating      =  if (nrow(unlist(.data$low_beats_spectrum)) > 0) {
-#   log2(1+sum(unlist(.data$low_beats_spectrum$amplitude ^ 2 * beats_spectrum$wavelength, na.rm = TRUE))
-# } else {
-#   0
-# }
-#
+#' Compute beating perception from beat spectrum
+#'
+#' Calculates a psychophysical measure of beating perception derived from the
+#' beat spectrum, interpreting beat frequencies and amplitudes in a perceptual context.
+#'
+#' @param x The beat spectrum, containing frequency and amplitude information for beats derived from the stimulus.
+#'
+#' @return Psychophysical measure of beating perception.
+#'
+#' @rdname compute_beats_perception
+#' @export
+compute_beats_perception <- function(x) {
+
+  low_beating  = beating(x$low_beats_spectrum[[1]])
+  high_beating = beating(x$high_beats_spectrum[[1]])
+  all_beating  = beating(x$all_beats_spectrum[[1]])
+
+  if (x$beat_pass_filter == BEAT_PASS_FILTER$LOW) {
+    beating = low_beating
+  } else if (x$beat_pass_filter == BEAT_PASS_FILTER$HIGH) {
+    beating = high_beating
+  } else if (x$beat_pass_filter == BEAT_PASS_FILTER$HIGH) {
+    beating = all_beating
+  } else  {
+    beating = 0
+  }
+
+  x %>% dplyr::mutate(
+    beating,
+    low_beating,
+    high_beating,
+    all_beating
+  )
+
+}
+
+beating <- function(
+    x
+) {
+  if (nrow(x) > 0) {
+    log2(1+sum(x$amplitude ^ 2 * x$wavelength, na.rm = TRUE))
+  } else {
+    0
+  }
+}
 
 # Constants
 
