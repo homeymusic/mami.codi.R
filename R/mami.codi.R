@@ -469,13 +469,3 @@ DIMENSION <- list(
   SPACE = 'space',
   TIME  = 'time'
 )
-
-#' Helper function to create an empty spectrum
-empty_spectrum <- function() {
-  tibble::tibble(
-    wavelength = numeric(),
-    amplitude  = numeric()
-  )
-}
-
-FLOATING_POINT_TOLERANCE <- 1e-6

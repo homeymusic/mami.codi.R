@@ -148,7 +148,7 @@ test_that('stimulus works beats near P1', {
   spectrum = hrep::sparse_fr_spectrum(c(C4_midi, C4_beat_midi), num_harmonics = num_harmonics)
 
   # no beats stimulus
-  no_beats_stimulus = stimulus(spectrum, include_beats=F)
+  no_beats_stimulus = generate_stimulus(spectrum)
   expect_equal(no_beats_stimulus$frequency_spectrum[[1]]$frequency,
                c(261.62, 268.62),
                tolerance=0.1)
@@ -161,87 +161,9 @@ test_that('stimulus works beats near P1', {
   expect_equal(no_beats_stimulus$wavelength_spectrum[[1]]$amplitude %>% sort,
                c(1,1),
                tolerance=0.1)
-  expect_equal(no_beats_stimulus$filtered_beats_spectrum[[1]]$wavelength %>% sort,
-               numeric(0),
-               tolerance=0.1)
-  expect_equal(no_beats_stimulus$filtered_beats_spectrum[[1]]$amplitude %>% sort,
-               numeric(0),
-               tolerance=0.1)
-
-  # beats stimulus
-  beats_stimulus = stimulus(spectrum, beat_pass_filter = BEAT_PASS_FILTER$LOW)
-  expect_equal(beats_stimulus$frequency_spectrum[[1]]$frequency,
-               c(261.62, 268.62),
-               tolerance=0.1)
-  expect_equal(beats_stimulus$frequency_spectrum[[1]]$amplitude %>% sort,
-               c(1,1),
-               tolerance=0.1)
-  expect_equal(beats_stimulus$filtered_beats_spectrum[[1]]$wavelength %>% sort,
-               c(49),
-               tolerance=0.1)
-  expect_equal(beats_stimulus$filtered_beats_spectrum[[1]]$amplitude %>% sort,
-               c(4),
-               tolerance=0.1)
-  expect_equal(beats_stimulus$wavelength_spectrum[[1]]$wavelength %>% sort,
-               c(1.31, 1.27, 49),
-               tolerance=0.1)
-  expect_equal(beats_stimulus$wavelength_spectrum[[1]]$amplitude %>% sort,
-               c(1,1,4),
-               tolerance=0.1)
+  expect_equal(no_beats_stimulus$source_spectrum[[1]],
+               spectrum)
 })
-
-test_that('stimulus works beats near P8 with 2 harmonics', {
-  C4_midi = 60
-  C5_midi = 72
-  f_beat  = 7 # Hz
-  C5_beat_midi = hrep::freq_to_midi(hrep::midi_to_freq(C5_midi) + f_beat)
-  num_harmonics = 2
-
-  spectrum = hrep::sparse_fr_spectrum(c(C4_midi, C5_beat_midi), num_harmonics = num_harmonics)
-
-  # no beats stimulus
-  no_beats_stimulus = stimulus(spectrum, include_beats=F)
-  expect_equal(no_beats_stimulus$frequency_spectrum[[1]]$frequency %>% sort,
-               c(261.6256, 523.2511, 530.2511, 1060.5022),
-               tolerance=0.1)
-  expect_equal(no_beats_stimulus$frequency_spectrum[[1]]$amplitude %>% sort,
-               c(0.89,0.89,1,1),
-               tolerance=0.1)
-  expect_equal(no_beats_stimulus$wavelength_spectrum[[1]]$wavelength %>% sort,
-               c(0.32, 0.64, 0.65, 1.31),
-               tolerance=0.1)
-  expect_equal(no_beats_stimulus$wavelength_spectrum[[1]]$amplitude %>% sort,
-               c(0.89,0.89,1,1),
-               tolerance=0.1)
-  expect_equal(no_beats_stimulus$filtered_beats_spectrum[[1]]$wavelength %>% sort,
-               numeric(0),
-               tolerance=0.1)
-  expect_equal(no_beats_stimulus$filtered_beats_spectrum[[1]]$amplitude %>% sort,
-               numeric(0),
-               tolerance=0.1)
-
-  # beats stimulus
-  beats_stimulus = stimulus(spectrum, beat_pass_filter = BEAT_PASS_FILTER$LOW)
-  expect_equal(beats_stimulus$frequency_spectrum[[1]]$frequency %>% sort,
-               c(261.62, 523.25, 530.25, 1060.50),
-               tolerance=0.1)
-  expect_equal(beats_stimulus$frequency_spectrum[[1]]$amplitude %>% sort,
-               c(1,0.89,1,0.89),
-               tolerance=0.1)
-  expect_equal(beats_stimulus$filtered_beats_spectrum[[1]]$wavelength  %>% sort,
-               c(49.00),
-               tolerance=0.1)
-  expect_equal(beats_stimulus$filtered_beats_spectrum[[1]]$amplitude %>% sort,
-               c(3.57),
-               tolerance=0.1)
-  expect_equal(beats_stimulus$wavelength_spectrum[[1]]$wavelength %>% sort,
-               c(0.32, 0.64, 0.65, 1.31, 49.00) %>% sort,
-               tolerance=0.1)
-  expect_equal(beats_stimulus$wavelength_spectrum[[1]]$amplitude %>% sort,
-               c(0.89, 3.57, 1.00, 0.89, 1.00) %>% sort,
-               tolerance=0.1)
-})
-
 
 test_that('mamai.codi works with beats near the unison', {
   C4_midi = 60
@@ -278,7 +200,7 @@ test_that('mamai.codi works with beats near the unison', {
   expect_equal(P1_beats$space_cycles, 3)
 })
 
-test_that('mamai.codi works with beats near the octave P8 with 2 harmonics', {
+test_that('mami.codi works with beats near the octave P8 with 2 harmonics', {
   C4_midi = 60
   C5_midi = 72
   f_beat  = 7 # Hz
@@ -321,36 +243,6 @@ test_that('mamai.codi works with beats near the octave P8 with 2 harmonics', {
   expect_equal(P8$time_cycles, 1)
   expect_equal(P8$space_cycles, 1)
 
-})
-
-test_that('stimulus works at octave P8 with 2 harmonics', {
-  C4_midi = 60
-  C5_midi = 72
-  f_beat = 7 # Hz
-  C5_beat_midi = hrep::freq_to_midi(hrep::midi_to_freq(C5_midi) + f_beat)
-  num_harmonics = 2
-  spectrum = hrep::sparse_fr_spectrum(c(C4_midi, C5_beat_midi), num_harmonics = num_harmonics)
-
-  # beats stimulus
-  beats_stimulus = stimulus(spectrum, beat_pass_filter = BEAT_PASS_FILTER$LOW)
-  expect_equal(beats_stimulus$frequency_spectrum[[1]]$frequency,
-               c(261.62, 523.25, 530.25, 1060.50),
-               tolerance=0.1)
-  expect_equal(beats_stimulus$frequency_spectrum[[1]]$amplitude %>% sort,
-               c(1,1, 0.89, 0.89) %>% sort(),
-               tolerance=0.1)
-  expect_equal(beats_stimulus$filtered_beats_spectrum[[1]]$wavelength %>% sort,
-               c(49.00),
-               tolerance=0.1)
-  expect_equal(beats_stimulus$filtered_beats_spectrum[[1]]$amplitude %>% sort,
-               c(3.57),
-               tolerance=0.1)
-  expect_equal(beats_stimulus$wavelength_spectrum[[1]]$wavelength %>% sort,
-               c(0.32, 0.64, 0.65, 1.31, 49.00),
-               tolerance=0.1)
-  expect_equal(beats_stimulus$wavelength_spectrum[[1]]$amplitude %>% sort,
-               c(0.89, 0.89, 1.00, 1.00, 3.57) %>% sort(),
-               tolerance=0.1)
 })
 
 test_that('mami codi with beats around unison and octave', {

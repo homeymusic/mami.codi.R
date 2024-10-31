@@ -56,3 +56,59 @@ format_output <- function(x, metadata, verbose) {
                     'metadata')
   }
 }
+
+# Parsing and marshaling helper functions
+
+#' Helper function to create an empty spectrum
+empty_spectrum <- function() {
+  tibble::tibble(
+    wavelength = numeric(),
+    amplitude  = numeric()
+  )
+}
+
+#' Helper functions to combine spectra
+combine_frequency_spectra <- function(x,y) {
+  x = hrep::sparse_fr_spectrum(x)
+  y = hrep::sparse_fr_spectrum(y)
+  z = hrep::combine_sparse_spectra(x,y)
+  tibble::tibble(
+    frequency = z$x,
+    amplitude  = z$y
+  )
+}
+
+combine_wavelength_spectra <- function(x,y) {
+  x = sparse_fr_spectrum_from_wavelength_spectrum(x)
+  y = sparse_fr_spectrum_from_wavelength_spectrum(y)
+  wavelength_spectrum_from_sparse_fr_spectrum(hrep::combine_sparse_spectra(x,y))
+}
+
+combine_frequency_spectra <- function(x,y) {
+  x = sparse_fr_spectrum_from_wavelength_spectrum(x)
+  y = sparse_fr_spectrum_from_wavelength_spectrum(y)
+  frequency_spectrum_from_sparse_fr_spectrum(hrep::combine_sparse_spectra(x,y))
+}
+
+sparse_fr_spectrum_from_wavelength_spectrum <- function(x) {
+  hrep::sparse_fr_spectrum(list(
+    frequency = C_SOUND / x$wavelength,
+    amplitude = x$amplitude
+  ))
+}
+
+wavelength_spectrum_from_sparse_fr_spectrum <- function(x) {
+  tibble::tibble(
+    wavelength = C_SOUND / x$x,
+    amplitude  = x$y
+  )
+}
+
+frequency_spectrum_from_sparse_fr_spectrum <- function(x) {
+  tibble::tibble(
+    frequency = x$x,
+    amplitude = x$y
+  )
+}
+
+FLOATING_POINT_TOLERANCE <- 1e-6
