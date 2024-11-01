@@ -2,12 +2,12 @@
 
 S3method(parse_input,default)
 S3method(parse_input,sparse_fr_spectrum)
+export(beat_pass_filter)
 export(compute_beats_perception)
 export(compute_fundamental_cycle)
 export(compute_fundamental_frequency)
 export(compute_fundamental_wavenumber)
 export(compute_harmony_perception)
-export(default_beat_pass_filter)
 export(default_integer_harmonics_tolerance)
 export(default_sfoae_num_harmonics)
 export(format_output)

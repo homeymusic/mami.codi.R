@@ -444,14 +444,14 @@ default_sfoae_num_harmonics <- function() { SFOAE_NUM_HARMONICS }
 SFOAE_NUM_HARMONICS = 5
 
 
-#' Default beat pass filter
+#' Beat pass filters
 #'
-#' Default beat pass filter for determining which beat tones pass into the model
+#' Beat pass filter for determining which beat tones pass into the model
 #'
 #''
 #' @rdname default_beat_pass_filter
 #' @export
-default_beat_pass_filter <- function() { BEAT_PASS_FILTER$LOW }
+beat_pass_filter <- function() { BEAT_PASS_FILTER }
 BEAT_PASS_FILTER <- list(
   ALL  = 'all',
   HIGH = 'high',

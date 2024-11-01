@@ -1,5 +1,4 @@
-github_result = devtools::install('/Users/homeymusic/Documents/git/homeymusic/mami.codi.R',
-                                  ref='main')
+github_result = devtools::install('/Users/homeymusic/Documents/git/homeymusic/mami.codi.R')
 
 if (is.na(github_result)) {
   stop("Fatal error: Unable to install the package from GitHub. Please check the repository and branch name.")
@@ -146,11 +145,12 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
   }
 
   mami.codi.R::mami.codi(study_chord,
+                         beat_pass_filter = mami.codi.R::beat_pass_filter()$LOW,
                          metadata = list(
-                           num_harmonics       = num_harmonics,
-                           octave_ratio        = octave_ratio,
-                           semitone            = interval,
-                           timbre              = timbre
+                           num_harmonics  = num_harmonics,
+                           octave_ratio   = octave_ratio,
+                           semitone       = interval,
+                           timbre         = timbre
                          ),
                          verbose=TRUE)
 
