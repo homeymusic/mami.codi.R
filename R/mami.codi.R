@@ -44,7 +44,7 @@ mami.codi <- function(
 ) {
 
   x %>%
-    # App Domain
+    # R Data Marshaling Domain
     parse_input(...) %>%
     # Physical Domain
     generate_stimulus() %>%

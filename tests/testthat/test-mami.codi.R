@@ -446,4 +446,3 @@ test_that('sfoae_num_harmonics round trips', {
   P1 = mami.codi(60, verbose=T)
   expect_equal(P1$sfoae_num_harmonics, 5)
 })
-
