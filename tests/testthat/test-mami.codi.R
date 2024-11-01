@@ -446,3 +446,10 @@ test_that('sfoae_num_harmonics round trips', {
   P1 = mami.codi(60, verbose=T)
   expect_equal(P1$sfoae_num_harmonics, 5)
 })
+test_that('beating for all beats has values', {
+  MT = c(60,64,67) %>% mami.codi(
+    beat_pass_filter = BEAT_PASS_FILTER$ALL,
+    verbose=T
+  )
+  expect_equal(MT$beating, 13.53953, tolerance=0.1)
+})

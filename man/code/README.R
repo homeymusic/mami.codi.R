@@ -145,7 +145,7 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
   }
 
   mami.codi.R::mami.codi(study_chord,
-                         beat_pass_filter = mami.codi.R::beat_pass_filter()$LOW,
+                         beat_pass_filter = mami.codi.R::beat_pass_filter()$ALL,
                          metadata = list(
                            num_harmonics  = num_harmonics,
                            octave_ratio   = octave_ratio,

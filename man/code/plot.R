@@ -1016,7 +1016,7 @@ plot_semitone_beating <- function(chords, title = '', include_line = F, sigma = 
 
   # Smooth the beating metric
   chords$smoothed.beating <- smoothed(chords$semitone, chords$beating, sigma)
-
+browser()
   # Plotting
   ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone, y = .data$beating)) +
     ggplot2::geom_vline(xintercept = black_vlines, color = colors_homey$highlight) +

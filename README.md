@@ -856,7 +856,7 @@ Consonance](https://img.youtube.com/vi/ustqdAdhc_U/0.jpg)](https://www.youtube.c
 
 A fourier transform from wavenumber to angular frequency.
 
-$$\psi(\omega, t) = \int \phi(k) e^{-i \left( \omega t - k x \right) } dk$$
+$$\psi(\omega, t) = \int \phi(k,x) e^{-i \left( \omega t - k x \right) } dk$$
 
 A fourier transform from angular frequency to wavenumber.
 
