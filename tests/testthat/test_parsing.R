@@ -22,16 +22,16 @@ test_that('combine wavelength spectra works', {
 test_that('combine_frequency_spectra', {
   C4_hrep = hrep::sparse_fr_spectrum(60, num_harmonics = 3)
   C4 = tibble::tibble(
-    wavelength = C_SOUND / C4_hrep$x,
-    amplitude  = C4_hrep$y
+    frequency = C4_hrep$x,
+    amplitude = C4_hrep$y
   )
-  expect_equal(C4$wavelength, c(1.3110340, 0.6555170, 0.4370113), tolerance = 0.1)
+  expect_equal(C4$frequency, c(261.6256, 523.2511, 784.8767), tolerance = 0.1)
   C5_hrep = hrep::sparse_fr_spectrum(72, num_harmonics = 3)
   C5 = tibble::tibble(
-    wavelength = C_SOUND / C5_hrep$x,
-    amplitude  = C5_hrep$y
+    frequency = C5_hrep$x,
+    amplitude = C5_hrep$y
   )
-  expect_equal(C5$wavelength, c(0.6555170, 0.3277585, 0.2185057), tolerance = 0.1)
+  expect_equal(C5$frequency, c(523.2511, 1046.5023, 1569.7534), tolerance = 0.1)
 
   P8 = combine_frequency_spectra(C4, C5)
   # the C5 from the C4 harmonic should be combined and have higher amp

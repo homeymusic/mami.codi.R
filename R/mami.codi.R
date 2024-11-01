@@ -84,22 +84,15 @@ generate_stimulus <- function(
     x
 ) {
 
-  frequency_spectrum  = tibble::tibble(
-    frequency     = x %>% hrep::freq(),
-    amplitude     = x %>% hrep::amp()
-  )
+  frequency_spectrum  = frequency_spectrum_from_sparse_fr_spectrum(x)
 
-  wavelength_spectrum = tibble::tibble(
-    wavelength    = C_SOUND / frequency_spectrum$frequency,
-    amplitude     = frequency_spectrum$amplitude
-  )
+  wavelength_spectrum = wavelength_spectrum_from_sparse_fr_spectrum(x)
 
   # Store the values
   tibble::tibble_row(
     frequency_spectrum  = list(frequency_spectrum),
     wavelength_spectrum = list(wavelength_spectrum),
-    source_spectrum     = list(x),
-    speed_of_sound      = C_SOUND
+    source_spectrum     = list(x)
   )
 
 }
@@ -147,11 +140,12 @@ generate_beats <- function(
   } else if (beat_pass_filter == BEAT_PASS_FILTER$ALL) {
     filtered_beats_spectrum = all_beats_spectrum
   } else if (beat_pass_filter == BEAT_PASS_FILTER$NONE) {
-    filtered_beats_spectrum = empty_spectrum()
+    filtered_beats_spectrum = empty_wavelength_spectrum()
   }
 
-  x$wavelength_spectrum = list(dplyr::bind_rows(
-    x$wavelength_spectrum, filtered_beats_spectrum
+  x$wavelength_spectrum = list(combine_wavelength_spectra(
+    x$wavelength_spectrum[[1]],
+    filtered_beats_spectrum
   ))
 
   # Store the values
@@ -186,28 +180,28 @@ generate_cochlea_emissions <- function(
       num_harmonics = sfoae_num_harmonics
     )
 
-    sfoae_frequency_spectrum = tibble::tibble(
-      frequency = cochlea_sparse_fr_spectrum %>% hrep::freq(),
-      amplitude = cochlea_sparse_fr_spectrum %>% hrep::amp()
+    sfoae_frequency_spectrum = frequency_spectrum_from_sparse_fr_spectrum(
+      cochlea_sparse_fr_spectrum
     )
 
-    x$frequency_spectrum = list(dplyr::bind_rows(
-      x$frequency_spectrum, sfoae_frequency_spectrum
+    sfoae_wavelength_spectrum = wavelength_spectrum_from_sparse_fr_spectrum(
+      cochlea_sparse_fr_spectrum
+    )
+
+    x$frequency_spectrum = list(combine_frequency_spectra(
+      x$frequency_spectrum[[1]],
+      sfoae_frequency_spectrum
     ))
 
-    sfoae_wavelength_spectrum = tibble::tibble(
-      wavelength = x$speed_of_sound / sfoae_frequency_spectrum$frequency,
-      amplitude  = cochlea_sparse_fr_spectrum %>% hrep::amp()
-    )
-
-    x$wavelength_spectrum = list(dplyr::bind_rows(
-      x$wavelength_spectrum, sfoae_wavelength_spectrum
+    x$wavelength_spectrum = list(combine_wavelength_spectra(
+      x$wavelength_spectrum[[1]],
+      sfoae_wavelength_spectrum
     ))
 
   } else {
 
-    sfoae_frequency_spectrum  = empty_spectrum()
-    sfoae_wavelength_spectrum = empty_spectrum()
+    sfoae_frequency_spectrum  = empty_frequency_spectrum()
+    sfoae_wavelength_spectrum = empty_wavelength_spectrum()
 
   }
 

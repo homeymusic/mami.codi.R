@@ -373,7 +373,10 @@ test_that('Beats and Stimulus Frequency Otoacoustic Emissions',{
                        num_harmonics = num_harmonics,
                        verbose =T)
   expect_equal(P8_beats_sfoae$sfoae_frequency_spectrum[[1]] %>% nrow(), sfoae_num_harmonics)
-  expect_true(P8_beats_sfoae$beating > 3.0)
+  expect_equal(P8_beats_sfoae$sfoae_wavelength_spectrum[[1]] %>% nrow(), sfoae_num_harmonics)
+  sfoae_f = c(261.6256 ,516.2511, 523.2511)
+  expect_equal(P8_beats_sfoae$frequencies[[1]] %>% sort(), sfoae_f, tolerance=0.1)
+  expect_equal(P8_beats_sfoae$wavelengths[[1]] %>% sort(), c(C_SOUND / sfoae_f) %>% sort(), tolerance=0.1)
   expect_equal(P8_beats_sfoae$filtered_beats_spectrum[[1]]$wavelength %>% sort,
                c(1.34, 48.99),
                tolerance=0.1)
@@ -381,6 +384,7 @@ test_that('Beats and Stimulus Frequency Otoacoustic Emissions',{
                c(4.00, 3.57) %>% sort(),
                tolerance=0.1)
 
+  expect_true(P8_beats_sfoae$beating > 3.0)
 
 })
 test_that('params round trip', {
