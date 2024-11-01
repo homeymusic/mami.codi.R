@@ -13,7 +13,8 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "man/figures/README-",
   warning = FALSE, 
-  message = FALSE
+  message = FALSE,
+  fig.crop= T
 )
 remove_floating_point_mistakes <- function(errors, uncertainty) {
   errors = errors[errors>=-uncertainty]
@@ -126,8 +127,9 @@ framed_intervals <- purrr::map(intervals, ~c(.x, 72))
 
 ### 2D Plots: The Fundamental of Complex Waves in Space and Time
 
-```{r, echo=F, message=F, include=T, results='asis'}
+```{r, echo=F, message=F, include=T, results='asis',fig.align='center'}
 num_harmonics = 2
+
 results <- purrr::map_dfr(names(framed_intervals), function(interval_name) {
   result <- framed_intervals[[interval_name]] %>% mami.codi(
     num_harmonics = num_harmonics,
@@ -135,6 +137,8 @@ results <- purrr::map_dfr(names(framed_intervals), function(interval_name) {
     sfoae_num_harmonics = 0,
     verbose=T
   )
+  
+  
   print(plot_space_time(1/result$time_cycles,
                         1/result$space_cycles,
                         majorness=result$majorness,

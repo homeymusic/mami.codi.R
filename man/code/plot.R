@@ -80,7 +80,7 @@ theme_homey <- function(aspect.ratio=NULL){
     legend.background = ggplot2::element_rect(fill = colors_homey$light_neutral),
     legend.key = ggplot2::element_rect(fill = colors_homey$background, color = NA),
     legend.position='bottom',
-    aspect.ratio = aspect.ratio
+    aspect.ratio = aspect.ratio,
   )
 }
 theme_homey_minimal <- function(aspect.ratio=NULL){
@@ -1314,5 +1314,6 @@ plot_space_time <- function(f0, k0, majorness = 0.0, chord_name = "Chord", time_
       y = "Space (%)",
       title = base::paste(chord_name, ": Time-Space Amplitude")
     ) +
-    theme_homey(aspect.ratio = 1)
+    ggplot2::coord_fixed(ratio = 1) +
+    theme_homey()
 }

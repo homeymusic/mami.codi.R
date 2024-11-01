@@ -1,7 +1,7 @@
 Fundamental Frequencies
 ================
 
-# 2D Plots of Fundamental Frequencies f versus k
+# Wave Amplitude in Space and Time as Function of Wavelength and Frequency Cycle Times
 
 ![](../figures/Fundamental-Frequencies-unnamed-chunk-3-1.png)<!-- -->![](../figures/Fundamental-Frequencies-unnamed-chunk-3-2.png)<!-- -->![](../figures/Fundamental-Frequencies-unnamed-chunk-3-3.png)<!-- -->![](../figures/Fundamental-Frequencies-unnamed-chunk-3-4.png)<!-- -->![](../figures/Fundamental-Frequencies-unnamed-chunk-3-5.png)<!-- -->![](../figures/Fundamental-Frequencies-unnamed-chunk-3-6.png)<!-- -->![](../figures/Fundamental-Frequencies-unnamed-chunk-3-7.png)<!-- -->![](../figures/Fundamental-Frequencies-unnamed-chunk-3-8.png)<!-- -->![](../figures/Fundamental-Frequencies-unnamed-chunk-3-9.png)<!-- -->![](../figures/Fundamental-Frequencies-unnamed-chunk-3-10.png)<!-- -->![](../figures/Fundamental-Frequencies-unnamed-chunk-3-11.png)<!-- -->![](../figures/Fundamental-Frequencies-unnamed-chunk-3-12.png)<!-- -->![](../figures/Fundamental-Frequencies-unnamed-chunk-3-13.png)<!-- -->
 
