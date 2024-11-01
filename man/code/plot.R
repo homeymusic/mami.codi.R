@@ -1208,7 +1208,7 @@ plot_semitone_space_time_sfoae_num_harmonics_wrap <- function(theory,
     theme_homey()
 }
 
-plot_semitone_beating_sfoae_num_harmonics_wrap <- function(theory,
+plot_semitone_low_beating_sfoae_num_harmonics_wrap <- function(theory,
                                                               black_vlines=c(), gray_vlines=c(),
                                                               title,ncols=1) {
   per_plot_labels = tidyr::expand_grid(
@@ -1223,7 +1223,34 @@ plot_semitone_beating_sfoae_num_harmonics_wrap <- function(theory,
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
     ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
                         fill=colors_homey$green,
-                        ggplot2::aes(x = semitone, y = beating)) +
+                        ggplot2::aes(x = semitone, y = low_beating)) +
+    ggplot2::geom_text(data=per_plot_labels, color=colors_homey$neutral,
+                       ggplot2::aes(x=-Inf,y=-Inf,label=label,
+                                    vjust="inward",hjust="inward")) +
+    ggplot2::xlab(NULL) +
+    ggplot2::ylab(NULL) +
+    ggplot2::facet_wrap(~sfoae_num_harmonics,ncol=ncols,dir='v',scales = "free_y") +
+    ggplot2::scale_x_continuous(breaks = c(),
+                                minor_breaks = 0:15) +
+    theme_homey()
+}
+
+plot_semitone_high_beating_sfoae_num_harmonics_wrap <- function(theory,
+                                                               black_vlines=c(), gray_vlines=c(),
+                                                               title,ncols=1) {
+  per_plot_labels = tidyr::expand_grid(
+    sfoae_num_harmonics  = theory$sfoae_num_harmonics  %>% unique
+  )
+  per_plot_labels$label = per_plot_labels %>%
+    purrr::pmap_vec(\(sfoae_num_harmonics) {
+      paste0('   sfoae_num_harmonics:', sfoae_num_harmonics)
+    })
+  theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
+    ggplot2::geom_vline(xintercept = black_vlines, color='black') +
+    ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
+    ggplot2::geom_point(data=theory, shape=21, stroke=NA, size=1,
+                        fill=colors_homey$fundamental,
+                        ggplot2::aes(x = semitone, y = high_beating)) +
     ggplot2::geom_text(data=per_plot_labels, color=colors_homey$neutral,
                        ggplot2::aes(x=-Inf,y=-Inf,label=label,
                                     vjust="inward",hjust="inward")) +

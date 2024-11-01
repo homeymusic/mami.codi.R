@@ -1,7 +1,7 @@
 SFOAE Number of Harmonics Search
 ================
 
-# Stretched
+# Bonang
 
 SFOAE Number of Harmonics:
 
@@ -15,4 +15,6 @@ SFOAE Number of Harmonics:
 
 ## Beating
 
-![](../figures/sfoae_num_harmonics/_Beating-1.png)<!-- -->
+![](../figures/sfoae_num_harmonics/_Low_Beating-1.png)<!-- -->
+
+![](../figures/sfoae_num_harmonics/_High_Beating-1.png)<!-- -->

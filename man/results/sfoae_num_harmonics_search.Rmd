@@ -6,7 +6,7 @@ always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'Stretched'
+search_label = 'Bonang'
 ```
 
 # `r search_label`
@@ -176,11 +176,24 @@ plot_semitone_space_time_sfoae_num_harmonics_wrap(
 
 ## Beating
 
-```{r _Beating, fig.height=7*rows, fig.width=12*cols, echo=F}
+```{r _Low_Beating, fig.height=7*rows, fig.width=12*cols, echo=F}
 # height = 3 per row and width = 5 per column
 # so for grid of 4x12 it would be height=12 and width=60
 
-plot_semitone_beating_sfoae_num_harmonics_wrap(
+plot_semitone_low_beating_sfoae_num_harmonics_wrap(
+  theory, 
+  gray_vlines  = params$gray_vlines[[1]],
+  black_vlines = params$black_vlines[[1]],
+  title=paste(search_label),
+  ncols=cols
+)
+```
+
+```{r _High_Beating, fig.height=7*rows, fig.width=12*cols, echo=F}
+# height = 3 per row and width = 5 per column
+# so for grid of 4x12 it would be height=12 and width=60
+
+plot_semitone_high_beating_sfoae_num_harmonics_wrap(
   theory, 
   gray_vlines  = params$gray_vlines[[1]],
   black_vlines = params$black_vlines[[1]],

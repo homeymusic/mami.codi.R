@@ -12,6 +12,7 @@ sfoae_num_harmonics = c(1:20)
 source('./man/code/sfoae_num_harmonics_trials.R')
 
 timbres=c('Pure','5PartialsNo3','5Partials','Bonang','Harmonic','Stretched','Compressed')
+timbres=c('Bonang')
 results <- purrr::map(timbres, function(t) {
   print(paste('Timbre:', t))
   run_trials(t, sfoae_num_harmonics)
