@@ -39,8 +39,7 @@ intervals <- list(
 framed_intervals <- purrr::map(intervals, ~c(.x, 72))
 ```
 
-# 2D Plots of Fundamental Frequencies f versus k
-
+# Wave Amplitude in Space and Time as Function of Wavelength and Frequency Cycle Times
 
 ```{r, echo=F, message=F, include=T, results='asis'}
 num_harmonics = 2
@@ -51,20 +50,18 @@ results <- purrr::map_dfr(names(framed_intervals), function(interval_name) {
     sfoae_num_harmonics = 0,
     verbose=T
   )
-  # f0 = result$fundamental_frequency
-  # l0 = result$fundamental_wavenumber
-  f0 = 1/result$time_cycles
-  l0 = result$space_cycles
-  print(plot_space_time(f0,l0,
-                        chord_name=interval_name,
-                        resolution=300))
+  print(plot_space_time(1/result$time_cycles,
+                        1/result$space_cycles,
+                        majorness=result$majorness,
+                        chord_name=interval_name))
   tibble::tibble(
     Interval = interval_name,
-    f0,
-    l0,
+    Harmonics = num_harmonics,
+    TimeCycles = result$time_cycles,
+    SpaceCycles = result$space_cycles,
     Majorness = result$majorness,
+    Dissonance = result$dissonance,
     Chord = list(framed_intervals[[interval_name]]),
-    Dissonance = result$dissonance
   )
 })
 

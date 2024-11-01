@@ -31,6 +31,22 @@ colors_homey <- list(
   'green'             = '#74DE7E',
   'gray'              = '#C0C0C0'
 )
+
+saturation_colors_homey <- list(
+  major = list(
+    hi = '#FF9700',
+    lo = '#FFE0B2'
+  ),
+  neutral = list(
+    hi = '#FF5500',
+    lo = '#FFCCB2'
+  ),
+  minor = list(
+    hi = '#0084EC',
+    lo = '#A5CDEC'
+  )
+)
+
 color_factor_homey <- function(x,column_name) {
   cut(x[[column_name]],c(-Inf,-1e-6,1e-6,Inf),labels=c("minor","neutral","major"))
 }
@@ -1261,29 +1277,42 @@ plot_semitone_high_beating_sfoae_num_harmonics_wrap <- function(theory,
                                 minor_breaks = 0:15) +
     theme_homey()
 }
-library(ggplot2)
 
-# Define the function to plot space vs. time as a 2D heatmap
-plot_space_time <- function(f0, l0, chord_name = "Chord", time_range = 10, space_range = 10, sigma = 0.2, resolution = 200) {
-  # Generate a higher-resolution grid of space and time values
+# Define the function to plot time vs. space as a 2D heatmap
+plot_space_time <- function(f0, k0, majorness = 0.0, chord_name = "Chord", time_range = 25, space_range = 25, resolution = 200) {
+
+  # Determine tonality based on majorness
+  tonality <- if (majorness < 0) {
+    'minor'
+  } else if (majorness == 0) {
+    'neutral'
+  } else {
+    'major'
+  }
+
+  # Select the color set based on tonality
+  color_set <- saturation_colors_homey[[tonality]]
+
+  # Generate a higher-resolution grid of time and space values
   time_values <- seq(0, time_range, length.out = resolution)
   space_values <- seq(0, space_range, length.out = resolution)
 
   # Create a data frame for the grid
-  grid <- expand.grid(time = time_values, space = space_values)
+  grid <- base::expand.grid(time = time_values, space = space_values)
 
-  # Define a wave pattern as a function of space and time
-  grid$wave_intensity <- sin(2 * pi * f0 * grid$time - (2 * pi / l0) * grid$space) * exp(-sigma * grid$time)
+  # Define a wave pattern as a function of time and space
+  grid$amplitude <- base::sin(2 * base::pi * f0 * grid$time - 2 * base::pi * k0 * grid$space)
 
-  # Plot using ggplot2 with theme_homey and a grayscale heatmap to show wave intensity over space and time
-  ggplot2::ggplot(grid, ggplot2::aes(x = space, y = time, fill = wave_intensity)) +
+  # Plot using ggplot2 with selected color gradient and percentage labels
+  ggplot2::ggplot(grid, ggplot2::aes(x = time, y = space, fill = amplitude)) +
     ggplot2::geom_tile() +
-    ggplot2::scale_fill_gradient(low = "gray90", high = "gray10") +  # Grayscale gradient
+    ggplot2::scale_fill_gradient(low = color_set$lo, high = color_set$hi) +  # Dynamic color gradient
+    ggplot2::scale_x_continuous(labels = scales::label_percent(scale = 1 / time_range)) +  # Percent label for time
+    ggplot2::scale_y_continuous(labels = scales::label_percent(scale = 1 / space_range)) + # Percent label for space
     ggplot2::labs(
-      x = "Space (m)",
-      y = "Time (s)",
-      title = paste(chord_name, "- Space-Time Wave Intensity")
+      x = "Time (%)",
+      y = "Space (%)",
+      title = base::paste(chord_name, ": Time-Space Amplitude")
     ) +
     theme_homey(aspect.ratio = 1)
 }
-
