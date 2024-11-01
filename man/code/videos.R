@@ -161,14 +161,14 @@ results <- purrr::map(timbres, function(t) {
   p2 = plot_semitone_beating(chords, paste(t, ': Beating'))
   title = paste0(t,'_Beating')
 
-  R.utils::mkdirs("output/videos")
+  R.utils::mkdirs("man/videos")
 
   sweep_v_line_over_plot(
     p2,
     x_start = 0,
     x_end = 15,
     duration = 75,
-    path = paste0('output/videos/',title,'.mp4'),
+    path = paste0('man/videos/',title,'.mp4'),
     fps = 30,
     dpi = 300,
     audio_components = audio_components(t)
@@ -177,14 +177,14 @@ results <- purrr::map(timbres, function(t) {
   p1 = plot_semitone_space_time(chords, paste(t, ': Space Time Consonance'))
   title = paste0(t,'_Space_Time_Consonance')
 
-  R.utils::mkdirs("output/videos")
+  R.utils::mkdirs("man/videos")
 
   sweep_v_line_over_plot(
     p1,
     x_start = 0,
     x_end = 15,
     duration = 75,
-    path = paste0('output/videos/',title,'.mp4'),
+    path = paste0('man/videos/',title,'.mp4'),
     fps = 30,
     dpi = 300,
     audio_components = audio_components(t)

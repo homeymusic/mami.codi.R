@@ -1261,3 +1261,29 @@ plot_semitone_high_beating_sfoae_num_harmonics_wrap <- function(theory,
                                 minor_breaks = 0:15) +
     theme_homey()
 }
+library(ggplot2)
+
+# Define the function to plot space vs. time as a 2D heatmap
+plot_space_time <- function(f0, l0, chord_name = "Chord", time_range = 10, space_range = 10, sigma = 0.2, resolution = 200) {
+  # Generate a higher-resolution grid of space and time values
+  time_values <- seq(0, time_range, length.out = resolution)
+  space_values <- seq(0, space_range, length.out = resolution)
+
+  # Create a data frame for the grid
+  grid <- expand.grid(time = time_values, space = space_values)
+
+  # Define a wave pattern as a function of space and time
+  grid$wave_intensity <- sin(2 * pi * f0 * grid$time - (2 * pi / l0) * grid$space) * exp(-sigma * grid$time)
+
+  # Plot using ggplot2 with theme_homey and a grayscale heatmap to show wave intensity over space and time
+  ggplot2::ggplot(grid, ggplot2::aes(x = space, y = time, fill = wave_intensity)) +
+    ggplot2::geom_tile() +
+    ggplot2::scale_fill_gradient(low = "gray90", high = "gray10") +  # Grayscale gradient
+    ggplot2::labs(
+      x = "Space (m)",
+      y = "Time (s)",
+      title = paste(chord_name, "- Space-Time Wave Intensity")
+    ) +
+    theme_homey(aspect.ratio = 1)
+}
+
