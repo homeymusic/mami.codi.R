@@ -667,6 +667,31 @@ major-minor versus the behavioral results are included in a plot below.
 | 5 | 0.07958 | 0.07958 | 0.2 | 2 |
 
 ![](man/figures/README-unnamed-chunk-15-1.png)<!-- -->  
+Called from: plot_semitone_beating(chords, paste(“Beating”), sigma =
+sigma, include_points = T, include_line = F, black_vlines =
+black_vlines, gray_vlines = gray_vlines) debug: ggplot2::ggplot(chords,
+ggplot2::aes(x = .data$semitone, y = .data$beating)) +
+ggplot2::geom_vline(xintercept = black_vlines, color =
+colors_homey$highlight) +
+    ggplot2::geom_vline(xintercept = gray_vlines, color = colors_homey$highlight,
+linetype = “dotted”) + { if (include_points) ggplot2::geom_point(shape =
+21, stroke = NA, size = 1, fill = colors_homey$green)
+} + {
+    if (include_line)
+        ggplot2::geom_line(data = chords, ggplot2::aes(x = semitone,
+            y = smoothed.beating, group = 1), color = colors_homey$neutral,
+linewidth = 1) } + ggplot2::scale_fill_manual(values =
+color_values_homey(), guide = “none”) +
+ggplot2::scale_color_manual(values = color_values_homey()) +
+ggplot2::ggtitle(title) + ggplot2::scale_x_continuous(breaks = -15:15,
+minor_breaks = c()) + ggplot2::ylab(“Beating”) +
+ggplot2::xlab(“Semitone”) + ggplot2::labs(color = NULL) + theme_homey()
+debug: if (include_points) ggplot2::geom_point(shape = 21, stroke = NA,
+size = 1, fill = colors_homey$green)
+debug: ggplot2::geom_point(shape = 21, stroke = NA, size = 1, fill = colors_homey$green)
+debug: if (include_line) ggplot2::geom_line(data = chords,
+ggplot2::aes(x = semitone, y = smoothed.beating, group = 1), color =
+colors_homey\$neutral, linewidth = 1)
 ![](man/figures/README-unnamed-chunk-15-2.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-3.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-4.png)<!-- -->  
@@ -682,6 +707,31 @@ For 10 harmonics, behavioral results and theoretical predictions agree.
 | 5 | 0.07958 | 0.07958 | 0.2 | 2 |
 
 ![](man/figures/README-unnamed-chunk-15-7.png)<!-- -->  
+Called from: plot_semitone_beating(chords, paste(“Beating”), sigma =
+sigma, include_points = T, include_line = F, black_vlines =
+black_vlines, gray_vlines = gray_vlines) debug: ggplot2::ggplot(chords,
+ggplot2::aes(x = .data$semitone, y = .data$beating)) +
+ggplot2::geom_vline(xintercept = black_vlines, color =
+colors_homey$highlight) +
+    ggplot2::geom_vline(xintercept = gray_vlines, color = colors_homey$highlight,
+linetype = “dotted”) + { if (include_points) ggplot2::geom_point(shape =
+21, stroke = NA, size = 1, fill = colors_homey$green)
+} + {
+    if (include_line)
+        ggplot2::geom_line(data = chords, ggplot2::aes(x = semitone,
+            y = smoothed.beating, group = 1), color = colors_homey$neutral,
+linewidth = 1) } + ggplot2::scale_fill_manual(values =
+color_values_homey(), guide = “none”) +
+ggplot2::scale_color_manual(values = color_values_homey()) +
+ggplot2::ggtitle(title) + ggplot2::scale_x_continuous(breaks = -15:15,
+minor_breaks = c()) + ggplot2::ylab(“Beating”) +
+ggplot2::xlab(“Semitone”) + ggplot2::labs(color = NULL) + theme_homey()
+debug: if (include_points) ggplot2::geom_point(shape = 21, stroke = NA,
+size = 1, fill = colors_homey$green)
+debug: ggplot2::geom_point(shape = 21, stroke = NA, size = 1, fill = colors_homey$green)
+debug: if (include_line) ggplot2::geom_line(data = chords,
+ggplot2::aes(x = semitone, y = smoothed.beating, group = 1), color =
+colors_homey\$neutral, linewidth = 1)
 ![](man/figures/README-unnamed-chunk-15-8.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-9.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-10.png)<!-- -->  
@@ -700,6 +750,31 @@ peak.
 | 5 | 0.07958 | 0.07958 | 0.2 | 2 |
 
 ![](man/figures/README-unnamed-chunk-15-13.png)<!-- -->  
+Called from: plot_semitone_beating(chords, paste(“Beating”), sigma =
+sigma, include_points = T, include_line = F, black_vlines =
+black_vlines, gray_vlines = gray_vlines) debug: ggplot2::ggplot(chords,
+ggplot2::aes(x = .data$semitone, y = .data$beating)) +
+ggplot2::geom_vline(xintercept = black_vlines, color =
+colors_homey$highlight) +
+    ggplot2::geom_vline(xintercept = gray_vlines, color = colors_homey$highlight,
+linetype = “dotted”) + { if (include_points) ggplot2::geom_point(shape =
+21, stroke = NA, size = 1, fill = colors_homey$green)
+} + {
+    if (include_line)
+        ggplot2::geom_line(data = chords, ggplot2::aes(x = semitone,
+            y = smoothed.beating, group = 1), color = colors_homey$neutral,
+linewidth = 1) } + ggplot2::scale_fill_manual(values =
+color_values_homey(), guide = “none”) +
+ggplot2::scale_color_manual(values = color_values_homey()) +
+ggplot2::ggtitle(title) + ggplot2::scale_x_continuous(breaks = -15:15,
+minor_breaks = c()) + ggplot2::ylab(“Beating”) +
+ggplot2::xlab(“Semitone”) + ggplot2::labs(color = NULL) + theme_homey()
+debug: if (include_points) ggplot2::geom_point(shape = 21, stroke = NA,
+size = 1, fill = colors_homey$green)
+debug: ggplot2::geom_point(shape = 21, stroke = NA, size = 1, fill = colors_homey$green)
+debug: if (include_line) ggplot2::geom_line(data = chords,
+ggplot2::aes(x = semitone, y = smoothed.beating, group = 1), color =
+colors_homey\$neutral, linewidth = 1)
 ![](man/figures/README-unnamed-chunk-15-14.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-15.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-16.png)<!-- -->  
@@ -718,6 +793,31 @@ while the M3 peak is slightly higher without the 3rd partial.
 | 5 | 0.07958 | 0.07958 | 0.2 | 2 |
 
 ![](man/figures/README-unnamed-chunk-15-19.png)<!-- -->  
+Called from: plot_semitone_beating(chords, paste(“Beating”), sigma =
+sigma, include_points = T, include_line = F, black_vlines =
+black_vlines, gray_vlines = gray_vlines) debug: ggplot2::ggplot(chords,
+ggplot2::aes(x = .data$semitone, y = .data$beating)) +
+ggplot2::geom_vline(xintercept = black_vlines, color =
+colors_homey$highlight) +
+    ggplot2::geom_vline(xintercept = gray_vlines, color = colors_homey$highlight,
+linetype = “dotted”) + { if (include_points) ggplot2::geom_point(shape =
+21, stroke = NA, size = 1, fill = colors_homey$green)
+} + {
+    if (include_line)
+        ggplot2::geom_line(data = chords, ggplot2::aes(x = semitone,
+            y = smoothed.beating, group = 1), color = colors_homey$neutral,
+linewidth = 1) } + ggplot2::scale_fill_manual(values =
+color_values_homey(), guide = “none”) +
+ggplot2::scale_color_manual(values = color_values_homey()) +
+ggplot2::ggtitle(title) + ggplot2::scale_x_continuous(breaks = -15:15,
+minor_breaks = c()) + ggplot2::ylab(“Beating”) +
+ggplot2::xlab(“Semitone”) + ggplot2::labs(color = NULL) + theme_homey()
+debug: if (include_points) ggplot2::geom_point(shape = 21, stroke = NA,
+size = 1, fill = colors_homey$green)
+debug: ggplot2::geom_point(shape = 21, stroke = NA, size = 1, fill = colors_homey$green)
+debug: if (include_line) ggplot2::geom_line(data = chords,
+ggplot2::aes(x = semitone, y = smoothed.beating, group = 1), color =
+colors_homey\$neutral, linewidth = 1)
 ![](man/figures/README-unnamed-chunk-15-20.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-21.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-22.png)<!-- -->  
@@ -737,6 +837,31 @@ be relatively higher than the behavioral results.
 | 5 | 0.07958 | 0.07958 | 0.2 | 2 |
 
 ![](man/figures/README-unnamed-chunk-15-25.png)<!-- -->  
+Called from: plot_semitone_beating(chords, paste(“Beating”), sigma =
+sigma, include_points = T, include_line = F, black_vlines =
+black_vlines, gray_vlines = gray_vlines) debug: ggplot2::ggplot(chords,
+ggplot2::aes(x = .data$semitone, y = .data$beating)) +
+ggplot2::geom_vline(xintercept = black_vlines, color =
+colors_homey$highlight) +
+    ggplot2::geom_vline(xintercept = gray_vlines, color = colors_homey$highlight,
+linetype = “dotted”) + { if (include_points) ggplot2::geom_point(shape =
+21, stroke = NA, size = 1, fill = colors_homey$green)
+} + {
+    if (include_line)
+        ggplot2::geom_line(data = chords, ggplot2::aes(x = semitone,
+            y = smoothed.beating, group = 1), color = colors_homey$neutral,
+linewidth = 1) } + ggplot2::scale_fill_manual(values =
+color_values_homey(), guide = “none”) +
+ggplot2::scale_color_manual(values = color_values_homey()) +
+ggplot2::ggtitle(title) + ggplot2::scale_x_continuous(breaks = -15:15,
+minor_breaks = c()) + ggplot2::ylab(“Beating”) +
+ggplot2::xlab(“Semitone”) + ggplot2::labs(color = NULL) + theme_homey()
+debug: if (include_points) ggplot2::geom_point(shape = 21, stroke = NA,
+size = 1, fill = colors_homey$green)
+debug: ggplot2::geom_point(shape = 21, stroke = NA, size = 1, fill = colors_homey$green)
+debug: if (include_line) ggplot2::geom_line(data = chords,
+ggplot2::aes(x = semitone, y = smoothed.beating, group = 1), color =
+colors_homey\$neutral, linewidth = 1)
 ![](man/figures/README-unnamed-chunk-15-26.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-27.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-28.png)<!-- -->  
@@ -754,6 +879,31 @@ and m7 that do not exist in the behavioral results.
 | 5 | 0.07958 | 0.07958 | 0.2 | 2.1 |
 
 ![](man/figures/README-unnamed-chunk-15-31.png)<!-- -->  
+Called from: plot_semitone_beating(chords, paste(“Beating”), sigma =
+sigma, include_points = T, include_line = F, black_vlines =
+black_vlines, gray_vlines = gray_vlines) debug: ggplot2::ggplot(chords,
+ggplot2::aes(x = .data$semitone, y = .data$beating)) +
+ggplot2::geom_vline(xintercept = black_vlines, color =
+colors_homey$highlight) +
+    ggplot2::geom_vline(xintercept = gray_vlines, color = colors_homey$highlight,
+linetype = “dotted”) + { if (include_points) ggplot2::geom_point(shape =
+21, stroke = NA, size = 1, fill = colors_homey$green)
+} + {
+    if (include_line)
+        ggplot2::geom_line(data = chords, ggplot2::aes(x = semitone,
+            y = smoothed.beating, group = 1), color = colors_homey$neutral,
+linewidth = 1) } + ggplot2::scale_fill_manual(values =
+color_values_homey(), guide = “none”) +
+ggplot2::scale_color_manual(values = color_values_homey()) +
+ggplot2::ggtitle(title) + ggplot2::scale_x_continuous(breaks = -15:15,
+minor_breaks = c()) + ggplot2::ylab(“Beating”) +
+ggplot2::xlab(“Semitone”) + ggplot2::labs(color = NULL) + theme_homey()
+debug: if (include_points) ggplot2::geom_point(shape = 21, stroke = NA,
+size = 1, fill = colors_homey$green)
+debug: ggplot2::geom_point(shape = 21, stroke = NA, size = 1, fill = colors_homey$green)
+debug: if (include_line) ggplot2::geom_line(data = chords,
+ggplot2::aes(x = semitone, y = smoothed.beating, group = 1), color =
+colors_homey\$neutral, linewidth = 1)
 ![](man/figures/README-unnamed-chunk-15-32.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-33.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-34.png)<!-- -->  
@@ -770,6 +920,31 @@ with the theoretical peaks.
 | 5 | 0.07958 | 0.07958 | 0.2 | 1.9 |
 
 ![](man/figures/README-unnamed-chunk-15-37.png)<!-- -->  
+Called from: plot_semitone_beating(chords, paste(“Beating”), sigma =
+sigma, include_points = T, include_line = F, black_vlines =
+black_vlines, gray_vlines = gray_vlines) debug: ggplot2::ggplot(chords,
+ggplot2::aes(x = .data$semitone, y = .data$beating)) +
+ggplot2::geom_vline(xintercept = black_vlines, color =
+colors_homey$highlight) +
+    ggplot2::geom_vline(xintercept = gray_vlines, color = colors_homey$highlight,
+linetype = “dotted”) + { if (include_points) ggplot2::geom_point(shape =
+21, stroke = NA, size = 1, fill = colors_homey$green)
+} + {
+    if (include_line)
+        ggplot2::geom_line(data = chords, ggplot2::aes(x = semitone,
+            y = smoothed.beating, group = 1), color = colors_homey$neutral,
+linewidth = 1) } + ggplot2::scale_fill_manual(values =
+color_values_homey(), guide = “none”) +
+ggplot2::scale_color_manual(values = color_values_homey()) +
+ggplot2::ggtitle(title) + ggplot2::scale_x_continuous(breaks = -15:15,
+minor_breaks = c()) + ggplot2::ylab(“Beating”) +
+ggplot2::xlab(“Semitone”) + ggplot2::labs(color = NULL) + theme_homey()
+debug: if (include_points) ggplot2::geom_point(shape = 21, stroke = NA,
+size = 1, fill = colors_homey$green)
+debug: ggplot2::geom_point(shape = 21, stroke = NA, size = 1, fill = colors_homey$green)
+debug: if (include_line) ggplot2::geom_line(data = chords,
+ggplot2::aes(x = semitone, y = smoothed.beating, group = 1), color =
+colors_homey\$neutral, linewidth = 1)
 ![](man/figures/README-unnamed-chunk-15-38.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-39.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-40.png)<!-- -->  
@@ -787,6 +962,31 @@ Description is below.
 | 5 | 0.07958 | 0.07958 | 0.035 | 2 |
 
 ![](man/figures/README-unnamed-chunk-15-43.png)<!-- -->  
+Called from: plot_semitone_beating(chords, paste(“Beating”), sigma =
+sigma, include_points = T, include_line = F, black_vlines =
+black_vlines, gray_vlines = gray_vlines) debug: ggplot2::ggplot(chords,
+ggplot2::aes(x = .data$semitone, y = .data$beating)) +
+ggplot2::geom_vline(xintercept = black_vlines, color =
+colors_homey$highlight) +
+    ggplot2::geom_vline(xintercept = gray_vlines, color = colors_homey$highlight,
+linetype = “dotted”) + { if (include_points) ggplot2::geom_point(shape =
+21, stroke = NA, size = 1, fill = colors_homey$green)
+} + {
+    if (include_line)
+        ggplot2::geom_line(data = chords, ggplot2::aes(x = semitone,
+            y = smoothed.beating, group = 1), color = colors_homey$neutral,
+linewidth = 1) } + ggplot2::scale_fill_manual(values =
+color_values_homey(), guide = “none”) +
+ggplot2::scale_color_manual(values = color_values_homey()) +
+ggplot2::ggtitle(title) + ggplot2::scale_x_continuous(breaks = -15:15,
+minor_breaks = c()) + ggplot2::ylab(“Beating”) +
+ggplot2::xlab(“Semitone”) + ggplot2::labs(color = NULL) + theme_homey()
+debug: if (include_points) ggplot2::geom_point(shape = 21, stroke = NA,
+size = 1, fill = colors_homey$green)
+debug: ggplot2::geom_point(shape = 21, stroke = NA, size = 1, fill = colors_homey$green)
+debug: if (include_line) ggplot2::geom_line(data = chords,
+ggplot2::aes(x = semitone, y = smoothed.beating, group = 1), color =
+colors_homey\$neutral, linewidth = 1)
 ![](man/figures/README-unnamed-chunk-15-44.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-45.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-46.png)<!-- -->  
@@ -802,6 +1002,31 @@ Description is below.
 | 5 | 0.07958 | 0.07958 | 0.035 | 2 |
 
 ![](man/figures/README-unnamed-chunk-15-49.png)<!-- -->  
+Called from: plot_semitone_beating(chords, paste(“Beating”), sigma =
+sigma, include_points = T, include_line = F, black_vlines =
+black_vlines, gray_vlines = gray_vlines) debug: ggplot2::ggplot(chords,
+ggplot2::aes(x = .data$semitone, y = .data$beating)) +
+ggplot2::geom_vline(xintercept = black_vlines, color =
+colors_homey$highlight) +
+    ggplot2::geom_vline(xintercept = gray_vlines, color = colors_homey$highlight,
+linetype = “dotted”) + { if (include_points) ggplot2::geom_point(shape =
+21, stroke = NA, size = 1, fill = colors_homey$green)
+} + {
+    if (include_line)
+        ggplot2::geom_line(data = chords, ggplot2::aes(x = semitone,
+            y = smoothed.beating, group = 1), color = colors_homey$neutral,
+linewidth = 1) } + ggplot2::scale_fill_manual(values =
+color_values_homey(), guide = “none”) +
+ggplot2::scale_color_manual(values = color_values_homey()) +
+ggplot2::ggtitle(title) + ggplot2::scale_x_continuous(breaks = -15:15,
+minor_breaks = c()) + ggplot2::ylab(“Beating”) +
+ggplot2::xlab(“Semitone”) + ggplot2::labs(color = NULL) + theme_homey()
+debug: if (include_points) ggplot2::geom_point(shape = 21, stroke = NA,
+size = 1, fill = colors_homey$green)
+debug: ggplot2::geom_point(shape = 21, stroke = NA, size = 1, fill = colors_homey$green)
+debug: if (include_line) ggplot2::geom_line(data = chords,
+ggplot2::aes(x = semitone, y = smoothed.beating, group = 1), color =
+colors_homey\$neutral, linewidth = 1)
 ![](man/figures/README-unnamed-chunk-15-50.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-51.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-52.png)<!-- -->  
@@ -817,6 +1042,31 @@ Description is below.
 | 5 | 0.07958 | 0.07958 | 0.035 | 2 |
 
 ![](man/figures/README-unnamed-chunk-15-55.png)<!-- -->  
+Called from: plot_semitone_beating(chords, paste(“Beating”), sigma =
+sigma, include_points = T, include_line = F, black_vlines =
+black_vlines, gray_vlines = gray_vlines) debug: ggplot2::ggplot(chords,
+ggplot2::aes(x = .data$semitone, y = .data$beating)) +
+ggplot2::geom_vline(xintercept = black_vlines, color =
+colors_homey$highlight) +
+    ggplot2::geom_vline(xintercept = gray_vlines, color = colors_homey$highlight,
+linetype = “dotted”) + { if (include_points) ggplot2::geom_point(shape =
+21, stroke = NA, size = 1, fill = colors_homey$green)
+} + {
+    if (include_line)
+        ggplot2::geom_line(data = chords, ggplot2::aes(x = semitone,
+            y = smoothed.beating, group = 1), color = colors_homey$neutral,
+linewidth = 1) } + ggplot2::scale_fill_manual(values =
+color_values_homey(), guide = “none”) +
+ggplot2::scale_color_manual(values = color_values_homey()) +
+ggplot2::ggtitle(title) + ggplot2::scale_x_continuous(breaks = -15:15,
+minor_breaks = c()) + ggplot2::ylab(“Beating”) +
+ggplot2::xlab(“Semitone”) + ggplot2::labs(color = NULL) + theme_homey()
+debug: if (include_points) ggplot2::geom_point(shape = 21, stroke = NA,
+size = 1, fill = colors_homey$green)
+debug: ggplot2::geom_point(shape = 21, stroke = NA, size = 1, fill = colors_homey$green)
+debug: if (include_line) ggplot2::geom_line(data = chords,
+ggplot2::aes(x = semitone, y = smoothed.beating, group = 1), color =
+colors_homey\$neutral, linewidth = 1)
 ![](man/figures/README-unnamed-chunk-15-56.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-57.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-15-58.png)<!-- -->  
