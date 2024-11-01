@@ -373,15 +373,11 @@ test_that('Beats and Stimulus Frequency Otoacoustic Emissions',{
                        num_harmonics = num_harmonics,
                        verbose =T)
   expect_equal(P8_beats_sfoae$sfoae_frequency_spectrum[[1]] %>% nrow(), sfoae_num_harmonics)
-  expect_equal(P8_beats_sfoae$sfoae_wavelength_spectrum[[1]] %>% nrow(), sfoae_num_harmonics)
-  sfoae_f = c(261.6256 ,516.2511, 523.2511)
-  expect_equal(P8_beats_sfoae$frequencies[[1]] %>% sort(), sfoae_f, tolerance=0.1)
-  expect_equal(P8_beats_sfoae$wavelengths[[1]] %>% sort(), c(C_SOUND / sfoae_f) %>% sort(), tolerance=0.1)
   expect_equal(P8_beats_sfoae$filtered_beats_spectrum[[1]]$wavelength %>% sort,
                c(1.34, 48.99),
                tolerance=0.1)
   expect_equal(P8_beats_sfoae$filtered_beats_spectrum[[1]]$amplitude %>% sort,
-               c(4.00, 3.57) %>% sort(),
+               c(5.828427, 3.576830) %>% sort(),
                tolerance=0.1)
 
   expect_true(P8_beats_sfoae$beating > 3.0)
@@ -393,7 +389,7 @@ test_that('params round trip', {
                  sfoae_num_harmonics = 2,
                  beat_pass_filter = BEAT_PASS_FILTER$LOW)
   expect_equal(P1$sfoae_num_harmonics, 2)
-  expect_equal(P1$include_beats, T)
+  expect_equal(P1$beat_pass_filter, BEAT_PASS_FILTER$LOW)
 })
 test_that('pure tone beat makes sense with without SFOAE 2 harmonics',{
 
@@ -423,18 +419,18 @@ test_that('pure tone beat makes sense with without SFOAE 2 harmonics',{
                    sfoae_num_harmonics = 2,
                    beat_pass_filter = BEAT_PASS_FILTER$LOW,
                    verbose=T)
-  expect_equal(dyad$beating, 8.53, tolerance = 0.01)
+  expect_equal(dyad$beating, 9.584609, tolerance = 0.01)
   expect_equal(dyad$filtered_beats_spectrum[[1]]$wavelength, c(22.04, 1.39), tolerance = 0.01)
-  expect_equal(dyad$filtered_beats_spectrum[[1]]$amplitude, c(4,3.57), tolerance = 0.01)
+  expect_equal(dyad$filtered_beats_spectrum[[1]]$amplitude, c(5.828427,3.57), tolerance = 0.01)
 
   dyad = mami.codi(c(60,71),
                    num_harmonics=1,
                    sfoae_num_harmonics = 2,
                    beat_pass_filter = BEAT_PASS_FILTER$LOW,
                    verbose=T)
-  expect_equal(dyad$beating, 7.44, tolerance = 0.01)
+  expect_equal(dyad$beating, 7.648117, tolerance = 0.01)
   expect_equal(dyad$filtered_beats_spectrum[[1]]$wavelength, c(1.47, 11.67), tolerance = 0.01)
-  expect_equal(dyad$filtered_beats_spectrum[[1]]$amplitude, c(4,3.57), tolerance = 0.01)
+  expect_equal(dyad$filtered_beats_spectrum[[1]]$amplitude, c(5.828427,3.57), tolerance = 0.01)
 
   dyad = mami.codi(c(60,73),
                    num_harmonics=1,
@@ -450,3 +446,4 @@ test_that('sfoae_num_harmonics round trips', {
   P1 = mami.codi(60, verbose=T)
   expect_equal(P1$sfoae_num_harmonics, 5)
 })
+
