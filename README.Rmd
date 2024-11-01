@@ -150,6 +150,74 @@ After reviewing the literature, it seems that proofs for an uncertainty principl
 
 Note 2: Based on the bimodal shape of the Stern-Brocot distribution below, explore modeling the two-slit experiment using the deterministic SB method instead of a probabilistic curve; consult Bohmian researchers, who may find the Stern-Brocot’s deterministic approach relevant to quantum mechanics.
 
+# Beats
+
+Beats are not detected in the temporal frequency domain. But they are detected in the 
+spatial frequency domain. Our model computes the difference among all wavelengths 
+in the complex waveform (including SFOAE) and then only includes difference wavelengths
+greater than the largest wavelength in the waveform.
+
+## Physics
+
+``` math
+\lambda_{\text{ij}} = \frac{\lambda_i \cdot \lambda_j}{|\lambda_i - \lambda_j|}
+```
+
+``` math
+p_{\text{ij}} = p_{\text{i}} + p_{\text{j}}
+```
+
+## Psychophysics
+
+We apply a beat pass filter so that only pitches below the lowest tone 
+(longer wavelength) are included.
+
+``` math
+\lambda_{\text{low}} = (\lambda_{\text{ij}} > \text{max}(\lambda_{\text{n}}))
+```
+
+In our model, the low wavelengths $\lambda_{\text{low}}$ are passed to the 
+wavelength spectrum (but not the frequency spectrum) and computed just like the
+other wavelengths from the stimulus and the SFOAE.
+
+### A Measure of Beat Perception
+
+We use beats to see how many harmonics should be included in the SFOAE waveform.
+
+We created this metric for beat perception:
+
+``` math
+\log_2 \left( 1 + \sum_{n=1}^{N} p_{\text{max}}^2 \cdot \lambda_{\text{n}} \right)
+```
+
+## Pure
+
+[![Pure Beating](https://img.youtube.com/vi/cVHmb-fJuVg/0.jpg)](https://www.youtube.com/watch?v=cVHmb-fJuVg)
+
+## 5 Partials No 3
+
+[![5 Partials No 3 Beating](https://img.youtube.com/vi/cOp3gnFVnPU/0.jpg)](https://www.youtube.com/watch?v=cOp3gnFVnPU)
+
+## 5 Partials
+
+[![5 Partials Beating](https://img.youtube.com/vi/aZRqkwwS9jg/0.jpg)](https://www.youtube.com/watch?v=aZRqkwwS9jg)
+
+## Bonang
+
+[![Bonang Beating](https://img.youtube.com/vi/1V-BsZqS9Mw/0.jpg)](https://www.youtube.com/watch?v=1V-BsZqS9Mw)
+
+## Compressed
+
+[![Compressed Beating](https://img.youtube.com/vi/sB1npeSe2Tc/0.jpg)](https://www.youtube.com/watch?v=sB1npeSe2Tc)
+
+## Harmonic
+
+[![Harmonic Beating](https://img.youtube.com/vi/2vrnfYxZBGM/0.jpg)](https://www.youtube.com/watch?v=2vrnfYxZBGM)
+
+## Stretched
+
+[![Stretched Beating](https://img.youtube.com/vi/cOVlcK7-tBU/0.jpg)](https://www.youtube.com/watch?v=cOVlcK7-tBU)
+
 # Wavelengths
 
 Consider the fundamental tone of middle C playing from $t=-\infty$ to $t=\infty$. 
@@ -644,27 +712,6 @@ params = list(
 )
 ```
 
-# Some Videos
-
-## Pure
-
-[![Pure Wavelength and Frequency Consonance](https://img.youtube.com/vi/Q24nZNuPuTU/0.jpg)](https://www.youtube.com/watch?v=Q24nZNuPuTU)
-
-## Bonang
-
-[![Bonang Wavelength and Frequency Consonance](https://img.youtube.com/vi/UupIS6A6m0I/0.jpg)](https://www.youtube.com/watch?v=UupIS6A6m0I)
-
-## Harmonic results
-
-[![Harmonic Wavelength and Frequency Consonance](https://img.youtube.com/vi/H3RO3NYzVJ8/0.jpg)](https://www.youtube.com/watch?v=H3RO3NYzVJ8)
-
-## 5 Partials
-
-[![5 Partials Wavelength and Frequency Consonance](https://img.youtube.com/vi/zzvs3_MsIZQ/0.jpg)](https://www.youtube.com/watch?v=zzvs3_MsIZQ)
-
-## 5 Partials No 3
-
-[![5 Partials No 3 Wavelength and Frequency Consonance](https://img.youtube.com/vi/ustqdAdhc_U/0.jpg)](https://www.youtube.com/watch?v=ustqdAdhc_U)
 
 
 # Fourier Transform Between Wavelength and Frequency Probability Waves

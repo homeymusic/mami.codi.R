@@ -3,7 +3,7 @@ test_that('M7 beats make sense', {
   M7_l = C_SOUND / (M7 %>% hrep::freq())
   M7_beats = compute_beats(wavelength = M7_l, amplitude = M7 %>% hrep::amp())
   expect_equal(M7_beats$wavelength,1.47, tol=0.01)
-  expect_equal(M7_beats$amplitude,4, tol=0.01)
+  expect_equal(M7_beats$amplitude,2, tol=0.01)
 })
 
 test_that('beats make sense at octave P8 with 2 harmonics', {
@@ -16,7 +16,7 @@ test_that('beats make sense at octave P8 with 2 harmonics', {
 
   beats = compute_beats(wavelength = C_SOUND/spectrum$x, amplitude = spectrum$y)
   expect_equal(beats$wavelength,c(1.2768703,  0.4293529 , 49.0000466 , 0.6384352,  0.6468633), tol=0.01)
-  expect_equal(beats$amplitude,c(4.000000, 3.576830, 3.576830, 3.177313, 3.576830), tol=0.01)
+  expect_equal(beats$amplitude,c(2.000000,1.891251, 1.891251, 1.782502, 1.891251), tol=0.01)
 
 })
 
@@ -32,7 +32,7 @@ test_that('calculated beat matches actual beat',{
                c(49),
                tolerance = 0.1)
   expect_equal(beats_spectrum$amplitude,
-               c(3.8025),
+               c(1.95),
                tolerance = 0.1)
   calculated_beat_freq = C_SOUND / beats_spectrum$wavelength
   expect_equal(beat_freq, calculated_beat_freq, tolerance = 0.1)
@@ -51,7 +51,7 @@ test_that('only low beats are returned',{
                c(49.00, 5.04, 5.62),
                tolerance = 0.1)
   expect_equal(beats_spectrum$amplitude,
-               c(4,4,4),
+               c(2,2,2),
                tolerance = 0.1)
   calculated_beat_freqs = C_SOUND / beats_spectrum$wavelength
   expect_true(any(abs(calculated_beat_freqs - beat_freq) < 0.1))

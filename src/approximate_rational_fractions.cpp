@@ -275,7 +275,7 @@ using namespace Rcpp;
          if (std::abs(computed_wavelength - max_wavelength) > tolerance) {
            beat_wavelength[count] = computed_wavelength;
            // Compute the beat amplitude
-           beat_amplitude[count] = std::pow(amplitude[i] + amplitude[j], 2);
+           beat_amplitude[count] = amplitude[i] + amplitude[j];
            count++;
          }
        }
