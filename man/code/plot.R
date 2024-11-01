@@ -1279,7 +1279,7 @@ plot_semitone_high_beating_sfoae_num_harmonics_wrap <- function(theory,
 }
 
 # Define the function to plot time vs. space as a 2D heatmap
-plot_space_time <- function(f0, k0, majorness = 0.0, chord_name = "Chord", time_range = 25, space_range = 25, resolution = 200) {
+plot_space_time <- function(f0, k0, majorness = 0.0, chord_name = "Chord", time_range = 25, space_range = 25, resolution = 1000) {
 
   # Determine tonality based on majorness
   tonality <- if (majorness < 0) {

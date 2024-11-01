@@ -107,27 +107,24 @@ We believe that these space-time discrepancies in cycle length are the source of
 ```{r, echo=F, message=F, include=T, results='asis'}
 # Define the intervals
 intervals <- list(
-  # consonant intervals
   M3 = c(60, 64),
+  P1 = c(60, 60),
   m6 = c(60, 68),
   M6 = c(60, 69),
-  m3 = c(60, 63),
-  # perfect intervals
-  P5 = c(60, 67),
-  P4 = c(60, 65),
-  P1 = c(60, 60),
   P8 = c(60, 72),
-  # dissonant intervals
+  m3 = c(60, 63),
+  P5 = c(60, 67),
   tt = c(60, 66),
-  M7 = c(60, 71),
+  P4 = c(60, 65),
   m2 = c(60, 61),
-  M2 = c(60, 62),
-  m7 = c(60, 70)
+  M7 = c(60, 71),
+  m7 = c(60, 70),
+  M2 = c(60, 62)
 )
 framed_intervals <- purrr::map(intervals, ~c(.x, 72))
 ```
 
-### Wave Amplitude in Space and Time as Function of Wavelength and Frequency Cycle Times
+### 2D Plots: The Fundamental of Complex Waves in Space and Time
 
 ```{r, echo=F, message=F, include=T, results='asis'}
 num_harmonics = 2

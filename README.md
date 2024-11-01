@@ -102,7 +102,7 @@ estimate is $log_2(\text{LCD}_\lambda) = log_2(2) = 1 \ \text{Sz}$.
 We believe that these space-time discrepancies in cycle length are the
 source of major-minor tonality perception.
 
-### Wave Amplitude in Space and Time as Function of Wavelength and Frequency Cycle Times
+### 2D Plots: The Fundamental of Complex Waves in Space and Time
 
 ![](man/figures/README-unnamed-chunk-3-1.png)<!-- -->![](man/figures/README-unnamed-chunk-3-2.png)<!-- -->![](man/figures/README-unnamed-chunk-3-3.png)<!-- -->![](man/figures/README-unnamed-chunk-3-4.png)<!-- -->![](man/figures/README-unnamed-chunk-3-5.png)<!-- -->![](man/figures/README-unnamed-chunk-3-6.png)<!-- -->![](man/figures/README-unnamed-chunk-3-7.png)<!-- -->![](man/figures/README-unnamed-chunk-3-8.png)<!-- -->![](man/figures/README-unnamed-chunk-3-9.png)<!-- -->![](man/figures/README-unnamed-chunk-3-10.png)<!-- -->![](man/figures/README-unnamed-chunk-3-11.png)<!-- -->![](man/figures/README-unnamed-chunk-3-12.png)<!-- -->![](man/figures/README-unnamed-chunk-3-13.png)<!-- -->
 
@@ -111,18 +111,18 @@ source of major-minor tonality perception.
 | Interval | Harmonics | TimeCycles | SpaceCycles |  Majorness | Dissonance | Chord      |
 |:---------|----------:|-----------:|------------:|-----------:|-----------:|:-----------|
 | M3       |         2 |          6 |          12 |  1.0000000 |   6.169925 | 60, 64, 72 |
+| P1       |         2 |          1 |           1 |  0.0000000 |   0.000000 | 60, 60, 72 |
 | m6       |         2 |         12 |           6 | -1.0000000 |   6.169925 | 60, 68, 72 |
 | M6       |         2 |          3 |          12 |  2.0000000 |   5.169925 | 60, 69, 72 |
+| P8       |         2 |          1 |           1 |  0.0000000 |   0.000000 | 60, 72, 72 |
 | m3       |         2 |         12 |           3 | -2.0000000 |   5.169925 | 60, 63, 72 |
 | P5       |         2 |          2 |           3 |  0.5849625 |   2.584963 | 60, 67, 72 |
-| P4       |         2 |          3 |           2 | -0.5849625 |   2.584963 | 60, 65, 72 |
-| P1       |         2 |          1 |           1 |  0.0000000 |   0.000000 | 60, 60, 72 |
-| P8       |         2 |          1 |           1 |  0.0000000 |   0.000000 | 60, 72, 72 |
 | tt       |         2 |         20 |          20 |  0.0000000 |   8.643856 | 60, 66, 72 |
-| M7       |         2 |         12 |           6 | -1.0000000 |   6.169925 | 60, 71, 72 |
+| P4       |         2 |          3 |           2 | -0.5849625 |   2.584963 | 60, 65, 72 |
 | m2       |         2 |          6 |          12 |  1.0000000 |   6.169925 | 60, 61, 72 |
-| M2       |         2 |         20 |           4 | -2.3219281 |   6.321928 | 60, 62, 72 |
+| M7       |         2 |         12 |           6 | -1.0000000 |   6.169925 | 60, 71, 72 |
 | m7       |         2 |          4 |          20 |  2.3219281 |   6.321928 | 60, 70, 72 |
+| M2       |         2 |         20 |           4 | -2.3219281 |   6.321928 | 60, 62, 72 |
 
 ### Uncertainty
 
