@@ -1,7 +1,7 @@
 SFOAE Number of Harmonics Search
 ================
 
-# Bonang
+# 5Partials
 
 SFOAE Number of Harmonics:
 

@@ -377,8 +377,6 @@ Number of Bins: `r bins` \
 
 ![IEEE TRANSACTIONS ON INSTRUMENTATION AND MEASUREMENT, VOL. 63, NO. 2, FEBRUARY 2014 267, A Practical Fundamental Frequency Extraction, Algorithm for Motion Parameters Estimation of Moving Targets, Jingchang Huang, Xin Zhang, Qianwei Zhou, Enliang Song, and Baoqing Li](man/scrapbook/huang2.png)
 
-from IEEE TRANSACTIONS ON INSTRUMENTATION AND MEASUREMENT, VOL. 63, NO. 2, FEBRUARY 2014 267, A Practical Fundamental Frequency Extraction, Algorithm for Motion Parameters Estimation of Moving Targets, Jingchang Huang, Xin Zhang, Qianwei Zhou, Enliang Song, and Baoqing Li
-
 # Attention
 
 ![Attention improves performance primarily by reducing interneuronal correlations, Marlene R Cohen & John H R Maunsell, VOLUME 12 | NUMBER 12 | december 2009 nature NEUROSCIENCE](man/scrapbook/cohen.png)

@@ -575,15 +575,25 @@ and Manohar Das, Member, IEEE</figcaption>
 
 ### Moving Targets
 
-![IEEE TRANSACTIONS ON INSTRUMENTATION AND MEASUREMENT, VOL. 63, NO. 2,
-FEBRUARY 2014 267, A Practical Fundamental Frequency Extraction,
-Algorithm for Motion Parameters Estimation of Moving Targets, Jingchang
-Huang, Xin Zhang, Qianwei Zhou, Enliang Song, and Baoqing
-Li](man/scrapbook/huang1.png) ![IEEE TRANSACTIONS ON INSTRUMENTATION AND
+<figure>
+<img src="man/scrapbook/huang1.png"
+alt="IEEE TRANSACTIONS ON INSTRUMENTATION AND MEASUREMENT, VOL. 63, NO. 2, FEBRUARY 2014 267, A Practical Fundamental Frequency Extraction, Algorithm for Motion Parameters Estimation of Moving Targets, Jingchang Huang, Xin Zhang, Qianwei Zhou, Enliang Song, and Baoqing Li" />
+<figcaption aria-hidden="true">IEEE TRANSACTIONS ON INSTRUMENTATION AND
 MEASUREMENT, VOL. 63, NO. 2, FEBRUARY 2014 267, A Practical Fundamental
 Frequency Extraction, Algorithm for Motion Parameters Estimation of
 Moving Targets, Jingchang Huang, Xin Zhang, Qianwei Zhou, Enliang Song,
-and Baoqing Li](man/scrapbook/huang2.png)
+and Baoqing Li</figcaption>
+</figure>
+
+<figure>
+<img src="man/scrapbook/huang2.png"
+alt="IEEE TRANSACTIONS ON INSTRUMENTATION AND MEASUREMENT, VOL. 63, NO. 2, FEBRUARY 2014 267, A Practical Fundamental Frequency Extraction, Algorithm for Motion Parameters Estimation of Moving Targets, Jingchang Huang, Xin Zhang, Qianwei Zhou, Enliang Song, and Baoqing Li" />
+<figcaption aria-hidden="true">IEEE TRANSACTIONS ON INSTRUMENTATION AND
+MEASUREMENT, VOL. 63, NO. 2, FEBRUARY 2014 267, A Practical Fundamental
+Frequency Extraction, Algorithm for Motion Parameters Estimation of
+Moving Targets, Jingchang Huang, Xin Zhang, Qianwei Zhou, Enliang Song,
+and Baoqing Li</figcaption>
+</figure>
 
 # Attention
 
