@@ -373,7 +373,7 @@ compute_beats_perception <- function(x) {
     beating = low_beating
   } else if (x$beat_pass_filter == BEAT_PASS_FILTER$HIGH) {
     beating = high_beating
-  } else if (x$beat_pass_filter == BEAT_PASS_FILTER$HIGH) {
+  } else if (x$beat_pass_filter == BEAT_PASS_FILTER$ALL) {
     beating = all_beating
   } else  {
     beating = 0

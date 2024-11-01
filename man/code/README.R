@@ -1,5 +1,4 @@
-github_result = devtools::install('/Users/homeymusic/Documents/git/homeymusic/mami.codi.R',
-                                  ref='main')
+github_result = devtools::install('/Users/homeymusic/Documents/git/homeymusic/mami.codi.R')
 
 if (is.na(github_result)) {
   stop("Fatal error: Unable to install the package from GitHub. Please check the repository and branch name.")
