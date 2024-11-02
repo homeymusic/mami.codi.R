@@ -16,14 +16,14 @@ knitr::opts_chunk$set(
 )
 ```
 
-Framed dyads from -12 to 24 semitones with 2 harmonics. Example chord: 60,64,72.
+Every pitch has 2 harmonics. These data are computed at the resolution of the cent, 100 data points per semitone. Every dyad includes 60 and 72, known as octave doubling. One pitch per dyad is varied from 48 to 72. Example chords: (56,60,72), (60,64,72), (60,68,72), (60,72,76).
 
 ```{r, echo=F, message=F, include=T, results='asis'}
-# Define the intervals
-# intervals <- seq(0,15,1/100) + 60
 # Define the intervals and framed_intervals
 intervals <- seq(-12, 24, 1/100) + 60
-framed_intervals <- purrr::map(intervals, ~c(60, .x, 72))
+unison = 60
+octave = unison + 12
+framed_intervals <- purrr::map(intervals, ~c(unison, .x, octave))
 num_harmonics <- 2
 
 # Run mami.codi on each interval and combine results into a tibble
@@ -46,27 +46,31 @@ semitone_mami_codi <- mami_codi %>% dplyr::rowwise() %>% dplyr::mutate(
   semitone      = metadata$semitone
 )
 
-semitone_mami_codi$consonance_z = z_scores(-semitone_mami_codi$dissonance)
-semitone_mami_codi$major_z = z_scores(semitone_mami_codi$majorness)
-semitone_mami_codi$space_consonance = -semitone_mami_codi$space_dissonance
-semitone_mami_codi$time_consonance = -semitone_mami_codi$time_dissonance
-semitone_mami_codi$space_consonance_z = z_scores(-semitone_mami_codi$space_dissonance)
-semitone_mami_codi$time_consonance_z = z_scores(-semitone_mami_codi$time_dissonance)
+semitone_mami_codi$consonance         = z_scores(-semitone_mami_codi$dissonance)
+semitone_mami_codi$consonance_z       = z_scores(semitone_mami_codi$consonance)
+semitone_mami_codi$majorness_z        = z_scores(semitone_mami_codi$majorness)
+semitone_mami_codi$space_consonance   = -semitone_mami_codi$space_dissonance
+semitone_mami_codi$time_consonance    = -semitone_mami_codi$time_dissonance
+semitone_mami_codi$space_consonance_z = z_scores(semitone_mami_codi$space_consonance)
+semitone_mami_codi$time_consonance_z  = z_scores(semitone_mami_codi$time_consonance)
 ```
-
 
 ```{r, echo=F, message=F, include=T, results='asis'}
+framing = paste('(unison:',unison,'octave:',octave,')')
+xlab=paste('Semitone',framing)
 plot_semitone_codi(semitone_mami_codi, title=paste('Consonance'),
-                   goal=NULL,include_points=T)
+                   black_vlines=c(unison,octave),
+                   xlab=xlab)
 ```
-
 
 ```{r, echo=F, message=F, include=T, results='asis'}
 plot_semitone_space_time(semitone_mami_codi, paste('Space and Time Consonance'),
-                         goal=NULL,include_points=T)
+                         black_vlines=c(unison,octave),
+                         xlab=xlab)
 ```
 
 ```{r, echo=F, message=F, include=T, results='asis'}
-plot_semitone_mami(semitone_mami_codi, paste('Major-Minor'),
-                   goal=NULL,include_points=T)
+plot_semitone_mami(semitone_mami_codi, 'Major-Minor',
+                   black_vlines=c(unison,octave),
+                   xlab=xlab)
 ```

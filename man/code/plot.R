@@ -269,18 +269,28 @@ plot_error_hist <- function(errors, bins=21, signal, variance, title='') {
     theme_homey()
 }
 
+integer_semitones <- function(semitones) {
+  unique(semitones[floor(semitones) == semitones])
+}
+
 plot_semitone_codi <- function(chords, title='', include_line=T, sigma=0.2,
                                include_points=T,
                                include_linear_regression = F, goal=NULL,
-                               black_vlines=c(),gray_vlines=c()) {
+                               black_vlines=c(),gray_vlines=c(),
+                               xlab='Semitone',
+                               ylab='Consonance (Z-Score)') {
 
+  whole_semitones = integer_semitones(chords$semitone)
+  if (length(gray_vlines) == 0) {
+    gray_vlines = whole_semitones
+  }
   color_factor_homey <- function(x,column_name) {
     cut(x[[column_name]],c(-Inf,-1e-6,1e-6,Inf),labels=c("minor","neutral","major"))
   }
 
-  chords$smoothed.consonance = smoothed(chords$semitone,
-                                        chords$consonance_z,
-                                        sigma)
+  chords$smoothed_consonance_z = smoothed(chords$semitone,
+                                          chords$consonance_z,
+                                          sigma)
 
   ggplot2::ggplot(chords, ggplot2::aes(x = .data$semitone,
                                        y = .data$consonance_z)) +
@@ -294,7 +304,7 @@ plot_semitone_codi <- function(chords, title='', include_line=T, sigma=0.2,
     { if (include_line)
       ggplot2::geom_line(data=chords,
                          ggplot2::aes(x = semitone,
-                                      y = smoothed.consonance,
+                                      y = smoothed_consonance_z,
                                       color=color_factor_homey(chords,'majorness'),
                                       group=1), linewidth = 1)} +
     {if (!is.null(goal))
@@ -306,17 +316,25 @@ plot_semitone_codi <- function(chords, title='', include_line=T, sigma=0.2,
     ggplot2::scale_fill_manual(values=color_values_homey(), guide="none") +
     ggplot2::scale_color_manual(values=color_values_homey()) +
     ggplot2::ggtitle(title) +
-    ggplot2::scale_x_continuous(breaks = -15:15,
-                                minor_breaks = c()) +
-    ggplot2::ylab('Consonance (Z-Score)') +
-    ggplot2::xlab('Semitone') +
+    ggplot2::scale_x_continuous(breaks = whole_semitones,
+                                minor_breaks = c()) + # Removed `breaks` argument to auto-generate tick labels
+    ggplot2::ylab(ylab) +
+    ggplot2::xlab(xlab) +
     ggplot2::labs(color = NULL) +
     theme_homey()
 }
 plot_semitone_mami <- function(chords, title='', include_line=T, sigma=0.2,
                                include_points=T,
                                include_linear_regression = F, goal=NULL,
-                               black_vlines=c(),gray_vlines=c()) {
+                               black_vlines=c(),gray_vlines=c(),
+                               xlab='Semitone',
+                               ylab='Major-Minor (Z-Score)') {
+
+  whole_semitones = integer_semitones(chords$semitone)
+  if (length(gray_vlines) == 0) {
+    gray_vlines = whole_semitones
+  }
+
   chords$smoothed.majorness = smoothed(chords$semitone,
                                        chords$majorness,
                                        sigma)
@@ -345,22 +363,30 @@ plot_semitone_mami <- function(chords, title='', include_line=T, sigma=0.2,
     ggplot2::scale_fill_manual(values=color_values_homey(), guide="none") +
     ggplot2::scale_color_manual(values=color_values_homey()) +
     ggplot2::ggtitle(title) +
-    ggplot2::scale_x_continuous(breaks = -15:15,
+    ggplot2::scale_x_continuous(breaks = whole_semitones,
                                 minor_breaks = c()) +
-    ggplot2::ylab('Major-Minor (Z-Score)') +
-    ggplot2::xlab('Semitone') +
+    ggplot2::ylab(ylab) +
+    ggplot2::xlab(xlab) +
     ggplot2::labs(color = NULL) +
     theme_homey()
 }
 plot_semitone_space_time <- function(chords, title='', include_line=T, sigma=0.2,
                                      dashed_minor = F,include_points=T,
                                      include_linear_regression = F, goal=NULL,
-                                     black_vlines=c(),gray_vlines=c()) {
-  chords$smoothed.time_consonance = smoothed(chords$semitone,
-                                             -chords$time_dissonance,
+                                     black_vlines=c(),gray_vlines=c(),
+                                     xlab='Semitone',
+                                     ylab='Consonance') {
+
+  whole_semitones = integer_semitones(chords$semitone)
+  if (length(gray_vlines) == 0) {
+    gray_vlines = whole_semitones
+  }
+
+  chords$smoothed.time_consonance  = smoothed(chords$semitone,
+                                             chords$time_consonance,
                                              sigma)
   chords$smoothed.space_consonance = smoothed(chords$semitone,
-                                              -chords$space_dissonance,
+                                              chords$space_consonance,
                                               sigma)
 
   mean_theoretical = mean(c(chords$smoothed.time_consonance,
@@ -372,12 +398,12 @@ plot_semitone_space_time <- function(chords, title='', include_line=T, sigma=0.2
     ggplot2::geom_vline(xintercept = black_vlines, color=colors_homey$highlight) +
     ggplot2::geom_vline(xintercept = gray_vlines,color='gray44',linetype = 'dotted') +
     { if (include_points)
-      ggplot2::geom_point(ggplot2::aes(y = -.data$time_dissonance),
+      ggplot2::geom_point(ggplot2::aes(y = .data$time_consonance),
                           shape=21, stroke=NA, size=1,
                           fill=colors_homey$major)
     } +
     { if (include_points)
-      ggplot2::geom_point(ggplot2::aes(y = -.data$space_dissonance),
+      ggplot2::geom_point(ggplot2::aes(y = .data$space_consonance),
                           shape=21, stroke=NA, size=1,
                           fill=colors_homey$minor)
     } +
@@ -397,11 +423,11 @@ plot_semitone_space_time <- function(chords, title='', include_line=T, sigma=0.2
                                       color = 'behavioral',
                                       group=1), linewidth = 0.5)} +
     ggplot2::ggtitle(title) +
-    ggplot2::scale_x_continuous(breaks = 0:15,
+    ggplot2::scale_x_continuous(breaks = whole_semitones,
                                 minor_breaks = c()) +
     ggplot2::guides(col = ggplot2::guide_legend()) +
-    ggplot2::ylab('Consonance') +
-    ggplot2::xlab('Semitone') +
+    ggplot2::ylab(ylab) +
+    ggplot2::xlab(xlab) +
     ggplot2::scale_color_manual(
       values=space_time_colors(),
       breaks=c('space', 'time', 'behavioral')) +

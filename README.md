@@ -102,9 +102,22 @@ estimate is $log_2(\text{LCD}_\lambda) = log_2(2) = 1 \ \text{Sz}$.
 We believe that these space-time discrepancies in cycle length are the
 source of major-minor tonality perception.
 
+### Major Minor Tonality
+
+Every pitch has 2 harmonics. These data are computed at the resolution
+of the cent, 100 data points per semitone. Every dyad includes 60 and
+72, known as octave doubling. One pitch per dyad is varied from 48 to
+72. Example chords: (56,60,72), (60,64,72), (60,68,72), (60,72,76).
+
+![](man/figures/README-unnamed-chunk-3-1.png)<!-- -->
+
+![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->
+
+![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->
+
 ### 2D Plots: The Fundamental of Complex Waves in Space and Time
 
-<img src="man/figures/README-unnamed-chunk-3-1.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-3-2.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-3-3.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-3-4.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-3-5.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-3-6.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-3-7.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-3-8.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-3-9.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-3-10.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-3-11.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-3-12.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-3-13.png" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-7-1.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-7-2.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-7-3.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-7-4.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-7-5.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-7-6.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-7-7.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-7-8.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-7-9.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-7-10.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-7-11.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-7-12.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-7-13.png" style="display: block; margin: auto;" />
 
 ### Framed Harmonics: 2
 
@@ -314,7 +327,7 @@ $t=\infty$.
 Assuming room temperature air at sea level, the wavelength $\lambda$ is
 1.31m.
 
-![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-8-1.png)<!-- -->
 
 The human cochlea is $\sim 33 mm$ long.
 
@@ -348,7 +361,7 @@ C1 = c(midi) %>% hrep::sparse_fr_spectrum(num_harmonics=5)
 C1 %>% plot(cochlea=T,ggplot=T,xlim=c(0,100))
 ```
 
-![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-9-1.png)<!-- -->
 
 ``` r
 midi=60
@@ -356,7 +369,7 @@ C4 = c(midi) %>% hrep::sparse_fr_spectrum(num_harmonics=5)
 C4 %>% plot(cochlea=T,ggplot=T,xlim=c(0,100))
 ```
 
-![](man/figures/README-unnamed-chunk-6-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-10-1.png)<!-- -->
 
 ``` r
 midi=97
@@ -364,7 +377,7 @@ C7 = c(midi) %>% hrep::sparse_fr_spectrum(num_harmonics=5)
 C7 %>% plot(cochlea=T,ggplot=T,xlim=c(0,100))
 ```
 
-![](man/figures/README-unnamed-chunk-7-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-11-1.png)<!-- -->
 
 ## t=0+deltas
 
@@ -428,7 +441,7 @@ C1 = c(midi) %>% hrep::sparse_fr_spectrum(num_harmonics=5)
 C1 %>% plot(ggplot=T,xlim=c(10,12000),trans='log10')
 ```
 
-![](man/figures/README-unnamed-chunk-8-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-12-1.png)<!-- -->
 
 ``` r
 midi=60
@@ -436,7 +449,7 @@ C4 = c(midi) %>% hrep::sparse_fr_spectrum(num_harmonics=5)
 C4 %>% plot(ggplot=T,xlim=c(10,12000),trans='log10')
 ```
 
-![](man/figures/README-unnamed-chunk-9-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-13-1.png)<!-- -->
 
 ``` r
 midi=97
@@ -444,7 +457,7 @@ C7 = c(midi) %>% hrep::sparse_fr_spectrum(num_harmonics=5)
 C7 %>% plot(ggplot=T,xlim=c(10,12000),trans='log10')
 ```
 
-![](man/figures/README-unnamed-chunk-10-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-14-1.png)<!-- -->
 
 # 2D: Wavelengths and Frequencies
 
@@ -604,7 +617,7 @@ Proceedings</figcaption>
 
 ## Stern-Brocot as Strictly Localized Probability Distribution
 
-![](man/figures/README-unnamed-chunk-12-1.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-16-1.png)<!-- -->  
 Number of Samples: 1,000,000  
 Number of Bins: 21  
 [Additional Stern-Brocot Plots](/man/thoughts/SternBrocotCurve.md)
@@ -775,12 +788,12 @@ major-minor versus the behavioral results are included in a plot below.
 |---:|:---|:---|---:|---:|
 | 5 | 0.07958 | 0.07958 | 0.2 | 2 |
 
-![](man/figures/README-unnamed-chunk-17-1.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-2.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-3.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-4.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-5.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-6.png)<!-- -->
+![](man/figures/README-unnamed-chunk-21-1.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-2.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-3.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-4.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-5.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-6.png)<!-- -->
 
 ##### Harmonic ~ Partials: 10
 
@@ -790,12 +803,12 @@ For 10 harmonics, behavioral results and theoretical predictions agree.
 |---:|:---|:---|---:|---:|
 | 5 | 0.07958 | 0.07958 | 0.2 | 2 |
 
-![](man/figures/README-unnamed-chunk-17-7.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-8.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-9.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-10.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-11.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-12.png)<!-- -->
+![](man/figures/README-unnamed-chunk-21-7.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-8.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-9.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-10.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-11.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-12.png)<!-- -->
 
 ##### 5Partials ~ Partials: 5
 
@@ -808,12 +821,12 @@ peak.
 |---:|:---|:---|---:|---:|
 | 5 | 0.07958 | 0.07958 | 0.2 | 2 |
 
-![](man/figures/README-unnamed-chunk-17-13.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-14.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-15.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-16.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-17.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-18.png)<!-- -->
+![](man/figures/README-unnamed-chunk-21-13.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-14.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-15.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-16.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-17.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-18.png)<!-- -->
 
 ##### 5PartialsNo3 ~ Partials: 5
 
@@ -826,12 +839,12 @@ while the M3 peak is slightly higher without the 3rd partial.
 |---:|:---|:---|---:|---:|
 | 5 | 0.07958 | 0.07958 | 0.2 | 2 |
 
-![](man/figures/README-unnamed-chunk-17-19.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-20.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-21.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-22.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-23.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-24.png)<!-- -->
+![](man/figures/README-unnamed-chunk-21-19.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-20.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-21.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-22.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-23.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-24.png)<!-- -->
 
 ##### Bonang ~ Partials: 4
 
@@ -845,12 +858,12 @@ be relatively higher than the behavioral results.
 |---:|:---|:---|---:|---:|
 | 5 | 0.07958 | 0.07958 | 0.2 | 2 |
 
-![](man/figures/README-unnamed-chunk-17-25.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-26.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-27.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-28.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-29.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-30.png)<!-- -->
+![](man/figures/README-unnamed-chunk-21-25.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-26.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-27.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-28.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-29.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-30.png)<!-- -->
 
 ##### Stretched ~ Partials: 10
 
@@ -862,12 +875,12 @@ and m7 that do not exist in the behavioral results.
 |---:|:---|:---|---:|---:|
 | 5 | 0.07958 | 0.07958 | 0.2 | 2.1 |
 
-![](man/figures/README-unnamed-chunk-17-31.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-32.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-33.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-34.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-35.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-36.png)<!-- -->
+![](man/figures/README-unnamed-chunk-21-31.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-32.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-33.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-34.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-35.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-36.png)<!-- -->
 
 ##### Compressed ~ Partials: 10
 
@@ -878,12 +891,12 @@ with the theoretical peaks.
 |---:|:---|:---|---:|---:|
 | 5 | 0.07958 | 0.07958 | 0.2 | 1.9 |
 
-![](man/figures/README-unnamed-chunk-17-37.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-38.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-39.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-40.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-41.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-42.png)<!-- -->
+![](man/figures/README-unnamed-chunk-21-37.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-38.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-39.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-40.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-41.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-42.png)<!-- -->
 
 #### Dyads spanning 1 quarter tone
 
@@ -895,12 +908,12 @@ Description is below.
 |---:|:---|:---|---:|---:|
 | 5 | 0.07958 | 0.07958 | 0.035 | 2 |
 
-![](man/figures/README-unnamed-chunk-17-43.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-44.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-45.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-46.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-47.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-48.png)<!-- -->
+![](man/figures/README-unnamed-chunk-21-43.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-44.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-45.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-46.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-47.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-48.png)<!-- -->
 
 ##### M6 ~ Partials: 10
 
@@ -910,12 +923,12 @@ Description is below.
 |---:|:---|:---|---:|---:|
 | 5 | 0.07958 | 0.07958 | 0.035 | 2 |
 
-![](man/figures/README-unnamed-chunk-17-49.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-50.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-51.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-52.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-53.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-54.png)<!-- -->
+![](man/figures/README-unnamed-chunk-21-49.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-50.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-51.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-52.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-53.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-54.png)<!-- -->
 
 ##### P8 ~ Partials: 10
 
@@ -925,12 +938,12 @@ Description is below.
 |---:|:---|:---|---:|---:|
 | 5 | 0.07958 | 0.07958 | 0.035 | 2 |
 
-![](man/figures/README-unnamed-chunk-17-55.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-56.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-57.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-58.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-59.png)<!-- -->  
-![](man/figures/README-unnamed-chunk-17-60.png)<!-- -->
+![](man/figures/README-unnamed-chunk-21-55.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-56.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-57.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-58.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-59.png)<!-- -->  
+![](man/figures/README-unnamed-chunk-21-60.png)<!-- -->
 
 ### Manipulating amplitudes
 
