@@ -1336,7 +1336,7 @@ plot_space_time <- function(f0, k0, majorness = 0.0, chord_name = "Chord", time_
     ggplot2::labs(
       x = "Time (%)",
       y = "Space (%)",
-      title = base::paste(chord_name, ": Time-Space Amplitude")
+      title = bquote(.(chord_name) ~ ": Traveling Wave " ~ f[0] == .(sprintf("%.2f", f0)) ~ "," ~ k[0] == .(sprintf("%.2f", k0)))
     ) +
     ggplot2::coord_fixed(ratio = 1) +
     theme_homey()

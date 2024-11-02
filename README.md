@@ -102,22 +102,16 @@ estimate is $log_2(\text{LCD}_\lambda) = log_2(2) = 1 \ \text{Sz}$.
 We believe that these space-time discrepancies in cycle length are the
 source of major-minor tonality perception.
 
-### Major Minor Tonality
+### 2D Plots: Fundamentals of Complex Traveling Waves
 
-Every pitch has 2 harmonics. These data are computed at the resolution
-of the cent, 100 data points per semitone. Every dyad includes 60 and
-72, known as octave doubling. One pitch per dyad is varied from 48 to
-72. Example chords: (56,60,72), (60,64,72), (60,68,72), (60,72,76).
+The plots are generated using the computed fundamental wavenumber
+(spatial frequency) and the computed fundamental (temporal) frequency.
+Major chords have an angle above the 45, neutral chords at the 45 and
+minor chords below the 45.
 
-![](man/figures/README-unnamed-chunk-3-1.png)<!-- -->
+This is akin to Shamma’s mapping onto a 2D plane.
 
-![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->
-
-![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->
-
-### 2D Plots: The Fundamental of Complex Waves in Space and Time
-
-<img src="man/figures/README-unnamed-chunk-7-1.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-7-2.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-7-3.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-7-4.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-7-5.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-7-6.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-7-7.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-7-8.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-7-9.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-7-10.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-7-11.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-7-12.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-7-13.png" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-3-1.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-3-2.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-3-3.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-3-4.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-3-5.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-3-6.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-3-7.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-3-8.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-3-9.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-3-10.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-3-11.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-3-12.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-3-13.png" style="display: block; margin: auto;" />
 
 ### Framed Harmonics: 2
 
@@ -136,6 +130,19 @@ of the cent, 100 data points per semitone. Every dyad includes 60 and
 | M7       |         2 |         12 |           6 | -1.0000000 |   6.169925 | 60, 71, 72 |
 | m7       |         2 |          4 |          20 |  2.3219281 |   6.321928 | 60, 70, 72 |
 | M2       |         2 |         20 |           4 | -2.3219281 |   6.321928 | 60, 62, 72 |
+
+### Major Minor Tonality
+
+Every pitch has 2 harmonics. These data are computed at the resolution
+of the cent, 100 data points per semitone. Every dyad includes 60 and
+72, known as octave doubling. One pitch per dyad is varied from 48 to
+72. Example chords: (56,60,72), (60,64,72), (60,68,72), (60,72,76).
+
+![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->
+
+![](man/figures/README-unnamed-chunk-6-1.png)<!-- -->
+
+![](man/figures/README-unnamed-chunk-7-1.png)<!-- -->
 
 ### Uncertainty
 
