@@ -16,6 +16,8 @@ knitr::opts_chunk$set(
 )
 ```
 
+Framed dyads from 0 to 15 semitones with 2 harmonics. Example chord: 60,64,72.
+
 ```{r, echo=F, message=F, include=T, results='asis'}
 # Define the intervals
 # intervals <- seq(0,15,1/100) + 60
@@ -50,8 +52,8 @@ semitone_mami_codi$space_consonance = -semitone_mami_codi$space_dissonance
 semitone_mami_codi$time_consonance = -semitone_mami_codi$time_dissonance
 semitone_mami_codi$space_consonance_z = z_scores(-semitone_mami_codi$space_dissonance)
 semitone_mami_codi$time_consonance_z = z_scores(-semitone_mami_codi$time_dissonance)
-
 ```
+
 
 ```{r, echo=F, message=F, include=T, results='asis'}
 plot_semitone_codi(semitone_mami_codi, title=paste('Consonance'),
