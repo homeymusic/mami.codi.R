@@ -274,7 +274,6 @@ plot_semitone_codi <- function(chords, title='', include_line=T, sigma=0.2,
                                include_linear_regression = F, goal=NULL,
                                black_vlines=c(),gray_vlines=c()) {
 
-
   color_factor_homey <- function(x,column_name) {
     cut(x[[column_name]],c(-Inf,-1e-6,1e-6,Inf),labels=c("minor","neutral","major"))
   }
@@ -1047,7 +1046,6 @@ plot_semitone_beating <- function(chords, title = '', include_line = F, sigma = 
                                       group = 1), color = colors_homey$neutral, linewidth = 1)  # Set color directly
     } +
     ggplot2::scale_fill_manual(values = color_values_homey(), guide = "none") +
-    ggplot2::scale_color_manual(values = color_values_homey()) +
     ggplot2::ggtitle(title) +
     ggplot2::scale_x_continuous(breaks = -15:15, minor_breaks = c()) +
     ggplot2::ylab('Beating') +

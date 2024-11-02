@@ -453,3 +453,20 @@ test_that('beating for all beats has values', {
   )
   expect_equal(MT$beating, 5.86 , tolerance=0.1)
 })
+test_that('beating in framed dyads works', {
+  dyad_mami_codi_no_beats = mami.codi(
+    c(0.0, 0.5, 12.0, 12.5, 24.0),
+    verbose=T,
+    beat_pass_filter = BEAT_PASS_FILTER$NONE,
+    num_harmonics=1
+  )
+  expect_equal(dyad_mami_codi_no_beats$beating, 0, tolerance=0.1)
+
+
+  dyad_mami_codi = mami.codi(
+    c(0.0, 0.5, 12.0, 12.5, 24.0),
+    verbose=T,
+    num_harmonics=1
+  )
+  expect_equal(dyad_mami_codi$beating, 13.64671, tolerance=0.1)
+})

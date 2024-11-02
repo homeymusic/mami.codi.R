@@ -1,0 +1,70 @@
+---
+title: "Simple Major Minor Tonality"
+output:
+  github_document: default
+always_allow_html: true
+---
+```{r, echo=F, message=F, include=F}
+devtools::load_all(".")
+devtools::load_all(".")
+source('../code/plot.R')
+source('../code/utils.R')
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "../figures/Simple-Major-Minor-Tonality-"
+)
+```
+
+```{r, echo=F, message=F, include=T, results='asis'}
+# Define the intervals
+# intervals <- seq(0,15,1/100) + 60
+# Define the intervals and framed_intervals
+intervals <- seq(0, 15, 1/100)
+framed_intervals <- purrr::map(intervals, ~c(0, .x, 12))
+num_harmonics <- 2
+
+# Run mami.codi on each interval and combine results into a tibble
+mami_codi <- purrr::map_dfr(framed_intervals, function(interval) {
+  mami.codi(
+    interval,
+    num_harmonics = num_harmonics,
+    beat_pass_filter = BEAT_PASS_FILTER$NONE,
+    sfoae_num_harmonics = 0,
+    verbose = TRUE,
+    metadata = list(
+      num_harmonics = num_harmonics,
+      semitone = interval[2]
+    )
+  )
+})
+
+semitone_mami_codi <- mami_codi %>% dplyr::rowwise() %>% dplyr::mutate(
+  num_harmonics = metadata$num_harmonics,
+  semitone      = metadata$semitone
+)
+
+semitone_mami_codi$consonance_z = z_scores(-semitone_mami_codi$dissonance)
+semitone_mami_codi$major_z = z_scores(semitone_mami_codi$majorness)
+semitone_mami_codi$space_consonance = -semitone_mami_codi$space_dissonance
+semitone_mami_codi$time_consonance = -semitone_mami_codi$time_dissonance
+semitone_mami_codi$space_consonance_z = z_scores(-semitone_mami_codi$space_dissonance)
+semitone_mami_codi$time_consonance_z = z_scores(-semitone_mami_codi$time_dissonance)
+
+```
+
+```{r, echo=F, message=F, include=T, results='asis'}
+plot_semitone_codi(semitone_mami_codi, title=paste('Consonance'),
+                   goal=NULL,include_points=T)
+```
+
+
+```{r, echo=F, message=F, include=T, results='asis'}
+plot_semitone_space_time(semitone_mami_codi, paste('Space and Time Consonance'),
+                         goal=NULL,include_points=T)
+```
+
+```{r, echo=F, message=F, include=T, results='asis'}
+plot_semitone_mami(semitone_mami_codi, paste('Major-Minor'),
+                   goal=NULL,include_points=T)
+```
