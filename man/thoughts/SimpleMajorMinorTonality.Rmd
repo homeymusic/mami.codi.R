@@ -16,14 +16,14 @@ knitr::opts_chunk$set(
 )
 ```
 
-Framed dyads from 0 to 15 semitones with 2 harmonics. Example chord: 60,64,72.
+Framed dyads from -12 to 24 semitones with 2 harmonics. Example chord: 60,64,72.
 
 ```{r, echo=F, message=F, include=T, results='asis'}
 # Define the intervals
 # intervals <- seq(0,15,1/100) + 60
 # Define the intervals and framed_intervals
-intervals <- seq(0, 15, 1/100)
-framed_intervals <- purrr::map(intervals, ~c(0, .x, 12))
+intervals <- seq(-12, 24, 1/100) + 60
+framed_intervals <- purrr::map(intervals, ~c(60, .x, 72))
 num_harmonics <- 2
 
 # Run mami.codi on each interval and combine results into a tibble
