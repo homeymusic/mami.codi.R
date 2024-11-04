@@ -33,7 +33,7 @@
 #' @export
 mami.codi <- function(
     x,
-    beat_pass_filter            = BEAT_PASS_FILTER$LOW,
+    beat_pass_filter            = BEAT_PASS_FILTER$ALL,
     oae_num_harmonics           = SFOAE_NUM_HARMONICS,
     space_uncertainty           = UNCERTAINTY_LIMIT,
     time_uncertainty            = UNCERTAINTY_LIMIT,
