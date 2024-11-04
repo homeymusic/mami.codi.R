@@ -1,0 +1,68 @@
+---
+title: "OAE"
+output:
+  github_document: default
+always_allow_html: true
+---
+
+```{r, echo=F, message=F, include=F}
+devtools::load_all(".")
+devtools::load_all(".")
+source('../code/plot.R')
+source('../code/utils.R')
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "../figures/OAE-"
+)
+```
+
+# Starting Point
+
+```{r, echo=T, message=F, include=T, results='asis'}
+C4 = hrep::midi_to_freq(60)
+C4
+```
+
+```{r, echo=T, message=F, include=T, results='asis'}
+E4 = hrep::midi_to_freq(64)
+E4
+```
+
+```{r, echo=T, message=F, include=T, results='asis'}
+E4 - C4
+```
+
+```{r, echo=T, message=F, include=T, results='asis'}
+N = -3:3
+N
+```
+
+```{r, echo=T, message=F, include=T, results='asis'}
+(C4 + N * (E4-C4)) %>% sort()
+```
+
+# from Otoacoustic emissions, their origin in cochlear function, and use (Kemp, 2002)
+
+```{r, echo=T, message=F, include=T, results='asis'}
+f1 = 1425
+f1
+```
+
+```{r, echo=T, message=F, include=T, results='asis'}
+f2 = 1500
+f2
+```
+
+```{r, echo=T, message=F, include=T, results='asis'}
+f2 - f1
+```
+
+```{r, echo=T, message=F, include=T, results='asis'}
+N = -3:3
+N
+```
+
+```{r, echo=T, message=F, include=T, results='asis'}
+(f2 + N * (f2-f1)) %>% sort()
+```
