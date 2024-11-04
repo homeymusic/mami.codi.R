@@ -224,52 +224,11 @@ plot_semitone_mami(semitone_mami_codi, 'Major-Minor',
                    xlab=xlab)
 ```
 
+# Stimulus Frequency Otoacoustic Emissions
 
-### Uncertainty
+Beats are created among every combination of waves in the signal when it arrives at the inner hair cells. That signal includes waves emitted by the cochlea itself: stimulus frequency otoacoustic (SFOAE) emissions. How many harmonics are emitted by the SFOAE and/or how many of those impact the perception of beating? And the perceived consonance?
 
-Our approach must also address two issues concerning uncertainty. The first challenge is that our GCD/LCD approach necessitates rational fractions. If we only considered just-intoned intervals that would not be a problem. But our model will accommodate equal-tempered intervals, micro-tuning, and timbre manipulation. We will need to convert real numbers into rational fractions. To accomplish this, we introduce a controlled measure of uncertainty to find a rational fraction that approximates the actual number.
-
-The second uncertainty issue stems from the nature of waves and auditory processing: the auditory system transforms stimuli signals from the space-time physical domain into the space-time frequency domain. 
-
-> ”… daß kanonisch konjugierte Größen simultan nur mit einer charakteristischen Ungenauigkeit bestimmt werden können.”
-> — Heisenberg
->
-> (… that canonically conjugate quantities can only be determined simultaneously with a characteristic uncertainty.)
-
-Accurately modeling this transformation requires accounting for Gabor uncertainty in both the time-frequency and space-wavelength forms. When addressing similar uncertainty constraints in quantum mechanics, Max Born introduced the probabilistic interpretation of the wave function, linking the wave amplitude to probability density. In our case, however, we seek a deterministic model of cycle perception and aim to avoid reliance on probabilistic interpretations. To approximate rational fractions, Stolzenburg employed the Stern-Brocot tree, enabling rational approximation within a relative deviation from a target number. Following this method, we also use the Stern-Brocot tree, but apply fixed deviations. 
-
-Remarkably, when aligning our model with extensive human behavioral data on consonance perception, we found that the closest matches between theory and experiment emerged at the product of the Gabor’s uncertainty limit,  $\frac{1}{4 \pi}$, for both the space-wavelength and time-frequency uncertainties. If our model evaluated one frequency at a time we would likely need to compute the $\Delta f$ from the $\Delta t$ (or the reverse) for each frequency partial and then the equivalent for the space-wavelength uncertainty. But our model computes all the partials as simultaneous ratios. One can imagine that whatever temporal window $\Delta t$ was used to transform from time to frequency would be accounted for in the uncertainty product $\Delta t \Delta x$. Therefore it is not a surprise that it is this product that aligned best with the experimental data.
-
-Although we do not explicitly use the Fourier transform in our model, it serves as a clear reminder of how uncertainty is introduced when transitioning from the physical domain to the frequency domain.
-
-``` math
-F(f, \lambda) = \iint f(x, t) \, e^{-i \left(2 \pi f t - 2 \pi \frac{x}{\lambda}\right)} \, dx \, dt
-```
-
-```math
-\sigma_x \sigma_\lambda \geq \frac{1}{4 \pi}, \ \sigma_t\sigma_f \geq \frac{1}{4 \pi}
-```
-Note 1: We have previously considered each uncertainty product—space-wavelength and time-frequency—as independent. However, in a 2D space-time context, these uncertainties likely interrelate. Let’s explore how they might connect.
-
-Assuming that $\sigma_x$ is constant due to cochlear geometry, and that $\sigma_t$ relates to the temporal window for recognizing repeating patterns in complex waves, we might find that as $\sigma_t$ narrows, $\sigma_\lambda$ decreases. This continues until $\Delta t = 0$, allowing precise identification of the displaced inner hair cell for each wave partial. Of course, the opposite is true for frequency. As $\Delta t$ shrinks, frequency uncertainty grows.
-
-Let's start with a simple question whether the two uncertainty products are equal to one another.
-
-``` math
-\frac{1}{4 \pi} = \sigma_x \sigma_\lambda \stackrel{?}{=} \sigma_t \sigma_f = \frac{1}{4 \pi}
-```
-
-Given the fixed spatial geometry of the cochlea, we set $\sigma_x = \kappa_{cochlea}$. Considering the variability of integration times used by the auditory system, we let $\sigma_t \equiv \Delta t_{integration}$.
-
-``` math
-\Delta t_{integration} \propto \frac{\sigma_{\lambda}}{\sigma_f} \kappa_{cochlea}
-```
-
-As the integration time increases, both wavelength and frequency uncertainty must change. A narrow window provides precise wavelength information but poor frequency data, while a wider window yields more frequency data at the expense of wavelength detail. Specifically, when the temporal window increases, frequency uncertainty improves, while wavelength uncertainty decreases.
-
-After reviewing the literature, it seems that proofs for an uncertainty principle emerging from the 2D spatiotemporal Fourier transform are elusive. This remains an interesting area for future exploration.
-
-Note 2: Based on the bimodal shape of the Stern-Brocot distribution below, explore modeling the two-slit experiment using the deterministic SB method instead of a probabilistic curve; consult Bohmian researchers, who may find the Stern-Brocot’s deterministic approach relevant to quantum mechanics.
+Our research indicates that the number is 5 harmonics. The Bonang beating at 6 introduces too many spike for beating. And at 4, too few. 
 
 # Beats
 
@@ -338,6 +297,52 @@ We created this metric for beat perception:
 ## Stretched
 
 [![Stretched Beating](https://img.youtube.com/vi/cOVlcK7-tBU/0.jpg)](https://www.youtube.com/watch?v=cOVlcK7-tBU)
+
+### Uncertainty
+
+Our approach must also address two issues concerning uncertainty. The first challenge is that our GCD/LCD approach necessitates rational fractions. If we only considered just-intoned intervals that would not be a problem. But our model will accommodate equal-tempered intervals, micro-tuning, and timbre manipulation. We will need to convert real numbers into rational fractions. To accomplish this, we introduce a controlled measure of uncertainty to find a rational fraction that approximates the actual number.
+
+The second uncertainty issue stems from the nature of waves and auditory processing: the auditory system transforms stimuli signals from the space-time physical domain into the space-time frequency domain. 
+
+> ”… daß kanonisch konjugierte Größen simultan nur mit einer charakteristischen Ungenauigkeit bestimmt werden können.”
+> — Heisenberg
+>
+> (… that canonically conjugate quantities can only be determined simultaneously with a characteristic uncertainty.)
+
+Accurately modeling this transformation requires accounting for Gabor uncertainty in both the time-frequency and space-wavelength forms. When addressing similar uncertainty constraints in quantum mechanics, Max Born introduced the probabilistic interpretation of the wave function, linking the wave amplitude to probability density. In our case, however, we seek a deterministic model of cycle perception and aim to avoid reliance on probabilistic interpretations. To approximate rational fractions, Stolzenburg employed the Stern-Brocot tree, enabling rational approximation within a relative deviation from a target number. Following this method, we also use the Stern-Brocot tree, but apply fixed deviations. 
+
+Remarkably, when aligning our model with extensive human behavioral data on consonance perception, we found that the closest matches between theory and experiment emerged at the product of the Gabor’s uncertainty limit,  $\frac{1}{4 \pi}$, for both the space-wavelength and time-frequency uncertainties. If our model evaluated one frequency at a time we would likely need to compute the $\Delta f$ from the $\Delta t$ (or the reverse) for each frequency partial and then the equivalent for the space-wavelength uncertainty. But our model computes all the partials as simultaneous ratios. One can imagine that whatever temporal window $\Delta t$ was used to transform from time to frequency would be accounted for in the uncertainty product $\Delta t \Delta x$. Therefore it is not a surprise that it is this product that aligned best with the experimental data.
+
+Although we do not explicitly use the Fourier transform in our model, it serves as a clear reminder of how uncertainty is introduced when transitioning from the physical domain to the frequency domain.
+
+``` math
+F(f, \lambda) = \iint f(x, t) \, e^{-i \left(2 \pi f t - 2 \pi \frac{x}{\lambda}\right)} \, dx \, dt
+```
+
+```math
+\sigma_x \sigma_\lambda \geq \frac{1}{4 \pi}, \ \sigma_t\sigma_f \geq \frac{1}{4 \pi}
+```
+Note 1: We have previously considered each uncertainty product—space-wavelength and time-frequency—as independent. However, in a 2D space-time context, these uncertainties likely interrelate. Let’s explore how they might connect.
+
+Assuming that $\sigma_x$ is constant due to cochlear geometry, and that $\sigma_t$ relates to the temporal window for recognizing repeating patterns in complex waves, we might find that as $\sigma_t$ narrows, $\sigma_\lambda$ decreases. This continues until $\Delta t = 0$, allowing precise identification of the displaced inner hair cell for each wave partial. Of course, the opposite is true for frequency. As $\Delta t$ shrinks, frequency uncertainty grows.
+
+Let's start with a simple question whether the two uncertainty products are equal to one another.
+
+``` math
+\frac{1}{4 \pi} = \sigma_x \sigma_\lambda \stackrel{?}{=} \sigma_t \sigma_f = \frac{1}{4 \pi}
+```
+
+Given the fixed spatial geometry of the cochlea, we set $\sigma_x = \kappa_{cochlea}$. Considering the variability of integration times used by the auditory system, we let $\sigma_t \equiv \Delta t_{integration}$.
+
+``` math
+\Delta t_{integration} \propto \frac{\sigma_{\lambda}}{\sigma_f} \kappa_{cochlea}
+```
+
+As the integration time increases, both wavelength and frequency uncertainty must change. A narrow window provides precise wavelength information but poor frequency data, while a wider window yields more frequency data at the expense of wavelength detail. Specifically, when the temporal window increases, frequency uncertainty improves, while wavelength uncertainty decreases.
+
+After reviewing the literature, it seems that proofs for an uncertainty principle emerging from the 2D spatiotemporal Fourier transform are elusive. This remains an interesting area for future exploration.
+
+Note 2: Based on the bimodal shape of the Stern-Brocot distribution below, explore modeling the two-slit experiment using the deterministic SB method instead of a probabilistic curve; consult Bohmian researchers, who may find the Stern-Brocot’s deterministic approach relevant to quantum mechanics.
 
 # Wavelengths
 

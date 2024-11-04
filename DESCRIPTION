@@ -14,6 +14,7 @@ Roxygen: list(markdown = TRUE)
 Suggests: 
     testthat (>= 3.0.0)
 Imports:
+    kableExtra,
     magrittr,
     furrr,
     tibble,

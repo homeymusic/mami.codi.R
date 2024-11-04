@@ -76,16 +76,16 @@ empty_frequency_spectrum <- function() {
 
 #' Helper functions to combine spectra
 
-combine_wavelength_spectra <- function(x,y) {
+combine_wavelength_spectra <- function(x,y=empty_wavelength_spectrum()) {
   x = sparse_fr_spectrum_from_wavelength_spectrum(x)
   y = sparse_fr_spectrum_from_wavelength_spectrum(y)
-  wavelength_spectrum_from_sparse_fr_spectrum(hrep::combine_sparse_spectra(x,y))
+  wavelength_spectrum_from_sparse_fr_spectrum(hrep::combine_sparse_spectra(x,y,coherent=T))
 }
 
-combine_frequency_spectra <- function(x,y) {
+combine_frequency_spectra <- function(x,y=empty_frequency_spectrum()) {
   x = hrep::sparse_fr_spectrum(x %>% as.list())
   y = hrep::sparse_fr_spectrum(y %>% as.list())
-  frequency_spectrum_from_sparse_fr_spectrum(hrep::combine_sparse_spectra(x,y))
+  frequency_spectrum_from_sparse_fr_spectrum(hrep::combine_sparse_spectra(x,y,coherent=T))
 }
 
 sparse_fr_spectrum_from_wavelength_spectrum <- function(x) {
@@ -108,4 +108,3 @@ frequency_spectrum_from_sparse_fr_spectrum <- function(x) {
     amplitude = x$y
   )
 }
-

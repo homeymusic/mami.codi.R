@@ -15,8 +15,8 @@ test_that('beats make sense at octave P8 with 2 harmonics', {
   spectrum = hrep::sparse_fr_spectrum(c(C4_midi, C5_beat_midi), num_harmonics = num_harmonics)
 
   beats = compute_beats(wavelength = C_SOUND/spectrum$x, amplitude = spectrum$y)
-  expect_equal(beats$wavelength,c(1.2768703,  0.4293529 , 49.0000466 , 0.6384352,  0.6468633), tol=0.01)
-  expect_equal(beats$amplitude,c(2.000000,1.891251, 1.891251, 1.782502, 1.891251), tol=0.01)
+  expect_equal(beats$wavelength,c(1.311034, 1.2768703,  0.4293529 , 49.0000466 , 0.6384352,  0.6468633), tol=0.01)
+  expect_equal(beats$amplitude,c(1.891251, 2.000000,1.891251, 1.891251, 1.782502, 1.891251), tol=0.01)
 
 })
 
@@ -79,7 +79,7 @@ test_that('beats near the octave',{
   amplitudes  = rep(1, length(wavelengths))
   beats_spectrum = compute_beats(wavelength = wavelengths, amplitude=amplitudes)
   expect_equal(beats_spectrum$wavelength,
-               numeric(0),
+               1.311034,
                tolerance = 0.1)
 
   Db5_freq = hrep::midi_to_freq(73)

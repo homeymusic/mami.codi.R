@@ -255,10 +255,6 @@ using namespace Rcpp;
      );
    }
 
-   // Define tolerance and maximum wavelength
-   const double tolerance = 1e-6;
-   const double max_wavelength = max(wavelength);
-
    // Vectors to hold the results
    NumericVector beat_wavelength(n * (n - 1) / 2); // Max number of pairs
    NumericVector beat_amplitude(n * (n - 1) / 2);
@@ -270,14 +266,11 @@ using namespace Rcpp;
      for (int j = i + 1; j < n; j++) {
        if (wavelength[i] != wavelength[j]) {
          // Compute the raw beat wavelength
-         const double computed_wavelength = (wavelength[i] * wavelength[j]) / std::abs(wavelength[i] - wavelength[j]);
-         // Check if it's within tolerance of max_wavelength
-         if (std::abs(computed_wavelength - max_wavelength) > tolerance) {
-           beat_wavelength[count] = computed_wavelength;
-           // Compute the beat amplitude
-           beat_amplitude[count] = amplitude[i] + amplitude[j];
-           count++;
-         }
+         double computed_wavelength = (wavelength[i] * wavelength[j]) / std::abs(wavelength[i] - wavelength[j]);
+         beat_wavelength[count] = computed_wavelength;
+         // Compute the beat amplitude
+         beat_amplitude[count] = amplitude[i] + amplitude[j];
+         count++;
        }
      }
    }

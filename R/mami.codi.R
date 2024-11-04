@@ -179,10 +179,15 @@ generate_beats <- function(
     amplitude  = x$wavelength_spectrum[[1]]$amplitude
   )
 
-  max_stimulus_wavelength = x$wavelength_spectrum[[1]]$wavelength %>% max()
+  if (nrow(all_beats_spectrum) > 0) {
+    all_beats_spectrum = all_beats_spectrum %>% combine_wavelength_spectra()
+  }
+
+  max_stimulus_wavelength = x$wavelength_spectrum[[1]]$wavelength %>%
+    max()
 
   low_beats_spectrum = all_beats_spectrum %>%
-    dplyr::filter(wavelength > max_stimulus_wavelength)
+    dplyr::filter(wavelength >= max_stimulus_wavelength)
 
   high_beats_spectrum = all_beats_spectrum %>%
     dplyr::filter(wavelength < max_stimulus_wavelength)
