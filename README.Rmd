@@ -226,7 +226,7 @@ plot_semitone_mami(semitone_mami_codi, 'Major-Minor',
 
 # Stimulus Frequency Otoacoustic Emissions
 
-Beats are created among every combination of waves in the signal when it arrives at the inner hair cells. That signal includes waves emitted by the cochlea itself: stimulus frequency otoacoustic (SFOAE) emissions. How many harmonics are emitted by the SFOAE and/or how many of those impact the perception of beating? And the perceived consonance?
+Beats are created among every combination of waves in the signal when it arrives at the inner hair cells. That signal includes waves emitted by the cochlea itself: otoacoustic emissions (OAE). How many harmonics are emitted by the OAE and/or how many of those impact the perception of beating? And the perceived consonance?
 
 Our research indicates that the number is 5 harmonics. The Bonang beating at 6 introduces too many spike for beating. And at 4, too few. 
 
