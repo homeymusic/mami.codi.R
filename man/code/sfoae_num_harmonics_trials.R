@@ -1,4 +1,4 @@
-run_trials <- function(search_label, sfoae_num_harmonics) {
+run_trials <- function(search_label, oae_num_harmonics) {
   devtools::load_all(".")
   source('./man/code/utils.R')
 
@@ -19,12 +19,12 @@ run_trials <- function(search_label, sfoae_num_harmonics) {
   }
 
   print(search_label)
-  print(paste('sfoae_num_harmonics:',sfoae_num_harmonics))
+  print(paste('oae_num_harmonics:',oae_num_harmonics))
   print(paste('octave_ratio:',octave_ratio))
   print(paste('num_harmonics:',num_harmonics))
   print(paste('roll_off:',roll_off))
 
-  output_rds = paste0('./man/data/output/sfoae_num_harmonics_',
+  output_rds = paste0('./man/data/output/oae_num_harmonics_',
                search_label,
                '.rds')
   prepare(output_rds)
@@ -38,7 +38,7 @@ run_trials <- function(search_label, sfoae_num_harmonics) {
 
   grid = tidyr::expand_grid(
     interval,
-    sfoae_num_harmonics = sfoae_num_harmonics
+    oae_num_harmonics = oae_num_harmonics
   )
 
   print(grid)
@@ -47,7 +47,7 @@ run_trials <- function(search_label, sfoae_num_harmonics) {
 
   data = grid %>% furrr::future_pmap_dfr(\(
     interval,
-    sfoae_num_harmonics
+    oae_num_harmonics
   ) {
 
     if (search_label=='Bonang') {
@@ -91,7 +91,7 @@ run_trials <- function(search_label, sfoae_num_harmonics) {
 
     mami.codi.R::mami.codi(
       chord,
-      sfoae_num_harmonics   = sfoae_num_harmonics,
+      oae_num_harmonics   = oae_num_harmonics,
       metadata              = list(
         octave_ratio        = octave_ratio,
         num_harmonics       = num_harmonics,

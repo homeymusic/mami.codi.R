@@ -18,7 +18,7 @@ source('../code/utils.R')
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "../figures/sfoae_num_harmonics/"
+  fig.path = "../figures/oae_num_harmonics/"
 )
 knitr::opts_chunk$set(dev = 'png')
 ```
@@ -67,7 +67,7 @@ experiment <- experiment %>% dplyr::mutate(
   consonance = rating
 )
 
-theory.rds = paste0('../data/output/sfoae_num_harmonics_',
+theory.rds = paste0('../data/output/oae_num_harmonics_',
                     search_label,
                     '.rds')
 theory = readRDS(theory.rds)
@@ -84,7 +84,7 @@ theory <- theory %>%
     .before=1
   ) %>% 
   dplyr::ungroup() %>%  
-  dplyr::group_by(sfoae_num_harmonics)
+  dplyr::group_by(oae_num_harmonics)
 ```
 
 ```{r, echo=F, results='asis', message=F}
@@ -94,7 +94,7 @@ experiment <- experiment
 
 SFOAE Number of Harmonics:
 ```{r, echo=F}
-sfoae = theory$sfoae_num_harmonics %>% unique
+oae = theory$oae_num_harmonics %>% unique
 ```
 
 ```{r, echo=F}
@@ -120,7 +120,7 @@ smoothed <- function(x,val,sigma=BEHAVIOURAL_SMOOTH_BROAD) {
 
 ```{r, echo=F}
 cols = 1
-rows = length(sfoae)
+rows = length(oae)
 ```
 
 ## CoDi
@@ -142,7 +142,7 @@ theory <- theory %>%
     smooth  = smoothed(semitone, .data$z_score, params$sigma)
   )
 
-plot_semitone_codi_sfoae_num_harmonics_wrap(
+plot_semitone_codi_oae_num_harmonics_wrap(
   theory, 
   experimental_data,
   gray_vlines  = params$gray_vlines[[1]],
@@ -165,7 +165,7 @@ theory <- theory %>%
     smooth_space  = smoothed(semitone, -space_dissonance, params$sigma)
   )
 
-plot_semitone_space_time_sfoae_num_harmonics_wrap(
+plot_semitone_space_time_oae_num_harmonics_wrap(
   theory, 
   gray_vlines  = params$gray_vlines[[1]],
   black_vlines = params$black_vlines[[1]],
@@ -180,7 +180,7 @@ plot_semitone_space_time_sfoae_num_harmonics_wrap(
 # height = 3 per row and width = 5 per column
 # so for grid of 4x12 it would be height=12 and width=60
 
-plot_semitone_low_beating_sfoae_num_harmonics_wrap(
+plot_semitone_low_beating_oae_num_harmonics_wrap(
   theory, 
   gray_vlines  = params$gray_vlines[[1]],
   black_vlines = params$black_vlines[[1]],
@@ -193,7 +193,7 @@ plot_semitone_low_beating_sfoae_num_harmonics_wrap(
 # height = 3 per row and width = 5 per column
 # so for grid of 4x12 it would be height=12 and width=60
 
-plot_semitone_high_beating_sfoae_num_harmonics_wrap(
+plot_semitone_high_beating_oae_num_harmonics_wrap(
   theory, 
   gray_vlines  = params$gray_vlines[[1]],
   black_vlines = params$black_vlines[[1]],

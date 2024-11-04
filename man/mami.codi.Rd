@@ -7,7 +7,7 @@
 mami.codi(
   x,
   beat_pass_filter = BEAT_PASS_FILTER$LOW,
-  sfoae_num_harmonics = SFOAE_NUM_HARMONICS,
+  oae_num_harmonics = SFOAE_NUM_HARMONICS,
   space_uncertainty = UNCERTAINTY_LIMIT,
   time_uncertainty = UNCERTAINTY_LIMIT,
   integer_harmonics_tolerance = INTEGER_HARMONICS_TOLERANCE,
@@ -31,7 +31,7 @@ mami.codi(
 )
 }}
 
-\item{sfoae_num_harmonics}{Number of harmonics to include for the stimulus-frequency otoacoustic emission.}
+\item{oae_num_harmonics}{Number of harmonics to include for the stimulus-frequency otoacoustic emission.}
 
 \item{space_uncertainty}{Optional space uncertainty value for finding rational fractions.}
 

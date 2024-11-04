@@ -3,38 +3,6 @@ Missing Fundamental
 
 # P1 with 10 Harmonics
 
-## Stimulus Frequencies
-
-|    x |         y |
-|-----:|----------:|
-|  343 | 1.0000000 |
-|  686 | 0.8912509 |
-| 1029 | 0.8332050 |
-| 1372 | 0.7943282 |
-| 1715 | 0.7654267 |
-| 2058 | 0.7425948 |
-| 2401 | 0.7238228 |
-| 2744 | 0.7079458 |
-| 3087 | 0.6942306 |
-| 3430 | 0.6821872 |
-
-## Stimulus Wavelengths
-
-| wavelength |         y |
-|-----------:|----------:|
-|  1.0000000 | 1.0000000 |
-|  0.5000000 | 0.8912509 |
-|  0.3333333 | 0.8332050 |
-|  0.2500000 | 0.7943282 |
-|  0.2000000 | 0.7654267 |
-|  0.1666667 | 0.7425948 |
-|  0.1428571 | 0.7238228 |
-|  0.1250000 | 0.7079458 |
-|  0.1111111 | 0.6942306 |
-|  0.1000000 | 0.6821872 |
-
-## MaMi.CoDi Results
-
 ### Frequency Spectrum
 
 <table class="kable_wrapper">
@@ -44,11 +12,11 @@ Missing Fundamental
 
 | frequency | amplitude |
 |----------:|----------:|
-|       343 | 1.4142136 |
-|       686 | 1.2604192 |
-|      1029 | 1.1783298 |
-|      1372 | 1.1233498 |
-|      1715 | 1.0824768 |
+|       343 | 2.0000000 |
+|       686 | 1.7825019 |
+|      1029 | 1.6664100 |
+|      1372 | 1.5886565 |
+|      1715 | 1.5308534 |
 |      2058 | 0.7425948 |
 |      2401 | 0.7238228 |
 |      2744 | 0.7079458 |
@@ -67,18 +35,19 @@ Missing Fundamental
 <tr>
 <td>
 
-| wavelength | amplitude |
-|-----------:|----------:|
-|  1.0000000 | 1.4142136 |
-|  0.5000000 | 1.2604192 |
-|  0.3333333 | 1.1783298 |
-|  0.2500000 | 1.1233498 |
-|  0.2000000 | 1.0824768 |
-|  0.1666667 | 0.7425948 |
-|  0.1428571 | 0.7238228 |
-|  0.1250000 | 0.7079458 |
-|  0.1111111 | 0.6942306 |
-|  0.1000000 | 0.6821872 |
+| wavelength |  amplitude |
+|-----------:|-----------:|
+|  1.0000000 |  4.4959277 |
+|  1.0000000 | 16.7868428 |
+|  0.5000000 |  1.7825019 |
+|  0.3333333 |  1.6664100 |
+|  0.2500000 |  1.5886565 |
+|  0.2000000 |  1.5308534 |
+|  0.1666667 |  0.7425948 |
+|  0.1428571 |  0.7238228 |
+|  0.1250000 |  0.7079458 |
+|  0.1111111 |  0.6942306 |
+|  0.1000000 |  0.6821872 |
 
 </td>
 </tr>
@@ -87,35 +56,57 @@ Missing Fundamental
 
 # P1 with Missing Fundamental
 
-## Stimulus Frequencies
+### Frequency Spectrum
 
-|    x |         y |
-|-----:|----------:|
-|  686 | 0.8912509 |
-| 1029 | 0.8332050 |
-| 1372 | 0.7943282 |
-| 1715 | 0.7654267 |
-| 2058 | 0.7425948 |
-| 2401 | 0.7238228 |
-| 2744 | 0.7079458 |
-| 3087 | 0.6942306 |
-| 3430 | 0.6821872 |
+<table class="kable_wrapper">
+<tbody>
+<tr>
+<td>
 
-## Stimulus Wavelengths
+| frequency | amplitude |
+|----------:|----------:|
+|       686 | 1.8912509 |
+|      1029 | 0.8332050 |
+|      1372 | 1.6855792 |
+|      1715 | 0.7654267 |
+|      2058 | 1.5757998 |
+|      2401 | 0.7238228 |
+|      2744 | 1.5022740 |
+|      3087 | 0.6942306 |
+|      3430 | 1.4476139 |
 
-| wavelength |         y |
-|-----------:|----------:|
-|  0.5000000 | 0.8912509 |
-|  0.3333333 | 0.8332050 |
-|  0.2500000 | 0.7943282 |
-|  0.2000000 | 0.7654267 |
-|  0.1666667 | 0.7425948 |
-|  0.1428571 | 0.7238228 |
-|  0.1250000 | 0.7079458 |
-|  0.1111111 | 0.6942306 |
-|  0.1000000 | 0.6821872 |
+</td>
+</tr>
+</tbody>
+</table>
 
-## MaMi.CoDi Results
+### Wavelength Spectrum
+
+<table class="kable_wrapper">
+<tbody>
+<tr>
+<td>
+
+| wavelength |  amplitude |
+|-----------:|-----------:|
+|  1.0000000 |  4.5928504 |
+|  1.0000000 | 11.9654641 |
+|  0.9999999 |  2.3412264 |
+|  0.5000000 |  2.9498879 |
+|  0.5000000 | 16.3134683 |
+|  0.3333333 |  0.8332050 |
+|  0.2500000 |  1.6855792 |
+|  0.2000000 |  0.7654267 |
+|  0.1666667 |  1.5757998 |
+|  0.1428571 |  0.7238228 |
+|  0.1250000 |  1.5022740 |
+|  0.1111111 |  0.6942306 |
+|  0.1000000 |  1.4476139 |
+
+</td>
+</tr>
+</tbody>
+</table>
 
 ### All Difference Wavelengths
 
@@ -141,17 +132,17 @@ Difference Wavelength (m)
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
+<td style="text-align:center;">
 0.499999989365327
 </td>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
+<td style="text-align:center;">
 0.333333326410174
 </td>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
+<td style="text-align:center;">
 1 , 2
 </td>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
-1.000000
+<td style="text-align:center;">
+0.999999980230257
 </td>
 </tr>
 <tr>
@@ -165,7 +156,7 @@ Difference Wavelength (m)
 1 , 3
 </td>
 <td style="text-align:center;">
-0.500000
+0.499999989365327
 </td>
 </tr>
 <tr>
@@ -179,7 +170,7 @@ Difference Wavelength (m)
 1 , 4
 </td>
 <td style="text-align:center;">
-0.333333
+0.333333330692797
 </td>
 </tr>
 <tr>
@@ -193,7 +184,7 @@ Difference Wavelength (m)
 1 , 5
 </td>
 <td style="text-align:center;">
-0.250000
+0.249999994870114
 </td>
 </tr>
 <tr>
@@ -207,7 +198,7 @@ Difference Wavelength (m)
 1 , 6
 </td>
 <td style="text-align:center;">
-0.200000
+0.199999996792410
 </td>
 </tr>
 <tr>
@@ -221,7 +212,7 @@ Difference Wavelength (m)
 1 , 7
 </td>
 <td style="text-align:center;">
-0.166667
+0.166666663121776
 </td>
 </tr>
 <tr>
@@ -235,7 +226,7 @@ Difference Wavelength (m)
 1 , 8
 </td>
 <td style="text-align:center;">
-0.142857
+0.142857140002290
 </td>
 </tr>
 <tr>
@@ -249,21 +240,21 @@ Difference Wavelength (m)
 1 , 9
 </td>
 <td style="text-align:center;">
-0.125000
+0.124999998592682
 </td>
 </tr>
 <tr>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
+<td style="text-align:center;">
 0.333333326410174
 </td>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
+<td style="text-align:center;">
 0.249999994682663
 </td>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
+<td style="text-align:center;">
 2 , 3
 </td>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
-1.000000
+<td style="text-align:center;">
+0.999999977231050
 </td>
 </tr>
 <tr>
@@ -277,7 +268,7 @@ Difference Wavelength (m)
 2 , 4
 </td>
 <td style="text-align:center;">
-0.500000
+0.499999999001230
 </td>
 </tr>
 <tr>
@@ -291,7 +282,7 @@ Difference Wavelength (m)
 2 , 5
 </td>
 <td style="text-align:center;">
-0.333333
+0.333333326410174
 </td>
 </tr>
 <tr>
@@ -305,7 +296,7 @@ Difference Wavelength (m)
 2 , 6
 </td>
 <td style="text-align:center;">
-0.250000
+0.249999996223750
 </td>
 </tr>
 <tr>
@@ -319,7 +310,7 @@ Difference Wavelength (m)
 2 , 7
 </td>
 <td style="text-align:center;">
-0.200000
+0.199999995686147
 </td>
 </tr>
 <tr>
@@ -333,7 +324,7 @@ Difference Wavelength (m)
 2 , 8
 </td>
 <td style="text-align:center;">
-0.166667
+0.166666663330054
 </td>
 </tr>
 <tr>
@@ -347,21 +338,21 @@ Difference Wavelength (m)
 2 , 9
 </td>
 <td style="text-align:center;">
-0.142857
+0.142857141422478
 </td>
 </tr>
 <tr>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
+<td style="text-align:center;">
 0.249999994682663
 </td>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
+<td style="text-align:center;">
 0.199999997347859
 </td>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
+<td style="text-align:center;">
 3 , 4
 </td>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
-1.000000
+<td style="text-align:center;">
+1.000000018773869
 </td>
 </tr>
 <tr>
@@ -375,7 +366,7 @@ Difference Wavelength (m)
 3 , 5
 </td>
 <td style="text-align:center;">
-0.500000
+0.499999990115128
 </td>
 </tr>
 <tr>
@@ -389,7 +380,7 @@ Difference Wavelength (m)
 3 , 6
 </td>
 <td style="text-align:center;">
-0.333333
+0.333333329149884
 </td>
 </tr>
 <tr>
@@ -403,7 +394,7 @@ Difference Wavelength (m)
 3 , 7
 </td>
 <td style="text-align:center;">
-0.250000
+0.249999994682663
 </td>
 </tr>
 <tr>
@@ -417,7 +408,7 @@ Difference Wavelength (m)
 3 , 8
 </td>
 <td style="text-align:center;">
-0.200000
+0.199999996106035
 </td>
 </tr>
 <tr>
@@ -431,21 +422,21 @@ Difference Wavelength (m)
 3 , 9
 </td>
 <td style="text-align:center;">
-0.166667
+0.166666665346399
 </td>
 </tr>
 <tr>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
+<td style="text-align:center;">
 0.199999997347859
 </td>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
+<td style="text-align:center;">
 0.166666663205087
 </td>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
+<td style="text-align:center;">
 4 , 5
 </td>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
-1.000000
+<td style="text-align:center;">
+0.999999941686648
 </td>
 </tr>
 <tr>
@@ -459,7 +450,7 @@ Difference Wavelength (m)
 4 , 6
 </td>
 <td style="text-align:center;">
-0.500000
+0.499999985893771
 </td>
 </tr>
 <tr>
@@ -473,7 +464,7 @@ Difference Wavelength (m)
 4 , 7
 </td>
 <td style="text-align:center;">
-0.333333
+0.333333321794305
 </td>
 </tr>
 <tr>
@@ -487,7 +478,7 @@ Difference Wavelength (m)
 4 , 8
 </td>
 <td style="text-align:center;">
-0.250000
+0.249999992742314
 </td>
 </tr>
 <tr>
@@ -501,21 +492,21 @@ Difference Wavelength (m)
 4 , 9
 </td>
 <td style="text-align:center;">
-0.200000
+0.199999997347859
 </td>
 </tr>
 <tr>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
+<td style="text-align:center;">
 0.166666663205087
 </td>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
+<td style="text-align:center;">
 0.142857140352481
 </td>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
+<td style="text-align:center;">
 5 , 6
 </td>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
-1.000000
+<td style="text-align:center;">
+1.000000001888438
 </td>
 </tr>
 <tr>
@@ -529,7 +520,7 @@ Difference Wavelength (m)
 5 , 7
 </td>
 <td style="text-align:center;">
-0.500000
+0.499999988615525
 </td>
 </tr>
 <tr>
@@ -543,7 +534,7 @@ Difference Wavelength (m)
 5 , 8
 </td>
 <td style="text-align:center;">
-0.333333
+0.333333326910041
 </td>
 </tr>
 <tr>
@@ -557,21 +548,21 @@ Difference Wavelength (m)
 5 , 9
 </td>
 <td style="text-align:center;">
-0.250000
+0.249999999500615
 </td>
 </tr>
 <tr>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
+<td style="text-align:center;">
 0.142857140352481
 </td>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
+<td style="text-align:center;">
 0.124999997341332
 </td>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
+<td style="text-align:center;">
 6 , 7
 </td>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
-1.000000
+<td style="text-align:center;">
+0.999999952573663
 </td>
 </tr>
 <tr>
@@ -585,7 +576,7 @@ Difference Wavelength (m)
 6 , 8
 </td>
 <td style="text-align:center;">
-0.500000
+0.499999985075484
 </td>
 </tr>
 <tr>
@@ -599,21 +590,21 @@ Difference Wavelength (m)
 6 , 9
 </td>
 <td style="text-align:center;">
-0.333333
+0.333333332235711
 </td>
 </tr>
 <tr>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
+<td style="text-align:center;">
 0.124999997341332
 </td>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
+<td style="text-align:center;">
 0.111111108858932
 </td>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
+<td style="text-align:center;">
 7 , 8
 </td>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
-1.000000
+<td style="text-align:center;">
+0.999999987728272
 </td>
 </tr>
 <tr>
@@ -627,69 +618,21 @@ Difference Wavelength (m)
 7 , 9
 </td>
 <td style="text-align:center;">
-0.500000
+0.500000009386935
 </td>
 </tr>
 <tr>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
+<td style="text-align:center;">
 0.111111108858932
 </td>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
+<td style="text-align:center;">
 0.099999998673930
 </td>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
+<td style="text-align:center;">
 8 , 9
 </td>
-<td style="text-align:center;font-weight: bold;background-color: rgba(255, 235, 59, 255) !important;">
-1.000000
-</td>
-</tr>
-</tbody>
-</table>
-
-### Frequency Spectrum
-
-<table class="kable_wrapper">
-<tbody>
-<tr>
-<td>
-
-|         frequency |         amplitude |
-|------------------:|------------------:|
-|  686.000014590772 | 1.339525376663048 |
-| 1029.000021371794 | 0.833205014412295 |
-| 1372.000029181544 | 1.193853248604901 |
-| 1715.000022742107 | 0.765426678540071 |
-| 2058.000042743588 | 1.116099260768169 |
-| 2401.000042095854 | 0.723822791473714 |
-| 2744.000058363088 | 1.064022827813137 |
-| 3087.000062572291 | 0.694230596041792 |
-| 3430.000045484214 | 1.025308459879334 |
-
-</td>
-</tr>
-</tbody>
-</table>
-
-### Wavelength Spectrum
-
-<table class="kable_wrapper">
-<tbody>
-<tr>
-<td>
-
-|        wavelength |         amplitude |
-|------------------:|------------------:|
-| 0.499999989365327 | 1.339525376663048 |
-| 0.333333326410174 | 0.833205014412295 |
-| 0.249999994682663 | 1.193853248604901 |
-| 0.199999997347859 | 0.765426678540071 |
-| 0.166666663205087 | 1.116099260768169 |
-| 0.142857140352481 | 0.723822791473714 |
-| 0.124999997341332 | 1.064022827813137 |
-| 0.111111108858932 | 0.694230596041792 |
-| 0.099999998673930 | 1.025308459879334 |
-
+<td style="text-align:center;">
+1.000000049819469
 </td>
 </tr>
 </tbody>

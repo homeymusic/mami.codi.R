@@ -75,18 +75,64 @@ empty_frequency_spectrum <- function() {
 }
 
 #' Helper functions to combine spectra
+combine_spectra <- function(..., tolerance = 1e-6) {
+  # Collect all spectra passed in as a list
+  spectra_list <- list(...)
 
-combine_wavelength_spectra <- function(x,y=empty_wavelength_spectrum()) {
-  x = sparse_fr_spectrum_from_wavelength_spectrum(x)
-  y = sparse_fr_spectrum_from_wavelength_spectrum(y)
-  wavelength_spectrum_from_sparse_fr_spectrum(hrep::combine_sparse_spectra(x,y,coherent=T))
+  # Check if the list is empty
+  if (length(spectra_list) == 0) {
+    stop("Error: At least one spectrum must be provided.")
+  }
+
+  # Determine the type of spectra based on the first spectrum
+  first_spectrum <- spectra_list[[1]]
+  if ("frequency" %in% names(first_spectrum)) {
+    spec_type <- "frequency"
+    sort_order <- "asc"
+  } else if ("wavelength" %in% names(first_spectrum)) {
+    spec_type <- "wavelength"
+    sort_order <- "desc"
+  } else {
+    stop("Error: Spectra must have either 'frequency' or 'wavelength' as a column.")
+  }
+
+  # Ensure all spectra have the same type as the first one
+  for (spectrum in spectra_list) {
+    if (!(spec_type %in% names(spectrum))) {
+      stop("Error: All spectra must have the same type (either all frequency or all wavelength).")
+    }
+  }
+
+  # Combine all spectra into a single tibble
+  combined <- dplyr::bind_rows(lapply(spectra_list, function(spectrum) {
+    spectrum %>% dplyr::rename(value = !!spec_type)
+  }))
+
+  # Aggregate amplitudes within tolerance for the combined tibble
+  result <- combined %>%
+    dplyr::arrange(value) %>%
+    dplyr::mutate(
+      # Group values that fall within the tolerance range
+      group = cumsum(c(TRUE, diff(value) > tolerance))
+    ) %>%
+    dplyr::group_by(group) %>%
+    dplyr::summarize(
+      value = mean(value),
+      amplitude = sum(amplitude),
+      .groups = "drop"
+    ) %>%
+    dplyr::select(!!spec_type := value, amplitude)
+
+  # Apply sorting based on type
+  result <- if (sort_order == "asc") {
+    result %>% dplyr::arrange(!!rlang::sym(spec_type))
+  } else {
+    result %>% dplyr::arrange(dplyr::desc(!!rlang::sym(spec_type)))
+  }
+
+  return(result)
 }
 
-combine_frequency_spectra <- function(x,y=empty_frequency_spectrum()) {
-  x = hrep::sparse_fr_spectrum(x %>% as.list())
-  y = hrep::sparse_fr_spectrum(y %>% as.list())
-  frequency_spectrum_from_sparse_fr_spectrum(hrep::combine_sparse_spectra(x,y,coherent=T))
-}
 
 sparse_fr_spectrum_from_wavelength_spectrum <- function(x) {
   hrep::sparse_fr_spectrum(list(

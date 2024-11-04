@@ -32,7 +32,7 @@ mami_codi <- purrr::map_dfr(framed_intervals, function(interval) {
     interval,
     num_harmonics = num_harmonics,
     beat_pass_filter = BEAT_PASS_FILTER$NONE,
-    sfoae_num_harmonics = 0,
+    oae_num_harmonics = 0,
     verbose = TRUE,
     metadata = list(
       num_harmonics = num_harmonics,

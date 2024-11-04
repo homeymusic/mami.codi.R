@@ -26,15 +26,15 @@ test_that('calculated beat matches actual beat',{
   freqs = c(C4_freq, C4_freq+beat_freq)
   wavelengths = C_SOUND / freqs
 
-  beats_spectrum = compute_beats(wavelength = wavelengths, amplitude=c(1,0.95))
+  beats_wavelength_spectrum = compute_beats(wavelength = wavelengths, amplitude=c(1,0.95))
 
-  expect_equal(beats_spectrum$wavelength,
+  expect_equal(beats_wavelength_spectrum$wavelength,
                c(49),
                tolerance = 0.1)
-  expect_equal(beats_spectrum$amplitude,
+  expect_equal(beats_wavelength_spectrum$amplitude,
                c(1.95),
                tolerance = 0.1)
-  calculated_beat_freq = C_SOUND / beats_spectrum$wavelength
+  calculated_beat_freq = C_SOUND / beats_wavelength_spectrum$wavelength
   expect_equal(beat_freq, calculated_beat_freq, tolerance = 0.1)
 })
 test_that('only low beats are returned',{
@@ -45,15 +45,15 @@ test_that('only low beats are returned',{
   wavelengths = C_SOUND / freqs
   amplitudes  = rep(1, length(wavelengths))
 
-  beats_spectrum = compute_beats(wavelength = wavelengths, amplitude=amplitudes)
+  beats_wavelength_spectrum = compute_beats(wavelength = wavelengths, amplitude=amplitudes)
 
-  expect_equal(beats_spectrum$wavelength,
+  expect_equal(beats_wavelength_spectrum$wavelength,
                c(49.00, 5.04, 5.62),
                tolerance = 0.1)
-  expect_equal(beats_spectrum$amplitude,
+  expect_equal(beats_wavelength_spectrum$amplitude,
                c(2,2,2),
                tolerance = 0.1)
-  calculated_beat_freqs = C_SOUND / beats_spectrum$wavelength
+  calculated_beat_freqs = C_SOUND / beats_wavelength_spectrum$wavelength
   expect_true(any(abs(calculated_beat_freqs - beat_freq) < 0.1))
 })
 test_that('beats near the octave',{
@@ -66,8 +66,8 @@ test_that('beats near the octave',{
   l = (wavelengths[1] * wavelengths[2]) / abs(wavelengths[1] - wavelengths[2])
   expect_true(l > max(wavelengths))
   amplitudes  = rep(1, length(wavelengths))
-  beats_spectrum = compute_beats(wavelength = wavelengths, amplitude=amplitudes)
-  expect_equal(beats_spectrum$wavelength,
+  beats_wavelength_spectrum = compute_beats(wavelength = wavelengths, amplitude=amplitudes)
+  expect_equal(beats_wavelength_spectrum$wavelength,
                c(1.47),
                tolerance = 0.1)
 
@@ -77,8 +77,8 @@ test_that('beats near the octave',{
   l = (wavelengths[1] * wavelengths[2]) / abs(wavelengths[1] - wavelengths[2])
   expect_true(l <= max(wavelengths))
   amplitudes  = rep(1, length(wavelengths))
-  beats_spectrum = compute_beats(wavelength = wavelengths, amplitude=amplitudes)
-  expect_equal(beats_spectrum$wavelength,
+  beats_wavelength_spectrum = compute_beats(wavelength = wavelengths, amplitude=amplitudes)
+  expect_equal(beats_wavelength_spectrum$wavelength,
                1.311034,
                tolerance = 0.1)
 
@@ -89,8 +89,8 @@ test_that('beats near the octave',{
   # above the ocatve the beats are not audible?
   expect_true(l < max(wavelengths))
   amplitudes  = rep(1, length(wavelengths))
-  beats_spectrum = compute_beats(wavelength = wavelengths, amplitude=amplitudes)
-  expect_equal(beats_spectrum$wavelength,
+  beats_wavelength_spectrum = compute_beats(wavelength = wavelengths, amplitude=amplitudes)
+  expect_equal(beats_wavelength_spectrum$wavelength,
                1.171689,
                tolerance=0.01)
 })

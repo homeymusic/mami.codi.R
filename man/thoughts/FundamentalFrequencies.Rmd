@@ -47,7 +47,7 @@ results <- purrr::map_dfr(names(framed_intervals), function(interval_name) {
   result <- framed_intervals[[interval_name]] %>% mami.codi(
     num_harmonics = num_harmonics,
     beat_pass_filter = BEAT_PASS_FILTER$NONE,
-    sfoae_num_harmonics = 0,
+    oae_num_harmonics = 0,
     verbose=T
   )
   print(plot_space_time(1/result$time_cycles,

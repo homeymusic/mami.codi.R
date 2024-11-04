@@ -1164,17 +1164,17 @@ plot_semitone_space_time_wrap <- function(theory,
     theme_homey()
 }
 
-plot_semitone_codi_sfoae_num_harmonics_wrap <- function(theory, experiment,
+plot_semitone_codi_oae_num_harmonics_wrap <- function(theory, experiment,
                                     black_vlines = c(), gray_vlines = c(),
                                     title, ncols = 12,
                                     include_points = TRUE) {
 
   per_plot_labels = tidyr::expand_grid(
-    sfoae_num_harmonics = theory$sfoae_num_harmonics %>% unique
+    oae_num_harmonics = theory$oae_num_harmonics %>% unique
   )
   per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(sfoae_num_harmonics) {
-      paste0('   sfoae_num_harmonics:', sfoae_num_harmonics)
+    purrr::pmap_vec(\(oae_num_harmonics) {
+      paste0('   oae_num_harmonics:', oae_num_harmonics)
     })
 
   theory %>% ggplot2::ggplot(ggplot2::aes(x = semitone, y = smooth)) +
@@ -1203,20 +1203,20 @@ plot_semitone_codi_sfoae_num_harmonics_wrap <- function(theory, experiment,
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
     ggplot2::scale_x_continuous() +  # Automatically generate x-axis labels
-    ggplot2::facet_wrap(~sfoae_num_harmonics, ncol = ncols, dir = 'v',
+    ggplot2::facet_wrap(~oae_num_harmonics, ncol = ncols, dir = 'v',
                         scales = "free_y") +
     theme_homey()
 }
 
-plot_semitone_space_time_sfoae_num_harmonics_wrap <- function(theory,
+plot_semitone_space_time_oae_num_harmonics_wrap <- function(theory,
                                           black_vlines=c(), gray_vlines=c(),
                                           title,ncols=1) {
   per_plot_labels = tidyr::expand_grid(
-    sfoae_num_harmonics  = theory$sfoae_num_harmonics  %>% unique
+    oae_num_harmonics  = theory$oae_num_harmonics  %>% unique
   )
   per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(sfoae_num_harmonics) {
-      paste0('   sfoae_num_harmonics:', sfoae_num_harmonics)
+    purrr::pmap_vec(\(oae_num_harmonics) {
+      paste0('   oae_num_harmonics:', oae_num_harmonics)
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
@@ -1242,21 +1242,21 @@ plot_semitone_space_time_sfoae_num_harmonics_wrap <- function(theory,
                                     vjust="inward",hjust="inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_wrap(~sfoae_num_harmonics,ncol=ncols,dir='v',scales = "free_y") +
+    ggplot2::facet_wrap(~oae_num_harmonics,ncol=ncols,dir='v',scales = "free_y") +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()
 }
 
-plot_semitone_low_beating_sfoae_num_harmonics_wrap <- function(theory,
+plot_semitone_low_beating_oae_num_harmonics_wrap <- function(theory,
                                                               black_vlines=c(), gray_vlines=c(),
                                                               title,ncols=1) {
   per_plot_labels = tidyr::expand_grid(
-    sfoae_num_harmonics  = theory$sfoae_num_harmonics  %>% unique
+    oae_num_harmonics  = theory$oae_num_harmonics  %>% unique
   )
   per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(sfoae_num_harmonics) {
-      paste0('   sfoae_num_harmonics:', sfoae_num_harmonics)
+    purrr::pmap_vec(\(oae_num_harmonics) {
+      paste0('   oae_num_harmonics:', oae_num_harmonics)
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
@@ -1269,21 +1269,21 @@ plot_semitone_low_beating_sfoae_num_harmonics_wrap <- function(theory,
                                     vjust="inward",hjust="inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_wrap(~sfoae_num_harmonics,ncol=ncols,dir='v',scales = "free_y") +
+    ggplot2::facet_wrap(~oae_num_harmonics,ncol=ncols,dir='v',scales = "free_y") +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()
 }
 
-plot_semitone_high_beating_sfoae_num_harmonics_wrap <- function(theory,
+plot_semitone_high_beating_oae_num_harmonics_wrap <- function(theory,
                                                                black_vlines=c(), gray_vlines=c(),
                                                                title,ncols=1) {
   per_plot_labels = tidyr::expand_grid(
-    sfoae_num_harmonics  = theory$sfoae_num_harmonics  %>% unique
+    oae_num_harmonics  = theory$oae_num_harmonics  %>% unique
   )
   per_plot_labels$label = per_plot_labels %>%
-    purrr::pmap_vec(\(sfoae_num_harmonics) {
-      paste0('   sfoae_num_harmonics:', sfoae_num_harmonics)
+    purrr::pmap_vec(\(oae_num_harmonics) {
+      paste0('   oae_num_harmonics:', oae_num_harmonics)
     })
   theory %>% ggplot2::ggplot(ggplot2::aes(x=semitone, y=smooth)) +
     ggplot2::geom_vline(xintercept = black_vlines, color='black') +
@@ -1296,7 +1296,7 @@ plot_semitone_high_beating_sfoae_num_harmonics_wrap <- function(theory,
                                     vjust="inward",hjust="inward")) +
     ggplot2::xlab(NULL) +
     ggplot2::ylab(NULL) +
-    ggplot2::facet_wrap(~sfoae_num_harmonics,ncol=ncols,dir='v',scales = "free_y") +
+    ggplot2::facet_wrap(~oae_num_harmonics,ncol=ncols,dir='v',scales = "free_y") +
     ggplot2::scale_x_continuous(breaks = c(),
                                 minor_breaks = 0:15) +
     theme_homey()

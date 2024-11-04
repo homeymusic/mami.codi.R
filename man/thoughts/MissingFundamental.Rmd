@@ -19,29 +19,19 @@ knitr::opts_chunk$set(
 
 # P1 with 10 Harmonics
 
-## Stimulus Frequencies
-
 ```{r, echo=F, message=F, include=T, results='asis'}
 P1_sparse = hrep::sparse_fr_spectrum(
   hrep::freq_to_midi(343),
   num_harmonics=10
 )
-knitr::kable(P1_sparse, format = "pipe")
-```
 
-## Stimulus Wavelengths
-
-```{r, echo=F, message=F, include=T, results='asis'}
 stimulus_wavelengths = P1_sparse %>% 
   dplyr::mutate(
     wavelength = C_SOUND / x
   ) %>% 
   dplyr::select(c('wavelength', 'y')) %>%
   tibble::as_tibble()
-knitr::kable(stimulus_wavelengths, format = "pipe")
 ```
-
-## MaMi.CoDi Results
 
 ```{r, echo=F, message=F, include=T, results='asis'}
 P1 = P1_sparse %>% mami.codi(verbose=T)
@@ -61,54 +51,20 @@ knitr::kable(P1$wavelength_spectrum, format = "pipe")
 
 # P1 with Missing Fundamental
 
-## Stimulus Frequencies
 
 ```{r, echo=F, message=F, include=T, results='asis'}
 P1_sparse_missing_fundamental = P1_sparse %>% dplyr::slice(-c(1))
 
-knitr::kable(P1_sparse_missing_fundamental, format = "pipe")
-```
-
-## Stimulus Wavelengths
-
-```{r, echo=F, message=F, include=T, results='asis'}
 stimulus_wavelengths = P1_sparse_missing_fundamental %>% 
   dplyr::mutate(
     wavelength = C_SOUND / x
   ) %>% 
   dplyr::select(c('wavelength', 'y')) %>%
   tibble::as_tibble()
-knitr::kable(stimulus_wavelengths, format = "pipe")
 ```
-
-## MaMi.CoDi Results
 
 ```{r, echo=F, message=F, include=T, results='asis'}
 P1_missing_f0 = P1_sparse_missing_fundamental %>% mami.codi(verbose=T)
-```
-
-### All Difference Wavelengths
-
-```{r, echo=F, message=F, include=T, results='asis'}
-
-# Calculate the difference wavelengths between each pair of stimulus wavelengths
-df <- tidyr::expand_grid(i = 1:nrow(stimulus_wavelengths), j = 1:nrow(stimulus_wavelengths)) %>%
-  dplyr::filter(i < j) %>%
-  dplyr::mutate(
-    harmonics = paste(i, ",", j),
-    wavelength_i = stimulus_wavelengths$wavelength[i],
-    wavelength_j = stimulus_wavelengths$wavelength[j],
-    diff_lambda = round((wavelength_i * wavelength_j) / abs(wavelength_i - wavelength_j), 6)  # Round to 6 decimals
-  ) %>%
-  dplyr::select(`Wavelength i` = wavelength_i, `Wavelength j` = wavelength_j, Harmonics = harmonics, `Difference Wavelength (m)` = diff_lambda)
-
-# Highlight rows where Difference Wavelength is exactly 1 meter
-options(digits = 15)  # Set to a high number to ensure full precision display
-df %>%
-  knitr::kable("pipe", align = "c", caption = "Difference Wavelength Table for Stimulus Wavelengths") %>%
-  kableExtra::kable_styling(full_width = FALSE) %>%
-  kableExtra::row_spec(which(df$`Difference Wavelength (m)` == 1), bold = TRUE, background = "#FFEB3B")
-
 ```
 
 ### Frequency Spectrum
@@ -123,3 +79,26 @@ knitr::kable(P1_missing_f0$frequency_spectrum, format = "pipe")
 knitr::kable(P1_missing_f0$wavelength_spectrum, format = "pipe")
 ```
 
+### All Difference Wavelengths
+
+```{r, echo=F, message=F, include=T, results='asis'}
+
+# Calculate the difference wavelengths between each pair of stimulus wavelengths
+df <- tidyr::expand_grid(i = 1:nrow(stimulus_wavelengths), j = 1:nrow(stimulus_wavelengths)) %>%
+  dplyr::filter(i < j) %>%
+  dplyr::mutate(
+    harmonics = paste(i, ",", j),
+    wavelength_i = stimulus_wavelengths$wavelength[i],
+    wavelength_j = stimulus_wavelengths$wavelength[j],
+    diff_lambda = (wavelength_i * wavelength_j) / abs(wavelength_i - wavelength_j)
+  ) %>%
+  dplyr::select(`Wavelength i` = wavelength_i, `Wavelength j` = wavelength_j, Harmonics = harmonics, `Difference Wavelength (m)` = diff_lambda)
+
+# Highlight rows where Difference Wavelength is exactly 1 meter
+options(digits = 15)  # Set to a high number to ensure full precision display
+df %>%
+  knitr::kable("pipe", align = "c", caption = "Difference Wavelength Table for Stimulus Wavelengths") %>%
+  kableExtra::kable_styling(full_width = FALSE) %>%
+  kableExtra::row_spec(which(df$`Difference Wavelength (m)` == 1), bold = TRUE, background = "#FFEB3B")
+
+```
