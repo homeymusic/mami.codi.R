@@ -84,13 +84,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // compute_combination_tones
-NumericVector compute_combination_tones(NumericVector frequencies, SEXP combination_coefficients);
+NumericVector compute_combination_tones(NumericVector frequencies, NumericVector combination_coefficients);
 RcppExport SEXP _mami_codi_R_compute_combination_tones(SEXP frequenciesSEXP, SEXP combination_coefficientsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type frequencies(frequenciesSEXP);
-    Rcpp::traits::input_parameter< SEXP >::type combination_coefficients(combination_coefficientsSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type combination_coefficients(combination_coefficientsSEXP);
     rcpp_result_gen = Rcpp::wrap(compute_combination_tones(frequencies, combination_coefficients));
     return rcpp_result_gen;
 END_RCPP

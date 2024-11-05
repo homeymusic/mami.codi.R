@@ -299,15 +299,9 @@ using namespace Rcpp;
  //' @export
  // [[Rcpp::export]]
  NumericVector compute_combination_tones(NumericVector frequencies,
-                                         SEXP combination_coefficients) {
-   if (Rf_isNull(combination_coefficients)) {
-     return NumericVector::create();
-   }
-
-   NumericVector coefficients(combination_coefficients);
-
+                                         NumericVector combination_coefficients) {
    const int n = frequencies.size();
-   const int n_coefficients = coefficients.size();
+   const int n_coefficients = combination_coefficients.size();
 
    // Debugging output
    if (n < 2 || n_coefficients == 0) {
@@ -323,10 +317,12 @@ using namespace Rcpp;
        if (frequencies[i] != frequencies[j]) {
          for (int k = 0; k < n_coefficients; ++k) {
            // Additional check for coefficient access
-           if (k < coefficients.size()) {
-             double combination_tone = frequencies[i] - coefficients[k] * (frequencies[j] - frequencies[i]);
-             combination_tones[count] = combination_tone;
-             count++;
+           if (k < combination_coefficients.size()) {
+             double combination_tone = frequencies[i] - combination_coefficients[k] * (frequencies[j] - frequencies[i]);
+             if (combination_tone > 0) {
+               combination_tones[count] = combination_tone;
+               count++;
+             }
            }
          }
        }

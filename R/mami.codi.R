@@ -34,7 +34,7 @@
 mami.codi <- function(
     x,
     beat_pass_filter            = BEAT_PASS_FILTER$LOW,
-    combination_tones           = COMBINATION_TONES,
+    combination_coefficients    = COMBINATION_COEFFICIENTS,
     oae_num_harmonics           = SFOAE_NUM_HARMONICS,
     space_uncertainty           = UNCERTAINTY_LIMIT,
     time_uncertainty            = UNCERTAINTY_LIMIT,
@@ -49,11 +49,11 @@ mami.codi <- function(
     parse_input(...) %>%
     # Physical Domain
     generate_stimulus() %>%
-    generate_combination_tones(
-      combination_tones
-    ) %>%
     generate_cochlea_emissions(
       oae_num_harmonics
+    ) %>%
+    generate_combination_tones(
+      combination_coefficients
     ) %>%
     generate_beats(
       beat_pass_filter
@@ -155,9 +155,23 @@ generate_cochlea_emissions <- function(
 #' @rdname generate_combination_tones
 #' @export
 generate_combination_tones <- function(
-    x, combination_tones
+    x, combination_coefficients
 ) {
 
+  all_combination_tones_frequencies = compute_combination_tones(
+    frequencies = x$stimulus_frequency_spectrum[[1]]$frequency,
+    combination_coefficients = combination_coefficients
+  )
+
+  combination_tones_frequencies = combine_spectra(tibble::tibble(
+    frequency = all_combination_tones_frequencies,
+    amplitude = 1
+  ))$frequency
+
+  # Store the values
+  x %>% dplyr::mutate(
+    combination_tones_frequencies = list(combination_tones_frequencies)
+  )
 
 }
 
@@ -488,4 +502,4 @@ DIMENSION <- list(
   TIME  = 'time'
 )
 
-COMBINATION_TONES=0
+COMBINATION_COEFFICIENTS=-4:4

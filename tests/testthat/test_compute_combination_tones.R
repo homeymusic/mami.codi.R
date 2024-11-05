@@ -19,14 +19,6 @@ test_that('not enough combos',{
   expect_equal(ct, numeric())
 })
 
-test_that('not enough combos usinc c()',{
-  combination_coefficients = c()
-  f = c(1425,1500)
-
-  ct = compute_combination_tones(f, combination_coefficients)
-  expect_equal(ct, numeric())
-})
-
 test_that('1 combo works',{
   combination_coefficients = c(1)
   f = c(1425,1500)
@@ -40,5 +32,13 @@ test_that('all combos works',{
   f = c(1425,1500)
 
   ct = compute_combination_tones(f, combination_coefficients)
-  expect_equal(ct, c(1125, 1200, 1275, 1350 ,1425, 1500 ,1575 ,1650))
+  expect_equal(ct, c(1125, 1200, 1275, 1350 ,1425, 1500 ,1575 ,1650, 1725))
+})
+
+test_that('negative frequencies are not returned',{
+  combination_coefficients = -4:4
+  f = hrep::sparse_fr_spectrum(60, num_harmonics = 10)$x
+
+  ct = compute_combination_tones(f, combination_coefficients)
+  expect_true(all(ct>0))
 })
