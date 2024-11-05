@@ -168,9 +168,14 @@ generate_combination_tones <- function(
     all_combination_tones_frequency_spectrum
   )
 
+  combination_tones_wavelength_spectrum = wavelength_spectrum_from_frequency_spectrum(
+    all_combination_tones_frequency_spectrum
+  )
+
   # Store the values
   x %>% dplyr::mutate(
-    combination_tones_frequency_spectrum = list(combination_tones_frequency_spectrum)
+    combination_tones_frequency_spectrum  = list(combination_tones_frequency_spectrum),
+    combination_tones_wavelength_spectrum = list(combination_tones_wavelength_spectrum)
   )
 
 }
@@ -202,7 +207,8 @@ generate_beats <- function(
 
   stimulus_and_oae_wavelength_spectrum = combine_spectra(
     x$stimulus_wavelength_spectrum[[1]],
-    x$oae_wavelength_spectrum[[1]]
+    x$oae_wavelength_spectrum[[1]],
+    x$combination_tones_wavelength_spectrum[[1]]
   )
 
   all_beats_wavelength_spectrum = compute_beats(

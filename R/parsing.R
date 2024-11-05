@@ -133,18 +133,17 @@ combine_spectra <- function(..., tolerance = 1e-6) {
   return(result)
 }
 
-
-sparse_fr_spectrum_from_wavelength_spectrum <- function(x) {
-  hrep::sparse_fr_spectrum(list(
-    frequency = C_SOUND / x$wavelength,
-    amplitude = x$amplitude
-  ))
-}
-
 wavelength_spectrum_from_sparse_fr_spectrum <- function(x) {
   tibble::tibble(
     wavelength = C_SOUND / x$x,
     amplitude  = x$y
+  )
+}
+
+wavelength_spectrum_from_frequency_spectrum <- function(x) {
+  tibble::tibble(
+    wavelength = C_SOUND / x$frequency,
+    amplitude  = x$amplitude
   )
 }
 

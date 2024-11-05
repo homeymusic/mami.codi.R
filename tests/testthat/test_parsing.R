@@ -39,16 +39,6 @@ test_that('combine_spectra', {
   P8_combined = P8 %>% dplyr::filter(abs(frequency-523.2511) < 0.1)
   expect_true(P8_combined$amplitude > 1)
 })
-test_that('sparse_fr_spectrum_from_wavelength_spectrum', {
-  C4_hrep = hrep::sparse_fr_spectrum(60, num_harmonics = 3)
-  C4 = tibble::tibble(
-    wavelength = C_SOUND / C4_hrep$x,
-    amplitude  = C4_hrep$y
-  )
-  expect_equal(C4$wavelength, c(1.3110340, 0.6555170, 0.4370113), tolerance = 0.1)
-  C4_roundtrip = sparse_fr_spectrum_from_wavelength_spectrum(C4)
-  expect_equal(C4_roundtrip, C4_hrep)
-})
 
 test_that('wavelength_spectrum_from_sparse_fr_spectrum', {
   C4_hrep = hrep::sparse_fr_spectrum(60, num_harmonics = 3)
