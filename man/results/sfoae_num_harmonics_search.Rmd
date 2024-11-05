@@ -94,7 +94,7 @@ experiment <- experiment
 
 SFOAE Number of Harmonics:
 ```{r, echo=F}
-oae = theory$cochlear_amplifier_num_harmonics %>% unique
+cochlear_amplifier = theory$cochlear_amplifier_num_harmonics %>% unique
 ```
 
 ```{r, echo=F}
@@ -120,7 +120,7 @@ smoothed <- function(x,val,sigma=BEHAVIOURAL_SMOOTH_BROAD) {
 
 ```{r, echo=F}
 cols = 1
-rows = length(oae)
+rows = length(cochlear_amplifier)
 ```
 
 ## CoDi

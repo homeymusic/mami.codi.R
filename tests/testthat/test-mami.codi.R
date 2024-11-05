@@ -366,14 +366,14 @@ test_that('we can quanity the amount of beating in chord', {
 test_that('Stimulus Frequency Otoacoustic Emissions',{
   cochlear_amplifier_num_harmonics=0
   P1 = mami.codi(60, verbose=T, cochlear_amplifier_num_harmonics = cochlear_amplifier_num_harmonics, num_harmonics=1)
-  expect_equal(P1$oae_frequency_spectrum[[1]] %>% nrow(), cochlear_amplifier_num_harmonics)
+  expect_equal(P1$cochlear_amplifier_frequency_spectrum[[1]] %>% nrow(), cochlear_amplifier_num_harmonics)
   expect_equal(P1$frequencies[[1]], c(261.6), tolerance=0.1)
 
   cochlear_amplifier_num_harmonics=2
-  P1_oae = mami.codi(60, verbose=T, cochlear_amplifier_num_harmonics = cochlear_amplifier_num_harmonics, num_harmonics=1)
-  expect_equal(P1_oae$oae_frequency_spectrum[[1]] %>% nrow(), cochlear_amplifier_num_harmonics)
-  expect_equal(P1_oae$frequencies[[1]] %>% length(), cochlear_amplifier_num_harmonics)
-  expect_equal(P1_oae$frequencies[[1]], c(261.6, 523.2), tolerance=0.1)
+  P1_cochlear_amplifier = mami.codi(60, verbose=T, cochlear_amplifier_num_harmonics = cochlear_amplifier_num_harmonics, num_harmonics=1)
+  expect_equal(P1_cochlear_amplifier$cochlear_amplifier_frequency_spectrum[[1]] %>% nrow(), cochlear_amplifier_num_harmonics)
+  expect_equal(P1_cochlear_amplifier$frequencies[[1]] %>% length(), cochlear_amplifier_num_harmonics)
+  expect_equal(P1_cochlear_amplifier$frequencies[[1]], c(261.6, 523.2), tolerance=0.1)
 })
 test_that('Beats and Stimulus Frequency Otoacoustic Emissions',{
   num_harmonics = 1
@@ -390,7 +390,7 @@ test_that('Beats and Stimulus Frequency Otoacoustic Emissions',{
                        beat_pass_filter = BEAT_PASS_FILTER$LOW,
                        num_harmonics = num_harmonics,
                        verbose =T)
-  expect_equal(P8_beats$oae_frequency_spectrum[[1]] %>% nrow(), cochlear_amplifier_num_harmonics)
+  expect_equal(P8_beats$cochlear_amplifier_frequency_spectrum[[1]] %>% nrow(), cochlear_amplifier_num_harmonics)
   expect_equal(P8_beats$all_beats_wavelength_spectrum[[1]]$wavelength %>% sort(),
                c(1.3585),
                tolerance=0.1)
@@ -404,23 +404,23 @@ test_that('Beats and Stimulus Frequency Otoacoustic Emissions',{
 
 
   cochlear_amplifier_num_harmonics = 2
-  P8_beats_oae = mami.codi(c(C4_midi, C5_beat_midi),
+  P8_beats_cochlear_amplifier = mami.codi(c(C4_midi, C5_beat_midi),
                        cochlear_amplifier_num_harmonics = cochlear_amplifier_num_harmonics,
                        beat_pass_filter = BEAT_PASS_FILTER$LOW,
                        num_harmonics = num_harmonics,
                        verbose =T)
-  expect_equal(P8_beats_oae$oae_frequency_spectrum[[1]] %>% nrow(), cochlear_amplifier_num_harmonics)
-  expect_equal(P8_beats_oae$all_beats_wavelength_spectrum[[1]]$wavelength %>% sort(),
+  expect_equal(P8_beats_cochlear_amplifier$cochlear_amplifier_frequency_spectrum[[1]] %>% nrow(), cochlear_amplifier_num_harmonics)
+  expect_equal(P8_beats_cochlear_amplifier$all_beats_wavelength_spectrum[[1]]$wavelength %>% sort(),
                c(1.3585, 1.31, 48.9),
                tolerance=0.1)
-  expect_equal(P8_beats_oae$filtered_beats_wavelength_spectrum[[1]]$wavelength %>% sort(),
+  expect_equal(P8_beats_cochlear_amplifier$filtered_beats_wavelength_spectrum[[1]]$wavelength %>% sort(),
                c(1.3585, 1.31, 48.9),
                tolerance=0.1)
-  expect_equal(P8_beats_oae$filtered_beats_wavelength_spectrum[[1]]$amplitude %>% sort(),
+  expect_equal(P8_beats_cochlear_amplifier$filtered_beats_wavelength_spectrum[[1]]$amplitude %>% sort(),
                c(3.000000 ,2.891251 ,1.891251) %>% sort(),
                tolerance=0.1)
 
-  expect_equal(P8_beats_oae$beating, 7.63, tolerance = 0.1)
+  expect_equal(P8_beats_cochlear_amplifier$beating, 7.63, tolerance = 0.1)
 
 })
 test_that('params round trip', {
@@ -489,7 +489,7 @@ test_that('pure tone beat makes sense with without SFOAE 2 harmonics',{
                    verbose=T)
   expect_equal(dyad$stimulus_wavelength_spectrum[[1]]$wavelength,
                c(1.31, 0.61), tolerance = 0.01)
-  expect_equal(dyad$oae_wavelength_spectrum[[1]]$wavelength,
+  expect_equal(dyad$cochlear_amplifier_wavelength_spectrum[[1]]$wavelength,
                c(1.31, 0.656), tolerance = 0.01)
   expect_equal(dyad$all_beats_wavelength_spectrum[[1]]$wavelength,
                c(1.311034 , 1.171689 ,11.023930), tolerance = 0.01)

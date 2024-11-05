@@ -119,30 +119,30 @@ generate_cochlea_emissions <- function(
 
   if (cochlear_amplifier_num_harmonics > 0) {
 
-    oae_sparse_fr_spectrum = hrep::sparse_fr_spectrum(
+    cochlear_amplifier_sparse_fr_spectrum = hrep::sparse_fr_spectrum(
       hrep::freq_to_midi(x$source_spectrum[[1]] %>% hrep::freq() %>% min()),
       num_harmonics = cochlear_amplifier_num_harmonics
     )
 
-    oae_frequency_spectrum  = frequency_spectrum_from_sparse_fr_spectrum(
-      oae_sparse_fr_spectrum
+    cochlear_amplifier_frequency_spectrum  = frequency_spectrum_from_sparse_fr_spectrum(
+      cochlear_amplifier_sparse_fr_spectrum
     )
 
-    oae_wavelength_spectrum = wavelength_spectrum_from_sparse_fr_spectrum(
-      oae_sparse_fr_spectrum
+    cochlear_amplifier_wavelength_spectrum = wavelength_spectrum_from_sparse_fr_spectrum(
+      cochlear_amplifier_sparse_fr_spectrum
     )
 
   } else {
 
-    oae_frequency_spectrum  = empty_frequency_spectrum()
-    oae_wavelength_spectrum = empty_wavelength_spectrum()
+    cochlear_amplifier_frequency_spectrum  = empty_frequency_spectrum()
+    cochlear_amplifier_wavelength_spectrum = empty_wavelength_spectrum()
 
   }
 
   # Store the values
   x %>% dplyr::mutate(
-    oae_wavelength_spectrum = list(oae_wavelength_spectrum),
-    oae_frequency_spectrum  = list(oae_frequency_spectrum),
+    cochlear_amplifier_wavelength_spectrum = list(cochlear_amplifier_wavelength_spectrum),
+    cochlear_amplifier_frequency_spectrum  = list(cochlear_amplifier_frequency_spectrum),
     cochlear_amplifier_num_harmonics
   )
 
@@ -173,14 +173,14 @@ generate_beats <- function(
 
   max_stimulus_wavelength = x$stimulus_wavelength_spectrum[[1]]$wavelength %>% max()
 
-  stimulus_and_oae_wavelength_spectrum = combine_spectra(
+  stimulus_and_cochlear_amplifier_wavelength_spectrum = combine_spectra(
     x$stimulus_wavelength_spectrum[[1]],
-    x$oae_wavelength_spectrum[[1]]
+    x$cochlear_amplifier_wavelength_spectrum[[1]]
   )
 
   all_beats_wavelength_spectrum = compute_beats(
-    wavelength = stimulus_and_oae_wavelength_spectrum$wavelength,
-    amplitude  = stimulus_and_oae_wavelength_spectrum$amplitude
+    wavelength = stimulus_and_cochlear_amplifier_wavelength_spectrum$wavelength,
+    amplitude  = stimulus_and_cochlear_amplifier_wavelength_spectrum$amplitude
   )
 
   low_beats_wavelength_spectrum = all_beats_wavelength_spectrum %>%
@@ -206,7 +206,7 @@ generate_beats <- function(
     low_beats_wavelength_spectrum        = list(low_beats_wavelength_spectrum),
     high_beats_wavelength_spectrum       = list(high_beats_wavelength_spectrum),
     beat_pass_filter,
-    stimulus_and_oae_wavelength_spectrum = list(stimulus_and_oae_wavelength_spectrum),
+    stimulus_and_cochlear_amplifier_wavelength_spectrum = list(stimulus_and_cochlear_amplifier_wavelength_spectrum),
     max_stimulus_wavelength
   )
 
@@ -233,7 +233,7 @@ compute_fundamental_wavenumber <- function(
 
   wavelength_spectrum = combine_spectra(
     x$stimulus_wavelength_spectrum[[1]],
-    x$oae_wavelength_spectrum[[1]],
+    x$cochlear_amplifier_wavelength_spectrum[[1]],
     x$filtered_beats_wavelength_spectrum[[1]]
   )
 
@@ -283,7 +283,7 @@ compute_fundamental_frequency <- function(
 
   frequency_spectrum = combine_spectra(
     x$stimulus_frequency_spectrum[[1]],
-    x$oae_frequency_spectrum[[1]]
+    x$cochlear_amplifier_frequency_spectrum[[1]]
   )
 
   f = frequency_spectrum$frequency
