@@ -166,8 +166,8 @@ ROBLES AND MARIO A. RUGGERO PHYSIOLOGICAL REVIEWS Vol. 81, No. 3, July
 Beats are not detected in the temporal frequency domain. But they are
 detected in the spatial frequency domain. Our model computes the
 difference among all wavelengths in the complex waveform (including
-cochlear amplification) and then only includes difference wavelengths greater than the
-largest wavelength in the waveform.
+cochlear amplification) and then only includes difference wavelengths
+greater than the largest wavelength in the waveform.
 
 ## Physics
 
@@ -190,12 +190,13 @@ We apply a beat pass filter so that only pitches below the lowest tone
 
 In our model, the low wavelengths $\lambda_{\text{low}}$ are passed to
 the wavelength spectrum (but not the frequency spectrum) and computed
-just like the other wavelengths from the stimulus and the cochlear amplification.
+just like the other wavelengths from the stimulus and the cochlear
+amplification.
 
 ### A Measure of Beat Perception
 
-We use beats to see how many harmonics should be included in the cochlear amplification
-waveform.
+We use beats to see how many harmonics should be included in the
+cochlear amplification waveform.
 
 We created this metric for beat perception:
 
