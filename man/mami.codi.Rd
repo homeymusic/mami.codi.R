@@ -7,7 +7,7 @@
 mami.codi(
   x,
   beat_pass_filter = BEAT_PASS_FILTER$LOW,
-  combination_tones = COMBINATION_TONES,
+  combination_coefficients = COMBINATION_COEFFICIENTS,
   oae_num_harmonics = SFOAE_NUM_HARMONICS,
   space_uncertainty = UNCERTAINTY_LIMIT,
   time_uncertainty = UNCERTAINTY_LIMIT,

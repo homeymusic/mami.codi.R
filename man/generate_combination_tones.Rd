@@ -4,7 +4,7 @@
 \alias{generate_combination_tones}
 \title{Generate combination tones}
 \usage{
-generate_combination_tones(x, combination_tones)
+generate_combination_tones(x, combination_coefficients)
 }
 \arguments{
 \item{x}{Wavelength and frequency spectra representing the stimulus tones.}

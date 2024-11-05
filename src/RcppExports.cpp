@@ -84,15 +84,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // compute_combination_tones
-DataFrame compute_combination_tones(NumericVector frequency, NumericVector amplitude, NumericVector combination_coefficients);
-RcppExport SEXP _mami_codi_R_compute_combination_tones(SEXP frequencySEXP, SEXP amplitudeSEXP, SEXP combination_coefficientsSEXP) {
+DataFrame compute_combination_tones(NumericVector frequency, NumericVector amplitude, NumericVector combination_coefficients, const double minimum_frequency);
+RcppExport SEXP _mami_codi_R_compute_combination_tones(SEXP frequencySEXP, SEXP amplitudeSEXP, SEXP combination_coefficientsSEXP, SEXP minimum_frequencySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type frequency(frequencySEXP);
     Rcpp::traits::input_parameter< NumericVector >::type amplitude(amplitudeSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type combination_coefficients(combination_coefficientsSEXP);
-    rcpp_result_gen = Rcpp::wrap(compute_combination_tones(frequency, amplitude, combination_coefficients));
+    Rcpp::traits::input_parameter< const double >::type minimum_frequency(minimum_frequencySEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_combination_tones(frequency, amplitude, combination_coefficients, minimum_frequency));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -104,7 +105,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_mami_codi_R_pseudo_octave", (DL_FUNC) &_mami_codi_R_pseudo_octave, 1},
     {"_mami_codi_R_approximate_rational_fractions", (DL_FUNC) &_mami_codi_R_approximate_rational_fractions, 3},
     {"_mami_codi_R_compute_beats", (DL_FUNC) &_mami_codi_R_compute_beats, 2},
-    {"_mami_codi_R_compute_combination_tones", (DL_FUNC) &_mami_codi_R_compute_combination_tones, 3},
+    {"_mami_codi_R_compute_combination_tones", (DL_FUNC) &_mami_codi_R_compute_combination_tones, 4},
     {NULL, NULL, 0}
 };
 

@@ -30,7 +30,7 @@ using namespace Rcpp;
 
    int left_num    = floor(x);
    int left_den    = 1;
-   int mediant_num = std::max(round(x),std::numeric_limits<double>::min());
+   int mediant_num = round(x);
    int mediant_den = 1;
    int right_num   = floor(x) + 1;
    int right_den   = 1;
@@ -300,7 +300,8 @@ using namespace Rcpp;
  // [[Rcpp::export]]
  DataFrame compute_combination_tones(NumericVector frequency,
                                      NumericVector amplitude,
-                                     NumericVector combination_coefficients) {
+                                     NumericVector combination_coefficients,
+                                     const double minimum_frequency=8.175799) {
    const int n = frequency.size();
    const int n_coefficients = combination_coefficients.size();
 
@@ -323,7 +324,7 @@ using namespace Rcpp;
            // Additional check for coefficient access
            if (k < combination_coefficients.size()) {
              double combination_tone = frequency[i] - combination_coefficients[k] * (frequency[j] - frequency[i]);
-             if (combination_tone > 0) {
+             if (combination_tone > minimum_frequency) {
                combination_tones[count]           = combination_tone;
                combination_tone_amplitudes[count] = amplitude[i] * pow(amplitude[j], 3);
                count++;
