@@ -7,7 +7,7 @@
 generate_cochlea_emissions(x, oae_num_harmonics)
 }
 \arguments{
-\item{x}{Wavelength and frequency spectra representing the stimulus and beat tones.}
+\item{x}{Wavelength and frequency spectra representing the stimulus.}
 
 \item{oae_num_harmonics}{Number of harmonics emitted from the cochlea via SFOAE.}
 }

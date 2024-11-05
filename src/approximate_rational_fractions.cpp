@@ -236,7 +236,7 @@ using namespace Rcpp;
 
  //' Calculate Beats from Frequencies
  //'
- //' Generate beats from two sets of frequencies and return their wavelength and amplitude.
+ //' Generate beats from two sets of wavelengths and amplitudes.
  //'
  //' @param wavelength NumericVector of wavelengths
  //' @param amplitude NumericVector of amplitudes
@@ -287,4 +287,58 @@ using namespace Rcpp;
                                         _("amplitude")  = beat_amplitude[Rcpp::Range(0, count - 1)]
      );
    }
+ }
+
+ //' Calculate Combination Tones from Frequencies
+ //'
+ //' Generate combination tones from a set of frequencies
+ //'
+ //' @param frequency NumericVector of frequencies
+ //'
+ //' @return A DataFrame containing the frequencies of the combination tones.
+ //' @export
+ // [[Rcpp::export]]
+ NumericVector compute_combination_tones(NumericVector frequencies,
+                                         SEXP combination_coefficients) {
+   if (Rf_isNull(combination_coefficients)) {
+     return NumericVector::create();
+   }
+
+   NumericVector coefficients(combination_coefficients);
+
+   const int n = frequencies.size();
+   const int n_coefficients = coefficients.size();
+
+   // Debugging output
+   if (n < 2 || n_coefficients == 0) {
+     return NumericVector::create();
+   }
+
+   NumericVector combination_tones(n * (n - 1) * n_coefficients / 2);
+
+   int count = 0;
+
+   for (int i = 0; i < n; i++) {
+     for (int j = i + 1; j < n; j++) {
+       if (frequencies[i] != frequencies[j]) {
+         for (int k = 0; k < n_coefficients; ++k) {
+           // Additional check for coefficient access
+           if (k < coefficients.size()) {
+             double combination_tone = frequencies[i] - coefficients[k] * (frequencies[j] - frequencies[i]);
+             combination_tones[count] = combination_tone;
+             count++;
+           }
+         }
+       }
+     }
+   }
+
+   // Resize combination_tones if count is less than the allocated size
+   if (count < combination_tones.size()) {
+     combination_tones = combination_tones[Range(0, count - 1)];
+   }
+
+   std::sort(combination_tones.begin(), combination_tones.end());
+
+   return combination_tones;
  }
