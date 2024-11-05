@@ -158,19 +158,19 @@ generate_combination_tones <- function(
     x, combination_coefficients
 ) {
 
-  all_combination_tones_frequencies = compute_combination_tones(
-    frequencies = x$stimulus_frequency_spectrum[[1]]$frequency,
+  all_combination_tones_frequency_spectrum = compute_combination_tones(
+    frequency = x$stimulus_frequency_spectrum[[1]]$frequency,
+    amplitude = x$stimulus_frequency_spectrum[[1]]$amplitude,
     combination_coefficients = combination_coefficients
   )
 
-  combination_tones_frequencies = combine_spectra(tibble::tibble(
-    frequency = all_combination_tones_frequencies,
-    amplitude = 1
-  ))$frequency
+  combination_tones_frequency_spectrum = combine_spectra(
+    all_combination_tones_frequency_spectrum
+  )
 
   # Store the values
   x %>% dplyr::mutate(
-    combination_tones_frequencies = list(combination_tones_frequencies)
+    combination_tones_frequency_spectrum = list(combination_tones_frequency_spectrum)
   )
 
 }

@@ -284,7 +284,7 @@ using namespace Rcpp;
      // Create the resulting DataFrame
      return DataFrame::create(
        _("wavelength") = beat_wavelength[Rcpp::Range(0, count - 1)],
-                                        _("amplitude")  = beat_amplitude[Rcpp::Range(0, count - 1)]
+       _("amplitude")  = beat_amplitude[Rcpp::Range(0, count - 1)]
      );
    }
  }
@@ -298,29 +298,34 @@ using namespace Rcpp;
  //' @return A DataFrame containing the frequencies of the combination tones.
  //' @export
  // [[Rcpp::export]]
- NumericVector compute_combination_tones(NumericVector frequencies,
-                                         NumericVector combination_coefficients) {
-   const int n = frequencies.size();
+ DataFrame compute_combination_tones(NumericVector frequency,
+                                     NumericVector amplitude,
+                                     NumericVector combination_coefficients) {
+   const int n = frequency.size();
    const int n_coefficients = combination_coefficients.size();
 
    // Debugging output
    if (n < 2 || n_coefficients == 0) {
-     return NumericVector::create();
+     return DataFrame::create(
+       _("frequency") = NumericVector::create(),
+       _("amplitude") = NumericVector::create()
+     );
    }
 
    NumericVector combination_tones(n * (n - 1) * n_coefficients / 2);
-
+   NumericVector combination_tone_amplitudes(n * (n - 1) * n_coefficients / 2);
    int count = 0;
 
    for (int i = 0; i < n; i++) {
      for (int j = i + 1; j < n; j++) {
-       if (frequencies[i] != frequencies[j]) {
+       if (frequency[i] != frequency[j]) {
          for (int k = 0; k < n_coefficients; ++k) {
            // Additional check for coefficient access
            if (k < combination_coefficients.size()) {
-             double combination_tone = frequencies[i] - combination_coefficients[k] * (frequencies[j] - frequencies[i]);
+             double combination_tone = frequency[i] - combination_coefficients[k] * (frequency[j] - frequency[i]);
              if (combination_tone > 0) {
-               combination_tones[count] = combination_tone;
+               combination_tones[count]           = combination_tone;
+               combination_tone_amplitudes[count] = 0.001 * frequency[i] * pow(frequency[j], 3);
                count++;
              }
            }
@@ -329,12 +334,17 @@ using namespace Rcpp;
      }
    }
 
-   // Resize combination_tones if count is less than the allocated size
-   if (count < combination_tones.size()) {
-     combination_tones = combination_tones[Range(0, count - 1)];
+   if (count < 1) {
+     return DataFrame::create(
+       _("frequency") = NumericVector::create(),
+       _("amplitude")  = NumericVector::create()
+     );
+   } else {
+     // Create the resulting DataFrame
+     return DataFrame::create(
+       _("frequency") = combination_tones[Rcpp::Range(0, count - 1)],
+       _("amplitude") = combination_tone_amplitudes[Rcpp::Range(0, count - 1)]
+     );
    }
 
-   std::sort(combination_tones.begin(), combination_tones.end());
-
-   return combination_tones;
  }
