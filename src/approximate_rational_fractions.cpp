@@ -325,7 +325,7 @@ using namespace Rcpp;
              double combination_tone = frequency[i] - combination_coefficients[k] * (frequency[j] - frequency[i]);
              if (combination_tone > 0) {
                combination_tones[count]           = combination_tone;
-               combination_tone_amplitudes[count] = 0.001 * frequency[i] * pow(frequency[j], 3);
+               combination_tone_amplitudes[count] = amplitude[i] * pow(amplitude[j], 3);
                count++;
              }
            }
