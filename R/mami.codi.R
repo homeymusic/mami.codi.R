@@ -121,7 +121,7 @@ generate_cochlea_amplifications <- function(
 
     cochlear_amplifier_sparse_fr_spectrum = hrep::expand_harmonics(
       x$source_spectrum[[1]],
-      num_harmonics = 2,
+      num_harmonics = cochlear_amplifier_num_harmonics,
       roll_off_dB   = 29 # dB
       # Among distortion components, the second harmonic is
       # the largest (47), attaining levels as high as 3.5%
