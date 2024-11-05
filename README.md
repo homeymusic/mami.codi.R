@@ -808,7 +808,7 @@ the 15 semitones but the overall peak structure agrees with MaMi.CoDi
 predictions. For futher comparison, the theoretical predictions for
 major-minor versus the behavioral results are included in a plot below.
 
-| oae_num_harmonics | beat_pass_filter | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
+| cochlear_amplifier_num_harmonics | beat_pass_filter | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
 |---:|:---|:---|:---|---:|---:|
 | 2 | low | 0.07958 | 0.07958 | 0.2 | 2 |
 
@@ -823,7 +823,7 @@ major-minor versus the behavioral results are included in a plot below.
 
 For 10 harmonics, behavioral results and theoretical predictions agree.
 
-| oae_num_harmonics | beat_pass_filter | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
+| cochlear_amplifier_num_harmonics | beat_pass_filter | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
 |---:|:---|:---|:---|---:|---:|
 | 2 | low | 0.07958 | 0.07958 | 0.2 | 2 |
 
@@ -841,7 +841,7 @@ For comparison with the study below (5 partils with the third partial
 deleted), notice that the m3 peak is only slightly lower than the M3
 peak.
 
-| oae_num_harmonics | beat_pass_filter | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
+| cochlear_amplifier_num_harmonics | beat_pass_filter | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
 |---:|:---|:---|:---|---:|---:|
 | 2 | low | 0.07958 | 0.07958 | 0.2 | 2 |
 
@@ -859,7 +859,7 @@ theoretical predictions mostly agree. As expected, the m3 peak without
 the third partial is now lower than the m3 peak with all 5 harmonics
 while the M3 peak is slightly higher without the 3rd partial.
 
-| oae_num_harmonics | beat_pass_filter | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
+| cochlear_amplifier_num_harmonics | beat_pass_filter | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
 |---:|:---|:---|:---|---:|---:|
 | 2 | low | 0.07958 | 0.07958 | 0.2 | 2 |
 
@@ -878,7 +878,7 @@ predicts a dissonance trough with minor polarity at P4 that is not in
 the behavioral results. MaMi.CoDi predicts P5 to have minor polarity and
 be relatively higher than the behavioral results.
 
-| oae_num_harmonics | beat_pass_filter | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
+| cochlear_amplifier_num_harmonics | beat_pass_filter | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
 |---:|:---|:---|:---|---:|---:|
 | 2 | low | 0.07958 | 0.07958 | 0.2 | 2 |
 
@@ -895,7 +895,7 @@ For stretched harmonics, behavioral results and theoretical predictions
 mostly agree. MaMi.Codi predicts peaks with minor polarity just above m3
 and m7 that do not exist in the behavioral results.
 
-| oae_num_harmonics | beat_pass_filter | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
+| cochlear_amplifier_num_harmonics | beat_pass_filter | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
 |---:|:---|:---|:---|---:|---:|
 | 2 | low | 0.07958 | 0.07958 | 0.2 | 2.1 |
 
@@ -911,7 +911,7 @@ and m7 that do not exist in the behavioral results.
 For compressed harmonics, the pronounced behavioral peaks mostly agree
 with the theoretical peaks.
 
-| oae_num_harmonics | beat_pass_filter | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
+| cochlear_amplifier_num_harmonics | beat_pass_filter | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
 |---:|:---|:---|:---|---:|---:|
 | 2 | low | 0.07958 | 0.07958 | 0.2 | 1.9 |
 
@@ -928,7 +928,7 @@ with the theoretical peaks.
 
 Description is below.
 
-| oae_num_harmonics | beat_pass_filter | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
+| cochlear_amplifier_num_harmonics | beat_pass_filter | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
 |---:|:---|:---|:---|---:|---:|
 | 2 | low | 0.07958 | 0.07958 | 0.035 | 2 |
 
@@ -943,7 +943,7 @@ Description is below.
 
 Description is below.
 
-| oae_num_harmonics | beat_pass_filter | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
+| cochlear_amplifier_num_harmonics | beat_pass_filter | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
 |---:|:---|:---|:---|---:|---:|
 | 2 | low | 0.07958 | 0.07958 | 0.035 | 2 |
 
@@ -958,7 +958,7 @@ Description is below.
 
 Description is below.
 
-| oae_num_harmonics | beat_pass_filter | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
+| cochlear_amplifier_num_harmonics | beat_pass_filter | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
 |---:|:---|:---|:---|---:|---:|
 | 2 | low | 0.07958 | 0.07958 | 0.035 | 2 |
 

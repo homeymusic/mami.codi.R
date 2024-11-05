@@ -1,6 +1,6 @@
 test_that('P1 pure tone looks good',{
   P1 = c(60) %>% mami.codi(num_harmonics=1, verbose=T,
-                           oae_num_harmonics = 0,
+                           cochlear_amplifier_num_harmonics = 0,
                            beat_pass_filter = BEAT_PASS_FILTER$NONE)
   expect_equal(P1$dissonance, 0)
   expect_equal(P1$time_cycles, 1)
@@ -10,7 +10,7 @@ test_that('P1 pure tone looks good',{
 })
 test_that('P1 with 3 harmonics fundamental frequency and fundamental wavenumber have different cycles',{
   P1_3 = c(60) %>% mami.codi(num_harmonics = 3, verbose=T,
-                             oae_num_harmonics = 0,
+                             cochlear_amplifier_num_harmonics = 0,
                              beat_pass_filter = BEAT_PASS_FILTER$NONE)
   C4_frequency = hrep::midi_to_freq(60)
   C4_wavenumber = hrep::midi_to_freq(60) / C_SOUND
@@ -33,22 +33,22 @@ test_that('Major-minor tonality of octave complements',{
   # m3 & M6
   expected_magnitude = 2.0 # log2(4)
   dyad = c(60,63,72) %>% mami.codi(num_harmonics=2,
-                                   oae_num_harmonics = 0,
+                                   cochlear_amplifier_num_harmonics = 0,
                                    beat_pass_filter = BEAT_PASS_FILTER$NONE)
   expect_equal(dyad$majorness, -expected_magnitude)
   dyad = c(60,69,72) %>% mami.codi(num_harmonics=2,
-                                   oae_num_harmonics = 0,
+                                   cochlear_amplifier_num_harmonics = 0,
                                    beat_pass_filter = BEAT_PASS_FILTER$NONE)
   expect_equal(dyad$majorness, expected_magnitude)
 
   # M3 & m6
   expected_magnitude = 1.0 # log2(2)
   dyad = c(60,64,72) %>% mami.codi(num_harmonics=2,
-                                   oae_num_harmonics = 0,
+                                   cochlear_amplifier_num_harmonics = 0,
                                    beat_pass_filter = BEAT_PASS_FILTER$NONE)
   expect_equal(dyad$majorness, expected_magnitude)
   dyad = c(60,68,72) %>% mami.codi(num_harmonics=2,
-                                   oae_num_harmonics = 0,
+                                   cochlear_amplifier_num_harmonics = 0,
                                    beat_pass_filter = BEAT_PASS_FILTER$NONE)
   expect_equal(dyad$majorness, -expected_magnitude)
 
@@ -57,22 +57,22 @@ test_that('Major-minor tonality of octave complements',{
   # P4 & P5
   expected_magnitude = 0.5849625 # log2(1.5)
   dyad = c(60,65,72) %>% mami.codi(num_harmonics=2,
-                                   oae_num_harmonics = 0,
+                                   cochlear_amplifier_num_harmonics = 0,
                                    beat_pass_filter = BEAT_PASS_FILTER$NONE)
   expect_equal(dyad$majorness, -expected_magnitude)
   dyad = c(60,67,72) %>% mami.codi(num_harmonics=2,
-                                   oae_num_harmonics = 0,
+                                   cochlear_amplifier_num_harmonics = 0,
                                    beat_pass_filter = BEAT_PASS_FILTER$NONE)
   expect_equal(dyad$majorness, expected_magnitude)
 
   # P1 & P8
   expected_magnitude = 0.0 # log2(1)
   dyad = c(60,60,72) %>% mami.codi(num_harmonics=2,
-                                   oae_num_harmonics = 0,
+                                   cochlear_amplifier_num_harmonics = 0,
                                    beat_pass_filter = BEAT_PASS_FILTER$NONE)
   expect_equal(dyad$majorness, expected_magnitude)
   dyad = c(60,72,72) %>% mami.codi(num_harmonics=2,
-                                   oae_num_harmonics = 0,
+                                   cochlear_amplifier_num_harmonics = 0,
                                    beat_pass_filter = BEAT_PASS_FILTER$NONE)
   expect_equal(dyad$majorness, -expected_magnitude)
 
@@ -81,33 +81,33 @@ test_that('Major-minor tonality of octave complements',{
   # M2 & m7 (traditional major-minor tonality is reversed)
   expected_magnitude = 2.3219281 # log2(5)
   dyad = c(60,62,72) %>% mami.codi(num_harmonics=2,
-                                   oae_num_harmonics = 0,
+                                   cochlear_amplifier_num_harmonics = 0,
                                    beat_pass_filter = BEAT_PASS_FILTER$NONE)
   expect_equal(dyad$majorness, -expected_magnitude)
   dyad = c(60,70,72) %>% mami.codi(num_harmonics=2,
-                                   oae_num_harmonics = 0,
+                                   cochlear_amplifier_num_harmonics = 0,
                                    beat_pass_filter = BEAT_PASS_FILTER$NONE)
   expect_equal(dyad$majorness, expected_magnitude)
 
   # m2 & M7 (traditional major-minor tonality is reversed)
   expected_magnitude = 1.0 # log2(2)
   dyad = c(60,61,72) %>% mami.codi(num_harmonics=2,
-                                   oae_num_harmonics = 0,
+                                   cochlear_amplifier_num_harmonics = 0,
                                    beat_pass_filter = BEAT_PASS_FILTER$NONE)
   expect_equal(dyad$majorness, expected_magnitude)
   dyad = c(60,71,72) %>% mami.codi(num_harmonics=2,
-                                   oae_num_harmonics = 0,
+                                   cochlear_amplifier_num_harmonics = 0,
                                    beat_pass_filter = BEAT_PASS_FILTER$NONE)
   expect_equal(dyad$majorness, -expected_magnitude)
 
   # tt with itself
   expected_magnitude = 0.0 # log2(1)
   dyad = c(60,66,72) %>% mami.codi(num_harmonics=2,
-                                   oae_num_harmonics = 0,
+                                   cochlear_amplifier_num_harmonics = 0,
                                    beat_pass_filter = BEAT_PASS_FILTER$NONE)
   expect_equal(dyad$majorness, -expected_magnitude)
   dyad = c(60,66,72) %>% mami.codi(num_harmonics=2,
-                                   oae_num_harmonics = 0,
+                                   cochlear_amplifier_num_harmonics = 0,
                                    beat_pass_filter = BEAT_PASS_FILTER$NONE)
   expect_equal(dyad$majorness, expected_magnitude)
 
@@ -120,7 +120,7 @@ test_that('beat spectrum looks interesting near P1',{
   num_harmonics = 2
   C4_beats = c(C4_midi, C4_beat_midi) %>%
     mami.codi(beat_pass_filter = BEAT_PASS_FILTER$LOW,
-              oae_num_harmonics = 0,
+              cochlear_amplifier_num_harmonics = 0,
               num_harmonics=num_harmonics,
               verbose=T)
 
@@ -187,7 +187,7 @@ test_that('mamai.codi works with beats near the unison', {
 
   P1_beats = mami.codi(c(C4_midi, C4_beat_midi),
                        beat_pass_filter = BEAT_PASS_FILTER$LOW,
-                       oae_num_harmonics=0,
+                       cochlear_amplifier_num_harmonics=0,
                        num_harmonics=num_harmonics,
                        verbose=T)
 
@@ -229,7 +229,7 @@ test_that('mami.codi works with beats near the octave P8 with 2 harmonics', {
 
   P8_beats = mami.codi(c(C4_midi, C5_beat_midi),
                        beat_pass_filter = BEAT_PASS_FILTER$LOW,
-                       oae_num_harmonics=0,
+                       cochlear_amplifier_num_harmonics=0,
                        num_harmonics=num_harmonics,
                        verbose=T)
 
@@ -266,7 +266,7 @@ test_that('mami.codi works with beats near the octave P8 with 2 harmonics', {
 
   P8 = mami.codi(c(C4_midi, C5_midi),
                  beat_pass_filter = BEAT_PASS_FILTER$LOW,
-                 oae_num_harmonics=0,
+                 cochlear_amplifier_num_harmonics=0,
                  num_harmonics=num_harmonics,
                  verbose=T)
   expect_equal(P8$time_cycles, 1)
@@ -285,7 +285,7 @@ test_that('mami codi with beats around unison and octave', {
 
   P1 = mami.codi(c(C4_midi),
                  beat_pass_filter = BEAT_PASS_FILTER$LOW,
-                 oae_num_harmonics=0,
+                 cochlear_amplifier_num_harmonics=0,
                  num_harmonics = num_harmonics,
                  verbose =T)
 
@@ -298,7 +298,7 @@ test_that('mami codi with beats around unison and octave', {
 
   P1_beats = mami.codi(c(C4_midi, C4_beat_midi),
                        beat_pass_filter = BEAT_PASS_FILTER$LOW,
-                       oae_num_harmonics=0,
+                       cochlear_amplifier_num_harmonics=0,
                        num_harmonics = num_harmonics,
                        verbose =T)
 
@@ -313,7 +313,7 @@ test_that('mami codi with beats around unison and octave', {
 
   P8_beats = mami.codi(c(C4_midi, C5_beat_midi),
                        beat_pass_filter = BEAT_PASS_FILTER$LOW,
-                       oae_num_harmonics=0,
+                       cochlear_amplifier_num_harmonics=0,
                        num_harmonics = num_harmonics,
                        verbose =T)
 
@@ -351,28 +351,28 @@ test_that('we can quanity the amount of beating in chord', {
 
   P1_beats = mami.codi(C4_midi,
                        beat_pass_filter = BEAT_PASS_FILTER$LOW,
-                       oae_num_harmonics=0,
+                       cochlear_amplifier_num_harmonics=0,
                        num_harmonics = num_harmonics,
                        verbose =T)
   expect_equal(P1_beats$beating, 0.0, tolerance=0.1)
 
   P1_beats = mami.codi(c(C4_midi, C4_beat_midi),
                        beat_pass_filter = BEAT_PASS_FILTER$LOW,
-                       oae_num_harmonics=0,
+                       cochlear_amplifier_num_harmonics=0,
                        num_harmonics = num_harmonics,
                        verbose =T)
   expect_equal(P1_beats$beating, log2(2*2*49.0+1), tolerance=0.1)
 })
 test_that('Stimulus Frequency Otoacoustic Emissions',{
-  oae_num_harmonics=0
-  P1 = mami.codi(60, verbose=T, oae_num_harmonics = oae_num_harmonics, num_harmonics=1)
-  expect_equal(P1$oae_frequency_spectrum[[1]] %>% nrow(), oae_num_harmonics)
+  cochlear_amplifier_num_harmonics=0
+  P1 = mami.codi(60, verbose=T, cochlear_amplifier_num_harmonics = cochlear_amplifier_num_harmonics, num_harmonics=1)
+  expect_equal(P1$oae_frequency_spectrum[[1]] %>% nrow(), cochlear_amplifier_num_harmonics)
   expect_equal(P1$frequencies[[1]], c(261.6), tolerance=0.1)
 
-  oae_num_harmonics=2
-  P1_oae = mami.codi(60, verbose=T, oae_num_harmonics = oae_num_harmonics, num_harmonics=1)
-  expect_equal(P1_oae$oae_frequency_spectrum[[1]] %>% nrow(), oae_num_harmonics)
-  expect_equal(P1_oae$frequencies[[1]] %>% length(), oae_num_harmonics)
+  cochlear_amplifier_num_harmonics=2
+  P1_oae = mami.codi(60, verbose=T, cochlear_amplifier_num_harmonics = cochlear_amplifier_num_harmonics, num_harmonics=1)
+  expect_equal(P1_oae$oae_frequency_spectrum[[1]] %>% nrow(), cochlear_amplifier_num_harmonics)
+  expect_equal(P1_oae$frequencies[[1]] %>% length(), cochlear_amplifier_num_harmonics)
   expect_equal(P1_oae$frequencies[[1]], c(261.6, 523.2), tolerance=0.1)
 })
 test_that('Beats and Stimulus Frequency Otoacoustic Emissions',{
@@ -384,13 +384,13 @@ test_that('Beats and Stimulus Frequency Otoacoustic Emissions',{
 
   C5_beat_midi = hrep::freq_to_midi(hrep::midi_to_freq(C5_midi) - f_beat)
 
-  oae_num_harmonics = 0
+  cochlear_amplifier_num_harmonics = 0
   P8_beats = mami.codi(c(C4_midi, C5_beat_midi),
-                       oae_num_harmonics = oae_num_harmonics,
+                       cochlear_amplifier_num_harmonics = cochlear_amplifier_num_harmonics,
                        beat_pass_filter = BEAT_PASS_FILTER$LOW,
                        num_harmonics = num_harmonics,
                        verbose =T)
-  expect_equal(P8_beats$oae_frequency_spectrum[[1]] %>% nrow(), oae_num_harmonics)
+  expect_equal(P8_beats$oae_frequency_spectrum[[1]] %>% nrow(), cochlear_amplifier_num_harmonics)
   expect_equal(P8_beats$all_beats_wavelength_spectrum[[1]]$wavelength %>% sort(),
                c(1.3585),
                tolerance=0.1)
@@ -403,13 +403,13 @@ test_that('Beats and Stimulus Frequency Otoacoustic Emissions',{
                tolerance=0.1)
 
 
-  oae_num_harmonics = 2
+  cochlear_amplifier_num_harmonics = 2
   P8_beats_oae = mami.codi(c(C4_midi, C5_beat_midi),
-                       oae_num_harmonics = oae_num_harmonics,
+                       cochlear_amplifier_num_harmonics = cochlear_amplifier_num_harmonics,
                        beat_pass_filter = BEAT_PASS_FILTER$LOW,
                        num_harmonics = num_harmonics,
                        verbose =T)
-  expect_equal(P8_beats_oae$oae_frequency_spectrum[[1]] %>% nrow(), oae_num_harmonics)
+  expect_equal(P8_beats_oae$oae_frequency_spectrum[[1]] %>% nrow(), cochlear_amplifier_num_harmonics)
   expect_equal(P8_beats_oae$all_beats_wavelength_spectrum[[1]]$wavelength %>% sort(),
                c(1.3585, 1.31, 48.9),
                tolerance=0.1)
@@ -426,9 +426,9 @@ test_that('Beats and Stimulus Frequency Otoacoustic Emissions',{
 test_that('params round trip', {
   P1 = mami.codi(60,
                  verbose=T,
-                 oae_num_harmonics = 2,
+                 cochlear_amplifier_num_harmonics = 2,
                  beat_pass_filter = BEAT_PASS_FILTER$LOW)
-  expect_equal(P1$oae_num_harmonics, 2)
+  expect_equal(P1$cochlear_amplifier_num_harmonics, 2)
   expect_equal(P1$beat_pass_filter, BEAT_PASS_FILTER$LOW)
 })
 test_that('pure tone beat makes sense with without SFOAE 2 harmonics',{
@@ -436,7 +436,7 @@ test_that('pure tone beat makes sense with without SFOAE 2 harmonics',{
   # without SFOAE
   dyad = mami.codi(c(60,71),
                    num_harmonics=1,
-                   oae_num_harmonics=0,
+                   cochlear_amplifier_num_harmonics=0,
                    beat_pass_filter = BEAT_PASS_FILTER$LOW,
                    verbose=T)
   expect_equal(dyad$beating, 2.788, tolerance = 0.01)
@@ -445,7 +445,7 @@ test_that('pure tone beat makes sense with without SFOAE 2 harmonics',{
 
   dyad = mami.codi(c(60,73),
                    num_harmonics=1,
-                   oae_num_harmonics=0,
+                   cochlear_amplifier_num_harmonics=0,
                    beat_pass_filter = BEAT_PASS_FILTER$LOW,
                    verbose=T)
   expect_equal(dyad$beating, 0, tolerance = 0.01)
@@ -456,7 +456,7 @@ test_that('pure tone beat makes sense with without SFOAE 2 harmonics',{
 
   dyad = mami.codi(c(60,61),
                    num_harmonics=1,
-                   oae_num_harmonics = 2,
+                   cochlear_amplifier_num_harmonics = 2,
                    beat_pass_filter = BEAT_PASS_FILTER$LOW,
                    verbose=T)
   expect_equal(dyad$beating, 7.75, tolerance = 0.01)
@@ -471,7 +471,7 @@ test_that('pure tone beat makes sense with without SFOAE 2 harmonics',{
 
   dyad = mami.codi(c(60,71),
                    num_harmonics=1,
-                   oae_num_harmonics = 2,
+                   cochlear_amplifier_num_harmonics = 2,
                    beat_pass_filter = BEAT_PASS_FILTER$LOW,
                    verbose=T)
   expect_equal(dyad$beating, 6.06, tolerance = 0.01)
@@ -484,7 +484,7 @@ test_that('pure tone beat makes sense with without SFOAE 2 harmonics',{
 
   dyad = mami.codi(c(60,73),
                    num_harmonics=1,
-                   oae_num_harmonics = 2,
+                   cochlear_amplifier_num_harmonics = 2,
                    beat_pass_filter = BEAT_PASS_FILTER$LOW,
                    verbose=T)
   expect_equal(dyad$stimulus_wavelength_spectrum[[1]]$wavelength,
@@ -500,9 +500,9 @@ test_that('pure tone beat makes sense with without SFOAE 2 harmonics',{
                c(1.891251, 2.89) %>% sort(), tolerance = 0.01)
 
 })
-test_that('oae_num_harmonics round trips', {
+test_that('cochlear_amplifier_num_harmonics round trips', {
   P1 = mami.codi(60, verbose=T)
-  expect_equal(P1$oae_num_harmonics, default_oae_num_harmonics())
+  expect_equal(P1$cochlear_amplifier_num_harmonics, default_cochlear_amplifier_num_harmonics())
 })
 test_that('beating for all beats has values', {
   MT = c(60) %>% mami.codi(
