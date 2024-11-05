@@ -33,7 +33,7 @@
 #' @export
 mami.codi <- function(
     x,
-    beat_pass_filter                 = BEAT_PASS_FILTER$LOW,
+    beat_pass_filter                 = BEAT_PASS_FILTER$ALL,
     cochlear_amplifier_num_harmonics = COCHLEAR_AMPLIFIER_NUM_HARMONICS,
     space_uncertainty                = UNCERTAINTY_LIMIT,
     time_uncertainty                 = UNCERTAINTY_LIMIT,
@@ -461,7 +461,7 @@ COCHLEAR_AMPLIFIER_NUM_HARMONICS = 2
 #''
 #' @rdname default_beat_pass_filter
 #' @export
-default_beat_pass_filter <- function() { BEAT_PASS_FILTER$LOW }
+default_beat_pass_filter <- function() { BEAT_PASS_FILTER$ALL }
 BEAT_PASS_FILTER <- list(
   ALL  = 'all',
   HIGH = 'high',
