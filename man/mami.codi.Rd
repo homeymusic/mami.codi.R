@@ -6,7 +6,7 @@
 \usage{
 mami.codi(
   x,
-  beat_pass_filter = BEAT_PASS_FILTER$ALL,
+  beat_pass_filter = BEAT_PASS_FILTER$LOW,
   cochlear_amplifier_num_harmonics = COCHLEAR_AMPLIFIER_NUM_HARMONICS,
   space_uncertainty = UNCERTAINTY_LIMIT,
   time_uncertainty = UNCERTAINTY_LIMIT,
