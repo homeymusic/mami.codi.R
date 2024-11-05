@@ -1,12 +1,12 @@
 ---
-title: "SFOAE Number of Harmonics Search"
+title: "Cochlear Amplifier Number of Harmonics Search"
 output:
   github_document: default
 always_allow_html: true
 ---
 
 ```{r, echo=F}
-search_label = 'Compressed'
+search_label = 'Harmonic'
 ```
 
 # `r search_label`
@@ -92,7 +92,7 @@ theory <- theory
 experiment <- experiment
 ```
 
-SFOAE Number of Harmonics:
+cochlear amplification Number of Harmonics:
 ```{r, echo=F}
 cochlear_amplifier = theory$cochlear_amplifier_num_harmonics %>% unique
 ```

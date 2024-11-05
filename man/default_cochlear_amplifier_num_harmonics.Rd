@@ -2,7 +2,7 @@
 % Please edit documentation in R/mami.codi.R
 \name{default_cochlear_amplifier_num_harmonics}
 \alias{default_cochlear_amplifier_num_harmonics}
-\title{Default SFOAE number of harmonics}
+\title{Default cochlear amplification number of harmonics}
 \usage{
 default_cochlear_amplifier_num_harmonics()
 }

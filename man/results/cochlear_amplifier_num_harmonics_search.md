@@ -1,9 +1,9 @@
-SFOAE Number of Harmonics Search
+Cochlear Amplifier Number of Harmonics Search
 ================
 
-# Compressed
+# Harmonic
 
-SFOAE Number of Harmonics:
+cochlear amplification Number of Harmonics:
 
 ## CoDi
 
