@@ -418,7 +418,7 @@ test_that('Beats and Stimulus Frequency Cochlear Amplifier',{
                c(1.3585, 1.31, 48.9),
                tolerance=0.1)
   expect_equal(P8_beats_cochlear_amplifier$filtered_beats_wavelength_spectrum[[1]]$amplitude %>% sort(),
-               c(2.891251, 2.891251, 4.000000) %>% sort(),
+               c(2.035481, 2.035481, 4.000000) %>% sort(),
                tolerance=0.1)
 
   expect_equal(P8_beats_cochlear_amplifier$beating, 7.63, tolerance = 0.1)
@@ -432,9 +432,9 @@ test_that('params round trip', {
   expect_equal(P1$cochlear_amplifier_num_harmonics, 2)
   expect_equal(P1$beat_pass_filter, BEAT_PASS_FILTER$LOW)
 })
-test_that('pure tone beat makes sense with without SFOAE 2 harmonics',{
+test_that('pure tone beat makes sense with without cochlear amplification 2 harmonics',{
 
-  # without SFOAE
+  # without cochlear amplification
   dyad = mami.codi(c(60,71),
                    num_harmonics=1,
                    cochlear_amplifier_num_harmonics=0,
@@ -453,35 +453,35 @@ test_that('pure tone beat makes sense with without SFOAE 2 harmonics',{
   expect_equal(dyad$filtered_beats_wavelength_spectrum[[1]]$wavelength, numeric(0), tolerance = 0.01)
   expect_equal(dyad$filtered_beats_wavelength_spectrum[[1]]$amplitude, numeric(0),, tolerance = 0.01)
 
-  # with SFOAE
+  # with cochlear amplification
 
   dyad = mami.codi(c(60,61),
                    num_harmonics=1,
                    cochlear_amplifier_num_harmonics = 2,
                    beat_pass_filter = BEAT_PASS_FILTER$LOW,
                    verbose=T)
-  expect_equal(dyad$beating, 7.75, tolerance = 0.01)
+  expect_equal(dyad$beating, 8.51, tolerance = 0.01)
   expect_equal(dyad$stimulus_wavelength_spectrum[[1]]$wavelength,
                c(1.31,1.23), tolerance = 0.01)
-  expect_equal(dyad$all_beats_wavelength_spectrum[[1]]$wavelength,
-               c(22.05, 1.31, 1.39), tolerance = 0.01)
-  expect_equal(dyad$filtered_beats_wavelength_spectrum[[1]]$wavelength,
-               c(22.05, 1.31, 1.39), tolerance = 0.01)
+  expect_equal(dyad$all_beats_wavelength_spectrum[[1]]$wavelength %>% sort(),
+               c(1.171689,  1.237451 , 1.311034  ,1.393921, 11.023930 ,22.047860), tolerance = 0.01)
+  expect_equal(dyad$filtered_beats_wavelength_spectrum[[1]]$wavelength %>% sort(),
+               c(1.311034,  1.393921, 11.023930, 22.047860), tolerance = 0.01)
   expect_equal(dyad$filtered_beats_wavelength_spectrum[[1]]$amplitude %>% sort(),
-               c(3.000000 ,2.891251 ,1.891251) %>% sort(), tolerance = 0.01)
+               c(0.07096268 ,2.03548134 ,2.03548134 ,4.00000000) %>% sort(), tolerance = 0.01)
 
   dyad = mami.codi(c(60,71),
                    num_harmonics=1,
                    cochlear_amplifier_num_harmonics = 2,
                    beat_pass_filter = BEAT_PASS_FILTER$LOW,
                    verbose=T)
-  expect_equal(dyad$beating, 6.06, tolerance = 0.01)
-  expect_equal(dyad$all_beats_wavelength_spectrum[[1]]$wavelength,
-               c(1.311034 , 1.476808, 11.679447), tolerance = 0.1)
+  expect_equal(dyad$beating, 6.29, tolerance = 0.01)
+  expect_equal(dyad$all_beats_wavelength_spectrum[[1]]$wavelength %>% sort(),
+               c(0.4723600,  0.6944960 , 0.7384038 , 1.3110340 , 1.4768076, 11.6794468), tolerance = 0.1)
   expect_equal(dyad$filtered_beats_wavelength_spectrum[[1]]$wavelength %>% sort(),
                c(1.48, 1.31, 11.67)  %>% sort(), tolerance = 0.1)
   expect_equal(dyad$filtered_beats_wavelength_spectrum[[1]]$amplitude %>% sort(),
-               c(3.000000 ,2.891251 ,1.891251) %>% sort(), tolerance = 0.01)
+               c(2.035481, 2.035481 ,4.000000) %>% sort(), tolerance = 0.01)
 
   dyad = mami.codi(c(60,73),
                    num_harmonics=1,
@@ -490,15 +490,15 @@ test_that('pure tone beat makes sense with without SFOAE 2 harmonics',{
                    verbose=T)
   expect_equal(dyad$stimulus_wavelength_spectrum[[1]]$wavelength,
                c(1.31, 0.61), tolerance = 0.01)
-  expect_equal(dyad$cochlear_amplifier_wavelength_spectrum[[1]]$wavelength,
-               c(1.31, 0.656), tolerance = 0.01)
-  expect_equal(dyad$all_beats_wavelength_spectrum[[1]]$wavelength,
-               c(1.311034 , 1.171689 ,11.023930), tolerance = 0.01)
+  expect_equal(dyad$cochlear_amplifier_wavelength_spectrum[[1]]$wavelength %>% sort(),
+               c(0.3093628, 0.6187256, 0.6555170, 1.3110340), tolerance = 0.01)
+  expect_equal(dyad$all_beats_wavelength_spectrum[[1]]$wavelength %>% sort(),
+               c(0.4049085 , 0.5858447 , 0.6187256 , 1.1716894 , 1.3110340 ,11.0239298), tolerance = 0.01)
   expect_equal(dyad$beating, 5.68, tolerance = 0.01)
   expect_equal(dyad$filtered_beats_wavelength_spectrum[[1]]$wavelength %>% sort(),
                c(1.311034, 11.023930) %>% sort(), tolerance = 0.01)
   expect_equal(dyad$filtered_beats_wavelength_spectrum[[1]]$amplitude %>% sort(),
-               c(1.891251, 2.89) %>% sort(), tolerance = 0.01)
+               c(2.035481, 2.035481) %>% sort(), tolerance = 0.01)
 
 })
 test_that('cochlear_amplifier_num_harmonics round trips', {
@@ -510,7 +510,7 @@ test_that('beating for all beats has values', {
     beat_pass_filter = BEAT_PASS_FILTER$ALL,
     verbose=T
   )
-  expect_equal(MT$beating, 7.44 , tolerance=0.1)
+  expect_equal(MT$beating, 8.65 , tolerance=0.1)
 })
 test_that('beating in framed dyads works', {
   dyad_mami_codi_no_beats = mami.codi(
@@ -527,5 +527,5 @@ test_that('beating in framed dyads works', {
     verbose=T,
     num_harmonics=1
   )
-  expect_equal(dyad_mami_codi$beating, 13.64671, tolerance=0.1)
+  expect_equal(dyad_mami_codi$beating, 15.18, tolerance=0.1)
 })
