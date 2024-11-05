@@ -207,37 +207,37 @@ We created this metric for beat perception:
 ## Pure
 
 [![Pure
-Beating](https://img.youtube.com/vi/cVHmb-fJuVg/0.jpg)](https://www.youtube.com/watch?v=cVHmb-fJuVg)
+Beating](https://img.youtube.com/vi/k4909GokvJU/0.jpg)](https://www.youtube.com/watch?v=k4909GokvJU)
 
 ## 5 Partials No 3
 
 [![5 Partials No 3
-Beating](https://img.youtube.com/vi/cOp3gnFVnPU/0.jpg)](https://www.youtube.com/watch?v=cOp3gnFVnPU)
+Beating](https://img.youtube.com/vi/R3FG2JZHMJc/0.jpg)](https://www.youtube.com/watch?v=R3FG2JZHMJc)
 
 ## 5 Partials
 
 [![5 Partials
-Beating](https://img.youtube.com/vi/aZRqkwwS9jg/0.jpg)](https://www.youtube.com/watch?v=aZRqkwwS9jg)
+Beating](https://img.youtube.com/vi/M-NcAv0shs4/0.jpg)](https://www.youtube.com/watch?v=M-NcAv0shs4)
 
 ## Bonang
 
 [![Bonang
-Beating](https://img.youtube.com/vi/1V-BsZqS9Mw/0.jpg)](https://www.youtube.com/watch?v=1V-BsZqS9Mw)
+Beating](https://img.youtube.com/vi/SjHab1979hA/0.jpg)](https://www.youtube.com/watch?v=SjHab1979hA)
 
 ## Compressed
 
 [![Compressed
-Beating](https://img.youtube.com/vi/sB1npeSe2Tc/0.jpg)](https://www.youtube.com/watch?v=sB1npeSe2Tc)
+Beating](https://img.youtube.com/vi/iSvOnpBgwTY/0.jpg)](https://www.youtube.com/watch?v=iSvOnpBgwTY)
 
 ## Harmonic
 
 [![Harmonic
-Beating](https://img.youtube.com/vi/2vrnfYxZBGM/0.jpg)](https://www.youtube.com/watch?v=2vrnfYxZBGM)
+Beating](https://img.youtube.com/vi/DulPersR6d0/0.jpg)](https://www.youtube.com/watch?v=DulPersR6d0)
 
 ## Stretched
 
 [![Stretched
-Beating](https://img.youtube.com/vi/cOVlcK7-tBU/0.jpg)](https://www.youtube.com/watch?v=cOVlcK7-tBU)
+Beating](https://img.youtube.com/vi/A4JjrWticaM/0.jpg)](https://www.youtube.com/watch?v=A4JjrWticaM)
 
 ### Uncertainty
 

@@ -153,10 +153,14 @@ results <- purrr::map(timbres, function(t) {
   print(paste('Timbre:', t))
 
   chords <- dyads %>% dplyr::filter(timbre == t)
-  chords$dissonance_z = z_scores(chords$dissonance)
+
+  chords$consonance_z = z_scores(-chords$dissonance)
   chords$major_z = z_scores(chords$majorness)
-  chords$space_dissonance_z = z_scores(chords$space_dissonance)
-  chords$time_dissonance_z = z_scores(chords$time_dissonance)
+  chords$space_consonance = -chords$space_dissonance
+  chords$time_consonance = -chords$time_dissonance
+  chords$space_consonance_z = z_scores(-chords$space_dissonance)
+  chords$time_consonance_z = z_scores(-chords$time_dissonance)
+
 
   p2 = plot_semitone_beating(chords, paste(t, ': Beating'))
   title = paste0(t,'_Beating')
