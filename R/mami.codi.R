@@ -119,12 +119,9 @@ generate_cochlea_amplifications <- function(
 
   if (cochlear_amplifier_num_harmonics > 0) {
 
-    cochlear_amplifier_sparse_fr_spectrum = hrep::sparse_fr_spectrum(
-      list(
-        frequency = x$stimulus_frequency_spectrum[[1]]$frequency,
-        amplitude = x$stimulus_frequency_spectrum[[1]]$amplitude
-      ),
-      num_harmonics = cochlear_amplifier_num_harmonics
+    cochlear_amplifier_sparse_fr_spectrum = hrep::expand_harmonics(
+      x$source_spectrum[[1]],
+      num_harmonics=2
     )
 
     cochlear_amplifier_frequency_spectrum  = frequency_spectrum_from_sparse_fr_spectrum(
