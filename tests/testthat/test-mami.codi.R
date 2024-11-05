@@ -375,7 +375,7 @@ test_that('Stimulus Frequency Otoacoustic Emissions',{
   expect_equal(P1_cochlear_amplifier$frequencies[[1]] %>% length(), cochlear_amplifier_num_harmonics)
   expect_equal(P1_cochlear_amplifier$frequencies[[1]], c(261.6, 523.2), tolerance=0.1)
 })
-test_that('Beats and Stimulus Frequency Otoacoustic Emissions',{
+test_that('Beats and Stimulus Frequency Cochlear Amplifier',{
   num_harmonics = 1
 
   C4_midi = 60
@@ -418,7 +418,7 @@ test_that('Beats and Stimulus Frequency Otoacoustic Emissions',{
                c(1.3585, 1.31, 48.9),
                tolerance=0.1)
   expect_equal(P8_beats_cochlear_amplifier$filtered_beats_wavelength_spectrum[[1]]$amplitude %>% sort(),
-               c(3.000000 ,2.891251 ,1.891251) %>% sort(),
+               c(2.891251, 2.891251, 4.000000) %>% sort(),
                tolerance=0.1)
 
   expect_equal(P8_beats_cochlear_amplifier$beating, 7.63, tolerance = 0.1)
