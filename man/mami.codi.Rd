@@ -6,8 +6,8 @@
 \usage{
 mami.codi(
   x,
-  beat_pass_filter = BEAT_PASS_FILTER$LOW,
-  oae_num_harmonics = SFOAE_NUM_HARMONICS,
+  beat_pass_filter = BEAT_PASS_FILTER$ALL,
+  oae_num_harmonics = OAE_NUM_HARMONICS,
   space_uncertainty = UNCERTAINTY_LIMIT,
   time_uncertainty = UNCERTAINTY_LIMIT,
   integer_harmonics_tolerance = INTEGER_HARMONICS_TOLERANCE,

@@ -33,8 +33,8 @@
 #' @export
 mami.codi <- function(
     x,
-    beat_pass_filter            = BEAT_PASS_FILTER$LOW,
-    oae_num_harmonics         = SFOAE_NUM_HARMONICS,
+    beat_pass_filter            = BEAT_PASS_FILTER$ALL,
+    oae_num_harmonics           = OAE_NUM_HARMONICS,
     space_uncertainty           = UNCERTAINTY_LIMIT,
     time_uncertainty            = UNCERTAINTY_LIMIT,
     integer_harmonics_tolerance = INTEGER_HARMONICS_TOLERANCE,
@@ -451,9 +451,8 @@ C_SOUND = 343 # m/s arbitrary, disappears in the ratios
 #''
 #' @rdname default_oae_num_harmonics
 #' @export
-default_oae_num_harmonics <- function() { SFOAE_NUM_HARMONICS }
-SFOAE_NUM_HARMONICS = 5
-
+default_oae_num_harmonics <- function() { OAE_NUM_HARMONICS }
+OAE_NUM_HARMONICS = 2
 
 #' Default beat pass filter
 #'
@@ -462,7 +461,7 @@ SFOAE_NUM_HARMONICS = 5
 #''
 #' @rdname default_beat_pass_filter
 #' @export
-default_beat_pass_filter <- function() { BEAT_PASS_FILTER$LOW }
+default_beat_pass_filter <- function() { BEAT_PASS_FILTER$ALL }
 BEAT_PASS_FILTER <- list(
   ALL  = 'all',
   HIGH = 'high',

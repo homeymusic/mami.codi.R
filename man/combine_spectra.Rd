@@ -4,7 +4,7 @@
 \alias{combine_spectra}
 \title{Helper functions to combine spectra}
 \usage{
-combine_spectra(x, y = NULL, tolerance = 1e-06)
+combine_spectra(..., tolerance = 1e-06)
 }
 \description{
 Helper functions to combine spectra
