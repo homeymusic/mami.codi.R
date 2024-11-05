@@ -30,7 +30,7 @@ using namespace Rcpp;
 
    int left_num    = floor(x);
    int left_den    = 1;
-   int mediant_num = round(x);
+   int mediant_num = std::max(round(x),std::numeric_limits<double>::min());
    int mediant_den = 1;
    int right_num   = floor(x) + 1;
    int right_den   = 1;
