@@ -502,7 +502,7 @@ test_that('pure tone beat makes sense with without SFOAE 2 harmonics',{
 })
 test_that('oae_num_harmonics round trips', {
   P1 = mami.codi(60, verbose=T)
-  expect_equal(P1$oae_num_harmonics, 5)
+  expect_equal(P1$oae_num_harmonics, default_oae_num_harmonics())
 })
 test_that('beating for all beats has values', {
   MT = c(60) %>% mami.codi(

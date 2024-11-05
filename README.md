@@ -143,16 +143,23 @@ of the cent, 100 data points per semitone. Every dyad includes 60 and
 
 ![](man/figures/README-unnamed-chunk-7-1.png)<!-- -->
 
-# Stimulus Frequency Otoacoustic Emissions
+# Cochlear Amplifier
 
 Beats are created among every combination of waves in the signal when it
 arrives at the inner hair cells. That signal includes waves emitted by
-the cochlea itself: otoacoustic emissions (OAE). How many harmonics are
-emitted by the OAE and/or how many of those impact the perception of
-beating? And the perceived consonance?
+the cochlea itself, referred to as the cochlear amplifier. How many
+harmonics are emitted by the cochlea and/or how many of those impact the
+perception of beating? And the perceived consonance?
 
-Our research indicates that the number is 5 harmonics. The Bonang
-beating at 6 introduces too many spike for beating. And at 4, too few.
+Our research indicates that the number is 2 harmonics.
+
+<figure>
+<img src="man/scrapbook/cochlear%20amplifier.png"
+alt="Mechanics of the Mammalian Cochlea LUIS ROBLES AND MARIO A. RUGGERO PHYSIOLOGICAL REVIEWS Vol. 81, No. 3, July 2001" />
+<figcaption aria-hidden="true">Mechanics of the Mammalian Cochlea LUIS
+ROBLES AND MARIO A. RUGGERO PHYSIOLOGICAL REVIEWS Vol. 81, No. 3, July
+2001</figcaption>
+</figure>
 
 # Beats
 
@@ -777,12 +784,12 @@ contours, using the framing only in the model to compare results.
 | M6       |  4.3219281 | 60, 69, 72 |   7.491853 |
 | m3       |  1.3219281 | 60, 63, 72 |   8.491853 |
 | P5       |  0.5849625 | 60, 67, 72 |   2.584963 |
-| P4       |  1.0000000 | 60, 65, 72 |   4.169925 |
-| P1       |  1.5849625 | 60, 60, 72 |   1.584963 |
-| P8       |  1.5849625 | 60, 72, 72 |   1.584963 |
+| P4       | -0.5849625 | 60, 65, 72 |   2.584963 |
+| P1       |  0.0000000 | 60, 60, 72 |   0.000000 |
+| P8       |  0.0000000 | 60, 72, 72 |   0.000000 |
 | tt       |  1.5849625 | 60, 66, 72 |  10.228819 |
 | M7       |  0.0000000 | 60, 71, 72 |   7.169925 |
-| m2       |  3.3219281 | 60, 61, 72 |   8.491853 |
+| m2       |  1.0000000 | 60, 61, 72 |   6.169925 |
 | M2       | -0.7369656 | 60, 62, 72 |   7.906891 |
 | m7       |  3.9068906 | 60, 70, 72 |   7.906891 |
 
@@ -803,7 +810,7 @@ major-minor versus the behavioral results are included in a plot below.
 
 | oae_num_harmonics | beat_pass_filter | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
 |---:|:---|:---|:---|---:|---:|
-| 2 | all | 0.07958 | 0.07958 | 0.2 | 2 |
+| 2 | low | 0.07958 | 0.07958 | 0.2 | 2 |
 
 ![](man/figures/README-unnamed-chunk-21-1.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-21-2.png)<!-- -->  
@@ -818,7 +825,7 @@ For 10 harmonics, behavioral results and theoretical predictions agree.
 
 | oae_num_harmonics | beat_pass_filter | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
 |---:|:---|:---|:---|---:|---:|
-| 2 | all | 0.07958 | 0.07958 | 0.2 | 2 |
+| 2 | low | 0.07958 | 0.07958 | 0.2 | 2 |
 
 ![](man/figures/README-unnamed-chunk-21-7.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-21-8.png)<!-- -->  
@@ -836,7 +843,7 @@ peak.
 
 | oae_num_harmonics | beat_pass_filter | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
 |---:|:---|:---|:---|---:|---:|
-| 2 | all | 0.07958 | 0.07958 | 0.2 | 2 |
+| 2 | low | 0.07958 | 0.07958 | 0.2 | 2 |
 
 ![](man/figures/README-unnamed-chunk-21-13.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-21-14.png)<!-- -->  
@@ -854,7 +861,7 @@ while the M3 peak is slightly higher without the 3rd partial.
 
 | oae_num_harmonics | beat_pass_filter | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
 |---:|:---|:---|:---|---:|---:|
-| 2 | all | 0.07958 | 0.07958 | 0.2 | 2 |
+| 2 | low | 0.07958 | 0.07958 | 0.2 | 2 |
 
 ![](man/figures/README-unnamed-chunk-21-19.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-21-20.png)<!-- -->  
@@ -873,7 +880,7 @@ be relatively higher than the behavioral results.
 
 | oae_num_harmonics | beat_pass_filter | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
 |---:|:---|:---|:---|---:|---:|
-| 2 | all | 0.07958 | 0.07958 | 0.2 | 2 |
+| 2 | low | 0.07958 | 0.07958 | 0.2 | 2 |
 
 ![](man/figures/README-unnamed-chunk-21-25.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-21-26.png)<!-- -->  
@@ -890,7 +897,7 @@ and m7 that do not exist in the behavioral results.
 
 | oae_num_harmonics | beat_pass_filter | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
 |---:|:---|:---|:---|---:|---:|
-| 2 | all | 0.07958 | 0.07958 | 0.2 | 2.1 |
+| 2 | low | 0.07958 | 0.07958 | 0.2 | 2.1 |
 
 ![](man/figures/README-unnamed-chunk-21-31.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-21-32.png)<!-- -->  
@@ -906,7 +913,7 @@ with the theoretical peaks.
 
 | oae_num_harmonics | beat_pass_filter | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
 |---:|:---|:---|:---|---:|---:|
-| 2 | all | 0.07958 | 0.07958 | 0.2 | 1.9 |
+| 2 | low | 0.07958 | 0.07958 | 0.2 | 1.9 |
 
 ![](man/figures/README-unnamed-chunk-21-37.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-21-38.png)<!-- -->  
@@ -923,7 +930,7 @@ Description is below.
 
 | oae_num_harmonics | beat_pass_filter | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
 |---:|:---|:---|:---|---:|---:|
-| 2 | all | 0.07958 | 0.07958 | 0.035 | 2 |
+| 2 | low | 0.07958 | 0.07958 | 0.035 | 2 |
 
 ![](man/figures/README-unnamed-chunk-21-43.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-21-44.png)<!-- -->  
@@ -938,7 +945,7 @@ Description is below.
 
 | oae_num_harmonics | beat_pass_filter | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
 |---:|:---|:---|:---|---:|---:|
-| 2 | all | 0.07958 | 0.07958 | 0.035 | 2 |
+| 2 | low | 0.07958 | 0.07958 | 0.035 | 2 |
 
 ![](man/figures/README-unnamed-chunk-21-49.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-21-50.png)<!-- -->  
@@ -953,7 +960,7 @@ Description is below.
 
 | oae_num_harmonics | beat_pass_filter | time_uncertainty | space_uncertainty | smoothing_sigma | pseudo_octave |
 |---:|:---|:---|:---|---:|---:|
-| 2 | all | 0.07958 | 0.07958 | 0.035 | 2 |
+| 2 | low | 0.07958 | 0.07958 | 0.035 | 2 |
 
 ![](man/figures/README-unnamed-chunk-21-55.png)<!-- -->  
 ![](man/figures/README-unnamed-chunk-21-56.png)<!-- -->  
