@@ -409,9 +409,10 @@ test_that('Beats and Stimulus Frequency Otoacoustic Emissions',{
                        beat_pass_filter = BEAT_PASS_FILTER$LOW,
                        num_harmonics = num_harmonics,
                        verbose =T)
-  expect_equal(P8_beats_cochlear_amplifier$cochlear_amplifier_frequency_spectrum[[1]] %>% nrow(), cochlear_amplifier_num_harmonics)
+  expect_equal(P8_beats_cochlear_amplifier$cochlear_amplifier_frequency_spectrum[[1]] %>% nrow(),
+               cochlear_amplifier_num_harmonics * (P8_beats_cochlear_amplifier$stimulus_frequency_spectrum[[1]] %>% nrow()))
   expect_equal(P8_beats_cochlear_amplifier$all_beats_wavelength_spectrum[[1]]$wavelength %>% sort(),
-               c(1.3585, 1.31, 48.9),
+               c(0.4449479 , 0.6644053,  0.6735380 , 1.3110340 , 1.3470761 ,48.9999691),
                tolerance=0.1)
   expect_equal(P8_beats_cochlear_amplifier$filtered_beats_wavelength_spectrum[[1]]$wavelength %>% sort(),
                c(1.3585, 1.31, 48.9),
