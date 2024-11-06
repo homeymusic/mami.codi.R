@@ -101,9 +101,9 @@ grid = dplyr::bind_rows(grid_1,
                         grid_M3,grid_M6,grid_P8)
 
 
-plan(multisession, workers=parallelly::availableCores())
+plan(multisession, workers = min(1,parallelly::availableCores()))
 
-output = grid %>% furrr::future_pmap_dfr(\(interval,
+output = grid %>% purrr::pmap_dfr(\(interval,
                                            num_harmonics,
                                            octave_ratio,
                                            timbre) {
@@ -144,7 +144,7 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
     )
   }
 
-  mami.codi.R::mami.codi(study_chord,
+  result = mami.codi.R::mami.codi(study_chord,
                          metadata = list(
                            num_harmonics       = num_harmonics,
                            octave_ratio        = octave_ratio,
@@ -152,6 +152,9 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
                            timbre              = timbre
                          ),
                          verbose=TRUE)
+  gc()
+
+  result
 
 }, .progress=TRUE, .options = furrr::furrr_options(seed = T))
 saveRDS(output,output.rds)
