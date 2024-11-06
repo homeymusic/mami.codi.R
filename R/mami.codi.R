@@ -54,9 +54,9 @@ mami.codi <- function(
     generate_cochlear_amplifications(
       cochlear_amplifier_num_harmonics
     ) %>%
-    # generate_cochlear_beats(
-    #   beat_pass_filter
-    # ) %>%
+    generate_cochlear_beats(
+      beat_pass_filter
+    ) %>%
     # Frequency Domain
     compute_fundamental_wavenumber(
       space_uncertainty,
@@ -213,6 +213,46 @@ generate_cochlear_amplifications <- function(
 
 }
 
+#' @rdname generate_cochlear_beats
+#' @export
+generate_cochlear_beats <- function(
+    x, beat_pass_filter
+) {
+
+  cochlear_beats_wavelength_spectrum = compute_beats(
+    wavelength = x$cochlear_amplifications_wavelength_spectrum[[1]]$wavelength,
+    amplitude  = x$cochlear_amplifications_wavelength_spectrum[[1]]$amplitude
+  )
+
+  max_cochlear_amplifications_wavelength = x$cochlear_amplifications_wavelength_spectrum[[1]]$wavelength %>% max()
+
+  low_cochlear_beats_wavelength_spectrum = cochlear_beats_wavelength_spectrum %>%
+    dplyr::filter(wavelength >= max_cochlear_amplifications_wavelength)
+
+  high_cochlear_beats_wavelength_spectrum = cochlear_beats_wavelength_spectrum %>%
+    dplyr::filter(wavelength < max_cochlear_amplifications_wavelength)
+
+  if (beat_pass_filter == BEAT_PASS_FILTER$LOW) {
+    filtered_cochlear_beats_wavelength_spectrum = low_cochlear_beats_wavelength_spectrum
+  } else if (beat_pass_filter == BEAT_PASS_FILTER$HIGH) {
+    filtered_cochlear_beats_wavelength_spectrum = high_cochlear_beats_wavelength_spectrum
+  } else if (beat_pass_filter == BEAT_PASS_FILTER$ALL) {
+    filtered_cochlear_beats_wavelength_spectrum = cochlear_beats_wavelength_spectrum
+  } else if (beat_pass_filter == BEAT_PASS_FILTER$NONE) {
+    filtered_cochlear_beats_wavelength_spectrum = x$cochlear_amplifications_wavelength_spectrum[[1]]
+  }
+
+  # Store the values
+  x %>% dplyr::mutate(
+    filtered_cochlear_beats_wavelength_spectrum = list(filtered_cochlear_beats_wavelength_spectrum),
+    cochlear_beats_wavelength_spectrum          = list(cochlear_beats_wavelength_spectrum),
+    low_cochlear_beats_wavelength_spectrum      = list(low_cochlear_beats_wavelength_spectrum),
+    high_cochlear_beats_wavelength_spectrum     = list(high_cochlear_beats_wavelength_spectrum),
+    max_cochlear_amplifications_wavelength
+  )
+
+}
+
 #' Compute the fundamental wavenumber of the complex waveform.
 #'
 #' Computes the fundamental wavenumber from a wavelength spectrum that
@@ -232,7 +272,10 @@ compute_fundamental_wavenumber <- function(
     integer_harmonics_tolerance
 ) {
 
-  wavelength_spectrum = x$cochlear_amplifications_wavelength_spectrum[[1]]
+  wavelength_spectrum = combine_spectra(
+    x$cochlear_amplifications_wavelength_spectrum[[1]],
+    x$filtered_cochlear_beats_wavelength_spectrum[[1]]
+  )
 
   l = wavelength_spectrum$wavelength
 
@@ -370,9 +413,9 @@ compute_harmony_perception <- function(x) {
 #' @export
 compute_beats_perception <- function(x) {
 
-  low_beating  = beating(x$low_air_beats_wavelength_spectrum[[1]])
-  high_beating = beating(x$high_air_beats_wavelength_spectrum[[1]])
-  all_beating  = beating(x$air_beats_wavelength_spectrum[[1]])
+  low_beating  = beating(x$low_cochlear_beats_wavelength_spectrum[[1]])
+  high_beating = beating(x$high_cochlear_beats_wavelength_spectrum[[1]])
+  all_beating  = beating(x$cochlear_beats_wavelength_spectrum[[1]])
 
   if (x$beat_pass_filter == BEAT_PASS_FILTER$LOW) {
     beating = low_beating
