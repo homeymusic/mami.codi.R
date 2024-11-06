@@ -133,6 +133,15 @@ combine_spectra <- function(..., tolerance = 1e-6) {
   return(result)
 }
 
+expand_harmonics <- function(wavelength_spectrum, num_harmonics, roll_off_dB) {
+  sparse_fr_spectrum = sparse_fr_spectrum_from_wavelength_spectrum(wavelength_spectrum)
+  expanded_sparse_fr_spectrum = hrep::expand_harmonics(
+    sparse_fr_spectrum,
+    num_harmonics,
+    roll_off_dB
+  )
+  wavelength_spectrum_from_sparse_fr_spectrum(expanded_sparse_fr_spectrum)
+}
 
 sparse_fr_spectrum_from_wavelength_spectrum <- function(x) {
   hrep::sparse_fr_spectrum(list(
@@ -152,5 +161,12 @@ frequency_spectrum_from_sparse_fr_spectrum <- function(x) {
   tibble::tibble(
     frequency = x$x,
     amplitude = x$y
+  )
+}
+
+frequency_spectrum_from_wavelength_spectrum <- function(x) {
+  tibble::tibble(
+    frequency = C_SOUND / x$wavelength,
+    amplitude = x$amplitude
   )
 }
