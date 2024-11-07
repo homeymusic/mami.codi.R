@@ -287,8 +287,7 @@ compute_fundamental_frequency <- function(
 ) {
 
   frequency_spectrum = combine_spectra(
-    x$stimulus_frequency_spectrum[[1]],
-    x$cochlear_amplifier_frequency_spectrum[[1]]
+    x$stimulus_frequency_spectrum[[1]]
   )
 
   f = frequency_spectrum$frequency
