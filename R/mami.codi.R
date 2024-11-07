@@ -119,15 +119,16 @@ generate_cochlea_amplifications <- function(
 
   if (cochlear_amplifier_num_harmonics > 0) {
 
-    cochlear_amplifier_sparse_fr_spectrum = hrep::expand_harmonics(
-      x$source_spectrum[[1]],
-      num_harmonics = cochlear_amplifier_num_harmonics,
-      roll_off_dB   = 29 # dB
-      # Among distortion components, the second harmonic is
-      # the largest (47), attaining levels as high as 3.5%
-      # (or 29 dB) referred to the fundamental component (43).
-      # ["Mechanics of the Mammalian Cochlea", Robles and Ruggero, 2001]
-    )
+    cochlear_amplifier_sparse_fr_spectrum = x$source_spectrum[[1]] %>%
+      dplyr::slice_min(x, n = 1) %>%
+      hrep::expand_harmonics(
+        num_harmonics = cochlear_amplifier_num_harmonics,
+        roll_off_dB   = 29
+        # Among distortion components, the second harmonic is
+        # the largest (47), attaining levels as high as 3.5%
+        # (or 29 dB) referred to the fundamental component (43).
+        # ["Mechanics of the Mammalian Cochlea", Robles and Ruggero, 2001]
+      )
 
     cochlear_amplifier_frequency_spectrum  = frequency_spectrum_from_sparse_fr_spectrum(
       cochlear_amplifier_sparse_fr_spectrum
