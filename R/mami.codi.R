@@ -322,7 +322,7 @@ compute_fundamental_frequency <- function(
     integer_harmonics_tolerance
 ) {
 
-  frequency_spectrum = x$cochlear_amplifications_frequency_spectrum[[1]]
+  frequency_spectrum = combine_spectra(x$cochlear_amplifications_frequency_spectrum[[1]])
 
   f = frequency_spectrum$frequency
 
