@@ -527,5 +527,49 @@ test_that('beating in framed dyads works', {
     verbose=T,
     num_harmonics=1
   )
-  expect_equal(dyad_mami_codi$beating, 15.18, tolerance=0.1)
+  expect_equal(dyad_mami_codi$beating, 10.41, tolerance=0.1)
+})
+test_that('freqs are less than max', {
+  num_harmonics = 10
+
+  too_high_freq = MAX_FREQUENCY + 1
+  result = mami.codi(c(60, hrep::freq_to_midi(too_high_freq)),
+                     verbose=T,
+                     cochlear_amplifier_num_harmonics = 0,
+                     num_harmonics=num_harmonics)
+  expect_equal(result$frequencies[[1]] %>% length(), num_harmonics)
+  expect_true(all(result$frequencies[[1]] <= MAX_FREQUENCY))
+})
+test_that('freqs are greater than min', {
+  num_harmonics = 10
+
+  too_low_freq = MIN_FREQUENCY -0.1
+  result = mami.codi(c(60, hrep::freq_to_midi(too_low_freq)),
+                     verbose=T,
+                     cochlear_amplifier_num_harmonics = 0,
+                     num_harmonics=num_harmonics)
+  expect_true(all(result$frequencies[[1]] >= MIN_FREQUENCY))
+  expect_equal(result$frequencies[[1]] %>% length(), 19)
+})
+test_that('wavelengths are less than max', {
+  num_harmonics = 10
+
+  too_long_wavelength_freq = C_SOUND / (MAX_WAVELENGTH + 1)
+  result = mami.codi(c(60, hrep::freq_to_midi(too_long_wavelength_freq)),
+                     verbose=T,
+                     cochlear_amplifier_num_harmonics = 0,
+                     num_harmonics=num_harmonics)
+  expect_equal(result$wavelengths[[1]] %>% length(), 21)
+  expect_true(all(result$wavelengths[[1]] <= MAX_WAVELENGTH))
+})
+test_that('wavelengths are greater than min', {
+  num_harmonics = 10
+
+  too_small_wavelength_freq = C_SOUND / (MIN_WAVELENGTH - 0.0001)
+  result = mami.codi(c(60, hrep::freq_to_midi(too_small_wavelength_freq)),
+                     verbose=T,
+                     cochlear_amplifier_num_harmonics = 0,
+                     num_harmonics=num_harmonics)
+  expect_true(all(result$wavelengths[[1]] >= MIN_WAVELENGTH))
+  expect_equal(result$wavelengths[[1]] %>% length(), 10)
 })

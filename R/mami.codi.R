@@ -186,7 +186,7 @@ generate_beats <- function(
   all_beats_wavelength_spectrum = compute_beats(
     wavelength = stimulus_and_cochlear_amplifier_wavelength_spectrum$wavelength,
     amplitude  = stimulus_and_cochlear_amplifier_wavelength_spectrum$amplitude
-  )
+  ) %>% filter_spectrum_in_range()
 
   low_beats_wavelength_spectrum = all_beats_wavelength_spectrum %>%
     dplyr::filter(wavelength >= max_stimulus_wavelength)
@@ -479,3 +479,9 @@ DIMENSION <- list(
   SPACE = 'space',
   TIME  = 'time'
 )
+
+MAX_FREQUENCY = hrep::midi_to_freq(127 + 24)
+MIN_FREQUENCY = 1
+
+MAX_WAVELENGTH = C_SOUND / MIN_FREQUENCY
+MIN_WAVELENGTH = C_SOUND / MAX_FREQUENCY
