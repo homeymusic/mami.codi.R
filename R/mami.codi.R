@@ -458,7 +458,7 @@ C_SOUND = 343 # m/s arbitrary, disappears in the ratios
 #' @rdname default_cochlear_amplifier_num_harmonics
 #' @export
 default_cochlear_amplifier_num_harmonics <- function() { COCHLEAR_AMPLIFIER_NUM_HARMONICS }
-COCHLEAR_AMPLIFIER_NUM_HARMONICS = 1
+COCHLEAR_AMPLIFIER_NUM_HARMONICS = 2
 
 #' Default beat pass filter
 #'

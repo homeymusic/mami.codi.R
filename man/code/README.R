@@ -1,3 +1,5 @@
+tonic_midi = 60
+
 github_result = devtools::install('/Users/homeymusic/Documents/git/homeymusic/mami.codi.R')
 
 if (is.na(github_result)) {
@@ -109,27 +111,27 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
                                            timbre) {
 
   if (timbre == 'Bonang') {
-    bass_f0 <- hrep::midi_to_freq(0)
+    bass_f0 <- hrep::midi_to_freq(tonic_midi)
     bass <- tibble::tibble(
       frequency = bass_f0 * 1:4,
       amplitude = 1
     ) %>% as.list() %>%  hrep::sparse_fr_spectrum()
 
-    upper_f0 <- hrep::midi_to_freq(interval)
+    upper_f0 <- hrep::midi_to_freq(interval + tonic_midi)
     upper <- tibble::tibble(
-      frequency = upper_f0 * c(1, 1.52, 3.46, 3.92),
+      frequency = upper_f0 * (c(1, 1.52, 3.46, 3.92) + tonic_midi),
       amplitude = 1
     ) %>% as.list() %>%  hrep::sparse_fr_spectrum()
 
     study_chord = do.call(hrep::combine_sparse_spectra, list(bass,upper))
   } else if (timbre == '5PartialsNo3') {
-    bass_f0 <- hrep::midi_to_freq(0)
+    bass_f0 <- hrep::midi_to_freq(tonic_midi)
     bass <- tibble::tibble(
       frequency = bass_f0 * 1:5,
       amplitude = c(1, 1, 0, 1, 1)
     ) %>% as.list() %>%  hrep::sparse_fr_spectrum()
 
-    upper_f0 <- hrep::midi_to_freq(interval)
+    upper_f0 <- hrep::midi_to_freq(interval + tonic_midi)
     upper <- tibble::tibble(
       frequency = upper_f0 * 1:5,
       amplitude = c(1, 1, 0, 1, 1)
@@ -137,7 +139,7 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
 
     study_chord = do.call(hrep::combine_sparse_spectra, list(bass,upper))
   } else {
-    study_chord = c(0, interval) %>% hrep::sparse_fr_spectrum(
+    study_chord = c(tonic_midi, interval + tonic_midi) %>% hrep::sparse_fr_spectrum(
       num_harmonics = num_harmonics,
       octave_ratio  = octave_ratio,
       roll_off_dB   = 3.0
@@ -145,6 +147,8 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
   }
 
   mami.codi.R::mami.codi(study_chord,
+                         num_harmonics       = num_harmonics,
+                         octave_ratio        = octave_ratio,
                          metadata = list(
                            num_harmonics       = num_harmonics,
                            octave_ratio        = octave_ratio,

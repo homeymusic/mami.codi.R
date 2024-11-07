@@ -10,15 +10,73 @@ source('../code/plot.R')
 source('../code/utils.R')
 ```
 
+## At 0
+
 ```{r, echo=F, message=F}
-C4_midi = 60
-f_beat = 7 # Hz
-C4_beat_midi = hrep::freq_to_midi(hrep::midi_to_freq(60) + f_beat)
-duration = 3.0
-num_harmonics = 5
-tone_1 = hrep::sparse_fr_spectrum(c(C4_midi, C4_beat_midi), num_harmonics=num_harmonics) %>% hrep::wave(length_sec = duration)
-tone_1  %>% hrep::play_wav(player = '/usr/bin/afplay')
+P1 = mami.codi(0, 
+               num_harmonics=1,
+               verbose=T)
 ```
+
+```{r, echo=F, message=F}
+M2_skinny = mami.codi(c(0,1.9), 
+                      num_harmonics=1,
+                      verbose=T)
+```
+
+
+```{r, echo=F, message=F}
+M2_fat = mami.codi(c(0,2.1), 
+                   num_harmonics=1,
+                   verbose=T)
+```
+
+```{r, echo=F}
+tibble::tibble(
+  interval=c('P1', 'M2 skinny', 'M2 FAT'),
+  semitone=c(P1$frequencies[[1]] %>% hrep::freq_to_midi() %>% max() ,
+             M2_skinny$frequencies[[1]] %>% hrep::freq_to_midi() %>% max() ,
+             M2_fat$frequencies[[1]] %>% hrep::freq_to_midi() %>% max() ),
+  beating=c(P1$beating, M2_skinny$beating, M2_fat$beating),
+  wavelengths=c(toString(P1$wavelengths[[1]]), toString(M2_skinny$wavelengths[[1]]), 
+                toString(M2_fat$wavelengths[[1]]))
+)
+```
+
+## At 60
+
+```{r, echo=F, message=F}
+P1 = mami.codi(60, 
+               num_harmonics=1,
+               verbose=T)
+```
+
+```{r, echo=F, message=F}
+M2_skinny = mami.codi(c(60,61.9), 
+                      num_harmonics=1,
+                      verbose=T)
+```
+
+
+```{r, echo=F, message=F}
+M2_fat = mami.codi(c(60,62.1), 
+                   num_harmonics=1,
+                   verbose=T)
+```
+
+```{r, echo=F}
+tibble::tibble(
+  interval=c('P1', 'M2 skinny', 'M2 FAT'),
+  semitone=c(P1$frequencies[[1]] %>% hrep::freq_to_midi() %>% max() - 60,
+             M2_skinny$frequencies[[1]] %>% hrep::freq_to_midi() %>% max() - 60,
+             M2_fat$frequencies[[1]] %>% hrep::freq_to_midi() %>% max() - 60),
+  beating=c(P1$beating, M2_skinny$beating, M2_fat$beating),
+  wavelengths=c(toString(P1$wavelengths[[1]]), toString(M2_skinny$wavelengths[[1]]), 
+                toString(M2_fat$wavelengths[[1]]))
+)
+```
+
+
 ```{r, echo=F, message=F}
 experiment.rds = '../data/input/Pure.rds'
 grid = tidyr::expand_grid(
@@ -28,20 +86,17 @@ grid = tidyr::expand_grid(
   timbre = 'Pure'
 )
 
-future::plan(future::multisession, workers=parallelly::availableCores())
-
-output = grid %>% furrr::future_pmap_dfr(\(interval,
-                                           num_harmonics,
-                                           octave_ratio,
-                                           timbre) {
-
-  study_chord = c(0, interval) %>% hrep::sparse_fr_spectrum(
+output = grid %>% purrr::pmap_dfr(\(interval,
+                                    num_harmonics,
+                                    octave_ratio,
+                                    timbre) {
+  
+  study_chord = (60 + c(0, interval)) %>% hrep::sparse_fr_spectrum(
     num_harmonics = num_harmonics,
     octave_ratio  = octave_ratio,
     roll_off_dB   = 3.0
   )
-
-
+  
   mami.codi.R::mami.codi(study_chord,
                          metadata = list(
                            num_harmonics       = num_harmonics,
@@ -51,7 +106,11 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
                          ),
                          verbose=TRUE)
   
-}, .progress=TRUE, .options = furrr::furrr_options(seed = T))
+}, .progress=TRUE)
+```
+
+```{r, echo=F, message=F}
+plot(output$beating)
 ```
 
 ```{r, echo=F}
@@ -85,9 +144,26 @@ black_vlines  = c(7,12)
 ```
 
 ```{r, echo=F}
+toString(chords$cochlear_amplifier_num_harmonics %>% unique)
+```
 
+```{r, echo=F}
+default_cochlear_amplifier_num_harmonics()
+```
+
+```{r, echo=F}
 plot_semitone_beating(chords, 'Beating',
                       include_points=T,include_line=F,
                       black_vlines=black_vlines)
 
+```
+
+```{r, echo=F, message=F}
+C4_midi = 60
+f_beat = 7 # Hz
+C4_beat_midi = hrep::freq_to_midi(hrep::midi_to_freq(60) + f_beat)
+duration = 3.0
+num_harmonics = 5
+tone_1 = hrep::sparse_fr_spectrum(c(C4_midi, C4_beat_midi), num_harmonics=num_harmonics) %>% hrep::wave(length_sec = duration)
+tone_1  %>% hrep::play_wav(player = '/usr/bin/afplay')
 ```
