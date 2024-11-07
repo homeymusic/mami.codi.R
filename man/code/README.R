@@ -119,7 +119,7 @@ output = grid %>% furrr::future_pmap_dfr(\(interval,
 
     upper_f0 <- hrep::midi_to_freq(interval + tonic_midi)
     upper <- tibble::tibble(
-      frequency = upper_f0 * (c(1, 1.52, 3.46, 3.92) + tonic_midi),
+      frequency = upper_f0 * (c(1, 1.52, 3.46, 3.92)),
       amplitude = 1
     ) %>% as.list() %>%  hrep::sparse_fr_spectrum()
 
