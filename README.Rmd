@@ -787,8 +787,8 @@ p = params %>% purrr::map(\(p) {
   cat("  \n")
   
   print(plot_semitone_beating(chords, paste('Beating'),
-                           sigma=sigma,include_points=T,include_line=F,
-                           black_vlines=black_vlines,gray_vlines=gray_vlines))
+                              sigma=sigma,include_points=T,include_line=F,
+                              black_vlines=black_vlines,gray_vlines=gray_vlines))
   cat("  \n")
 
   print(plot_semitone_space_time(chords, paste('space and time Consonance'),
