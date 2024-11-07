@@ -120,7 +120,6 @@ generate_cochlea_amplifications <- function(
   if (cochlear_amplifier_num_harmonics > 0) {
 
     cochlear_amplifier_sparse_fr_spectrum = x$source_spectrum[[1]] %>%
-      dplyr::slice_min(x, n = 1) %>%
       hrep::expand_harmonics(
         num_harmonics = cochlear_amplifier_num_harmonics,
         roll_off_dB   = 29
