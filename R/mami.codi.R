@@ -458,7 +458,7 @@ C_SOUND = 343 # m/s arbitrary, disappears in the ratios
 #' @rdname default_cochlear_amplifier_num_harmonics
 #' @export
 default_cochlear_amplifier_num_harmonics <- function() { COCHLEAR_AMPLIFIER_NUM_HARMONICS }
-COCHLEAR_AMPLIFIER_NUM_HARMONICS = 2
+COCHLEAR_AMPLIFIER_NUM_HARMONICS = 5
 
 #' Default beat pass filter
 #'
@@ -474,7 +474,7 @@ BEAT_PASS_FILTER <- list(
   LOW  = 'low',
   NONE = 'none'
 )
-DEFAULT_BEAT_PASS_FILTER = BEAT_PASS_FILTER$LOW
+DEFAULT_BEAT_PASS_FILTER = BEAT_PASS_FILTER$ALL
 
 DIMENSION <- list(
   SPACE = 'space',
