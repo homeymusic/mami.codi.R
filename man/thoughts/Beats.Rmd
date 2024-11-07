@@ -6,6 +6,8 @@ always_allow_html: true
 ---
 ```{r, echo=F, message=F, include=F}
 devtools::load_all(".")
+source('../code/plot.R')
+source('../code/utils.R')
 ```
 
 ```{r, echo=F, message=F}
@@ -16,4 +18,76 @@ duration = 3.0
 num_harmonics = 5
 tone_1 = hrep::sparse_fr_spectrum(c(C4_midi, C4_beat_midi), num_harmonics=num_harmonics) %>% hrep::wave(length_sec = duration)
 tone_1  %>% hrep::play_wav(player = '/usr/bin/afplay')
+```
+```{r, echo=F, message=F}
+experiment.rds = '../data/input/Pure.rds'
+grid = tidyr::expand_grid(
+  interval = readRDS(experiment.rds)$profile$interval,
+  num_harmonics=1,
+  octave_ratio=2.0,
+  timbre = 'Pure'
+)
+
+future::plan(future::multisession, workers=parallelly::availableCores())
+
+output = grid %>% furrr::future_pmap_dfr(\(interval,
+                                           num_harmonics,
+                                           octave_ratio,
+                                           timbre) {
+
+  study_chord = c(0, interval) %>% hrep::sparse_fr_spectrum(
+    num_harmonics = num_harmonics,
+    octave_ratio  = octave_ratio,
+    roll_off_dB   = 3.0
+  )
+
+
+  mami.codi.R::mami.codi(study_chord,
+                         metadata = list(
+                           num_harmonics       = num_harmonics,
+                           octave_ratio        = octave_ratio,
+                           semitone            = interval,
+                           timbre              = timbre
+                         ),
+                         verbose=TRUE)
+  
+}, .progress=TRUE, .options = furrr::furrr_options(seed = T))
+```
+
+```{r, echo=F}
+dyads <- output %>% dplyr::rowwise() %>% dplyr::mutate(
+  num_harmonics = metadata$num_harmonics,
+  octave_ratio  = metadata$octave_ratio,
+  semitone      = metadata$semitone,
+  timbre        = metadata$timbre,
+  label         = round(metadata$semitone),
+  chord_max     = max(frequencies),
+  chord_min     = min(frequencies),
+  .before=1
+)
+```
+
+```{r, echo=F}
+
+chords <- dyads %>% dplyr::filter(timbre == 'Pure')
+
+```
+
+```{r, echo=F}
+
+chords$consonance_z = z_scores(-chords$dissonance)
+chords$major_z = z_scores(chords$majorness)
+chords$space_consonance = -chords$space_dissonance
+chords$time_consonance = -chords$time_dissonance
+chords$space_consonance_z = z_scores(-chords$space_dissonance)
+chords$time_consonance_z = z_scores(-chords$time_dissonance)
+black_vlines  = c(7,12)
+```
+
+```{r, echo=F}
+
+plot_semitone_beating(chords, 'Beating',
+                      include_points=T,include_line=F,
+                      black_vlines=black_vlines)
+
 ```
