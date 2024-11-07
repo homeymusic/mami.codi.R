@@ -19,13 +19,20 @@ using namespace Rcpp;
    if (x <= 0) {
      stop("STOP: x must be greater than 0");
    }
-   if (uncertainty < 0) {
-     stop("STOP: uncertainty must be non-negative");
+   if (uncertainty <= 0) {
+     stop("STOP: uncertainty must be greater than 0");
+   }
+
+   int cycles = 0;
+
+   if (x <= uncertainty) {
+     cycles = 1; // this would be considered a R move with 1 cycle.
+     return NumericVector::create(1, static_cast<int>(1 / uncertainty));
    }
 
    double approximation;
 
-   const double valid_min = std::max(std::numeric_limits<double>::min(), x - uncertainty);
+   const double valid_min = x - uncertainty;
    const double valid_max = x + uncertainty;
 
    int left_num    = floor(x);
@@ -37,9 +44,8 @@ using namespace Rcpp;
 
    approximation = (double) mediant_num / mediant_den;
 
-   int sanity = 0;
    const int insane = 1000;
-   while (((approximation < valid_min) || (valid_max < approximation)) && sanity < insane) {
+   while (((approximation < valid_min) || (valid_max < approximation)) && cycles < insane) {
      double x0  = 2 * x - approximation;
 
      if (approximation < valid_min) {
@@ -61,15 +67,44 @@ using namespace Rcpp;
      mediant_den   = left_den + right_den;
 
      approximation = (double) mediant_num / (double) mediant_den;
-     sanity++;
+     cycles++;
    }
 
    // Final checks
+   // Final checks
    if (mediant_num <= 0) {
+     Rcpp::Rcout << "Error: mediant_num is less than or equal to zero.\n";
+     Rcpp::Rcout << "x: " << x << "\n";
+     Rcpp::Rcout << "uncertainty: " << uncertainty << "\n";
+     Rcpp::Rcout << "valid_min: " << valid_min << "\n";
+     Rcpp::Rcout << "valid_max: " << valid_max << "\n";
+     Rcpp::Rcout << "mediant_num: " << mediant_num << "\n";
+     Rcpp::Rcout << "mediant_den: " << mediant_den << "\n";
+     Rcpp::Rcout << "left_num: " << left_num << "\n";
+     Rcpp::Rcout << "left_den: " << left_den << "\n";
+     Rcpp::Rcout << "right_num: " << right_num << "\n";
+     Rcpp::Rcout << "right_den: " << right_den << "\n";
+     Rcpp::Rcout << "approximation: " << approximation << "\n";
+     Rcpp::Rcout << "cycles: " << cycles << "\n";
+     Rcpp::Rcout.flush();
      stop("STOP: this should not happen, mediant_num is less than or equal to zero");
    }
 
    if (mediant_den <= 0) {
+     Rcpp::Rcout << "Error: mediant_den is less than or equal to zero.\n";
+     Rcpp::Rcout << "x: " << x << "\n";
+     Rcpp::Rcout << "uncertainty: " << uncertainty << "\n";
+     Rcpp::Rcout << "valid_min: " << valid_min << "\n";
+     Rcpp::Rcout << "valid_max: " << valid_max << "\n";
+     Rcpp::Rcout << "mediant_num: " << mediant_num << "\n";
+     Rcpp::Rcout << "mediant_den: " << mediant_den << "\n";
+     Rcpp::Rcout << "left_num: " << left_num << "\n";
+     Rcpp::Rcout << "left_den: " << left_den << "\n";
+     Rcpp::Rcout << "right_num: " << right_num << "\n";
+     Rcpp::Rcout << "right_den: " << right_den << "\n";
+     Rcpp::Rcout << "approximation: " << approximation << "\n";
+     Rcpp::Rcout << "cycles: " << cycles << "\n";
+     Rcpp::Rcout.flush();
      stop("STOP: this should not happen, mediant_den is less than or equal to zero");
    }
 
