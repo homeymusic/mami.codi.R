@@ -287,7 +287,8 @@ compute_fundamental_wavenumber <- function(
       l/min(l),
       DIMENSION$SPACE,
       space_uncertainty,
-      integer_harmonics_tolerance
+      integer_harmonics_tolerance,
+      paste("l:", l, "min(l):", min(l))
     ),
 
     fundamental_wavenumber = min(k) / .data$space_cycles,
@@ -333,7 +334,8 @@ compute_fundamental_frequency <- function(
       f/min(f),
       DIMENSION$TIME,
       time_uncertainty,
-      integer_harmonics_tolerance
+      integer_harmonics_tolerance,
+      paste("f:", f, "min(f):", min(f))
     ),
 
     fundamental_frequency  = min(f) / .data$time_cycles,
@@ -359,9 +361,11 @@ compute_fundamental_frequency <- function(
 #'
 #' @rdname compute_fundamental_cycle
 #' @export
-compute_fundamental_cycle <- function(x, dimension, uncertainty, integer_harmonics_tolerance) {
+compute_fundamental_cycle <- function(x, dimension, uncertainty, integer_harmonics_tolerance,
+                                      metadata) {
 
-  fractions = approximate_rational_fractions(x, uncertainty, integer_harmonics_tolerance)
+  fractions = approximate_rational_fractions(x, uncertainty, integer_harmonics_tolerance,
+                                             metadata)
 
   t = tibble::tibble_row(
     cycles = lcm_integers(fractions$den),

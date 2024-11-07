@@ -14,7 +14,8 @@ using namespace Rcpp;
  //'
  //' @export
  // [[Rcpp::export]]
- NumericVector stern_brocot(const double x, const double uncertainty) {
+ NumericVector stern_brocot(const double x, const double uncertainty,
+                            const std::string& metadata = "") {
    // Ensure x is positive and uncertainty is non-negative
    if (x <= 0) {
      stop("STOP: x must be greater than 0");
@@ -74,6 +75,7 @@ using namespace Rcpp;
    // Final checks
    if (mediant_num <= 0) {
      Rcpp::Rcout << "Error: mediant_num is less than or equal to zero.\n";
+     Rcpp::Rcout << "Metadata: " << metadata << "\n";
      Rcpp::Rcout << "x: " << x << "\n";
      Rcpp::Rcout << "uncertainty: " << uncertainty << "\n";
      Rcpp::Rcout << "valid_min: " << valid_min << "\n";
@@ -92,6 +94,7 @@ using namespace Rcpp;
 
    if (mediant_den <= 0) {
      Rcpp::Rcout << "Error: mediant_den is less than or equal to zero.\n";
+     Rcpp::Rcout << "Metadata: " << metadata << "\n";
      Rcpp::Rcout << "x: " << x << "\n";
      Rcpp::Rcout << "uncertainty: " << uncertainty << "\n";
      Rcpp::Rcout << "valid_min: " << valid_min << "\n";
@@ -231,7 +234,8 @@ using namespace Rcpp;
  // [[Rcpp::export]]
  DataFrame approximate_rational_fractions(NumericVector x,
                                           const double uncertainty,
-                                          const double deviation) {
+                                          const double deviation,
+                                          const std::string& metadata = "") {
 
    x = unique(x);
 
@@ -247,7 +251,7 @@ using namespace Rcpp;
 
    for (int i = 0; i < n; ++i) {
      pseudo_x[i]                  = pow(2.0, log(x[i]) / log(pseudo_octave_double));
-     const NumericVector fraction = stern_brocot(pseudo_x[i], uncertainty);
+     const NumericVector fraction = stern_brocot(pseudo_x[i], uncertainty, metadata);
      nums[i]                      = fraction[0];
      dens[i]                      = fraction[1];
      approximations[i]            = nums[i] / dens[i];
