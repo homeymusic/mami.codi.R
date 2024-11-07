@@ -11,14 +11,15 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // stern_brocot
-NumericVector stern_brocot(const double x, const double uncertainty);
-RcppExport SEXP _mami_codi_R_stern_brocot(SEXP xSEXP, SEXP uncertaintySEXP) {
+NumericVector stern_brocot(const double x, const double uncertainty, const std::string& metadata);
+RcppExport SEXP _mami_codi_R_stern_brocot(SEXP xSEXP, SEXP uncertaintySEXP, SEXP metadataSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const double >::type x(xSEXP);
     Rcpp::traits::input_parameter< const double >::type uncertainty(uncertaintySEXP);
-    rcpp_result_gen = Rcpp::wrap(stern_brocot(x, uncertainty));
+    Rcpp::traits::input_parameter< const std::string& >::type metadata(metadataSEXP);
+    rcpp_result_gen = Rcpp::wrap(stern_brocot(x, uncertainty, metadata));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -85,7 +86,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_mami_codi_R_stern_brocot", (DL_FUNC) &_mami_codi_R_stern_brocot, 2},
+    {"_mami_codi_R_stern_brocot", (DL_FUNC) &_mami_codi_R_stern_brocot, 3},
     {"_mami_codi_R_compute_pseudo_octave", (DL_FUNC) &_mami_codi_R_compute_pseudo_octave, 3},
     {"_mami_codi_R_approximate_harmonics", (DL_FUNC) &_mami_codi_R_approximate_harmonics, 2},
     {"_mami_codi_R_pseudo_octave", (DL_FUNC) &_mami_codi_R_pseudo_octave, 1},

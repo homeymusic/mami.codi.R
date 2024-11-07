@@ -3,7 +3,7 @@
 
 using namespace Rcpp;
 
- //' stern_brocot
+//' stern_brocot
  //'
  //' Approximates a floating-point number to arbitrary uncertainty.
  //'
@@ -14,18 +14,26 @@ using namespace Rcpp;
  //'
  //' @export
  // [[Rcpp::export]]
- NumericVector stern_brocot(const double x, const double uncertainty) {
+ NumericVector stern_brocot(const double x, const double uncertainty,
+                            const std::string& metadata = "") {
    // Ensure x is positive and uncertainty is non-negative
    if (x <= 0) {
      stop("STOP: x must be greater than 0");
    }
-   if (uncertainty < 0) {
-     stop("STOP: uncertainty must be non-negative");
+   if (uncertainty <= 0) {
+     stop("STOP: uncertainty must be greater than 0");
+   }
+
+   int cycles = 0;
+
+   if (x <= uncertainty) {
+     cycles = 1; // this would be considered a R move with 1 cycle.
+     return NumericVector::create(1, static_cast<int>(1 / uncertainty));
    }
 
    double approximation;
 
-   const double valid_min = std::max(std::numeric_limits<double>::min(), x - uncertainty);
+   const double valid_min = x - uncertainty;
    const double valid_max = x + uncertainty;
 
    int left_num    = floor(x);
@@ -37,9 +45,8 @@ using namespace Rcpp;
 
    approximation = (double) mediant_num / mediant_den;
 
-   int sanity = 0;
    const int insane = 1000;
-   while (((approximation < valid_min) || (valid_max < approximation)) && sanity < insane) {
+   while (((approximation < valid_min) || (valid_max < approximation)) && cycles < insane) {
      double x0  = 2 * x - approximation;
 
      if (approximation < valid_min) {
@@ -61,7 +68,7 @@ using namespace Rcpp;
      mediant_den   = left_den + right_den;
 
      approximation = (double) mediant_num / (double) mediant_den;
-     sanity++;
+     cycles++;
    }
 
    // Final checks
