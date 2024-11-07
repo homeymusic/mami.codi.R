@@ -126,7 +126,7 @@ generate_air_beats <- function(
   air_beats_wavelength_spectrum = compute_beats(
     wavelength = x$stimulus_wavelength_spectrum[[1]]$wavelength,
     amplitude  = x$stimulus_wavelength_spectrum[[1]]$amplitude
-  )
+  ) %>% filter_spectrum_in_range(DIMENSION$SPACE)
 
   max_stimulus_wavelength = x$stimulus_wavelength_spectrum[[1]]$wavelength %>% max()
 
@@ -222,7 +222,7 @@ generate_cochlear_beats <- function(
   cochlear_beats_wavelength_spectrum = compute_beats(
     wavelength = x$cochlear_amplifications_wavelength_spectrum[[1]]$wavelength,
     amplitude  = x$cochlear_amplifications_wavelength_spectrum[[1]]$amplitude
-  )
+  ) %>% filter_spectrum_in_range(DIMENSION$SPACE)
 
   max_cochlear_amplifications_wavelength = x$cochlear_amplifications_wavelength_spectrum[[1]]$wavelength %>% max()
 
@@ -517,3 +517,9 @@ DIMENSION <- list(
   SPACE = 'space',
   TIME  = 'time'
 )
+
+MAX_FREQUENCY = hrep::midi_to_freq(127 + 24)
+MIN_FREQUENCY = 1
+
+MAX_WAVELENGTH = C_SOUND / MIN_FREQUENCY
+MIN_WAVELENGTH = C_SOUND / MAX_FREQUENCY

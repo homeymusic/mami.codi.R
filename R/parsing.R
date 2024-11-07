@@ -88,9 +88,11 @@ combine_spectra <- function(..., tolerance = 1e-6) {
   first_spectrum <- spectra_list[[1]]
   if ("frequency" %in% names(first_spectrum)) {
     spec_type <- "frequency"
+    dimension = DIMENSION$TIME
     sort_order <- "asc"
   } else if ("wavelength" %in% names(first_spectrum)) {
     spec_type <- "wavelength"
+    dimension = DIMENSION$SPACE
     sort_order <- "desc"
   } else {
     stop("Error: Spectra must have either 'frequency' or 'wavelength' as a column.")
@@ -130,7 +132,7 @@ combine_spectra <- function(..., tolerance = 1e-6) {
     result %>% dplyr::arrange(dplyr::desc(!!rlang::sym(spec_type)))
   }
 
-  return(result)
+  return(result %>% filter_spectrum_in_range(dimension))
 }
 
 expand_harmonics <- function(wavelength_spectrum, num_harmonics, roll_off_dB) {
@@ -154,19 +156,35 @@ wavelength_spectrum_from_sparse_fr_spectrum <- function(x) {
   tibble::tibble(
     wavelength = C_SOUND / x$x,
     amplitude  = x$y
-  )
+  ) %>% filter_spectrum_in_range(DIMENSION$SPACE)
 }
 
 frequency_spectrum_from_sparse_fr_spectrum <- function(x) {
   tibble::tibble(
     frequency = x$x,
     amplitude = x$y
-  )
+  ) %>% filter_spectrum_in_range(DIMENSION$TIME)
 }
 
 frequency_spectrum_from_wavelength_spectrum <- function(x) {
   tibble::tibble(
     frequency = C_SOUND / x$wavelength,
     amplitude = x$amplitude
-  )
+  ) %>% filter_spectrum_in_range(DIMENSION$TIME)
+}
+
+# Function to filter a tibble within the specified range based on the dimension
+filter_spectrum_in_range <- function(spectrum, dimension) {
+  if (dimension == DIMENSION$TIME) {
+    # Filter for frequencies within the audible range
+    spectrum <- spectrum %>%
+      dplyr::filter(frequency >= MIN_FREQUENCY & frequency <= MAX_FREQUENCY)
+  } else if (dimension == DIMENSION$SPACE) {
+    # Filter for wavelengths within the audible range
+    spectrum <- spectrum %>%
+      dplyr::filter(wavelength >= MIN_WAVELENGTH & wavelength <= MAX_WAVELENGTH)
+  } else {
+    stop("Invalid dimension specified. Use DIMENSION$TIME or DIMENSION$SPACE.")
+  }
+  return(spectrum)
 }
