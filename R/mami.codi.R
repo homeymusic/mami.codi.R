@@ -352,7 +352,7 @@ compute_fundamental_frequency <- function(
 
 #' Compute the cycle length of a complex wave
 #'
-#' @param x Spectrum representing a complex waveform
+#' @param x Spectrum components without amplitude representing a complex waveform
 #' @param dimension Space or time, used to label the output
 #' @param uncertainty Precision for creating rational approximations
 #' @param integer_harmonics_tolerance Allowable toleance for approximating least common multiples (LCM).
@@ -364,6 +364,11 @@ compute_fundamental_frequency <- function(
 compute_fundamental_cycle <- function(x, dimension, uncertainty,
                                       integer_harmonics_tolerance,
                                       metadata) {
+
+
+  print(dimension)
+  print(length(x))
+  print(x)
 
   fractions = approximate_rational_fractions(x, uncertainty,
                                              integer_harmonics_tolerance,
