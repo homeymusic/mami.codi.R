@@ -372,8 +372,10 @@ test_that('Stimulus Frequency Otoacoustic Emissions',{
   cochlear_amplifier_num_harmonics=2
   P1_cochlear_amplifier = mami.codi(60, verbose=T, cochlear_amplifier_num_harmonics = cochlear_amplifier_num_harmonics, num_harmonics=1)
   expect_equal(P1_cochlear_amplifier$cochlear_amplifier_frequency_spectrum[[1]] %>% nrow(), cochlear_amplifier_num_harmonics)
-  expect_equal(P1_cochlear_amplifier$frequencies[[1]] %>% length(), cochlear_amplifier_num_harmonics)
-  expect_equal(P1_cochlear_amplifier$frequencies[[1]], c(261.6, 523.2), tolerance=0.1)
+  expect_equal(P1_cochlear_amplifier$frequencies[[1]] %>% length(), 1)
+  expect_equal(P1_cochlear_amplifier$frequencies[[1]], 261.6, tolerance=0.1)
+  expect_equal(P1_cochlear_amplifier$wavelengths[[1]] %>% length(), 2)
+  expect_equal(P1_cochlear_amplifier$wavelengths[[1]], c(1.311034,  0.655517), tolerance=0.1)
 })
 test_that('Beats and Stimulus Frequency Cochlear Amplifier',{
   num_harmonics = 1
