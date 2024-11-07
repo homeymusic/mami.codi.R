@@ -52,7 +52,8 @@ mami.codi <- function(
       beat_pass_filter
     ) %>%
     generate_cochlear_amplifications(
-      cochlear_amplifier_num_harmonics
+      cochlear_amplifier_num_harmonics,
+      space_uncertainty
     ) %>%
     generate_cochlear_beats(
       beat_pass_filter
@@ -173,14 +174,16 @@ generate_air_beats <- function(
 #' @rdname generate_cochlear_amplifications
 #' @export
 generate_cochlear_amplifications <- function(
-    x, cochlear_amplifier_num_harmonics
+    x, cochlear_amplifier_num_harmonics, space_uncertainty
 ) {
 
   if (cochlear_amplifier_num_harmonics > 0) {
 
     stimulus_and_air_beats_wavelength_spectrum = combine_spectra(
       x$stimulus_wavelength_spectrum[[1]],
-      x$filtered_air_beats_wavelength_spectrum[[1]]
+      x$filtered_air_beats_wavelength_spectrum[[1]],
+      reference = x$stimulus_wavelength_spectrum[[1]]$wavelength %>% min(),
+      uncertainty = space_uncertainty
     )
 
     cochlear_amplifications_wavelength_spectrum = expand_harmonics(
@@ -274,7 +277,9 @@ compute_fundamental_wavenumber <- function(
 
   wavelength_spectrum = combine_spectra(
     x$cochlear_amplifications_wavelength_spectrum[[1]],
-    x$filtered_cochlear_beats_wavelength_spectrum[[1]]
+    x$filtered_cochlear_beats_wavelength_spectrum[[1]],
+    reference = x$stimulus_wavelength_spectrum[[1]]$wavelength %>% min(),
+    uncertainty = space_uncertainty
   )
 
   l = wavelength_spectrum$wavelength
@@ -322,7 +327,11 @@ compute_fundamental_frequency <- function(
     integer_harmonics_tolerance
 ) {
 
-  frequency_spectrum = combine_spectra(x$cochlear_amplifications_frequency_spectrum[[1]])
+  frequency_spectrum = combine_spectra(
+    x$cochlear_amplifications_frequency_spectrum[[1]],
+    reference = x$stimulus_frequency_spectrum[[1]]$frequency %>% min(),
+    uncertainty = time_uncertainty
+  )
 
   f = frequency_spectrum$frequency
 

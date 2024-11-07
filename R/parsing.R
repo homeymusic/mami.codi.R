@@ -74,8 +74,8 @@ empty_frequency_spectrum <- function() {
   )
 }
 
-#' Helper functions to combine spectra
-combine_spectra <- function(..., tolerance = 1e-6) {
+#' Helper function to combine spectra based on Stern-Brocot ratio approximation
+combine_spectra <- function(..., reference, uncertainty) {
   # Collect all spectra passed in as a list
   spectra_list <- list(...)
 
@@ -110,12 +110,17 @@ combine_spectra <- function(..., tolerance = 1e-6) {
     spectrum %>% dplyr::rename(value = !!spec_type)
   }))
 
-  # Aggregate amplitudes within tolerance for the combined tibble
+  # Set the reference value if not provided (use minimum as Stern-Brocot does)
+  if (is.null(reference)) {
+    reference <- min(combined$value)
+  }
+
+  # Aggregate amplitudes based on the Stern-Brocot style of grouping
   result <- combined %>%
     dplyr::arrange(value) %>%
     dplyr::mutate(
-      # Group values that fall within the tolerance range
-      group = cumsum(c(TRUE, diff(value) > tolerance))
+      # Group values based on whether their ratio relative to reference is within uncertainty
+      group = cumsum(c(TRUE, abs((diff(value / reference))) > uncertainty))
     ) %>%
     dplyr::group_by(group) %>%
     dplyr::summarize(
