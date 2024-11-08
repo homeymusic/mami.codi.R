@@ -3,7 +3,7 @@
 
 using namespace Rcpp;
 
-//' stern_brocot
+ //' stern_brocot
  //'
  //' Approximates a floating-point number to arbitrary uncertainty.
  //'
