@@ -255,7 +255,7 @@ compute_fundamental_wavenumber <- function(
       integer_harmonics_tolerance
     ),
 
-    fundamental_wavenumber = min(k) / .data$space_cycles,
+    fundamental_wavenumber = min(k) / .data$space_cycle_length,
 
     # Store the values
     wavelength_spectrum    = list(wavelength_spectrum),
@@ -303,7 +303,7 @@ compute_fundamental_frequency <- function(
       integer_harmonics_tolerance
     ),
 
-    fundamental_frequency  = min(f) / .data$time_cycles,
+    fundamental_frequency  = min(f) / .data$time_cycle_length,
 
     # Store the values
     frequency_spectrum     = list(frequency_spectrum),
@@ -331,7 +331,7 @@ compute_fundamental_cycle <- function(x, dimension, uncertainty, integer_harmoni
   fractions = approximate_rational_fractions(x, uncertainty, integer_harmonics_tolerance)
 
   t = tibble::tibble_row(
-    cycles = lcm_integers(fractions$den),
+    cycle_length = lcm_integers(fractions$den),
     fractions = list(fractions)
   ) %>% dplyr::rename_with(~ paste0(dimension, '_' , .))
   t
@@ -357,8 +357,8 @@ compute_harmony_perception <- function(x) {
 
   x %>% dplyr::mutate(
 
-    time_dissonance  = log2(.data$time_cycles),
-    space_dissonance = log2(.data$space_cycles),
+    time_dissonance  = log2(.data$time_cycle_length),
+    space_dissonance = log2(.data$space_cycle_length),
 
     dissonance       = .data$space_dissonance + .data$time_dissonance,
     majorness        = .data$space_dissonance - .data$time_dissonance

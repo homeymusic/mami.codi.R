@@ -1303,7 +1303,10 @@ plot_semitone_high_beating_cochlear_amplifier_num_harmonics_wrap <- function(the
 }
 
 # Define the function to plot time vs. space as a 2D heatmap
-plot_space_time <- function(f0, k0, majorness = 0.0, chord_name = "Chord", time_range = 25, space_range = 25, resolution = 1000) {
+plot_space_time_orig <- function(time_cycle_length, space_cycle_length, majorness = 0.0, chord_name = "Chord", time_range = 25, space_range = 25, resolution = 1000) {
+
+  relative_f0 = 1/time_cycle_length
+  relative_k0 = 1/space_cycle_length
 
   # Determine tonality based on majorness
   tonality <- if (majorness < 0) {
@@ -1325,7 +1328,7 @@ plot_space_time <- function(f0, k0, majorness = 0.0, chord_name = "Chord", time_
   grid <- base::expand.grid(time = time_values, space = space_values)
 
   # Define a wave pattern as a function of time and space
-  grid$amplitude <- base::sin(2 * base::pi * f0 * grid$time - 2 * base::pi * k0 * grid$space)
+  grid$amplitude <- base::sin(2 * base::pi * relative_f0 * grid$time - 2 * base::pi * relative_k0 * grid$space)
 
   # Plot using ggplot2 with selected color gradient and percentage labels
   ggplot2::ggplot(grid, ggplot2::aes(x = time, y = space, fill = amplitude)) +
@@ -1336,6 +1339,54 @@ plot_space_time <- function(f0, k0, majorness = 0.0, chord_name = "Chord", time_
     ggplot2::labs(
       x = "Time (%)",
       y = "Space (%)",
+      title = bquote(.(chord_name) ~ ": Traveling Wave " ~ f[0] == .(sprintf("%.2f", relative_f0)) ~ "," ~ k[0] == .(sprintf("%.2f", relative_k0)))
+    ) +
+    ggplot2::coord_fixed(ratio = 1) +
+    theme_homey()
+}
+
+
+# Define the function to plot time vs. space as a 2D heatmap
+plot_space_time <- function(time_cycle_length, space_cycle_length, f0, k0, majorness = 0.0, chord_name = "Chord",
+                            time_range = 25, space_range = 25, resolution = 1000) {
+
+  # Define relative frequencies
+  relative_f0 <- 1 / time_cycle_length
+  relative_k0 <- 1 / space_cycle_length
+
+  # Determine tonality based on majorness
+  tonality <- if (majorness < 0) {
+    'minor'
+  } else if (majorness == 0) {
+    'neutral'
+  } else {
+    'major'
+  }
+
+  # Select the color set based on tonality
+  color_set <- saturation_colors_homey[[tonality]]
+
+  # Generate a higher-resolution grid of time and space values
+  time_values <- seq(0, time_range, length.out = resolution)
+  space_values <- seq(0, space_range, length.out = resolution)
+
+  # Create a data frame for the grid
+  grid <- base::expand.grid(time = time_values, space = space_values)
+
+  # Define a wave pattern as a function of time and space
+  grid$amplitude <- base::sin(2 * base::pi * relative_f0 * grid$time - 2 * base::pi * relative_k0 * grid$space)
+
+  # Define scaling factors to adjust the axis labels
+  scale_time <- time_range / time_cycle_length * (1 / f0)
+  scale_space <- space_range / space_cycle_length * (1 / k0)
+
+  # Plot using ggplot2 with adjusted labels for time and space
+  ggplot2::ggplot(grid, ggplot2::aes(x = time, y = space, fill = amplitude)) +
+    ggplot2::geom_tile() +
+    ggplot2::scale_fill_gradient(low = color_set$lo, high = color_set$hi) +
+    ggplot2::scale_x_continuous(name = "Time (s)", labels = function(x) sprintf("%.3f", x * scale_time)) +
+    ggplot2::scale_y_continuous(name = "Space (m)", labels = function(y) sprintf("%.3f", y * scale_space)) +
+    ggplot2::labs(
       title = bquote(.(chord_name) ~ ": Traveling Wave " ~ f[0] == .(sprintf("%.2f", f0)) ~ "," ~ k[0] == .(sprintf("%.2f", k0)))
     ) +
     ggplot2::coord_fixed(ratio = 1) +

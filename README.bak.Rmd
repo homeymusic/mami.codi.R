@@ -141,15 +141,15 @@ results <- purrr::map_dfr(names(framed_intervals), function(interval_name) {
   )
   
   
-  print(plot_space_time(1/result$time_cycles,
-                        1/result$space_cycles,
+  print(plot_space_time(1/result$time_cycle_length,
+                        1/result$space_cycle_length,
                         majorness=result$majorness,
                         chord_name=interval_name))
   tibble::tibble(
     Interval = interval_name,
     Harmonics = num_harmonics,
-    TimeCycles = result$time_cycles,
-    SpaceCycles = result$space_cycles,
+    TimeCycles = result$time_cycle_length,
+    SpaceCycles = result$space_cycle_length,
     Majorness = result$majorness,
     Dissonance = result$dissonance,
     Chord = list(framed_intervals[[interval_name]]),
@@ -1054,7 +1054,7 @@ the space and time signals would have the same values. However, for complex
 pitches that is not the case. The pattern of the two sets of components are different.
 See the example of the major triad with 5 harmonics, below.
 
-# ```{r, child=c('man/Space_Time_Cycles.Rmd')}
+# ```{r, child=c('man/Space_time_cycle_length.Rmd')}
 # ```
 
 ### Finding the uncertainty Values
