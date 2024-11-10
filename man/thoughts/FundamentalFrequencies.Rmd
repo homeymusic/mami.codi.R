@@ -36,10 +36,6 @@ intervals <- list(
   M2 = c(60, 62),
   m7 = c(60, 70)
 )
-intervals <- list(
-  P1 = c(60, 60),
-  tt = c(60, 66)
-)
 framed_intervals <- purrr::map(intervals, ~c(.x, 72))
 ```
 
@@ -59,11 +55,9 @@ results <- purrr::map_dfr(names(framed_intervals), function(interval_name) {
   k0 = max(result$wavelengths[[1]]) / result$space_cycle_length
   
   cat("\n\n")
-  cat(paste("#### Interval:", interval_name, "\n\n"))
-  cat(paste("#### f0:", f0, "\n\n"))
-  cat(paste("#### time cycles:", result$time_cycle_length, "\n\n"))
-  cat(paste("#### k0:", k0, "\n\n"))
-  cat(paste("#### space cycles:", result$space_cycle_length, "\n\n"))
+  cat(paste("####", interval_name, "\n\n"))
+  cat(paste("time cycles:", result$time_cycle_length, "\n\n"))
+  cat(paste("space cycles:", result$space_cycle_length, "\n\n"))
   cat("\n\n")
   
   print(plot_space_time(result$time_cycle_length,
